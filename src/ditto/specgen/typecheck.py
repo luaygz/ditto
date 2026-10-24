@@ -63,7 +63,7 @@ def infer_value_type(values: Iterable[str], *, threshold: float = 0.9) -> ValueT
     n = len(vals)
     for kind in ("email", "url", "date"):
         if sum(check_value(kind, v) for v in vals) >= threshold * n:
-            return kind  # type: ignore[return-value]
+            return kind
     if sum(check_value("price", v) for v in vals) >= threshold * n and any(
         _HAS_CURRENCY.search(v) for v in vals
     ):
