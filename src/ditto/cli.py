@@ -251,7 +251,9 @@ def eval_run(
     results_dir: Annotated[Path, typer.Option(help="Where results are written.")] = Path(
         "eval/results"
     ),
-    dry_run: Annotated[bool, typer.Option(help="Plan and estimate cost only.")] = False,
+    dry_run: Annotated[
+        bool, typer.Option(help="Validate the config and list the planned sites.")
+    ] = False,
 ) -> None:
     """Regenerate benchmark numbers into eval/results/."""
     from ditto.evaluation.runner import run_eval

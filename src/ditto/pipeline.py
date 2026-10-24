@@ -89,6 +89,7 @@ class RunOptions:
     workers: int | None = None
     concurrency: int = 4
     input_fn: Callable[[str], str] = input
+    settings: Any = None  # ditto.llm Settings (pinned per-role models); None = from env
     timings: dict[str, float] = field(default_factory=dict)
 
 
@@ -141,11 +142,15 @@ def continue_run(run: RunDir, opts: RunOptions, schema: Any) -> RunDir:
 
     mapping = None
     if opts.mode == "prompted":
-        probe_llm = get_llm("probe", run=run, no_cache=opts.no_cache) if opts.probe_llm else None
+        probe_llm = (
+            get_llm("probe", settings=opts.settings, run=run, no_cache=opts.no_cache)
+            if opts.probe_llm
+            else None
+        )
         probe_run(run, schema, use_llm=opts.probe_llm, llm=probe_llm)
         _require_terminal(opts, "the mapping checkpoint (ditto confirm)")
         mapping = confirm_run(run, yes=opts.yes, interactive=not opts.yes)
-    gen_llm = get_llm("generation", run=run, no_cache=opts.no_cache)
+    gen_llm = get_llm("generation", settings=opts.settings, run=run, no_cache=opts.no_cache)
     generate_run(
         run,
         mode=opts.mode,
@@ -159,7 +164,7 @@ def continue_run(run: RunDir, opts: RunOptions, schema: Any) -> RunDir:
     if opts.mode == "unprompted":
         _require_terminal(opts, "the schema checkpoint")
         show_schema_proposal(run, yes=opts.yes, input_fn=opts.input_fn)
-    repair_llm = get_llm("repair", run=run, no_cache=opts.no_cache)
+    repair_llm = get_llm("repair", settings=opts.settings, run=run, no_cache=opts.no_cache)
     verify_run(run, max_repair_calls=opts.max_repair_calls, llm=repair_llm, workers=opts.workers)
     _require_terminal(opts, "the review checkpoint (ditto review)")
     review_run(run, yes=opts.yes, input_fn=opts.input_fn)
@@ -167,7 +172,7 @@ def continue_run(run: RunDir, opts: RunOptions, schema: Any) -> RunDir:
     if opts.tail == "direct" and schema is not None:
         from ditto.specgen.tail import tail_direct_run
 
-        tail_llm = get_llm("tail_direct", run=run, no_cache=opts.no_cache)
+        tail_llm = get_llm("tail_direct", settings=opts.settings, run=run, no_cache=opts.no_cache)
         tail_direct_run(run, schema, llm=tail_llm, concurrency=opts.concurrency)
     write_report(run)
     _log(f"done: report at {run.report_md}")
