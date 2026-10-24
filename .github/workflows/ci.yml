@@ -1,0 +1,68 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    if: github.event_name != 'schedule'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.11", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: uv sync --extra synth --python ${{ matrix.python }}
+      - name: Lint
+        run: |
+          uv run ruff check src tests eval
+          uv run ruff format --check src tests eval
+      - name: Types
+        run: uv run mypy --strict src/ditto
+      - name: Tests
+        env:
+          OPENAI_API_KEY: ""
+        run: uv run pytest --cov=src/ditto --cov-report=term --cov-fail-under=80
+
+  build:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.11"
+      - run: uv build
+      - name: Install wheel in a clean venv
+        run: |
+          python -m venv /tmp/clean
+          /tmp/clean/bin/pip install dist/*.whl
+          /tmp/clean/bin/ditto --help
+
+  nightly-synthetic:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.11"
+      - run: uv sync --extra synth
+      - name: Synthetic clustering benchmark (10k pages)
+        run: uv run ditto eval run eval/configs/synth_nightly.yaml --results-dir nightly-results
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-clustering-metrics
+          path: nightly-results/

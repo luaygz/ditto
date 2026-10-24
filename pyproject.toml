@@ -1,0 +1,111 @@
+[project]
+name = "ditto-extract"
+version = "0.0.0"
+description = "Extract a whole downloaded website into JSON with roughly one LLM call per page template."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "Luay Gharzeddine" }]
+keywords = ["web extraction", "xpath", "llm", "wrapper induction", "warc"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Text Processing :: Markup :: HTML",
+]
+dependencies = [
+    "lxml>=5.2",
+    "datasketch>=1.6",
+    "warcio>=1.7",
+    "pydantic>=2.7",
+    "typer>=0.12",
+    "openai>=1.40",
+    "anthropic>=0.34",
+    "orjson>=3.10",
+    "numpy>=1.26",
+    "tiktoken>=0.7",
+    "python-dotenv>=1.0",
+    "psutil>=5.9",
+    "extruct>=0.17",
+    "pyyaml>=6.0",
+    "charset-normalizer>=3.3",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+synth = ["faker>=25"]
+eval = ["crawl4ai>=0.4", "matplotlib>=3.8", "pandas>=2.2"]
+
+[project.scripts]
+ditto = "ditto.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/luaygz/ditto"
+Repository = "https://github.com/luaygz/ditto"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "mypy>=1.10",
+    "ruff>=0.5",
+    "types-PyYAML",
+    "types-psutil",
+    "lxml-stubs",
+    "faker>=25",
+]
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ditto"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"prompts" = "ditto/_data/prompts"
+"config/prices.yaml" = "ditto/_data/prices.yaml"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/ditto", "prompts", "config", "tests", "README.md", "LICENSE", "CHANGELOG.md"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["eval/baselines/autoscraper/vendor"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E501", "RUF001", "RUF002", "RUF003"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src/ditto"]
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["datasketch.*", "warcio.*", "extruct.*", "tiktoken.*", "faker.*", "crawl4ai.*", "matplotlib.*", "pandas.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "live: calls a real LLM API; skipped unless OPENAI_API_KEY is set",
+    "slow: longer-running test",
+]
+
+[tool.coverage.run]
+source = ["src/ditto"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+skip_covered = true
