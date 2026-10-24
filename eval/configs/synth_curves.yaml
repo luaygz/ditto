@@ -1,0 +1,38 @@
+name: synth_curves
+description: >-
+  Clustering curves: one stress parameter at a time from the defaults (brief stress ranges),
+  10k pages per site, frozen seed 1. Each sweep includes the default value. No LLM.
+dataset: synthetic
+dataset_options:
+  params: eval/synth/default.yaml
+  pages: 10000
+  truth_only: true
+  sweep:
+    templates: [2, 12, 50, 100, 200]
+    pages_median: [20, 100, 500, 2000]
+    optional_fields: [0, 3, 6, 10]
+    optional_presence: [[0.02, 0.1], [0.02, 0.95], [0.5, 0.95]]
+    record_tables: [0, 1, 2, 3]
+    table_rows: [[0, 0], [0, 12], [0, 100], [0, 300]]
+    optional_columns: [0, 1, 2]
+    kv_style: [dl, table, div, mixed]
+    hashed_class_share: [0.0, 0.3, 0.6, 1.0]
+    boilerplate_share: [0.1, 0.4, 0.6, 0.8]
+    boilerplate_variants: [2, 3, 5]
+    near_duplicate_pairs: [0, 1, 3, 5]
+    near_duplicate_jaccard: [0.6, 0.7, 0.8, 0.9]
+    absent_rendering: [omitted, empty, na, hidden]
+    markup_style: [server, react, table]
+    noise: [[], [entities], [nbsp], [whitespace], [entities, nbsp, whitespace]]
+  sweep_overrides:
+    pages_median:
+      total_pages: null        # page count follows the median (12 templates, log-normal sizes)
+method:
+  kind: ditto
+  params:
+    until: cluster
+    min_cluster_size: 20
+keep_runs: false
+seeds:
+  run: 1                     # page samples (identical across ditto and baselines)
+  synth: 1

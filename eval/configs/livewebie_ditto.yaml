@@ -1,0 +1,26 @@
+name: livewebie_ditto
+description: >-
+  LiveWeb-IE snapshot (third-party modern check, 15 permission-granted sites), ditto prompted
+  mode with each site's queries translated to fields.yaml; reported by complexity type. Recorded
+  as not run when the snapshot is unavailable.
+dataset: livewebie
+selection:
+  split: test
+method:
+  kind: ditto
+  mode: prompted
+  params:
+    min_cluster_size: 20
+    max_repair_calls: 3
+    tail: skip
+models:                      # pinned; the run fails if the LLM layer resolves another id
+  generation: openai/gpt-6.1-sol
+  repair: openai/gpt-6.1-sol
+  probe: openai/gpt-5.4-mini
+  tail_direct: openai/gpt-5.4-mini
+budget_usd: 4.0            # real (uncached) spend cap; sites are run round-robin across verticals
+sample:
+  pages_per_site: null
+seeds:
+  run: 1                     # page samples (identical across ditto and baselines)
+  synth: 1

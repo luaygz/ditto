@@ -1,0 +1,18 @@
+name: synth_nightly
+description: >-
+  CI nightly: the synthetic default site at 10k pages (frozen seed 1), clustering metrics only.
+  No LLM.
+dataset: synthetic
+dataset_options:
+  params: eval/synth/default.yaml
+  pages: 10000
+  truth_only: true
+method:
+  kind: ditto
+  params:
+    until: cluster
+    min_cluster_size: 20
+keep_runs: false
+seeds:
+  run: 1                     # page samples (identical across ditto and baselines)
+  synth: 1

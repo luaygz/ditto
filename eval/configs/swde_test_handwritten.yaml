@@ -1,0 +1,15 @@
+name: swde_test_handwritten
+description: >-
+  Hand-written XPath wrappers for 5 SWDE test sites, written by the build agent before looking at generated specs (selector-quality ceiling). No LLM; other sites are recorded as not run.
+dataset: swde
+selection:
+  split: test
+method:
+  kind: baseline
+  baseline: handwritten
+budget_usd: 0.01
+sample:
+  pages_per_site: null       # every labeled page
+seeds:
+  run: 1                     # page samples (identical across ditto and baselines)
+  synth: 1

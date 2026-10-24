@@ -1,0 +1,17 @@
+name: swde_test_crawl4ai
+description: >-
+  SWDE frozen test split, Crawl4AI JsonCssExtractionStrategy.generate_schema on one sample page per template, applied to every labeled page.
+dataset: swde
+selection:
+  split: test
+method:
+  kind: baseline
+  baseline: crawl4ai_schema
+models:                      # pinned; same main model as ditto so the comparison is fair
+  baseline: openai/gpt-6.1-sol
+budget_usd: 1.0            # real (uncached) spend cap; sites are run round-robin across verticals
+sample:
+  pages_per_site: null       # every labeled page
+seeds:
+  run: 1                     # page samples (identical across ditto and baselines)
+  synth: 1

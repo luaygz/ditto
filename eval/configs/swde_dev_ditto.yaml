@@ -1,0 +1,24 @@
+name: swde_dev_ditto
+description: >-
+  SWDE development slice (two alphabetically-first sites per vertical), ditto prompted mode. Also scores the 50-page per-site samples the naive baseline runs on (v0.3 gate).
+dataset: swde
+selection:
+  split: dev
+method:
+  kind: ditto
+  mode: prompted
+  params:
+    min_cluster_size: 20
+    max_repair_calls: 3
+    tail: skip
+models:                      # pinned; the run fails if the LLM layer resolves another id
+  generation: openai/gpt-6.1-sol
+  repair: openai/gpt-6.1-sol
+  probe: openai/gpt-5.4-mini
+  tail_direct: openai/gpt-5.4-mini
+budget_usd: 3.0            # real (uncached) spend cap; sites are run round-robin across verticals
+sample:
+  pages_per_site: 50          # seeded sample per site (budget-limited; brief cap 200); baselines run on it, ditto also scores it
+seeds:
+  run: 1                     # page samples (identical across ditto and baselines)
+  synth: 1

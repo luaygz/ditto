@@ -1,0 +1,21 @@
+name: synth_scale
+description: >-
+  v0.1 gate: the synthetic default site at 100k pages (scaled to 20k on machines with fewer than
+  8 cores or less than 16 GB, stated in meta.json notes); clustering metrics and stage speed.
+  No LLM.
+dataset: synthetic
+dataset_options:
+  params: eval/synth/default.yaml
+  pages: 100000
+  scale_for_machine: true
+  scaled_pages: 20000
+  truth_only: true
+method:
+  kind: ditto
+  params:
+    until: cluster
+    min_cluster_size: 20
+keep_runs: false
+seeds:
+  run: 1                     # page samples (identical across ditto and baselines)
+  synth: 1

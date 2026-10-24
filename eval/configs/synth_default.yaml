@@ -1,0 +1,17 @@
+name: synth_default
+description: >-
+  v0.1 gate: clustering of the synthetic default site at 10k pages (frozen seed 1); adjusted Rand
+  index must reach 0.95. No LLM.
+dataset: synthetic
+dataset_options:
+  params: eval/synth/default.yaml
+  pages: 10000
+  truth_only: true
+method:
+  kind: ditto
+  params:
+    until: cluster
+    min_cluster_size: 20
+seeds:
+  run: 1                     # page samples (identical across ditto and baselines)
+  synth: 1
