@@ -1,0 +1,102 @@
+{
+  "spec_version": "1",
+  "template_id": "handwritten",
+  "site": "university-usnews",
+  "status": "final",
+  "generated_by": {
+    "model": "hand-written (build agent)",
+    "prompt_version": "handwritten.v1",
+    "pages_seen": [
+      "0000",
+      "0001",
+      "0002",
+      "0003",
+      "0004",
+      "0005",
+      "0006",
+      "0007",
+      "0008",
+      "0009"
+    ],
+    "mode": "prompted",
+    "repair_calls": 0,
+    "created_at": "2026-10-24",
+    "author": "build agent (Claude, Anthropic), not a human",
+    "method": "XPath written by reading the cleaned HTML of pages 0000-0009 next to their SWDE labels, before any ditto-generated spec existed; labels follow SWDE convention (the labeled text node, e.g. \"Publisher: X\"). Checked once against labels on all 1027 pages; no selector was revised after that check."
+  },
+  "fields": {
+    "name": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@class=\"vcard\"]/h1[contains(@class, \"fn\")]",
+        "//div[@id=\"nav-breadcrumb\"]/a[@class=\"active\"]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    },
+    "phone": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@class=\"vcard\"]//div[@class=\"tel\"]/span[@class=\"value\"]",
+        "//div[@class=\"tel\"]/span[@class=\"value\"]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    },
+    "website": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@class=\"vcard\"]//span[@class=\"url\"]/span",
+        "//span[@class=\"url\"][contains(., \"Web site\")]/span"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    },
+    "type": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@id=\"profile-details\"]//tr[td[@class=\"label\"][starts-with(normalize-space(.), \"Institutional Control\")]]/td[@class=\"value\"]",
+        "//tr[td[contains(., \"Institutional Control\")]]/td[@class=\"value\"]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    }
+  },
+  "not_present": {}
+}

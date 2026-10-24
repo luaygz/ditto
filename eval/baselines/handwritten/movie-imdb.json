@@ -1,0 +1,102 @@
+{
+  "spec_version": "1",
+  "template_id": "handwritten",
+  "site": "movie-imdb",
+  "status": "final",
+  "generated_by": {
+    "model": "hand-written (build agent)",
+    "prompt_version": "handwritten.v1",
+    "pages_seen": [
+      "0000",
+      "0001",
+      "0002",
+      "0003",
+      "0004",
+      "0005",
+      "0006",
+      "0007",
+      "0008",
+      "0009"
+    ],
+    "mode": "prompted",
+    "repair_calls": 0,
+    "created_at": "2026-10-24",
+    "author": "build agent (Claude, Anthropic), not a human",
+    "method": "XPath written by reading the cleaned HTML of pages 0000-0009 next to their SWDE labels, before any ditto-generated spec existed; labels follow SWDE convention (the labeled text node, e.g. \"Publisher: X\"). Checked once against labels on 300-page random sample (seed 7); no selector was revised after that check."
+  },
+  "fields": {
+    "title": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//td[@id=\"overview-top\"]/h1[@class=\"header\"]/text()[normalize-space()][1]",
+        "//h1[@class=\"header\"]/text()[normalize-space()][1]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    },
+    "director": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//td[@id=\"overview-top\"]/div[@class=\"txt-block\"][h4[starts-with(normalize-space(.), \"Director\")]]/a[contains(@href, \"/name/\")]",
+        "//div[@class=\"txt-block\"][h4[starts-with(normalize-space(.), \"Director\")]]/a"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    },
+    "genre": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//td[@id=\"overview-top\"]/div[@class=\"infobar\"]/a[starts-with(@href, \"/genre/\")]",
+        "//div[@class=\"infobar\"]//a[contains(@href, \"/genre/\")]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    },
+    "mpaa_rating": {
+      "optional": true,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@class=\"txt-block\"][h4[contains(., \"Motion Picture Rating\")]]/text()[normalize-space()][1]",
+        "//div[h4[contains(., \"MPAA\")]]/text()[normalize-space()][1]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    }
+  },
+  "not_present": {}
+}
