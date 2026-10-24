@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from importlib.metadata import PackageNotFoundError, version
 
+from ditto.api import Probe, Site
+from ditto.schema import FieldsSchema, Mapping
 from ditto.specgen.models import Spec
 
 try:
@@ -11,4 +13,4 @@ try:
 except PackageNotFoundError:  # running from a source tree without installation
     __version__ = "0.0.0"
 
-__all__ = ["Spec", "__version__"]
+__all__ = ["FieldsSchema", "Mapping", "Probe", "Site", "Spec", "__version__"]
