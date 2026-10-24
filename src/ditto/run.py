@@ -126,6 +126,11 @@ class RunDir:
     def golden(self, template_id: str) -> Path:
         return self.golden_dir / f"{template_id}.jsonl"
 
+    @property
+    def review_json(self) -> Path:
+        """Review sign-off per template, incl. rejected fields with the user's notes (repair)."""
+        return self.root / "review.json"
+
     # -- stage 8: extract ---------------------------------------------------------------------
     def out_dir(self, site: str) -> Path:
         return self.root / "out" / site

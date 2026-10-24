@@ -149,7 +149,7 @@ def continue_run(run: RunDir, opts: RunOptions, schema: Any) -> RunDir:
         )
         probe_run(run, schema, use_llm=opts.probe_llm, llm=probe_llm)
         _require_terminal(opts, "the mapping checkpoint (ditto confirm)")
-        mapping = confirm_run(run, yes=opts.yes, interactive=not opts.yes)
+        mapping = confirm_run(run, yes=opts.yes, interactive=not opts.yes, input_fn=opts.input_fn)
     gen_llm = get_llm("generation", settings=opts.settings, run=run, no_cache=opts.no_cache)
     generate_run(
         run,
