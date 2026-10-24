@@ -28,3 +28,9 @@ One line per decision, with the reason. Newest at the bottom of each section.
 - 2026-10-24 — Relative column selectors may be positional only when `column_source` is `llm` (headerless tables have no header text to anchor on).
 - 2026-10-24 — Scalar/list fields carry `fallbacks`: candidate indices verification found to agree with the winner; extraction tries them only when the selected candidate matches nothing.
 - 2026-10-24 — Page ids are dense integers from 0 in ingest order; `pages.sqlite` also stores `encoding`.
+- 2026-10-24 — Owner raised the LLM budget to $60 (`LLM_BUDGET_USD=60` added to `.env`) after the measured naive-baseline cost (≈11.3k tokens ≈ $0.024 per SWDE page) showed the brief's 200-page samples on every site would cost ≈$450.
+- 2026-10-24 — OpenAI Flex tier (`service_tier: flex`, 50% off, verified working for gpt-6.1-sol) may be used for bulk baseline calls; README cost tables are computed from token counts at standard-tier prices for every method so comparisons stay fair, and actual spend is reported separately.
+
+## Process
+
+- 2026-10-24 — The build is split into parallel slice agents against fixed contracts (`ditto.run`, `ditto.fingerprint.dom`, spec models, candidate/cluster/mapping models, LLM interface); all 15 hit an Anthropic API rate limit after ~34 minutes and were resumed in two batches of ≤8 to stay under it.
