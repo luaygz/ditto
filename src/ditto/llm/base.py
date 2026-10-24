@@ -16,6 +16,9 @@ class Message(TypedDict):
 
 @dataclass(frozen=True)
 class Usage:
+    """Token counts of one call. ``input_tokens`` is the total prompt size and *includes*
+    ``cached_input_tokens`` (prompt tokens the provider served from its prompt cache)."""
+
     input_tokens: int = 0
     output_tokens: int = 0
     cached_input_tokens: int = 0
@@ -38,7 +41,48 @@ class LLMError(Exception):
 
 
 class BudgetExceeded(LLMError):
-    """Raised before a call that would exceed the remaining LLM budget."""
+    """Raised before a call that would exceed the remaining LLM budget.
+
+    The keyword attributes carry the totals the CLI prints; all are optional so
+    ``BudgetExceeded("message")`` keeps working.
+    """
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        scope: str = "global",
+        budget_usd: float | None = None,
+        spent_usd: float | None = None,
+        remaining_usd: float | None = None,
+        projected_usd: float | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.scope = scope  # "global" (LLM_BUDGET_USD ledger) or "run" (per-run budget)
+        self.budget_usd = budget_usd
+        self.spent_usd = spent_usd
+        self.remaining_usd = remaining_usd
+        self.projected_usd = projected_usd
+
+
+class ProviderError(LLMError):
+    """A provider request failed. ``retryable`` is set for 429 (rate limit), 5xx and
+    connection errors; the shared layer retries those with backoff and raises the rest."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        status: int | None = None,
+        code: str | None = None,
+        retryable: bool = False,
+        retry_after: float | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.status = status
+        self.code = code
+        self.retryable = retryable
+        self.retry_after = retry_after
 
 
 class InvalidResponse(LLMError):
