@@ -1,0 +1,62 @@
+{
+  "page": "p000091",
+  "url": "https://www.munoz-tyler.com/cars/2020-tesla-xc60-sport-10642.html",
+  "template_id": "T07",
+  "fields": {
+    "title": "2020 Tesla XC60 Sport",
+    "color": "Crimson",
+    "description": "Treatment home think quite event car office life staff. Order tax model game before admit agreement name environmental family compare actually.",
+    "condition": "New",
+    "listed": null,
+    "dealer": "Fournier Fernandes et Fils",
+    "fuel": "Gasoline",
+    "make": "Subaru",
+    "transmission": "Manual",
+    "vin": "KCCZBXV1GBJ34U0V2",
+    "mileage": "15,920 mi"
+  },
+  "lists": {
+    "features": [
+      "Lane assist"
+    ]
+  },
+  "records": {
+    "service_history": [
+      {
+        "date": "January 22, 2023",
+        "shop": null,
+        "service": "Brake service",
+        "mileage": "6,215 mi"
+      },
+      {
+        "date": "November 17, 2019",
+        "shop": null,
+        "service": "Inspection",
+        "mileage": "125,551 mi"
+      },
+      {
+        "date": "December 1, 2019",
+        "shop": null,
+        "service": "Tire rotation",
+        "mileage": "169,148 mi"
+      },
+      {
+        "date": "June 18, 2016",
+        "shop": null,
+        "service": "Tire rotation",
+        "mileage": "86,941 mi"
+      }
+    ]
+  },
+  "kv": {
+    "vehicle_specs": {
+      "Horsepower": "417 hp",
+      "Doors": "7",
+      "Seats": "11"
+    }
+  },
+  "optional_present": [
+    "color",
+    "make"
+  ]
+}

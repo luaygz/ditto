@@ -1,0 +1,41 @@
+{
+  "page": "p000053",
+  "url": "https://www.munoz-tyler.com/movies/10371/the-student",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Student",
+    "description": "Ask cup either team only arm democrat. Research scene issue pretty cut chance movie soon material trade hard.",
+    "country": "Philippines",
+    "director": "Eitel Godoy",
+    "budget": null,
+    "language": "English",
+    "genre": null,
+    "box_office": "1.309.000 €",
+    "runtime": "135 min",
+    "studio": "Carter Ltd",
+    "certificate": "12A",
+    "release_date": "Jun 23, 2015"
+  },
+  "lists": {
+    "keywords": [
+      "most",
+      "would",
+      "enjoy"
+    ]
+  },
+  "records": {
+    "cast": []
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "16 : 9",
+      "Color": "Black and White",
+      "Filming location": "East Ann, GU",
+      "Camera": "Red Dragon",
+      "Production company": "Fisher-Garcia"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

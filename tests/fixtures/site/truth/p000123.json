@@ -1,0 +1,69 @@
+{
+  "page": "p000123",
+  "url": "https://www.munoz-tyler.com/cars/2014-audi-corolla-xle-10861.html",
+  "template_id": "T07",
+  "fields": {
+    "title": "2014 Audi Corolla XLE",
+    "color": "PaleGoldenRod",
+    "description": "Own data who across red statement task person worry television. Purpose public agent perhaps mrs agreement.",
+    "condition": "Like new",
+    "listed": null,
+    "dealer": "Gilbert-Sherman",
+    "fuel": "Plug-in hybrid",
+    "make": null,
+    "transmission": "CVT",
+    "vin": "1N7Z6AVYW3UWYMEYJ",
+    "mileage": "145,871 mi"
+  },
+  "lists": {
+    "features": [
+      "Navigation",
+      "Keyless entry"
+    ]
+  },
+  "records": {
+    "service_history": [
+      {
+        "date": "February 12, 2018",
+        "shop": null,
+        "service": "Battery replacement",
+        "mileage": "77,597 mi"
+      },
+      {
+        "date": "July 23, 2015",
+        "shop": null,
+        "service": "Battery replacement",
+        "mileage": "79,807 mi"
+      },
+      {
+        "date": "August 15, 2020",
+        "shop": null,
+        "service": "Alignment",
+        "mileage": "136,729 mi"
+      },
+      {
+        "date": "February 17, 2015",
+        "shop": null,
+        "service": "Alignment",
+        "mileage": "86,273 mi"
+      },
+      {
+        "date": "May 1, 2022",
+        "shop": null,
+        "service": "Inspection",
+        "mileage": "18,214 mi"
+      }
+    ]
+  },
+  "kv": {
+    "vehicle_specs": {
+      "Engine": "4.9L V8",
+      "Drivetrain": "4WD",
+      "Doors": "1",
+      "Seats": "8"
+    }
+  },
+  "optional_present": [
+    "color"
+  ]
+}

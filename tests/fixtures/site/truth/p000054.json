@@ -1,0 +1,53 @@
+{
+  "page": "p000054",
+  "url": "https://www.munoz-tyler.com/courses/product-strategy-fundamentals-10379/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Product strategy Fundamentals",
+    "rating": null,
+    "enrolled": "11,123",
+    "effort": "2-9 hours per week",
+    "level": "Intermediate",
+    "start_date": "Apr 4, 2024",
+    "description": "Store program pay game sure resource special glass need four else above. When other face form through weight red expert manager. Listen easy grow rest allow necessary from beat weight.",
+    "credential": "Diploma",
+    "contact_email": "cbrown@cook-rodriguez.com",
+    "language": "Korean",
+    "instructor": "Adam Marsh"
+  },
+  "lists": {
+    "topics": [
+      "Cloud architecture",
+      "Kubernetes",
+      "Customer support"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 4",
+        "topic": "Accept Call in Machine learning",
+        "hours": "1",
+        "reading": "Hot Music Officer Herself"
+      },
+      {
+        "week": "Week 4",
+        "topic": "For Walk in TypeScript",
+        "hours": "12",
+        "reading": "Society Movement Off How"
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Prerequisites": "High school biology",
+      "Assessment": "None",
+      "Subtitles": "Japanese",
+      "Certificate": "Diploma"
+    }
+  },
+  "optional_present": [
+    "enrolled",
+    "effort"
+  ]
+}

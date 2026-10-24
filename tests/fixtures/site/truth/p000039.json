@@ -1,0 +1,45 @@
+{
+  "page": "p000039",
+  "url": "https://www.munoz-tyler.com/recipes/grilled-coconut-milk-dumplings-10273/",
+  "template_id": "T06",
+  "fields": {
+    "name": "Grilled Coconut Milk Dumplings",
+    "cook_time": "1 hr 37 min",
+    "cuisine": "Mexican",
+    "published": "January 4, 2020",
+    "rating": "4.8",
+    "course": "Dinner",
+    "prep_time": "1 hr 53 min",
+    "total_time": "1 hr 52 min",
+    "author": "Tyler Lebreton",
+    "servings": "10",
+    "description": null
+  },
+  "lists": {
+    "steps": [
+      "Season the chickpeas expert past wonder discover keep guess play stop.",
+      "Whisk the tomatoes onto natural star customer under mission."
+    ]
+  },
+  "records": {
+    "nutrition": [
+      {
+        "nutrient": "Salt",
+        "per_100g": "76 mg",
+        "amount": "36 g",
+        "daily_value": "46%"
+      }
+    ]
+  },
+  "kv": {
+    "recipe_info": {
+      "Diet": "Pescatarian",
+      "Storage": "Keeps 6 days in the fridge",
+      "Freezer friendly": "No"
+    }
+  },
+  "optional_present": [
+    "cuisine",
+    "author"
+  ]
+}

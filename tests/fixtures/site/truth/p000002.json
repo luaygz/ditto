@@ -1,0 +1,38 @@
+{
+  "page": "p000002",
+  "url": "https://www.munoz-tyler.com/courses/graphic-design-fundamentals-10020/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Graphic design Fundamentals",
+    "rating": null,
+    "enrolled": "15,440",
+    "effort": "2-11 hours per week",
+    "level": "All levels",
+    "start_date": "Apr 3, 2015",
+    "description": "Job each realize speak budget before over never line site. National fear sport gas work scientist environmental product international allow. Imagine whatever same cut morning everybody away seek.",
+    "credential": "None",
+    "contact_email": "carreno.c@gmail.com",
+    "language": "English",
+    "instructor": "Alma Manning"
+  },
+  "lists": {
+    "topics": [
+      "Negotiation"
+    ]
+  },
+  "records": {
+    "syllabus": []
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Online",
+      "Prerequisites": "Prior course",
+      "Credits": "2",
+      "Assessment": "Quiz"
+    }
+  },
+  "optional_present": [
+    "enrolled",
+    "effort"
+  ]
+}

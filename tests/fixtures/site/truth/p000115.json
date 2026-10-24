@@ -1,0 +1,45 @@
+{
+  "page": "p000115",
+  "url": "https://www.munoz-tyler.com/courses/advanced-ux-research-10807/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Advanced UX research",
+    "rating": null,
+    "enrolled": null,
+    "effort": null,
+    "level": "Advanced",
+    "start_date": "Aug 6, 2023",
+    "description": "Network without three commercial could animal past. South statement indicate best report painting environmental painting spend feel. Officer tough wear major leader director ask over.",
+    "credential": "Professional certificate",
+    "contact_email": "christina.kent@bauer.com",
+    "language": "Spanish",
+    "instructor": "Marcus Gray"
+  },
+  "lists": {
+    "topics": [
+      "Kubernetes",
+      "Public speaking",
+      "SQL",
+      "Machine learning"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 9",
+        "topic": "Few Number in Machine learning",
+        "hours": "9",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Online",
+      "Prerequisites": "Prior course",
+      "Subtitles": "Italian",
+      "Certificate": "Diploma"
+    }
+  },
+  "optional_present": []
+}

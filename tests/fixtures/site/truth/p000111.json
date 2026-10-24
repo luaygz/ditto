@@ -1,0 +1,50 @@
+{
+  "page": "p000111",
+  "url": "https://www.munoz-tyler.com/movies/10778/all-section",
+  "template_id": "T03",
+  "fields": {
+    "title": "All Section",
+    "description": "Feeling high whatever stay plant happen employee sit international rich attorney. Task forward fly political money tough leg sign player raise. Tell strategy could suffer cup example firm.",
+    "country": "Nauru",
+    "director": "Nadin Henry",
+    "budget": null,
+    "language": "Swedish",
+    "genre": null,
+    "box_office": "2.446.000 €",
+    "runtime": "139 min",
+    "studio": "Ramirez and Sons",
+    "certificate": "G",
+    "release_date": "Apr 17, 2025"
+  },
+  "lists": {
+    "keywords": [
+      "behind",
+      "break",
+      "vote"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Laure Bowers",
+        "character": "Agent Flores",
+        "episodes": "2"
+      },
+      {
+        "actor": "Tyler Swanson",
+        "character": "Officer Mülichen",
+        "episodes": "9"
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "2.39 : 1",
+      "Color": "Color",
+      "Camera": "Super 16"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

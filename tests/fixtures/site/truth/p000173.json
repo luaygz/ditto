@@ -1,0 +1,57 @@
+{
+  "page": "p000173",
+  "url": "https://www.munoz-tyler.com/courses/accounting-fundamentals-11216/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Accounting Fundamentals",
+    "rating": null,
+    "enrolled": "13,903",
+    "effort": "4-6 hours per week",
+    "level": "Beginner",
+    "start_date": "Mar 5, 2024",
+    "description": "Avoid why detail bit lose whether whatever later quite. Culture quite society growth someone continue indeed night bed follow risk.",
+    "credential": "Diploma",
+    "contact_email": "jdufour@yahoo.com",
+    "language": "Italian",
+    "instructor": "Cornelius Jackson"
+  },
+  "lists": {
+    "topics": [
+      "Machine learning"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 12",
+        "topic": "System Every in Customer support",
+        "hours": "2",
+        "reading": null
+      },
+      {
+        "week": "Week 2",
+        "topic": "Stay Through in Kubernetes",
+        "hours": "10",
+        "reading": null
+      },
+      {
+        "week": "Week 3",
+        "topic": "Write Coach in Data analysis",
+        "hours": "8",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Hybrid",
+      "Prerequisites": "High school biology",
+      "Credits": "10",
+      "Subtitles": "Italian"
+    }
+  },
+  "optional_present": [
+    "enrolled",
+    "effort"
+  ]
+}

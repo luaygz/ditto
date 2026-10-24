@@ -1,0 +1,64 @@
+{
+  "page": "p000058",
+  "url": "https://www.munoz-tyler.com/courses/cloud-architecture-fundamentals-10411/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Cloud architecture Fundamentals",
+    "rating": "4.6",
+    "enrolled": "8,578",
+    "effort": "2-10 hours per week",
+    "level": "Beginner",
+    "start_date": "Jan 17, 2017",
+    "description": "Site can per threat want customer its design. Assume fly travel pattern result less fund skill. Television final street reason leave ability.",
+    "credential": "None",
+    "contact_email": "sancho64@blair.com",
+    "language": "French",
+    "instructor": "Leslie Haynes"
+  },
+  "lists": {
+    "topics": [
+      "Customer support"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 16",
+        "topic": "Religious Each in Statistics",
+        "hours": "3",
+        "reading": "The For of Need Series"
+      },
+      {
+        "week": "Week 16",
+        "topic": "Old Performance in Product strategy",
+        "hours": "9",
+        "reading": "A None in New Jacob"
+      },
+      {
+        "week": "Week 12",
+        "topic": "Them Traditional in Photography",
+        "hours": "4",
+        "reading": "A Trip in Loganhaven"
+      },
+      {
+        "week": "Week 7",
+        "topic": "Yes Law in Python",
+        "hours": "11",
+        "reading": "A Simply in Lake Charlesbury"
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Online",
+      "Credits": "9",
+      "Assessment": "Essay",
+      "Subtitles": "Dutch"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

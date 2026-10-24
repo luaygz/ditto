@@ -1,0 +1,40 @@
+# Synthetic site defaults (brief, "Synthetic generator"). Identical to SynthParams() defaults.
+# Generate: ditto synth generate --params eval/synth/default.yaml --seed 1 --out data/synth/default
+# Stress curves vary one parameter at a time from these values (seed 1, frozen).
+
+# size
+templates: 12            # regular templates per site (stress 2-200)
+pages_median: 2000       # log-normal page count per template (stress: singletons to 60,000)
+pages_sigma: 1.0
+pages_min: 20
+pages_max: 60000
+total_pages: null        # set to rescale template sizes, e.g. 10000 / 20000 / 100000
+tail_templates: 3        # extra long-tail templates below the min cluster size
+tail_pages: [1, 19]
+
+# fields
+mandatory_fields: [5, 8]          # mandatory scalars per template (besides the heading)
+optional_fields: 3                # stress 0-10
+optional_presence: [0.02, 0.95]   # presence rate of each optional field / column
+list_fields: 1
+list_items: [1, 8]
+record_tables: 1                  # stress 0-3
+table_rows: [0, 12]               # stress up to 300
+optional_columns: 1               # stress 0-2
+kv_blocks: 1                      # stress 0-3
+kv_style: mixed                   # dl | table | div | mixed (per template)
+kv_keys: [3, 8]
+
+# markup
+hashed_class_share: 0.3           # stress 0-1
+boilerplate_share: 0.4            # stress 0.1-0.8
+boilerplate_variants: 3           # nav/footer variants, stress 2-5
+near_duplicate_pairs: 1           # stress 0-5
+near_duplicate_jaccard: 0.7       # stress 0.6-0.9 (pairs always have different URL patterns)
+absent_rendering: omitted         # omitted | empty | na | hidden | mixed
+markup_style: server              # server | react | table | mixed
+noise: []                         # any of: entities, nbsp, whitespace, charset
+noise_rate: 0.5
+
+site_name: null
+host: null

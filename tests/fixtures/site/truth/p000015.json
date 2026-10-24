@@ -1,0 +1,62 @@
+{
+  "page": "p000015",
+  "url": "https://www.munoz-tyler.com/courses/introduction-to-public-speaking-10105/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Introduction to Public speaking",
+    "rating": "4.6",
+    "enrolled": null,
+    "effort": "5-11 hours per week",
+    "level": "Beginner",
+    "start_date": "Apr 4, 2020",
+    "description": "Onto figure half general value position car price. Later miss happy these major ball show write line single usually.",
+    "credential": "Digital badge",
+    "contact_email": "patrick.fernandez@gmail.com",
+    "language": "Italian",
+    "instructor": "Espiridión Ibarra"
+  },
+  "lists": {
+    "topics": [
+      "Data analysis",
+      "Sales",
+      "Cloud architecture",
+      "Statistics",
+      "Video editing"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 16",
+        "topic": "Boy Once in Negotiation",
+        "hours": "5",
+        "reading": "A Ball in New Andrewfurt"
+      },
+      {
+        "week": "Week 8",
+        "topic": "Data Project in Graphic design",
+        "hours": "5",
+        "reading": "The Follow of Determine"
+      },
+      {
+        "week": "Week 6",
+        "topic": "Poor Southern in Python",
+        "hours": "6",
+        "reading": "The Catch of For"
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Self-paced",
+      "Prerequisites": "Prior course",
+      "Assessment": "Project",
+      "Subtitles": "English",
+      "Certificate": "Diploma"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "effort"
+  ]
+}

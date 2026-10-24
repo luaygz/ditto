@@ -1,0 +1,72 @@
+{
+  "page": "p000072",
+  "url": "https://www.munoz-tyler.com/courses/public-speaking-for-professionals-10508/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Public speaking for Professionals",
+    "rating": null,
+    "enrolled": null,
+    "effort": "2-12 hours per week",
+    "level": "All levels",
+    "start_date": "Jul 15, 2026",
+    "description": "Public traditional charge ahead fact store tell answer west born door skin remain trip. Stop want society fall able push value citizen.",
+    "credential": "Professional certificate",
+    "contact_email": "leah.olsen@leach.info",
+    "language": "Arabic",
+    "instructor": "Julian Lane"
+  },
+  "lists": {
+    "topics": [
+      "Statistics",
+      "Copywriting",
+      "Photography"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 16",
+        "topic": "Apply How in Data analysis",
+        "hours": "3",
+        "reading": null
+      },
+      {
+        "week": "Week 14",
+        "topic": "Want Bill in Accounting",
+        "hours": "2",
+        "reading": null
+      },
+      {
+        "week": "Week 2",
+        "topic": "Society Force in Copywriting",
+        "hours": "4",
+        "reading": null
+      },
+      {
+        "week": "Week 4",
+        "topic": "Prevent Eight in Python",
+        "hours": "1",
+        "reading": null
+      },
+      {
+        "week": "Week 7",
+        "topic": "Water Reach in Rust",
+        "hours": "4",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Online",
+      "Prerequisites": "None",
+      "Credits": "2",
+      "Assessment": "Peer review",
+      "Subtitles": "Korean",
+      "Certificate": "Certificate of completion"
+    }
+  },
+  "optional_present": [
+    "effort"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "page": "p000055",
+  "url": "https://www.munoz-tyler.com/movies/10391/the-poor",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Poor",
+    "description": "Their doctor election site performance benefit president month after later history maybe offer increase. Right pay seat too institution inside itself car test oil involve itself. Follow car hope stop ago certain tree night couple central son.",
+    "country": "Tuvalu",
+    "director": "Mark Valdez",
+    "budget": "1.658.000 €",
+    "language": "Arabic",
+    "genre": "Self-help",
+    "box_office": "2.357.000 €",
+    "runtime": "173 min",
+    "studio": "Robinson PLC",
+    "certificate": "12A",
+    "release_date": "Aug 7, 2022"
+  },
+  "lists": {
+    "keywords": [
+      "edge",
+      "eye",
+      "computer",
+      "together"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Kaspar Keller",
+        "character": "Mayor Henry",
+        "episodes": null
+      },
+      {
+        "actor": "Douglas King",
+        "character": "Captain Lombard",
+        "episodes": null
+      },
+      {
+        "actor": "Rémy Lyons",
+        "character": "Detective Peterson",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Sound mix": "Dolby Digital",
+      "Color": "Color",
+      "Production company": "Lopez SA"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget",
+    "genre"
+  ]
+}

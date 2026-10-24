@@ -1,0 +1,61 @@
+{
+  "page": "p000166",
+  "url": "https://www.munoz-tyler.com/movies/11167/case-social-maintain",
+  "template_id": "T03",
+  "fields": {
+    "title": "Case: Social Maintain",
+    "description": "Southern huge want group others environmental consumer him site. Develop pressure almost body quite ball town within director occur key long include. There pick subject rock develop chance deep boy buy pass each.",
+    "country": null,
+    "director": "Alice Hampton",
+    "budget": "1.006.000 €",
+    "language": "Korean",
+    "genre": "History",
+    "box_office": "1.236.000 €",
+    "runtime": "152 min",
+    "studio": "Mendoza-Jones",
+    "certificate": "18",
+    "release_date": "Sep 10, 2015"
+  },
+  "lists": {
+    "keywords": [
+      "answer",
+      "fly",
+      "ground"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Hans-Hinrich Gibson",
+        "character": "Captain Aragón",
+        "episodes": null
+      },
+      {
+        "actor": "Tammy Carreño",
+        "character": "Sister Petersen",
+        "episodes": null
+      },
+      {
+        "actor": "Jacques Stanton",
+        "character": "Mayor Dawson",
+        "episodes": null
+      },
+      {
+        "actor": "Lawrence Abbott",
+        "character": "Captain Mitchell",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Sound mix": "Mono",
+      "Filming location": "Derekland, GU",
+      "Production company": "Rodriguez Bousquet S.A.S."
+    }
+  },
+  "optional_present": [
+    "budget",
+    "genre"
+  ]
+}

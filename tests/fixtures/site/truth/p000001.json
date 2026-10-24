@@ -1,0 +1,41 @@
+{
+  "page": "p000001",
+  "url": "https://www.munoz-tyler.com/courses/supply-chain-for-professionals-10012/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Supply chain for Professionals",
+    "rating": "1.9",
+    "enrolled": "35,006",
+    "effort": "2-12 hours per week",
+    "level": "Advanced",
+    "start_date": "Aug 20, 2015",
+    "description": "All similar also pass sell degree nation congress exactly tonight culture least. Home its his individual knowledge gas rest land beat season per old form. Need meeting friend employee office billion cost business whatever keep rule.",
+    "credential": "Digital badge",
+    "contact_email": "cpreston@vasquez.com",
+    "language": "Japanese",
+    "instructor": "Sarah Gieß"
+  },
+  "lists": {
+    "topics": [
+      "Machine learning",
+      "Accounting",
+      "Photography"
+    ]
+  },
+  "records": {
+    "syllabus": []
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Self-paced",
+      "Prerequisites": "High school biology",
+      "Assessment": "Project",
+      "Certificate": "Digital badge"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "page": "p000197",
+  "url": "https://www.munoz-tyler.com/movies/11384/the-direction",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Direction",
+    "description": "Give next security should economy get wrong reality chance film church interest. View family floor travel any reveal finish stuff each prove commercial popular last between.",
+    "country": "Cote d'Ivoire",
+    "director": "Caitlin West",
+    "budget": null,
+    "language": "Korean",
+    "genre": "Mystery",
+    "box_office": "813.000 €",
+    "runtime": "125 min",
+    "studio": "Leconte",
+    "certificate": "15",
+    "release_date": "Aug 1, 2023"
+  },
+  "lists": {
+    "keywords": [
+      "happy",
+      "bag"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Anna-Marie Pozuelo",
+        "character": "Officer Aguilar",
+        "episodes": null
+      },
+      {
+        "actor": "Justina Gunpf",
+        "character": "Detective Luna",
+        "episodes": null
+      },
+      {
+        "actor": "Sven Brady",
+        "character": "Sister Pérez",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Sound mix": "Mono",
+      "Color": "Black and White",
+      "Camera": "Sony Venice"
+    }
+  },
+  "optional_present": [
+    "country",
+    "genre"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "page": "p000104",
+  "url": "https://www.munoz-tyler.com/courses/supply-chain-for-professionals-10730/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Supply chain for Professionals",
+    "rating": "3.8",
+    "enrolled": "12,803",
+    "effort": "5-8 hours per week",
+    "level": "Intermediate",
+    "start_date": "Oct 19, 2020",
+    "description": "Few recognize daughter measure shake huge image lay parent necessary. Across charge lose customer street mind reason gas system.",
+    "credential": "None",
+    "contact_email": "ilse.fisher@hotmail.com",
+    "language": "Japanese",
+    "instructor": "Shaun Scott"
+  },
+  "lists": {
+    "topics": [
+      "Data analysis",
+      "Rust",
+      "Photography",
+      "Product strategy"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 7",
+        "topic": "Issue Side in SQL",
+        "hours": "3",
+        "reading": "A Measure in West Stephanie"
+      },
+      {
+        "week": "Week 5",
+        "topic": "Attack Professional in Customer support",
+        "hours": "3",
+        "reading": "Mind Hope Walk"
+      },
+      {
+        "week": "Week 11",
+        "topic": "Onto Why in Accounting",
+        "hours": "3",
+        "reading": "A Floor in Jessicahaven"
+      },
+      {
+        "week": "Week 15",
+        "topic": "Including Her in Project management",
+        "hours": "5",
+        "reading": "The Firm of Shake"
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Self-paced",
+      "Prerequisites": "High school biology",
+      "Assessment": "Peer review",
+      "Subtitles": "English"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

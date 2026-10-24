@@ -1,0 +1,41 @@
+{
+  "page": "p000073",
+  "url": "https://www.munoz-tyler.com/courses/advanced-photography-10516/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Advanced Photography",
+    "rating": null,
+    "enrolled": "3,208",
+    "effort": "5-6 hours per week",
+    "level": "Beginner",
+    "start_date": "Jul 19, 2023",
+    "description": "Central live alone because add window after deal visit. Safe ever movie less than first indeed evidence.",
+    "credential": "Certificate of completion",
+    "contact_email": "rene24@lewis-horn.com",
+    "language": "Korean",
+    "instructor": "Hannah Tintzmann"
+  },
+  "lists": {
+    "topics": [
+      "TypeScript",
+      "Supply chain",
+      "Cloud architecture",
+      "Copywriting"
+    ]
+  },
+  "records": {
+    "syllabus": []
+  },
+  "kv": {
+    "course_facts": {
+      "Prerequisites": "High school biology",
+      "Credits": "12",
+      "Subtitles": "Korean",
+      "Certificate": "Professional certificate"
+    }
+  },
+  "optional_present": [
+    "enrolled",
+    "effort"
+  ]
+}

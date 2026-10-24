@@ -1,0 +1,49 @@
+{
+  "page": "p000000",
+  "url": "https://www.munoz-tyler.com/movies/10003/the-year",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Year",
+    "description": "You part material who bit off happen family game husband the democrat bank. Start effect since arrive try certain but final maintain reflect social policy.",
+    "country": "Montenegro",
+    "director": "Tony Peterson",
+    "budget": "2.310.000 €",
+    "language": "Italian",
+    "genre": null,
+    "box_office": "171.000 €",
+    "runtime": "148 min",
+    "studio": "Chevallier",
+    "certificate": "PG",
+    "release_date": "Jan 14, 2019"
+  },
+  "lists": {
+    "keywords": [
+      "music"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Kathryn Mccarthy",
+        "character": "Captain Valdez",
+        "episodes": "10"
+      },
+      {
+        "actor": "Donna Cohen",
+        "character": "Sister Soto",
+        "episodes": "5"
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "16 : 9",
+      "Color": "Black and White",
+      "Production company": "Fisher-Garcia"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget"
+  ]
+}

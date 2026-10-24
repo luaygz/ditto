@@ -1,0 +1,71 @@
+{
+  "page": "p000142",
+  "url": "https://www.munoz-tyler.com/recipes/coconut-butter-skewers-10994/",
+  "template_id": "T06",
+  "fields": {
+    "name": "Coconut Butter Skewers",
+    "cook_time": "44 min",
+    "cuisine": "Italian",
+    "published": "October 28, 2024",
+    "rating": "3.7",
+    "course": "Dessert",
+    "prep_time": "1 hr 23 min",
+    "total_time": "1 hr 41 min",
+    "author": "Salvatore Wilkerson",
+    "servings": "8",
+    "description": "Security choice condition minute occur right decision degree answer sell draw. High market fine spend reach prove across have."
+  },
+  "lists": {
+    "steps": [
+      "Bake the paprika lot owner easy white."
+    ]
+  },
+  "records": {
+    "nutrition": [
+      {
+        "nutrient": "Saturates",
+        "per_100g": "32 g",
+        "amount": "56 g",
+        "daily_value": "35%"
+      },
+      {
+        "nutrient": "Calories",
+        "per_100g": "104 g",
+        "amount": "74 mg",
+        "daily_value": "24%"
+      },
+      {
+        "nutrient": "Sugars",
+        "per_100g": "69 g",
+        "amount": "51 mg",
+        "daily_value": "80%"
+      },
+      {
+        "nutrient": "Sodium",
+        "per_100g": "89 mg",
+        "amount": "43 g",
+        "daily_value": "20%"
+      },
+      {
+        "nutrient": "Cholesterol",
+        "per_100g": "99 g",
+        "amount": "100 g",
+        "daily_value": "27%"
+      }
+    ]
+  },
+  "kv": {
+    "recipe_info": {
+      "Diet": "Dairy-free",
+      "Equipment": "Slow cooker",
+      "Freezer friendly": "Yes",
+      "Season": "All year",
+      "Origin": "Gabon"
+    }
+  },
+  "optional_present": [
+    "cuisine",
+    "author",
+    "description"
+  ]
+}

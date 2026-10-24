@@ -1,0 +1,1388 @@
+{
+  "seed": 1,
+  "site_name": "Munoz-Tyler",
+  "host": "www.munoz-tyler.com",
+  "templates": [
+    {
+      "template_id": "T01",
+      "kind": "course",
+      "pages": 35,
+      "is_tail": false,
+      "near_duplicate_of": null,
+      "url_pattern": "/courses/{slug}-{id}/",
+      "url_example": "https://www.munoz-tyler.com/courses/supply-chain-for-professionals-10012/",
+      "markup_style": "server",
+      "absent_rendering": "omitted",
+      "class_prefix": "class",
+      "field_scheme": "wrapper",
+      "field_layout": "p",
+      "fields": [
+        {
+          "name": "title",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": null,
+          "description": "the course title shown as the page heading"
+        },
+        {
+          "name": "rating",
+          "type": "scalar",
+          "value_type": "number",
+          "optional": true,
+          "presence": 0.75,
+          "observed_presence": 0.6571,
+          "label": "Course rating",
+          "description": "rating out of 5"
+        },
+        {
+          "name": "enrolled",
+          "type": "scalar",
+          "value_type": "number",
+          "optional": true,
+          "presence": 0.562,
+          "observed_presence": 0.6,
+          "label": "Enrolled",
+          "description": "number of enrolled students"
+        },
+        {
+          "name": "effort",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.894,
+          "observed_presence": 0.9429,
+          "label": "Effort",
+          "description": "weekly effort"
+        },
+        {
+          "name": "level",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Difficulty",
+          "description": "course level"
+        },
+        {
+          "name": "start_date",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Start date",
+          "description": "start date"
+        },
+        {
+          "name": "description",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Overview",
+          "description": "course description paragraph"
+        },
+        {
+          "name": "credential",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Credential",
+          "description": "certificate awarded"
+        },
+        {
+          "name": "contact_email",
+          "type": "scalar",
+          "value_type": "email",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Questions",
+          "description": "contact email"
+        },
+        {
+          "name": "language",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Language",
+          "description": "teaching language"
+        },
+        {
+          "name": "instructor",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Taught by",
+          "description": "instructor"
+        },
+        {
+          "name": "topics",
+          "type": "list",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": "What you'll learn",
+          "description": "topics covered"
+        },
+        {
+          "name": "syllabus",
+          "type": "record_list",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Curriculum",
+          "description": "syllabus table with week, topic and hours",
+          "columns": [
+            {
+              "name": "week",
+              "label": "Week",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "topic",
+              "label": "Topic",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "hours",
+              "label": "Hours",
+              "value_type": "number",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "reading",
+              "label": "Reading",
+              "value_type": "text",
+              "optional": true,
+              "presence": 0.507,
+              "observed_presence": 0.3143
+            }
+          ]
+        },
+        {
+          "name": "course_facts",
+          "type": "key_value",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Course details",
+          "description": "course fact pairs such as format and prerequisites",
+          "style": "div",
+          "keys": [
+            "Format",
+            "Prerequisites",
+            "Credits",
+            "Assessment",
+            "Subtitles",
+            "Certificate"
+          ]
+        }
+      ]
+    },
+    {
+      "template_id": "T02",
+      "kind": "article",
+      "pages": 64,
+      "is_tail": false,
+      "near_duplicate_of": null,
+      "url_pattern": "/blog/{yyyy}/{mm}/{slug}-{id}",
+      "url_example": "https://www.munoz-tyler.com/blog/2016/08/beilngries-questions-bad-turn-specific-than-night-10038",
+      "markup_style": "server",
+      "absent_rendering": "omitted",
+      "class_prefix": "article",
+      "field_scheme": "itemprop",
+      "field_layout": "p",
+      "fields": [
+        {
+          "name": "headline",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": null,
+          "description": "the article headline shown as the page heading"
+        },
+        {
+          "name": "comment_count",
+          "type": "scalar",
+          "value_type": "number",
+          "optional": true,
+          "presence": 0.07,
+          "observed_presence": 0.0625,
+          "label": "Comments",
+          "description": "number of comments"
+        },
+        {
+          "name": "published",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Posted",
+          "description": "publication date"
+        },
+        {
+          "name": "photo_credit",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Image credit",
+          "description": "photographer credit"
+        },
+        {
+          "name": "updated",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Updated",
+          "description": "last update date"
+        },
+        {
+          "name": "read_time",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Read time",
+          "description": "estimated reading time"
+        },
+        {
+          "name": "word_count",
+          "type": "scalar",
+          "value_type": "number",
+          "optional": true,
+          "presence": 0.237,
+          "observed_presence": 0.2344,
+          "label": "Word count",
+          "description": "number of words"
+        },
+        {
+          "name": "author_email",
+          "type": "scalar",
+          "value_type": "email",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Contact the author",
+          "description": "author email address"
+        },
+        {
+          "name": "summary",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "In brief",
+          "description": "one-sentence summary"
+        },
+        {
+          "name": "author",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.46,
+          "observed_presence": 0.5,
+          "label": "By",
+          "description": "article author"
+        },
+        {
+          "name": "tags",
+          "type": "list",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": "Topics",
+          "description": "article tags"
+        },
+        {
+          "name": "comments",
+          "type": "record_list",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Reader comments",
+          "description": "reader comments with author, date and text",
+          "columns": [
+            {
+              "name": "author",
+              "label": "Author",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "date",
+              "label": "Date",
+              "value_type": "date",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "comment",
+              "label": "Comment",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "location",
+              "label": "Location",
+              "value_type": "text",
+              "optional": true,
+              "presence": 0.291,
+              "observed_presence": 0.3906
+            }
+          ]
+        },
+        {
+          "name": "article_info",
+          "type": "key_value",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Article info",
+          "description": "article metadata pairs",
+          "style": "table",
+          "keys": [
+            "Section",
+            "Language",
+            "License",
+            "Edition",
+            "Series",
+            "Word count"
+          ]
+        }
+      ]
+    },
+    {
+      "template_id": "T03",
+      "kind": "movie",
+      "pages": 36,
+      "is_tail": false,
+      "near_duplicate_of": null,
+      "url_pattern": "/movies/{id}/{slug}",
+      "url_example": "https://www.munoz-tyler.com/movies/10003/the-year",
+      "markup_style": "server",
+      "absent_rendering": "omitted",
+      "class_prefix": "feature",
+      "field_scheme": "value",
+      "field_layout": "p",
+      "fields": [
+        {
+          "name": "title",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": null,
+          "description": "the movie title shown as the page heading"
+        },
+        {
+          "name": "description",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Plot",
+          "description": "plot synopsis paragraph"
+        },
+        {
+          "name": "country",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.817,
+          "observed_presence": 0.75,
+          "label": "Country",
+          "description": "country of origin"
+        },
+        {
+          "name": "director",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Directed by",
+          "description": "director"
+        },
+        {
+          "name": "budget",
+          "type": "scalar",
+          "value_type": "price",
+          "optional": true,
+          "presence": 0.44,
+          "observed_presence": 0.3889,
+          "label": "Budget",
+          "description": "production budget including the currency symbol"
+        },
+        {
+          "name": "language",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Original language",
+          "description": "original language"
+        },
+        {
+          "name": "genre",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.262,
+          "observed_presence": 0.3056,
+          "label": "Genre",
+          "description": "primary genre"
+        },
+        {
+          "name": "box_office",
+          "type": "scalar",
+          "value_type": "price",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Gross",
+          "description": "box office gross including the currency symbol"
+        },
+        {
+          "name": "runtime",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Running time",
+          "description": "running time"
+        },
+        {
+          "name": "studio",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Production",
+          "description": "studio"
+        },
+        {
+          "name": "certificate",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Rated",
+          "description": "age certificate"
+        },
+        {
+          "name": "release_date",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Released",
+          "description": "release date"
+        },
+        {
+          "name": "keywords",
+          "type": "list",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": "Plot keywords",
+          "description": "plot keywords"
+        },
+        {
+          "name": "cast",
+          "type": "record_list",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Cast and crew",
+          "description": "cast list with actor and role",
+          "columns": [
+            {
+              "name": "actor",
+              "label": "Actor",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "character",
+              "label": "Role",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "episodes",
+              "label": "Episodes",
+              "value_type": "number",
+              "optional": true,
+              "presence": 0.191,
+              "observed_presence": 0.1111
+            }
+          ]
+        },
+        {
+          "name": "tech_specs",
+          "type": "key_value",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Details",
+          "description": "technical specification pairs",
+          "style": "table",
+          "keys": [
+            "Aspect ratio",
+            "Sound mix",
+            "Color",
+            "Filming location",
+            "Camera",
+            "Production company"
+          ]
+        }
+      ]
+    },
+    {
+      "template_id": "T04",
+      "kind": "article",
+      "pages": 52,
+      "is_tail": false,
+      "near_duplicate_of": "T02",
+      "url_pattern": "/news/{yyyy}/{mm}/{slug}-{id}",
+      "url_example": "https://www.munoz-tyler.com/news/2023/03/pritzwalk-embraces-rate-range-10030",
+      "markup_style": "server",
+      "absent_rendering": "omitted",
+      "class_prefix": "article",
+      "field_scheme": "itemprop",
+      "field_layout": "p",
+      "fields": [
+        {
+          "name": "headline",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": null,
+          "description": "the article headline shown as the page heading"
+        },
+        {
+          "name": "comment_count",
+          "type": "scalar",
+          "value_type": "number",
+          "optional": true,
+          "presence": 0.07,
+          "observed_presence": 0.0385,
+          "label": "Comments",
+          "description": "number of comments"
+        },
+        {
+          "name": "badge",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Label",
+          "description": "badge label"
+        },
+        {
+          "name": "published",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Posted",
+          "description": "publication date"
+        },
+        {
+          "name": "section",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Filed under",
+          "description": "site section"
+        },
+        {
+          "name": "word_count",
+          "type": "scalar",
+          "value_type": "number",
+          "optional": true,
+          "presence": 0.237,
+          "observed_presence": 0.2115,
+          "label": "Word count",
+          "description": "number of words"
+        },
+        {
+          "name": "permalink",
+          "type": "scalar",
+          "value_type": "url",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Share link",
+          "description": "permanent link URL"
+        },
+        {
+          "name": "support_phone",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Support",
+          "description": "support phone number"
+        },
+        {
+          "name": "listing_date",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Added",
+          "description": "date the entry was added"
+        },
+        {
+          "name": "region",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Region",
+          "description": "region or country"
+        },
+        {
+          "name": "summary",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "In brief",
+          "description": "one-sentence summary"
+        },
+        {
+          "name": "author",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.46,
+          "observed_presence": 0.4231,
+          "label": "By",
+          "description": "article author"
+        },
+        {
+          "name": "verification",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Verification",
+          "description": "verification status"
+        },
+        {
+          "name": "tags",
+          "type": "list",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": "Topics",
+          "description": "article tags"
+        },
+        {
+          "name": "comments",
+          "type": "record_list",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Reader comments",
+          "description": "reader comments with author, date and text",
+          "columns": [
+            {
+              "name": "author",
+              "label": "Author",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "date",
+              "label": "Date",
+              "value_type": "date",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "comment",
+              "label": "Comment",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "location",
+              "label": "Location",
+              "value_type": "text",
+              "optional": true,
+              "presence": 0.291,
+              "observed_presence": 0.25
+            }
+          ]
+        },
+        {
+          "name": "article_info",
+          "type": "key_value",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Article info",
+          "description": "article metadata pairs",
+          "style": "table",
+          "keys": [
+            "Section",
+            "Language",
+            "License",
+            "Edition",
+            "Series",
+            "Word count"
+          ]
+        }
+      ]
+    },
+    {
+      "template_id": "T05",
+      "kind": "job",
+      "pages": 3,
+      "is_tail": true,
+      "near_duplicate_of": null,
+      "url_pattern": "/jobs/{id}/{slug}",
+      "url_example": "https://www.munoz-tyler.com/jobs/10075/insurance-account-manager",
+      "markup_style": "server",
+      "absent_rendering": "omitted",
+      "class_prefix": "posting",
+      "field_scheme": "wrapper",
+      "field_layout": "li",
+      "fields": [
+        {
+          "name": "title",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": null,
+          "description": "the job title shown as the page heading"
+        },
+        {
+          "name": "salary",
+          "type": "scalar",
+          "value_type": "price",
+          "optional": true,
+          "presence": 0.933,
+          "observed_presence": 1.0,
+          "label": "Pay",
+          "description": "annual salary including the currency symbol"
+        },
+        {
+          "name": "apply_url",
+          "type": "scalar",
+          "value_type": "url",
+          "optional": true,
+          "presence": 0.878,
+          "observed_presence": 1.0,
+          "label": "Apply online",
+          "description": "URL of the application form"
+        },
+        {
+          "name": "date_posted",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Posted",
+          "description": "date the job was posted"
+        },
+        {
+          "name": "experience_level",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.904,
+          "observed_presence": 1.0,
+          "label": "Level",
+          "description": "seniority level"
+        },
+        {
+          "name": "department",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Department",
+          "description": "department of the role"
+        },
+        {
+          "name": "contact_email",
+          "type": "scalar",
+          "value_type": "email",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Questions",
+          "description": "recruiter contact email"
+        },
+        {
+          "name": "openings",
+          "type": "scalar",
+          "value_type": "number",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Openings",
+          "description": "number of open positions"
+        },
+        {
+          "name": "deadline",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Apply by",
+          "description": "application deadline"
+        },
+        {
+          "name": "description",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Job description",
+          "description": "job description paragraph"
+        },
+        {
+          "name": "employment_type",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Contract",
+          "description": "employment type such as Full-time"
+        },
+        {
+          "name": "benefits",
+          "type": "list",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": "Perks",
+          "description": "list of benefits"
+        },
+        {
+          "name": "open_positions",
+          "type": "record_list",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Locations",
+          "description": "table of open positions per location",
+          "columns": [
+            {
+              "name": "location",
+              "label": "Location",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "start",
+              "label": "Start",
+              "value_type": "date",
+              "optional": true,
+              "presence": 0.382,
+              "observed_presence": 0.3333
+            },
+            {
+              "name": "team",
+              "label": "Team",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "positions",
+              "label": "Positions",
+              "value_type": "number",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            }
+          ]
+        },
+        {
+          "name": "job_details",
+          "type": "key_value",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Job details",
+          "description": "job detail pairs such as schedule and travel",
+          "style": "div",
+          "keys": [
+            "Category",
+            "Schedule",
+            "Travel",
+            "Visa sponsorship",
+            "Start date",
+            "Contract length",
+            "Reports to",
+            "Team size"
+          ]
+        }
+      ]
+    },
+    {
+      "template_id": "T06",
+      "kind": "recipe",
+      "pages": 5,
+      "is_tail": true,
+      "near_duplicate_of": null,
+      "url_pattern": "/recipes/{slug}-{id}/",
+      "url_example": "https://www.munoz-tyler.com/recipes/grilled-coconut-milk-dumplings-10273/",
+      "markup_style": "server",
+      "absent_rendering": "omitted",
+      "class_prefix": "cook",
+      "field_scheme": "wrapper",
+      "field_layout": "p",
+      "fields": [
+        {
+          "name": "name",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": null,
+          "description": "the recipe name shown as the page heading"
+        },
+        {
+          "name": "cook_time",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Cook time",
+          "description": "cooking time"
+        },
+        {
+          "name": "cuisine",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.827,
+          "observed_presence": 1.0,
+          "label": "Cuisine",
+          "description": "cuisine"
+        },
+        {
+          "name": "published",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Posted on",
+          "description": "publication date"
+        },
+        {
+          "name": "rating",
+          "type": "scalar",
+          "value_type": "number",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Average rating",
+          "description": "average rating out of 5"
+        },
+        {
+          "name": "course",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Meal",
+          "description": "meal course"
+        },
+        {
+          "name": "prep_time",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Prep time",
+          "description": "preparation time"
+        },
+        {
+          "name": "total_time",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Ready in",
+          "description": "total time"
+        },
+        {
+          "name": "author",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.595,
+          "observed_presence": 0.6,
+          "label": "By",
+          "description": "recipe author"
+        },
+        {
+          "name": "servings",
+          "type": "scalar",
+          "value_type": "number",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Serves",
+          "description": "number of servings"
+        },
+        {
+          "name": "description",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.378,
+          "observed_presence": 0.2,
+          "label": "Introduction",
+          "description": "recipe introduction paragraph"
+        },
+        {
+          "name": "steps",
+          "type": "list",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": "Directions",
+          "description": "ordered preparation steps"
+        },
+        {
+          "name": "nutrition",
+          "type": "record_list",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Nutrition per serving",
+          "description": "nutrition table with nutrient, amount and daily value",
+          "columns": [
+            {
+              "name": "nutrient",
+              "label": "Nutrient",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "per_100g",
+              "label": "Per 100 g",
+              "value_type": "text",
+              "optional": true,
+              "presence": 0.504,
+              "observed_presence": 0.4
+            },
+            {
+              "name": "amount",
+              "label": "Amount",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "daily_value",
+              "label": "Daily value",
+              "value_type": "number",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            }
+          ]
+        },
+        {
+          "name": "recipe_info",
+          "type": "key_value",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "At a glance",
+          "description": "recipe information pairs such as diet and equipment",
+          "style": "table",
+          "keys": [
+            "Diet",
+            "Equipment",
+            "Storage",
+            "Freezer friendly",
+            "Season",
+            "Occasion",
+            "Origin"
+          ]
+        }
+      ]
+    },
+    {
+      "template_id": "T07",
+      "kind": "vehicle",
+      "pages": 5,
+      "is_tail": true,
+      "near_duplicate_of": null,
+      "url_pattern": "/cars/{slug}-{id}.html",
+      "url_example": "https://www.munoz-tyler.com/cars/2020-tesla-xc60-sport-10642.html",
+      "markup_style": "server",
+      "absent_rendering": "omitted",
+      "class_prefix": "car",
+      "field_scheme": "itemprop",
+      "field_layout": "div",
+      "fields": [
+        {
+          "name": "title",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": null,
+          "description": "the vehicle title shown as the page heading"
+        },
+        {
+          "name": "color",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.638,
+          "observed_presence": 0.8,
+          "label": "Exterior color",
+          "description": "exterior color"
+        },
+        {
+          "name": "description",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Seller's notes",
+          "description": "seller description paragraph"
+        },
+        {
+          "name": "condition",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Condition",
+          "description": "condition"
+        },
+        {
+          "name": "listed",
+          "type": "scalar",
+          "value_type": "date",
+          "optional": true,
+          "presence": 0.093,
+          "observed_presence": 0.0,
+          "label": "Date listed",
+          "description": "date listed"
+        },
+        {
+          "name": "dealer",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Seller",
+          "description": "dealer name"
+        },
+        {
+          "name": "fuel",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Fuel type",
+          "description": "fuel type"
+        },
+        {
+          "name": "make",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": true,
+          "presence": 0.479,
+          "observed_presence": 0.2,
+          "label": "Make",
+          "description": "make"
+        },
+        {
+          "name": "transmission",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Gearbox",
+          "description": "transmission"
+        },
+        {
+          "name": "vin",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "VIN",
+          "description": "vehicle identification number"
+        },
+        {
+          "name": "mileage",
+          "type": "scalar",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "observed_presence": 1.0,
+          "label": "Odometer",
+          "description": "mileage"
+        },
+        {
+          "name": "features",
+          "type": "list",
+          "value_type": "text",
+          "optional": false,
+          "presence": 1.0,
+          "label": "Features",
+          "description": "vehicle features"
+        },
+        {
+          "name": "service_history",
+          "type": "record_list",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Service history",
+          "description": "service history with date, service and mileage",
+          "columns": [
+            {
+              "name": "date",
+              "label": "Date",
+              "value_type": "date",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "shop",
+              "label": "Shop",
+              "value_type": "text",
+              "optional": true,
+              "presence": 0.354,
+              "observed_presence": 0.0
+            },
+            {
+              "name": "service",
+              "label": "Service",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            },
+            {
+              "name": "mileage",
+              "label": "Mileage",
+              "value_type": "text",
+              "optional": false,
+              "presence": 1.0,
+              "observed_presence": 1.0
+            }
+          ]
+        },
+        {
+          "name": "vehicle_specs",
+          "type": "key_value",
+          "value_type": null,
+          "optional": false,
+          "presence": 1.0,
+          "label": "Vehicle specs",
+          "description": "vehicle specification pairs such as engine and drivetrain",
+          "style": "table",
+          "keys": [
+            "Engine",
+            "Horsepower",
+            "Drivetrain",
+            "Doors",
+            "Seats",
+            "Fuel economy",
+            "Interior color"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "page": "p000080",
+  "url": "https://www.munoz-tyler.com/recipes/wild-mushroom-parsley-flatbread-10565/",
+  "template_id": "T06",
+  "fields": {
+    "name": "Wild Mushroom Parsley Flatbread",
+    "cook_time": "22 min",
+    "cuisine": "Thai",
+    "published": "October 28, 2015",
+    "rating": "4.1",
+    "course": "Dessert",
+    "prep_time": "1 hr 5 min",
+    "total_time": "8 min",
+    "author": null,
+    "servings": "1",
+    "description": null
+  },
+  "lists": {
+    "steps": [
+      "Chop the cumin book back quality.",
+      "Bake the spinach hotel sign huge economic country."
+    ]
+  },
+  "records": {
+    "nutrition": [
+      {
+        "nutrient": "Sugars",
+        "per_100g": null,
+        "amount": "55 g",
+        "daily_value": "49%"
+      },
+      {
+        "nutrient": "Sugars",
+        "per_100g": null,
+        "amount": "45 mg",
+        "daily_value": "14%"
+      },
+      {
+        "nutrient": "Fat",
+        "per_100g": null,
+        "amount": "53 mg",
+        "daily_value": "73%"
+      },
+      {
+        "nutrient": "Calories",
+        "per_100g": null,
+        "amount": "59 mg",
+        "daily_value": "98%"
+      }
+    ]
+  },
+  "kv": {
+    "recipe_info": {
+      "Diet": "Dairy-free",
+      "Equipment": "Slow cooker",
+      "Storage": "Keeps 3 days in the fridge",
+      "Freezer friendly": "Yes",
+      "Season": "All year",
+      "Occasion": "Weeknight"
+    }
+  },
+  "optional_present": [
+    "cuisine"
+  ]
+}

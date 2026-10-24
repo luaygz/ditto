@@ -1,0 +1,46 @@
+{
+  "page": "p000132",
+  "url": "https://www.munoz-tyler.com/movies/10927/the-radio-skin",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Radio Skin",
+    "description": "Strong education poor foreign arm kid marriage drive none system. Democrat man money their city get important later especially vote floor.",
+    "country": null,
+    "director": "Stephanie Day",
+    "budget": "1.048.000 €",
+    "language": "Swedish",
+    "genre": null,
+    "box_office": "1.110.000 €",
+    "runtime": "92 min",
+    "studio": "Williams Inc",
+    "certificate": "18",
+    "release_date": "May 28, 2016"
+  },
+  "lists": {
+    "keywords": [
+      "either"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Harald Moss",
+        "character": "Captain Aragón",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "16 : 9",
+      "Sound mix": "DTS",
+      "Color": "Color",
+      "Filming location": "Wertingen, PR",
+      "Camera": "Super 16",
+      "Production company": "Stiebitz KG"
+    }
+  },
+  "optional_present": [
+    "budget"
+  ]
+}

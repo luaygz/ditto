@@ -1,0 +1,55 @@
+{
+  "page": "p000074",
+  "url": "https://www.munoz-tyler.com/movies/10518/visit-some",
+  "template_id": "T03",
+  "fields": {
+    "title": "Visit Some",
+    "description": "Ever rock wife hot green reduce fight. Safe specific capital require despite affect sport third shake simply concern.",
+    "country": "Antigua and Barbuda",
+    "director": "Christelle Lebreton",
+    "budget": null,
+    "language": "Spanish",
+    "genre": "Science fiction",
+    "box_office": "1.390.000 €",
+    "runtime": "119 min",
+    "studio": "Ackermann",
+    "certificate": "PG-13",
+    "release_date": "May 20, 2025"
+  },
+  "lists": {
+    "keywords": [
+      "day",
+      "daughter"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Andrew Naranjo",
+        "character": "Captain Perrin",
+        "episodes": null
+      },
+      {
+        "actor": "Elizabeth Flores",
+        "character": "Doctor Harper",
+        "episodes": null
+      },
+      {
+        "actor": "Steven Leiva",
+        "character": "Detective Moss",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Sound mix": "Mono",
+      "Color": "Color",
+      "Filming location": "West Nicole, NJ"
+    }
+  },
+  "optional_present": [
+    "country",
+    "genre"
+  ]
+}

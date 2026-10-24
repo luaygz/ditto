@@ -1,0 +1,66 @@
+{
+  "page": "p000047",
+  "url": "https://www.munoz-tyler.com/courses/introduction-to-leadership-10334/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Introduction to Leadership",
+    "rating": "3.1",
+    "enrolled": "6,940",
+    "effort": "3-9 hours per week",
+    "level": "Intermediate",
+    "start_date": "Sep 18, 2021",
+    "description": "Reality american natural matter anyone them hour young early others bring white enter simply. Bed tonight will begin hold seek tree likely magazine test land lay challenge one.",
+    "credential": "Professional certificate",
+    "contact_email": "gomis.w@bell.com",
+    "language": "German",
+    "instructor": "Albina Tucker"
+  },
+  "lists": {
+    "topics": [
+      "Accounting",
+      "Data analysis"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 9",
+        "topic": "Fire Firm in Cloud architecture",
+        "hours": "3",
+        "reading": null
+      },
+      {
+        "week": "Week 16",
+        "topic": "Third Hotel in Sales",
+        "hours": "6",
+        "reading": null
+      },
+      {
+        "week": "Week 10",
+        "topic": "Cup Moment in Kubernetes",
+        "hours": "11",
+        "reading": null
+      },
+      {
+        "week": "Week 13",
+        "topic": "Course Stage in Public speaking",
+        "hours": "7",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "In person",
+      "Prerequisites": "High school biology",
+      "Credits": "11",
+      "Subtitles": "Italian",
+      "Certificate": "Professional certificate"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

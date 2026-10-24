@@ -1,0 +1,61 @@
+{
+  "page": "p000118",
+  "url": "https://www.munoz-tyler.com/movies/10826/the-season",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Season",
+    "description": "Else here space international responsibility left turn pull arm beat. Away again music seek kitchen small director above always. Focus return bed fight expert firm.",
+    "country": "Saint Kitts and Nevis",
+    "director": "Josephine Gunpf",
+    "budget": "975.000 €",
+    "language": "English",
+    "genre": "Horror",
+    "box_office": "723.000 €",
+    "runtime": "104 min",
+    "studio": "Vogt Vollbrecht GmbH & Co. KGaA",
+    "certificate": "R",
+    "release_date": "Sep 28, 2019"
+  },
+  "lists": {
+    "keywords": [
+      "season",
+      "mouth",
+      "husband",
+      "shake",
+      "world"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Zoé Palmer",
+        "character": "Captain Sandoval",
+        "episodes": null
+      },
+      {
+        "actor": "Tyler Salas",
+        "character": "Officer Bartlett",
+        "episodes": null
+      },
+      {
+        "actor": "Brianna Hartmann",
+        "character": "Officer Binner",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Sound mix": "DTS",
+      "Color": "Black and White",
+      "Filming location": "Holmeschester, SC",
+      "Production company": "Thompson Inc"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget",
+    "genre"
+  ]
+}

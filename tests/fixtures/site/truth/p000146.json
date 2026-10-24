@@ -1,0 +1,48 @@
+{
+  "page": "p000146",
+  "url": "https://www.munoz-tyler.com/movies/11028/test",
+  "template_id": "T03",
+  "fields": {
+    "title": "Test",
+    "description": "Deal four concern decision hundred very around thousand look son all rather line. Fund poor body yourself consider management player last recently.",
+    "country": "Lesotho",
+    "director": "Jessica Wilson",
+    "budget": "494.000 €",
+    "language": "Arabic",
+    "genre": null,
+    "box_office": "1.177.000 €",
+    "runtime": "180 min",
+    "studio": "Buck, Carroll and Greer",
+    "certificate": "15",
+    "release_date": "Jun 21, 2020"
+  },
+  "lists": {
+    "keywords": [
+      "certain",
+      "history",
+      "garden",
+      "idea",
+      "quickly"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Emily Chang",
+        "character": "Captain Estrada",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "16 : 9",
+      "Sound mix": "Dolby Atmos",
+      "Filming location": "Saint Anaïs-les-Bains, MS"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "page": "p000147",
+  "url": "https://www.munoz-tyler.com/courses/cloud-architecture-for-professionals-11030/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Cloud architecture for Professionals",
+    "rating": "2.1",
+    "enrolled": "13,920",
+    "effort": "3-9 hours per week",
+    "level": "All levels",
+    "start_date": "Jul 9, 2023",
+    "description": "Executive early change positive arm both cultural idea region. Right city nearly fight maintain others help establish. Doctor per out camera finally worker record help follow find however.",
+    "credential": "Digital badge",
+    "contact_email": "bheath@meyer.com",
+    "language": "French",
+    "instructor": "Robert Wesack"
+  },
+  "lists": {
+    "topics": [
+      "Data analysis"
+    ]
+  },
+  "records": {
+    "syllabus": []
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Hybrid",
+      "Prerequisites": "None",
+      "Assessment": "Quiz",
+      "Subtitles": "Spanish",
+      "Certificate": "Diploma"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

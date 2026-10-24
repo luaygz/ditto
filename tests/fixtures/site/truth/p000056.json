@@ -1,0 +1,49 @@
+{
+  "page": "p000056",
+  "url": "https://www.munoz-tyler.com/courses/advanced-cloud-architecture-10392/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Advanced Cloud architecture",
+    "rating": null,
+    "enrolled": "35,254",
+    "effort": "3-11 hours per week",
+    "level": "Advanced",
+    "start_date": "Feb 6, 2025",
+    "description": "Specific should small group inside modern eight last politics common tax top imagine. Better tend prevent consider its sometimes strong there even green week enjoy doctor. Tree mother trip interview about poor training better foot off offer president amount former.",
+    "credential": "Digital badge",
+    "contact_email": "lilo69@mcdonald.com",
+    "language": "Portuguese",
+    "instructor": "Frédéric Chartier"
+  },
+  "lists": {
+    "topics": [
+      "UX research",
+      "SQL",
+      "TypeScript",
+      "Python"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 12",
+        "topic": "Discover Mention in Video editing",
+        "hours": "3",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Online",
+      "Credits": "2",
+      "Assessment": "None",
+      "Subtitles": "Japanese",
+      "Certificate": "None"
+    }
+  },
+  "optional_present": [
+    "enrolled",
+    "effort"
+  ]
+}

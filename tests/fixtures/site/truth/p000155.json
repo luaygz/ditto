@@ -1,0 +1,63 @@
+{
+  "page": "p000155",
+  "url": "https://www.munoz-tyler.com/courses/project-management-fundamentals-11087/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Project management Fundamentals",
+    "rating": "2.7",
+    "enrolled": "42,608",
+    "effort": "2-11 hours per week",
+    "level": "Beginner",
+    "start_date": "May 15, 2020",
+    "description": "See point from care american near. List detail represent quality off final number leader dog second book.",
+    "credential": "Digital badge",
+    "contact_email": "elyons@powell-mccormick.com",
+    "language": "Dutch",
+    "instructor": "Marie-Louise España"
+  },
+  "lists": {
+    "topics": [
+      "UX research"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 10",
+        "topic": "Western Effect in Mentoring",
+        "hours": "9",
+        "reading": null
+      },
+      {
+        "week": "Week 8",
+        "topic": "Behavior Light in Negotiation",
+        "hours": "10",
+        "reading": null
+      },
+      {
+        "week": "Week 9",
+        "topic": "Meet Play in Supply chain",
+        "hours": "9",
+        "reading": null
+      },
+      {
+        "week": "Week 2",
+        "topic": "Exactly South in Data analysis",
+        "hours": "10",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Credits": "1",
+      "Subtitles": "Korean",
+      "Certificate": "Professional certificate"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

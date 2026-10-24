@@ -1,0 +1,67 @@
+{
+  "page": "p000126",
+  "url": "https://www.munoz-tyler.com/movies/10884/fall-loss-simple",
+  "template_id": "T03",
+  "fields": {
+    "title": "Fall Loss Simple",
+    "description": "Child recent full watch suffer information center prove. Grow black college look feeling movie term. Myself night answer raise husband manage think fund.",
+    "country": "Cambodia",
+    "director": "Roberto Preston",
+    "budget": "693.000 €",
+    "language": "Japanese",
+    "genre": "Romance",
+    "box_office": "665.000 €",
+    "runtime": "93 min",
+    "studio": "Whitaker Ltd",
+    "certificate": "18",
+    "release_date": "Feb 13, 2024"
+  },
+  "lists": {
+    "keywords": [
+      "enough",
+      "box"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Miguel Weaver",
+        "character": "Captain Nolan",
+        "episodes": null
+      },
+      {
+        "actor": "Karina Wiggins",
+        "character": "Officer Gomis",
+        "episodes": null
+      },
+      {
+        "actor": "Caitlin Valentine",
+        "character": "Captain Anthony",
+        "episodes": null
+      },
+      {
+        "actor": "Sandra Thompson",
+        "character": "Captain Andrade",
+        "episodes": null
+      },
+      {
+        "actor": "Patrizia Rodgers",
+        "character": "Mayor Valdez",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Sound mix": "DTS",
+      "Color": "Black and White",
+      "Camera": "Arri Alexa"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget",
+    "genre"
+  ]
+}

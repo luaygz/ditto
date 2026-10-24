@@ -1,0 +1,48 @@
+{
+  "page": "p000152",
+  "url": "https://www.munoz-tyler.com/jobs/11064/secretary-company",
+  "template_id": "T05",
+  "fields": {
+    "title": "Secretary, company",
+    "salary": "$171,000",
+    "apply_url": "https://www.reyes-reyes.info/",
+    "date_posted": "May 17, 2026",
+    "experience_level": "Junior",
+    "department": "Research",
+    "contact_email": "karina.roberts@ramsey.com",
+    "openings": "4",
+    "deadline": "Feb 15, 2016",
+    "description": "Shoulder land friend fast stock key campaign blue. Outside production when fine exactly add manage most likely.",
+    "employment_type": "Internship"
+  },
+  "lists": {
+    "benefits": [
+      "Commuter benefits"
+    ]
+  },
+  "records": {
+    "open_positions": [
+      {
+        "location": "Delitzsch, NV",
+        "start": null,
+        "team": "Research",
+        "positions": "11"
+      }
+    ]
+  },
+  "kv": {
+    "job_details": {
+      "Schedule": "Shift work",
+      "Visa sponsorship": "No",
+      "Start date": "Oct 10, 2018",
+      "Contract length": "13 months",
+      "Reports to": "Higher education lecturer",
+      "Team size": "7"
+    }
+  },
+  "optional_present": [
+    "salary",
+    "apply_url",
+    "experience_level"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "page": "p000165",
+  "url": "https://www.munoz-tyler.com/courses/advanced-public-speaking-11156/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Advanced Public speaking",
+    "rating": "4.1",
+    "enrolled": "43,933",
+    "effort": "2-12 hours per week",
+    "level": "Beginner",
+    "start_date": "Jan 25, 2020",
+    "description": "Rather adult event peace standard left. Heart minute buy book resource age already remember security. Magazine red let building become benefit together family let street scientist hear.",
+    "credential": "Digital badge",
+    "contact_email": "stefanie.bruder@hotmail.com",
+    "language": "French",
+    "instructor": "Nicole Miranda"
+  },
+  "lists": {
+    "topics": [
+      "Python",
+      "Kubernetes"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 3",
+        "topic": "Order Through in Rust",
+        "hours": "2",
+        "reading": null
+      },
+      {
+        "week": "Week 6",
+        "topic": "Music Win in Copywriting",
+        "hours": "10",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Self-paced",
+      "Credits": "11",
+      "Subtitles": "Spanish"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

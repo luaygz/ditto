@@ -1,0 +1,43 @@
+{
+  "page": "p000014",
+  "url": "https://www.munoz-tyler.com/blog/2022/11/susanmouth-explains-western-data-argue-event-media-10099",
+  "template_id": "T02",
+  "fields": {
+    "headline": "Susanmouth Explains Western Data Argue Event Media",
+    "comment_count": null,
+    "published": "2024-04-20",
+    "photo_credit": "Anna-Marie Harmon",
+    "updated": "2021-02-12",
+    "read_time": "9 min read",
+    "word_count": "429",
+    "author_email": "smargraf@gmail.com",
+    "summary": "Change thus continue run live everyone certainly all effort especially shoulder interview ask.",
+    "author": "Samantha Morgan"
+  },
+  "lists": {
+    "tags": [
+      "develop"
+    ]
+  },
+  "records": {
+    "comments": [
+      {
+        "author": "Henri Sims",
+        "date": "2017-09-07",
+        "comment": "Try personal music among teacher dog goal everything name compare seem trip various morning.",
+        "location": null
+      }
+    ]
+  },
+  "kv": {
+    "article_info": {
+      "Language": "Korean",
+      "Edition": "Second edition",
+      "Word count": "35,632"
+    }
+  },
+  "optional_present": [
+    "word_count",
+    "author"
+  ]
+}

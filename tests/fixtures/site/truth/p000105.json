@@ -1,0 +1,55 @@
+{
+  "page": "p000105",
+  "url": "https://www.munoz-tyler.com/cars/2022-nissan-sportage-touring-10736.html",
+  "template_id": "T07",
+  "fields": {
+    "title": "2022 Nissan Sportage Touring",
+    "color": "CornflowerBlue",
+    "description": "Behind individual sure that movement stage issue. Return best sister with cup phone second method both piece language. Film protect memory bank within create pretty open country.",
+    "condition": "Fair",
+    "listed": null,
+    "dealer": "Mcguire, Wilson and Patton",
+    "fuel": "Plug-in hybrid",
+    "make": null,
+    "transmission": "CVT",
+    "vin": "3PV7FG70881B6T1E3",
+    "mileage": "54,685 mi"
+  },
+  "lists": {
+    "features": [
+      "Tow package",
+      "Lane assist",
+      "Apple CarPlay",
+      "Bluetooth"
+    ]
+  },
+  "records": {
+    "service_history": [
+      {
+        "date": "April 25, 2018",
+        "shop": null,
+        "service": "Brake service",
+        "mileage": "119,538 mi"
+      },
+      {
+        "date": "February 27, 2020",
+        "shop": null,
+        "service": "Transmission service",
+        "mileage": "121,061 mi"
+      }
+    ]
+  },
+  "kv": {
+    "vehicle_specs": {
+      "Engine": "5.4L V8",
+      "Horsepower": "444 hp",
+      "Drivetrain": "4WD",
+      "Doors": "4",
+      "Fuel economy": "23 city / 35 hwy",
+      "Interior color": "Thistle"
+    }
+  },
+  "optional_present": [
+    "color"
+  ]
+}

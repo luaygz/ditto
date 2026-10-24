@@ -1,0 +1,67 @@
+{
+  "page": "p000069",
+  "url": "https://www.munoz-tyler.com/courses/rust-fundamentals-10485/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Rust Fundamentals",
+    "rating": null,
+    "enrolled": null,
+    "effort": "4-12 hours per week",
+    "level": "Advanced",
+    "start_date": "Jul 14, 2018",
+    "description": "Walk discuss one without drop strategy return table single prove. People avoid nature dinner skin factor far station important front mouth entire every success.",
+    "credential": "Digital badge",
+    "contact_email": "bditschlerin@gmail.com",
+    "language": "English",
+    "instructor": "Élodie Jungfer"
+  },
+  "lists": {
+    "topics": [
+      "Sales"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 13",
+        "topic": "Class Country in Kubernetes",
+        "hours": "10",
+        "reading": "A Everything in West Douglas"
+      },
+      {
+        "week": "Week 9",
+        "topic": "Minute Indeed in UX research",
+        "hours": "8",
+        "reading": "A Direction in Scheinfeld"
+      },
+      {
+        "week": "Week 10",
+        "topic": "Market Contain in Mentoring",
+        "hours": "10",
+        "reading": "The Mind of Color Guess"
+      },
+      {
+        "week": "Week 8",
+        "topic": "Hand Buy in TypeScript",
+        "hours": "11",
+        "reading": "The Gas of Film Water"
+      },
+      {
+        "week": "Week 8",
+        "topic": "Task Environment in Supply chain",
+        "hours": "6",
+        "reading": "The Response of You"
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Prerequisites": "Prior course",
+      "Credits": "3",
+      "Certificate": "Digital badge"
+    }
+  },
+  "optional_present": [
+    "effort"
+  ]
+}

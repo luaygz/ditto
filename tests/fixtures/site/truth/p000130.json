@@ -1,0 +1,66 @@
+{
+  "page": "p000130",
+  "url": "https://www.munoz-tyler.com/movies/10914/science-identify-trial",
+  "template_id": "T03",
+  "fields": {
+    "title": "Science: Identify Trial",
+    "description": "Radio worry democratic style determine among chair. Parent book door tough inside seven development short huge young whether word note exactly. Establish under thought land white second bed thank while everyone away.",
+    "country": null,
+    "director": "Bradley Wilkerson",
+    "budget": "1.505.000 €",
+    "language": "Dutch",
+    "genre": null,
+    "box_office": "2.394.000 €",
+    "runtime": "109 min",
+    "studio": "Ponce Group",
+    "certificate": "18",
+    "release_date": "Dec 26, 2019"
+  },
+  "lists": {
+    "keywords": [
+      "life",
+      "market",
+      "military"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Friedrich Glenn",
+        "character": "Officer Moss",
+        "episodes": "4"
+      },
+      {
+        "actor": "Cheryl Vives",
+        "character": "Agent Moore",
+        "episodes": "2"
+      },
+      {
+        "actor": "Erin Wilmsen",
+        "character": "Professor Jones",
+        "episodes": "10"
+      },
+      {
+        "actor": "Ekkehard Wilmsen",
+        "character": "Agent Schneider",
+        "episodes": "2"
+      },
+      {
+        "actor": "Samantha Margraf",
+        "character": "Detective Stanton",
+        "episodes": "11"
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "2.39 : 1",
+      "Sound mix": "Dolby Digital",
+      "Color": "Black and White",
+      "Filming location": "Lake Christopher, SD"
+    }
+  },
+  "optional_present": [
+    "budget"
+  ]
+}

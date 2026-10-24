@@ -1,0 +1,56 @@
+{
+  "page": "p000042",
+  "url": "https://www.munoz-tyler.com/movies/10300/site-speech-just",
+  "template_id": "T03",
+  "fields": {
+    "title": "Site: Speech Just",
+    "description": "Body speech participant character these your wonder relate keep tonight. Mouth evening either education baby race play available old buy will along player industry.",
+    "country": "Djibouti",
+    "director": "Andrej Heidrich",
+    "budget": null,
+    "language": "French",
+    "genre": null,
+    "box_office": "543.000 €",
+    "runtime": "173 min",
+    "studio": "Valentine-Williams",
+    "certificate": "12A",
+    "release_date": "Aug 18, 2023"
+  },
+  "lists": {
+    "keywords": [
+      "ball",
+      "protect",
+      "cut"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Christiane Mace",
+        "character": "Professor Lelièvre",
+        "episodes": null
+      },
+      {
+        "actor": "Arnaude Bertrand",
+        "character": "Doctor Vidal",
+        "episodes": null
+      },
+      {
+        "actor": "Brittany Cohen",
+        "character": "Doctor Morgan",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Color": "Color",
+      "Filming location": "Säckingen, TN",
+      "Camera": "Red Dragon"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

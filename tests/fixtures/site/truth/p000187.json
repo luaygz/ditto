@@ -1,0 +1,65 @@
+{
+  "page": "p000187",
+  "url": "https://www.munoz-tyler.com/courses/introduction-to-mentoring-11311/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Introduction to Mentoring",
+    "rating": null,
+    "enrolled": null,
+    "effort": "2-7 hours per week",
+    "level": "Beginner",
+    "start_date": "Aug 16, 2026",
+    "description": "Customer girl speak participant peace pull check administration our key per garden even range. End budget administration might race light between begin only section control.",
+    "credential": "Certificate of completion",
+    "contact_email": "young.g@lee.org",
+    "language": "Italian",
+    "instructor": "Eugene Cox"
+  },
+  "lists": {
+    "topics": [
+      "Leadership",
+      "Accounting",
+      "Video editing",
+      "Sales"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 5",
+        "topic": "Back Take in Supply chain",
+        "hours": "12",
+        "reading": "Similar Structure Score Once"
+      },
+      {
+        "week": "Week 7",
+        "topic": "Generation Station in TypeScript",
+        "hours": "6",
+        "reading": "Interesting Bank Player"
+      },
+      {
+        "week": "Week 8",
+        "topic": "Career Total in Public speaking",
+        "hours": "7",
+        "reading": "A Artist in Rodriguezland"
+      },
+      {
+        "week": "Week 12",
+        "topic": "Without Event in Sales",
+        "hours": "9",
+        "reading": "Including Law"
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Hybrid",
+      "Prerequisites": "Prior course",
+      "Credits": "3",
+      "Certificate": "Digital badge"
+    }
+  },
+  "optional_present": [
+    "effort"
+  ]
+}

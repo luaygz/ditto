@@ -1,0 +1,58 @@
+{
+  "page": "p000022",
+  "url": "https://www.munoz-tyler.com/movies/10156/the-hold-look",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Hold Look",
+    "description": "Space case business walk manager score. Activity instead project sometimes blood relate understand mind bring there argue right similar store. Half star billion happen today class.",
+    "country": null,
+    "director": "Anna-Maria Meunier",
+    "budget": null,
+    "language": "English",
+    "genre": null,
+    "box_office": "342.000 €",
+    "runtime": "182 min",
+    "studio": "Harrington-Burton",
+    "certificate": "18",
+    "release_date": "Jun 1, 2020"
+  },
+  "lists": {
+    "keywords": [
+      "get",
+      "next"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Cameron Wilson",
+        "character": "Professor Hampton",
+        "episodes": null
+      },
+      {
+        "actor": "Kerri Martinez",
+        "character": "Mayor Bruder",
+        "episodes": null
+      },
+      {
+        "actor": "Wladimir Brooks",
+        "character": "Sister Schuchhardt",
+        "episodes": null
+      },
+      {
+        "actor": "Joan Carpenter",
+        "character": "Doctor Heidrich",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Sound mix": "Dolby Digital",
+      "Filming location": "La Coruña, PA",
+      "Production company": "Matthews LLC"
+    }
+  },
+  "optional_present": []
+}

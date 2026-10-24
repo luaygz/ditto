@@ -1,0 +1,69 @@
+{
+  "page": "p000026",
+  "url": "https://www.munoz-tyler.com/movies/10186/the-oil",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Oil",
+    "description": "Behavior store really rich car story inside teacher fill evidence. Report assume tree chance full then benefit mouth event interest dog increase lay similar. Plant official suffer resource body describe cause long site.",
+    "country": "Costa Rica",
+    "director": "Kristin Leblanc",
+    "budget": null,
+    "language": "German",
+    "genre": "Science fiction",
+    "box_office": "1.902.000 €",
+    "runtime": "159 min",
+    "studio": "Mcdowell, Saunders and Christensen",
+    "certificate": "R",
+    "release_date": "Jan 11, 2022"
+  },
+  "lists": {
+    "keywords": [
+      "establish",
+      "check",
+      "car",
+      "culture",
+      "nation"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Kaspar Fouquet",
+        "character": "Officer Stanton",
+        "episodes": null
+      },
+      {
+        "actor": "Valérie Clark",
+        "character": "Sister Balaguer",
+        "episodes": null
+      },
+      {
+        "actor": "Alf Herrera",
+        "character": "Captain Olsen",
+        "episodes": null
+      },
+      {
+        "actor": "Nicole Benavent",
+        "character": "Mayor Sorgatz",
+        "episodes": null
+      },
+      {
+        "actor": "Théodore Evans",
+        "character": "Captain Cain",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Color": "Black and White",
+      "Filming location": "Lake Lisahaven, GU",
+      "Production company": "Bernard"
+    }
+  },
+  "optional_present": [
+    "country",
+    "genre"
+  ]
+}

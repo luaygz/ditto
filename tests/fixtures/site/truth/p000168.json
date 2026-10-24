@@ -1,0 +1,47 @@
+{
+  "page": "p000168",
+  "url": "https://www.munoz-tyler.com/courses/introduction-to-kubernetes-11182/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Introduction to Kubernetes",
+    "rating": "4.4",
+    "enrolled": null,
+    "effort": "2-8 hours per week",
+    "level": "Intermediate",
+    "start_date": "Jan 19, 2024",
+    "description": "May fine smile form success available such employee between size along owner one. Brother likely reduce phone enjoy training chance. Choose goal break summer ball usually leader see third listen discuss world tend manage.",
+    "credential": "Digital badge",
+    "contact_email": "seth.cooper@hernandez-buckley.com",
+    "language": "French",
+    "instructor": "Henry Pölitz"
+  },
+  "lists": {
+    "topics": [
+      "Kubernetes",
+      "Accounting",
+      "Sales",
+      "Statistics"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 16",
+        "topic": "Smile Fill in Rust",
+        "hours": "3",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Prerequisites": "Prior course",
+      "Credits": "12",
+      "Assessment": "Essay"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "effort"
+  ]
+}

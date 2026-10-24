@@ -1,0 +1,40 @@
+{
+  "page": "p000007",
+  "url": "https://www.munoz-tyler.com/courses/typescript-fundamentals-10049/",
+  "template_id": "T01",
+  "fields": {
+    "title": "TypeScript Fundamentals",
+    "rating": "3.7",
+    "enrolled": null,
+    "effort": "2-7 hours per week",
+    "level": "Advanced",
+    "start_date": "Oct 3, 2026",
+    "description": "She create top direction nothing position else thought. Item modern process here computer interesting appear page late place these out personal.",
+    "credential": "Diploma",
+    "contact_email": "gregor4@williams-martinez.info",
+    "language": "Japanese",
+    "instructor": "Shannon Richardson"
+  },
+  "lists": {
+    "topics": [
+      "Sales",
+      "SQL",
+      "Accounting"
+    ]
+  },
+  "records": {
+    "syllabus": []
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Online",
+      "Prerequisites": "Introductory programming",
+      "Credits": "2",
+      "Certificate": "Digital badge"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "effort"
+  ]
+}

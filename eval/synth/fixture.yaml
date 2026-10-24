@@ -1,0 +1,16 @@
+# The committed 200-page test fixture (tests/fixtures/site/): four templates of 25-70 pages
+# (one near-duplicate pair) plus three long-tail templates, small pages. Everything not listed
+# here keeps the eval/synth/default.yaml value.
+# Regenerate: ditto synth generate --params eval/synth/fixture.yaml --seed 1 --out tests/fixtures/site
+
+templates: 4
+pages_median: 45
+pages_sigma: 0.35
+pages_min: 25
+pages_max: 70
+total_pages: 200
+tail_templates: 3
+tail_pages: [2, 5]
+list_items: [1, 5]
+table_rows: [0, 5]
+kv_keys: [3, 6]

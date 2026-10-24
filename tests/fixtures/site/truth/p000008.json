@@ -1,0 +1,67 @@
+{
+  "page": "p000008",
+  "url": "https://www.munoz-tyler.com/blog/2017/09/delitzsch-reveals-then-end-message-tree-describe-10062",
+  "template_id": "T02",
+  "fields": {
+    "headline": "Delitzsch Reveals Then End Message Tree Describe",
+    "comment_count": null,
+    "published": "2023-08-27",
+    "photo_credit": "Luisina Barth",
+    "updated": "2018-08-27",
+    "read_time": "15 min read",
+    "word_count": null,
+    "author_email": "gonzales.d@cordova.org",
+    "summary": "Example different structure area learn expect himself season again see tough.",
+    "author": "Caitlin Roskoth"
+  },
+  "lists": {
+    "tags": [
+      "event",
+      "fast"
+    ]
+  },
+  "records": {
+    "comments": [
+      {
+        "author": "Shelby Jackson",
+        "date": "2022-06-09",
+        "comment": "How cut machine boy activity agent stay watch.",
+        "location": null
+      },
+      {
+        "author": "Salomón Huhn",
+        "date": "2020-03-03",
+        "comment": "Involve strong rather expect environmental meeting feel real huge change range explain billion local.",
+        "location": null
+      },
+      {
+        "author": "Kevin Nguyen",
+        "date": "2015-12-15",
+        "comment": "Author like relationship look big phone behavior lead such.",
+        "location": null
+      },
+      {
+        "author": "Glenn Cuervo",
+        "date": "2021-12-25",
+        "comment": "Produce bar room cover statement sure page myself remain visit send.",
+        "location": null
+      },
+      {
+        "author": "Nicolas Mccormick",
+        "date": "2023-12-06",
+        "comment": "Director most because choose rather country performance same there agent.",
+        "location": null
+      }
+    ]
+  },
+  "kv": {
+    "article_info": {
+      "Section": "Technology",
+      "License": "CC BY 4.0",
+      "Edition": "Anniversary edition"
+    }
+  },
+  "optional_present": [
+    "author"
+  ]
+}

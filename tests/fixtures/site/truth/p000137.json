@@ -1,0 +1,65 @@
+{
+  "page": "p000137",
+  "url": "https://www.munoz-tyler.com/cars/2022-mazda-xc60-touring-10964.html",
+  "template_id": "T07",
+  "fields": {
+    "title": "2022 Mazda XC60 Touring",
+    "color": null,
+    "description": "Job myself suddenly book discuss activity stuff pass. Training upon article water successful rise benefit clear case nor business happen. Beautiful task executive court article final brother character evidence provide.",
+    "condition": "Used",
+    "listed": null,
+    "dealer": "Thompson, Payne and Jones",
+    "fuel": "Diesel",
+    "make": null,
+    "transmission": "CVT",
+    "vin": "GFAW4SKH7M3ZS0PNV",
+    "mileage": "129,074 mi"
+  },
+  "lists": {
+    "features": [
+      "Lane assist"
+    ]
+  },
+  "records": {
+    "service_history": [
+      {
+        "date": "March 26, 2017",
+        "shop": null,
+        "service": "Battery replacement",
+        "mileage": "148,974 mi"
+      },
+      {
+        "date": "February 13, 2021",
+        "shop": null,
+        "service": "Alignment",
+        "mileage": "53,325 mi"
+      },
+      {
+        "date": "October 13, 2025",
+        "shop": null,
+        "service": "Alignment",
+        "mileage": "154,453 mi"
+      },
+      {
+        "date": "June 2, 2016",
+        "shop": null,
+        "service": "Inspection",
+        "mileage": "69,836 mi"
+      },
+      {
+        "date": "August 8, 2026",
+        "shop": null,
+        "service": "Inspection",
+        "mileage": "167,452 mi"
+      }
+    ]
+  },
+  "kv": {
+    "vehicle_specs": {
+      "Seats": "6",
+      "Fuel economy": "23 city / 21 hwy",
+      "Interior color": "Black"
+    }
+  },
+  "optional_present": []
+}

@@ -1,0 +1,53 @@
+{
+  "page": "p000188",
+  "url": "https://www.munoz-tyler.com/blog/2019/06/brianbury-faces-always-never-few-11317",
+  "template_id": "T02",
+  "fields": {
+    "headline": "Brianbury Faces Always Never Few",
+    "comment_count": null,
+    "published": "2024-10-19",
+    "photo_credit": "Alf Godoy",
+    "updated": "2025-11-09",
+    "read_time": "11 min read",
+    "word_count": null,
+    "author_email": "bfrank@ferguson.net",
+    "summary": "Baby per someone fear fine small leave management move.",
+    "author": "Stephen Davis"
+  },
+  "lists": {
+    "tags": [
+      "dog",
+      "deal",
+      "avoid",
+      "happy"
+    ]
+  },
+  "records": {
+    "comments": [
+      {
+        "author": "Dorothea Pichon",
+        "date": "2024-03-23",
+        "comment": "Discover region coach speech concern sister toward.",
+        "location": null
+      },
+      {
+        "author": "Étienne Hofmann",
+        "date": "2024-01-08",
+        "comment": "Commercial member stuff small ask seem source miss evening town project.",
+        "location": null
+      }
+    ]
+  },
+  "kv": {
+    "article_info": {
+      "Section": "Opinion",
+      "Language": "English",
+      "License": "All rights reserved",
+      "Edition": "First edition",
+      "Series": "The Few Series"
+    }
+  },
+  "optional_present": [
+    "author"
+  ]
+}

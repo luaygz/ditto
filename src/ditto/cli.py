@@ -267,11 +267,12 @@ def synth_generate(
     params: Annotated[Path, typer.Option(help="Parameter YAML, e.g. eval/synth/default.yaml.")],
     seed: Annotated[int, typer.Option(help="Random seed.")] = 1,
     out: Annotated[Path, typer.Option("--out", "-o", help="Output directory.")] = Path("synth"),
+    workers: Workers = None,
 ) -> None:
     """Build a synthetic site with per-page ground truth."""
     from ditto.synth import synth_main
 
-    synth_main(params, seed, out)
+    synth_main(params, seed, out, workers=workers)
 
 
 def main() -> None:

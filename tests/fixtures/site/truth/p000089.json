@@ -1,0 +1,49 @@
+{
+  "page": "p000089",
+  "url": "https://www.munoz-tyler.com/courses/introduction-to-sql-10627/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Introduction to SQL",
+    "rating": "2.6",
+    "enrolled": "36,345",
+    "effort": "2-10 hours per week",
+    "level": "Advanced",
+    "start_date": "Sep 10, 2020",
+    "description": "President worry successful hundred ball case blue whom. Actually character different magazine energy western material official bring often end tend.",
+    "credential": "Certificate of completion",
+    "contact_email": "keith40@yahoo.com",
+    "language": "Spanish",
+    "instructor": "Rebecca Godoy"
+  },
+  "lists": {
+    "topics": [
+      "Public speaking",
+      "Data analysis"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 7",
+        "topic": "Begin Success in TypeScript",
+        "hours": "6",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Online",
+      "Prerequisites": "None",
+      "Credits": "4",
+      "Assessment": "Quiz",
+      "Subtitles": "Korean",
+      "Certificate": "Diploma"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

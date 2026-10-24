@@ -1,0 +1,67 @@
+{
+  "page": "p000149",
+  "url": "https://www.munoz-tyler.com/movies/11046/several-success-meeting",
+  "template_id": "T03",
+  "fields": {
+    "title": "Several: Success Meeting",
+    "description": "Second woman space also according political detail toward. Modern suddenly spend thought serve important meeting take.",
+    "country": "Egypt",
+    "director": "Cody Parker",
+    "budget": null,
+    "language": "English",
+    "genre": null,
+    "box_office": "357.000 €",
+    "runtime": "106 min",
+    "studio": "Scott, Holland and Scott",
+    "certificate": "PG",
+    "release_date": "Nov 8, 2025"
+  },
+  "lists": {
+    "keywords": [
+      "least",
+      "friend",
+      "return"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Thomas Roy",
+        "character": "Doctor Pittman",
+        "episodes": null
+      },
+      {
+        "actor": "Seth Luna",
+        "character": "Sister Roberts",
+        "episodes": null
+      },
+      {
+        "actor": "Andrea Lane",
+        "character": "Sister Moran",
+        "episodes": null
+      },
+      {
+        "actor": "Maria Stein",
+        "character": "Sister Wagner",
+        "episodes": null
+      },
+      {
+        "actor": "Robert Perrin",
+        "character": "Agent Davis",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Sound mix": "Dolby Atmos",
+      "Filming location": "Wagner-sur-Mer, FL",
+      "Camera": "Arri Alexa",
+      "Production company": "Gonzalez, Wells and Dixon"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

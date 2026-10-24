@@ -1,0 +1,67 @@
+{
+  "page": "p000035",
+  "url": "https://www.munoz-tyler.com/courses/advanced-data-analysis-10246/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Advanced Data analysis",
+    "rating": null,
+    "enrolled": null,
+    "effort": "2-9 hours per week",
+    "level": "Beginner",
+    "start_date": "May 23, 2021",
+    "description": "May any though state well southern would although order especially along prove. Central chair deal choice easy eat relate score friend seat for. System happy ball she anyone research represent turn test.",
+    "credential": "Diploma",
+    "contact_email": "juan.s@yahoo.com",
+    "language": "Dutch",
+    "instructor": "Chad Smith"
+  },
+  "lists": {
+    "topics": [
+      "Accounting",
+      "Negotiation",
+      "Mentoring",
+      "Project management",
+      "TypeScript"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 9",
+        "topic": "Bit Generation in Machine learning",
+        "hours": "1",
+        "reading": null
+      },
+      {
+        "week": "Week 1",
+        "topic": "Manager Low in Product strategy",
+        "hours": "6",
+        "reading": null
+      },
+      {
+        "week": "Week 5",
+        "topic": "Never Per in Negotiation",
+        "hours": "12",
+        "reading": null
+      },
+      {
+        "week": "Week 5",
+        "topic": "Spring View in SQL",
+        "hours": "11",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "In person",
+      "Credits": "10",
+      "Assessment": "Essay",
+      "Subtitles": "English",
+      "Certificate": "Digital badge"
+    }
+  },
+  "optional_present": [
+    "effort"
+  ]
+}

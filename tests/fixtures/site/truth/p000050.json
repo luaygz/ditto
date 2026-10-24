@@ -1,0 +1,40 @@
+{
+  "page": "p000050",
+  "url": "https://www.munoz-tyler.com/movies/10351/science-camera-song",
+  "template_id": "T03",
+  "fields": {
+    "title": "Science: Camera Song",
+    "description": "Notice side shake near see parent let mind. Argue claim tell great government throughout final whether question memory position benefit opportunity. Yet commercial traditional pass police door capital describe never away everything without.",
+    "country": "Swaziland",
+    "director": "Flavio Gaines",
+    "budget": null,
+    "language": "Korean",
+    "genre": null,
+    "box_office": "1.192.000 €",
+    "runtime": "167 min",
+    "studio": "Infraestructuras Larrea S.Com.",
+    "certificate": "PG",
+    "release_date": "Dec 5, 2016"
+  },
+  "lists": {
+    "keywords": [
+      "respond"
+    ]
+  },
+  "records": {
+    "cast": []
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.33 : 1",
+      "Sound mix": "Dolby Atmos",
+      "Color": "Black and White",
+      "Filming location": "North Marytown, KY",
+      "Camera": "Red Dragon",
+      "Production company": "Rose-Reyes"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

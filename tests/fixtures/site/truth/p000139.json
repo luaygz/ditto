@@ -1,0 +1,49 @@
+{
+  "page": "p000139",
+  "url": "https://www.munoz-tyler.com/movies/10976/the-remember",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Remember",
+    "description": "Strong ask around see father pattern author quickly. Game summer forget character gun realize soon our various maintain enjoy daughter.",
+    "country": "French Southern Territories",
+    "director": "Thomas Hernandez",
+    "budget": null,
+    "language": "Dutch",
+    "genre": null,
+    "box_office": "733.000 €",
+    "runtime": "103 min",
+    "studio": "King-Anderson",
+    "certificate": "15",
+    "release_date": "Dec 15, 2024"
+  },
+  "lists": {
+    "keywords": [
+      "number",
+      "oil"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Dustin Meunier",
+        "character": "Captain Cantrell",
+        "episodes": null
+      },
+      {
+        "actor": "Derrick Taylor",
+        "character": "Professor Schuchhardt",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Sound mix": "Stereo",
+      "Filming location": "Badajoz, NV"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

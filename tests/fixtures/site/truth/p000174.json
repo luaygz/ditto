@@ -1,0 +1,65 @@
+{
+  "page": "p000174",
+  "url": "https://www.munoz-tyler.com/movies/11221/act",
+  "template_id": "T03",
+  "fields": {
+    "title": "Act",
+    "description": "Last maintain treatment difficult music north stop grow apply dinner must call. Beyond note create long will firm work own discussion.",
+    "country": "Korea",
+    "director": "Katie Duffy",
+    "budget": "649.000 €",
+    "language": "Portuguese",
+    "genre": null,
+    "box_office": "1.584.000 €",
+    "runtime": "148 min",
+    "studio": "White, Gray and Smith",
+    "certificate": "PG-13",
+    "release_date": "Oct 9, 2018"
+  },
+  "lists": {
+    "keywords": [
+      "size",
+      "visit",
+      "right",
+      "region"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Edward Duffy",
+        "character": "Detective Wiggins",
+        "episodes": null
+      },
+      {
+        "actor": "Sarah Guzmán",
+        "character": "Officer Heidrich",
+        "episodes": null
+      },
+      {
+        "actor": "Ezequiel Chase",
+        "character": "Detective Salmon",
+        "episodes": null
+      },
+      {
+        "actor": "Cathy Hanson",
+        "character": "Detective Warren",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "16 : 9",
+      "Sound mix": "Dolby Atmos",
+      "Color": "Black and White",
+      "Filming location": "East Dawnport, VT",
+      "Camera": "Red Dragon",
+      "Production company": "Watson-Massey"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget"
+  ]
+}

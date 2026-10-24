@@ -1,0 +1,61 @@
+{
+  "page": "p000108",
+  "url": "https://www.munoz-tyler.com/movies/10762/the-major",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Major",
+    "description": "Shake first bag office leader walk water rule model job hope but development. Through energy several company although poor executive. Address book paper well almost though face pattern end meeting whatever.",
+    "country": null,
+    "director": "Anette Loiseau",
+    "budget": null,
+    "language": "Portuguese",
+    "genre": null,
+    "box_office": "1.478.000 €",
+    "runtime": "104 min",
+    "studio": "Eckbauer GmbH & Co. KG",
+    "certificate": "12A",
+    "release_date": "Jun 11, 2024"
+  },
+  "lists": {
+    "keywords": [
+      "receive"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Roque Villa",
+        "character": "Mayor Curry",
+        "episodes": null
+      },
+      {
+        "actor": "Aimée Salz",
+        "character": "Detective Gibbs",
+        "episodes": null
+      },
+      {
+        "actor": "Samuel Pichon",
+        "character": "Sister Munoz",
+        "episodes": null
+      },
+      {
+        "actor": "Anna-Marie Lemoine",
+        "character": "Captain Schneider",
+        "episodes": null
+      },
+      {
+        "actor": "Monica Mack",
+        "character": "Mayor Binner",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.33 : 1",
+      "Sound mix": "DTS",
+      "Color": "Black and White"
+    }
+  },
+  "optional_present": []
+}

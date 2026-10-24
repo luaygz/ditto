@@ -1,0 +1,66 @@
+{
+  "page": "p000049",
+  "url": "https://www.munoz-tyler.com/courses/data-analysis-fundamentals-10344/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Data analysis Fundamentals",
+    "rating": "2.0",
+    "enrolled": "22,695",
+    "effort": "3-12 hours per week",
+    "level": "Intermediate",
+    "start_date": "Aug 2, 2022",
+    "description": "Decade tough might head religious fear not point such claim. Since throughout price certain seat television film.",
+    "credential": "Diploma",
+    "contact_email": "jhuhn@joyce-edwards.com",
+    "language": "Korean",
+    "instructor": "Leah Scholz"
+  },
+  "lists": {
+    "topics": [
+      "Cloud architecture",
+      "TypeScript"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 2",
+        "topic": "Court Role in Copywriting",
+        "hours": "3",
+        "reading": null
+      },
+      {
+        "week": "Week 10",
+        "topic": "Wish Quality in Kubernetes",
+        "hours": "8",
+        "reading": null
+      },
+      {
+        "week": "Week 14",
+        "topic": "Tell Area in Video editing",
+        "hours": "8",
+        "reading": null
+      },
+      {
+        "week": "Week 7",
+        "topic": "Decision Dark in SQL",
+        "hours": "8",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "In person",
+      "Prerequisites": "High school biology",
+      "Assessment": "Project",
+      "Subtitles": "Spanish",
+      "Certificate": "Diploma"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

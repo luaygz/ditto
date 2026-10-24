@@ -1,0 +1,45 @@
+{
+  "page": "p000010",
+  "url": "https://www.munoz-tyler.com/jobs/10075/insurance-account-manager",
+  "template_id": "T05",
+  "fields": {
+    "title": "Insurance account manager",
+    "salary": "$155,000",
+    "apply_url": "https://www.peterson.com/",
+    "date_posted": "Feb 16, 2020",
+    "experience_level": "Senior",
+    "department": "Security",
+    "contact_email": "julie78@johnson.info",
+    "openings": "5",
+    "deadline": "Nov 7, 2016",
+    "description": "View mind must serve majority hope. Six none sea police sense prove fast. Each institution concern each meeting family heart.",
+    "employment_type": "Contract"
+  },
+  "lists": {
+    "benefits": [
+      "Remote work budget",
+      "Stock options",
+      "Gym membership",
+      "Flexible hours",
+      "Commuter benefits"
+    ]
+  },
+  "records": {
+    "open_positions": []
+  },
+  "kv": {
+    "job_details": {
+      "Schedule": "Monday to Friday",
+      "Travel": "Up to 50%",
+      "Visa sponsorship": "Yes",
+      "Start date": "Dec 27, 2021",
+      "Reports to": "Plant breeder/geneticist",
+      "Team size": "8"
+    }
+  },
+  "optional_present": [
+    "salary",
+    "apply_url",
+    "experience_level"
+  ]
+}

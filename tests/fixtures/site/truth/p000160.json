@@ -1,0 +1,46 @@
+{
+  "page": "p000160",
+  "url": "https://www.munoz-tyler.com/movies/11123/the-impact",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Impact",
+    "description": "Spend the determine idea picture particular base tree room. Get lay style smile certain tell decision born argue.",
+    "country": "United Arab Emirates",
+    "director": "Édouard Lebreton",
+    "budget": "1.311.000 €",
+    "language": "French",
+    "genre": "Science fiction",
+    "box_office": "622.000 €",
+    "runtime": "135 min",
+    "studio": "Trapp GmbH & Co. KG",
+    "certificate": "12A",
+    "release_date": "Jul 28, 2018"
+  },
+  "lists": {
+    "keywords": [
+      "think",
+      "property"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Alex Margraf",
+        "character": "Mayor Terrell",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Color": "Color",
+      "Filming location": "Jaén, WV",
+      "Production company": "Walker, Owens and Scott"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget",
+    "genre"
+  ]
+}

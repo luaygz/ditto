@@ -1,0 +1,49 @@
+{
+  "page": "p000051",
+  "url": "https://www.munoz-tyler.com/movies/10358/the-list",
+  "template_id": "T03",
+  "fields": {
+    "title": "The List",
+    "description": "Professor wait speak hot information necessary whole represent can without president picture pattern. Require production develop court doctor fish its despite into she expect.",
+    "country": "Tuvalu",
+    "director": "Sylvester Sorgatz",
+    "budget": null,
+    "language": "German",
+    "genre": null,
+    "box_office": "2.057.000 €",
+    "runtime": "170 min",
+    "studio": "Clark, Shepherd and Perry",
+    "certificate": "G",
+    "release_date": "Jun 17, 2016"
+  },
+  "lists": {
+    "keywords": [
+      "involve",
+      "defense",
+      "follow",
+      "field",
+      "financial"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Joseph Hill",
+        "character": "Agent Stein",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.33 : 1",
+      "Sound mix": "Dolby Atmos",
+      "Color": "Color",
+      "Filming location": "East John, ND",
+      "Camera": "Red Dragon"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

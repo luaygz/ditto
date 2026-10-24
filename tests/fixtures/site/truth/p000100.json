@@ -1,0 +1,57 @@
+{
+  "page": "p000100",
+  "url": "https://www.munoz-tyler.com/courses/introduction-to-leadership-10706/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Introduction to Leadership",
+    "rating": "4.0",
+    "enrolled": null,
+    "effort": "2-7 hours per week",
+    "level": "All levels",
+    "start_date": "Dec 28, 2024",
+    "description": "Name month life difficult standard realize speech all purpose parent. Information role require policy administration fund food instead.",
+    "credential": "Digital badge",
+    "contact_email": "michele83@torres-hill.org",
+    "language": "Dutch",
+    "instructor": "Gilles Mccoy"
+  },
+  "lists": {
+    "topics": [
+      "Negotiation",
+      "Data analysis"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 16",
+        "topic": "Development Old in Customer support",
+        "hours": "12",
+        "reading": null
+      },
+      {
+        "week": "Week 9",
+        "topic": "Pretty His in Project management",
+        "hours": "12",
+        "reading": null
+      },
+      {
+        "week": "Week 11",
+        "topic": "Responsibility Behavior in Graphic design",
+        "hours": "2",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Credits": "11",
+      "Assessment": "Quiz",
+      "Certificate": "Professional certificate"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "effort"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "page": "p000143",
+  "url": "https://www.munoz-tyler.com/courses/introduction-to-machine-learning-11005/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Introduction to Machine learning",
+    "rating": null,
+    "enrolled": null,
+    "effort": "3-11 hours per week",
+    "level": "Advanced",
+    "start_date": "Apr 28, 2019",
+    "description": "Situation success population bad evidence meeting any administration. Growth political federal final crime west himself design national yeah generation price ready.",
+    "credential": "None",
+    "contact_email": "rterrell@gmail.com",
+    "language": "Italian",
+    "instructor": "Alice Salz"
+  },
+  "lists": {
+    "topics": [
+      "Video editing"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 16",
+        "topic": "Important Letter in Python",
+        "hours": "5",
+        "reading": null
+      },
+      {
+        "week": "Week 6",
+        "topic": "Reflect Religious in Data analysis",
+        "hours": "2",
+        "reading": null
+      },
+      {
+        "week": "Week 6",
+        "topic": "Staff Worker in Graphic design",
+        "hours": "3",
+        "reading": null
+      },
+      {
+        "week": "Week 7",
+        "topic": "Brother Something in Graphic design",
+        "hours": "10",
+        "reading": null
+      },
+      {
+        "week": "Week 2",
+        "topic": "Western Enjoy in Supply chain",
+        "hours": "5",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Prerequisites": "None",
+      "Credits": "12",
+      "Assessment": "Exam"
+    }
+  },
+  "optional_present": [
+    "effort"
+  ]
+}

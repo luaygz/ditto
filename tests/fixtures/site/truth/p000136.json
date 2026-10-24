@@ -1,0 +1,65 @@
+{
+  "page": "p000136",
+  "url": "https://www.munoz-tyler.com/movies/10955/the-white",
+  "template_id": "T03",
+  "fields": {
+    "title": "The White",
+    "description": "Wait land western serious even exactly describe. Then travel necessary american recently commercial talk both.",
+    "country": "Egypt",
+    "director": "Cheryl Fowler",
+    "budget": "281.000 €",
+    "language": "German",
+    "genre": null,
+    "box_office": "1.828.000 €",
+    "runtime": "154 min",
+    "studio": "Wiley, Moore and Palmer",
+    "certificate": "PG-13",
+    "release_date": "Dec 18, 2021"
+  },
+  "lists": {
+    "keywords": [
+      "blue",
+      "trip",
+      "idea",
+      "benefit"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Lola Kitzmann",
+        "character": "Officer Willis",
+        "episodes": "5"
+      },
+      {
+        "actor": "Remedios Ford",
+        "character": "Agent Holzapfel",
+        "episodes": "6"
+      },
+      {
+        "actor": "Leah Silva",
+        "character": "Agent Birnbaum",
+        "episodes": "3"
+      },
+      {
+        "actor": "Henry Pichon",
+        "character": "Sister Mülichen",
+        "episodes": "2"
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "2.39 : 1",
+      "Sound mix": "Mono",
+      "Color": "Color",
+      "Filming location": "North Rachelmouth, OK",
+      "Camera": "Sony Venice",
+      "Production company": "Walker, Owens and Scott"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget"
+  ]
+}

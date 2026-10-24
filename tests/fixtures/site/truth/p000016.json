@@ -1,0 +1,49 @@
+{
+  "page": "p000016",
+  "url": "https://www.munoz-tyler.com/movies/10114/the-campaign-main",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Campaign Main",
+    "description": "Raise hit environment people dog project draw never pick use begin. Detail finally agency leader get nature energy. Hand life arm return box minute plan begin character become foreign effort team politics.",
+    "country": "Ecuador",
+    "director": "Hugues Harper",
+    "budget": "1.662.000 €",
+    "language": "Swedish",
+    "genre": null,
+    "box_office": "673.000 €",
+    "runtime": "123 min",
+    "studio": "Zamora, Elliott and Gross",
+    "certificate": "12A",
+    "release_date": "Oct 7, 2020"
+  },
+  "lists": {
+    "keywords": [
+      "option"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Amanda Barker",
+        "character": "Professor Auger",
+        "episodes": null
+      },
+      {
+        "actor": "Rhonda Asensio",
+        "character": "Captain Scholtz",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "16 : 9",
+      "Filming location": "Ariasshire, KS",
+      "Camera": "Red Dragon"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget"
+  ]
+}

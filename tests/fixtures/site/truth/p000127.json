@@ -1,0 +1,72 @@
+{
+  "page": "p000127",
+  "url": "https://www.munoz-tyler.com/cars/2025-tesla-focus-premium-10892.html",
+  "template_id": "T07",
+  "fields": {
+    "title": "2025 Tesla Focus Premium",
+    "color": "OliveDrab",
+    "description": "Evening amount quite interview little career follow board short happen response environment. Look would technology remain money party usually just study west nation community read. Matter institution though cause hand federal.",
+    "condition": "Fair",
+    "listed": null,
+    "dealer": "Nette Kühnert OHG mbH",
+    "fuel": "Diesel",
+    "make": null,
+    "transmission": "Automatic",
+    "vin": "XXR8S6X5G3YEGN3L1",
+    "mileage": "40,246 mi"
+  },
+  "lists": {
+    "features": [
+      "Sunroof",
+      "Heated seats",
+      "Tow package",
+      "Keyless entry"
+    ]
+  },
+  "records": {
+    "service_history": [
+      {
+        "date": "December 9, 2015",
+        "shop": null,
+        "service": "Battery replacement",
+        "mileage": "118,564 mi"
+      },
+      {
+        "date": "August 13, 2018",
+        "shop": null,
+        "service": "Transmission service",
+        "mileage": "163,644 mi"
+      },
+      {
+        "date": "May 1, 2019",
+        "shop": null,
+        "service": "Brake service",
+        "mileage": "72,795 mi"
+      },
+      {
+        "date": "October 12, 2026",
+        "shop": null,
+        "service": "Oil change",
+        "mileage": "109,337 mi"
+      },
+      {
+        "date": "August 16, 2016",
+        "shop": null,
+        "service": "Oil change",
+        "mileage": "141,269 mi"
+      }
+    ]
+  },
+  "kv": {
+    "vehicle_specs": {
+      "Engine": "1.6L Turbo I4",
+      "Horsepower": "283 hp",
+      "Doors": "5",
+      "Seats": "8",
+      "Fuel economy": "33 city / 42 hwy"
+    }
+  },
+  "optional_present": [
+    "color"
+  ]
+}

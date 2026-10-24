@@ -1,0 +1,56 @@
+{
+  "page": "p000125",
+  "url": "https://www.munoz-tyler.com/courses/advanced-video-editing-10877/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Advanced Video editing",
+    "rating": "3.6",
+    "enrolled": null,
+    "effort": "3-6 hours per week",
+    "level": "Advanced",
+    "start_date": "Jun 23, 2021",
+    "description": "North current back know author away bed live himself position find. Son figure value price official again man call defense.",
+    "credential": "None",
+    "contact_email": "lauren.blanchet@hotmail.com",
+    "language": "Korean",
+    "instructor": "Joanna Birnbaum"
+  },
+  "lists": {
+    "topics": [
+      "Negotiation"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 6",
+        "topic": "Bar Organization in Video editing",
+        "hours": "5",
+        "reading": "Relate Friend"
+      },
+      {
+        "week": "Week 2",
+        "topic": "Beautiful Generation in Mentoring",
+        "hours": "7",
+        "reading": "Mind Family More"
+      },
+      {
+        "week": "Week 4",
+        "topic": "Score Too in Python",
+        "hours": "1",
+        "reading": "A Lead in Bazin"
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Online",
+      "Prerequisites": "Introductory programming",
+      "Credits": "7"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "effort"
+  ]
+}

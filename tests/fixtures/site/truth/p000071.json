@@ -1,0 +1,53 @@
+{
+  "page": "p000071",
+  "url": "https://www.munoz-tyler.com/recipes/herbed-tomatoes-flatbread-10500/",
+  "template_id": "T06",
+  "fields": {
+    "name": "Herbed Tomatoes Flatbread",
+    "cook_time": "29 min",
+    "cuisine": "Thai",
+    "published": "February 15, 2018",
+    "rating": "3.2",
+    "course": "Breakfast",
+    "prep_time": "1 hr 29 min",
+    "total_time": "1 hr 51 min",
+    "author": null,
+    "servings": "4",
+    "description": null
+  },
+  "lists": {
+    "steps": [
+      "Mix the yogurt certain study cold.",
+      "Season the black pepper still skill tough give four account north.",
+      "Mix the sugar per debate ball chair anyone."
+    ]
+  },
+  "records": {
+    "nutrition": [
+      {
+        "nutrient": "Carbohydrates",
+        "per_100g": null,
+        "amount": "45 mg",
+        "daily_value": "88%"
+      },
+      {
+        "nutrient": "Calories",
+        "per_100g": null,
+        "amount": "76 g",
+        "daily_value": "8%"
+      }
+    ]
+  },
+  "kv": {
+    "recipe_info": {
+      "Diet": "Low-carb",
+      "Storage": "Keeps 6 days in the fridge",
+      "Freezer friendly": "Yes",
+      "Occasion": "Brunch",
+      "Origin": "Senegal"
+    }
+  },
+  "optional_present": [
+    "cuisine"
+  ]
+}

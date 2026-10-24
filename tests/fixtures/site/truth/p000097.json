@@ -1,0 +1,65 @@
+{
+  "page": "p000097",
+  "url": "https://www.munoz-tyler.com/movies/10680/southern-people-course",
+  "template_id": "T03",
+  "fields": {
+    "title": "Southern: People Course",
+    "description": "Could language fear figure once born carry laugh brother laugh. Tell method customer today less stop although unit out.",
+    "country": "Nigeria",
+    "director": "Lindsay Salas",
+    "budget": null,
+    "language": "French",
+    "genre": null,
+    "box_office": "1.090.000 €",
+    "runtime": "101 min",
+    "studio": "Bryan, Graves and Williams",
+    "certificate": "R",
+    "release_date": "Dec 9, 2020"
+  },
+  "lists": {
+    "keywords": [
+      "author",
+      "performance",
+      "hour",
+      "scene",
+      "certainly"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Eugene Fouquet",
+        "character": "Professor Swanson",
+        "episodes": null
+      },
+      {
+        "actor": "Jason Woodard",
+        "character": "Sister Agullo",
+        "episodes": null
+      },
+      {
+        "actor": "Pauline Willis",
+        "character": "Detective Perkins",
+        "episodes": null
+      },
+      {
+        "actor": "Brianna Vallée",
+        "character": "Captain Goodman",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "16 : 9",
+      "Sound mix": "DTS",
+      "Color": "Color",
+      "Filming location": "North Jacobhaven, IA",
+      "Camera": "Red Dragon",
+      "Production company": "Carson, Coleman and Gonzalez"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

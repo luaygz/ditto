@@ -1,0 +1,72 @@
+{
+  "page": "p000196",
+  "url": "https://www.munoz-tyler.com/courses/statistics-for-professionals-11374/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Statistics for Professionals",
+    "rating": "1.1",
+    "enrolled": "14,103",
+    "effort": "3-12 hours per week",
+    "level": "Advanced",
+    "start_date": "May 23, 2025",
+    "description": "Source dinner court thousand article fall avoid cost animal culture then short run future. Present week but sea become respond cut beautiful responsibility either.",
+    "credential": "Professional certificate",
+    "contact_email": "tbaker@fernandez.net",
+    "language": "Arabic",
+    "instructor": "Alexander Harris"
+  },
+  "lists": {
+    "topics": [
+      "Customer support",
+      "Copywriting",
+      "Photography",
+      "Graphic design"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 3",
+        "topic": "Expect President in Graphic design",
+        "hours": "7",
+        "reading": "A Manager in Pritzwalk"
+      },
+      {
+        "week": "Week 1",
+        "topic": "Player Bank in Video editing",
+        "hours": "12",
+        "reading": "The Also of Describe"
+      },
+      {
+        "week": "Week 2",
+        "topic": "Instead Happy in SQL",
+        "hours": "12",
+        "reading": "Everybody Spend"
+      },
+      {
+        "week": "Week 10",
+        "topic": "Approach Right in Negotiation",
+        "hours": "4",
+        "reading": "The Whatever of Sense List"
+      },
+      {
+        "week": "Week 3",
+        "topic": "Human People in Customer support",
+        "hours": "3",
+        "reading": "Fact Because Reflect"
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Self-paced",
+      "Subtitles": "German",
+      "Certificate": "Digital badge"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

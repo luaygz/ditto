@@ -1,0 +1,43 @@
+{
+  "page": "p000122",
+  "url": "https://www.munoz-tyler.com/blog/2017/11/north-stevenborough-plans-news-paper-10859",
+  "template_id": "T02",
+  "fields": {
+    "headline": "North Stevenborough Plans News Paper",
+    "comment_count": "6",
+    "published": "2016-08-17",
+    "photo_credit": "Keith Edwards",
+    "updated": "2019-01-28",
+    "read_time": "12 min read",
+    "word_count": "25,828",
+    "author_email": "bradley.m@burke.com",
+    "summary": "Certain body these control dinner thus budget food she message.",
+    "author": "Sven Dávila"
+  },
+  "lists": {
+    "tags": [
+      "success",
+      "professor",
+      "before",
+      "site"
+    ]
+  },
+  "records": {
+    "comments": []
+  },
+  "kv": {
+    "article_info": {
+      "Section": "World",
+      "Language": "English",
+      "License": "All rights reserved",
+      "Edition": "Illustrated edition",
+      "Series": "The Question Series",
+      "Word count": "14,669"
+    }
+  },
+  "optional_present": [
+    "comment_count",
+    "word_count",
+    "author"
+  ]
+}

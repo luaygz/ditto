@@ -1,0 +1,56 @@
+{
+  "page": "p000003",
+  "url": "https://www.munoz-tyler.com/courses/negotiation-for-professionals-10023/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Negotiation for Professionals",
+    "rating": "4.1",
+    "enrolled": null,
+    "effort": "5-11 hours per week",
+    "level": "Beginner",
+    "start_date": "Mar 5, 2024",
+    "description": "Film maybe white local year determine high strong feeling. Minute thought already mention church game remain realize standard until serious water amount change. Year seem probably conference pretty environmental throw five beyond must explain win.",
+    "credential": "Professional certificate",
+    "contact_email": "emperatriz.picard@williams-robinson.org",
+    "language": "Arabic",
+    "instructor": "Danielle Gaines"
+  },
+  "lists": {
+    "topics": [
+      "TypeScript",
+      "Mentoring",
+      "Accounting",
+      "Sales"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 15",
+        "topic": "Audience Without in Public speaking",
+        "hours": "4",
+        "reading": null
+      },
+      {
+        "week": "Week 4",
+        "topic": "Discuss Cut in Photography",
+        "hours": "1",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Hybrid",
+      "Prerequisites": "Introductory programming",
+      "Credits": "5",
+      "Assessment": "Project",
+      "Subtitles": "Arabic",
+      "Certificate": "Digital badge"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "effort"
+  ]
+}

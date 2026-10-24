@@ -1,0 +1,62 @@
+{
+  "page": "p000077",
+  "url": "https://www.munoz-tyler.com/movies/10543/the-suddenly-black",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Suddenly Black",
+    "description": "Lot nice official respond ahead notice talk mission exist large. Seem quality word support accept force time staff similar two apply continue. Result thus fly them little job allow huge decide represent his early design.",
+    "country": null,
+    "director": "Justina Brady",
+    "budget": null,
+    "language": "Portuguese",
+    "genre": null,
+    "box_office": "244.000 €",
+    "runtime": "157 min",
+    "studio": "Stevenson, Wu and Jones",
+    "certificate": "PG",
+    "release_date": "Aug 18, 2025"
+  },
+  "lists": {
+    "keywords": [
+      "item"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Rachel Wilmsen",
+        "character": "Sister Valdez",
+        "episodes": null
+      },
+      {
+        "actor": "Jennifer Salz",
+        "character": "Doctor Harris",
+        "episodes": null
+      },
+      {
+        "actor": "Derek Brown",
+        "character": "Doctor Harmon",
+        "episodes": null
+      },
+      {
+        "actor": "Andrew Ditschlerin",
+        "character": "Detective Teixeira",
+        "episodes": null
+      },
+      {
+        "actor": "Kornelia Russo",
+        "character": "Professor Palmer",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.33 : 1",
+      "Sound mix": "Stereo",
+      "Filming location": "Dickersonshire, IL",
+      "Production company": "Mullen, Chapman and Morales"
+    }
+  },
+  "optional_present": []
+}

@@ -1,0 +1,58 @@
+{
+  "page": "p000082",
+  "url": "https://www.munoz-tyler.com/movies/10580/the-easy-spend",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Easy Spend",
+    "description": "Check management head each car present help benefit instead very prevent type treat successful. Trip can poor alone writer public author word bank car sister however line crime.",
+    "country": "Swaziland",
+    "director": "Berta Camacho",
+    "budget": null,
+    "language": "English",
+    "genre": null,
+    "box_office": "405.000 €",
+    "runtime": "119 min",
+    "studio": "Mullen, Chapman and Morales",
+    "certificate": "18",
+    "release_date": "Dec 26, 2025"
+  },
+  "lists": {
+    "keywords": [
+      "production"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Chad Corominas",
+        "character": "Detective Stiffel",
+        "episodes": null
+      },
+      {
+        "actor": "Kayla Weber",
+        "character": "Agent Azorin",
+        "episodes": null
+      },
+      {
+        "actor": "Käte Pérez",
+        "character": "Agent Gaillard",
+        "episodes": null
+      },
+      {
+        "actor": "John Willis",
+        "character": "Agent Abbott",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Filming location": "Davidshire, LA",
+      "Production company": "Weiss and Sons"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

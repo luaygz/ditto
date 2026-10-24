@@ -1,0 +1,67 @@
+{
+  "page": "p000194",
+  "url": "https://www.munoz-tyler.com/movies/11358/create-throw-brother",
+  "template_id": "T03",
+  "fields": {
+    "title": "Create: Throw Brother",
+    "description": "Attorney day over plant born small decade hotel program quality ask. Democrat international after coach nothing yet but behind probably dream kid forward accept huge.",
+    "country": "Holy See (Vatican City State)",
+    "director": "Dörte Cameron",
+    "budget": "82.000 €",
+    "language": "Arabic",
+    "genre": null,
+    "box_office": "1.195.000 €",
+    "runtime": "92 min",
+    "studio": "Juan Fajardo Aguirre S.Com.",
+    "certificate": "PG",
+    "release_date": "Feb 17, 2019"
+  },
+  "lists": {
+    "keywords": [
+      "son",
+      "agree"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Caitlin Jähn",
+        "character": "Doctor Day",
+        "episodes": null
+      },
+      {
+        "actor": "Frédéric Aubert",
+        "character": "Agent Dörr",
+        "episodes": null
+      },
+      {
+        "actor": "Christina Hampton",
+        "character": "Professor Best",
+        "episodes": null
+      },
+      {
+        "actor": "Bradley Kent",
+        "character": "Detective Ayuso",
+        "episodes": null
+      },
+      {
+        "actor": "Caroline Swanson",
+        "character": "Doctor Holland",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "16 : 9",
+      "Color": "Black and White",
+      "Filming location": "West Denise, HI",
+      "Camera": "Red Dragon",
+      "Production company": "Solis Inc"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "page": "p000182",
+  "url": "https://www.munoz-tyler.com/movies/11275/position",
+  "template_id": "T03",
+  "fields": {
+    "title": "Position",
+    "description": "Record lot deep idea wife blue quickly. Protect range company where everything month professor. Seem too activity development american turn carry until minute against thing radio.",
+    "country": "Sweden",
+    "director": "Karina Ditschlerin",
+    "budget": null,
+    "language": "Japanese",
+    "genre": null,
+    "box_office": "115.000 €",
+    "runtime": "124 min",
+    "studio": "Patterson-Nelson",
+    "certificate": "12A",
+    "release_date": "May 26, 2023"
+  },
+  "lists": {
+    "keywords": [
+      "though"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Nicholas Pena",
+        "character": "Professor Day",
+        "episodes": null
+      },
+      {
+        "actor": "Valerio Carpenter",
+        "character": "Officer Abbott",
+        "episodes": null
+      },
+      {
+        "actor": "Stacey Lewis",
+        "character": "Detective Willis",
+        "episodes": null
+      },
+      {
+        "actor": "Chad Charles",
+        "character": "Mayor Harrison",
+        "episodes": null
+      },
+      {
+        "actor": "Roque Cruz",
+        "character": "Doctor Hellwig",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Camera": "Sony Venice",
+      "Production company": "Turner, Mueller and Silva"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "page": "p000057",
+  "url": "https://www.munoz-tyler.com/movies/10403/service-job-easy",
+  "template_id": "T03",
+  "fields": {
+    "title": "Service: Job Easy",
+    "description": "Strategy pretty truth move mother watch explain bill debate month know sometimes sound senior. Top capital never low some race cost skin effect step practice prepare. Watch want herself across rich treat smile among record.",
+    "country": "Seychelles",
+    "director": "Philippe Quirós",
+    "budget": null,
+    "language": "Spanish",
+    "genre": null,
+    "box_office": "2.037.000 €",
+    "runtime": "104 min",
+    "studio": "Grupo Cuervo S.A.D",
+    "certificate": "18",
+    "release_date": "Dec 11, 2022"
+  },
+  "lists": {
+    "keywords": [
+      "lot",
+      "direction",
+      "decision",
+      "grow"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Amy Proctor",
+        "character": "Officer Quinn",
+        "episodes": null
+      },
+      {
+        "actor": "Jacobo Leleu",
+        "character": "Sister Moran",
+        "episodes": null
+      },
+      {
+        "actor": "Édouard Burton",
+        "character": "Agent Stiffel",
+        "episodes": null
+      },
+      {
+        "actor": "Juan Wu",
+        "character": "Doctor Fernandez",
+        "episodes": null
+      },
+      {
+        "actor": "Nadin Benthin",
+        "character": "Captain Adkins",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Sound mix": "Mono",
+      "Color": "Black and White",
+      "Camera": "Arri Alexa",
+      "Production company": "Mcguire, Wilson and Patton"
+    }
+  },
+  "optional_present": [
+    "country"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "page": "p000113",
+  "url": "https://www.munoz-tyler.com/jobs/10793/database-administrator",
+  "template_id": "T05",
+  "fields": {
+    "title": "Database administrator",
+    "salary": "$111,000",
+    "apply_url": "https://www.oliver.com/",
+    "date_posted": "Dec 9, 2020",
+    "experience_level": "Director",
+    "department": "Data",
+    "contact_email": "gunpf.l@fernandez-ramirez.info",
+    "openings": "7",
+    "deadline": "Dec 27, 2021",
+    "description": "Charge happy medical can west indicate however. Lawyer become late analysis professional pay item agree high low bank. Wide prove seven table national common community help during these bed should.",
+    "employment_type": "Internship"
+  },
+  "lists": {
+    "benefits": [
+      "Flexible hours",
+      "Learning stipend",
+      "Remote work budget"
+    ]
+  },
+  "records": {
+    "open_positions": [
+      {
+        "location": "CharpentierBourg, MA",
+        "start": null,
+        "team": "Customer Success",
+        "positions": "6"
+      },
+      {
+        "location": "Schwabmünchen, VA",
+        "start": null,
+        "team": "Legal",
+        "positions": "8"
+      },
+      {
+        "location": "East Dawnport, KY",
+        "start": null,
+        "team": "Data",
+        "positions": "11"
+      }
+    ]
+  },
+  "kv": {
+    "job_details": {
+      "Travel": "None",
+      "Start date": "Dec 20, 2017",
+      "Contract length": "4 months",
+      "Reports to": "Production assistant, radio"
+    }
+  },
+  "optional_present": [
+    "salary",
+    "apply_url",
+    "experience_level"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "page": "p000116",
+  "url": "https://www.munoz-tyler.com/movies/10818/the-quickly-particularly",
+  "template_id": "T03",
+  "fields": {
+    "title": "The Quickly Particularly",
+    "description": "Best join national happen environmental among player herself. Try right young reflect prepare past order congress itself improve. How personal affect right report scientist.",
+    "country": null,
+    "director": "Chris Schneider",
+    "budget": null,
+    "language": "Japanese",
+    "genre": null,
+    "box_office": "1.871.000 €",
+    "runtime": "98 min",
+    "studio": "Ryan-Gibson",
+    "certificate": "15",
+    "release_date": "Sep 26, 2025"
+  },
+  "lists": {
+    "keywords": [
+      "myself",
+      "sing",
+      "must",
+      "door",
+      "left"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Tyler Garrett",
+        "character": "Officer Soto",
+        "episodes": null
+      },
+      {
+        "actor": "Devin West",
+        "character": "Sister Mccarthy",
+        "episodes": null
+      },
+      {
+        "actor": "Kike Haynes",
+        "character": "Officer Wade",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "2.39 : 1",
+      "Sound mix": "Dolby Digital",
+      "Color": "Color",
+      "Filming location": "North Marytown, NH",
+      "Camera": "Panavision"
+    }
+  },
+  "optional_present": []
+}

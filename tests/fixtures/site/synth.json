@@ -1,0 +1,111 @@
+{
+  "generator": "ditto.synth",
+  "seed": 1,
+  "params": {
+    "templates": 4,
+    "pages_median": 45.0,
+    "pages_sigma": 0.35,
+    "pages_min": 25,
+    "pages_max": 70,
+    "total_pages": 200,
+    "tail_templates": 3,
+    "tail_pages": [
+      2,
+      5
+    ],
+    "mandatory_fields": [
+      5,
+      8
+    ],
+    "optional_fields": 3,
+    "optional_presence": [
+      0.02,
+      0.95
+    ],
+    "list_fields": 1,
+    "list_items": [
+      1,
+      5
+    ],
+    "record_tables": 1,
+    "table_rows": [
+      0,
+      5
+    ],
+    "optional_columns": 1,
+    "kv_blocks": 1,
+    "kv_style": "mixed",
+    "kv_keys": [
+      3,
+      6
+    ],
+    "hashed_class_share": 0.3,
+    "boilerplate_share": 0.4,
+    "boilerplate_variants": 3,
+    "near_duplicate_pairs": 1,
+    "near_duplicate_jaccard": 0.7,
+    "absent_rendering": "omitted",
+    "markup_style": "server",
+    "noise": [],
+    "noise_rate": 0.5,
+    "site_name": null,
+    "host": null
+  },
+  "site_name": "Munoz-Tyler",
+  "host": "www.munoz-tyler.com",
+  "n_pages": 200,
+  "n_templates": 7,
+  "n_tail_templates": 3,
+  "template_pages": {
+    "T01": 35,
+    "T02": 64,
+    "T03": 36,
+    "T04": 52,
+    "T05": 3,
+    "T06": 5,
+    "T07": 5
+  },
+  "near_duplicates": [
+    {
+      "a": "T02",
+      "b": "T04",
+      "target": 0.7,
+      "jaccard": 0.7,
+      "content_jaccard": 0.6842,
+      "segments": [
+        "blog",
+        "news"
+      ]
+    }
+  ],
+  "cross_template_jaccard": {
+    "max": 0.0,
+    "pair": []
+  },
+  "measured": {
+    "boilerplate_share_mean": 0.3955,
+    "boilerplate_share_median": 0.3923,
+    "hashed_class_share": 0.2161,
+    "content_elements_median": 72.33333333333333,
+    "shell_elements": [
+      48,
+      51,
+      51
+    ],
+    "variant_weights": [
+      0.5455,
+      0.2727,
+      0.1818
+    ],
+    "bytes_html": 1487470,
+    "mean_page_bytes": 7437.4
+  },
+  "generation": {
+    "seconds": 5.044,
+    "plan_seconds": 2.45,
+    "workers": 2,
+    "cpu_count": 12,
+    "pages_per_second": 39.7,
+    "note": "timing only; every other byte of the output depends on (params, seed) alone"
+  }
+}

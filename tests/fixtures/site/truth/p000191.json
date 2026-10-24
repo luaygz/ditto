@@ -1,0 +1,57 @@
+{
+  "page": "p000191",
+  "url": "https://www.munoz-tyler.com/courses/introduction-to-data-analysis-11341/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Introduction to Data analysis",
+    "rating": "4.3",
+    "enrolled": "23,736",
+    "effort": "4-9 hours per week",
+    "level": "All levels",
+    "start_date": "Aug 24, 2019",
+    "description": "But kid executive from size politics exactly their tough machine simply decide. Experience alone sing also together color subject fund treat window mention.",
+    "credential": "Diploma",
+    "contact_email": "goodman.r@rodriguez-fleming.com",
+    "language": "Portuguese",
+    "instructor": "Eric Quinn"
+  },
+  "lists": {
+    "topics": [
+      "Machine learning",
+      "Python",
+      "SQL",
+      "UX research"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 15",
+        "topic": "Sometimes Meeting in Mentoring",
+        "hours": "11",
+        "reading": null
+      },
+      {
+        "week": "Week 1",
+        "topic": "Drive Phone in Negotiation",
+        "hours": "6",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "In person",
+      "Prerequisites": "None",
+      "Credits": "9",
+      "Assessment": "Project",
+      "Subtitles": "German",
+      "Certificate": "Diploma"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

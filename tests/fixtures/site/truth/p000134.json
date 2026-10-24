@@ -1,0 +1,41 @@
+{
+  "page": "p000134",
+  "url": "https://www.munoz-tyler.com/movies/10943/write-nothing-picture",
+  "template_id": "T03",
+  "fields": {
+    "title": "Write Nothing Picture",
+    "description": "Half partner girl perform action few full challenge finish research view simply should group. True century machine exist southern yes simple write relate street respond almost lawyer.",
+    "country": "Netherlands Antilles",
+    "director": "Dominga Benavent",
+    "budget": "1.267.000 €",
+    "language": "Japanese",
+    "genre": "Fiction",
+    "box_office": "1.444.000 €",
+    "runtime": "100 min",
+    "studio": "Collet",
+    "certificate": "PG",
+    "release_date": "Dec 18, 2025"
+  },
+  "lists": {
+    "keywords": [
+      "stay",
+      "final"
+    ]
+  },
+  "records": {
+    "cast": []
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.33 : 1",
+      "Sound mix": "Mono",
+      "Color": "Black and White",
+      "Filming location": "West Nicole, VA"
+    }
+  },
+  "optional_present": [
+    "country",
+    "budget",
+    "genre"
+  ]
+}

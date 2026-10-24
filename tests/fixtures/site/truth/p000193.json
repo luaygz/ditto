@@ -1,0 +1,51 @@
+{
+  "page": "p000193",
+  "url": "https://www.munoz-tyler.com/movies/11356/data",
+  "template_id": "T03",
+  "fields": {
+    "title": "Data",
+    "description": "Great mind often soon though mention among likely action religious culture picture control. Action key trip song expert hand film teacher such carry buy green particular.",
+    "country": null,
+    "director": "Ekkehard Busquets",
+    "budget": null,
+    "language": "Portuguese",
+    "genre": "Mystery",
+    "box_office": "1.739.000 €",
+    "runtime": "135 min",
+    "studio": "Haynes, Jordan and Wells",
+    "certificate": "12A",
+    "release_date": "Jul 21, 2025"
+  },
+  "lists": {
+    "keywords": [
+      "American",
+      "suffer",
+      "watch"
+    ]
+  },
+  "records": {
+    "cast": [
+      {
+        "actor": "Geert Loiseau",
+        "character": "Professor Gilmore",
+        "episodes": null
+      },
+      {
+        "actor": "Adrienne Mccarthy",
+        "character": "Professor Robinson",
+        "episodes": null
+      }
+    ]
+  },
+  "kv": {
+    "tech_specs": {
+      "Aspect ratio": "1.85 : 1",
+      "Filming location": "Thomas-sur-Mer, WA",
+      "Camera": "Arri Alexa",
+      "Production company": "Rodriguez, Hernandez and Jenkins"
+    }
+  },
+  "optional_present": [
+    "genre"
+  ]
+}

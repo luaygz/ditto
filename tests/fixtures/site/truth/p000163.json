@@ -1,0 +1,62 @@
+{
+  "page": "p000163",
+  "url": "https://www.munoz-tyler.com/recipes/honey-chicken-thighs-dumplings-11147/",
+  "template_id": "T06",
+  "fields": {
+    "name": "Honey Chicken Thighs Dumplings",
+    "cook_time": "12 min",
+    "cuisine": "Spanish",
+    "published": "August 24, 2022",
+    "rating": "4.8",
+    "course": "Lunch",
+    "prep_time": "1 hr 7 min",
+    "total_time": "32 min",
+    "author": "Claudia Riehl",
+    "servings": "6",
+    "description": null
+  },
+  "lists": {
+    "steps": [
+      "Stir the garlic probably site all choice her.",
+      "Stir the olive oil face financial create billion maybe daughter.",
+      "Stir the olive oil later operation cause provide real magazine name campaign.",
+      "Stir the sugar read audience change interest.",
+      "Whisk the sugar agreement dream stage head leader hard garden future."
+    ]
+  },
+  "records": {
+    "nutrition": [
+      {
+        "nutrient": "Sugars",
+        "per_100g": null,
+        "amount": "74 mg",
+        "daily_value": "74%"
+      },
+      {
+        "nutrient": "Saturates",
+        "per_100g": null,
+        "amount": "21 mg",
+        "daily_value": "24%"
+      },
+      {
+        "nutrient": "Fat",
+        "per_100g": null,
+        "amount": "91 g",
+        "daily_value": "69%"
+      }
+    ]
+  },
+  "kv": {
+    "recipe_info": {
+      "Diet": "Dairy-free",
+      "Storage": "Keeps 3 days in the fridge",
+      "Freezer friendly": "No",
+      "Occasion": "Weeknight",
+      "Origin": "Kazakhstan"
+    }
+  },
+  "optional_present": [
+    "cuisine",
+    "author"
+  ]
+}

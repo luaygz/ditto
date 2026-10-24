@@ -1,0 +1,49 @@
+{
+  "page": "p000083",
+  "url": "https://www.munoz-tyler.com/courses/introduction-to-python-10583/",
+  "template_id": "T01",
+  "fields": {
+    "title": "Introduction to Python",
+    "rating": "5.0",
+    "enrolled": "36,042",
+    "effort": "3-12 hours per week",
+    "level": "Advanced",
+    "start_date": "Jul 27, 2023",
+    "description": "Tell better big office realize team. Agreement democrat run administration question popular then hot technology listen play before message. Street leg measure explain main girl science everything born enter end actually else right.",
+    "credential": "Digital badge",
+    "contact_email": "beck.d@saunders-davis.net",
+    "language": "Arabic",
+    "instructor": "Harald Scott"
+  },
+  "lists": {
+    "topics": [
+      "Photography",
+      "Video editing",
+      "Customer support",
+      "Machine learning"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 15",
+        "topic": "Return Mouth in Graphic design",
+        "hours": "9",
+        "reading": null
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Hybrid",
+      "Credits": "1",
+      "Assessment": "Quiz",
+      "Certificate": "Diploma"
+    }
+  },
+  "optional_present": [
+    "rating",
+    "enrolled",
+    "effort"
+  ]
+}

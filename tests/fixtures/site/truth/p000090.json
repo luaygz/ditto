@@ -1,0 +1,63 @@
+{
+  "page": "p000090",
+  "url": "https://www.munoz-tyler.com/courses/typescript-for-professionals-10633/",
+  "template_id": "T01",
+  "fields": {
+    "title": "TypeScript for Professionals",
+    "rating": "4.9",
+    "enrolled": null,
+    "effort": null,
+    "level": "Intermediate",
+    "start_date": "Feb 5, 2025",
+    "description": "Last activity push worry once fire statement region tough east shake. Wonder product itself beat body site throughout stay happy current report hear nice war.",
+    "credential": "None",
+    "contact_email": "david21@mack.biz",
+    "language": "Arabic",
+    "instructor": "Bradley Salas"
+  },
+  "lists": {
+    "topics": [
+      "TypeScript",
+      "Negotiation"
+    ]
+  },
+  "records": {
+    "syllabus": [
+      {
+        "week": "Week 5",
+        "topic": "Lay Line in Project management",
+        "hours": "6",
+        "reading": "Rest Partner Raise"
+      },
+      {
+        "week": "Week 7",
+        "topic": "Action Meet in Sales",
+        "hours": "9",
+        "reading": "Rule Author Sing Kitchen"
+      },
+      {
+        "week": "Week 12",
+        "topic": "South One in Mentoring",
+        "hours": "3",
+        "reading": "The Sure of Guess"
+      },
+      {
+        "week": "Week 10",
+        "topic": "Moment Everything in Photography",
+        "hours": "3",
+        "reading": "The Voice of Well"
+      }
+    ]
+  },
+  "kv": {
+    "course_facts": {
+      "Format": "Self-paced",
+      "Prerequisites": "Introductory programming",
+      "Credits": "11",
+      "Assessment": "Essay"
+    }
+  },
+  "optional_present": [
+    "rating"
+  ]
+}

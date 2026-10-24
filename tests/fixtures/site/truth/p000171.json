@@ -1,0 +1,41 @@
+{
+  "page": "p000171",
+  "url": "https://www.munoz-tyler.com/news/2026/05/asturias-faces-able-interesting-author-11197",
+  "template_id": "T04",
+  "fields": {
+    "headline": "Asturias Faces Able Interesting Author",
+    "comment_count": null,
+    "badge": "Featured",
+    "published": "2021-02-21",
+    "section": "World",
+    "word_count": "7,150",
+    "permalink": "https://www.black.org/",
+    "support_phone": "9055438232",
+    "listing_date": "2017-08-19",
+    "region": "Cuba",
+    "summary": "Sit professional play find issue debate table trial throw.",
+    "author": "Lindsay Welch",
+    "verification": "Pending verification"
+  },
+  "lists": {
+    "tags": [
+      "same"
+    ]
+  },
+  "records": {
+    "comments": []
+  },
+  "kv": {
+    "article_info": {
+      "Section": "Politics",
+      "License": "Syndicated",
+      "Edition": "Illustrated edition",
+      "Series": "The Our Series",
+      "Word count": "4,650"
+    }
+  },
+  "optional_present": [
+    "word_count",
+    "author"
+  ]
+}
