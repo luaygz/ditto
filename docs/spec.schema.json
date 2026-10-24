@@ -1,0 +1,757 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "FieldStats": {
+      "additionalProperties": true,
+      "description": "Per-field statistics written by verification over every page of the cluster; kept in the\nspec for drift detection on later crawls. Extra keys are allowed.",
+      "properties": {
+        "presence_rate": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Share of pages where the field has a value.",
+          "title": "Presence Rate"
+        },
+        "expected_presence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Presence rate the analysis expected from the field's path (`p`).",
+          "title": "Expected Presence"
+        },
+        "multiplicity": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "For scalars: share of pages with a match where the selector matched exactly one node.",
+          "title": "Multiplicity"
+        },
+        "type_check_pass": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Share of extracted values that pass the field's `type_check`.",
+          "title": "Type Check Pass"
+        },
+        "rows_min": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "record_list: fewest rows on a page where present.",
+          "title": "Rows Min"
+        },
+        "rows_max": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "record_list: most rows on a page where present.",
+          "title": "Rows Max"
+        },
+        "keys_seen": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "key_value: distinct keys seen across the cluster.",
+          "title": "Keys Seen"
+        },
+        "pages_scored": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Pages the statistics were computed on.",
+          "title": "Pages Scored"
+        }
+      },
+      "title": "FieldStats",
+      "type": "object"
+    },
+    "GeneratedBy": {
+      "additionalProperties": true,
+      "description": "Provenance: which model and prompt wrote the spec, from which pages. Extra keys allowed.",
+      "properties": {
+        "model": {
+          "description": "Model id that wrote the spec.",
+          "title": "Model",
+          "type": "string"
+        },
+        "prompt_version": {
+          "description": "Prompt id used for generation, e.g. `specgen.v1`.",
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "pages_seen": {
+          "description": "URLs of the pages merged into the union page.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Pages Seen",
+          "type": "array"
+        },
+        "mode": {
+          "default": "prompted",
+          "description": "`prompted` (user fields.yaml), `unprompted` (LLM named the fields) or `fallback` (path-induced selectors, no LLM).",
+          "enum": [
+            "prompted",
+            "unprompted",
+            "fallback"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "repair_calls": {
+          "default": 0,
+          "description": "Repair LLM calls spent on this spec.",
+          "minimum": 0,
+          "title": "Repair Calls",
+          "type": "integer"
+        },
+        "repair_prompt_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Prompt id used for repair, e.g. `repair.v1`.",
+          "title": "Repair Prompt Version"
+        },
+        "created_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO 8601 creation time.",
+          "title": "Created At"
+        }
+      },
+      "required": [
+        "model",
+        "prompt_version"
+      ],
+      "title": "GeneratedBy",
+      "type": "object"
+    },
+    "KeyValueField": {
+      "additionalProperties": false,
+      "description": "An object: `pairs` matches one element per pair, `key` and `value` are relative to it.\nKeys lose a trailing colon; the first occurrence of a key wins.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "What the field holds, in words (from fields.yaml or the LLM).",
+          "title": "Description"
+        },
+        "optional": {
+          "default": false,
+          "description": "True when the analysis found the field's path on fewer than 95% of the cluster's pages, so a null is not a failure.",
+          "title": "Optional",
+          "type": "boolean"
+        },
+        "degraded": {
+          "default": false,
+          "description": "Set by verification when the field still fails on some pages after the repair budget is spent; see `stats` for its rates.",
+          "title": "Degraded",
+          "type": "boolean"
+        },
+        "selection_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Why verification picked the selected candidate.",
+          "title": "Selection Reason"
+        },
+        "source_candidates": {
+          "description": "Analysis candidate ids (e.g. c17) this field maps to.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Candidates",
+          "type": "array"
+        },
+        "stats": {
+          "$ref": "#/$defs/FieldStats",
+          "description": "Verification statistics (see `stats`)."
+        },
+        "type": {
+          "const": "key_value",
+          "default": "key_value",
+          "description": "Field type discriminator.",
+          "title": "Type",
+          "type": "string"
+        },
+        "pairs": {
+          "description": "Absolute XPath matching one element per key/value pair.",
+          "title": "Pairs",
+          "type": "string"
+        },
+        "pairs_alternates": {
+          "description": "Up to two alternative pair selectors (the 2-3 candidates rule); extraction uses `pairs` only.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 2,
+          "title": "Pairs Alternates",
+          "type": "array"
+        },
+        "key": {
+          "default": ".",
+          "description": "XPath relative to the pair element for the key.",
+          "title": "Key",
+          "type": "string"
+        },
+        "value": {
+          "description": "XPath relative to the pair element for the value.",
+          "title": "Value",
+          "type": "string"
+        },
+        "transforms": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "description": "Transform chains for `key` and/or `value`.",
+          "propertyNames": {
+            "enum": [
+              "key",
+              "value"
+            ]
+          },
+          "title": "Transforms",
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "pairs",
+        "value"
+      ],
+      "title": "KeyValueField",
+      "type": "object"
+    },
+    "ListField": {
+      "additionalProperties": false,
+      "description": "An array of values: every node the selector matches (0..N), in document order.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "What the field holds, in words (from fields.yaml or the LLM).",
+          "title": "Description"
+        },
+        "optional": {
+          "default": false,
+          "description": "True when the analysis found the field's path on fewer than 95% of the cluster's pages, so a null is not a failure.",
+          "title": "Optional",
+          "type": "boolean"
+        },
+        "degraded": {
+          "default": false,
+          "description": "Set by verification when the field still fails on some pages after the repair budget is spent; see `stats` for its rates.",
+          "title": "Degraded",
+          "type": "boolean"
+        },
+        "selection_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Why verification picked the selected candidate.",
+          "title": "Selection Reason"
+        },
+        "source_candidates": {
+          "description": "Analysis candidate ids (e.g. c17) this field maps to.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Candidates",
+          "type": "array"
+        },
+        "stats": {
+          "$ref": "#/$defs/FieldStats",
+          "description": "Verification statistics (see `stats`)."
+        },
+        "candidates": {
+          "description": "Two or three distinct absolute XPath 1.0 selectors for the same value.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 2,
+          "title": "Candidates",
+          "type": "array"
+        },
+        "selected": {
+          "default": 0,
+          "description": "Index of the candidate extraction uses (set by verification).",
+          "minimum": 0,
+          "title": "Selected",
+          "type": "integer"
+        },
+        "fallbacks": {
+          "description": "Candidate indices tried in order when the selected one matches nothing; verification only lists candidates that agree with the winner.",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Fallbacks",
+          "type": "array"
+        },
+        "transforms": {
+          "description": "Transforms applied in order to each matched item (closed set: strip, normalize_ws, regex(pattern, group), split(sep, index), replace(old, new), cast(int|float|date), attr(name)).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Transforms",
+          "type": "array"
+        },
+        "type_check": {
+          "anyOf": [
+            {
+              "enum": [
+                "email",
+                "url",
+                "number",
+                "date",
+                "price",
+                "text"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Expected value type, checked by verification.",
+          "title": "Type Check"
+        },
+        "type": {
+          "const": "list",
+          "default": "list",
+          "description": "Field type discriminator.",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "candidates"
+      ],
+      "title": "ListField",
+      "type": "object"
+    },
+    "RecordListField": {
+      "additionalProperties": false,
+      "description": "An array of objects: `container` matches each row, each column XPath is relative to the\nrow. Rows whose columns are all null are dropped.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "What the field holds, in words (from fields.yaml or the LLM).",
+          "title": "Description"
+        },
+        "optional": {
+          "default": false,
+          "description": "True when the analysis found the field's path on fewer than 95% of the cluster's pages, so a null is not a failure.",
+          "title": "Optional",
+          "type": "boolean"
+        },
+        "degraded": {
+          "default": false,
+          "description": "Set by verification when the field still fails on some pages after the repair budget is spent; see `stats` for its rates.",
+          "title": "Degraded",
+          "type": "boolean"
+        },
+        "selection_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Why verification picked the selected candidate.",
+          "title": "Selection Reason"
+        },
+        "source_candidates": {
+          "description": "Analysis candidate ids (e.g. c17) this field maps to.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Candidates",
+          "type": "array"
+        },
+        "stats": {
+          "$ref": "#/$defs/FieldStats",
+          "description": "Verification statistics (see `stats`)."
+        },
+        "type": {
+          "const": "record_list",
+          "default": "record_list",
+          "description": "Field type discriminator.",
+          "title": "Type",
+          "type": "string"
+        },
+        "container": {
+          "description": "Absolute XPath matching every row element.",
+          "title": "Container",
+          "type": "string"
+        },
+        "container_alternates": {
+          "description": "Up to two alternative container selectors (the 2-3 candidates rule); verification may promote one, extraction uses `container` only.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 2,
+          "title": "Container Alternates",
+          "type": "array"
+        },
+        "columns": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Column name -> XPath relative to the row (starts with `.`). With `column_source: header_row` cells are addressed by header text, never by position.",
+          "minProperties": 1,
+          "title": "Columns",
+          "type": "object"
+        },
+        "column_source": {
+          "default": "llm",
+          "description": "`header_row` when column names came from `<th>` text, `llm` when the LLM named them (headerless tables may then address cells by position).",
+          "enum": [
+            "header_row",
+            "llm"
+          ],
+          "title": "Column Source",
+          "type": "string"
+        },
+        "transforms": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "description": "Column name -> transform chain for that column.",
+          "title": "Transforms",
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "container",
+        "columns"
+      ],
+      "title": "RecordListField",
+      "type": "object"
+    },
+    "ScalarField": {
+      "additionalProperties": false,
+      "description": "One value or null. The selector must match exactly one node where the field exists;\nextraction keeps the first non-null match.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "What the field holds, in words (from fields.yaml or the LLM).",
+          "title": "Description"
+        },
+        "optional": {
+          "default": false,
+          "description": "True when the analysis found the field's path on fewer than 95% of the cluster's pages, so a null is not a failure.",
+          "title": "Optional",
+          "type": "boolean"
+        },
+        "degraded": {
+          "default": false,
+          "description": "Set by verification when the field still fails on some pages after the repair budget is spent; see `stats` for its rates.",
+          "title": "Degraded",
+          "type": "boolean"
+        },
+        "selection_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Why verification picked the selected candidate.",
+          "title": "Selection Reason"
+        },
+        "source_candidates": {
+          "description": "Analysis candidate ids (e.g. c17) this field maps to.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Candidates",
+          "type": "array"
+        },
+        "stats": {
+          "$ref": "#/$defs/FieldStats",
+          "description": "Verification statistics (see `stats`)."
+        },
+        "candidates": {
+          "description": "Two or three distinct absolute XPath 1.0 selectors for the same value.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 2,
+          "title": "Candidates",
+          "type": "array"
+        },
+        "selected": {
+          "default": 0,
+          "description": "Index of the candidate extraction uses (set by verification).",
+          "minimum": 0,
+          "title": "Selected",
+          "type": "integer"
+        },
+        "fallbacks": {
+          "description": "Candidate indices tried in order when the selected one matches nothing; verification only lists candidates that agree with the winner.",
+          "items": {
+            "type": "integer"
+          },
+          "title": "Fallbacks",
+          "type": "array"
+        },
+        "transforms": {
+          "description": "Transforms applied in order to each matched item (closed set: strip, normalize_ws, regex(pattern, group), split(sep, index), replace(old, new), cast(int|float|date), attr(name)).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Transforms",
+          "type": "array"
+        },
+        "type_check": {
+          "anyOf": [
+            {
+              "enum": [
+                "email",
+                "url",
+                "number",
+                "date",
+                "price",
+                "text"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Expected value type, checked by verification.",
+          "title": "Type Check"
+        },
+        "type": {
+          "const": "scalar",
+          "default": "scalar",
+          "description": "Field type discriminator.",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "candidates"
+      ],
+      "title": "ScalarField",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One template's extraction spec.",
+  "properties": {
+    "spec_version": {
+      "const": "1",
+      "default": "1",
+      "description": "Format version; `\"1\"` for this release.",
+      "title": "Spec Version",
+      "type": "string"
+    },
+    "template_id": {
+      "description": "Template (cluster) id, e.g. `t_3f9a`.",
+      "minLength": 1,
+      "title": "Template Id",
+      "type": "string"
+    },
+    "site": {
+      "description": "Site the template belongs to (its domain).",
+      "minLength": 1,
+      "title": "Site",
+      "type": "string"
+    },
+    "status": {
+      "default": "draft",
+      "description": "`draft` after generation, `final` once verification selected candidates.",
+      "enum": [
+        "draft",
+        "final"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "generated_by": {
+      "$ref": "#/$defs/GeneratedBy",
+      "description": "Provenance (see `generated_by`)."
+    },
+    "fields": {
+      "additionalProperties": {
+        "discriminator": {
+          "mapping": {
+            "key_value": "#/$defs/KeyValueField",
+            "list": "#/$defs/ListField",
+            "record_list": "#/$defs/RecordListField",
+            "scalar": "#/$defs/ScalarField"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/ScalarField"
+          },
+          {
+            "$ref": "#/$defs/ListField"
+          },
+          {
+            "$ref": "#/$defs/RecordListField"
+          },
+          {
+            "$ref": "#/$defs/KeyValueField"
+          }
+        ]
+      },
+      "description": "Output field name -> field definition. Names are the keys of every extracted record; `url`, `page_id`, `template_id` and names starting with `_` are reserved.",
+      "title": "Fields",
+      "type": "object"
+    },
+    "not_present": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Prompted fields the LLM could not find -> reason.",
+      "title": "Not Present",
+      "type": "object"
+    }
+  },
+  "required": [
+    "template_id",
+    "site",
+    "generated_by",
+    "fields"
+  ],
+  "title": "Spec",
+  "type": "object"
+}
