@@ -10,6 +10,7 @@ from pydantic import BaseModel, ConfigDict, Field
 CandidateClass = Literal["boilerplate", "label", "mandatory", "optional", "list", "noise"]
 TableRole = Literal["kv_key", "kv_value", "record_header", "record_column"]
 ValueType = Literal["email", "url", "number", "date", "price", "text"]
+TableLayout = Literal["dl", "alternating", "pairs", "table", "rows"]
 
 FIELD_CLASSES: frozenset[str] = frozenset({"mandatory", "optional", "list"})
 
@@ -47,8 +48,17 @@ class TableColumn(BaseModel):
 class Table(BaseModel):
     id: str
     kind: Literal["key_value", "record_list"]
+    layout: TableLayout | None = Field(
+        None,
+        description="How rows are built: dl (dt/dd), alternating (dl-like generic siblings), "
+        "pairs (row element = key child + value child or tail text), table (<table> rows/cells), "
+        "rows (generic repeated sibling rows; columns are distinct sub-paths).",
+    )
     container_path: str = Field(description="Path of the table / dl / list element.")
-    row_path: str = Field(description="Path of the repeated row element (tr, dt, li, div).")
+    row_path: str = Field(
+        description="Path of the repeated row element (tr, div, li; for dl/alternating the key "
+        "element, e.g. dt)."
+    )
     p: float = 0.0
     rows_min: int = 0
     rows_max: int = 0
@@ -64,6 +74,9 @@ class CandidateTable(BaseModel):
     template_id: str
     cluster_size: int
     n_sampled: int
+    base_page_id: int | None = Field(
+        None, description="Sampled page covering the most text paths; ids follow its doc order."
+    )
     candidates: list[Candidate]
     tables: list[Table] = Field(default_factory=list)
 
