@@ -194,6 +194,56 @@ def test_tiered_client_adds_service_tier(common: ModuleType) -> None:
     assert client.models == "models"
 
 
+def test_tiered_client_falls_back_when_flex_has_no_capacity(common: ModuleType) -> None:
+    import httpx
+    import openai
+
+    calls: list[dict[str, object]] = []
+    request = httpx.Request("POST", "https://api.openai.com/v1/chat/completions")
+    unavailable = openai.RateLimitError(
+        "Flex does not have sufficient resources",
+        response=httpx.Response(429, request=request),
+        body={"code": "flex_unavailable", "type": "resource_unavailable"},
+    )
+
+    class Completions:
+        def create(self, **kwargs: object) -> object:
+            calls.append(kwargs)
+            if kwargs.get("service_tier") == "flex":
+                raise unavailable
+            return "default-tier response"
+
+    fake = type(
+        "Client", (), {"chat": type("Chat", (), {"completions": Completions()})(), "models": None}
+    )()
+    client = common.TieredClient(fake, "flex")
+    assert client.chat.completions.create(model="m", messages=[]) == "default-tier response"
+    assert [c.get("service_tier") for c in calls] == ["flex", None]
+    assert client.chat.completions.fallbacks == 1
+
+
+def test_tiered_client_reraises_other_rate_limits(common: ModuleType) -> None:
+    import httpx
+    import openai
+
+    request = httpx.Request("POST", "https://api.openai.com/v1/chat/completions")
+    limited = openai.RateLimitError(
+        "rate limited",
+        response=httpx.Response(429, request=request),
+        body={"code": "rate_limit_exceeded"},
+    )
+
+    class Completions:
+        def create(self, **kwargs: object) -> object:
+            raise limited
+
+    fake = type(
+        "Client", (), {"chat": type("Chat", (), {"completions": Completions()})(), "models": None}
+    )()
+    with pytest.raises(openai.RateLimitError):
+        common.TieredClient(fake, "flex").chat.completions.create(model="m", messages=[])
+
+
 def test_baseline_llm_tiers(common: ModuleType, tmp_path: Path) -> None:
     from ditto.llm import Settings
 

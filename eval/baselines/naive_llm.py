@@ -190,7 +190,8 @@ def run_baseline(
     if tally.estimated_price:
         notes.append("price entry for the model is marked estimated")
     notes.append(
-        f"service tier: {tier}; spend is recorded at the standard price (Flex bills ~50% of it)"
+        f"service tier: {tier} (falls back to the default tier when Flex has no capacity); "
+        "spend is billed per call at the tier the provider reports, cost tables use standard prices"
     )
     if failed:
         notes.append(f"{len(failed)} page(s) got no valid answer and score as empty: {failed[:10]}")
@@ -205,6 +206,7 @@ def run_baseline(
         model=base_llm.model,
         pages_run=len(sample),
         spend_usd=tally.spent_usd,
+        pages_failed=len(failed),
     )
     common.write_jsonl(out_dir / f"{NAME}.pages.jsonl", page_rows)
     common.write_jsonl(

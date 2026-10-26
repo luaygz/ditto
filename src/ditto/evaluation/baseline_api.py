@@ -45,6 +45,9 @@ class BaselineOutput:
     """Pages actually processed (when sampled below the input count)."""
     spend_usd: float | None = None
     """Real spend of this run (cache hits are free); ``None`` means ``cost_usd``."""
+    pages_failed: int = 0
+    """Pages whose call errored (provider/LLM error or invalid answer after the retry); they
+    score as empty. When every processed page failed the harness marks the site failed."""
 
 
 class NotRun(Exception):

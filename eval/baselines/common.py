@@ -374,12 +374,31 @@ FLEX_TIMEOUT_S = 900.0  # OpenAI recommends a 15-minute timeout for Flex process
 
 
 class _TieredCompletions:
+    """Sends every request on ``service_tier``; when the provider has no capacity on that tier
+    (OpenAI ``flex_unavailable`` 429), the same request goes out once on the default tier.
+
+    The response's own ``service_tier`` says which tier billed it; the LLM layer prices the
+    call from that, so a fallback is recorded at the standard price.
+    """
+
     def __init__(self, inner: Any, service_tier: str) -> None:
         self._inner = inner
         self._tier = service_tier
+        self.fallbacks = 0
 
     def create(self, **kwargs: Any) -> Any:
-        return self._inner.create(service_tier=self._tier, **kwargs)
+        import openai
+
+        try:
+            return self._inner.create(service_tier=self._tier, **kwargs)
+        except openai.APIStatusError as exc:
+            if exc.status_code != 429 or exc.code not in (
+                "flex_unavailable",
+                "resource_unavailable",
+            ):
+                raise
+        self.fallbacks += 1
+        return self._inner.create(**kwargs)
 
 
 class TieredClient:
