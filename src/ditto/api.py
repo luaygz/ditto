@@ -35,17 +35,14 @@ class Probe:
     result: Any
 
     def confirm(self, edits: dict[str, dict[str, str | list[str]]] | None = None) -> Mapping:
-        """Accept the proposal, optionally overriding ``{template_id: {field: cid|"absent"}}``."""
+        """Accept the proposal, optionally overriding ``{template_id: {field: use}}`` where
+        ``use`` is a candidate id, a list of ids (or a table id) for record/key-value groups, or
+        ``"absent"``. Edits are validated like a hand edit of ``probe.yaml`` (``ConfirmError`` on
+        unknown templates, fields or candidates, with nothing written), then saved there with
+        provenance ``user``."""
         from ditto.checkpoints import confirm_run
-        from ditto.schema import TemplateMapping
 
-        mapping = confirm_run(self.site.run, yes=True, interactive=False)
-        if edits:
-            for tid, fields in edits.items():
-                tm = mapping.templates.setdefault(tid, TemplateMapping())
-                tm.fields.update(fields)
-            mapping.save(self.site.run.mapping_json)
-        return mapping
+        return confirm_run(self.site.run, yes=True, interactive=False, edits=edits)
 
 
 class Site:

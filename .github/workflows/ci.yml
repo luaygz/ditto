@@ -9,6 +9,13 @@ on:
     - cron: "17 3 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   check:
     if: github.event_name != 'schedule'
@@ -18,51 +25,92 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         python: ["3.11", "3.12"]
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    env:
+      UV_PYTHON: ${{ matrix.python }} # overrides .python-version (3.11) for every uv command
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python }}
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      # Both extras: Faker (synth) for the synthetic-site tests, matplotlib/pandas (eval) for the
+      # report tests; crawl4ai tests skip themselves without a browser. --locked fails on a stale
+      # uv.lock instead of silently re-resolving.
       - name: Install
-        run: uv sync --extra synth --python ${{ matrix.python }}
+        run: uv sync --locked --all-extras
       - name: Lint
         run: |
           uv run ruff check src tests eval
           uv run ruff format --check src tests eval
       - name: Types
         run: uv run mypy --strict src/ditto
+      # macOS runs the worker processes with spawn (its default), Linux with fork.
       - name: Tests
         env:
           OPENAI_API_KEY: ""
+          ANTHROPIC_API_KEY: ""
         run: uv run pytest --cov=src/ditto --cov-report=term --cov-fail-under=80
 
   build:
     if: github.event_name != 'schedule'
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
         with:
-          python-version: "3.11"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      # uv build makes the sdist, then builds the wheel from it (checks the sdist is complete).
       - run: uv build
-      - name: Install wheel in a clean venv
+      - name: Install the wheel in a clean venv
         run: |
-          python -m venv /tmp/clean
-          /tmp/clean/bin/pip install dist/*.whl
-          /tmp/clean/bin/ditto --help
+          uv venv --seed --python 3.11 "$RUNNER_TEMP/clean"
+          "$RUNNER_TEMP/clean/bin/pip" install "$(ls dist/*.whl)[synth]"
+      # Outside the checkout, so prompts and prices can only come from the installed ditto/_data.
+      - name: Smoke-test the installed package
+        working-directory: ${{ runner.temp }}
+        env:
+          PARAMS: ${{ github.workspace }}/eval/synth/fixture.yaml
+        run: |
+          clean/bin/ditto --help
+          clean/bin/python -c "from ditto.specgen import load_prompt; from ditto.llm import load_prices; import ditto; print(ditto.__version__, load_prompt('specgen').id, len(load_prices().models), 'priced models')"
+          clean/bin/ditto synth generate --params "$PARAMS" --seed 101 --out synth
+          clean/bin/ditto ingest synth/site --out run
+          clean/bin/ditto cluster run
+      - uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          name: dist
+          path: dist/
 
   nightly-synthetic:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.11"
-      - run: uv sync --extra synth
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      # The synthetic generator needs Faker (synth extra); the clustering benchmark needs no LLM.
+      - run: uv sync --locked --extra synth
       - name: Synthetic clustering benchmark (10k pages)
+        env:
+          OPENAI_API_KEY: ""
         run: uv run ditto eval run eval/configs/synth_nightly.yaml --results-dir nightly-results
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: synthetic-clustering-metrics
           path: nightly-results/
+          if-no-files-found: error
+          retention-days: 90

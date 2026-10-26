@@ -93,12 +93,14 @@ class RunOptions:
     timings: dict[str, float] = field(default_factory=dict)
 
 
-def _interactive() -> bool:
+def interactive() -> bool:
+    """Both stdin and stdout are terminals, so a checkpoint can ask questions."""
     return sys.stdin.isatty() and sys.stdout.isatty()
 
 
-def _require_terminal(opts: RunOptions, what: str) -> None:
-    if not opts.yes and not _interactive():
+def require_terminal(yes: bool, what: str) -> None:
+    """Raise :class:`CheckpointRequired` unless ``yes`` or a terminal is attached."""
+    if not yes and not interactive():
         raise CheckpointRequired(
             f"{what} needs an interactive terminal; rerun with --yes to accept proposals"
         )
@@ -113,6 +115,7 @@ def run_all(src: Path | Sequence[Path], out: Path, opts: RunOptions) -> RunDir:
     if opts.tail == "direct" and opts.mode != "prompted":
         raise ValueError("--tail direct extracts the prompted schema; use --mode prompted")
     schema = FieldsSchema.load(opts.schema) if opts.schema else None
+    require_terminal(opts.yes, "ditto run (it pauses at two checkpoints)")
 
     def timed(name: str, fn: Callable[[], Any]) -> Any:
         t0 = time.perf_counter()
@@ -148,10 +151,10 @@ def continue_run(run: RunDir, opts: RunOptions, schema: Any) -> RunDir:
             else None
         )
         probe_run(run, schema, use_llm=opts.probe_llm, llm=probe_llm)
-        _require_terminal(opts, "the mapping checkpoint (ditto confirm)")
+        require_terminal(opts.yes, "the mapping checkpoint (ditto confirm)")
         mapping = confirm_run(run, yes=opts.yes, interactive=not opts.yes, input_fn=opts.input_fn)
     gen_llm = get_llm("generation", settings=opts.settings, run=run, no_cache=opts.no_cache)
-    generate_run(
+    generation = generate_run(
         run,
         mode=opts.mode,
         schema=schema,
@@ -161,12 +164,22 @@ def continue_run(run: RunDir, opts: RunOptions, schema: Any) -> RunDir:
         tail="spec" if opts.tail == "spec" else "skip",
         concurrency=opts.concurrency,
     )
+    if generation.aborted:
+        _log(
+            f"warning: generation stopped early ({' '.join(generation.aborted.split())}); "
+            f"continuing with {len(generation.specs)} drafts, unprocessed: "
+            f"{', '.join(generation.unprocessed)}"
+        )
     if opts.mode == "unprompted":
-        _require_terminal(opts, "the schema checkpoint")
+        require_terminal(opts.yes, "the schema checkpoint")
         show_schema_proposal(run, yes=opts.yes, input_fn=opts.input_fn)
-    repair_llm = get_llm("repair", settings=opts.settings, run=run, no_cache=opts.no_cache)
+    repair_llm = (
+        get_llm("repair", settings=opts.settings, run=run, no_cache=opts.no_cache)
+        if opts.max_repair_calls > 0
+        else None
+    )
     verify_run(run, max_repair_calls=opts.max_repair_calls, llm=repair_llm, workers=opts.workers)
-    _require_terminal(opts, "the review checkpoint (ditto review)")
+    require_terminal(opts.yes, "the review checkpoint (ditto review)")
     review_run(run, yes=opts.yes, input_fn=opts.input_fn)
     extract_run(run, workers=opts.workers)
     if opts.tail == "direct" and schema is not None:
