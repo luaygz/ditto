@@ -1,0 +1,2737 @@
+{
+  "dataset": "swde",
+  "title": "Structured Web Data Extraction (SWDE)",
+  "citation": "Qiang Hao, Rui Cai, Yanwei Pang, and Lei Zhang. From One Tree to a Forest: a Unified Solution for Structured Web Data Extraction. SIGIR 2011, pp. 775-784.",
+  "paper_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/StructedDataExtraction_SIGIR2011.pdf",
+  "original_urls": [
+    "http://swde.codeplex.com/",
+    "https://archive.codeplex.com/?p=swde",
+    "https://codeplexarchive.blob.core.windows.net/archive/projects/swde/swde.zip"
+  ],
+  "original_status": "unreachable (CodePlex shut down; archive blob host does not resolve)",
+  "alternate_copy": "https://academictorrents.com/details/411576c7e80787e4b40452360f5f24acba9b5159 (SWDE_Dataset.zip, 207.31 MB; not used)",
+  "mirror": {
+    "repo": "https://github.com/woailaosang/swde",
+    "commit": "e9b60dbbcb899d70e813e8b899b84e3540d540da",
+    "base_url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/"
+  },
+  "downloaded_on": "2026-10-24",
+  "archives": [
+    {
+      "name": "auto.7z",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/auto.7z",
+      "bytes": 15380590,
+      "sha256": "43494053906dde1ac44c72d30ecdc66aea060b2c02daed3379c88e382f2e79f5",
+      "git_blob_sha1": "daf9684f4e8b11af54c90891004b3f554e73e13a"
+    },
+    {
+      "name": "book.7z",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/book.7z",
+      "bytes": 58095795,
+      "sha256": "34899c1f7f44b6858c8d1a24924b4b16cf9d9dd85a41a0c30de0315c04569c1f",
+      "git_blob_sha1": "9be810d143296c7df1575724f92c752542d52acb"
+    },
+    {
+      "name": "camera.7z",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/camera.7z",
+      "bytes": 8043333,
+      "sha256": "549f29713295cff31d0ccaa1420d80efc9c6470affea983770a8db47f149f913",
+      "git_blob_sha1": "6af15b5c3878d0ca503d3fe2cdda70136d995d86"
+    },
+    {
+      "name": "job.7z",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/job.7z",
+      "bytes": 17631529,
+      "sha256": "0a0c8e4fabbc7150cf7313acba2386721d9e3011655e0cac79d6140b8acee408",
+      "git_blob_sha1": "f4ce64bf1ae580e951c711ccf482850aeb7140b5"
+    },
+    {
+      "name": "movie.7z",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/movie.7z",
+      "bytes": 34838817,
+      "sha256": "1323f66fd1d7fcc13d03137fdb6ccbd9faf1e05e882b880981b203fd90d4153f",
+      "git_blob_sha1": "70ab72a557fa99050058c6bafaf041c3c9f3d34e"
+    },
+    {
+      "name": "nbaplayer.7z",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/nbaplayer.7z",
+      "bytes": 5674557,
+      "sha256": "34f3e391b6f72cc21c139c5354b0cfd0722830dc3302ba1808f354a9ec2d75f5",
+      "git_blob_sha1": "8dc54ce01066c6a6e52a5dca45f354c0f2ab2302"
+    },
+    {
+      "name": "restaurant.7z",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/restaurant.7z",
+      "bytes": 50020553,
+      "sha256": "b4f24a058e11d835b8fff383bb2fa7f68997d0c36ca6086fdf969798ab8b2b4f",
+      "git_blob_sha1": "beb9b4d155ee3f0ab24cd9db41fc411f424aaf21"
+    },
+    {
+      "name": "university.7z",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/university.7z",
+      "bytes": 14793527,
+      "sha256": "acc7b3df25fc06accadbf1a04108f8edaa8eaecaf0d26b2da8b3276d0fe91ad2",
+      "git_blob_sha1": "5edbbeff2f8bb17a2b53670b2620dbf622808ee5"
+    },
+    {
+      "name": "groundtruth.7z",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/groundtruth.7z",
+      "bytes": 2766024,
+      "sha256": "473d248296878daf2b08f65f0e530f54eb336064d6d4617acf723a12b9d74db9",
+      "git_blob_sha1": "e70630251b62e1836728f09a59d089da8378838e"
+    },
+    {
+      "name": "readme.txt",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/readme.txt",
+      "bytes": 3352,
+      "sha256": "cc50fd75dfc9cbbdd9e8c3dc4d5a33a27d6769f87ce65a53378e689dd822a8c6",
+      "git_blob_sha1": "993aa4b44747c16214c33a8007f130ba9575f773"
+    },
+    {
+      "name": "website_list.txt",
+      "url": "https://raw.githubusercontent.com/woailaosang/swde/e9b60dbbcb899d70e813e8b899b84e3540d540da/swde/sourceCode/sourceCode/website_list.txt",
+      "bytes": 4165,
+      "sha256": "673dc83abefc558eb0d40aea91a1f05fc59dc11d700b76afc2fe194528b7cfea",
+      "git_blob_sha1": "e518a97a34a4a3844a12ee6fdf18a2a2ae6e7b91"
+    }
+  ],
+  "data_dir": "data/swde",
+  "layout": {
+    "pages": "data/swde/<vertical>/<vertical>-<site>(<n_pages>)/<NNNN>.htm",
+    "groundtruth": "data/swde/groundtruth/<vertical>/<vertical>-<site>-<attribute>.txt",
+    "page_key": "page file stem, e.g. 0001 (= ground-truth page id)"
+  },
+  "split": {
+    "path": "eval/datasets/swde/split.json",
+    "sha256": "98bc8c274c63f35358c9570a8638aa3a17b2358794d38932086cfdb0aec751ac",
+    "dev_sites": 16,
+    "test_sites": 64,
+    "dev_pages": 26894,
+    "test_pages": 97397
+  },
+  "fields": {
+    "auto": {
+      "path": "eval/datasets/swde/fields/auto.yaml",
+      "sha256": "6455197279bc5c47b6bb0be05998f6ee2d8d190551594d6a723babfe8b2cfb17"
+    },
+    "book": {
+      "path": "eval/datasets/swde/fields/book.yaml",
+      "sha256": "d768e9bbc29ce2610ce89a1d3942cf1c0185edf997dfaa9802d216c237040bc1"
+    },
+    "camera": {
+      "path": "eval/datasets/swde/fields/camera.yaml",
+      "sha256": "3d67b32fd330c47d76ac7f57344f26cdaffaf7ae65743a06b240c603dfbe2211"
+    },
+    "job": {
+      "path": "eval/datasets/swde/fields/job.yaml",
+      "sha256": "c428c856fd100c220d0b2b01c6b4c115bcc603e075a4af2dee1179244becaba2"
+    },
+    "movie": {
+      "path": "eval/datasets/swde/fields/movie.yaml",
+      "sha256": "cf85bce6ad00c0c3748f53e652f759bb9eae52d55750d45a1bd1f990e707a19a"
+    },
+    "nbaplayer": {
+      "path": "eval/datasets/swde/fields/nbaplayer.yaml",
+      "sha256": "ea7b55816b58489277535639c2778b7547f931d54407da94cac28ea92d9191f4"
+    },
+    "restaurant": {
+      "path": "eval/datasets/swde/fields/restaurant.yaml",
+      "sha256": "74e9844efff72aa1db9827ab00831f94512da8edd0905c06de88f4f19830bc61"
+    },
+    "university": {
+      "path": "eval/datasets/swde/fields/university.yaml",
+      "sha256": "a555cf4a6f4a970ff2fafc364fed8e979e1a040e1794f30d007050fd193cc5ee"
+    }
+  },
+  "totals": {
+    "verticals": 8,
+    "sites": 80,
+    "pages": 124291,
+    "groundtruth_files": 320
+  },
+  "verticals": {
+    "auto": {
+      "sites": 10,
+      "pages": 17923,
+      "attributes": [
+        "model",
+        "price",
+        "engine",
+        "fuel_economy"
+      ],
+      "site_detail": {
+        "aol": {
+          "split": "dev",
+          "directory": "auto/auto-aol(2000)",
+          "pages": 2000,
+          "attributes": {
+            "model": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 586,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1632,
+              "multi_value_pages": 0
+            },
+            "engine": {
+              "pages_with_values": 0,
+              "values": 0,
+              "unique_values": 0,
+              "multi_value_pages": 0
+            },
+            "fuel_economy": {
+              "pages_with_values": 1845,
+              "values": 1845,
+              "unique_values": 155,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "autobytel": {
+          "split": "dev",
+          "directory": "auto/auto-autobytel(2000)",
+          "pages": 2000,
+          "attributes": {
+            "model": {
+              "pages_with_values": 2000,
+              "values": 3998,
+              "unique_values": 2568,
+              "multi_value_pages": 1998
+            },
+            "price": {
+              "pages_with_values": 1994,
+              "values": 1994,
+              "unique_values": 1615,
+              "multi_value_pages": 0
+            },
+            "engine": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 63,
+              "multi_value_pages": 0
+            },
+            "fuel_economy": {
+              "pages_with_values": 1816,
+              "values": 1816,
+              "unique_values": 156,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "automotive": {
+          "split": "test",
+          "directory": "auto/auto-automotive(1999)",
+          "pages": 1999,
+          "attributes": {
+            "model": {
+              "pages_with_values": 1999,
+              "values": 1999,
+              "unique_values": 1915,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 1999,
+              "values": 1999,
+              "unique_values": 1620,
+              "multi_value_pages": 0
+            },
+            "engine": {
+              "pages_with_values": 1999,
+              "values": 1999,
+              "unique_values": 76,
+              "multi_value_pages": 0
+            },
+            "fuel_economy": {
+              "pages_with_values": 1999,
+              "values": 1999,
+              "unique_values": 164,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "autoweb": {
+          "split": "test",
+          "directory": "auto/auto-autoweb(2000)",
+          "pages": 2000,
+          "attributes": {
+            "model": {
+              "pages_with_values": 2000,
+              "values": 4000,
+              "unique_values": 2563,
+              "multi_value_pages": 2000
+            },
+            "price": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1621,
+              "multi_value_pages": 0
+            },
+            "engine": {
+              "pages_with_values": 1998,
+              "values": 1998,
+              "unique_values": 421,
+              "multi_value_pages": 0
+            },
+            "fuel_economy": {
+              "pages_with_values": 2000,
+              "values": 4000,
+              "unique_values": 302,
+              "multi_value_pages": 2000
+            }
+          }
+        },
+        "carquotes": {
+          "split": "test",
+          "directory": "auto/auto-carquotes(2000)",
+          "pages": 2000,
+          "attributes": {
+            "model": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 545,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1554,
+              "multi_value_pages": 0
+            },
+            "engine": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 386,
+              "multi_value_pages": 0
+            },
+            "fuel_economy": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 157,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "cars": {
+          "split": "test",
+          "directory": "auto/auto-cars(657)",
+          "pages": 657,
+          "attributes": {
+            "model": {
+              "pages_with_values": 657,
+              "values": 657,
+              "unique_values": 657,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 647,
+              "values": 647,
+              "unique_values": 614,
+              "multi_value_pages": 0
+            },
+            "engine": {
+              "pages_with_values": 646,
+              "values": 1168,
+              "unique_values": 439,
+              "multi_value_pages": 336
+            },
+            "fuel_economy": {
+              "pages_with_values": 607,
+              "values": 607,
+              "unique_values": 355,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "kbb": {
+          "split": "test",
+          "directory": "auto/auto-kbb(2000)",
+          "pages": 2000,
+          "attributes": {
+            "model": {
+              "pages_with_values": 2000,
+              "values": 4000,
+              "unique_values": 1993,
+              "multi_value_pages": 2000
+            },
+            "price": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1675,
+              "multi_value_pages": 0
+            },
+            "engine": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 128,
+              "multi_value_pages": 0
+            },
+            "fuel_economy": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 152,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "motortrend": {
+          "split": "test",
+          "directory": "auto/auto-motortrend(1267)",
+          "pages": 1267,
+          "attributes": {
+            "model": {
+              "pages_with_values": 1267,
+              "values": 1267,
+              "unique_values": 1267,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 1267,
+              "values": 1267,
+              "unique_values": 1100,
+              "multi_value_pages": 0
+            },
+            "engine": {
+              "pages_with_values": 1267,
+              "values": 1267,
+              "unique_values": 262,
+              "multi_value_pages": 0
+            },
+            "fuel_economy": {
+              "pages_with_values": 1267,
+              "values": 2534,
+              "unique_values": 752,
+              "multi_value_pages": 1267
+            }
+          }
+        },
+        "msn": {
+          "split": "test",
+          "directory": "auto/auto-msn(2000)",
+          "pages": 2000,
+          "attributes": {
+            "model": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 516,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 2000,
+              "values": 3901,
+              "unique_values": 2074,
+              "multi_value_pages": 1901
+            },
+            "engine": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 341,
+              "multi_value_pages": 0
+            },
+            "fuel_economy": {
+              "pages_with_values": 2000,
+              "values": 3623,
+              "unique_values": 130,
+              "multi_value_pages": 1623
+            }
+          }
+        },
+        "yahoo": {
+          "split": "test",
+          "directory": "auto/auto-yahoo(2000)",
+          "pages": 2000,
+          "attributes": {
+            "model": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 705,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1624,
+              "multi_value_pages": 0
+            },
+            "engine": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 370,
+              "multi_value_pages": 0
+            },
+            "fuel_economy": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 155,
+              "multi_value_pages": 0
+            }
+          }
+        }
+      }
+    },
+    "book": {
+      "sites": 10,
+      "pages": 20000,
+      "attributes": [
+        "title",
+        "author",
+        "isbn_13",
+        "publisher",
+        "publication_date"
+      ],
+      "site_detail": {
+        "abebooks": {
+          "split": "dev",
+          "directory": "book/book-abebooks(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1983,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 2000,
+              "values": 2280,
+              "unique_values": 2025,
+              "multi_value_pages": 213
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 1850,
+              "values": 1850,
+              "unique_values": 725,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 1993,
+              "values": 1993,
+              "unique_values": 48,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "amazon": {
+          "split": "dev",
+          "directory": "book/book-amazon(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1848,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 2000,
+              "values": 2294,
+              "unique_values": 1441,
+              "multi_value_pages": 254
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1963,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 1994,
+              "values": 1994,
+              "unique_values": 1920,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 1994,
+              "values": 1994,
+              "unique_values": 1920,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "barnesandnoble": {
+          "split": "test",
+          "directory": "book/book-barnesandnoble(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1963,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 2000,
+              "values": 2372,
+              "unique_values": 1753,
+              "multi_value_pages": 298
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 296,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 269,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "bookdepository": {
+          "split": "test",
+          "directory": "book/book-bookdepository(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1795,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 2000,
+              "values": 2311,
+              "unique_values": 1558,
+              "multi_value_pages": 243
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1965,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 1976,
+              "values": 1976,
+              "unique_values": 603,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 1915,
+              "values": 1915,
+              "unique_values": 1073,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "booksamillion": {
+          "split": "test",
+          "directory": "book/book-booksamillion(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1931,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 2000,
+              "values": 2645,
+              "unique_values": 1841,
+              "multi_value_pages": 483
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 450,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 242,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "borders": {
+          "split": "test",
+          "directory": "book/book-borders(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1606,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 2000,
+              "values": 2229,
+              "unique_values": 1071,
+              "multi_value_pages": 197
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 206,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 737,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "buy": {
+          "split": "test",
+          "directory": "book/book-buy(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1981,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 1938,
+              "values": 2024,
+              "unique_values": 1906,
+              "multi_value_pages": 66
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1159,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 745,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "christianbook": {
+          "split": "test",
+          "directory": "book/book-christianbook(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1997,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 2000,
+              "values": 2309,
+              "unique_values": 1920,
+              "multi_value_pages": 262
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 395,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 58,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "deepdiscount": {
+          "split": "test",
+          "directory": "book/book-deepdiscount(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1989,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 2000,
+              "values": 2501,
+              "unique_values": 2341,
+              "multi_value_pages": 386
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 1999,
+              "values": 1999,
+              "unique_values": 825,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 886,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "waterstones": {
+          "split": "test",
+          "directory": "book/book-waterstones(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1987,
+              "multi_value_pages": 0
+            },
+            "author": {
+              "pages_with_values": 1918,
+              "values": 2498,
+              "unique_values": 2118,
+              "multi_value_pages": 436
+            },
+            "isbn_13": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "publisher": {
+              "pages_with_values": 1998,
+              "values": 1998,
+              "unique_values": 493,
+              "multi_value_pages": 0
+            },
+            "publication_date": {
+              "pages_with_values": 1998,
+              "values": 1998,
+              "unique_values": 858,
+              "multi_value_pages": 0
+            }
+          }
+        }
+      }
+    },
+    "camera": {
+      "sites": 10,
+      "pages": 5258,
+      "attributes": [
+        "model",
+        "price",
+        "manufacturer"
+      ],
+      "site_detail": {
+        "amazon": {
+          "split": "dev",
+          "directory": "camera/camera-amazon(1767)",
+          "pages": 1767,
+          "attributes": {
+            "model": {
+              "pages_with_values": 1767,
+              "values": 1767,
+              "unique_values": 1752,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 1767,
+              "values": 1767,
+              "unique_values": 723,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 1767,
+              "values": 3534,
+              "unique_values": 124,
+              "multi_value_pages": 1767
+            }
+          }
+        },
+        "beachaudio": {
+          "split": "dev",
+          "directory": "camera/camera-beachaudio(247)",
+          "pages": 247,
+          "attributes": {
+            "model": {
+              "pages_with_values": 247,
+              "values": 494,
+              "unique_values": 250,
+              "multi_value_pages": 247
+            },
+            "price": {
+              "pages_with_values": 247,
+              "values": 247,
+              "unique_values": 157,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 247,
+              "values": 441,
+              "unique_values": 37,
+              "multi_value_pages": 194
+            }
+          }
+        },
+        "buy": {
+          "split": "test",
+          "directory": "camera/camera-buy(500)",
+          "pages": 500,
+          "attributes": {
+            "model": {
+              "pages_with_values": 500,
+              "values": 828,
+              "unique_values": 705,
+              "multi_value_pages": 328
+            },
+            "price": {
+              "pages_with_values": 500,
+              "values": 500,
+              "unique_values": 293,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 500,
+              "values": 633,
+              "unique_values": 46,
+              "multi_value_pages": 133
+            }
+          }
+        },
+        "compsource": {
+          "split": "test",
+          "directory": "camera/camera-compsource(430)",
+          "pages": 430,
+          "attributes": {
+            "model": {
+              "pages_with_values": 430,
+              "values": 860,
+              "unique_values": 613,
+              "multi_value_pages": 430
+            },
+            "price": {
+              "pages_with_values": 430,
+              "values": 430,
+              "unique_values": 141,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 430,
+              "values": 876,
+              "unique_values": 49,
+              "multi_value_pages": 364
+            }
+          }
+        },
+        "ecost": {
+          "split": "test",
+          "directory": "camera/camera-ecost(923)",
+          "pages": 923,
+          "attributes": {
+            "model": {
+              "pages_with_values": 923,
+              "values": 923,
+              "unique_values": 923,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 911,
+              "values": 911,
+              "unique_values": 278,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 917,
+              "values": 917,
+              "unique_values": 69,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "jr": {
+          "split": "test",
+          "directory": "camera/camera-jr(367)",
+          "pages": 367,
+          "attributes": {
+            "model": {
+              "pages_with_values": 367,
+              "values": 367,
+              "unique_values": 361,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 342,
+              "values": 342,
+              "unique_values": 113,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 367,
+              "values": 367,
+              "unique_values": 19,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "newegg": {
+          "split": "test",
+          "directory": "camera/camera-newegg(220)",
+          "pages": 220,
+          "attributes": {
+            "model": {
+              "pages_with_values": 220,
+              "values": 220,
+              "unique_values": 212,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 220,
+              "values": 220,
+              "unique_values": 92,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 220,
+              "values": 321,
+              "unique_values": 22,
+              "multi_value_pages": 101
+            }
+          }
+        },
+        "onsale": {
+          "split": "test",
+          "directory": "camera/camera-onsale(261)",
+          "pages": 261,
+          "attributes": {
+            "model": {
+              "pages_with_values": 261,
+              "values": 261,
+              "unique_values": 261,
+              "multi_value_pages": 0
+            },
+            "price": {
+              "pages_with_values": 261,
+              "values": 261,
+              "unique_values": 99,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 261,
+              "values": 261,
+              "unique_values": 24,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "pcnation": {
+          "split": "test",
+          "directory": "camera/camera-pcnation(234)",
+          "pages": 234,
+          "attributes": {
+            "model": {
+              "pages_with_values": 234,
+              "values": 468,
+              "unique_values": 332,
+              "multi_value_pages": 234
+            },
+            "price": {
+              "pages_with_values": 234,
+              "values": 234,
+              "unique_values": 87,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 234,
+              "values": 410,
+              "unique_values": 21,
+              "multi_value_pages": 176
+            }
+          }
+        },
+        "thenerds": {
+          "split": "test",
+          "directory": "camera/camera-thenerds(309)",
+          "pages": 309,
+          "attributes": {
+            "model": {
+              "pages_with_values": 309,
+              "values": 618,
+              "unique_values": 452,
+              "multi_value_pages": 309
+            },
+            "price": {
+              "pages_with_values": 309,
+              "values": 309,
+              "unique_values": 122,
+              "multi_value_pages": 0
+            },
+            "manufacturer": {
+              "pages_with_values": 309,
+              "values": 870,
+              "unique_values": 64,
+              "multi_value_pages": 309
+            }
+          }
+        }
+      }
+    },
+    "job": {
+      "sites": 10,
+      "pages": 20000,
+      "attributes": [
+        "title",
+        "company",
+        "location",
+        "date_posted"
+      ],
+      "site_detail": {
+        "careerbuilder": {
+          "split": "dev",
+          "directory": "job/job-careerbuilder(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1362,
+              "multi_value_pages": 0
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 455,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 625,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 0,
+              "values": 0,
+              "unique_values": 0,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "dice": {
+          "split": "dev",
+          "directory": "job/job-dice(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1758,
+              "multi_value_pages": 0
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 623,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 460,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 29,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "hotjobs": {
+          "split": "test",
+          "directory": "job/job-hotjobs(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 4000,
+              "unique_values": 3719,
+              "multi_value_pages": 2000
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 549,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 924,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 172,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "job": {
+          "split": "test",
+          "directory": "job/job-job(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 3774,
+              "unique_values": 3049,
+              "multi_value_pages": 1774
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 802,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 482,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 37,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "jobcircle": {
+          "split": "test",
+          "directory": "job/job-jobcircle(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1726,
+              "multi_value_pages": 0
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 527,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 654,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 14,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "jobtarget": {
+          "split": "test",
+          "directory": "job/job-jobtarget(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1649,
+              "multi_value_pages": 0
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 836,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 671,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 90,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "monster": {
+          "split": "test",
+          "directory": "job/job-monster(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1662,
+              "multi_value_pages": 0
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1324,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1208,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 0,
+              "values": 0,
+              "unique_values": 0,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "nettemps": {
+          "split": "test",
+          "directory": "job/job-nettemps(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1646,
+              "multi_value_pages": 0
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 556,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 467,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 33,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "rightitjobs": {
+          "split": "test",
+          "directory": "job/job-rightitjobs(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1292,
+              "multi_value_pages": 0
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 183,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 479,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "techcentric": {
+          "split": "test",
+          "directory": "job/job-techcentric(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1496,
+              "multi_value_pages": 0
+            },
+            "company": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 226,
+              "multi_value_pages": 0
+            },
+            "location": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 401,
+              "multi_value_pages": 0
+            },
+            "date_posted": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 104,
+              "multi_value_pages": 0
+            }
+          }
+        }
+      }
+    },
+    "movie": {
+      "sites": 10,
+      "pages": 20000,
+      "attributes": [
+        "title",
+        "director",
+        "genre",
+        "mpaa_rating"
+      ],
+      "site_detail": {
+        "allmovie": {
+          "split": "dev",
+          "directory": "movie/movie-allmovie(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1991,
+              "multi_value_pages": 0
+            },
+            "director": {
+              "pages_with_values": 1998,
+              "values": 2115,
+              "unique_values": 1049,
+              "multi_value_pages": 73
+            },
+            "genre": {
+              "pages_with_values": 1998,
+              "values": 2738,
+              "unique_values": 26,
+              "multi_value_pages": 673
+            },
+            "mpaa_rating": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 4,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "amctv": {
+          "split": "dev",
+          "directory": "movie/movie-amctv(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1980,
+              "multi_value_pages": 0
+            },
+            "director": {
+              "pages_with_values": 1980,
+              "values": 2199,
+              "unique_values": 1280,
+              "multi_value_pages": 135
+            },
+            "genre": {
+              "pages_with_values": 1995,
+              "values": 1995,
+              "unique_values": 185,
+              "multi_value_pages": 0
+            },
+            "mpaa_rating": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 679,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "boxofficemojo": {
+          "split": "test",
+          "directory": "movie/movie-boxofficemojo(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1983,
+              "multi_value_pages": 0
+            },
+            "director": {
+              "pages_with_values": 2000,
+              "values": 2049,
+              "unique_values": 686,
+              "multi_value_pages": 35
+            },
+            "genre": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 64,
+              "multi_value_pages": 0
+            },
+            "mpaa_rating": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 8,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "hollywood": {
+          "split": "test",
+          "directory": "movie/movie-hollywood(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 4000,
+              "unique_values": 3989,
+              "multi_value_pages": 2000
+            },
+            "director": {
+              "pages_with_values": 1977,
+              "values": 2147,
+              "unique_values": 1813,
+              "multi_value_pages": 137
+            },
+            "genre": {
+              "pages_with_values": 2000,
+              "values": 2576,
+              "unique_values": 37,
+              "multi_value_pages": 499
+            },
+            "mpaa_rating": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 4,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "iheartmovies": {
+          "split": "test",
+          "directory": "movie/movie-iheartmovies(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "director": {
+              "pages_with_values": 2000,
+              "values": 2123,
+              "unique_values": 1442,
+              "multi_value_pages": 123
+            },
+            "genre": {
+              "pages_with_values": 1974,
+              "values": 4641,
+              "unique_values": 21,
+              "multi_value_pages": 1487
+            },
+            "mpaa_rating": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 8,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "imdb": {
+          "split": "test",
+          "directory": "movie/movie-imdb(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1993,
+              "multi_value_pages": 0
+            },
+            "director": {
+              "pages_with_values": 1998,
+              "values": 2114,
+              "unique_values": 1445,
+              "multi_value_pages": 107
+            },
+            "genre": {
+              "pages_with_values": 2000,
+              "values": 5607,
+              "unique_values": 22,
+              "multi_value_pages": 1766
+            },
+            "mpaa_rating": {
+              "pages_with_values": 1986,
+              "values": 1986,
+              "unique_values": 1595,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "metacritic": {
+          "split": "test",
+          "directory": "movie/movie-metacritic(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1997,
+              "multi_value_pages": 0
+            },
+            "director": {
+              "pages_with_values": 1998,
+              "values": 1998,
+              "unique_values": 1427,
+              "multi_value_pages": 0
+            },
+            "genre": {
+              "pages_with_values": 1998,
+              "values": 1998,
+              "unique_values": 477,
+              "multi_value_pages": 0
+            },
+            "mpaa_rating": {
+              "pages_with_values": 1900,
+              "values": 1900,
+              "unique_values": 17,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "msn": {
+          "split": "test",
+          "directory": "movie/movie-msn(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1986,
+              "multi_value_pages": 0
+            },
+            "director": {
+              "pages_with_values": 2000,
+              "values": 2231,
+              "unique_values": 1768,
+              "multi_value_pages": 182
+            },
+            "genre": {
+              "pages_with_values": 1903,
+              "values": 3081,
+              "unique_values": 11,
+              "multi_value_pages": 980
+            },
+            "mpaa_rating": {
+              "pages_with_values": 1818,
+              "values": 1818,
+              "unique_values": 6,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "rottentomatoes": {
+          "split": "test",
+          "directory": "movie/movie-rottentomatoes(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 4000,
+              "unique_values": 3990,
+              "multi_value_pages": 2000
+            },
+            "director": {
+              "pages_with_values": 1998,
+              "values": 2199,
+              "unique_values": 1651,
+              "multi_value_pages": 201
+            },
+            "genre": {
+              "pages_with_values": 1999,
+              "values": 4703,
+              "unique_values": 21,
+              "multi_value_pages": 1602
+            },
+            "mpaa_rating": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 6,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "yahoo": {
+          "split": "test",
+          "directory": "movie/movie-yahoo(2000)",
+          "pages": 2000,
+          "attributes": {
+            "title": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1991,
+              "multi_value_pages": 0
+            },
+            "director": {
+              "pages_with_values": 1912,
+              "values": 2270,
+              "unique_values": 1734,
+              "multi_value_pages": 308
+            },
+            "genre": {
+              "pages_with_values": 1924,
+              "values": 1924,
+              "unique_values": 691,
+              "multi_value_pages": 0
+            },
+            "mpaa_rating": {
+              "pages_with_values": 1928,
+              "values": 1928,
+              "unique_values": 972,
+              "multi_value_pages": 0
+            }
+          }
+        }
+      }
+    },
+    "nbaplayer": {
+      "sites": 10,
+      "pages": 4405,
+      "attributes": [
+        "name",
+        "team",
+        "height",
+        "weight"
+      ],
+      "site_detail": {
+        "espn": {
+          "split": "dev",
+          "directory": "nbaplayer/nbaplayer-espn(434)",
+          "pages": 434,
+          "attributes": {
+            "name": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 434,
+              "multi_value_pages": 0
+            },
+            "team": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 30,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 20,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 82,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "fanhouse": {
+          "split": "dev",
+          "directory": "nbaplayer/nbaplayer-fanhouse(446)",
+          "pages": 446,
+          "attributes": {
+            "name": {
+              "pages_with_values": 446,
+              "values": 479,
+              "unique_values": 479,
+              "multi_value_pages": 33
+            },
+            "team": {
+              "pages_with_values": 446,
+              "values": 446,
+              "unique_values": 30,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 446,
+              "values": 446,
+              "unique_values": 20,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 446,
+              "values": 446,
+              "unique_values": 87,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "foxsports": {
+          "split": "test",
+          "directory": "nbaplayer/nbaplayer-foxsports(425)",
+          "pages": 425,
+          "attributes": {
+            "name": {
+              "pages_with_values": 425,
+              "values": 425,
+              "unique_values": 425,
+              "multi_value_pages": 0
+            },
+            "team": {
+              "pages_with_values": 425,
+              "values": 425,
+              "unique_values": 30,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 425,
+              "values": 425,
+              "unique_values": 20,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 425,
+              "values": 425,
+              "unique_values": 85,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "msnca": {
+          "split": "test",
+          "directory": "nbaplayer/nbaplayer-msnca(434)",
+          "pages": 434,
+          "attributes": {
+            "name": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 434,
+              "multi_value_pages": 0
+            },
+            "team": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 30,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 20,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 86,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "nba": {
+          "split": "test",
+          "directory": "nbaplayer/nbaplayer-nba(434)",
+          "pages": 434,
+          "attributes": {
+            "name": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 434,
+              "multi_value_pages": 0
+            },
+            "team": {
+              "pages_with_values": 0,
+              "values": 0,
+              "unique_values": 0,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 20,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 434,
+              "values": 434,
+              "unique_values": 82,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "si": {
+          "split": "test",
+          "directory": "nbaplayer/nbaplayer-si(515)",
+          "pages": 515,
+          "attributes": {
+            "name": {
+              "pages_with_values": 515,
+              "values": 515,
+              "unique_values": 515,
+              "multi_value_pages": 0
+            },
+            "team": {
+              "pages_with_values": 515,
+              "values": 515,
+              "unique_values": 30,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 515,
+              "values": 515,
+              "unique_values": 20,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 515,
+              "values": 515,
+              "unique_values": 93,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "slam": {
+          "split": "test",
+          "directory": "nbaplayer/nbaplayer-slam(423)",
+          "pages": 423,
+          "attributes": {
+            "name": {
+              "pages_with_values": 423,
+              "values": 423,
+              "unique_values": 423,
+              "multi_value_pages": 0
+            },
+            "team": {
+              "pages_with_values": 423,
+              "values": 423,
+              "unique_values": 30,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 423,
+              "values": 423,
+              "unique_values": 20,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 423,
+              "values": 423,
+              "unique_values": 79,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "usatoday": {
+          "split": "test",
+          "directory": "nbaplayer/nbaplayer-usatoday(436)",
+          "pages": 436,
+          "attributes": {
+            "name": {
+              "pages_with_values": 436,
+              "values": 436,
+              "unique_values": 436,
+              "multi_value_pages": 0
+            },
+            "team": {
+              "pages_with_values": 436,
+              "values": 436,
+              "unique_values": 30,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 436,
+              "values": 436,
+              "unique_values": 20,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 436,
+              "values": 436,
+              "unique_values": 85,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "wiki": {
+          "split": "test",
+          "directory": "nbaplayer/nbaplayer-wiki(420)",
+          "pages": 420,
+          "attributes": {
+            "name": {
+              "pages_with_values": 420,
+              "values": 420,
+              "unique_values": 420,
+              "multi_value_pages": 0
+            },
+            "team": {
+              "pages_with_values": 420,
+              "values": 420,
+              "unique_values": 30,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 420,
+              "values": 420,
+              "unique_values": 21,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 420,
+              "values": 420,
+              "unique_values": 83,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "yahoo": {
+          "split": "test",
+          "directory": "nbaplayer/nbaplayer-yahoo(438)",
+          "pages": 438,
+          "attributes": {
+            "name": {
+              "pages_with_values": 438,
+              "values": 438,
+              "unique_values": 438,
+              "multi_value_pages": 0
+            },
+            "team": {
+              "pages_with_values": 438,
+              "values": 438,
+              "unique_values": 30,
+              "multi_value_pages": 0
+            },
+            "height": {
+              "pages_with_values": 438,
+              "values": 438,
+              "unique_values": 20,
+              "multi_value_pages": 0
+            },
+            "weight": {
+              "pages_with_values": 438,
+              "values": 438,
+              "unique_values": 85,
+              "multi_value_pages": 0
+            }
+          }
+        }
+      }
+    },
+    "restaurant": {
+      "sites": 10,
+      "pages": 20000,
+      "attributes": [
+        "name",
+        "address",
+        "phone",
+        "cuisine"
+      ],
+      "site_detail": {
+        "fodors": {
+          "split": "dev",
+          "directory": "restaurant/restaurant-fodors(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1969,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1980,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1988,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 2000,
+              "values": 2037,
+              "unique_values": 81,
+              "multi_value_pages": 36
+            }
+          }
+        },
+        "frommers": {
+          "split": "dev",
+          "directory": "restaurant/restaurant-frommers(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1965,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1977,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1988,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 610,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "gayot": {
+          "split": "test",
+          "directory": "restaurant/restaurant-gayot(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1805,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 8000,
+              "unique_values": 3431,
+              "multi_value_pages": 2000
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1994,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 2000,
+              "values": 3331,
+              "unique_values": 155,
+              "multi_value_pages": 1032
+            }
+          }
+        },
+        "opentable": {
+          "split": "test",
+          "directory": "restaurant/restaurant-opentable(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1998,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 4089,
+              "unique_values": 3145,
+              "multi_value_pages": 2000
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1995,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 630,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "pickarestaurant": {
+          "split": "test",
+          "directory": "restaurant/restaurant-pickarestaurant(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1552,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 4000,
+              "unique_values": 2036,
+              "multi_value_pages": 2000
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1992,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 97,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "restaurantica": {
+          "split": "test",
+          "directory": "restaurant/restaurant-restaurantica(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1880,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 8000,
+              "unique_values": 3296,
+              "multi_value_pages": 2000
+            },
+            "phone": {
+              "pages_with_values": 1977,
+              "values": 1977,
+              "unique_values": 1974,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 2000,
+              "values": 2264,
+              "unique_values": 59,
+              "multi_value_pages": 262
+            }
+          }
+        },
+        "tripadvisor": {
+          "split": "test",
+          "directory": "restaurant/restaurant-tripadvisor(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1899,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 9927,
+              "unique_values": 4999,
+              "multi_value_pages": 2000
+            },
+            "phone": {
+              "pages_with_values": 1935,
+              "values": 1935,
+              "unique_values": 1932,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 1849,
+              "values": 1849,
+              "unique_values": 571,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "urbanspoon": {
+          "split": "test",
+          "directory": "restaurant/restaurant-urbanspoon(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1885,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 7998,
+              "unique_values": 3421,
+              "multi_value_pages": 2000
+            },
+            "phone": {
+              "pages_with_values": 1994,
+              "values": 1994,
+              "unique_values": 1983,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 1934,
+              "values": 3826,
+              "unique_values": 81,
+              "multi_value_pages": 1249
+            }
+          }
+        },
+        "usdiners": {
+          "split": "test",
+          "directory": "restaurant/restaurant-usdiners(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1421,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 4322,
+              "unique_values": 3642,
+              "multi_value_pages": 1999
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1995,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 1999,
+              "values": 1999,
+              "unique_values": 218,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "zagat": {
+          "split": "test",
+          "directory": "restaurant/restaurant-zagat(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1942,
+              "multi_value_pages": 0
+            },
+            "address": {
+              "pages_with_values": 2000,
+              "values": 5848,
+              "unique_values": 4123,
+              "multi_value_pages": 2000
+            },
+            "phone": {
+              "pages_with_values": 1998,
+              "values": 1998,
+              "unique_values": 1994,
+              "multi_value_pages": 0
+            },
+            "cuisine": {
+              "pages_with_values": 1997,
+              "values": 1997,
+              "unique_values": 356,
+              "multi_value_pages": 0
+            }
+          }
+        }
+      }
+    },
+    "university": {
+      "sites": 10,
+      "pages": 16705,
+      "attributes": [
+        "name",
+        "phone",
+        "website",
+        "type"
+      ],
+      "site_detail": {
+        "collegeboard": {
+          "split": "dev",
+          "directory": "university/university-collegeboard(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1990,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 4346,
+              "unique_values": 4308,
+              "multi_value_pages": 1641
+            },
+            "website": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1801,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 3,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "collegenavigator": {
+          "split": "dev",
+          "directory": "university/university-collegenavigator(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1914,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1936,
+              "multi_value_pages": 0
+            },
+            "website": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1728,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 12,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "collegeprowler": {
+          "split": "test",
+          "directory": "university/university-collegeprowler(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 2000,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1973,
+              "multi_value_pages": 0
+            },
+            "website": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1794,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 3,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "collegetoolkit": {
+          "split": "test",
+          "directory": "university/university-collegetoolkit(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1935,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 0,
+              "values": 0,
+              "unique_values": 0,
+              "multi_value_pages": 0
+            },
+            "website": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1765,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 3,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "ecampustours": {
+          "split": "test",
+          "directory": "university/university-ecampustours(1063)",
+          "pages": 1063,
+          "attributes": {
+            "name": {
+              "pages_with_values": 1063,
+              "values": 1063,
+              "unique_values": 1046,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 1063,
+              "values": 1063,
+              "unique_values": 1058,
+              "multi_value_pages": 0
+            },
+            "website": {
+              "pages_with_values": 1063,
+              "values": 1063,
+              "unique_values": 1049,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 1063,
+              "values": 1063,
+              "unique_values": 6,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "embark": {
+          "split": "test",
+          "directory": "university/university-embark(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1994,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1994,
+              "multi_value_pages": 0
+            },
+            "website": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1833,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 5,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "matchcollege": {
+          "split": "test",
+          "directory": "university/university-matchcollege(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2658,
+              "unique_values": 2614,
+              "multi_value_pages": 658
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1980,
+              "multi_value_pages": 0
+            },
+            "website": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1912,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 9,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "princetonreview": {
+          "split": "test",
+          "directory": "university/university-princetonreview(615)",
+          "pages": 615,
+          "attributes": {
+            "name": {
+              "pages_with_values": 615,
+              "values": 615,
+              "unique_values": 615,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 615,
+              "values": 615,
+              "unique_values": 615,
+              "multi_value_pages": 0
+            },
+            "website": {
+              "pages_with_values": 0,
+              "values": 0,
+              "unique_values": 0,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 615,
+              "values": 615,
+              "unique_values": 2,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "studentaid": {
+          "split": "test",
+          "directory": "university/university-studentaid(2000)",
+          "pages": 2000,
+          "attributes": {
+            "name": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1999,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 2000,
+              "values": 5466,
+              "unique_values": 5434,
+              "multi_value_pages": 2000
+            },
+            "website": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 1931,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 2000,
+              "values": 2000,
+              "unique_values": 37,
+              "multi_value_pages": 0
+            }
+          }
+        },
+        "usnews": {
+          "split": "test",
+          "directory": "university/university-usnews(1027)",
+          "pages": 1027,
+          "attributes": {
+            "name": {
+              "pages_with_values": 1027,
+              "values": 1027,
+              "unique_values": 1008,
+              "multi_value_pages": 0
+            },
+            "phone": {
+              "pages_with_values": 1027,
+              "values": 1027,
+              "unique_values": 1026,
+              "multi_value_pages": 0
+            },
+            "website": {
+              "pages_with_values": 1027,
+              "values": 1027,
+              "unique_values": 1026,
+              "multi_value_pages": 0
+            },
+            "type": {
+              "pages_with_values": 1027,
+              "values": 1027,
+              "unique_values": 2,
+              "multi_value_pages": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "notes": [
+    "Original host (CodePlex) unreachable; archives fetched from the GitHub mirror of the CodePlex project export at the pinned commit and verified against its git tree.",
+    "Pages are UTF-8 with a BOM; many still declare <meta charset=iso-8859-1|windows-1252> from the original crawl. The BOM is authoritative.",
+    "Every page starts with <base href=\"<source URL>\"/>; source URLs are unique within each site and are used as page URLs in the generated urls.tsv (indexed under data/swde/urls/).",
+    "Ground-truth files are UTF-8 with a BOM and CRLF line ends; values keep HTML entities as in the page source (&nbsp;, &amp;, &#150;, ...); the adapter decodes them with html.unescape.",
+    "No byte-identical duplicate pages and no missing pages: every site has pages 0000..n-1 and every ground-truth file covers exactly those ids."
+  ]
+}

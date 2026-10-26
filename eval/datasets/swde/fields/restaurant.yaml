@@ -1,0 +1,4 @@
+name: the name of the restaurant
+address: the street address of the restaurant (a page may split it over several parts)
+phone: the restaurant's telephone number
+cuisine: the type of cuisine or food the restaurant serves

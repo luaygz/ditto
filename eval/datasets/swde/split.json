@@ -1,0 +1,120 @@
+{
+  "dataset": "swde",
+  "rule": "per vertical, the 2 sites that sort first alphabetically form the development slice (tuning allowed); the other sites are the frozen test set",
+  "dev": {
+    "auto": [
+      "aol",
+      "autobytel"
+    ],
+    "book": [
+      "abebooks",
+      "amazon"
+    ],
+    "camera": [
+      "amazon",
+      "beachaudio"
+    ],
+    "job": [
+      "careerbuilder",
+      "dice"
+    ],
+    "movie": [
+      "allmovie",
+      "amctv"
+    ],
+    "nbaplayer": [
+      "espn",
+      "fanhouse"
+    ],
+    "restaurant": [
+      "fodors",
+      "frommers"
+    ],
+    "university": [
+      "collegeboard",
+      "collegenavigator"
+    ]
+  },
+  "test": {
+    "auto": [
+      "automotive",
+      "autoweb",
+      "carquotes",
+      "cars",
+      "kbb",
+      "motortrend",
+      "msn",
+      "yahoo"
+    ],
+    "book": [
+      "barnesandnoble",
+      "bookdepository",
+      "booksamillion",
+      "borders",
+      "buy",
+      "christianbook",
+      "deepdiscount",
+      "waterstones"
+    ],
+    "camera": [
+      "buy",
+      "compsource",
+      "ecost",
+      "jr",
+      "newegg",
+      "onsale",
+      "pcnation",
+      "thenerds"
+    ],
+    "job": [
+      "hotjobs",
+      "job",
+      "jobcircle",
+      "jobtarget",
+      "monster",
+      "nettemps",
+      "rightitjobs",
+      "techcentric"
+    ],
+    "movie": [
+      "boxofficemojo",
+      "hollywood",
+      "iheartmovies",
+      "imdb",
+      "metacritic",
+      "msn",
+      "rottentomatoes",
+      "yahoo"
+    ],
+    "nbaplayer": [
+      "foxsports",
+      "msnca",
+      "nba",
+      "si",
+      "slam",
+      "usatoday",
+      "wiki",
+      "yahoo"
+    ],
+    "restaurant": [
+      "gayot",
+      "opentable",
+      "pickarestaurant",
+      "restaurantica",
+      "tripadvisor",
+      "urbanspoon",
+      "usdiners",
+      "zagat"
+    ],
+    "university": [
+      "collegeprowler",
+      "collegetoolkit",
+      "ecampustours",
+      "embark",
+      "matchcollege",
+      "princetonreview",
+      "studentaid",
+      "usnews"
+    ]
+  }
+}

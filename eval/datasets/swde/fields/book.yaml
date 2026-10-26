@@ -1,0 +1,5 @@
+title: the title of the book
+author: the name of an author of the book (a page may list several)
+isbn_13: the 13-digit ISBN of the book
+publisher: the name of the book's publisher
+publication_date: the date the book was published

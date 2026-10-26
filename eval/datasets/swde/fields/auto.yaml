@@ -1,0 +1,4 @@
+model: the car's model name as shown on the page, usually year, make and model
+price: the listed price of the car (MSRP or asking price), including currency symbol
+engine: the engine specification, e.g. displacement, cylinders, valves or horsepower
+fuel_economy: the fuel economy rating in miles per gallon, city and highway

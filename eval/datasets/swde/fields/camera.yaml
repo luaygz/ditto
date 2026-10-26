@@ -1,0 +1,3 @@
+model: the camera's product name or model as shown on the page
+price: the listed price of the camera, including currency symbol
+manufacturer: the brand or company that makes the camera
