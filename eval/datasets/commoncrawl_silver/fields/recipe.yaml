@@ -1,0 +1,7 @@
+# Prompted-mode fields for recipe detail pages (labels: the page's own schema.org Recipe JSON-LD).
+name: the name of the recipe
+prepTime: the preparation time, as shown (e.g. "15 mins")
+cookTime: the cooking time, as shown (e.g. "1 hr 10 mins")
+recipeYield: how much the recipe makes / number of servings, as shown
+ingredients: {description: "every ingredient line of the recipe, one item per ingredient, in page order", type: list}
+author: the name of the recipe's author

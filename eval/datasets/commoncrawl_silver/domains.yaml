@@ -1,0 +1,668 @@
+description: 'Common Crawl silver set: domains whose detail pages carry schema.org JSON-LD of the vertical''s
+  target type. Labels are regenerated from that JSON-LD by labels.py into data/cc/<domain>/labels.jsonl
+  (never committed).'
+crawls:
+- CC-MAIN-2026-43
+- CC-MAIN-2026-39
+selection_date: '2026-10-24'
+criteria:
+  min_distinct_html_urls: 5000
+  sample_size: 50
+  sample_from: distinct detail-pattern URLs (index status 200, mime text/html)
+  min_jsonld_rate: 0.6
+  min_median_visible_words: 200
+  robots_agents:
+  - CCBot
+  - ditto-benchmark
+  min_robots_allowed_share: 0.9
+  max_login_wall_share: 0.2
+selected:
+- domain: argos.co.uk
+  vertical: product
+  target_type: Product
+  crawls:
+  - CC-MAIN-2026-43
+  - CC-MAIN-2026-39
+  detail_pattern: ^/product/(?:tuc)?\d+
+  selection_date: '2026-10-24'
+  evidence:
+    distinct_html_urls: 33133
+    distinct_detail_urls: 20342
+    sampled_detail_pages: 50
+    jsonld_rate: 1.0
+    median_visible_words: 3940.5
+    robots_txt:
+      found: true
+      url: https://www.argos.co.uk/robots.txt
+      crawl: CC-MAIN-2026-43
+      detail_urls_allowed:
+        CCBot: 1.0
+        ditto-benchmark: 1.0
+    login_walled_pages: 0
+- domain: ikea.com
+  vertical: product
+  target_type: Product
+  crawls:
+  - CC-MAIN-2026-43
+  - CC-MAIN-2026-39
+  detail_pattern: /p/[a-z0-9-]+-[s]?\d+/?$
+  selection_date: '2026-10-24'
+  evidence:
+    distinct_html_urls: 52880
+    distinct_detail_urls: 33618
+    sampled_detail_pages: 50
+    jsonld_rate: 1.0
+    median_visible_words: 830.5
+    robots_txt:
+      found: true
+      url: https://www.ikea.com/robots.txt
+      crawl: CC-MAIN-2026-43
+      detail_urls_allowed:
+        CCBot: 1.0
+        ditto-benchmark: 1.0
+    login_walled_pages: 0
+- domain: careerbuilder.com
+  vertical: job
+  target_type: JobPosting
+  crawls:
+  - CC-MAIN-2026-43
+  - CC-MAIN-2026-39
+  detail_pattern: ^/job-details/[^/?]+
+  selection_date: '2026-10-24'
+  evidence:
+    distinct_html_urls: 32051
+    distinct_detail_urls: 12332
+    sampled_detail_pages: 50
+    jsonld_rate: 1.0
+    median_visible_words: 798.5
+    robots_txt:
+      found: true
+      url: https://www.careerbuilder.com/robots.txt
+      crawl: CC-MAIN-2026-43
+      detail_urls_allowed:
+        CCBot: 1.0
+        ditto-benchmark: 1.0
+    login_walled_pages: 0
+- domain: dice.com
+  vertical: job
+  target_type: JobPosting
+  crawls:
+  - CC-MAIN-2026-43
+  - CC-MAIN-2026-39
+  detail_pattern: ^/job-detail/[0-9a-f-]+
+  selection_date: '2026-10-24'
+  evidence:
+    distinct_html_urls: 22873
+    distinct_detail_urls: 8964
+    sampled_detail_pages: 50
+    jsonld_rate: 1.0
+    median_visible_words: 1567.0
+    robots_txt:
+      found: true
+      url: https://www.dice.com/robots.txt
+      crawl: CC-MAIN-2026-43
+      detail_urls_allowed:
+        CCBot: 1.0
+        ditto-benchmark: 1.0
+    login_walled_pages: 0
+- domain: marmiton.org
+  vertical: recipe
+  target_type: Recipe
+  crawls:
+  - CC-MAIN-2026-43
+  - CC-MAIN-2026-39
+  detail_pattern: ^/recettes/recette_[^/]+\.aspx$
+  selection_date: '2026-10-24'
+  evidence:
+    distinct_html_urls: 25846
+    distinct_detail_urls: 13917
+    sampled_detail_pages: 50
+    jsonld_rate: 1.0
+    median_visible_words: 1018.5
+    robots_txt:
+      found: true
+      url: https://www.marmiton.org/robots.txt
+      crawl: CC-MAIN-2026-43
+      detail_urls_allowed:
+        CCBot: 1.0
+        ditto-benchmark: 1.0
+    login_walled_pages: 0
+- domain: food.ndtv.com
+  vertical: recipe
+  target_type: Recipe
+  crawls:
+  - CC-MAIN-2026-43
+  - CC-MAIN-2026-39
+  detail_pattern: ^/recipe-[a-z0-9-]+-\d+/?$
+  selection_date: '2026-10-24'
+  evidence:
+    distinct_html_urls: 46377
+    distinct_detail_urls: 4085
+    sampled_detail_pages: 50
+    jsonld_rate: 1.0
+    median_visible_words: 706.5
+    robots_txt:
+      found: true
+      url: https://food.ndtv.com/robots.txt
+      crawl: CC-MAIN-2026-43
+      detail_urls_allowed:
+        CCBot: 1.0
+        ditto-benchmark: 1.0
+    login_walled_pages: 0
+- domain: ticketweb.com
+  vertical: event
+  target_type: Event
+  crawls:
+  - CC-MAIN-2026-43
+  - CC-MAIN-2026-39
+  detail_pattern: /event/[^/]+/\d+
+  selection_date: '2026-10-24'
+  evidence:
+    distinct_html_urls: 28272
+    distinct_detail_urls: 22280
+    sampled_detail_pages: 50
+    jsonld_rate: 1.0
+    median_visible_words: 413.0
+    robots_txt:
+      found: true
+      url: https://www.ticketweb.com/robots.txt
+      crawl: CC-MAIN-2026-43
+      detail_urls_allowed:
+        CCBot: 1.0
+        ditto-benchmark: 1.0
+    login_walled_pages: 0
+- domain: skiddle.com
+  vertical: event
+  target_type: Event
+  crawls:
+  - CC-MAIN-2026-43
+  - CC-MAIN-2026-39
+  detail_pattern: ^/whats-on/[^/]+/[^/]+/[^/]+/\d+/?$
+  selection_date: '2026-10-24'
+  evidence:
+    distinct_html_urls: 24475
+    distinct_detail_urls: 8318
+    sampled_detail_pages: 50
+    jsonld_rate: 1.0
+    median_visible_words: 823.5
+    robots_txt:
+      found: true
+      url: https://www.skiddle.com/robots.txt
+      crawl: CC-MAIN-2026-43
+      detail_urls_allowed:
+        CCBot: 1.0
+        ditto-benchmark: 1.0
+    login_walled_pages: 0
+rejected:
+- domain: food.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: bbcgoodfood.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: simplyrecipes.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: seriouseats.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: kingarthurbaking.com
+  vertical: recipe
+  reason: 3134 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: tasty.co
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: food52.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: jamieoliver.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: tasteofhome.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: foodnetwork.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: bettycrocker.com
+  vertical: recipe
+  reason: 3306 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: delish.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: epicurious.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: eatingwell.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: recipetineats.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: onceuponachef.com
+  vertical: recipe
+  reason: 725 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: budgetbytes.com
+  vertical: recipe
+  reason: 606 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: tarladalal.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: vegrecipesofindia.com
+  vertical: recipe
+  reason: 467 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: indianhealthyrecipes.com
+  vertical: recipe
+  reason: 241 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: hebbarskitchen.com
+  vertical: recipe
+  reason: 3416 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: sanjeevkapoor.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: justapinch.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: bigoven.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: cooks.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: recipes.net
+  vertical: recipe
+  reason: passed all checks but ranked below the chosen recipe domains (JSON-LD rate 100%)
+- domain: copykat.com
+  vertical: recipe
+  reason: 1374 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: spendwithpennies.com
+  vertical: recipe
+  reason: 2357 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: natashaskitchen.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: cafedelites.com
+  vertical: recipe
+  reason: 681 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: therecipecritic.com
+  vertical: recipe
+  reason: 1585 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: dinneratthezoo.com
+  vertical: recipe
+  reason: 637 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: jocooks.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: tastesbetterfromscratch.com
+  vertical: recipe
+  reason: 643 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: damndelicious.net
+  vertical: recipe
+  reason: 692 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: skinnytaste.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: thewoksoflife.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: justonecookbook.com
+  vertical: recipe
+  reason: 4 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: cookieandkate.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: minimalistbaker.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: loveandlemons.com
+  vertical: recipe
+  reason: 1409 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: pinchofyum.com
+  vertical: recipe
+  reason: 820 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: halfbakedharvest.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: smittenkitchen.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: sallysbakingaddiction.com
+  vertical: recipe
+  reason: 992 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: inspiredtaste.net
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: kitchenstories.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: olivemagazine.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: deliciousmagazine.co.uk
+  vertical: recipe
+  reason: 40 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: realfood.tesco.com
+  vertical: recipe
+  reason: 127 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: sainsburysmagazine.co.uk
+  vertical: recipe
+  reason: 3837 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: myfoodandfamily.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: pillsbury.com
+  vertical: recipe
+  reason: 1549 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: tablespoon.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: mccormick.com
+  vertical: recipe
+  reason: 534 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: landolakes.com
+  vertical: recipe
+  reason: 2926 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: hersheyland.com
+  vertical: recipe
+  reason: 774 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: cookpad.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: chefkoch.de
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: ricette.giallozafferano.it
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: recetasgratis.net
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: delicious.com.au
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: bestrecipes.com.au
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: womensweeklyfood.com.au
+  vertical: recipe
+  reason: 2222 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: thepioneerwoman.com
+  vertical: recipe
+  reason: 18 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: goodhousekeeping.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: foodandwine.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: bonappetit.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: thekitchn.com
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: taste.com.au
+  vertical: recipe
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: allbirds.com
+  vertical: product
+  reason: 6 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: gymshark.com
+  vertical: product
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: bombas.com
+  vertical: product
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: brooklinen.com
+  vertical: product
+  reason: 416 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: colourpop.com
+  vertical: product
+  reason: 15 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: rothys.com
+  vertical: product
+  reason: 270 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: tentree.com
+  vertical: product
+  reason: 547 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: kith.com
+  vertical: product
+  reason: 169 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: everlane.com
+  vertical: product
+  reason: 60 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: glossier.com
+  vertical: product
+  reason: 147 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: sweetwater.com
+  vertical: product
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: adorama.com
+  vertical: product
+  reason: 175 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: bhphotovideo.com
+  vertical: product
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: newegg.com
+  vertical: product
+  reason: Product JSON-LD on 0% of sampled detail pages (< 60%)
+- domain: rei.com
+  vertical: product
+  reason: passed all checks but ranked below the chosen product domains (JSON-LD rate 100%)
+- domain: zappos.com
+  vertical: product
+  reason: passed all checks but ranked below the chosen product domains (JSON-LD rate 100%)
+- domain: lego.com
+  vertical: product
+  reason: 2511 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: patagonia.com
+  vertical: product
+  reason: 'Product JSON-LD on 0% of sampled detail pages (< 60%); median visible text 156.0 words (<=
+    200): JS shell'
+- domain: decathlon.co.uk
+  vertical: product
+  reason: 1 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: currys.co.uk
+  vertical: product
+  reason: passed all checks but ranked below the chosen product domains (JSON-LD rate 100%)
+- domain: johnlewis.com
+  vertical: product
+  reason: passed all checks but ranked below the chosen product domains (JSON-LD rate 100%)
+- domain: thriftbooks.com
+  vertical: product
+  reason: passed all checks but ranked below the chosen product domains (JSON-LD rate 100%)
+- domain: huckberry.com
+  vertical: product
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: reed.co.uk
+  vertical: job
+  reason: passed all checks but ranked below the chosen job domains (JSON-LD rate 100%)
+- domain: totaljobs.com
+  vertical: job
+  reason: 17 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: cv-library.co.uk
+  vertical: job
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: jobs.ac.uk
+  vertical: job
+  reason: passed all checks but ranked below the chosen job domains (JSON-LD rate 94%)
+- domain: builtin.com
+  vertical: job
+  reason: passed all checks but ranked below the chosen job domains (JSON-LD rate 100%)
+- domain: weworkremotely.com
+  vertical: job
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: simplyhired.com
+  vertical: job
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: monster.com
+  vertical: job
+  reason: passed all checks but shares its operator/platform with the selected careerbuilder.com (same
+    design-system markup and slug--uuid URLs as careerbuilder.com); one domain per operator
+- domain: idealist.org
+  vertical: job
+  reason: only 18 detail-pattern pages found/fetched (< 20)
+- domain: higheredjobs.com
+  vertical: job
+  reason: 3772 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: seek.com.au
+  vertical: job
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: jobbank.gc.ca
+  vertical: job
+  reason: JobPosting JSON-LD on 0% of sampled detail pages (< 60%)
+- domain: usajobs.gov
+  vertical: job
+  reason: passed all checks but ranked below the chosen job domains (JSON-LD rate 100%)
+- domain: governmentjobs.com
+  vertical: job
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: remotive.com
+  vertical: job
+  reason: 2560 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: himalayas.app
+  vertical: job
+  reason: passed all checks but ranked below the chosen job domains (JSON-LD rate 100%)
+- domain: efinancialcareers.com
+  vertical: job
+  reason: 3 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: cwjobs.co.uk
+  vertical: job
+  reason: 2 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: adzuna.co.uk
+  vertical: job
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: workingnomads.com
+  vertical: job
+  reason: 2966 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: schooljobs.com
+  vertical: job
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: jobs.lever.co
+  vertical: job
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: boards.greenhouse.io
+  vertical: job
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: jobs.smartrecruiters.com
+  vertical: job
+  reason: 4636 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: songkick.com
+  vertical: event
+  reason: 'Event JSON-LD on 20% of sampled detail pages (< 60%); median visible text 37.0 words (<= 200):
+    JS shell'
+- domain: allevents.in
+  vertical: event
+  reason: 3317 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: 10times.com
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: jambase.com
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: seetickets.com
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: ents24.com
+  vertical: event
+  reason: passed all checks but ranked below the chosen event domains (JSON-LD rate 100%)
+- domain: wegottickets.com
+  vertical: event
+  reason: Event JSON-LD on 4% of sampled detail pages (< 60%)
+- domain: dice.fm
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: meetup.com
+  vertical: event
+  reason: passed all checks but ranked below the chosen event domains (JSON-LD rate 100%)
+- domain: ra.co
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: bandsintown.com
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: eventbrite.co.uk
+  vertical: event
+  reason: 171 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: eventbrite.com.au
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: eventfinda.co.nz
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: universe.com
+  vertical: event
+  reason: 'Event JSON-LD on 0% of sampled detail pages (< 60%); median visible text 9.0 words (<= 200):
+    JS shell'
+- domain: tixr.com
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: setlist.fm
+  vertical: event
+  reason: Event JSON-LD on 0% of sampled detail pages (< 60%)
+- domain: concertarchives.org
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: feverup.com
+  vertical: event
+  reason: Event JSON-LD on 32% of sampled detail pages (< 60%)
+- domain: vividseats.com
+  vertical: event
+  reason: passed all checks but ranked below the chosen event domains (JSON-LD rate 100%)
+- domain: axs.com
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: bachtrack.com
+  vertical: event
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: theconversation.com
+  vertical: news
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: phys.org
+  vertical: news
+  reason: 2030 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: npr.org
+  vertical: news
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: apnews.com
+  vertical: news
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: aljazeera.com
+  vertical: news
+  reason: passed all checks but ranked below the chosen news domains (JSON-LD rate 92%)
+- domain: sciencedaily.com
+  vertical: news
+  reason: NewsArticle JSON-LD on 0% of sampled detail pages (< 60%)
+- domain: dw.com
+  vertical: news
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: rnz.co.nz
+  vertical: news
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: euronews.com
+  vertical: news
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: electrek.co
+  vertical: news
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: penguinrandomhouse.com
+  vertical: book
+  reason: passed all checks but ranked below the chosen book domains (JSON-LD rate 100%)
+- domain: simonandschuster.com
+  vertical: book
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: goodreads.com
+  vertical: book
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: openlibrary.org
+  vertical: book
+  reason: Book JSON-LD on 0% of sampled detail pages (< 60%)
+- domain: bookshop.org
+  vertical: book
+  reason: 0 distinct status-200 text/html URLs in the two crawls (< 5000)
+- domain: hachettebookgroup.com
+  vertical: book
+  reason: passed all checks but ranked below the chosen book domains (JSON-LD rate 98%)
+- domain: fantasticfiction.com
+  vertical: book
+  reason: Book JSON-LD on 0% of sampled detail pages (< 60%)

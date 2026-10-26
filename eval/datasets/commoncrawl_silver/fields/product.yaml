@@ -1,0 +1,8 @@
+# Prompted-mode fields for Product detail pages (labels: the page's own schema.org Product JSON-LD).
+name: the product's name as shown in the main heading of the page
+price: {description: "the current selling price of the product's default offer, as displayed", type_check: price}
+priceCurrency: the currency of the price (ISO code such as USD, or the currency symbol shown)
+availability: whether the product can be bought now, e.g. "In stock" or "Out of stock"
+brand: the brand or manufacturer of the product
+sku: the product's SKU / item number / product code shown on the page
+image: {description: URL of the main product image, type_check: url}

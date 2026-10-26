@@ -1,0 +1,8 @@
+# Prompted-mode fields for event detail pages (labels: the page's own schema.org Event JSON-LD).
+name: the name / title of the event
+startDate: {description: the date (and time) the event starts, type_check: date}
+endDate: {description: the date (and time) the event ends, type_check: date}
+location: the name of the venue or place where the event takes place
+address: the venue's address (street, city, region as shown)
+organizer: the name of the organizer / promoter of the event
+performer: the performer(s) or headliner(s) of the event

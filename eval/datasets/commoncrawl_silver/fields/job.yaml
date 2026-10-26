@@ -1,0 +1,7 @@
+# Prompted-mode fields for job-posting detail pages (labels: the page's own JobPosting JSON-LD).
+title: the job title of the posting
+hiringOrganization: the name of the employer / hiring company
+location: where the job is located (city, region and/or country as shown, or "Remote")
+datePosted: {description: the date the job was posted, type_check: date}
+employmentType: the employment type, e.g. full-time, part-time, contract, temporary
+salary: the salary or pay range offered, as shown (amounts only, e.g. "50,000 - 60,000")

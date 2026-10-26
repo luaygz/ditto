@@ -1,0 +1,4173 @@
+{
+ "counts": {
+  "10times.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "10times.com",
+   "passes": false,
+   "vertical": "event"
+  },
+  "adorama.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 93,
+     "html_captures": 93,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 82,
+     "html_captures": 82,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 175,
+   "domain": "adorama.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "adzuna.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "adzuna.co.uk",
+   "passes": false,
+   "vertical": "job"
+  },
+  "aljazeera.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 63487,
+     "html_captures": 64966,
+     "index_blocks": 28
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 66655,
+     "html_captures": 68424,
+     "index_blocks": 28
+    }
+   },
+   "distinct_detail_urls": 103860,
+   "distinct_urls": 117959,
+   "domain": "aljazeera.com",
+   "passes": true,
+   "vertical": "news"
+  },
+  "allbirds.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 2,
+     "html_captures": 3,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 4,
+     "html_captures": 4,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 6,
+   "domain": "allbirds.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "allevents.in": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 2078,
+     "html_captures": 2088,
+     "index_blocks": 15
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1261,
+     "html_captures": 1269,
+     "index_blocks": 8
+    }
+   },
+   "distinct_detail_urls": 462,
+   "distinct_urls": 3317,
+   "domain": "allevents.in",
+   "passes": false,
+   "vertical": "event"
+  },
+  "apnews.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "apnews.com",
+   "passes": false,
+   "vertical": "news"
+  },
+  "argos.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 15527,
+     "html_captures": 15620,
+     "index_blocks": 8
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 17711,
+     "html_captures": 17747,
+     "index_blocks": 8
+    }
+   },
+   "distinct_detail_urls": 15414,
+   "distinct_urls": 33133,
+   "domain": "argos.co.uk",
+   "passes": true,
+   "vertical": "product"
+  },
+  "axs.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "axs.com",
+   "passes": false,
+   "vertical": "event"
+  },
+  "bachtrack.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "bachtrack.com",
+   "passes": false,
+   "vertical": "event"
+  },
+  "bandsintown.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "bandsintown.com",
+   "passes": false,
+   "vertical": "event"
+  },
+  "bbcgoodfood.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "bbcgoodfood.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "bestrecipes.com.au": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "bestrecipes.com.au",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "bettycrocker.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1378,
+     "html_captures": 1447,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1957,
+     "html_captures": 2008,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 2453,
+   "distinct_urls": 3306,
+   "domain": "bettycrocker.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "bhphotovideo.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "bhphotovideo.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "bigoven.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "bigoven.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "boards.greenhouse.io": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 5
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 6
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "boards.greenhouse.io",
+   "passes": false,
+   "vertical": "job"
+  },
+  "bombas.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "bombas.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "bonappetit.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "bonappetit.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "bookshop.org": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "bookshop.org",
+   "passes": false,
+   "vertical": "book"
+  },
+  "brooklinen.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 55,
+     "html_captures": 55,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 363,
+     "html_captures": 365,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 111,
+   "distinct_urls": 416,
+   "domain": "brooklinen.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "budgetbytes.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 606,
+     "html_captures": 611,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 507,
+   "distinct_urls": 606,
+   "domain": "budgetbytes.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "builtin.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 3615,
+     "html_captures": 3622,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 25505,
+     "html_captures": 25561,
+     "index_blocks": 10
+    }
+   },
+   "distinct_detail_urls": 4722,
+   "distinct_urls": 29082,
+   "domain": "builtin.com",
+   "passes": true,
+   "vertical": "job"
+  },
+  "cafedelites.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 376,
+     "html_captures": 378,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 311,
+     "html_captures": 317,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 369,
+   "distinct_urls": 681,
+   "domain": "cafedelites.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "careerbuilder.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 16469,
+     "html_captures": 16562,
+     "index_blocks": 9
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 15603,
+     "html_captures": 15682,
+     "index_blocks": 9
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 32051,
+   "domain": "careerbuilder.com",
+   "passes": true,
+   "vertical": "job"
+  },
+  "chefkoch.de": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "chefkoch.de",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "colourpop.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 11,
+     "html_captures": 12,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 5,
+     "html_captures": 6,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 2,
+   "distinct_urls": 15,
+   "domain": "colourpop.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "concertarchives.org": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "concertarchives.org",
+   "passes": false,
+   "vertical": "event"
+  },
+  "cookieandkate.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "cookieandkate.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "cookpad.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "cookpad.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "cooks.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "cooks.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "copykat.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1374,
+     "html_captures": 1380,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 744,
+   "distinct_urls": 1374,
+   "domain": "copykat.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "currys.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 2559,
+     "html_captures": 2701,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 2816,
+     "html_captures": 2936,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 1828,
+   "distinct_urls": 5284,
+   "domain": "currys.co.uk",
+   "passes": true,
+   "vertical": "product"
+  },
+  "cv-library.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "cv-library.co.uk",
+   "passes": false,
+   "vertical": "job"
+  },
+  "cwjobs.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1,
+     "html_captures": 1,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1,
+     "html_captures": 1,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 2,
+   "domain": "cwjobs.co.uk",
+   "passes": false,
+   "vertical": "job"
+  },
+  "damndelicious.net": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 312,
+     "html_captures": 313,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 384,
+     "html_captures": 386,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 370,
+   "distinct_urls": 692,
+   "domain": "damndelicious.net",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "decathlon.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1,
+     "html_captures": 1,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 1,
+   "domain": "decathlon.co.uk",
+   "passes": false,
+   "vertical": "product"
+  },
+  "delicious.com.au": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "delicious.com.au",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "deliciousmagazine.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 40,
+     "html_captures": 40,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 40,
+   "domain": "deliciousmagazine.co.uk",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "delish.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "delish.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "dice.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 11839,
+     "html_captures": 11896,
+     "index_blocks": 7
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 11655,
+     "html_captures": 11685,
+     "index_blocks": 7
+    }
+   },
+   "distinct_detail_urls": 8964,
+   "distinct_urls": 22873,
+   "domain": "dice.com",
+   "passes": true,
+   "vertical": "job"
+  },
+  "dice.fm": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "dice.fm",
+   "passes": false,
+   "vertical": "event"
+  },
+  "dinneratthezoo.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 637,
+     "html_captures": 640,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 348,
+   "distinct_urls": 637,
+   "domain": "dinneratthezoo.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "dw.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "dw.com",
+   "passes": false,
+   "vertical": "news"
+  },
+  "eatingwell.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "eatingwell.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "efinancialcareers.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 2,
+     "html_captures": 2,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1,
+     "html_captures": 1,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 1,
+   "distinct_urls": 3,
+   "domain": "efinancialcareers.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "electrek.co": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "electrek.co",
+   "passes": false,
+   "vertical": "news"
+  },
+  "ents24.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 15136,
+     "html_captures": 15138,
+     "index_blocks": 7
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 3384,
+     "html_captures": 3386,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 23,
+   "distinct_urls": 18517,
+   "domain": "ents24.com",
+   "passes": true,
+   "vertical": "event"
+  },
+  "epicurious.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "epicurious.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "euronews.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "euronews.com",
+   "passes": false,
+   "vertical": "news"
+  },
+  "eventbrite.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 171,
+     "html_captures": 171,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 80,
+   "distinct_urls": 171,
+   "domain": "eventbrite.co.uk",
+   "passes": false,
+   "vertical": "event"
+  },
+  "eventbrite.com.au": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "eventbrite.com.au",
+   "passes": false,
+   "vertical": "event"
+  },
+  "eventfinda.co.nz": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "eventfinda.co.nz",
+   "passes": false,
+   "vertical": "event"
+  },
+  "everlane.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 32,
+     "html_captures": 33,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 29,
+     "html_captures": 29,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 46,
+   "distinct_urls": 60,
+   "domain": "everlane.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "fantasticfiction.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 16727,
+     "html_captures": 16779,
+     "index_blocks": 6
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 17292,
+     "html_captures": 17312,
+     "index_blocks": 7
+    }
+   },
+   "distinct_detail_urls": 20428,
+   "distinct_urls": 33833,
+   "domain": "fantasticfiction.com",
+   "passes": true,
+   "vertical": "book"
+  },
+  "feverup.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 20448,
+     "html_captures": 21069,
+     "index_blocks": 9
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 19815,
+     "html_captures": 20242,
+     "index_blocks": 9
+    }
+   },
+   "distinct_detail_urls": 22727,
+   "distinct_urls": 39672,
+   "domain": "feverup.com",
+   "passes": true,
+   "vertical": "event"
+  },
+  "food.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "food.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "food.ndtv.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 23099,
+     "html_captures": 23695,
+     "index_blocks": 9
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 23669,
+     "html_captures": 24262,
+     "index_blocks": 10
+    }
+   },
+   "distinct_detail_urls": 4085,
+   "distinct_urls": 46377,
+   "domain": "food.ndtv.com",
+   "passes": true,
+   "vertical": "recipe"
+  },
+  "food52.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "food52.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "foodandwine.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "foodandwine.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "foodnetwork.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "foodnetwork.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "glossier.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 114,
+     "html_captures": 132,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 92,
+     "html_captures": 105,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 43,
+   "distinct_urls": 147,
+   "domain": "glossier.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "goodhousekeeping.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "goodhousekeeping.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "goodreads.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "goodreads.com",
+   "passes": false,
+   "vertical": "book"
+  },
+  "governmentjobs.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "governmentjobs.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "gymshark.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "gymshark.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "hachettebookgroup.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 22321,
+     "html_captures": 22713,
+     "index_blocks": 9
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 22625,
+     "html_captures": 23008,
+     "index_blocks": 10
+    }
+   },
+   "distinct_detail_urls": 29504,
+   "distinct_urls": 43831,
+   "domain": "hachettebookgroup.com",
+   "passes": true,
+   "vertical": "book"
+  },
+  "halfbakedharvest.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "halfbakedharvest.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "hebbarskitchen.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1741,
+     "html_captures": 1749,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1685,
+     "html_captures": 1690,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 855,
+   "distinct_urls": 3416,
+   "domain": "hebbarskitchen.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "hersheyland.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 336,
+     "html_captures": 348,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 472,
+     "html_captures": 494,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 265,
+   "distinct_urls": 774,
+   "domain": "hersheyland.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "higheredjobs.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 556,
+     "html_captures": 560,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 3222,
+     "html_captures": 3232,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 3365,
+   "distinct_urls": 3772,
+   "domain": "higheredjobs.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "himalayas.app": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 2621,
+     "html_captures": 2629,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 12106,
+     "html_captures": 12166,
+     "index_blocks": 6
+    }
+   },
+   "distinct_detail_urls": 1467,
+   "distinct_urls": 14724,
+   "domain": "himalayas.app",
+   "passes": true,
+   "vertical": "job"
+  },
+  "huckberry.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "huckberry.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "idealist.org": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 25570,
+     "html_captures": 25621,
+     "index_blocks": 10
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 25109,
+     "html_captures": 25150,
+     "index_blocks": 10
+    }
+   },
+   "distinct_detail_urls": 18,
+   "distinct_urls": 50632,
+   "domain": "idealist.org",
+   "passes": true,
+   "vertical": "job"
+  },
+  "ikea.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 26148,
+     "html_captures": 27251,
+     "index_blocks": 13
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 27099,
+     "html_captures": 28713,
+     "index_blocks": 14
+    }
+   },
+   "distinct_detail_urls": 33618,
+   "distinct_urls": 52880,
+   "domain": "ikea.com",
+   "passes": true,
+   "vertical": "product"
+  },
+  "indianhealthyrecipes.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 241,
+     "html_captures": 241,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 221,
+   "distinct_urls": 241,
+   "domain": "indianhealthyrecipes.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "inspiredtaste.net": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "inspiredtaste.net",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "jambase.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "jambase.com",
+   "passes": false,
+   "vertical": "event"
+  },
+  "jamieoliver.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "jamieoliver.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "jobbank.gc.ca": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 20123,
+     "html_captures": 20135,
+     "index_blocks": 8
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 10200,
+     "html_captures": 10205,
+     "index_blocks": 5
+    }
+   },
+   "distinct_detail_urls": 49,
+   "distinct_urls": 30316,
+   "domain": "jobbank.gc.ca",
+   "passes": true,
+   "vertical": "job"
+  },
+  "jobs.ac.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 12467,
+     "html_captures": 14095,
+     "index_blocks": 7
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 12340,
+     "html_captures": 13872,
+     "index_blocks": 8
+    }
+   },
+   "distinct_detail_urls": 4837,
+   "distinct_urls": 24032,
+   "domain": "jobs.ac.uk",
+   "passes": true,
+   "vertical": "job"
+  },
+  "jobs.lever.co": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "jobs.lever.co",
+   "passes": false,
+   "vertical": "job"
+  },
+  "jobs.smartrecruiters.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 2014,
+     "html_captures": 2019,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 2631,
+     "html_captures": 2637,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 3692,
+   "distinct_urls": 4636,
+   "domain": "jobs.smartrecruiters.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "jocooks.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "jocooks.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "johnlewis.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 21213,
+     "html_captures": 21357,
+     "index_blocks": 9
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 21077,
+     "html_captures": 21200,
+     "index_blocks": 9
+    }
+   },
+   "distinct_detail_urls": 37027,
+   "distinct_urls": 42158,
+   "domain": "johnlewis.com",
+   "passes": true,
+   "vertical": "product"
+  },
+  "justapinch.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "justapinch.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "justonecookbook.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 4,
+     "html_captures": 4,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 2,
+   "distinct_urls": 4,
+   "domain": "justonecookbook.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "kingarthurbaking.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1421,
+     "html_captures": 1468,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1806,
+     "html_captures": 1938,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 1359,
+   "distinct_urls": 3134,
+   "domain": "kingarthurbaking.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "kitchenstories.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "kitchenstories.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "kith.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 30,
+     "html_captures": 31,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 140,
+     "html_captures": 143,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 79,
+   "distinct_urls": 169,
+   "domain": "kith.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "landolakes.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1361,
+     "html_captures": 1398,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1622,
+     "html_captures": 1674,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 1479,
+   "distinct_urls": 2926,
+   "domain": "landolakes.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "lego.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1333,
+     "html_captures": 1344,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1183,
+     "html_captures": 1186,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 2511,
+   "domain": "lego.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "loveandlemons.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 696,
+     "html_captures": 706,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 732,
+     "html_captures": 748,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 1054,
+   "distinct_urls": 1409,
+   "domain": "loveandlemons.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "marmiton.org": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 12863,
+     "html_captures": 12923,
+     "index_blocks": 7
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 13190,
+     "html_captures": 13305,
+     "index_blocks": 7
+    }
+   },
+   "distinct_detail_urls": 13917,
+   "distinct_urls": 25846,
+   "domain": "marmiton.org",
+   "passes": true,
+   "vertical": "recipe"
+  },
+  "mccormick.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 350,
+     "html_captures": 392,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 213,
+     "html_captures": 246,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 534,
+   "domain": "mccormick.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "meetup.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 31895,
+     "html_captures": 39000,
+     "index_blocks": 25
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 30236,
+     "html_captures": 37119,
+     "index_blocks": 24
+    }
+   },
+   "distinct_detail_urls": 624,
+   "distinct_urls": 61179,
+   "domain": "meetup.com",
+   "passes": true,
+   "vertical": "event"
+  },
+  "minimalistbaker.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "minimalistbaker.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "monster.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 17806,
+     "html_captures": 17999,
+     "index_blocks": 9
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 16985,
+     "html_captures": 17184,
+     "index_blocks": 10
+    }
+   },
+   "distinct_detail_urls": 9105,
+   "distinct_urls": 34541,
+   "domain": "monster.com",
+   "passes": true,
+   "vertical": "job"
+  },
+  "myfoodandfamily.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "myfoodandfamily.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "natashaskitchen.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "natashaskitchen.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "newegg.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 20143,
+     "html_captures": 20259,
+     "index_blocks": 9
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 12787,
+     "html_captures": 12819,
+     "index_blocks": 6
+    }
+   },
+   "distinct_detail_urls": 11574,
+   "distinct_urls": 32519,
+   "domain": "newegg.com",
+   "passes": true,
+   "vertical": "product"
+  },
+  "npr.org": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "npr.org",
+   "passes": false,
+   "vertical": "news"
+  },
+  "olivemagazine.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "olivemagazine.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "onceuponachef.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 406,
+     "html_captures": 411,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 329,
+     "html_captures": 329,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 540,
+   "distinct_urls": 725,
+   "domain": "onceuponachef.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "openlibrary.org": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 10841,
+     "html_captures": 10879,
+     "index_blocks": 6
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 10875,
+     "html_captures": 10926,
+     "index_blocks": 6
+    }
+   },
+   "distinct_detail_urls": 6365,
+   "distinct_urls": 20434,
+   "domain": "openlibrary.org",
+   "passes": true,
+   "vertical": "book"
+  },
+  "patagonia.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1145,
+     "html_captures": 1145,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 4154,
+     "html_captures": 4188,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 1536,
+   "distinct_urls": 5292,
+   "domain": "patagonia.com",
+   "passes": true,
+   "vertical": "product"
+  },
+  "penguinrandomhouse.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 27194,
+     "html_captures": 29224,
+     "index_blocks": 16
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 27366,
+     "html_captures": 29409,
+     "index_blocks": 18
+    }
+   },
+   "distinct_detail_urls": 36795,
+   "distinct_urls": 48251,
+   "domain": "penguinrandomhouse.com",
+   "passes": true,
+   "vertical": "book"
+  },
+  "phys.org": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 985,
+     "html_captures": 985,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1052,
+     "html_captures": 1052,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 2030,
+   "domain": "phys.org",
+   "passes": false,
+   "vertical": "news"
+  },
+  "pillsbury.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 792,
+     "html_captures": 843,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 806,
+     "html_captures": 852,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 1055,
+   "distinct_urls": 1549,
+   "domain": "pillsbury.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "pinchofyum.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 456,
+     "html_captures": 464,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 375,
+     "html_captures": 378,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 458,
+   "distinct_urls": 820,
+   "domain": "pinchofyum.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "ra.co": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "ra.co",
+   "passes": false,
+   "vertical": "event"
+  },
+  "realfood.tesco.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 127,
+     "html_captures": 128,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 127,
+   "domain": "realfood.tesco.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "recetasgratis.net": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "recetasgratis.net",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "recipes.net": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 2623,
+     "html_captures": 2712,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 2554,
+     "html_captures": 2657,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 1655,
+   "distinct_urls": 5011,
+   "domain": "recipes.net",
+   "passes": true,
+   "vertical": "recipe"
+  },
+  "recipetineats.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "recipetineats.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "reed.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 13756,
+     "html_captures": 13774,
+     "index_blocks": 6
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 14288,
+     "html_captures": 14309,
+     "index_blocks": 6
+    }
+   },
+   "distinct_detail_urls": 1198,
+   "distinct_urls": 28003,
+   "domain": "reed.co.uk",
+   "passes": true,
+   "vertical": "job"
+  },
+  "rei.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 20610,
+     "html_captures": 20740,
+     "index_blocks": 10
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 22759,
+     "html_captures": 22982,
+     "index_blocks": 10
+    }
+   },
+   "distinct_detail_urls": 3845,
+   "distinct_urls": 43117,
+   "domain": "rei.com",
+   "passes": true,
+   "vertical": "product"
+  },
+  "remotive.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1508,
+     "html_captures": 1509,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1057,
+     "html_captures": 1059,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 17,
+   "distinct_urls": 2560,
+   "domain": "remotive.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "ricette.giallozafferano.it": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "ricette.giallozafferano.it",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "rnz.co.nz": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "rnz.co.nz",
+   "passes": false,
+   "vertical": "news"
+  },
+  "rothys.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 169,
+     "html_captures": 282,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 211,
+     "html_captures": 278,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 81,
+   "distinct_urls": 270,
+   "domain": "rothys.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "sainsburysmagazine.co.uk": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1637,
+     "html_captures": 1666,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 2339,
+     "html_captures": 2432,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 2845,
+   "distinct_urls": 3837,
+   "domain": "sainsburysmagazine.co.uk",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "sallysbakingaddiction.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 992,
+     "html_captures": 1006,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 221,
+   "distinct_urls": 992,
+   "domain": "sallysbakingaddiction.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "sanjeevkapoor.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "sanjeevkapoor.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "schooljobs.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "schooljobs.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "sciencedaily.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 37808,
+     "html_captures": 40417,
+     "index_blocks": 15
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 37160,
+     "html_captures": 39656,
+     "index_blocks": 14
+    }
+   },
+   "distinct_detail_urls": 68538,
+   "distinct_urls": 71660,
+   "domain": "sciencedaily.com",
+   "passes": true,
+   "vertical": "news"
+  },
+  "seek.com.au": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "seek.com.au",
+   "passes": false,
+   "vertical": "job"
+  },
+  "seetickets.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "seetickets.com",
+   "passes": false,
+   "vertical": "event"
+  },
+  "seriouseats.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "seriouseats.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "setlist.fm": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 20147,
+     "html_captures": 20165,
+     "index_blocks": 8
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 18585,
+     "html_captures": 18587,
+     "index_blocks": 7
+    }
+   },
+   "distinct_detail_urls": 6215,
+   "distinct_urls": 38701,
+   "domain": "setlist.fm",
+   "passes": true,
+   "vertical": "event"
+  },
+  "simonandschuster.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "simonandschuster.com",
+   "passes": false,
+   "vertical": "book"
+  },
+  "simplyhired.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "simplyhired.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "simplyrecipes.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "simplyrecipes.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "skiddle.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 12977,
+     "html_captures": 13935,
+     "index_blocks": 8
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 11982,
+     "html_captures": 12698,
+     "index_blocks": 7
+    }
+   },
+   "distinct_detail_urls": 8318,
+   "distinct_urls": 24475,
+   "domain": "skiddle.com",
+   "passes": true,
+   "vertical": "event"
+  },
+  "skinnytaste.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "skinnytaste.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "smittenkitchen.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "smittenkitchen.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "songkick.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 24542,
+     "html_captures": 24674,
+     "index_blocks": 9
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 24148,
+     "html_captures": 24612,
+     "index_blocks": 10
+    }
+   },
+   "distinct_detail_urls": 14200,
+   "distinct_urls": 48523,
+   "domain": "songkick.com",
+   "passes": true,
+   "vertical": "event"
+  },
+  "spendwithpennies.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1289,
+     "html_captures": 1292,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1074,
+     "html_captures": 1076,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 1258,
+   "distinct_urls": 2357,
+   "domain": "spendwithpennies.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "sweetwater.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "sweetwater.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "tablespoon.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "tablespoon.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "tarladalal.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "tarladalal.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "taste.com.au": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "taste.com.au",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "tasteofhome.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "tasteofhome.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "tastesbetterfromscratch.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 643,
+     "html_captures": 646,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 173,
+   "distinct_urls": 643,
+   "domain": "tastesbetterfromscratch.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "tasty.co": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "tasty.co",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "tentree.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 359,
+     "html_captures": 360,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 189,
+     "html_captures": 189,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 404,
+   "distinct_urls": 547,
+   "domain": "tentree.com",
+   "passes": false,
+   "vertical": "product"
+  },
+  "theconversation.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "theconversation.com",
+   "passes": false,
+   "vertical": "news"
+  },
+  "thekitchn.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 6
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "thekitchn.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "thepioneerwoman.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 18,
+     "html_captures": 18,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 18,
+   "domain": "thepioneerwoman.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "therecipecritic.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1585,
+     "html_captures": 1591,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 1094,
+   "distinct_urls": 1585,
+   "domain": "therecipecritic.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "thewoksoflife.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "thewoksoflife.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "thriftbooks.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 20151,
+     "html_captures": 20180,
+     "index_blocks": 8
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 19718,
+     "html_captures": 19737,
+     "index_blocks": 8
+    }
+   },
+   "distinct_detail_urls": 27595,
+   "distinct_urls": 39358,
+   "domain": "thriftbooks.com",
+   "passes": true,
+   "vertical": "product"
+  },
+  "ticketweb.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 14427,
+     "html_captures": 14585,
+     "index_blocks": 7
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 14077,
+     "html_captures": 14195,
+     "index_blocks": 8
+    }
+   },
+   "distinct_detail_urls": 22280,
+   "distinct_urls": 28272,
+   "domain": "ticketweb.com",
+   "passes": true,
+   "vertical": "event"
+  },
+  "tixr.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "tixr.com",
+   "passes": false,
+   "vertical": "event"
+  },
+  "totaljobs.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 5,
+     "html_captures": 5,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 13,
+     "html_captures": 16,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 17,
+   "domain": "totaljobs.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "universe.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 2305,
+     "html_captures": 2321,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 3391,
+     "html_captures": 3413,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 5255,
+   "distinct_urls": 5666,
+   "domain": "universe.com",
+   "passes": true,
+   "vertical": "event"
+  },
+  "usajobs.gov": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 2829,
+     "html_captures": 2851,
+     "index_blocks": 3
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 3264,
+     "html_captures": 3305,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 4845,
+   "distinct_urls": 6067,
+   "domain": "usajobs.gov",
+   "passes": true,
+   "vertical": "job"
+  },
+  "vegrecipesofindia.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 467,
+     "html_captures": 467,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 294,
+   "distinct_urls": 467,
+   "domain": "vegrecipesofindia.com",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "vividseats.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 12027,
+     "html_captures": 12701,
+     "index_blocks": 7
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 12061,
+     "html_captures": 12902,
+     "index_blocks": 6
+    }
+   },
+   "distinct_detail_urls": 7337,
+   "distinct_urls": 23245,
+   "domain": "vividseats.com",
+   "passes": true,
+   "vertical": "event"
+  },
+  "wegottickets.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 10543,
+     "html_captures": 12821,
+     "index_blocks": 7
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 11385,
+     "html_captures": 16309,
+     "index_blocks": 9
+    }
+   },
+   "distinct_detail_urls": 8544,
+   "distinct_urls": 19612,
+   "domain": "wegottickets.com",
+   "passes": true,
+   "vertical": "event"
+  },
+  "weworkremotely.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 0,
+     "html_captures": 0,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 0,
+   "distinct_urls": 0,
+   "domain": "weworkremotely.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "womensweeklyfood.com.au": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1151,
+     "html_captures": 1154,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1078,
+     "html_captures": 1086,
+     "index_blocks": 2
+    }
+   },
+   "distinct_detail_urls": 1490,
+   "distinct_urls": 2222,
+   "domain": "womensweeklyfood.com.au",
+   "passes": false,
+   "vertical": "recipe"
+  },
+  "workingnomads.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 1600,
+     "html_captures": 1611,
+     "index_blocks": 2
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 1396,
+     "html_captures": 1399,
+     "index_blocks": 1
+    }
+   },
+   "distinct_detail_urls": 1409,
+   "distinct_urls": 2966,
+   "domain": "workingnomads.com",
+   "passes": false,
+   "vertical": "job"
+  },
+  "zappos.com": {
+   "crawls": {
+    "CC-MAIN-2026-39": {
+     "distinct_urls": 25297,
+     "html_captures": 25332,
+     "index_blocks": 10
+    },
+    "CC-MAIN-2026-43": {
+     "distinct_urls": 28017,
+     "html_captures": 28072,
+     "index_blocks": 11
+    }
+   },
+   "distinct_detail_urls": 2453,
+   "distinct_urls": 53288,
+   "domain": "zappos.com",
+   "passes": true,
+   "vertical": "product"
+  }
+ },
+ "crawls": [
+  "CC-MAIN-2026-43",
+  "CC-MAIN-2026-39"
+ ],
+ "samples": {
+  "aljazeera.com": {
+   "detail_pattern": "^/[a-z-]+/\\d{4}/\\d{1,2}/\\d{1,2}/",
+   "distinct_detail_urls": 103860,
+   "domain": "aljazeera.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 46,
+   "jsonld_rate": 0.92,
+   "labeled_pages": 46,
+   "login_walled_pages": 0,
+   "median_words": 776.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023637",
+    "url": "https://www.aljazeera.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "news"
+  },
+  "argos.co.uk": {
+   "detail_pattern": "^/product/(?:tuc)?\\d+",
+   "distinct_detail_urls": 20342,
+   "domain": "argos.co.uk",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 3940.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018042019",
+    "url": "https://www.argos.co.uk/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "product"
+  },
+  "builtin.com": {
+   "detail_pattern": "^/job/[a-z0-9-]+/\\d+/?$",
+   "distinct_detail_urls": 4722,
+   "domain": "builtin.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 1810.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018024052",
+    "url": "https://builtin.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "job"
+  },
+  "careerbuilder.com": {
+   "detail_pattern": "^/job-details/[^/?]+",
+   "distinct_detail_urls": 12332,
+   "domain": "careerbuilder.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 798.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023949",
+    "url": "https://www.careerbuilder.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "job"
+  },
+  "currys.co.uk": {
+   "detail_pattern": "^/products/.+-\\d+\\.html$",
+   "distinct_detail_urls": 1828,
+   "domain": "currys.co.uk",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 2463.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261017183950",
+    "url": "https://www.currys.co.uk/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "product"
+  },
+  "dice.com": {
+   "detail_pattern": "^/job-detail/[0-9a-f-]+",
+   "distinct_detail_urls": 8964,
+   "domain": "dice.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 1567.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023901",
+    "url": "https://www.dice.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "job"
+  },
+  "ents24.com": {
+   "detail_pattern": "^/[^/]+/events/\\d+",
+   "distinct_detail_urls": 23,
+   "domain": "ents24.com",
+   "fetch_errors": [],
+   "fetched": 23,
+   "jsonld_pages": 23,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 11,
+   "login_walled_pages": 0,
+   "median_words": 214,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261017193050",
+    "url": "https://www.ents24.com/robots.txt"
+   },
+   "sampled": 23,
+   "share_over_200_words": 0.696,
+   "vertical": "event"
+  },
+  "fantasticfiction.com": {
+   "detail_pattern": "^/[a-z]/[^/]+/[^/]+\\.htm$",
+   "distinct_detail_urls": 20428,
+   "domain": "fantasticfiction.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 0,
+   "jsonld_rate": 0.0,
+   "labeled_pages": 0,
+   "login_walled_pages": 0,
+   "median_words": 318.0,
+   "passes": false,
+   "reasons": [
+    "Book JSON-LD on 0% of sampled detail pages (< 60%)"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023737",
+    "url": "https://www.fantasticfiction.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 0.88,
+   "vertical": "book"
+  },
+  "feverup.com": {
+   "detail_pattern": "^/m/\\d+/?$",
+   "distinct_detail_urls": 10895,
+   "domain": "feverup.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 16,
+   "jsonld_rate": 0.32,
+   "labeled_pages": 16,
+   "login_walled_pages": 0,
+   "median_words": 1055.0,
+   "passes": false,
+   "reasons": [
+    "Event JSON-LD on 32% of sampled detail pages (< 60%)"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018024108",
+    "url": "https://feverup.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "event"
+  },
+  "food.ndtv.com": {
+   "detail_pattern": "^/recipe-[a-z0-9-]+-\\d+/?$",
+   "distinct_detail_urls": 4085,
+   "domain": "food.ndtv.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 706.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018024100",
+    "url": "https://food.ndtv.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "recipe"
+  },
+  "hachettebookgroup.com": {
+   "detail_pattern": "^/titles/",
+   "distinct_detail_urls": 29504,
+   "domain": "hachettebookgroup.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 49,
+   "jsonld_rate": 0.98,
+   "labeled_pages": 49,
+   "login_walled_pages": 0,
+   "median_words": 1047.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018041700",
+    "url": "https://www.hachettebookgroup.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "book"
+  },
+  "himalayas.app": {
+   "detail_pattern": "^/companies/[^/]+/jobs/[^/]+/?$",
+   "distinct_detail_urls": 1467,
+   "domain": "himalayas.app",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 2151.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023713",
+    "url": "https://himalayas.app/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "job"
+  },
+  "idealist.org": {
+   "detail_pattern": "^/[a-z]{2}/(?:nonprofit-)?job/",
+   "distinct_detail_urls": 18,
+   "domain": "idealist.org",
+   "fetch_errors": [],
+   "fetched": 18,
+   "jsonld_pages": 18,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 18,
+   "login_walled_pages": 0,
+   "median_words": 1415.5,
+   "passes": false,
+   "reasons": [
+    "only 18 detail-pattern pages found/fetched (< 20)"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023814",
+    "url": "https://www.idealist.org/robots.txt"
+   },
+   "sampled": 18,
+   "share_over_200_words": 1.0,
+   "vertical": "job"
+  },
+  "ikea.com": {
+   "detail_pattern": "/p/[a-z0-9-]+-[s]?\\d+/?$",
+   "distinct_detail_urls": 33618,
+   "domain": "ikea.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 830.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018024122",
+    "url": "https://www.ikea.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "product"
+  },
+  "jobbank.gc.ca": {
+   "detail_pattern": "^/jobsearch/jobposting/\\d+",
+   "distinct_detail_urls": 49,
+   "domain": "jobbank.gc.ca",
+   "fetch_errors": [],
+   "fetched": 49,
+   "jsonld_pages": 0,
+   "jsonld_rate": 0.0,
+   "labeled_pages": 0,
+   "login_walled_pages": 0,
+   "median_words": 1027,
+   "passes": false,
+   "reasons": [
+    "JobPosting JSON-LD on 0% of sampled detail pages (< 60%)"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023647",
+    "url": "https://www.jobbank.gc.ca/robots.txt"
+   },
+   "sampled": 49,
+   "share_over_200_words": 1.0,
+   "vertical": "job"
+  },
+  "jobs.ac.uk": {
+   "detail_pattern": "^/job/[A-Z0-9]+/",
+   "distinct_detail_urls": 4837,
+   "domain": "jobs.ac.uk",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 47,
+   "jsonld_rate": 0.94,
+   "labeled_pages": 47,
+   "login_walled_pages": 0,
+   "median_words": 1197.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023635",
+    "url": "https://www.jobs.ac.uk/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 0.94,
+   "vertical": "job"
+  },
+  "johnlewis.com": {
+   "detail_pattern": "/p\\d+(?:\\?.*)?$",
+   "distinct_detail_urls": 40618,
+   "domain": "johnlewis.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 1152.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023917",
+    "url": "https://www.johnlewis.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "product"
+  },
+  "marmiton.org": {
+   "detail_pattern": "^/recettes/recette_[^/]+\\.aspx$",
+   "distinct_detail_urls": 13917,
+   "domain": "marmiton.org",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 1018.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018024040",
+    "url": "https://www.marmiton.org/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "recipe"
+  },
+  "meetup.com": {
+   "detail_pattern": "^/[^/]+/events/\\d+/?$",
+   "distinct_detail_urls": 624,
+   "domain": "meetup.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 401.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018034310",
+    "url": "https://www.meetup.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 0.98,
+   "vertical": "event"
+  },
+  "monster.com": {
+   "detail_pattern": "^/job-openings/",
+   "distinct_detail_urls": 9105,
+   "domain": "monster.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 1009.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023817",
+    "url": "https://www.monster.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "job"
+  },
+  "newegg.com": {
+   "detail_pattern": "/p/[A-Za-z0-9-]+/?$",
+   "distinct_detail_urls": 11574,
+   "domain": "newegg.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 0,
+   "jsonld_rate": 0.0,
+   "labeled_pages": 0,
+   "login_walled_pages": 0,
+   "median_words": 794.0,
+   "passes": false,
+   "reasons": [
+    "Product JSON-LD on 0% of sampled detail pages (< 60%)"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023902",
+    "url": "https://www.newegg.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "product"
+  },
+  "openlibrary.org": {
+   "detail_pattern": "^/works/OL\\d+W",
+   "distinct_detail_urls": 6365,
+   "domain": "openlibrary.org",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 0,
+   "jsonld_rate": 0.0,
+   "labeled_pages": 0,
+   "login_walled_pages": 0,
+   "median_words": 674.0,
+   "passes": false,
+   "reasons": [
+    "Book JSON-LD on 0% of sampled detail pages (< 60%)"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023854",
+    "url": "https://openlibrary.org/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "book"
+  },
+  "patagonia.com": {
+   "detail_pattern": "^/(?:[a-z]{2}/)?product/[a-z0-9-]+/\\d+\\.html",
+   "distinct_detail_urls": 2937,
+   "domain": "patagonia.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 0,
+   "jsonld_rate": 0.0,
+   "labeled_pages": 0,
+   "login_walled_pages": 0,
+   "median_words": 156.0,
+   "passes": false,
+   "reasons": [
+    "Product JSON-LD on 0% of sampled detail pages (< 60%)",
+    "median visible text 156.0 words (<= 200): JS shell"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "found": false
+   },
+   "sampled": 50,
+   "share_over_200_words": 0.0,
+   "vertical": "product"
+  },
+  "penguinrandomhouse.com": {
+   "detail_pattern": "^/books/\\d+/",
+   "distinct_detail_urls": 36795,
+   "domain": "penguinrandomhouse.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 1622.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018050550",
+    "url": "https://www.penguinrandomhouse.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "book"
+  },
+  "recipes.net": {
+   "detail_pattern": "-recipe/?$",
+   "distinct_detail_urls": 1655,
+   "domain": "recipes.net",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 3371.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023727",
+    "url": "https://recipes.net/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "recipe"
+  },
+  "reed.co.uk": {
+   "detail_pattern": "^/jobs/[a-z0-9-]+/\\d+",
+   "distinct_detail_urls": 1198,
+   "domain": "reed.co.uk",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 784.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023939",
+    "url": "https://www.reed.co.uk/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "job"
+  },
+  "rei.com": {
+   "detail_pattern": "^/product/[A-Z]?\\d+/",
+   "distinct_detail_urls": 6822,
+   "domain": "rei.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 3379.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023919",
+    "url": "https://www.rei.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "product"
+  },
+  "sciencedaily.com": {
+   "detail_pattern": "^/releases/\\d{4}/\\d{2}/\\d+\\.htm$",
+   "distinct_detail_urls": 68538,
+   "domain": "sciencedaily.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 0,
+   "jsonld_rate": 0.0,
+   "labeled_pages": 0,
+   "login_walled_pages": 0,
+   "median_words": 1766.0,
+   "passes": false,
+   "reasons": [
+    "NewsArticle JSON-LD on 0% of sampled detail pages (< 60%)"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018025745",
+    "url": "http://www.sciencedaily.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "news"
+  },
+  "setlist.fm": {
+   "detail_pattern": "^/setlist/[^/]+/\\d{4}/[^/]+\\.html$",
+   "distinct_detail_urls": 6215,
+   "domain": "setlist.fm",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 0,
+   "jsonld_rate": 0.0,
+   "labeled_pages": 0,
+   "login_walled_pages": 0,
+   "median_words": 779.5,
+   "passes": false,
+   "reasons": [
+    "Event JSON-LD on 0% of sampled detail pages (< 60%)"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023611",
+    "url": "https://www.setlist.fm/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "event"
+  },
+  "skiddle.com": {
+   "detail_pattern": "^/whats-on/[^/]+/[^/]+/[^/]+/\\d+/?$",
+   "distinct_detail_urls": 8318,
+   "domain": "skiddle.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 823.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018024012",
+    "url": "https://www.skiddle.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "event"
+  },
+  "songkick.com": {
+   "detail_pattern": "^/concerts/\\d+",
+   "distinct_detail_urls": 14200,
+   "domain": "songkick.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 10,
+   "jsonld_rate": 0.2,
+   "labeled_pages": 10,
+   "login_walled_pages": 0,
+   "median_words": 37.0,
+   "passes": false,
+   "reasons": [
+    "Event JSON-LD on 20% of sampled detail pages (< 60%)",
+    "median visible text 37.0 words (<= 200): JS shell"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "found": false
+   },
+   "sampled": 50,
+   "share_over_200_words": 0.2,
+   "vertical": "event"
+  },
+  "thriftbooks.com": {
+   "detail_pattern": "^/w/[a-z0-9-_]+/\\d+/?",
+   "distinct_detail_urls": 27595,
+   "domain": "thriftbooks.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 449.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018024106",
+    "url": "https://www.thriftbooks.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "product"
+  },
+  "ticketweb.com": {
+   "detail_pattern": "/event/[^/]+/\\d+",
+   "distinct_detail_urls": 22280,
+   "domain": "ticketweb.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 413.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023906",
+    "url": "https://www.ticketweb.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 0.82,
+   "vertical": "event"
+  },
+  "universe.com": {
+   "detail_pattern": "^/events/[^/]+/?$",
+   "distinct_detail_urls": 5255,
+   "domain": "universe.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 0,
+   "jsonld_rate": 0.0,
+   "labeled_pages": 0,
+   "login_walled_pages": 0,
+   "median_words": 9.0,
+   "passes": false,
+   "reasons": [
+    "Event JSON-LD on 0% of sampled detail pages (< 60%)",
+    "median visible text 9.0 words (<= 200): JS shell"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261017182142",
+    "url": "https://www.universe.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 0.0,
+   "vertical": "event"
+  },
+  "usajobs.gov": {
+   "detail_pattern": "^/(?:job|GetJob/ViewDetails)/\\d+",
+   "distinct_detail_urls": 4845,
+   "domain": "usajobs.gov",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 4700.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018010617",
+    "url": "https://www.usajobs.gov/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "job"
+  },
+  "vividseats.com": {
+   "detail_pattern": "/production/\\d+",
+   "distinct_detail_urls": 7337,
+   "domain": "vividseats.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 600.0,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261017233543",
+    "url": "https://www.vividseats.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 0.8,
+   "vertical": "event"
+  },
+  "wegottickets.com": {
+   "detail_pattern": "^/event/\\d+",
+   "distinct_detail_urls": 8544,
+   "domain": "wegottickets.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 2,
+   "jsonld_rate": 0.04,
+   "labeled_pages": 2,
+   "login_walled_pages": 0,
+   "median_words": 370.0,
+   "passes": false,
+   "reasons": [
+    "Event JSON-LD on 4% of sampled detail pages (< 60%)"
+   ],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023647",
+    "url": "https://wegottickets.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 0.9,
+   "vertical": "event"
+  },
+  "zappos.com": {
+   "detail_pattern": "^/p/.+/product/\\d+",
+   "distinct_detail_urls": 2453,
+   "domain": "zappos.com",
+   "fetch_errors": [],
+   "fetched": 50,
+   "jsonld_pages": 50,
+   "jsonld_rate": 1.0,
+   "labeled_pages": 50,
+   "login_walled_pages": 0,
+   "median_words": 1467.5,
+   "passes": true,
+   "reasons": [],
+   "robots": {
+    "allowed": {
+     "CCBot": 1.0,
+     "ditto-benchmark": 1.0
+    },
+    "crawl": "CC-MAIN-2026-43",
+    "found": true,
+    "timestamp": "20261018023743",
+    "url": "https://www.zappos.com/robots.txt"
+   },
+   "sampled": 50,
+   "share_over_200_words": 1.0,
+   "vertical": "product"
+  }
+ }
+}
