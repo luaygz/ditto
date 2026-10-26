@@ -207,6 +207,7 @@ def run_baseline(
         pages_run=len(sample),
         spend_usd=tally.spent_usd,
         pages_failed=len(failed),
+        prompt_version=prompt_id,
     )
     common.write_jsonl(out_dir / f"{NAME}.pages.jsonl", page_rows)
     common.write_jsonl(

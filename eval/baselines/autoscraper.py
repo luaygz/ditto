@@ -391,6 +391,7 @@ def run_baseline(
         model=base_llm.model,
         pages_run=len(selected),
         spend_usd=tally.spent_usd,
+        prompt_version=PROMPT_VERSION,
     )
     common.write_jsonl(out_dir / f"{NAME}.templates.jsonl", template_rows)
     common.write_jsonl(
