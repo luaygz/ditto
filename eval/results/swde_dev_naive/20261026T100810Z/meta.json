@@ -1,0 +1,106 @@
+{
+  "name": "swde_dev_naive",
+  "description": "SWDE development slice, naive per-page LLM baseline on a seeded 50-page sample per site (same pages as swde_dev_ditto accuracy_sample); cost per 1,000 pages extrapolated.",
+  "created_at": "2026-10-26T10:08:10+00:00",
+  "config_path": "eval/configs/swde_dev_naive.yaml",
+  "config_sha256": "c8f4e82e71994818a37279dad5fb21f3cb7df1ab07a41ad3cfc8da395e880673",
+  "config": {
+    "name": "swde_dev_naive",
+    "description": "SWDE development slice, naive per-page LLM baseline on a seeded 50-page sample per site (same pages as swde_dev_ditto accuracy_sample); cost per 1,000 pages extrapolated.",
+    "dataset": "swde",
+    "dataset_options": {},
+    "selection": {
+      "split": "dev",
+      "sites": [],
+      "verticals": [],
+      "max_sites": null
+    },
+    "method": {
+      "kind": "baseline",
+      "mode": "prompted",
+      "baseline": "naive_llm",
+      "params": {
+        "until": "extract",
+        "min_cluster_size": 20,
+        "union_min_tokens": 8000,
+        "union_max_tokens": 30000,
+        "max_repair_calls": 3,
+        "tail": "skip",
+        "concurrency": 4
+      }
+    },
+    "models": {
+      "baseline": "openai/gpt-6.1-sol"
+    },
+    "budget_usd": 6.0,
+    "sample": {
+      "pages_per_site": 50,
+      "align_pages": 50,
+      "align_min_fraction": 0.1
+    },
+    "seeds": {
+      "run": 1,
+      "synth": 1
+    },
+    "workers": null,
+    "keep_runs": true
+  },
+  "dry_run": false,
+  "git": {
+    "commit": "adf16225bc387061dca17531a466fa26424c714a",
+    "dirty": true
+  },
+  "dataset_manifests": {
+    "livewebie": {
+      "path": "eval/datasets/livewebie/manifest.json",
+      "sha256": "28d925d4950900ea5912cff719e29b1b083bff3e624788137100878eeb12d575"
+    },
+    "swde": {
+      "path": "eval/datasets/swde/manifest.json",
+      "sha256": "e7c3b6fda04a7bc4514d968449de03233d6f32ba13722329796d2cbac75531cc"
+    }
+  },
+  "machine": {
+    "cpu_count": 16,
+    "memory_gb": 62.66,
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "processor": "",
+    "python": "3.11.15"
+  },
+  "work_dir": "data/eval/swde_dev_naive/20261026T100810Z",
+  "budget_usd": 6.0,
+  "cost_basis": "usd_per_1k_pages = tokens x standard-tier list prices (config/prices.yaml, no cache, batch or flex discounts) for every method; spend_usd = what was actually billed",
+  "ditto_version": "0.0.0",
+  "notes": [],
+  "status": "ok",
+  "models": {
+    "pinned": {
+      "baseline": "openai/gpt-6.1-sol"
+    },
+    "used": [
+      "openai/gpt-6.1-sol"
+    ]
+  },
+  "prompt_versions": [],
+  "spend_usd": 6.599718,
+  "spend_by_site": {
+    "auto-aol": 1.182324,
+    "book-abebooks": 1.177536,
+    "camera-amazon": 1.119684,
+    "job-careerbuilder": 0.721474,
+    "movie-allmovie": 0.73291,
+    "nbaplayer-espn": 0.889904,
+    "restaurant-fodors": 0.775886,
+    "university-collegeboard": 0.0,
+    "auto-autobytel": 0.0,
+    "book-amazon": 0.0,
+    "camera-beachaudio": 0.0,
+    "job-dice": 0.0,
+    "movie-amctv": 0.0,
+    "nbaplayer-fanhouse": 0.0,
+    "restaurant-frommers": 0.0,
+    "university-collegenavigator": 0.0
+  },
+  "wall_seconds": 413.445
+}

@@ -1,0 +1,18 @@
+name: union_gate_swde_dev
+description: >-
+  v0.2 gate, part 2: union pages of every template on the SWDE development slice (two
+  alphabetically-first sites per vertical, 16 sites) stay within 30k tokens each (tiktoken
+  o200k_base). Runs ingest -> cluster -> analyze -> union; no LLM.
+dataset: swde
+selection:
+  split: dev
+method:
+  kind: ditto
+  params:
+    until: union
+    min_cluster_size: 20
+    union_min_tokens: 8000
+    union_max_tokens: 30000
+keep_runs: false             # 16 run directories of page blobs; the numbers are in results.json
+seeds:
+  run: 1

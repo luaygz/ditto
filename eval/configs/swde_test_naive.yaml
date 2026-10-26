@@ -9,9 +9,9 @@ method:
   baseline: naive_llm
 models:                      # pinned; same main model as ditto so the comparison is fair
   baseline: openai/gpt-6.1-sol
-budget_usd: 9.0            # real (uncached) spend cap; sites are run round-robin across verticals
+budget_usd: 14.0           # real (uncached) spend cap; sites are run round-robin across verticals
 sample:
-  pages_per_site: 20          # seeded sample per site (budget-limited; brief cap 200); baselines run on it, ditto also scores it
+  pages_per_site: 10          # seeded sample per site (budget-limited; brief cap 200); baselines run on it, ditto also scores it
 seeds:
   run: 1                     # page samples (identical across ditto and baselines)
   synth: 1

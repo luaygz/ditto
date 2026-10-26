@@ -1,0 +1,20 @@
+name: union_gate_synth
+description: >-
+  v0.2 gate, part 1: every optional field (scalars and optional record-table columns) of the
+  synthetic default site at 10k pages (frozen seed 1) appears in its template's union page, as
+  an annotated candidate at the field's structural path showing one of its values. Also reports
+  union-page tokens per template. Runs ingest -> cluster -> analyze -> union; no LLM.
+dataset: synthetic
+dataset_options:
+  params: eval/synth/default.yaml
+  pages: 10000
+method:
+  kind: ditto
+  params:
+    until: union
+    min_cluster_size: 20
+    union_min_tokens: 8000
+    union_max_tokens: 30000
+seeds:
+  run: 1
+  synth: 1                   # frozen evaluation seed; tune on 101-199 only

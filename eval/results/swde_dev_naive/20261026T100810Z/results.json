@@ -1,0 +1,1827 @@
+{
+  "name": "swde_dev_naive",
+  "dataset": "swde",
+  "split": "dev",
+  "method": {
+    "kind": "baseline",
+    "mode": "prompted",
+    "baseline": "naive_llm",
+    "params": {
+      "until": "extract",
+      "min_cluster_size": 20,
+      "union_min_tokens": 8000,
+      "union_max_tokens": 30000,
+      "max_repair_calls": 3,
+      "tail": "skip",
+      "concurrency": 4
+    }
+  },
+  "method_label": "naive_llm",
+  "status": "ok",
+  "reason": null,
+  "summary": {
+    "n_sites": 16,
+    "n_ok": 7,
+    "status_counts": {
+      "ok": 7,
+      "skipped": 9
+    },
+    "accuracy": {
+      "per_vertical": {
+        "auto": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.75,
+            "recall": 1.0,
+            "f1": 0.75
+          },
+          "fields_norm_f1": {
+            "engine": 0.0,
+            "fuel_economy": 1.0,
+            "model": 1.0,
+            "price": 1.0
+          },
+          "raw": {
+            "precision": 0.75,
+            "recall": 1.0,
+            "f1": 0.75
+          },
+          "fields_raw_f1": {
+            "engine": 0.0,
+            "fuel_economy": 1.0,
+            "model": 1.0,
+            "price": 1.0
+          }
+        },
+        "book": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.9955555555555555,
+            "recall": 1.0,
+            "f1": 0.997752808988764
+          },
+          "fields_norm_f1": {
+            "author": 1.0,
+            "isbn_13": 1.0,
+            "publication_date": 1.0,
+            "publisher": 0.9887640449438202,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.9955555555555555,
+            "recall": 1.0,
+            "f1": 0.997752808988764
+          },
+          "fields_raw_f1": {
+            "author": 1.0,
+            "isbn_13": 1.0,
+            "publication_date": 1.0,
+            "publisher": 0.9887640449438202,
+            "title": 1.0
+          }
+        },
+        "camera": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.9133333333333334,
+            "recall": 0.9133333333333334,
+            "f1": 0.9133333333333334
+          },
+          "fields_norm_f1": {
+            "manufacturer": 1.0,
+            "model": 0.74,
+            "price": 1.0
+          },
+          "raw": {
+            "precision": 0.9133333333333334,
+            "recall": 0.9133333333333334,
+            "f1": 0.9133333333333334
+          },
+          "fields_raw_f1": {
+            "manufacturer": 1.0,
+            "model": 0.74,
+            "price": 1.0
+          }
+        },
+        "job": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.745,
+            "recall": 0.9933333333333333,
+            "f1": 0.745
+          },
+          "fields_norm_f1": {
+            "company": 0.98,
+            "date_posted": 0.0,
+            "location": 1.0,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.745,
+            "recall": 0.9933333333333333,
+            "f1": 0.745
+          },
+          "fields_raw_f1": {
+            "company": 0.98,
+            "date_posted": 0.0,
+            "location": 1.0,
+            "title": 1.0
+          }
+        },
+        "movie": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.78,
+            "recall": 0.78,
+            "f1": 0.78
+          },
+          "fields_norm_f1": {
+            "director": 1.0,
+            "genre": 0.76,
+            "mpaa_rating": 0.36,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.78,
+            "recall": 0.78,
+            "f1": 0.78
+          },
+          "fields_raw_f1": {
+            "director": 1.0,
+            "genre": 0.76,
+            "mpaa_rating": 0.36,
+            "title": 1.0
+          }
+        },
+        "nbaplayer": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.75,
+            "recall": 0.75,
+            "f1": 0.75
+          },
+          "fields_norm_f1": {
+            "height": 1.0,
+            "name": 0.0,
+            "team": 1.0,
+            "weight": 1.0
+          },
+          "raw": {
+            "precision": 0.75,
+            "recall": 0.75,
+            "f1": 0.75
+          },
+          "fields_raw_f1": {
+            "height": 1.0,
+            "name": 0.0,
+            "team": 1.0,
+            "weight": 1.0
+          }
+        },
+        "restaurant": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.71,
+            "recall": 0.71,
+            "f1": 0.71
+          },
+          "fields_norm_f1": {
+            "address": 0.12,
+            "cuisine": 0.98,
+            "name": 1.0,
+            "phone": 0.74
+          },
+          "raw": {
+            "precision": 0.71,
+            "recall": 0.71,
+            "f1": 0.71
+          },
+          "fields_raw_f1": {
+            "address": 0.12,
+            "cuisine": 0.98,
+            "name": 1.0,
+            "phone": 0.74
+          }
+        }
+      },
+      "overall": {
+        "n_sites": 7,
+        "n_verticals": 7,
+        "norm": {
+          "precision": 0.8062698412698414,
+          "recall": 0.878095238095238,
+          "f1": 0.8065837346174425
+        },
+        "raw": {
+          "precision": 0.8062698412698414,
+          "recall": 0.878095238095238,
+          "f1": 0.8065837346174425
+        }
+      }
+    },
+    "accuracy_sample": null,
+    "optional_field_recall": null,
+    "groups": {},
+    "clustering": {
+      "n_clusters": 6.0,
+      "n_templates": 1.8571428571428572,
+      "tail_pages": 10.285714285714286,
+      "n_sites": 7
+    },
+    "cost": {
+      "pages": 350,
+      "templates": 12,
+      "calls": 350,
+      "input_tokens": 3261474,
+      "output_tokens": 16872,
+      "input_tokens_per_1k_pages": 9318497.142857144,
+      "output_tokens_per_1k_pages": 48205.71428571428,
+      "calls_per_template": 40.714285714285715,
+      "usd_per_1k_pages": 19.11905142857142,
+      "price_estimated": false,
+      "extrapolated": true,
+      "spend_usd": 6.599717999999999,
+      "llm_latency_s_mean": null
+    },
+    "cost_per_vertical": {
+      "auto": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 573002,
+        "output_tokens": 3632,
+        "input_tokens_per_1k_pages": 11460040.0,
+        "output_tokens_per_1k_pages": 72640.0,
+        "calls_per_template": 50.0,
+        "usd_per_1k_pages": 23.646479999999997,
+        "price_estimated": false,
+        "extrapolated": true,
+        "spend_usd": 1.182324,
+        "llm_latency_s_mean": null
+      },
+      "book": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 620198,
+        "output_tokens": 2909,
+        "input_tokens_per_1k_pages": 12403960.0,
+        "output_tokens_per_1k_pages": 58180.0,
+        "calls_per_template": 50.0,
+        "usd_per_1k_pages": 25.389719999999997,
+        "price_estimated": false,
+        "extrapolated": true,
+        "spend_usd": 1.177536,
+        "llm_latency_s_mean": null
+      },
+      "camera": {
+        "pages": 50,
+        "templates": 2,
+        "calls": 50,
+        "input_tokens": 546802,
+        "output_tokens": 2608,
+        "input_tokens_per_1k_pages": 10936040.0,
+        "output_tokens_per_1k_pages": 52160.0,
+        "calls_per_template": 25.0,
+        "usd_per_1k_pages": 22.393679999999996,
+        "price_estimated": false,
+        "extrapolated": true,
+        "spend_usd": 1.1196840000000001,
+        "llm_latency_s_mean": null
+      },
+      "job": {
+        "pages": 50,
+        "templates": 5,
+        "calls": 50,
+        "input_tokens": 351997,
+        "output_tokens": 1748,
+        "input_tokens_per_1k_pages": 7039940.0,
+        "output_tokens_per_1k_pages": 34960.0,
+        "calls_per_template": 10.0,
+        "usd_per_1k_pages": 14.429479999999998,
+        "price_estimated": false,
+        "extrapolated": true,
+        "spend_usd": 0.721474,
+        "llm_latency_s_mean": null
+      },
+      "movie": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 354725,
+        "output_tokens": 2346,
+        "input_tokens_per_1k_pages": 7094500.0,
+        "output_tokens_per_1k_pages": 46920.0,
+        "calls_per_template": 50.0,
+        "usd_per_1k_pages": 14.658199999999999,
+        "price_estimated": false,
+        "extrapolated": true,
+        "spend_usd": 0.7329100000000002,
+        "llm_latency_s_mean": null
+      },
+      "nbaplayer": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 437922,
+        "output_tokens": 1406,
+        "input_tokens_per_1k_pages": 8758440.0,
+        "output_tokens_per_1k_pages": 28120.0,
+        "calls_per_template": 50.0,
+        "usd_per_1k_pages": 17.79808,
+        "price_estimated": false,
+        "extrapolated": true,
+        "spend_usd": 0.889904,
+        "llm_latency_s_mean": null
+      },
+      "restaurant": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 376828,
+        "output_tokens": 2223,
+        "input_tokens_per_1k_pages": 7536560.0,
+        "output_tokens_per_1k_pages": 44460.0,
+        "calls_per_template": 50.0,
+        "usd_per_1k_pages": 15.517719999999999,
+        "price_estimated": false,
+        "extrapolated": true,
+        "spend_usd": 0.7758860000000001,
+        "llm_latency_s_mean": null
+      }
+    },
+    "speed_pages_per_sec_per_core": {
+      "baseline": null
+    },
+    "curves": {},
+    "unprompted_recall": null
+  },
+  "sites": [
+    {
+      "site": "auto-aol",
+      "vertical": "auto",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "auto-aol",
+        "vertical": "auto",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.75
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 0,
+              "fp": 43,
+              "fn": 0,
+              "tn": 7,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 43,
+              "fn": 0,
+              "tn": 7,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 45,
+              "fp": 0,
+              "fn": 0,
+              "tn": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 45,
+              "fp": 0,
+              "fn": 0,
+              "tn": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 573002,
+        "output_tokens": 3632,
+        "input_tokens_per_1k_pages": 11460040.0,
+        "output_tokens_per_1k_pages": 72640.0,
+        "calls_per_template": 50.0,
+        "calls_per_page": 1.0,
+        "usd_per_1k_pages": 23.646479999999997,
+        "price_estimated": false,
+        "spend_usd": 1.182324,
+        "extrapolated": true,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 73.95
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 70.7729,
+          "pages": 50,
+          "pages_per_sec": 0.7065
+        }
+      },
+      "spend_usd": 1.182324,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [],
+      "notes": [
+        "cost per 1,000 pages extrapolated from 50 of 2000 pages",
+        "naive per-page extraction with openai/gpt-6.1-sol (naive_baseline.v1) on 50 of 50 pages (seeded random sample, seed=1, max_pages=50)",
+        "cost_usd prices all 573002 input + 3632 output tokens from config/prices.yaml (cached calls included); actually spent this run: $1.1823 (0/50 calls served from cache)",
+        "per page: 11460 input + 73 output tokens; extrapolated $23.65 per 1,000 pages",
+        "service tier: flex (falls back to the default tier when Flex has no capacity); spend is billed per call at the tier the provider reports, cost tables use standard prices"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "aol",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_naive/20261026T100810Z/auto-aol/run"
+    },
+    {
+      "site": "book-abebooks",
+      "vertical": "book",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "book-abebooks",
+        "vertical": "book",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9955555555555555,
+          "recall": 1.0,
+          "f1": 0.997752808988764
+        },
+        "raw": {
+          "precision": 0.9955555555555555,
+          "recall": 1.0,
+          "f1": 0.997752808988764
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 44,
+              "fp": 1,
+              "fn": 0,
+              "tn": 5,
+              "precision": 0.9777777777777777,
+              "recall": 1.0,
+              "f1": 0.9887640449438202
+            },
+            "raw": {
+              "tp": 44,
+              "fp": 1,
+              "fn": 0,
+              "tn": 5,
+              "precision": 0.9777777777777777,
+              "recall": 1.0,
+              "f1": 0.9887640449438202
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 620198,
+        "output_tokens": 2909,
+        "input_tokens_per_1k_pages": 12403960.0,
+        "output_tokens_per_1k_pages": 58180.0,
+        "calls_per_template": 50.0,
+        "calls_per_page": 1.0,
+        "usd_per_1k_pages": 25.389719999999997,
+        "price_estimated": false,
+        "spend_usd": 1.177536,
+        "extrapolated": true,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 70.004
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 65.7945,
+          "pages": 50,
+          "pages_per_sec": 0.7599
+        }
+      },
+      "spend_usd": 1.177536,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [],
+      "notes": [
+        "cost per 1,000 pages extrapolated from 50 of 2000 pages",
+        "naive per-page extraction with openai/gpt-6.1-sol (naive_baseline.v1) on 50 of 50 pages (seeded random sample, seed=1, max_pages=50)",
+        "cost_usd prices all 620198 input + 2909 output tokens from config/prices.yaml (cached calls included); actually spent this run: $1.1775 (3/50 calls served from cache)",
+        "per page: 12404 input + 58 output tokens; extrapolated $25.39 per 1,000 pages",
+        "service tier: flex (falls back to the default tier when Flex has no capacity); spend is billed per call at the tier the provider reports, cost tables use standard prices"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "abebooks",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_naive/20261026T100810Z/book-abebooks/run"
+    },
+    {
+      "site": "camera-amazon",
+      "vertical": "camera",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 1767,
+      "n_labeled": 1767,
+      "accuracy": {
+        "site": "camera-amazon",
+        "vertical": "camera",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9133333333333334,
+          "recall": 0.9133333333333334,
+          "f1": 0.9133333333333334
+        },
+        "raw": {
+          "precision": 0.9133333333333334,
+          "recall": 0.9133333333333334,
+          "f1": 0.9133333333333334
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 37,
+              "fp": 13,
+              "fn": 13,
+              "tn": 0,
+              "precision": 0.74,
+              "recall": 0.74,
+              "f1": 0.74
+            },
+            "raw": {
+              "tp": 37,
+              "fp": 13,
+              "fn": 13,
+              "tn": 0,
+              "precision": 0.74,
+              "recall": 0.74,
+              "f1": 0.74
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "manufacturer": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 3,
+        "n_templates": 3,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 50,
+        "templates": 2,
+        "calls": 50,
+        "input_tokens": 546802,
+        "output_tokens": 2608,
+        "input_tokens_per_1k_pages": 10936040.0,
+        "output_tokens_per_1k_pages": 52160.0,
+        "calls_per_template": 25.0,
+        "calls_per_page": 1.0,
+        "usd_per_1k_pages": 22.393679999999996,
+        "price_estimated": false,
+        "spend_usd": 1.1196840000000001,
+        "extrapolated": true,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 51.896
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 46.4513,
+          "pages": 50,
+          "pages_per_sec": 1.0764
+        }
+      },
+      "spend_usd": 1.119684,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [],
+      "notes": [
+        "cost per 1,000 pages extrapolated from 50 of 1767 pages",
+        "naive per-page extraction with openai/gpt-6.1-sol (naive_baseline.v1) on 50 of 50 pages (seeded random sample, seed=1, max_pages=50)",
+        "cost_usd prices all 546802 input + 2608 output tokens from config/prices.yaml (cached calls included); actually spent this run: $1.1197 (0/50 calls served from cache)",
+        "per page: 10936 input + 52 output tokens; extrapolated $22.39 per 1,000 pages",
+        "service tier: flex (falls back to the default tier when Flex has no capacity); spend is billed per call at the tier the provider reports, cost tables use standard prices"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "amazon",
+        "split": "dev",
+        "pages": 1767,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_naive/20261026T100810Z/camera-amazon/run"
+    },
+    {
+      "site": "job-careerbuilder",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "job-careerbuilder",
+        "vertical": "job",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.745,
+          "recall": 0.9933333333333333,
+          "f1": 0.745
+        },
+        "raw": {
+          "precision": 0.745,
+          "recall": 0.9933333333333333,
+          "f1": 0.745
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "company": {
+            "norm": {
+              "tp": 49,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.98,
+              "recall": 0.98,
+              "f1": 0.98
+            },
+            "raw": {
+              "tp": 49,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.98,
+              "recall": 0.98,
+              "f1": 0.98
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "date_posted": {
+            "norm": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "tn": 49,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "tn": 49,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 34,
+        "n_templates": 5,
+        "tail_pages": 72
+      },
+      "cost": {
+        "pages": 50,
+        "templates": 5,
+        "calls": 50,
+        "input_tokens": 351997,
+        "output_tokens": 1748,
+        "input_tokens_per_1k_pages": 7039940.0,
+        "output_tokens_per_1k_pages": 34960.0,
+        "calls_per_template": 10.0,
+        "calls_per_page": 1.0,
+        "usd_per_1k_pages": 14.429479999999998,
+        "price_estimated": false,
+        "spend_usd": 0.721474,
+        "extrapolated": true,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 56.431
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 50.136,
+          "pages": 50,
+          "pages_per_sec": 0.9973
+        }
+      },
+      "spend_usd": 0.721474,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [],
+      "notes": [
+        "cost per 1,000 pages extrapolated from 50 of 2000 pages",
+        "naive per-page extraction with openai/gpt-6.1-sol (naive_baseline.v1) on 50 of 50 pages (seeded random sample, seed=1, max_pages=50)",
+        "cost_usd prices all 351997 input + 1748 output tokens from config/prices.yaml (cached calls included); actually spent this run: $0.7215 (0/50 calls served from cache)",
+        "per page: 7040 input + 35 output tokens; extrapolated $14.43 per 1,000 pages",
+        "service tier: flex (falls back to the default tier when Flex has no capacity); spend is billed per call at the tier the provider reports, cost tables use standard prices"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "careerbuilder",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_naive/20261026T100810Z/job-careerbuilder/run"
+    },
+    {
+      "site": "movie-allmovie",
+      "vertical": "movie",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "movie-allmovie",
+        "vertical": "movie",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.78,
+          "recall": 0.78,
+          "f1": 0.78
+        },
+        "raw": {
+          "precision": 0.78,
+          "recall": 0.78,
+          "f1": 0.78
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "director": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "genre": {
+            "norm": {
+              "tp": 38,
+              "fp": 12,
+              "fn": 12,
+              "tn": 0,
+              "precision": 0.76,
+              "recall": 0.76,
+              "f1": 0.76
+            },
+            "raw": {
+              "tp": 38,
+              "fp": 12,
+              "fn": 12,
+              "tn": 0,
+              "precision": 0.76,
+              "recall": 0.76,
+              "f1": 0.76
+            }
+          },
+          "mpaa_rating": {
+            "norm": {
+              "tp": 18,
+              "fp": 32,
+              "fn": 32,
+              "tn": 0,
+              "precision": 0.36,
+              "recall": 0.36,
+              "f1": 0.36
+            },
+            "raw": {
+              "tp": 18,
+              "fp": 32,
+              "fn": 32,
+              "tn": 0,
+              "precision": 0.36,
+              "recall": 0.36,
+              "f1": 0.36
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 354725,
+        "output_tokens": 2346,
+        "input_tokens_per_1k_pages": 7094500.0,
+        "output_tokens_per_1k_pages": 46920.0,
+        "calls_per_template": 50.0,
+        "calls_per_page": 1.0,
+        "usd_per_1k_pages": 14.658199999999999,
+        "price_estimated": false,
+        "spend_usd": 0.7329100000000002,
+        "extrapolated": true,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 55.639
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 53.1434,
+          "pages": 50,
+          "pages_per_sec": 0.9409
+        }
+      },
+      "spend_usd": 0.73291,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [],
+      "notes": [
+        "cost per 1,000 pages extrapolated from 50 of 2000 pages",
+        "naive per-page extraction with openai/gpt-6.1-sol (naive_baseline.v1) on 50 of 50 pages (seeded random sample, seed=1, max_pages=50)",
+        "cost_usd prices all 354725 input + 2346 output tokens from config/prices.yaml (cached calls included); actually spent this run: $0.7329 (0/50 calls served from cache)",
+        "per page: 7094 input + 47 output tokens; extrapolated $14.66 per 1,000 pages",
+        "service tier: flex (falls back to the default tier when Flex has no capacity); spend is billed per call at the tier the provider reports, cost tables use standard prices"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "allmovie",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_naive/20261026T100810Z/movie-allmovie/run"
+    },
+    {
+      "site": "nbaplayer-espn",
+      "vertical": "nbaplayer",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 434,
+      "n_labeled": 434,
+      "accuracy": {
+        "site": "nbaplayer-espn",
+        "vertical": "nbaplayer",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 0,
+              "fp": 50,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 50,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "team": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "height": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "weight": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 437922,
+        "output_tokens": 1406,
+        "input_tokens_per_1k_pages": 8758440.0,
+        "output_tokens_per_1k_pages": 28120.0,
+        "calls_per_template": 50.0,
+        "calls_per_page": 1.0,
+        "usd_per_1k_pages": 17.79808,
+        "price_estimated": false,
+        "spend_usd": 0.889904,
+        "extrapolated": true,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 51.38
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 48.5516,
+          "pages": 50,
+          "pages_per_sec": 1.0298
+        }
+      },
+      "spend_usd": 0.889904,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [],
+      "notes": [
+        "cost per 1,000 pages extrapolated from 50 of 434 pages",
+        "naive per-page extraction with openai/gpt-6.1-sol (naive_baseline.v1) on 50 of 50 pages (seeded random sample, seed=1, max_pages=50)",
+        "cost_usd prices all 437922 input + 1406 output tokens from config/prices.yaml (cached calls included); actually spent this run: $0.8899 (0/50 calls served from cache)",
+        "per page: 8758 input + 28 output tokens; extrapolated $17.80 per 1,000 pages",
+        "service tier: flex (falls back to the default tier when Flex has no capacity); spend is billed per call at the tier the provider reports, cost tables use standard prices"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "espn",
+        "split": "dev",
+        "pages": 434,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_naive/20261026T100810Z/nbaplayer-espn/run"
+    },
+    {
+      "site": "restaurant-fodors",
+      "vertical": "restaurant",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "restaurant-fodors",
+        "vertical": "restaurant",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.71,
+          "recall": 0.71,
+          "f1": 0.71
+        },
+        "raw": {
+          "precision": 0.71,
+          "recall": 0.71,
+          "f1": 0.71
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "address": {
+            "norm": {
+              "tp": 6,
+              "fp": 44,
+              "fn": 44,
+              "tn": 0,
+              "precision": 0.12,
+              "recall": 0.12,
+              "f1": 0.12
+            },
+            "raw": {
+              "tp": 6,
+              "fp": 44,
+              "fn": 44,
+              "tn": 0,
+              "precision": 0.12,
+              "recall": 0.12,
+              "f1": 0.12
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 37,
+              "fp": 13,
+              "fn": 13,
+              "tn": 0,
+              "precision": 0.74,
+              "recall": 0.74,
+              "f1": 0.74
+            },
+            "raw": {
+              "tp": 37,
+              "fp": 13,
+              "fn": 13,
+              "tn": 0,
+              "precision": 0.74,
+              "recall": 0.74,
+              "f1": 0.74
+            }
+          },
+          "cuisine": {
+            "norm": {
+              "tp": 49,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.98,
+              "recall": 0.98,
+              "f1": 0.98
+            },
+            "raw": {
+              "tp": 49,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.98,
+              "recall": 0.98,
+              "f1": 0.98
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 50,
+        "templates": 1,
+        "calls": 50,
+        "input_tokens": 376828,
+        "output_tokens": 2223,
+        "input_tokens_per_1k_pages": 7536560.0,
+        "output_tokens_per_1k_pages": 44460.0,
+        "calls_per_template": 50.0,
+        "calls_per_page": 1.0,
+        "usd_per_1k_pages": 15.517719999999999,
+        "price_estimated": false,
+        "spend_usd": 0.7758860000000001,
+        "extrapolated": true,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 53.452
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 50.9868,
+          "pages": 50,
+          "pages_per_sec": 0.9806
+        }
+      },
+      "spend_usd": 0.775886,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [],
+      "notes": [
+        "cost per 1,000 pages extrapolated from 50 of 2000 pages",
+        "naive per-page extraction with openai/gpt-6.1-sol (naive_baseline.v1) on 50 of 50 pages (seeded random sample, seed=1, max_pages=50)",
+        "cost_usd prices all 376828 input + 2223 output tokens from config/prices.yaml (cached calls included); actually spent this run: $0.7759 (0/50 calls served from cache)",
+        "per page: 7537 input + 44 output tokens; extrapolated $15.52 per 1,000 pages",
+        "service tier: flex (falls back to the default tier when Flex has no capacity); spend is billed per call at the tier the provider reports, cost tables use standard prices"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "fodors",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_naive/20261026T100810Z/restaurant-fodors/run"
+    },
+    {
+      "site": "university-collegeboard",
+      "vertical": "university",
+      "status": "skipped",
+      "reason": "evaluation budget of $6.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "collegeboard",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "auto-autobytel",
+      "vertical": "auto",
+      "status": "skipped",
+      "reason": "evaluation budget of $6.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "autobytel",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "book-amazon",
+      "vertical": "book",
+      "status": "skipped",
+      "reason": "evaluation budget of $6.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "amazon",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "camera-beachaudio",
+      "vertical": "camera",
+      "status": "skipped",
+      "reason": "evaluation budget of $6.00 reached",
+      "n_pages": 0,
+      "n_labeled": 247,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "beachaudio",
+        "split": "dev",
+        "pages": 247,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "job-dice",
+      "vertical": "job",
+      "status": "skipped",
+      "reason": "evaluation budget of $6.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "dice",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "movie-amctv",
+      "vertical": "movie",
+      "status": "skipped",
+      "reason": "evaluation budget of $6.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "amctv",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "nbaplayer-fanhouse",
+      "vertical": "nbaplayer",
+      "status": "skipped",
+      "reason": "evaluation budget of $6.00 reached",
+      "n_pages": 0,
+      "n_labeled": 446,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "fanhouse",
+        "split": "dev",
+        "pages": 446,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "restaurant-frommers",
+      "vertical": "restaurant",
+      "status": "skipped",
+      "reason": "evaluation budget of $6.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "frommers",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "university-collegenavigator",
+      "vertical": "university",
+      "status": "skipped",
+      "reason": "evaluation budget of $6.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "collegenavigator",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    }
+  ]
+}
