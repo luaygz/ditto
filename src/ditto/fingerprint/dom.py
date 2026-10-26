@@ -20,12 +20,17 @@ everything in ``<head>`` except ``<title>`` are removed.
 from __future__ import annotations
 
 import re
+import threading
 from collections.abc import Iterator
 from dataclasses import dataclass, field
+from functools import lru_cache
+from typing import TypeVar, cast
 
 from lxml import etree, html
 
 from ditto.textutil import normalize_ws
+
+_E = TypeVar("_E", bound=etree._Element)
 
 STRIP_TAGS = ("script", "style", "noscript", "svg", "iframe", "template")
 KEPT_ATTRS = ("itemprop", "data-testid", "role")
@@ -269,21 +274,70 @@ class Step:
         return self.tag + "".join(f"[{p}]" for p in preds)
 
 
-def step_of(el: etree._Element) -> Step:
-    tag = str(el.tag).lower()
-    ident = keep_identifier(el.get("id"))
-    classes = tuple(canonical_classes(el.get("class")))
+def _step(
+    tag: str,
+    raw_id: str | None,
+    raw_class: str | None,
+    itemprop: str | None,
+    testid: str | None,
+    role: str | None,
+) -> Step:
+    ident = keep_identifier(raw_id)
+    classes = tuple(canonical_classes(raw_class))
     attrs: list[tuple[str, str]] = []
-    for name in KEPT_ATTRS:
-        raw = el.get(name)
+    for name, raw in zip(KEPT_ATTRS, (itemprop, testid, role), strict=True):
         value = keep_identifier(raw) if name == "data-testid" else _clean_attr_value(raw)
         if value:
             attrs.append((name, value))
-    return Step(tag, ident, classes, tuple(attrs))
+    return Step(tag.lower(), ident, classes, tuple(attrs))
+
+
+_cached_step = lru_cache(maxsize=1 << 16)(_step)
+
+
+@lru_cache(maxsize=1 << 16)
+def _cached_label(
+    tag: str,
+    raw_id: str | None,
+    raw_class: str | None,
+    itemprop: str | None,
+    testid: str | None,
+    role: str | None,
+) -> str:
+    return _step(tag, raw_id, raw_class, itemprop, testid, role).label()
+
+
+def step_of(el: etree._Element) -> Step:
+    """The structural step of an element (memoized on its tag and relevant attributes)."""
+    get = el.get
+    return _cached_step(
+        str(el.tag), get("id"), get("class"), get("itemprop"), get("data-testid"), get("role")
+    )
+
+
+# Attributes a step label depends on; an element with none of them is labelled by its tag.
+STEP_ATTRS = ("id", "class", *KEPT_ATTRS)
+_STEP_ATTR_SET = frozenset(STEP_ATTRS)
+_TAG_LABELS: dict[str, str] = {}
+
+
+def tag_label(tag: str) -> str:
+    """Step label of an element that has none of ``STEP_ATTRS`` (its lower-cased tag)."""
+    label = _TAG_LABELS.get(tag)
+    if label is None:
+        label = _TAG_LABELS[tag] = tag.lower()
+    return label
 
 
 def step_label(el: etree._Element) -> str:
-    return step_of(el).label()
+    """``step_of(el).label()``, memoized: pages of one site repeat a few thousand step kinds."""
+    keys = el.keys()
+    if not keys or _STEP_ATTR_SET.isdisjoint(keys):
+        return tag_label(str(el.tag))
+    get = el.get
+    return _cached_label(
+        str(el.tag), get("id"), get("class"), get("itemprop"), get("data-testid"), get("role")
+    )
 
 
 _STEP_RE = re.compile(
@@ -309,24 +363,45 @@ def split_path(path: str) -> tuple[list[Step], str | None]:
     return [parse_step(s) for s in path.split(PATH_SEP)], attr
 
 
+_PARSERS = threading.local()
+
+
+def _parser(plain: bool) -> etree.HTMLParser:
+    """Per-thread reusable parser (lxml parsers must not be shared between threads)."""
+    key = "plain" if plain else "html"
+    parser: etree.HTMLParser | None = getattr(_PARSERS, key, None)
+    if parser is None:
+        cls = etree.HTMLParser if plain else html.HTMLParser
+        parser = cls(remove_comments=True, remove_pis=True)
+        setattr(_PARSERS, key, parser)
+    return parser
+
+
+def _parse(data: bytes | str, encoding: str | None, plain: bool) -> etree._Element:
+    if isinstance(data, bytes) and encoding:
+        data = data.decode(encoding, errors="replace")
+    if isinstance(data, str):
+        data = _XML_DECL.sub("", data, count=1)
+    parser = _parser(plain)
+    root: etree._Element | None = None
+    if data.strip():
+        try:
+            root = etree.fromstring(data, parser)
+        except etree.XMLSyntaxError:  # e.g. a document that is only a comment
+            root = None
+    if root is None:
+        root = etree.fromstring("<html></html>", parser)
+    return root
+
+
 def parse_html(data: bytes | str, encoding: str | None = None) -> html.HtmlElement:
     """Parse a page with lxml's HTML parser. ``data`` may be bytes (decoded with ``encoding``
-    when given, else by lxml's own sniffing) or an already-decoded string."""
-    if isinstance(data, bytes):
-        if encoding:
-            data = data.decode(encoding, errors="replace")
-        else:
-            parser = html.HTMLParser(remove_comments=True, remove_pis=True)
-            root = html.document_fromstring(data or b"<html></html>", parser=parser)
-            return root
-    text = _XML_DECL.sub("", data, count=1)
-    if not text.strip():
-        text = "<html></html>"
-    parser = html.HTMLParser(remove_comments=True, remove_pis=True)
-    return html.document_fromstring(text, parser=parser)
+    when given, else by lxml's own sniffing) or an already-decoded string. Empty or
+    unparseable input yields an empty ``<html>`` document."""
+    return cast(html.HtmlElement, _parse(data, encoding, plain=False))
 
 
-def clean_tree(root: html.HtmlElement) -> html.HtmlElement:
+def clean_tree(root: _E) -> _E:
     """Strip non-content elements in place and return ``root``."""
     etree.strip_elements(root, *STRIP_TAGS, with_tail=False)
     etree.strip_tags(root, etree.Comment, etree.ProcessingInstruction)
@@ -341,6 +416,13 @@ def clean_tree(root: html.HtmlElement) -> html.HtmlElement:
 def clean_html(data: bytes | str, encoding: str | None = None) -> html.HtmlElement:
     """Parse and clean a page: the exact tree the extractor, analysis and LLM operate on."""
     return clean_tree(parse_html(data, encoding))
+
+
+def clean_etree(data: bytes | str, encoding: str | None = None) -> etree._Element:
+    """``clean_html`` with plain ``lxml.etree`` elements instead of ``lxml.html`` ones: the same
+    tags, attributes, text and structural paths, without the per-node Python element-class
+    lookup (several times faster to traverse). For read-only bulk passes like fingerprinting."""
+    return clean_tree(_parse(data, encoding, plain=True))
 
 
 def own_text(el: etree._Element) -> str:
