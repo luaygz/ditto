@@ -34,3 +34,89 @@ One line per decision, with the reason. Newest at the bottom of each section.
 ## Process
 
 - 2026-10-24 — The build is split into parallel slice agents against fixed contracts (`ditto.run`, `ditto.fingerprint.dom`, spec models, candidate/cluster/mapping models, LLM interface); all 15 hit an Anthropic API rate limit after ~34 minutes and were resumed in two batches of ≤8 to stay under it.
+
+## Module decisions (reported by the slice builds; condensed)
+
+### Ingest
+- Encoding order: BOM, HTTP charset, meta/XML declaration, strict UTF-8, charset_normalizer, cp1252 (HTML5 order; SWDE pages carry a UTF-8 BOM with a stale `iso-8859-1` meta).
+- WHATWG superset names (latin-1 → cp1252, gb2312 → gbk, shift_jis → cp932, …); non-text codecs (utf-7, base64, rot13) ignored; a meta declaring UTF-16/32 means UTF-8.
+- WARC filters (HTTP 200, HTML content type, sniffing when missing) run before "latest capture per URL", so a newer 404 never hides an older good capture; ties go to the later file/offset.
+- Blob paths stored relative to the run root so run directories can move; re-ingest keeps valid blobs and prunes the rest.
+- Mixed inputs (HTML dir + WARC, two dirs, manifest with WARC) raise `ValueError`.
+- Blob layout stays one file per page (contract); on btrfs the first ingest of 20k files measured ~980 pages/s (hardlink-bound), 100k-page synthetic ingest measured 1,375 pages/s/core.
+
+### LLM layer
+- Model ranking drops `-pro`, `-chat-latest`, `-codex`, `-deep-research`, `-instruct` to last resort; highest numeric version wins; undated alias beats dated snapshots.
+- Cache key = SHA-256 of `{v:1, prompt_version, provider/model, messages, max_tokens, json_schema}`; `base_url` excluded (use another `DITTO_CACHE_DIR` per endpoint).
+- Structured output never delegated: the JSON schema is rendered into the system prompt, not sent as `response_format`.
+- Retries: up to 6 attempts, exponential backoff with jitter (1–60 s), `Retry-After` honoured up to 300 s, `insufficient_quota` not retried, SDK retries disabled.
+- Budget guard reserves a worst-case projection (input chars ÷ 3 + `max_tokens` output) while a call runs, so concurrent calls cannot overspend; scopes: global ledger vs `LLM_BUDGET_USD`, optional per-run `DITTO_RUN_BUDGET_USD`.
+- Cached calls record `cost_usd: 0` and `list_cost_usd` (uncached price) for cost tables.
+- Flex-tier calls are billed at the tier multiplier from `prices.yaml` (0.5) in the ledger; `list_cost_usd` stays at standard prices.
+
+### Spec format
+- Lint uses a real XPath 1.0 tokenizer; rejects namespace prefixes and `$variables`; positional forms include `[position()=n]`, `[last()]`, axis steps, `(…)[n]`, and every branch of `|`.
+- Row-relative column selectors fail only when positional or stepping through `td`/`th`/`*` without an anchor.
+- Reserved field names: `url`, `page_id`, `template_id`, anything starting with `_`.
+- The runner recognises the brief's header-text column pattern and resolves the column index once per row group (identical results; quadratic → linear per table).
+- `cast(date)` yields `YYYY-MM` for month-year, `YYYY` for a bare year; a lone `,` is a thousands separator only before exactly three digits.
+
+### Analysis
+- Key-value tables produce one candidate per key (shared path, `column` = key); record tables one candidate per column (`<th>` text, else `colN`).
+- Key-value test: ≥70% of key cells recur on ≥2 pages and ≥2% of pages, some values vary, some page has ≥2 rows; keys capped at 50 characters.
+- Layout tables (nested table or 60+ elements in a cell) are ignored.
+- Constant text on < 95% of pages is boilerplate/label, not optional (the brief's optional rule requires m < 0.98).
+- Two-pass analysis: pass 1 (≤500 evenly spaced pages) decides tables and invariant texts, pass 2 gathers stats on every sampled page.
+- Label hint = adjacent invariant text only (never nav/lists/tables/blocks > 6 items; never climbs into `body`).
+
+### Union page
+- Candidates located with the analysis' own `locate_candidates`, so matching agrees with the analysis exactly.
+- Every field candidate missing from the base is spliced (not only optional ones); donors chosen greedily.
+- `colspan`/`rowspan` kept beyond the brief's attribute list (numbered columns depend on them).
+- Collapse has four aggressiveness levels; key-value lists never collapse; over budget: collapse, then drop candidate-free subtrees, then cut candidate text to 120 characters, then drop least-frequent candidates (logged).
+
+### Spec generation
+- Prompt files are split into chat messages by `# system` / `# user` headings with `{{placeholder}}` values; all prompt text lives in versioned files.
+- Both mode instructions sit in the system message so the system prefix is identical across templates (provider prompt cache applies).
+- The schema shown to the model is derived from the Pydantic `Spec` minus verification-owned keys.
+- The pipeline overrides `optional` from the analysis (max p of source candidates < 0.95) and fills `type_check`/description from `fields.yaml`.
+- After a second validation failure, individually valid fields are kept (draft `partial`); failed fields go to `generation.json` for the path-induced fallback.
+- Budget: refuse before any call when the projection exceeds the remainder; mid-run exhaustion returns normally listing unprocessed templates.
+
+### Checkpoints
+- Probe score = strongest evidence (label similarity, description overlap, user examples, type) × factors that only lower it (type, example shape, scalar/list shape, presence); found ≥ 0.6 with a 0.15 lead, ambiguous ≥ 0.35.
+- Labels, boilerplate, noise, and table key/header cells can never be fields.
+- `confirm --yes` accepts `probe.yaml` as it stands (hand edits kept).
+- Review applies the spec to sampled pages directly; rejected fields go to `ditto.verify.repair_rejected`.
+
+### Evaluation
+- A field key missing from a page's label dict is not scored on that page; present-but-empty means the page lacks it.
+- A null prediction on an empty label is a true negative; a wrong value counts as both a false positive and a miss.
+- Scalar labels given as lists are alternatives; list predictions are scored top-1 against scalar labels (standard SWDE practice).
+- The normalized column also canonicalizes numbers, reads C1 controls as cp1252, strips leading separators (SWDE labels carry `": Canon"`).
+- Pages in a spec's `pages_seen` are excluded from accuracy.
+- `usd_per_1k_pages` uses standard-tier list prices for every method; `spend_usd` is what was billed.
+- Naive-baseline samples: 50 pages/site SWDE dev, 20 SWDE test, 40 Common Crawl (budget); ditto is scored on the same seeded pages.
+
+### Synthetic generator
+- `templates` counts regular templates; 3 extra tail templates (1–19 pages) always exist.
+- Faker value pools built once per seed; each page's RNG derives from (seed, page index), so output is identical for any worker count.
+- Near-duplicate Jaccard measured on rendered pages (worst case over nav variants); templates re-rolled until pairwise Jaccard ≤ 0.5 except the designated pair.
+
+### Baselines
+- Naive model input: `clean_html` plus attribute pruning to the union-page set (+ microdata `content`/`datetime`, `alt`/`title`).
+- crawl4ai forced to temperature 1 (gpt-6.1-sol rejects 0.01); its token usage captured by wrapping its completion helper and recorded via `record_external_usage`.
+- AutoScraper's `eval()` on model output replaced with a digits-only parser (no generated code runs); 3 seed pages per template; ≤40 calls per (template, field).
+- Hand-written wrappers for auto-yahoo, book-barnesandnoble, movie-imdb, nbaplayer-yahoo, university-usnews (test split), written from pages 0000–0009 before any generated spec existed.
+
+### Common Crawl
+- Crawls CC-MAIN-2026-43 and CC-MAIN-2026-39; 8 domains: argos.co.uk, ikea.com (product), careerbuilder.com, dice.com (job), food.ndtv.com, marmiton.org (recipe), skiddle.com, ticketweb.com (event); selection evidence in `domains.yaml` and `selection_log.json`.
+- Download measured at ~7.5 captures/s with the 4-request limit, so 160k captures take ~6 h; cap kept at 20,000 per domain.
+
+## Gates
+
+- 2026-10-26 — v0.1 passed on the desktop (16 cores, 62 GB; no scaling needed): ARI 1.0, purity 1.0, 0 over/under-merges at 10k and 100k pages (seed 1). Results: `eval/results/synth_default/20261026T095112Z`, `eval/results/synth_scale/20261026T095119Z`.
+
+## Process (continued)
+
+- 2026-10-26 — Work moved from the laptop (12 cores, 30 GB) to the desktop (16 cores, 62 GB); the copied `.venv` pointed at a missing interpreter and was rebuilt from `uv.lock`. Speed numbers in results come from the desktop.

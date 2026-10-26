@@ -1,16 +1,16 @@
 # Status
 
-_Updated 2026-10-24._
+_Updated 2026-10-26._
 
 ## Current phase
 
-**v0.1 Foundations** — in progress.
+**v0.2 Analysis and union page** — in progress (v0.1 passed and tagged).
 
 ## Gates
 
 | Gate | Criterion | Status |
 | --- | --- | --- |
-| v0.1 | ARI ≥ 0.95 on synthetic default site at 10k pages; 100k (or scaled) run completes | pending |
+| v0.1 | ARI ≥ 0.95 on synthetic default site at 10k pages; 100k (or scaled) run completes | **passed** — ARI 1.0 at 10k and 100k (`eval/results/synth_default`, `synth_scale`) |
 | v0.2 | every optional synthetic field in its union page; SWDE dev union pages < 30k tokens | pending |
 | v0.3 | SWDE dev F1 within 5 points of naive baseline at < 1% of its tokens/page | pending |
 | v0.4 | schema-precision ≥ 0.8 on 10 dev sites; clean install + README example works | pending |
@@ -26,16 +26,23 @@ _Updated 2026-10-24._
 
 ## v0.1 task list
 
-- [ ] ingest (directory + manifest, WARC) into `pages.sqlite`
-- [ ] fingerprinting (signatures, text hashes) at 100k-page scale
-- [ ] clustering (exact groups, chrome filter, MinHash LSH, Jaccard confirm, URL tie-break)
-- [ ] synthetic generator with default parameters + 200-page fixture site
-- [ ] unit tests for all of the above
-- [ ] gate: ARI ≥ 0.95 at 10k pages; 100k run with clustering metrics recorded
+- [x] ingest (directory + manifest, WARC) into `pages.sqlite`
+- [x] fingerprinting (signatures, text hashes) at 100k-page scale
+- [x] clustering (exact groups, chrome filter, MinHash LSH, Jaccard confirm, URL tie-break)
+- [x] synthetic generator with default parameters + 200-page fixture site
+- [x] unit tests for all of the above (`make check`: 1,152 tests, 93.6% coverage)
+- [x] gate: ARI 1.0 at 10k; 100k run completes (ARI 1.0, ~60 s end to end on 16 cores)
+
+All other stages also exist (analysis, union page, spec generation, verification/repair, extraction, checkpoints, LLM layer, evaluation harness, baselines); the fixture site runs end to end through `ditto run --yes` for $0.053.
+
+## v0.2 task list
+
+- [ ] gate: every optional synthetic field appears in its template's union page
+- [ ] gate: SWDE development-slice union pages under 30k tokens each
 
 ## Next
 
-Parallel build of all pipeline stages against the shared contracts; dataset acquisition (SWDE, Common Crawl, LiveWeb-IE) runs alongside.
+v0.2 gate measurement; probe/mapping robustness (auto-accepted mappings become hints); SWDE dev accuracy tuning toward the v0.3 gate; Common Crawl download (~6 h, running).
 
 ## Known blockers
 
@@ -43,4 +50,4 @@ None.
 
 ## LLM spend so far
 
-$0.00 (two key/model checks, < $0.001).
+$0.36 (agent smoke tests and the fixture run); budget $60.
