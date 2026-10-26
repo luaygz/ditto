@@ -1,0 +1,961 @@
+{
+  "dataset": "livewebie",
+  "status": "partial",
+  "summary": "9 of 15 LiveWeb-IE websites snapshotted and usable; excluded sites carry an excluded_reason",
+  "paper": {
+    "title": "LiveWeb-IE: A Benchmark For Online Web Information Extraction",
+    "arxiv": "https://arxiv.org/abs/2603.13773",
+    "venue": "ICLR 2026",
+    "openreview": "https://openreview.net/forum?id=bIODmQ1TNd"
+  },
+  "release": {
+    "repo": "https://github.com/sbY99/LiveWeb-IE",
+    "commit": "34b56496f221e41ae44d137b7c42e38e57702c70",
+    "commit_date": "2026-02-01T08:07:56Z",
+    "tarball_url": "https://codeload.github.com/sbY99/LiveWeb-IE/tar.gz/34b56496f221e41ae44d137b7c42e38e57702c70",
+    "tarball_sha256": "671f0305683470663a0d72c4d4e73d5bc0e9930863ee75b254391dd499e09f7d",
+    "tree_sha256": "dceb29577810893a69b4363701f407d70021e221249ccb0a81631b8f3ab71c37",
+    "dataset_json_sha256": "122dbef831a6903344b2922529e37267272198a9ad938e49414e1f95693d8fbf",
+    "path": "data/livewebie/release/LiveWeb_IE",
+    "license_url": "https://github.com/sbY99/LiveWeb-IE#license-and-terms-of-use",
+    "license_terms": "The LiveWeb-IE benchmark is released strictly for non-commercial research purposes only. By downloading or using this dataset, you agree to the following terms: 1. Non-Commercial Use: You may not use this dataset for any commercial purposes, including but not limited to training commercial models or enhancing commercial services. 2. Attribution: Any publication or report using this dataset must cite the original paper (LiveWeb-IE: A Benchmark For Online Web Information Extraction, ICLR 2026). 3. No Redistribution without License: You may not redistribute this dataset without including this license agreement. This restriction complies with the ethical agreements made with the website providers included in this benchmark.",
+    "citation": "Seungbin Yang, Jihwan Kim, Jaemin Choi, Dongjin Kim, Soyoung Yang, ChaeHun Park, Jaegul Choo. LiveWeb-IE: A Benchmark For Online Web Information Extraction. ICLR 2026. arXiv:2603.13773. https://openreview.net/forum?id=bIODmQ1TNd"
+  },
+  "permissions": {
+    "checked_at": "2026-10-24",
+    "assessment": "Usable by third parties for non-commercial research. The release README grants use to whoever downloads it ('By downloading or using this dataset, you agree to the following terms') under non-commercial-research, attribution and license-on-redistribution terms that it says comply with the agreements made with the website providers; the paper requires benchmark users' systems to access the listed URLs (live evaluation), so fetching them is the intended use. ditto uses it for non-commercial research evaluation, keeps release and pages under gitignored data/, and commits only derived field definitions (with the license terms) and this manifest. Each host's robots.txt is obeyed at fetch time; a host whose robots.txt carries Content-Signal ai-input=no is excluded because ditto feeds page content to an LLM.",
+    "evidence": [
+      {
+        "url": "https://arxiv.org/abs/2603.13773",
+        "finding": "Abstract: 'Based on trusted and permission-granted websites'; footnote links the dataset at https://github.com/sbY99/LiveWeb-IE."
+      },
+      {
+        "url": "https://arxiv.org/html/2603.13773v1",
+        "finding": "Ethics statement: robots.txt and Terms of Use reviewed, administrators contacted for explicit permission 'to include their website in our benchmark'; 'We will release our benchmark under a license that restricts its application to research purposes only'. Sec. 1/3: 'LiveWeb-IE mandates evaluation directly on live websites ... by requiring WIE systems to access the target URL'."
+      },
+      {
+        "url": "https://github.com/sbY99/LiveWeb-IE",
+        "finding": "README 'License and Terms of Use' (non-commercial research only, attribution, no redistribution without the license); GitHub API reports no SPDX license; repository holds dataset.json, group.jsonl per site and 179 ground-truth files."
+      }
+    ]
+  },
+  "counts": {
+    "websites": 15,
+    "domains": 8,
+    "groups": 46,
+    "queries": 342,
+    "unique_attributes": 97,
+    "groundtruth_files": 164,
+    "group_urls": 4874,
+    "unique_urls": 4874,
+    "queries_by_type": {
+      "type_1": 65,
+      "type_2": 96,
+      "type_3": 97,
+      "type_4": 84
+    }
+  },
+  "paper_reported": {
+    "_label": "numbers reported by the LiveWeb-IE paper (arXiv 2603.13773v1), not measured by ditto",
+    "domains": 8,
+    "websites": 15,
+    "page_groups": 46,
+    "queries": 342,
+    "unique_attributes": 97,
+    "web_pages_per_website_tables_7_9": {
+      "arxiv.org": 87,
+      "iclr.cc": 292,
+      "neurips.cc": 311,
+      "icml.cc": 225,
+      "huggingface.co": 230,
+      "marinespecies.org": 73,
+      "fueleconomy.gov": 69,
+      "thesportsdb.com": 261,
+      "dp.la": 184,
+      "themealdb.com": 298,
+      "thecocktaildb.com": 495,
+      "books.toscrape.com": 1100,
+      "sandbox.oxylabs.io": 1143,
+      "scrapethissite.com": 32,
+      "quotes.toscrape.com": 70
+    },
+    "static_vs_live_gap": "Appendix F: HTML-based LLM wrapper generation loses >15% F1 on the Nov 2025 versions of SWDE pages vs. their snapshots (GPT-4o: -15.14% avg)."
+  },
+  "snapshot": {
+    "user_agent": "ditto-benchmark/1.0 (+https://github.com/luaygz/ditto)",
+    "min_interval_s_per_host": 1.0,
+    "robots": "RFC 9309; Crawl-delay honoured; Content-Signal ai-input=no excludes host",
+    "run_started": "2026-10-24T09:46:38Z",
+    "run_finished": "2026-10-24T09:58:40Z",
+    "data_dir": "data/livewebie",
+    "min_label_presence": 0.5
+  },
+  "evaluation_protocol": [
+    "The paper evaluates systems on the live sites at evaluation time; ditto evaluates on the frozen snapshot recorded here, so ditto's numbers are not directly comparable with the paper's.",
+    "The paper gives systems free-form queries; ditto is given per-site prompted-mode fields.yaml files translated mechanically from those queries (eval/datasets/livewebie/build_fields.py), so attribute identification is not tested.",
+    "Field kind follows the query type: type_1/type_2 attributes are scalar, type_3/type_4 attributes are lists; a site using one attribute name both ways gets '<attr>_list' for the list-valued one.",
+    "Complexity breakdown: mean field F1 over the fields asked for by each type's queries (field-level), not the paper's per-query precision/recall.",
+    "Image and link ground truth are raw @src/@href values (often relative), compared as such.",
+    "Pages are labeled only with the fields annotated for their page group."
+  ],
+  "known_issues": [
+    "Release README swaps the Type II/III descriptions; dataset.json follows the paper (type_2 = several single-valued attributes, type_3 = one list-valued attribute).",
+    "iclr.cc, icml.cc and neurips.cc g_000 'author' is queried as a list (type_3) but annotated as one ' · '-joined string per page; kept as published.",
+    "Some group.jsonl files repeat URLs (4915 listed, 4874 unique); duplicates are fetched once.",
+    "Ground-truth values may contain newlines (huggingface.co titles); the parser keeps them."
+  ],
+  "sites": {
+    "arxiv.org": {
+      "domain": "academic",
+      "host": "arxiv.org",
+      "groups": [
+        "g_000",
+        "g_001",
+        "g_002"
+      ],
+      "urls": 87,
+      "robots": {
+        "url": "https://arxiv.org/robots.txt",
+        "final_url": "https://arxiv.org/robots.txt",
+        "status": 200,
+        "sha256": "eda2bc852443f3f29d31eb04d37b26476654dc33b29256fb882819da23d189a5",
+        "mode": "parsed",
+        "crawl_delay": 15.0,
+        "content_signals": {},
+        "rules": 35,
+        "interval_s": 15.0
+      },
+      "fetch_counts": {
+        "urls": 87,
+        "ok_html": 87,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 42,
+      "fetched_from": "2026-10-24T09:46:38Z",
+      "fetched_to": "2026-10-24T09:56:55Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/arxiv.org.yaml",
+      "fields_sha256": "f4d97056f53ba8bc21139907d7dedd28cc74b166baa80648e2153b145750fbe3",
+      "warc": "data/livewebie/arxiv.org.warc.gz",
+      "warc_bytes": 991830,
+      "warc_sha256": "8ddc485a9200c29c884e6bfae566711f134d8f4ee07b68c7406eb76e71465e38",
+      "pages_200": 87,
+      "label_presence": {
+        "overall": 0.9801,
+        "values": 19312,
+        "found": 18928,
+        "labeled_pages": 87,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 0.9845,
+          "g_001": 0.98,
+          "g_002": 1.0
+        },
+        "by_field": {
+          "author": 0.9578,
+          "author_profile_link": 0.9996,
+          "pdf_link": 1.0,
+          "pdf_link_list": 0.9994,
+          "subject": 1.0,
+          "subject_list": 1.0,
+          "title": 0.9783,
+          "title_list": 0.972
+        }
+      },
+      "included": true
+    },
+    "books.toscrape.com": {
+      "domain": "book",
+      "host": "books.toscrape.com",
+      "groups": [
+        "g_000",
+        "g_001",
+        "g_002"
+      ],
+      "urls": 1100,
+      "robots": {
+        "url": "https://books.toscrape.com/robots.txt",
+        "final_url": "https://books.toscrape.com/robots.txt",
+        "status": 404,
+        "sha256": "6ad407809dc8e6d079dfbd21823508dffb897b97a27eb8ae43acbea1b7c8df0d",
+        "mode": "allow_all",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 0,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 1100,
+        "ok_html": 1100,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 404,
+      "fetched_from": "2026-10-24T09:46:39Z",
+      "fetched_to": "2026-10-24T09:53:26Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/books.toscrape.com.yaml",
+      "fields_sha256": "6ee2b1685ae822cc3c1d3e00c0bde564b2b12e94b1a8bb75715d150bdae59974",
+      "warc": "data/livewebie/books.toscrape.com.warc.gz",
+      "warc_bytes": 5130111,
+      "warc_sha256": "bff287e127bd7dd4808819cae38e70c4dfdaf7a85f89f0ec1a33669c5660a1b1",
+      "pages_200": 1100,
+      "label_presence": {
+        "overall": 1.0,
+        "values": 10100,
+        "found": 10100,
+        "labeled_pages": 1100,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 1.0,
+          "g_001": 1.0,
+          "g_002": 1.0
+        },
+        "by_field": {
+          "book_image": 1.0,
+          "book_image_list": 1.0,
+          "book_link": 1.0,
+          "category": 1.0,
+          "count": 1.0,
+          "price": 1.0,
+          "price_list": 1.0,
+          "stock_status": 1.0,
+          "stock_status_list": 1.0,
+          "title": 1.0,
+          "title_list": 1.0,
+          "upc": 1.0
+        }
+      },
+      "included": true
+    },
+    "dp.la": {
+      "domain": "library",
+      "host": "dp.la",
+      "groups": [
+        "g_000",
+        "g_001",
+        "g_002",
+        "g_003",
+        "g_004"
+      ],
+      "urls": 184,
+      "robots": {
+        "url": "https://dp.la/robots.txt",
+        "final_url": "https://dp.la/robots.txt",
+        "status": 200,
+        "sha256": "f9f134a0ce38f49ec8d751ebbd1bb5dfaf6039b4c429a8ec6e10baa934d9c8b0",
+        "mode": "parsed",
+        "crawl_delay": 2.0,
+        "content_signals": {},
+        "rules": 2,
+        "interval_s": 2.0
+      },
+      "fetch_counts": {
+        "urls": 184,
+        "ok_html": 0,
+        "non_200": 184,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 185,
+      "fetched_from": "2026-10-24T09:32:29Z",
+      "fetched_to": "2026-10-24T09:38:39Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/dp.la.yaml",
+      "fields_sha256": "9926765b22382c5c7c41429d027d7036537d4711cdb281cc6bea2b8d47fa2e2f",
+      "warc": "data/livewebie/dp.la.warc.gz",
+      "warc_bytes": 321694,
+      "warc_sha256": "f6d54a5d5f26e5b52d13220e3bfe80cc2c1dbf1d89f2b4ff9f79b6248f7675da",
+      "pages_200": 0,
+      "label_presence": {
+        "overall": null,
+        "values": 0,
+        "found": 0,
+        "labeled_pages": 0,
+        "labeled_pages_not_in_snapshot": 184,
+        "by_group": {},
+        "by_field": {}
+      },
+      "included": false,
+      "excluded_reason": "no page could be fetched (no HTTP 200)"
+    },
+    "fueleconomy.gov": {
+      "domain": "auto",
+      "host": "www.fueleconomy.gov",
+      "groups": [
+        "g_000",
+        "g_001",
+        "g_002"
+      ],
+      "urls": 69,
+      "robots": {
+        "url": "https://www.fueleconomy.gov/robots.txt",
+        "final_url": "https://www.fueleconomy.gov/robots.txt",
+        "status": null,
+        "error": "RemoteProtocolError: Server disconnected without sending a response.",
+        "mode": "disallow_all",
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 0,
+        "ok_html": 0,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 4,
+      "fetched_from": "2026-10-24T09:46:39Z",
+      "fetched_to": "2026-10-24T09:47:13Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/fueleconomy.gov.yaml",
+      "fields_sha256": "040dcad709bd219107b41559ab4fa358746b660ccebafb937d79e156d276cae1",
+      "included": false,
+      "excluded_reason": "robots.txt unreachable (RemoteProtocolError: Server disconnected without sending a response.); RFC 9309 requires assuming complete disallow"
+    },
+    "huggingface.co": {
+      "domain": "academic",
+      "host": "huggingface.co",
+      "groups": [
+        "g_000",
+        "g_001"
+      ],
+      "urls": 230,
+      "robots": {
+        "url": "https://huggingface.co/robots.txt",
+        "final_url": "https://huggingface.co/robots.txt",
+        "status": 200,
+        "sha256": "045c12bc2b5f1820752a5c149d2c96030ecfb8f32c42dd034cead715be277193",
+        "mode": "parsed",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 1,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 230,
+        "ok_html": 230,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 233,
+      "fetched_from": "2026-10-24T09:32:29Z",
+      "fetched_to": "2026-10-24T09:40:14Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/huggingface.co.yaml",
+      "fields_sha256": "8de48a2d66ee31496f333bb4c991605cd88d6532a7fa84cdf6024503910dac1d",
+      "warc": "data/livewebie/huggingface.co.warc.gz",
+      "warc_bytes": 9847338,
+      "warc_sha256": "1c31b3e0afd73884089c0be2599891304a5d341e1033011373e2cc56b5b555c9",
+      "pages_200": 230,
+      "label_presence": {
+        "overall": 0.9971,
+        "values": 5611,
+        "found": 5595,
+        "labeled_pages": 230,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 0.993,
+          "g_001": 0.9988
+        },
+        "by_field": {
+          "author": 1.0,
+          "author_count": 0.9985,
+          "citing_model_link": 0.9053,
+          "model_citation_count": 0.9855,
+          "paper_link": 1.0,
+          "publish_date": 1.0,
+          "source_link": 1.0,
+          "title": 1.0,
+          "title_list": 0.9977
+        }
+      },
+      "included": true
+    },
+    "iclr.cc": {
+      "domain": "academic",
+      "host": "iclr.cc",
+      "groups": [
+        "g_000",
+        "g_001"
+      ],
+      "urls": 292,
+      "robots": {
+        "url": "https://iclr.cc/robots.txt",
+        "final_url": "https://iclr.cc/robots.txt",
+        "status": 200,
+        "sha256": "5f7f1596c6da2abecd1a1e8c3b36fdbfb66f0b3298ec49aaad53e74852a882b6",
+        "mode": "parsed",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 8,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 292,
+        "ok_html": 292,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 243,
+      "fetched_from": "2026-10-24T09:46:39Z",
+      "fetched_to": "2026-10-24T09:50:46Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/iclr.cc.yaml",
+      "fields_sha256": "89a2349a914da26b85e90ed18eb487e0ec2b0d7c9e047573ff3c29c4af642eaa",
+      "warc": "data/livewebie/iclr.cc.warc.gz",
+      "warc_bytes": 6361204,
+      "warc_sha256": "c55fbfee03ed36197cba6dd487bc90a80bb064a02a63629f7b9426cac205fc5f",
+      "pages_200": 292,
+      "label_presence": {
+        "overall": 0.0985,
+        "values": 5897,
+        "found": 581,
+        "labeled_pages": 292,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 0.3298,
+          "g_001": 0.06
+        },
+        "by_field": {
+          "abstract_link": 0.0,
+          "author": 0.0004,
+          "author_profile_link": 0.0,
+          "title": 0.9893,
+          "title_list": 1.0
+        }
+      },
+      "included": false,
+      "excluded_reason": "only 0.0985 of ground-truth values appear in the fetched HTML (threshold 0.5): content is rendered client-side or has changed"
+    },
+    "icml.cc": {
+      "domain": "academic",
+      "host": "icml.cc",
+      "groups": [
+        "g_000",
+        "g_001"
+      ],
+      "urls": 225,
+      "robots": {
+        "url": "https://icml.cc/robots.txt",
+        "final_url": "https://icml.cc/robots.txt",
+        "status": 200,
+        "sha256": "5f7f1596c6da2abecd1a1e8c3b36fdbfb66f0b3298ec49aaad53e74852a882b6",
+        "mode": "parsed",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 8,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 225,
+        "ok_html": 225,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 71,
+      "fetched_from": "2026-10-24T09:46:39Z",
+      "fetched_to": "2026-10-24T09:47:55Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/icml.cc.yaml",
+      "fields_sha256": "66f3652912b44f1c4474b88156f4cf03749d38f203125fb5e08197942fd90ae9",
+      "warc": "data/livewebie/icml.cc.warc.gz",
+      "warc_bytes": 5107377,
+      "warc_sha256": "5c4143ca1b951020b071570939ea1ce4f077480aafa93a26df19cf11a89cc3aa",
+      "pages_200": 225,
+      "label_presence": {
+        "overall": 0.127,
+        "values": 3371,
+        "found": 428,
+        "labeled_pages": 225,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 0.3255,
+          "g_001": 0.0802
+        },
+        "by_field": {
+          "abstract_link": 0.0,
+          "author": 0.0,
+          "author_profile_link": 0.0,
+          "title": 0.9766,
+          "title_list": 1.0
+        }
+      },
+      "included": false,
+      "excluded_reason": "only 0.127 of ground-truth values appear in the fetched HTML (threshold 0.5): content is rendered client-side or has changed"
+    },
+    "marinespecies.org": {
+      "domain": "academic",
+      "host": "marinespecies.org",
+      "groups": [
+        "g_000",
+        "g_001",
+        "g_002",
+        "g_003"
+      ],
+      "urls": 76,
+      "robots": {
+        "url": "https://marinespecies.org/robots.txt",
+        "final_url": "https://marinespecies.org/robots.txt",
+        "status": 200,
+        "sha256": "f5efab08414353aff4f85793c99ec79e81638372b2857aac7b5e25cab6674d90",
+        "mode": "parsed",
+        "crawl_delay": 1.0,
+        "content_signals": {},
+        "rules": 2,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 76,
+        "ok_html": 76,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 77,
+      "fetched_from": "2026-10-24T09:32:29Z",
+      "fetched_to": "2026-10-24T09:33:47Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/marinespecies.org.yaml",
+      "fields_sha256": "ee06c7ecd017bd58a5ef5c80058571f65f267e42fc964fcb297b3f17c6d00d9e",
+      "warc": "data/livewebie/marinespecies.org.warc.gz",
+      "warc_bytes": 1549576,
+      "warc_sha256": "495459bb9c233d2e5e03d84c941dc5b5c77807415ba52983cfe292bf5bceede1",
+      "pages_200": 76,
+      "label_presence": {
+        "overall": 0.8297,
+        "values": 5612,
+        "found": 4656,
+        "labeled_pages": 73,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 1.0,
+          "g_001": 0.774,
+          "g_002": 0.9973,
+          "g_003": 0.98
+        },
+        "by_field": {
+          "author": 1.0,
+          "author_profile_link": 1.0,
+          "country": 1.0,
+          "editor_profile_link": 0.9969,
+          "editor_type": 1.0,
+          "group": 1.0,
+          "group_image": 0.94,
+          "group_link": 1.0,
+          "institute": 0.9919,
+          "photo_title": 1.0,
+          "species": 1.0,
+          "species_image": 1.0,
+          "species_image_list": 0.7645,
+          "species_link": 1.0,
+          "species_link_list": 0.7716,
+          "species_list": 0.7859
+        }
+      },
+      "included": true
+    },
+    "neurips.cc": {
+      "domain": "academic",
+      "host": "neurips.cc",
+      "groups": [
+        "g_000",
+        "g_001"
+      ],
+      "urls": 311,
+      "robots": {
+        "url": "https://neurips.cc/robots.txt",
+        "final_url": "https://neurips.cc/robots.txt",
+        "status": 200,
+        "sha256": "5f7f1596c6da2abecd1a1e8c3b36fdbfb66f0b3298ec49aaad53e74852a882b6",
+        "mode": "parsed",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 8,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 311,
+        "ok_html": 311,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 312,
+      "fetched_from": "2026-10-24T09:32:29Z",
+      "fetched_to": "2026-10-24T09:37:44Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/neurips.cc.yaml",
+      "fields_sha256": "d3d15d2fa6efc63a0dc8f05024bb3205c1327bcb23429f601e6cb34ea48d39f7",
+      "warc": "data/livewebie/neurips.cc.warc.gz",
+      "warc_bytes": 7012514,
+      "warc_sha256": "7e069d96d9997ab55238c79423671991e7d04c3444b8062d65383a2468df2188",
+      "pages_200": 311,
+      "label_presence": {
+        "overall": 0.1202,
+        "values": 5101,
+        "found": 613,
+        "labeled_pages": 311,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 0.3311,
+          "g_001": 0.075
+        },
+        "by_field": {
+          "abstract_link": 0.0,
+          "author": 0.0013,
+          "author_profile_link": 0.0,
+          "title": 0.9833,
+          "title_list": 1.0
+        }
+      },
+      "included": false,
+      "excluded_reason": "only 0.1202 of ground-truth values appear in the fetched HTML (threshold 0.5): content is rendered client-side or has changed"
+    },
+    "quotes.toscrape.com": {
+      "domain": "other",
+      "host": "quotes.toscrape.com",
+      "groups": [
+        "g_000",
+        "g_001",
+        "g_002"
+      ],
+      "urls": 70,
+      "robots": {
+        "url": "https://quotes.toscrape.com/robots.txt",
+        "final_url": "https://quotes.toscrape.com/robots.txt",
+        "status": 404,
+        "sha256": "e9639e3c4681ce85f852fbac48e2eeee5ba51296dbfec57c200d59b76237ab80",
+        "mode": "allow_all",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 0,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 70,
+        "ok_html": 70,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 121,
+      "fetched_from": "2026-10-24T09:32:29Z",
+      "fetched_to": "2026-10-24T09:34:31Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/quotes.toscrape.com.yaml",
+      "fields_sha256": "490a175a9e412d07892825c94b3740da74c036368bc32779dfb6b055a836d265",
+      "warc": "data/livewebie/quotes.toscrape.com.warc.gz",
+      "warc_bytes": 237132,
+      "warc_sha256": "1c9eb6c629a546806cd5aecca33e5f988da6bd4a1da7fc225155fe2978828bfe",
+      "pages_200": 70,
+      "label_presence": {
+        "overall": 1.0,
+        "values": 642,
+        "found": 642,
+        "labeled_pages": 70,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 1.0,
+          "g_001": 1.0,
+          "g_002": 1.0
+        },
+        "by_field": {
+          "author": 1.0,
+          "author_list": 1.0,
+          "author_profile_link": 1.0,
+          "birth": 1.0,
+          "quote": 1.0,
+          "tag_link": 1.0,
+          "tag_link_list": 1.0
+        }
+      },
+      "included": true
+    },
+    "sandbox.oxylabs.io": {
+      "domain": "ecommerce",
+      "host": "sandbox.oxylabs.io",
+      "groups": [
+        "g_000",
+        "g_001",
+        "g_002"
+      ],
+      "urls": 1143,
+      "robots": {
+        "url": "https://sandbox.oxylabs.io/robots.txt",
+        "final_url": "https://sandbox.oxylabs.io/robots.txt",
+        "status": 404,
+        "sha256": "8acce3b652e1c8cb243a46c4e3a159295b157ab0ffdd518098c96fc955207228",
+        "mode": "allow_all",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 0,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 1143,
+        "ok_html": 1143,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 447,
+      "fetched_from": "2026-10-24T09:46:39Z",
+      "fetched_to": "2026-10-24T09:54:07Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/sandbox.oxylabs.io.yaml",
+      "fields_sha256": "dac27ba4f64147ba54c7ae91d89c02312b6bb88c202997224dd4eabe5ced0c6b",
+      "warc": "data/livewebie/sandbox.oxylabs.io.warc.gz",
+      "warc_bytes": 13783258,
+      "warc_sha256": "4afa4c9a88ac1c195ac9fb914f87f76c77dc6edb2995cc16a5a7a66d90928d02",
+      "pages_200": 1143,
+      "label_presence": {
+        "overall": 1.0,
+        "values": 27258,
+        "found": 27258,
+        "labeled_pages": 1143,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 1.0,
+          "g_001": 1.0,
+          "g_002": 1.0
+        },
+        "by_field": {
+          "developer": 1.0,
+          "game_count": 1.0,
+          "genre": 1.0,
+          "image": 1.0,
+          "image_list": 1.0,
+          "link": 1.0,
+          "platform": 1.0,
+          "price": 1.0,
+          "price_list": 1.0,
+          "title": 1.0,
+          "title_list": 1.0
+        }
+      },
+      "included": true
+    },
+    "scrapethissite.com": {
+      "domain": "other",
+      "host": "www.scrapethissite.com",
+      "groups": [
+        "g_000",
+        "g_001",
+        "g_002",
+        "g_003"
+      ],
+      "urls": 32,
+      "robots": {
+        "url": "https://www.scrapethissite.com/robots.txt",
+        "final_url": "https://www.scrapethissite.com/robots.txt",
+        "status": 200,
+        "sha256": "9ccad4a2220f964813dc4c6347ff01b4d41534164ebb413fb1f14b8db8cec58e",
+        "mode": "parsed",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 2,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 32,
+        "ok_html": 32,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 33,
+      "fetched_from": "2026-10-24T09:32:29Z",
+      "fetched_to": "2026-10-24T09:33:02Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/scrapethissite.com.yaml",
+      "fields_sha256": "c4e1f2f5e386ad215ed6288c6692de7390e6259736070b824336e7bb690429ab",
+      "warc": "data/livewebie/scrapethissite.com.warc.gz",
+      "warc_bytes": 207731,
+      "warc_sha256": "27aad76ee9d4f265aed886f0c79ba560d864272b7bf7f2be721f941663388276",
+      "pages_200": 32,
+      "label_presence": {
+        "overall": 0.9645,
+        "values": 3631,
+        "found": 3502,
+        "labeled_pages": 32,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 0.6667,
+          "g_001": 1.0,
+          "g_002": 1.0,
+          "g_003": 0.0
+        },
+        "by_field": {
+          "area": 1.0,
+          "awards": 1.0,
+          "capital": 1.0,
+          "country": 1.0,
+          "goals_for": 1.0,
+          "nominations": 1.0,
+          "population": 1.0,
+          "team": 1.0,
+          "title": 0.0,
+          "turtle_image": 0.0,
+          "turtle_link": 0.0,
+          "turtle_name": 0.0,
+          "wins": 1.0,
+          "year": 1.0
+        }
+      },
+      "included": true
+    },
+    "thecocktaildb.com": {
+      "domain": "food",
+      "host": "www.thecocktaildb.com",
+      "groups": [
+        "g_000",
+        "g_001"
+      ],
+      "urls": 495,
+      "robots": {
+        "url": "https://www.thecocktaildb.com/robots.txt",
+        "final_url": "https://www.thecocktaildb.com/robots.txt",
+        "status": 200,
+        "sha256": "8fa3036c68bfcbd32365f6225d24333264093b7cd38d306e106b4dbdc934fd5b",
+        "mode": "parsed",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 0,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 495,
+        "ok_html": 495,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 335,
+      "fetched_from": "2026-10-24T09:46:39Z",
+      "fetched_to": "2026-10-24T09:52:16Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/thecocktaildb.com.yaml",
+      "fields_sha256": "94779fcdc7aee8b706913a30b6d62fdb7636a7f290485c7bb689cbc9c0d5425e",
+      "warc": "data/livewebie/thecocktaildb.com.warc.gz",
+      "warc_bytes": 2200205,
+      "warc_sha256": "69170665be569d8a340301e56fc3017cc732d504ae6722af907c6ef202d71655",
+      "pages_200": 495,
+      "label_presence": {
+        "overall": 0.8553,
+        "values": 8660,
+        "found": 7407,
+        "labeled_pages": 495,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 0.9984,
+          "g_001": 0.3333
+        },
+        "by_field": {
+          "cocktail": 1.0,
+          "cocktail_image": 1.0,
+          "cocktail_image_list": 0.0,
+          "cocktail_link": 0.0,
+          "cocktail_list": 1.0,
+          "ingredient": 1.0,
+          "ingredient_image": 0.9974,
+          "ingredient_link": 0.9969
+        }
+      },
+      "included": true
+    },
+    "themealdb.com": {
+      "domain": "food",
+      "host": "www.themealdb.com",
+      "groups": [
+        "g_000",
+        "g_001"
+      ],
+      "urls": 299,
+      "robots": {
+        "url": "https://www.themealdb.com/robots.txt",
+        "final_url": "https://www.themealdb.com/robots.txt",
+        "status": 200,
+        "sha256": "bc44ee6617e4e660d125e293a1eb2e1250715ba9efcd62b2a1e623a9736b0269",
+        "mode": "parsed",
+        "crawl_delay": null,
+        "content_signals": {},
+        "rules": 1,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 299,
+        "ok_html": 299,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 50,
+      "fetched_from": "2026-10-24T09:46:39Z",
+      "fetched_to": "2026-10-24T09:47:29Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/themealdb.com.yaml",
+      "fields_sha256": "0aa35bb36b0258d027c3bb58d9f5ed5d51f77500e811a6c17a1f9ca44a9be710",
+      "warc": "data/livewebie/themealdb.com.warc.gz",
+      "warc_bytes": 1582355,
+      "warc_sha256": "623cb2a53b7e925fab97e82dcefd5a99a62810b301084de56d8e009bd129b20a",
+      "pages_200": 299,
+      "label_presence": {
+        "overall": 0.9699,
+        "values": 10413,
+        "found": 10100,
+        "labeled_pages": 298,
+        "labeled_pages_not_in_snapshot": 0,
+        "by_group": {
+          "g_000": 0.9993,
+          "g_001": 0.6623
+        },
+        "by_field": {
+          "flag_image": 0.9963,
+          "ingredient": 1.0,
+          "ingredient_image": 1.0,
+          "ingredient_link": 0.9983,
+          "meal": 1.0,
+          "meal_image": 0.9963,
+          "meal_image_list": 0.0,
+          "meal_link": 0.9868,
+          "meal_list": 1.0
+        }
+      },
+      "included": true
+    },
+    "thesportsdb.com": {
+      "domain": "sports",
+      "host": "www.thesportsdb.com",
+      "groups": [
+        "g_000",
+        "g_001",
+        "g_002",
+        "g_003",
+        "g_004",
+        "g_005"
+      ],
+      "urls": 261,
+      "robots": {
+        "url": "https://www.thesportsdb.com/robots.txt",
+        "final_url": "https://www.thesportsdb.com/robots.txt",
+        "status": 200,
+        "sha256": "8364717c24c562314f2bb1dd96d8a0aabd76f8b5fd3b1f3f802ebd6a22549b59",
+        "mode": "parsed",
+        "crawl_delay": null,
+        "content_signals": {
+          "ai-train": "no",
+          "search": "yes",
+          "ai-input": "no"
+        },
+        "rules": 3,
+        "interval_s": 1.0
+      },
+      "fetch_counts": {
+        "urls": 0,
+        "ok_html": 0,
+        "non_200": 0,
+        "errors": 0,
+        "disallowed": 0
+      },
+      "requests": 1,
+      "fetched_from": "2026-10-24T09:46:39Z",
+      "fetched_to": "2026-10-24T09:46:40Z",
+      "fields_yaml": "eval/datasets/livewebie/fields/thesportsdb.com.yaml",
+      "fields_sha256": "96ba57c8acd511f44aa5c936aa1235b6f316bfcf178d11a95c456b931e823a86",
+      "included": false,
+      "excluded_reason": "robots.txt Content-Signal ai-input=no; ditto feeds page content to an LLM during spec generation"
+    }
+  }
+}
