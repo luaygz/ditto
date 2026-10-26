@@ -73,6 +73,7 @@ class OpenAICompatAdapter:
                 "response_model": resp.model,
                 "response_id": resp.id,
                 "refusal": choice.message.refusal,
+                "service_tier": getattr(resp, "service_tier", None),
             },
         )
 

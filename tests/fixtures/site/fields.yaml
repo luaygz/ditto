@@ -1,0 +1,4 @@
+# Prompted-mode schema for the fixture site, used by the integration test and the README example.
+title: the main title or headline shown as the page heading
+published: the date the page was published or released
+tags: the topic tags, keywords or topics listed on the page

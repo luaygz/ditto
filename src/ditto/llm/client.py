@@ -454,6 +454,9 @@ class CachedLLM:
                 cached_input_tokens=u.cached_input_tokens,
                 prices=self.prices,
             )
+            # Billed spend follows the service tier the provider reports (flex is half price);
+            # list_cost_usd in the usage records stays at the standard tier for cost tables.
+            cost *= self.prices.tier_multiplier(raw.meta.get("service_tier"))
             completion = replace(
                 raw,
                 model=self.model,

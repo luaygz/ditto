@@ -1,0 +1,296 @@
+{
+  "name": "synth_scale",
+  "dataset": "synthetic",
+  "split": "all",
+  "method": {
+    "kind": "ditto",
+    "mode": "prompted",
+    "baseline": null,
+    "params": {
+      "until": "cluster",
+      "min_cluster_size": 20,
+      "union_min_tokens": 8000,
+      "union_max_tokens": 30000,
+      "max_repair_calls": 3,
+      "tail": "skip",
+      "concurrency": 4
+    }
+  },
+  "method_label": "ditto (clustering)",
+  "status": "ok",
+  "reason": null,
+  "summary": {
+    "n_sites": 1,
+    "n_ok": 1,
+    "status_counts": {
+      "ok": 1
+    },
+    "accuracy": null,
+    "accuracy_sample": null,
+    "optional_field_recall": null,
+    "groups": {},
+    "clustering": {
+      "ari": 1.0,
+      "inverse_purity": 1.0,
+      "n_clusters": 15.0,
+      "n_pages": 100000.0,
+      "n_pred": 15.0,
+      "n_templates": 12.0,
+      "n_true": 15.0,
+      "n_true_templates": 15.0,
+      "over_merge": 0.0,
+      "purity": 1.0,
+      "tail_pages": 34.0,
+      "under_merge": 0.0,
+      "n_sites": 1
+    },
+    "cost": {
+      "pages": 100000,
+      "templates": 12,
+      "calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "input_tokens_per_1k_pages": 0.0,
+      "output_tokens_per_1k_pages": 0.0,
+      "calls_per_template": 0.0,
+      "usd_per_1k_pages": 0.0,
+      "price_estimated": false,
+      "extrapolated": false,
+      "spend_usd": 0.0,
+      "llm_latency_s_mean": null
+    },
+    "cost_per_vertical": {
+      "synthetic": {
+        "pages": 100000,
+        "templates": 12,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      }
+    },
+    "speed_pages_per_sec_per_core": {
+      "ingest": 1374.89,
+      "fingerprint": 374.41,
+      "cluster": 54879.45
+    },
+    "curves": {},
+    "unprompted_recall": null
+  },
+  "sites": [
+    {
+      "site": "default",
+      "vertical": "synthetic",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 100000,
+      "n_labeled": 100000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 15,
+        "n_templates": 12,
+        "tail_pages": 34,
+        "n_true_templates": 15,
+        "ari": 1.0,
+        "purity": 1.0,
+        "inverse_purity": 1.0,
+        "over_merge": 0,
+        "under_merge": 0,
+        "n_pages": 100000,
+        "n_true": 15,
+        "n_pred": 15
+      },
+      "cost": {
+        "pages": 100000,
+        "templates": 12,
+        "calls": 0,
+        "cached_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "spend_usd": 0,
+        "llm_latency_s_mean": null,
+        "by_model": {},
+        "models": [],
+        "wall_seconds": 24.123
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 4.5458,
+          "pages": 100000,
+          "workers": 16,
+          "pages_per_sec": 21998.28,
+          "pages_per_sec_per_core": 1374.89
+        },
+        "fingerprint": {
+          "seconds": 16.6929,
+          "pages": 100000,
+          "workers": 16,
+          "pages_per_sec": 5990.58,
+          "pages_per_sec_per_core": 374.41
+        },
+        "cluster": {
+          "seconds": 1.8222,
+          "pages": 100000,
+          "workers": 1,
+          "pages_per_sec": 54879.45,
+          "pages_per_sec_per_core": 54879.45
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [
+        "run directory deleted after scoring (keep_runs: false)"
+      ],
+      "site_meta": {
+        "synth": {
+          "generator": "ditto.synth",
+          "seed": 1,
+          "params": {
+            "templates": 12,
+            "pages_median": 2000.0,
+            "pages_sigma": 1.0,
+            "pages_min": 20,
+            "pages_max": 60000,
+            "total_pages": 100000,
+            "tail_templates": 3,
+            "tail_pages": [
+              1,
+              19
+            ],
+            "mandatory_fields": [
+              5,
+              8
+            ],
+            "optional_fields": 3,
+            "optional_presence": [
+              0.02,
+              0.95
+            ],
+            "list_fields": 1,
+            "list_items": [
+              1,
+              8
+            ],
+            "record_tables": 1,
+            "table_rows": [
+              0,
+              12
+            ],
+            "optional_columns": 1,
+            "kv_blocks": 1,
+            "kv_style": "mixed",
+            "kv_keys": [
+              3,
+              8
+            ],
+            "hashed_class_share": 0.3,
+            "boilerplate_share": 0.4,
+            "boilerplate_variants": 3,
+            "near_duplicate_pairs": 1,
+            "near_duplicate_jaccard": 0.7,
+            "absent_rendering": "omitted",
+            "markup_style": "server",
+            "noise": [],
+            "noise_rate": 0.5,
+            "site_name": null,
+            "host": null
+          },
+          "site_name": "Munoz-Tyler",
+          "host": "www.munoz-tyler.com",
+          "n_pages": 100000,
+          "n_templates": 15,
+          "n_tail_templates": 3,
+          "template_pages": {
+            "T01": 3243,
+            "T02": 17411,
+            "T03": 3508,
+            "T04": 10079,
+            "T05": 2168,
+            "T06": 8545,
+            "T07": 13300,
+            "T08": 1092,
+            "T09": 21338,
+            "T10": 13749,
+            "T11": 1696,
+            "T12": 3837,
+            "T13": 14,
+            "T14": 8,
+            "T15": 12
+          },
+          "near_duplicates": [
+            {
+              "a": "T03",
+              "b": "T05",
+              "target": 0.7,
+              "jaccard": 0.6949,
+              "content_jaccard": 0.6786,
+              "segments": [
+                "movies",
+                "films"
+              ]
+            }
+          ],
+          "cross_template_jaccard": {
+            "max": 0.0256,
+            "pair": [
+              "T04",
+              "T11"
+            ]
+          },
+          "measured": {
+            "boilerplate_share_mean": 0.3902,
+            "boilerplate_share_median": 0.3836,
+            "hashed_class_share": 0.248,
+            "content_elements_median": 86.66666666666667,
+            "shell_elements": [
+              58,
+              61,
+              61
+            ],
+            "variant_weights": [
+              0.5455,
+              0.2727,
+              0.1818
+            ],
+            "bytes_html": 868645290,
+            "mean_page_bytes": 8686.5
+          },
+          "generation": {
+            "seconds": 29.489,
+            "plan_seconds": 0.497,
+            "workers": 16,
+            "cpu_count": 16,
+            "pages_per_second": 3391.1,
+            "note": "timing only; every other byte of the output depends on (params, seed) alone"
+          }
+        },
+        "parameter": null,
+        "value": null,
+        "index": 0,
+        "seed": 1,
+        "params": "eval/synth/default.yaml",
+        "overrides": {
+          "total_pages": 100000
+        },
+        "site_dir": "data/synth/seed1-7b6b001a3f5d4f4d",
+        "notes": []
+      },
+      "run_dir": "data/eval/synth_scale/20261026T095119Z/default/run"
+    }
+  ]
+}

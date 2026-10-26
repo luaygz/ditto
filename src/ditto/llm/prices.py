@@ -29,6 +29,13 @@ class PriceTable:
     models: dict[str, Price]
     default: Price
     retrieved: str | None = None
+    tiers: dict[str, float] | None = None  # service tier -> price multiplier (flex: 0.5)
+
+    def tier_multiplier(self, tier: str | None) -> float:
+        """Billing multiplier of an OpenAI service tier; 1.0 for default/unknown tiers."""
+        if not tier or not self.tiers:
+            return 1.0
+        return float(self.tiers.get(tier, 1.0))
 
     def lookup(self, model: str) -> Price:
         """Price of ``"provider/model"`` (a bare id means ``openai/``).
@@ -63,7 +70,13 @@ def _load_prices(path: Path) -> PriceTable:
     models = {str(k): _price(v) for k, v in (raw.get("models") or {}).items()}
     default = _price(raw.get("default") or {"input": 10.0, "output": 50.0, "estimated": True})
     retrieved = raw.get("retrieved")
-    return PriceTable(models=models, default=default, retrieved=str(retrieved or "") or None)
+    tiers = {str(k): float(v) for k, v in (raw.get("tiers") or {}).items()}
+    return PriceTable(
+        models=models,
+        default=default,
+        retrieved=str(retrieved or "") or None,
+        tiers=tiers or None,
+    )
 
 
 def _price(entry: dict[str, Any]) -> Price:

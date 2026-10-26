@@ -49,3 +49,8 @@ default:
   input: 10.00
   output: 50.00
   estimated: true
+# Service tier billing multipliers (same page: Flex and Batch are half the standard rates for
+# every listed model). Applied to actual spend only; cost tables use standard-tier list prices.
+tiers:
+  flex: 0.5
+  batch: 0.5

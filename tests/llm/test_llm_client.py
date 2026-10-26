@@ -393,6 +393,27 @@ def test_usage_jsonl_and_ledger_contents(tmp_path: Path) -> None:
     assert ledger[0]["cost_usd"] == pytest.approx(expected_cost)
 
 
+def test_flex_tier_bills_half_but_lists_standard(tmp_path: Path) -> None:
+    from dataclasses import replace
+
+    run = RunDir(tmp_path / "run")
+    flex = Completion(
+        text='{"ok": true}',
+        usage=Usage(1000, 500, 0),
+        model="openai/gpt-test",
+        meta={"finish_reason": "stop", "service_tier": "flex"},
+    )
+    llm = _llm(tmp_path, FakeAdapter([flex]), run=run)
+    llm.prices = replace(PRICES, tiers={"flex": 0.5})
+    real = llm.complete(MSGS, prompt_version="p.v1")
+    standard = (1000 * 2.0 + 500 * 10.0) / 1e6
+    assert real.cost_usd == pytest.approx(standard / 2)
+    (line,) = _lines(run.usage_jsonl)
+    assert line["cost_usd"] == pytest.approx(standard / 2)
+    assert line["list_cost_usd"] == pytest.approx(standard)
+    assert _lines(llm.settings.ledger_path)[0]["cost_usd"] == pytest.approx(standard / 2)
+
+
 def test_summarize_usage(tmp_path: Path) -> None:
     run = RunDir(tmp_path / "run")
     run.ensure().write_meta(site="example.org")
