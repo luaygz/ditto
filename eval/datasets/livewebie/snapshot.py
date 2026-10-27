@@ -415,9 +415,10 @@ def snapshot_site(
     log_path = out_dir / "fetchlog" / f"{website}.jsonl"
     done_path = out_dir / "fetchlog" / f"{website}.done.json"
     if final.is_file() and done_path.is_file():
-        data = json.loads(done_path.read_text(encoding="utf-8"))
         log(f"{website}: complete snapshot present, skipping")
-        return SiteResult(**{**data, "warc": final if data.get("warc") else None})
+        recorded = load_result(website, out_dir)
+        assert recorded is not None
+        return recorded
     started = _now_iso()
     if final.is_file() and not part.exists():
         final.replace(part)  # renamed but summary never written: resume from it
@@ -503,6 +504,16 @@ def snapshot_site(
     payload = {**result.__dict__, "warc": str(warc) if warc else None}
     done_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     return result
+
+
+def load_result(website: str, out_dir: Path) -> SiteResult | None:
+    """The recorded outcome of a finished run (``fetchlog/<website>.done.json``), if any."""
+    done_path = out_dir / "fetchlog" / f"{website}.done.json"
+    if not done_path.is_file():
+        return None
+    data = json.loads(done_path.read_text(encoding="utf-8"))
+    final = out_dir / f"{website}.warc.gz"
+    return SiteResult(**{**data, "warc": final if data.get("warc") else None})
 
 
 def _outcome_row(outcome: FetchOutcome) -> dict[str, Any]:

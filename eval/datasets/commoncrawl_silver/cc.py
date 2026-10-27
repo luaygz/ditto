@@ -3,10 +3,17 @@
 Network etiquette (Common Crawl asks for it, and the brief requires it):
 
 * every request carries a descriptive ``User-Agent``;
-* at most :data:`MAX_DATA_CONCURRENCY` concurrent requests to ``data.commoncrawl.org`` and
-  :data:`MAX_INDEX_CONCURRENCY` to ``index.commoncrawl.org`` (process-wide semaphores);
-* exponential backoff with jitter on 429/503 (and other 5xx / transport errors), honouring
-  ``Retry-After``;
+* requests to ``data.commoncrawl.org`` are serialized (:data:`MAX_DATA_CONCURRENCY` = 1) and
+  start at least :data:`DATA_INTERVAL_S` apart; at most :data:`MAX_INDEX_CONCURRENCY` concurrent
+  requests go to ``index.commoncrawl.org``;
+* a 403, 429 or 503 from ``data.commoncrawl.org`` means "slow down" (Common Crawl's CloudFront
+  WAF answers 403 "Request blocked" to clients it throttles): every data request then waits an
+  exponential backoff with jitter, starting at :data:`SLOW_DOWN_START_S` and doubling up to
+  :data:`SLOW_DOWN_MAX_S` while the block lasts, and the next request is the probe (no storm of
+  retries). Slow-down answers never exhaust a request's attempts: the request waits as long as
+  the block lasts. A success resets the backoff;
+* other 5xx and transport errors back off exponentially with jitter (honouring ``Retry-After``)
+  for at most ``max_attempts``;
 * every download is a byte-range request that resumes from the last received byte when a
   transfer breaks;
 * index data is cached on disk under ``data/cc/index_cache/`` so every query is made once.
@@ -32,7 +39,8 @@ import re
 import threading
 import time
 import zlib
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -47,9 +55,13 @@ INDEX_BASE = "https://index.commoncrawl.org"
 COLLINFO_URL = f"{INDEX_BASE}/collinfo.json"
 DATA_BASE = "https://data.commoncrawl.org"
 
-MAX_DATA_CONCURRENCY = 4
+MAX_DATA_CONCURRENCY = 1
 MAX_INDEX_CONCURRENCY = 2
+DATA_INTERVAL_S = 1.0
 RETRY_STATUS = frozenset({429, 500, 502, 503, 504})
+SLOW_DOWN_STATUS = frozenset({403, 429, 503})
+SLOW_DOWN_START_S = 60.0
+SLOW_DOWN_MAX_S = 1800.0
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
@@ -68,7 +80,8 @@ class FetchError(RuntimeError):
 
 
 class Http:
-    """Thread-safe polite client: bounded concurrency per host, backoff, byte-range resume."""
+    """Thread-safe polite client: paced and serialized data requests, slow-down handling,
+    backoff, byte-range resume (see the module docstring)."""
 
     def __init__(
         self,
@@ -77,10 +90,17 @@ class Http:
         index_concurrency: int = MAX_INDEX_CONCURRENCY,
         max_attempts: int = 10,
         max_delay: float = 300.0,
+        data_interval: float = DATA_INTERVAL_S,
+        slow_down_start: float = SLOW_DOWN_START_S,
+        slow_down_max: float = SLOW_DOWN_MAX_S,
+        client: httpx.Client | None = None,
+        sleep: Callable[[float], None] = time.sleep,
+        clock: Callable[[], float] = time.monotonic,
+        log: Callable[[str], None] | None = None,
     ) -> None:
         if data_concurrency > MAX_DATA_CONCURRENCY:
             raise ValueError(f"at most {MAX_DATA_CONCURRENCY} concurrent data requests")
-        self.client = httpx.Client(
+        self.client = client or httpx.Client(
             headers={"User-Agent": USER_AGENT},
             timeout=httpx.Timeout(180.0, connect=30.0),
             follow_redirects=True,
@@ -92,42 +112,97 @@ class Http:
         }
         self.max_attempts = max_attempts
         self.max_delay = max_delay
+        self.data_interval = data_interval
+        self.slow_down_start = slow_down_start
+        self.slow_down_max = slow_down_max
+        self._sleep_fn = sleep
+        self._clock = clock
+        self._log = log or (lambda msg: print(msg, flush=True))
+        self._next_data_start = 0.0
+        self._slow_level = 0
         self.lock = threading.Lock()
-        self.stats = {"requests": 0, "retries": 0, "bytes": 0}
+        self.stats: dict[str, float] = {
+            "requests": 0,
+            "retries": 0,
+            "bytes": 0,
+            "slow_downs": 0,
+            "slow_down_seconds": 0.0,
+        }
 
     def close(self) -> None:
         self.client.close()
+
+    def _count(self, key: str, value: float = 1) -> None:
+        with self.lock:
+            self.stats[key] += value
 
     def _sleep(self, attempt: int, retry_after: str | None = None) -> None:
         delay = min(self.max_delay, 2.0 * 2**attempt) * (0.5 + random.random())
         if retry_after and retry_after.strip().isdigit():
             delay = max(delay, float(retry_after.strip()))
-        with self.lock:
-            self.stats["retries"] += 1
-        time.sleep(delay)
+        self._count("retries")
+        self._sleep_fn(delay)
 
-    def _sem(self, url: str) -> threading.BoundedSemaphore:
-        return self._sems["data" if url.startswith(DATA_BASE) else "index"]
+    @contextmanager
+    def _slot(self, url: str) -> Iterator[None]:
+        """Hold the host's concurrency slot; data requests also wait for their start time."""
+        data = url.startswith(DATA_BASE)
+        with self._sems["data" if data else "index"]:
+            if data:
+                wait = self._next_data_start - self._clock()
+                if wait > 0:
+                    self._sleep_fn(wait)
+                self._next_data_start = self._clock() + self.data_interval
+            yield
+
+    def _slowed(self, url: str, status: int, retry_after: str | None) -> bool:
+        """Handle a data-host answer inside its slot: ``True`` when it asks us to slow down.
+
+        Pushes the next data request start out by the jittered backoff of the current block
+        level; a non-slow-down answer ends the block."""
+        if not url.startswith(DATA_BASE):
+            return False
+        if status not in SLOW_DOWN_STATUS:
+            self._slow_level = 0
+            return False
+        self._slow_level += 1
+        base = min(self.slow_down_max, self.slow_down_start * 2 ** (self._slow_level - 1))
+        delay = min(self.slow_down_max, base * (0.75 + 0.5 * random.random()))
+        if retry_after and retry_after.strip().isdigit():
+            delay = max(delay, float(retry_after.strip()))
+        self._next_data_start = self._clock() + delay
+        self._count("slow_downs")
+        self._count("slow_down_seconds", delay)
+        self._log(
+            f"data.commoncrawl.org: HTTP {status} (slow down), next request in {delay:.0f}s "
+            f"(level {self._slow_level})"
+        )
+        return True
 
     def get(self, url: str, *, ok: tuple[int, ...] = (200,), method: str = "GET") -> httpx.Response:
         """GET (or HEAD) with backoff; returns the response when its status is in ``ok``."""
         last = ""
-        for attempt in range(self.max_attempts):
+        attempt = 0
+        while attempt < self.max_attempts:
             try:
-                with self._sem(url):
+                with self._slot(url):
                     resp = self.client.request(method, url)
-                with self.lock:
-                    self.stats["requests"] += 1
-                    self.stats["bytes"] += len(resp.content)
+                    slowed = self._slowed(url, resp.status_code, resp.headers.get("Retry-After"))
+                self._count("requests")
+                self._count("bytes", len(resp.content))
             except httpx.TransportError as exc:
                 last = f"{type(exc).__name__}: {exc}"
                 self._sleep(attempt)
+                attempt += 1
                 continue
             if resp.status_code in ok:
                 return resp
+            if slowed:
+                continue  # the slot already waits out the block; not an attempt
             last = f"HTTP {resp.status_code}"
             if resp.status_code in RETRY_STATUS:
                 self._sleep(attempt, resp.headers.get("Retry-After"))
+                attempt += 1
                 continue
             raise FetchError(f"{url}: {last}")
         raise FetchError(f"{url}: gave up after {self.max_attempts} attempts ({last})")
@@ -149,9 +224,10 @@ class Http:
             headers = {"Range": f"bytes={start}-{offset + length - 1}"}
             retry_after: str | None = None
             try:
-                with self._sems["data"], self.client.stream("GET", url, headers=headers) as resp:
-                    with self.lock:
-                        self.stats["requests"] += 1
+                with self._slot(url), self.client.stream("GET", url, headers=headers) as resp:
+                    self._count("requests")
+                    if self._slowed(url, resp.status_code, resp.headers.get("Retry-After")):
+                        continue  # waited out in the next slot; never counts as an attempt
                     if resp.status_code in RETRY_STATUS:
                         last = f"HTTP {resp.status_code}"
                         retry_after = resp.headers.get("Retry-After")
@@ -160,8 +236,7 @@ class Http:
                     else:
                         for chunk in resp.iter_bytes():
                             buf += chunk
-                            with self.lock:
-                                self.stats["bytes"] += len(chunk)
+                            self._count("bytes", len(chunk))
                         if len(buf) >= length:
                             break
                         last = f"short body ({len(buf)}/{length} bytes)"

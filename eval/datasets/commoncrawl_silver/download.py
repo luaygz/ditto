@@ -1,35 +1,43 @@
 """Step 4 (download) of the Common Crawl silver set.
 
-    uv run python eval/datasets/commoncrawl_silver/download.py [--cap 20000] [--only D ...]
+    uv run python eval/datasets/commoncrawl_silver/download.py [--cap 2500] [--only D ...]
+        [--plan-only]
 
 For every domain selected in ``domains.yaml``: list its status-200 ``text/html`` captures in the
 two crawls, keep the newest capture per URL and one URL per payload digest, then plan up to
 ``--cap`` pages -- every detail-pattern URL first (a seeded sample if there are more than the
 cap allows), then a seeded sample of the other URLs so the site keeps its long tail (at least
-``TAIL_SHARE`` of the cap when the site has that many). Records are fetched by byte range (at most
-4 concurrent requests, backoff on 429/503) and their gzip members concatenated into proper WARC
-files ``data/cc/<domain>/captures-NNNNN.warc.gz`` (``ROLL`` records per file).
+``TAIL_SHARE`` of the cap when the site has that many). Captures already downloaded by an
+earlier run are kept and count toward the quota of their kind; the rest of each quota is filled
+in the seeded order (so a domain downloaded under an earlier, larger cap keeps all its pages).
+
+Records are fetched by byte range, one request at a time, at least one second apart, with
+Common Crawl's slow-down answers (403/429/503) waited out with growing backoff
+(:class:`cc.Http`), and their gzip members concatenated into WARC files
+``data/cc/<domain>/captures-NNNNN.warc.gz`` (``ROLL`` records per file). Domains are fetched
+round-robin, one capture each in turn, so an interrupted run leaves every domain with a similar
+share of its plan.
 
 Resumable: ``data/cc/<domain>/journal.jsonl`` records every appended capture with the file's end
-offset; a restart truncates each file to its last journaled offset and skips journaled captures.
+offset and every failed capture as an error row; a restart truncates each file to its last
+journaled offset, skips journaled captures and retries the failed ones.
 
 Writes the committed ``captures.jsonl.gz`` (one row per planned capture: url, crawl, filename,
-offset, length, digest, ...), updates ``domains.yaml`` with the capture counts and rewrites
-``manifest.json``.
+offset, length, digest, ...), updates ``domains.yaml`` with the capture counts, the cap and its
+reason, and rewrites ``manifest.json``.
 """
 
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import random
 import re
 import sys
 import time
-from collections import deque
-from concurrent.futures import Future, ThreadPoolExecutor
 from pathlib import Path
-from typing import Any
+from typing import Any, BinaryIO
 
 import yaml
 
@@ -38,7 +46,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cc import (
     CAPTURES_JSONL,
     DATA_DIR,
+    DATA_INTERVAL_S,
     DOMAINS_YAML,
+    MAX_DATA_CONCURRENCY,
+    SLOW_DOWN_MAX_S,
+    SLOW_DOWN_START_S,
     CdxIndex,
     Http,
     dump_yaml,
@@ -48,16 +60,28 @@ from cc import (
 )
 from manifest import write_manifest
 
-DEFAULT_CAP = 20_000
+DEFAULT_CAP = 2_500
 TAIL_SHARE = 0.2
 ROLL = 5000
-IN_FLIGHT = 64
+CAP_REASON = (
+    "Lowered from 20,000 to 2,500 pages per domain on 2026-10-27: at 4 concurrent requests "
+    "Common Crawl's CloudFront WAF answered every range request with 403 'Request blocked' after "
+    "about 2,250 records (~440 MB) per run, and 160,000 captures at the recommended pace of one "
+    "request per second would take ~44 h. Pages downloaded before the change are kept "
+    "(argos.co.uk: 6,701 detail pages)."
+)
 
 
 def plan_domain(
-    entry: dict[str, Any], indexes: dict[str, CdxIndex], cap: int
+    entry: dict[str, Any],
+    indexes: dict[str, CdxIndex],
+    cap: int,
+    have: set[str] | frozenset[str] = frozenset(),
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    """Captures to download for one domain, detail-pattern URLs first, plus listing counts."""
+    """Captures to download for one domain, detail-pattern URLs first, plus listing counts.
+
+    ``have``: URLs already downloaded; they stay in the plan and fill their kind's quota first.
+    """
     domain = entry["domain"]
     detail = re.compile(entry["detail_pattern"])
     counts: dict[str, Any] = {"index_html_captures": {}}
@@ -88,15 +112,25 @@ def plan_domain(
     tail_reserve = min(len(others), round(cap * TAIL_SHARE))
     n_detail = min(len(details), cap - tail_reserve)
     n_other = min(len(others), cap - n_detail)
-    chosen_details = sorted(details[:n_detail], key=lambda r: r["urlkey"])
-    chosen_others = sorted(others[:n_other], key=lambda r: r["urlkey"])
+    chosen_details = sorted(_fill(details, n_detail, have), key=lambda r: r["urlkey"])
+    chosen_others = sorted(_fill(others, n_other, have), key=lambda r: r["urlkey"])
     plan = [r | {"kind": "detail"} for r in chosen_details]
     plan += [r | {"kind": "other"} for r in chosen_others]
     counts["cap"] = cap
     counts["planned"] = len(plan)
     counts["planned_detail"] = len(chosen_details)
     counts["planned_other"] = len(chosen_others)
+    counts["kept_from_earlier_runs"] = sum(r["url"] in have for r in plan)
     return plan, counts
+
+
+def _fill(
+    rows: list[dict[str, Any]], quota: int, have: set[str] | frozenset[str]
+) -> list[dict[str, Any]]:
+    """Every already-downloaded row, topped up to ``quota`` in the given (seeded) order."""
+    kept = [r for r in rows if r["url"] in have]
+    fresh = [r for r in rows if r["url"] not in have]
+    return kept + fresh[: max(0, quota - len(kept))]
 
 
 def capture_row(domain: str, row: dict[str, Any]) -> dict[str, Any]:
@@ -114,7 +148,10 @@ def capture_row(domain: str, row: dict[str, Any]) -> dict[str, Any]:
 
 
 class Journal:
-    """Append-only progress log keyed by URL; restores file sizes and the done set on resume."""
+    """Append-only progress log keyed by URL; restores file sizes and the done set on resume.
+
+    Error rows are kept for the record but never count as done: a rerun retries them.
+    """
 
     def __init__(self, site_dir: Path) -> None:
         self.path = site_dir / "journal.jsonl"
@@ -149,74 +186,107 @@ class Journal:
         self.fh.close()
 
 
-def download_domain(http: Http, domain: str, plan: list[dict[str, Any]]) -> dict[str, Any]:
-    site_dir = DATA_DIR / domain
-    site_dir.mkdir(parents=True, exist_ok=True)
-    journal = Journal(site_dir)
-    todo = [i for i, row in enumerate(plan) if row["url"] not in journal.done]
-    per_file: dict[str, int] = {}
-    for entry in journal.done.values():
-        per_file[entry["file"]] = per_file.get(entry["file"], 0) + 1
-    file_no = max((int(n[9:14]) for n in per_file), default=0)
-    current = f"captures-{file_no:05d}.warc.gz"
-    print(f"{domain}: {len(plan)} planned, {len(journal.done)} already done", flush=True)
+class DomainWriter:
+    """One domain's WARC files and journal during a download run."""
 
-    def fetch(i: int) -> bytes:
-        row = plan[i]
-        raw = http.fetch_range(row["filename"], int(row["offset"]), int(row["length"]))
-        record = parse_record(raw)
-        if record.url != row["url"]:
-            raise ValueError(f"record URL {record.url!r} != index URL {row['url']!r}")
-        return raw
+    def __init__(self, domain: str, plan: list[dict[str, Any]]) -> None:
+        self.domain = domain
+        self.plan = plan
+        self.site_dir = DATA_DIR / domain
+        self.site_dir.mkdir(parents=True, exist_ok=True)
+        self.journal = Journal(self.site_dir)
+        self.todo = [i for i, row in enumerate(plan) if row["url"] not in self.journal.done]
+        self.per_file: dict[str, int] = {}
+        for entry in self.journal.done.values():
+            self.per_file[entry["file"]] = self.per_file.get(entry["file"], 0) + 1
+        self.file_no = max((int(n[9:14]) for n in self.per_file), default=0)
+        self.current = f"captures-{self.file_no:05d}.warc.gz"
+        self.out: BinaryIO = (self.site_dir / self.current).open("ab")
+        self.fetched = self.errors = self.nbytes = 0
 
+    def append(self, i: int, raw: bytes) -> None:
+        if self.per_file.get(self.current, 0) >= ROLL:
+            self.out.close()
+            self.file_no += 1
+            self.current = f"captures-{self.file_no:05d}.warc.gz"
+            self.out = (self.site_dir / self.current).open("ab")
+        self.out.write(raw)
+        self.out.flush()
+        self.per_file[self.current] = self.per_file.get(self.current, 0) + 1
+        self.journal.log(
+            {"i": i, "file": self.current, "end": self.out.tell(), "url": self.plan[i]["url"]}
+        )
+        self.fetched += 1
+        self.nbytes += len(raw)
+
+    def fail(self, i: int, exc: Exception) -> None:
+        self.errors += 1
+        self.journal.log({"i": i, "url": self.plan[i]["url"], "error": repr(exc)[:500]})
+
+    def close(self) -> None:
+        self.out.close()
+        self.journal.close()
+
+
+def fetch_capture(http: Http, row: dict[str, Any]) -> bytes:
+    """The capture's gzip member, checked to be the record the index row points at."""
+    raw = http.fetch_range(row["filename"], int(row["offset"]), int(row["length"]))
+    record = parse_record(raw)
+    if record.url != row["url"]:
+        raise ValueError(f"record URL {record.url!r} != index URL {row['url']!r}")
+    return raw
+
+
+def download_all(http: Http, plans: dict[str, list[dict[str, Any]]]) -> dict[str, dict[str, Any]]:
+    """Fetch every planned capture not yet journaled, round-robin over the domains."""
+    writers = {d: DomainWriter(d, plan) for d, plan in plans.items()}
+    total = sum(len(w.todo) for w in writers.values())
+    for w in writers.values():
+        done = len(w.plan) - len(w.todo)
+        print(f"{w.domain}: {len(w.plan)} planned, {done} already done", flush=True)
     started = time.time()
-    fetched = errors = 0
-    nbytes = 0
-    out = (site_dir / current).open("ab")
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        pending: deque[tuple[int, Future[bytes]]] = deque()
-        queue = iter(todo)
-        while True:
-            while len(pending) < IN_FLIGHT:
-                nxt = next(queue, None)
-                if nxt is None:
-                    break
-                pending.append((nxt, pool.submit(fetch, nxt)))
-            if not pending:
-                break
-            i, fut = pending.popleft()
-            try:
-                raw = fut.result()
-            except Exception as exc:
-                errors += 1
-                journal.log({"i": i, "error": repr(exc)[:500]})
-                continue
-            if per_file.get(current, 0) >= ROLL:
-                out.close()
-                file_no += 1
-                current = f"captures-{file_no:05d}.warc.gz"
-                out = (site_dir / current).open("ab")
-            out.write(raw)
-            out.flush()
-            per_file[current] = per_file.get(current, 0) + 1
-            journal.log({"i": i, "file": current, "end": out.tell(), "url": plan[i]["url"]})
-            fetched += 1
-            nbytes += len(raw)
-            if fetched % 1000 == 0:
-                rate = fetched / (time.time() - started)
-                print(f"  {domain}: {fetched}/{len(todo)} fetched, {rate:.1f}/s", flush=True)
-    out.close()
-    journal.close()
+    queues = {d: iter(w.todo) for d, w in writers.items()}
+    count = 0
+    try:
+        while queues:
+            for domain in list(queues):
+                i = next(queues[domain], None)
+                if i is None:
+                    del queues[domain]
+                    continue
+                w = writers[domain]
+                try:
+                    w.append(i, fetch_capture(http, w.plan[i]))
+                except Exception as exc:  # one bad capture must not end the run
+                    w.fail(i, exc)
+                count += 1
+                if count % 250 == 0:
+                    rate = count / (time.time() - started)
+                    left = (total - count) / rate if rate else 0
+                    print(
+                        f"  {count}/{total} captures attempted, {rate:.2f}/s, "
+                        f"~{left / 3600:.1f} h left, http {http.stats}",
+                        flush=True,
+                    )
+    finally:
+        for w in writers.values():
+            w.close()
     elapsed = time.time() - started
-    stats = {
-        "fetched_this_run": fetched,
-        "errors_this_run": errors,
-        "bytes_this_run": nbytes,
-        "seconds_this_run": round(elapsed, 1),
-        "records_per_second": round(fetched / elapsed, 2) if elapsed else None,
-    }
-    print(f"{domain}: done {stats}", flush=True)
+    stats: dict[str, dict[str, Any]] = {}
+    for domain, w in writers.items():
+        stats[domain] = {
+            "fetched_this_run": w.fetched,
+            "errors_this_run": w.errors,
+            "bytes_this_run": w.nbytes,
+            "seconds_this_run": round(elapsed, 1),
+        }
+        print(f"{domain}: done {stats[domain]}", flush=True)
     return stats
+
+
+def download_domain(http: Http, domain: str, plan: list[dict[str, Any]]) -> dict[str, Any]:
+    """:func:`download_all` for one domain."""
+    return download_all(http, {domain: plan})[domain]
 
 
 def downloaded(domain: str) -> set[str]:
@@ -234,6 +304,21 @@ def downloaded(domain: str) -> set[str]:
     return done
 
 
+def policy(cap: int) -> dict[str, Any]:
+    """The download settings recorded in ``domains.yaml``."""
+    return {
+        "cap_per_domain": cap,
+        "cap_reason": CAP_REASON,
+        "tail_share": TAIL_SHARE,
+        "data_concurrency": MAX_DATA_CONCURRENCY,
+        "min_interval_s": DATA_INTERVAL_S,
+        "slow_down": (
+            f"403/429/503 from data.commoncrawl.org: backoff with jitter from {SLOW_DOWN_START_S:.0f}"
+            f" s doubling to {SLOW_DOWN_MAX_S:.0f} s while blocked, one probe request each time"
+        ),
+    }
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cap", type=int, default=DEFAULT_CAP)
@@ -246,28 +331,38 @@ def main(argv: list[str] | None = None) -> None:
     indexes = {crawl: CdxIndex(http, crawl) for crawl in doc["crawls"]}
     plans: dict[str, list[dict[str, Any]]] = {}
     for entry in doc["selected"]:
-        plan, counts = plan_domain(entry, indexes, args.cap)
-        plans[entry["domain"]] = plan
+        domain = entry["domain"]
+        plan, counts = plan_domain(entry, indexes, args.cap, downloaded(domain))
+        plans[domain] = plan
         entry["captures"] = counts
-        print(f"{entry['domain']}: {counts}", flush=True)
-        stats_path = DATA_DIR / entry["domain"] / "plan.json"
+        print(f"{domain}: {counts}", flush=True)
+        stats_path = DATA_DIR / domain / "plan.json"
         stats_path.parent.mkdir(parents=True, exist_ok=True)
         stats_path.write_text(json.dumps(counts, indent=1))
 
     all_rows = [capture_row(d, r) for d, plan in plans.items() for r in plan]
     gzip_jsonl(CAPTURES_JSONL, all_rows)
     print(f"wrote {CAPTURES_JSONL} ({len(all_rows)} captures)", flush=True)
+    doc["download"] = policy(args.cap)
+    _write_counts(doc, plans)
 
     if not args.plan_only:
-        for entry in doc["selected"]:
-            domain = entry["domain"]
-            if args.only and domain not in args.only:
-                continue
-            stats = download_domain(http, domain, plans[domain])
-            runs_path = DATA_DIR / domain / "download_runs.jsonl"
-            with runs_path.open("a") as fh:
-                fh.write(json.dumps(stats | {"finished": time.time()}) + "\n")
+        wanted = {d: p for d, p in plans.items() if not args.only or d in args.only}
+        run_started = time.time()
+        stats = download_all(http, wanted)
+        for domain, s in stats.items():
+            with (DATA_DIR / domain / "download_runs.jsonl").open("a") as fh:
+                fh.write(json.dumps(s | {"started": run_started, "finished": time.time()}) + "\n")
+        doc["download"]["last_run"] = {
+            "finished": dt.datetime.now(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "http": dict(http.stats),
+        }
+        _write_counts(doc, plans)
+    write_manifest(http_stats=http.stats)
 
+
+def _write_counts(doc: dict[str, Any], plans: dict[str, list[dict[str, Any]]]) -> None:
+    """Record the downloaded share of every plan in ``domains.yaml``."""
     for entry in doc["selected"]:
         done = downloaded(entry["domain"])
         plan = plans[entry["domain"]]
@@ -277,7 +372,6 @@ def main(argv: list[str] | None = None) -> None:
                 r["url"] in done for r in plan if r["kind"] == kind
             )
     DOMAINS_YAML.write_text(dump_yaml(doc))
-    write_manifest(http_stats=http.stats)
 
 
 if __name__ == "__main__":

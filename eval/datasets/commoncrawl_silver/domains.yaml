@@ -39,6 +39,22 @@ selected:
         CCBot: 1.0
         ditto-benchmark: 1.0
     login_walled_pages: 0
+  captures:
+    index_html_captures:
+      CC-MAIN-2026-43: 17747
+      CC-MAIN-2026-39: 15620
+    distinct_urls: 33133
+    distinct_pages: 33133
+    distinct_detail_pages: 20342
+    distinct_other_pages: 12791
+    cap: 2500
+    planned: 7201
+    planned_detail: 6701
+    planned_other: 500
+    kept_from_earlier_runs: 6701
+    downloaded: 6701
+    downloaded_detail: 6701
+    downloaded_other: 0
 - domain: ikea.com
   vertical: product
   target_type: Product
@@ -61,6 +77,22 @@ selected:
         CCBot: 1.0
         ditto-benchmark: 1.0
     login_walled_pages: 0
+  captures:
+    index_html_captures:
+      CC-MAIN-2026-43: 28713
+      CC-MAIN-2026-39: 27251
+    distinct_urls: 52880
+    distinct_pages: 52730
+    distinct_detail_pages: 33618
+    distinct_other_pages: 19112
+    cap: 2500
+    planned: 2500
+    planned_detail: 2000
+    planned_other: 500
+    kept_from_earlier_runs: 0
+    downloaded: 0
+    downloaded_detail: 0
+    downloaded_other: 0
 - domain: careerbuilder.com
   vertical: job
   target_type: JobPosting
@@ -83,6 +115,22 @@ selected:
         CCBot: 1.0
         ditto-benchmark: 1.0
     login_walled_pages: 0
+  captures:
+    index_html_captures:
+      CC-MAIN-2026-43: 15682
+      CC-MAIN-2026-39: 16562
+    distinct_urls: 32051
+    distinct_pages: 32050
+    distinct_detail_pages: 12332
+    distinct_other_pages: 19718
+    cap: 2500
+    planned: 2500
+    planned_detail: 2000
+    planned_other: 500
+    kept_from_earlier_runs: 0
+    downloaded: 0
+    downloaded_detail: 0
+    downloaded_other: 0
 - domain: dice.com
   vertical: job
   target_type: JobPosting
@@ -105,6 +153,22 @@ selected:
         CCBot: 1.0
         ditto-benchmark: 1.0
     login_walled_pages: 0
+  captures:
+    index_html_captures:
+      CC-MAIN-2026-43: 11685
+      CC-MAIN-2026-39: 11896
+    distinct_urls: 22873
+    distinct_pages: 21556
+    distinct_detail_pages: 8964
+    distinct_other_pages: 12592
+    cap: 2500
+    planned: 2500
+    planned_detail: 2000
+    planned_other: 500
+    kept_from_earlier_runs: 0
+    downloaded: 0
+    downloaded_detail: 0
+    downloaded_other: 0
 - domain: marmiton.org
   vertical: recipe
   target_type: Recipe
@@ -127,6 +191,22 @@ selected:
         CCBot: 1.0
         ditto-benchmark: 1.0
     login_walled_pages: 0
+  captures:
+    index_html_captures:
+      CC-MAIN-2026-43: 13305
+      CC-MAIN-2026-39: 12923
+    distinct_urls: 25846
+    distinct_pages: 25846
+    distinct_detail_pages: 13917
+    distinct_other_pages: 11929
+    cap: 2500
+    planned: 2500
+    planned_detail: 2000
+    planned_other: 500
+    kept_from_earlier_runs: 0
+    downloaded: 0
+    downloaded_detail: 0
+    downloaded_other: 0
 - domain: food.ndtv.com
   vertical: recipe
   target_type: Recipe
@@ -149,6 +229,22 @@ selected:
         CCBot: 1.0
         ditto-benchmark: 1.0
     login_walled_pages: 0
+  captures:
+    index_html_captures:
+      CC-MAIN-2026-43: 24262
+      CC-MAIN-2026-39: 23695
+    distinct_urls: 46377
+    distinct_pages: 46349
+    distinct_detail_pages: 4085
+    distinct_other_pages: 42264
+    cap: 2500
+    planned: 2500
+    planned_detail: 2000
+    planned_other: 500
+    kept_from_earlier_runs: 0
+    downloaded: 0
+    downloaded_detail: 0
+    downloaded_other: 0
 - domain: ticketweb.com
   vertical: event
   target_type: Event
@@ -171,6 +267,22 @@ selected:
         CCBot: 1.0
         ditto-benchmark: 1.0
     login_walled_pages: 0
+  captures:
+    index_html_captures:
+      CC-MAIN-2026-43: 14195
+      CC-MAIN-2026-39: 14585
+    distinct_urls: 28272
+    distinct_pages: 28139
+    distinct_detail_pages: 22233
+    distinct_other_pages: 5906
+    cap: 2500
+    planned: 2500
+    planned_detail: 2000
+    planned_other: 500
+    kept_from_earlier_runs: 0
+    downloaded: 0
+    downloaded_detail: 0
+    downloaded_other: 0
 - domain: skiddle.com
   vertical: event
   target_type: Event
@@ -193,6 +305,22 @@ selected:
         CCBot: 1.0
         ditto-benchmark: 1.0
     login_walled_pages: 0
+  captures:
+    index_html_captures:
+      CC-MAIN-2026-43: 12698
+      CC-MAIN-2026-39: 13935
+    distinct_urls: 24475
+    distinct_pages: 24474
+    distinct_detail_pages: 8318
+    distinct_other_pages: 16156
+    cap: 2500
+    planned: 2500
+    planned_detail: 2000
+    planned_other: 500
+    kept_from_earlier_runs: 0
+    downloaded: 0
+    downloaded_detail: 0
+    downloaded_other: 0
 rejected:
 - domain: food.com
   vertical: recipe
@@ -666,3 +794,14 @@ rejected:
 - domain: fantasticfiction.com
   vertical: book
   reason: Book JSON-LD on 0% of sampled detail pages (< 60%)
+download:
+  cap_per_domain: 2500
+  cap_reason: 'Lowered from 20,000 to 2,500 pages per domain on 2026-10-27: at 4 concurrent requests Common
+    Crawl''s CloudFront WAF answered every range request with 403 ''Request blocked'' after about 2,250
+    records (~440 MB) per run, and 160,000 captures at the recommended pace of one request per second
+    would take ~44 h. Pages downloaded before the change are kept (argos.co.uk: 6,701 detail pages).'
+  tail_share: 0.2
+  data_concurrency: 1
+  min_interval_s: 1.0
+  slow_down: '403/429/503 from data.commoncrawl.org: backoff with jitter from 60 s doubling to 1800 s
+    while blocked, one probe request each time'

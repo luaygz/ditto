@@ -14,9 +14,12 @@ The dataset is built by the scripts in ``eval/datasets/commoncrawl_silver/`` (``
 
 Scalar labels are a string or a list of acceptable alternative spellings of the same value
 (e.g. ``["PT15M", "15 mins", "15 minutes", ...]`` for an ISO-8601 duration, ``["12.5", "12.50"]``
-for a price), so that a prediction copied from the visible page can match a value the site
-encoded in machine form. ``ingredients`` is a real list field. Fields the JSON-LD object lacks
-are labeled ``None``.
+for a price, ``["2026-10-31", "31 October 2026", ...]`` for a date, ``["GBP", "£"]`` for a
+currency, and an identifier's displayed spelling such as ``334/2679`` for ``sku`` ``3342679``),
+so that a prediction copied from the visible page can match a value the site encoded in machine
+form. ``ingredients`` is a real list field. Fields the JSON-LD object lacks are ``None`` in
+``labels.jsonl``; the adapter leaves them out of the page's labels, so they are not scored on
+that page (the JSON-LD omitting a property does not show that the page lacks it).
 """
 
 from __future__ import annotations
@@ -25,7 +28,7 @@ import html as html_lib
 import json
 import re
 from collections.abc import Iterable, Iterator
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 from urllib.parse import urljoin
@@ -39,6 +42,7 @@ from ditto.evaluation.datasets.base import (
     EvalSite,
     LabelKind,
     Selection,
+    is_empty,
     select_sites,
 )
 from ditto.fingerprint.dom import clean_tree, parse_html
@@ -94,6 +98,8 @@ class Vertical:
     types: frozenset[str]
     fields: tuple[str, ...]
     list_fields: frozenset[str] = frozenset()
+    identifiers: frozenset[str] = frozenset()
+    """Code-like fields whose displayed spelling may differ (see :func:`add_display_forms`)."""
 
     @property
     def primary_type(self) -> str:
@@ -117,6 +123,7 @@ VERTICALS: dict[str, Vertical] = {
             "product",
             frozenset({"Product", "ProductGroup", "IndividualProduct", "ProductModel"}),
             ("name", "price", "priceCurrency", "availability", "brand", "sku", "image"),
+            identifiers=frozenset({"sku"}),
         ),
         Vertical(
             "job",
@@ -143,6 +150,7 @@ VERTICALS: dict[str, Vertical] = {
             "book",
             frozenset({"Book"}),
             ("name", "author", "isbn", "publisher", "datePublished", "numberOfPages"),
+            identifiers=frozenset({"isbn"}),
         ),
     )
 }
@@ -280,6 +288,7 @@ def enum_name(value: Any) -> str | list[str] | None:
 
 
 def price_forms(value: Any) -> str | list[str] | None:
+    """A price plus its usual spellings: ``1299.5`` -> ``1299.50``, ``1,299.50``, ``1299,50``."""
     text = clean_text(first(value))
     if not text:
         return None
@@ -288,10 +297,50 @@ def price_forms(value: Any) -> str | list[str] | None:
         number = float(text.replace(",", ""))
     except ValueError:
         return text
-    alts += [_number(number), f"{number:.2f}", f"{number:,.2f}"]
+    alts += _amount_forms(number)
+    return scalar(alts)
+
+
+def _amount_forms(number: float) -> list[str]:
+    """Spellings of an amount: plain, two decimals, thousands-grouped, decimal comma.
+
+    Dot-grouped integers (``1.000``) are left out: a reader takes them for decimals.
+    """
+    two = f"{number:.2f}"
+    grouped = f"{number:,.2f}"
+    alts = [_number(number), two, grouped, two.replace(".", ",")]
+    if abs(number) >= 1000:
+        alts.append(grouped.translate(str.maketrans(",.", ".,")))
     if number.is_integer():
         alts.append(f"{int(number):,}")
-    return scalar(alts)
+    return alts
+
+
+CURRENCY_SYMBOLS: dict[str, str] = {
+    "GBP": "£",
+    "USD": "$",
+    "EUR": "€",
+    "JPY": "¥",
+    "CNY": "¥",
+    "INR": "₹",
+    "KRW": "₩",
+    "RUB": "₽",
+    "AUD": "$",
+    "CAD": "$",
+    "NZD": "$",
+    "SGD": "$",
+    "HKD": "$",
+    "MXN": "$",
+}
+"""Display symbol of common ISO 4217 codes (a page usually shows the symbol, not the code)."""
+
+
+def currency_forms(value: Any) -> str | list[str] | None:
+    """A currency as given (usually its ISO code) plus its display symbol when known."""
+    text = clean_text(first(value))
+    if not text:
+        return None
+    return scalar([text, CURRENCY_SYMBOLS.get(text.upper())])
 
 
 _DURATION = re.compile(
@@ -335,12 +384,53 @@ def duration_forms(value: Any) -> str | list[str] | None:
     return scalar(alts)
 
 
+_MONTHS = (
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+)
+
+
 def date_forms(value: Any) -> str | list[str] | None:
-    """An ISO date/datetime plus its date part."""
+    """An ISO date/datetime plus its date part and the usual English display spellings.
+
+    ``2026-10-31T19:30`` also matches ``31 October 2026``, ``31 Oct 2026``, ``October 31, 2026``,
+    ``Oct 31, 2026``, ``Oct 31 2026`` and ``10/31/2026``; ``31/10/2026`` is added only when the
+    day/month order is unambiguous (day above 12).
+    """
     text = clean_text(first(value))
     if not text:
         return None
-    return scalar([text, text[:10] if re.match(r"^\d{4}-\d{2}-\d{2}", text) else None])
+    match = re.match(r"^(\d{4})-(\d{2})-(\d{2})", text)
+    if not match:
+        return text
+    year, month, day = (int(g) for g in match.groups())
+    if not (1 <= month <= 12 and 1 <= day <= 31):
+        return scalar([text, text[:10]])
+    full = _MONTHS[month - 1]
+    abbr = full[:3]
+    alts = [
+        text,
+        text[:10],
+        f"{day} {full} {year}",
+        f"{day} {abbr} {year}",
+        f"{full} {day}, {year}",
+        f"{abbr} {day}, {year}",
+        f"{abbr} {day} {year}",
+        f"{month:02d}/{day:02d}/{year}",
+    ]
+    if day > 12:
+        alts.append(f"{day:02d}/{month:02d}/{year}")
+    return scalar(alts)
 
 
 def image_url(value: Any, base_url: str | None) -> str | None:
@@ -414,12 +504,15 @@ def _product(obj: dict[str, Any], url: str | None) -> dict[str, Any]:
     return {
         "name": clean_text(obj.get("name")),
         "price": price_forms(offer.get("price")),
-        "priceCurrency": clean_text(offer.get("priceCurrency")),
+        "priceCurrency": currency_forms(offer.get("priceCurrency")),
         "availability": enum_name(offer.get("availability")),
         "brand": scalar(names(obj.get("brand"))[:1]),
         "sku": clean_text(obj.get("sku")),
         "image": image_url(obj.get("image"), url),
     }
+
+
+_RANGE_SEPARATORS = (" - ", "-", " to ", "\u2013", " \u2013 ")
 
 
 def _salary(value: Any) -> str | list[str] | None:
@@ -432,8 +525,31 @@ def _salary(value: Any) -> str | list[str] | None:
     low, high = clean_text(inner.get("minValue")), clean_text(inner.get("maxValue"))
     single = clean_text(inner.get("value"))
     if low and high and low != high:
-        return scalar([f"{low} - {high}", f"{low}-{high}", f"{low} to {high}"])
+        return scalar(_range_forms(low, high))
     return price_forms(single or low or high)
+
+
+def _range_forms(low: str, high: str) -> list[str]:
+    """``low - high`` with the usual separators (hyphen, en dash, "to"); each bound as given, in
+    plain form and, when either bound has a fraction, at two decimals (``14 - 14.5`` also matches
+    ``14–14.50``)."""
+    lows, highs = [low], [high]
+    try:
+        lo, hi = float(low.replace(",", "")), float(high.replace(",", ""))
+    except ValueError:
+        pass
+    else:
+        lows.append(_number(lo))
+        highs.append(_number(hi))
+        if not (lo.is_integer() and hi.is_integer()):
+            lows.append(f"{lo:.2f}")
+            highs.append(f"{hi:.2f}")
+    return [
+        f"{a}{sep}{b}"
+        for a in dict.fromkeys(lows)
+        for b in dict.fromkeys(highs)
+        for sep in _RANGE_SEPARATORS
+    ]
 
 
 def _job(obj: dict[str, Any], url: str | None) -> dict[str, Any]:
@@ -581,6 +697,8 @@ class PageLabel:
     type: str | None
     labels: dict[str, Any] | None
     """Flattened fields of the page's own object (``None``: no object, or ambiguous)."""
+    display_forms: list[str] = field(default_factory=list)
+    """Identifier fields that got the page's displayed spelling as an alternative."""
 
 
 def page_labels(root: lxml_html.HtmlElement, vertical: str, url: str | None) -> PageLabel:
@@ -591,6 +709,56 @@ def page_labels(root: lxml_html.HtmlElement, vertical: str, url: str | None) -> 
         return PageLabel(len(objs), None, None)
     kind = sorted(type_names(obj) & VERTICALS[vertical].types)
     return PageLabel(len(objs), kind[0] if kind else None, flatten(obj, vertical, url))
+
+
+_ID_SEPARATOR = "[-/ .]?"
+
+
+def identifier_display_form(value: str, visible: str) -> str | None:
+    """How the page shows an identifier that the JSON-LD gives in another spelling.
+
+    Argos's ``sku`` ``3342679`` is displayed as ``334/2679``; ISBNs come with and without
+    hyphens. Returns the displayed spelling (the value's characters with ``-``, ``/``, space or
+    ``.`` between them, as a whole token of the visible text), or ``None`` when the value itself
+    is shown, is shorter than 4 characters, or no spelling of it is found.
+    """
+    compact = re.sub(r"[-/ .]", "", value)
+    if len(compact) < 4 or not compact.isalnum():
+        return None
+    edge_l, edge_r = r"(?<![0-9A-Za-z])", r"(?![0-9A-Za-z])"
+    if re.search(edge_l + re.escape(value) + edge_r, visible, re.IGNORECASE):
+        return None
+    pattern = _ID_SEPARATOR.join(re.escape(c) for c in compact)
+    match = re.search(edge_l + pattern + edge_r, visible, re.IGNORECASE)
+    return match.group(0) if match else None
+
+
+def add_display_forms(labels: dict[str, Any], vertical: str, visible: str) -> list[str]:
+    """Add the displayed spelling of each identifier field as an alternative (in place).
+
+    Returns the fields that got one.
+    """
+    changed: list[str] = []
+    for name in sorted(VERTICALS[vertical].identifiers):
+        value = labels.get(name)
+        alternatives = value if isinstance(value, list) else [value]
+        if not alternatives or not isinstance(alternatives[0], str):
+            continue
+        shown = identifier_display_form(alternatives[0], visible)
+        if shown is not None and shown not in alternatives:
+            labels[name] = [*alternatives, shown]
+            changed.append(name)
+    return changed
+
+
+def label_page(body: bytes, content_type: str | None, vertical: str, url: str) -> PageLabel:
+    """Labels of one captured page: :func:`page_labels` on the original page, then the
+    identifier display forms looked up in its script-stripped text."""
+    root = parse_page(body, content_type)
+    found = page_labels(root, vertical, url)
+    if found.labels is not None and VERTICALS[vertical].identifiers:
+        found.display_forms = add_display_forms(found.labels, vertical, visible_text(root))
+    return found
 
 
 # --------------------------------------------------------------------------- selection checks
@@ -704,24 +872,35 @@ def _url_tail(url: str) -> str:
     return path.rsplit("/", 1)[-1].lower()
 
 
-def label_agrees(value: Any, text_norm: str, attrs: list[str] | None = None) -> bool | None:
+def label_agrees(
+    value: Any,
+    text_norm: str,
+    attrs: list[str] | None = None,
+    text_raw: str | None = None,
+) -> bool | None:
     """Whether a scalar label (a string or a list of alternatives) appears on the page.
 
     ``None`` when the label is empty. Text must occur in the normalized visible text; URL labels
     are looked up by file name in the page's ``src``/``href``/``content`` attributes when
-    ``attrs`` is given. Any alternative agreeing is enough.
+    ``attrs`` is given; an alternative that normalizes to nothing (a currency symbol) is looked
+    up in ``text_raw``, the un-normalized visible text, when given. Any alternative agreeing is
+    enough.
     """
     if value is None or value == "" or value == []:
         return None
     alternatives = value if isinstance(value, list) else [value]
-    return any(_one_agrees(str(v), text_norm, attrs) for v in alternatives)
+    return any(_one_agrees(str(v), text_norm, attrs, text_raw) for v in alternatives)
 
 
-def _one_agrees(value: str, text_norm: str, attrs: list[str] | None) -> bool:
+def _one_agrees(
+    value: str, text_norm: str, attrs: list[str] | None, text_raw: str | None = None
+) -> bool:
     if value.startswith(("http://", "https://", "//")) and attrs is not None:
         tail = _url_tail(value)
         return bool(tail) and any(tail in a.lower() for a in attrs)
     needle = normalize_for_match(value)
+    if not needle and text_raw is not None and value.strip():
+        return value.strip() in text_raw
     return bool(needle) and needle in text_norm
 
 
@@ -788,7 +967,8 @@ class CCSilverDataset:
             raise DatasetUnavailable(f"{labels_path} not found: run labels.py")
         labels: dict[str, dict[str, Any]] = {}
         for row in iter_labels(labels_path):
-            labels[str(row["url"])] = dict(row["labels"])
+            # A property the JSON-LD omits is not evidence that the page lacks it: unscored.
+            labels[str(row["url"])] = {k: v for k, v in row["labels"].items() if not is_empty(v)}
         meta = {k: v for k, v in entry.items() if k not in ("domain", "vertical")}
         meta["labeled_pages"] = len(labels)
         return EvalSite(

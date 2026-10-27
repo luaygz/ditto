@@ -6,6 +6,7 @@ from __future__ import annotations
 import gzip
 import importlib.util
 import io
+import itertools
 import json
 import sys
 from pathlib import Path
@@ -23,12 +24,15 @@ from ditto.evaluation.datasets.cc_silver import (
     CCSilverDataset,
     attribute_values,
     clean_text,
+    currency_forms,
     date_forms,
     decode_body,
     duration_forms,
     enum_name,
     has_password_input,
+    identifier_display_form,
     label_agrees,
+    label_page,
     list_agreement,
     load_sites,
     main_object,
@@ -97,8 +101,8 @@ def test_product_labels_from_graph_skip_broken_block() -> None:
     assert found.type == "Product"
     assert found.labels == {
         "name": "Trail Runner 2 & Co",
-        "price": ["1299.5", "1299.50", "1,299.50"],
-        "priceCurrency": "USD",
+        "price": ["1299.5", "1299.50", "1,299.50", "1299,50", "1.299,50"],
+        "priceCurrency": ["USD", "$"],
         "availability": ["InStock", "In Stock", "In-Stock"],
         "brand": "Acme",
         "sku": "12345",
@@ -117,7 +121,7 @@ def test_product_aggregate_offer_and_product_group_variants() -> None:
         ),
         "",
     )
-    assert labels_of(agg, "product").labels["price"] == ["199", "199.00"]
+    assert labels_of(agg, "product").labels["price"] == ["199", "199.00", "199,00"]
     group = page(
         ld(
             {
@@ -138,8 +142,8 @@ def test_product_aggregate_offer_and_product_group_variants() -> None:
     )
     found = labels_of(group, "product")
     assert found.n_objects == 1  # variants are not separate hits
-    assert found.labels["price"] == ["20", "20.00"]
-    assert found.labels["priceCurrency"] == "EUR"
+    assert found.labels["price"] == ["20", "20.00", "20,00"]
+    assert found.labels["priceCurrency"] == ["EUR", "€"]
     assert found.labels["brand"] == "Basic"
 
 
@@ -155,8 +159,8 @@ def test_price_specification_fallback() -> None:
         "",
     )
     labels = labels_of(html, "product").labels
-    assert labels["price"] == "49.99"
-    assert labels["priceCurrency"] == "GBP"
+    assert labels["price"] == ["49.99", "49,99"]
+    assert labels["priceCurrency"] == ["GBP", "£"]
 
 
 def test_listing_page_is_ambiguous_unless_one_object_is_the_page() -> None:
@@ -205,9 +209,15 @@ def test_job_labels() -> None:
     assert labels["title"] == "Senior Nurse"
     assert labels["hiringOrganization"] == "City Hospital"
     assert labels["location"] == ["Leeds, West Yorkshire, GB", "Leeds, West Yorkshire", "Leeds"]
-    assert labels["datePosted"] == ["2026-10-01T09:00:00Z", "2026-10-01"]
+    assert labels["datePosted"][:3] == ["2026-10-01T09:00:00Z", "2026-10-01", "1 October 2026"]
     assert labels["employmentType"] == ["FULL_TIME", "FULL TIME", "FULL-TIME"]
-    assert labels["salary"] == ["30000 - 35000", "30000-35000", "30000 to 35000"]
+    assert labels["salary"] == [
+        "30000 - 35000",
+        "30000-35000",
+        "30000 to 35000",
+        "30000–35000",
+        "30000 – 35000",
+    ]
 
 
 def test_job_remote_multi_type_and_single_salary() -> None:
@@ -227,7 +237,7 @@ def test_job_remote_multi_type_and_single_salary() -> None:
     assert labels["title"] == "Engineer"
     assert labels["location"] == "Remote"
     assert labels["employmentType"] == "FULL_TIME, CONTRACTOR"
-    assert labels["salary"] == ["55", "55.00"]
+    assert labels["salary"] == ["55", "55.00", "55,00"]
     assert labels["hiringOrganization"] is None
 
 
@@ -277,7 +287,8 @@ def test_event_news_book_labels() -> None:
     )
     labels = labels_of(event, "event").labels
     assert labels["name"] == "Band Live"
-    assert labels["startDate"] == ["2026-11-02T20:00", "2026-11-02"]
+    assert labels["startDate"][:2] == ["2026-11-02T20:00", "2026-11-02"]
+    assert "Nov 2, 2026" in labels["startDate"]
     assert labels["endDate"] is None
     assert labels["location"] == "The Hall"
     assert labels["address"] == ["1 Main St, Bristol", "Bristol"]
@@ -335,7 +346,7 @@ def test_value_helpers() -> None:
     assert duration_forms("about 10 minutes") == "about 10 minutes"
     assert duration_forms(None) is None
     assert price_forms("free") == "free"
-    assert price_forms(1000) == ["1000", "1000.00", "1,000.00", "1,000"]
+    assert price_forms(1000) == ["1000", "1000.00", "1,000.00", "1000,00", "1.000,00", "1,000"]
     assert enum_name("http://schema.org/OutOfStock") == [
         "OutOfStock",
         "Out Of Stock",
@@ -453,7 +464,7 @@ def make_dataset(tmp_path: Path, *, warc: bool = True, labels: bool = True) -> P
                 "url": f"https://{domain}/a",
                 "type": "Recipe",
                 "n_objects": 1,
-                "labels": {"name": "A", "ingredients": ["x"]},
+                "labels": {"name": "A", "ingredients": ["x"], "author": None, "prepTime": ""},
             }
             (site / "labels.jsonl").write_text(json.dumps(row) + "\n")
     return tmp_path
@@ -804,3 +815,201 @@ def test_select_choose_prefers_two_per_main_vertical() -> None:
     assert [s["domain"] for s in chosen] == ["p1", "p2", "j1", "r1", "e1", "e2", "b1", "b2"]
     reasons = {r["domain"]: r["reason"] for r in rejected}
     assert "shares its operator/platform with the selected j1" in reasons["j2"]
+
+
+# --------------------------------------------------------------------------- polite downloader
+
+
+class FakeClock:
+    def __init__(self) -> None:
+        self.now = 0.0
+        self.sleeps: list[float] = []
+
+    def sleep(self, seconds: float) -> None:
+        self.sleeps.append(seconds)
+        self.now += seconds
+
+    def clock(self) -> float:
+        return self.now
+
+
+def polite_http(statuses: list[int], body: bytes = b"0123456789") -> tuple[Any, Any, list[float]]:
+    """An ``Http`` over a mock transport answering ``statuses`` in turn (206 serves ``body``)."""
+    import httpx
+
+    cc = script("cc")
+    fake = FakeClock()
+    starts: list[float] = []
+    answers = iter(statuses)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        starts.append(fake.now)
+        status = next(answers)
+        if status == 206:
+            first, last = request.headers["Range"].removeprefix("bytes=").split("-")
+            return httpx.Response(206, content=body[int(first) : int(last) + 1])
+        if status == 200:
+            return httpx.Response(200, headers={"Content-Length": str(len(body))})
+        return httpx.Response(status, content=b"Request blocked")
+
+    http = cc.Http(
+        client=httpx.Client(transport=httpx.MockTransport(handler)),
+        sleep=fake.sleep,
+        clock=fake.clock,
+        max_attempts=2,
+        log=lambda msg: None,
+    )
+    return cc, http, starts
+
+
+def test_http_waits_out_slow_down_without_spending_attempts() -> None:
+    cc, http, starts = polite_http([403, 403, 503, 206, 206, 403, 206])
+    assert http.fetch_range("crawl-data/x.warc.gz", 2, 4) == b"2345"  # 3 slow-downs, 2 attempts
+    gaps = [b - a for a, b in itertools.pairwise(starts)]
+    assert 45 <= gaps[0] <= 75 and 90 <= gaps[1] <= 150 and 180 <= gaps[2] <= 300
+    assert http.fetch_range("crawl-data/x.warc.gz", 0, 2) == b"01"
+    assert starts[4] - starts[3] >= cc.DATA_INTERVAL_S  # paced even without a block
+    assert http.fetch_range("crawl-data/x.warc.gz", 0, 1) == b"0"
+    assert 45 <= starts[6] - starts[5] <= 75  # the success reset the backoff level
+    assert http.stats["slow_downs"] == 4 and http.stats["retries"] == 0
+
+
+def test_http_backoff_is_capped_and_other_errors_still_fail() -> None:
+    cc, http, starts = polite_http([403] * 8 + [206, 404])
+    assert http.fetch_range("crawl-data/x.warc.gz", 0, 3) == b"012"
+    gaps = [b - a for a, b in itertools.pairwise(starts)]
+    assert max(gaps) <= cc.SLOW_DOWN_MAX_S and gaps[-1] >= 0.75 * cc.SLOW_DOWN_MAX_S
+    with pytest.raises(cc.FetchError, match="HTTP 404"):
+        http.fetch_range("crawl-data/x.warc.gz", 0, 3)
+    _, head, _ = polite_http([429, 200])
+    assert head.size("crawl-data/x.warc.gz") == 10
+    with pytest.raises(ValueError):
+        cc.Http(data_concurrency=2)
+
+
+def test_plan_keeps_downloaded_pages_and_fills_the_rest() -> None:
+    download = script("download")
+
+    class FakeIndex:
+        def __init__(self, rows: list[dict[str, Any]]) -> None:
+            self.rows = rows
+
+        def domain_rows(self, domain: str) -> list[dict[str, Any]]:
+            return self.rows
+
+    rows = [
+        {
+            "urlkey": f"com,x)/{kind}/{i}",
+            "url": f"https://x.com/{kind}/{i}",
+            "timestamp": "20261005000000",
+            "digest": f"{kind}{i}",
+            "filename": "f",
+            "offset": "0",
+            "length": "1",
+        }
+        for kind in ("p", "tag")
+        for i in range(30)
+    ]
+    entry = {"domain": "x.com", "detail_pattern": r"^/p/\d+$"}
+    indexes = {"CC-MAIN-2026-43": FakeIndex(rows)}
+    fresh, _ = download.plan_domain(entry, indexes, cap=10)
+    have = {f"https://x.com/p/{i}" for i in range(20)}  # more details than the quota of 8
+    plan, counts = download.plan_domain(entry, indexes, cap=10, have=have)
+    details = [p["url"] for p in plan if p["kind"] == "detail"]
+    assert set(details) == have and counts["planned_detail"] == 20
+    assert [p for p in plan if p["kind"] == "other"] == [p for p in fresh if p["kind"] == "other"]
+    assert counts["kept_from_earlier_runs"] == 20 and counts["planned"] == 22
+    few = {f"https://x.com/p/{i}" for i in range(3)}
+    topped, _ = download.plan_domain(entry, indexes, cap=10, have=few)
+    topped_details = {p["url"] for p in topped if p["kind"] == "detail"}
+    assert few <= topped_details and len(topped_details) == 8
+
+
+def test_download_all_round_robin_and_retries_errors(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    download = script("download")
+    monkeypatch.setattr(download, "DATA_DIR", tmp_path)
+    records = {
+        d: [warc_bytes([(f"https://{d}/{i}", f"<p>{i}</p>")]) for i in range(3)] for d in "ab"
+    }
+    files = {d: b"".join(recs) for d, recs in records.items()}
+
+    def plan(d: str) -> list[dict[str, Any]]:
+        offsets = [sum(len(r) for r in records[d][:i]) for i in range(3)]
+        return [
+            {"url": f"https://{d}/{i}", "filename": d, "offset": offsets[i], "length": len(r)}
+            for i, r in enumerate(records[d])
+        ]
+
+    class Flaky(FakeHttp):
+        def __init__(self, files: dict[str, bytes], fail: set[tuple[str, int]]) -> None:
+            super().__init__(files)
+            self.fail = fail
+            self.calls: list[tuple[str, int]] = []
+
+        def fetch_range(self, filename: str, offset: int, length: int) -> bytes:
+            self.calls.append((filename, offset))
+            if (filename, offset) in self.fail:
+                raise RuntimeError("transient")
+            return super().fetch_range(filename, offset, length)
+
+    plans = {"a": plan("a"), "b": plan("b")}
+    first = Flaky(files, {("b", plans["b"][1]["offset"])})
+    stats = download.download_all(first, plans)
+    assert [c[0] for c in first.calls] == ["a", "b", "a", "b", "a", "b"]  # interleaved
+    assert stats["b"]["errors_this_run"] == 1 and stats["a"]["fetched_this_run"] == 3
+    second = Flaky(files, set())
+    again = download.download_all(second, plans)
+    assert second.calls == [("b", plans["b"][1]["offset"])]  # only the failed capture again
+    assert again["b"]["fetched_this_run"] == 1
+    assert download.downloaded("b") == {f"https://b/{i}" for i in range(3)}
+    assert download.policy(2500)["cap_per_domain"] == 2500
+
+
+# --------------------------------------------------------------------------- label alternatives
+
+
+def test_display_forms_dates_currency_and_ranges() -> None:
+    assert identifier_display_form("3342679", "Curtains 334/2679 £28.50") == "334/2679"
+    assert identifier_display_form("3342679", "Cat. no. 3342679") is None  # shown as is
+    assert identifier_display_form("12", "1/2") is None  # too short to be safe
+    assert identifier_display_form("3342679", "13342679 elsewhere") is None
+    html = page(
+        ld({"@type": "Product", "name": "Cam", "sku": "4352321", "offers": {"price": "2.49"}}),
+        "<h1>Cam</h1><p>435/2321</p><p>2,49 €</p>",
+    )
+    found = label_page(html.encode(), "text/html", "product", "https://x.example/p/1")
+    assert found.display_forms == ["sku"] and found.labels is not None
+    assert found.labels["sku"] == ["4352321", "435/2321"]
+    assert "2,49" in found.labels["price"]
+    assert price_forms(1299.5) == ["1299.5", "1299.50", "1,299.50", "1299,50", "1.299,50"]
+    assert currency_forms("gbp") == ["gbp", "£"] and currency_forms("CHF") == "CHF"
+    assert currency_forms(None) is None
+    dates = date_forms("2026-10-31T19:30:00+00:00")
+    assert isinstance(dates, list)
+    assert {"2026-10-31", "31 October 2026", "Oct 31, 2026", "10/31/2026", "31/10/2026"} <= set(
+        dates
+    )
+    assert "05/06/2026" not in (date_forms("2026-06-05") or [])  # ambiguous day/month order
+    assert date_forms("2026-13-45") == "2026-13-45"  # not a calendar date: kept as given
+    norm = normalize_for_match("Total £28.50")
+    assert label_agrees(["GBP", "£"], norm, None, "Total £28.50") is True
+    assert label_agrees(["GBP", "£"], norm) is False
+
+
+def test_job_salary_range_forms() -> None:
+    html = page(
+        ld(
+            {
+                "@type": "JobPosting",
+                "title": "Clerk",
+                "baseSalary": {"value": {"minValue": 14, "maxValue": 14.5}},
+            }
+        ),
+        "<h1>Clerk</h1><p>$14–$14.50 Per Hour</p>",
+    )
+    labels = labels_of(html, "job").labels
+    assert labels is not None and "14–14.50" in labels["salary"]
+    norm = normalize_for_match(visible_text(parse_html(html)))
+    assert label_agrees(labels["salary"], norm) is True

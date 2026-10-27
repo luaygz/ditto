@@ -42,6 +42,7 @@ from collections.abc import Iterable, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 
 import httpx
 from lxml import etree
@@ -65,6 +66,7 @@ from ditto.evaluation.datasets.livewebie import (  # noqa: E402
     parse_groundtruth,
     site_fields,
 )
+from ditto.fingerprint.dom import clean_html  # noqa: E402
 from ditto.textutil import normalize_ws  # noqa: E402
 
 DEFAULT_DATA_DIR = REPO_ROOT / "data" / "livewebie"
@@ -101,13 +103,15 @@ def tree_digest(root: Path) -> str:
     return h.hexdigest()
 
 
-def fetch_release(data_dir: Path) -> dict[str, Any]:
+def fetch_release(data_dir: Path, *, offline: bool = False) -> dict[str, Any]:
     """Download + extract the pinned release; verify its digest. Returns manifest fields."""
     data_dir.mkdir(parents=True, exist_ok=True)
     tarball = data_dir / f"LiveWeb-IE-{RELEASE_COMMIT}.tar.gz"
     release_dir = data_dir / "release"
     root = release_dir / "LiveWeb_IE"
     if not tarball.is_file():
+        if offline:
+            raise SystemExit(f"release tarball missing: {tarball} (run without --offline)")
         log(f"downloading {TARBALL_URL}")
         tmp = tarball.with_suffix(".part")
         with httpx.stream(
@@ -185,15 +189,22 @@ def release_counts(release: Release) -> dict[str, Any]:
 
 
 class PageIndex:
-    """Whitespace-normalised text and attribute values of one page, for substring checks."""
+    """Whitespace-normalised text and attribute values of one page, for substring checks.
 
-    def __init__(self, body: bytes) -> None:
-        try:
-            root = lxml_html.fromstring(body)
-        except (etree.ParserError, ValueError):  # empty or unparsable payload: no content
-            self.spaced = self.joined = ""
-            self.attrs: set[str] = set()
-            return
+    ``extractor_input=True`` indexes the tree every method works on (``clean_html``: scripts,
+    styles, ``noscript``, ``svg``, ``iframe``, ``template`` and ``<head>`` except ``<title>``
+    removed); ``False`` indexes the raw HTML, script text included.
+    """
+
+    def __init__(self, body: bytes, *, extractor_input: bool = True) -> None:
+        root: etree._Element
+        if extractor_input:
+            root = clean_html(body)
+        else:
+            try:
+                root = lxml_html.fromstring(body)
+            except (etree.ParserError, ValueError):  # empty or unparsable payload: no content
+                root = etree.Element("html")
         texts = [_text(t) for t in root.itertext()]
         self.spaced = normalize_ws(" ".join(texts))
         self.joined = normalize_ws("".join(texts))
@@ -229,7 +240,13 @@ def snapshot_pages(warc: Path, fetchlog: Path) -> dict[str, bytes]:
     return pages
 
 
-def label_presence(release: Release, website: str, pages: dict[str, bytes]) -> dict[str, Any]:
+def label_presence(
+    release: Release,
+    website: str,
+    pages: dict[str, bytes],
+    *,
+    extractor_input: bool = True,
+) -> dict[str, Any]:
     """Share of ground-truth values found in the snapshot, per field, group and overall."""
     index: dict[str, PageIndex] = {}
     per_field: dict[str, dict[str, int]] = {}
@@ -250,7 +267,7 @@ def label_presence(release: Release, website: str, pages: dict[str, bytes]) -> d
                 seen_pages.add(url)
                 idx = index.get(url)
                 if idx is None:
-                    idx = index[url] = PageIndex(body)
+                    idx = index[url] = PageIndex(body, extractor_input=extractor_input)
                 found = sum(idx.contains(v) for v in vals)
                 for bucket in (
                     per_field.setdefault(fd.name, {"values": 0, "found": 0}),
@@ -274,6 +291,100 @@ def label_presence(release: Release, website: str, pages: dict[str, bytes]) -> d
 
 def _rate(c: dict[str, int]) -> float | None:
     return round(c["found"] / c["values"], 4) if c["values"] else None
+
+
+# --------------------------------------------------------------------------- snapshot audit
+
+
+def audit_snapshot(
+    warc: Path, log_path: Path, urls: Sequence[str], interval: float
+) -> dict[str, Any]:
+    """Re-check a finished snapshot from its WARC and fetch log alone.
+
+    Every request record is checked against the ``robots.txt`` archived before it in the same
+    file (its session), every benchmark URL must have a settled fetch-log row, and every logged
+    200 must match the archived payload's SHA-256. ``WARC-Date`` has one-second resolution and is
+    stamped when the response arrives, so the archive bounds the request rate only per window:
+    ``max_requests_in_any_60s`` may exceed ``60 / interval`` by the requests whose responses
+    straddle the window edges (``throttle_ok`` allows two).
+    """
+    stamps: list[dt.datetime] = []
+    robots = snapshot.Robots.allow_all()
+    sessions = disallowed = 0
+    statuses: Counter[str] = Counter()
+    payloads: dict[str, str] = {}
+    with warc.open("rb") as fh:
+        for rec in ArchiveIterator(fh):
+            uri = rec.rec_headers.get_header("WARC-Target-URI") or ""
+            is_robots = urlsplit(uri).path == "/robots.txt"
+            if rec.rec_type == "request":
+                date = rec.rec_headers.get_header("WARC-Date") or ""
+                stamps.append(dt.datetime.fromisoformat(date.replace("Z", "+00:00")))
+                if is_robots:
+                    sessions += 1
+                elif not robots.allowed(uri):
+                    disallowed += 1
+            elif rec.rec_type == "response" and rec.http_headers is not None:
+                code = rec.http_headers.get_statuscode()
+                statuses[code] += 1
+                body = rec.content_stream().read()
+                if is_robots:
+                    robots = _archived_robots(int(code), body)
+                elif code == "200":
+                    payloads[uri] = hashlib.sha256(body).hexdigest()
+    latest = snapshot.latest_rows(fetch_log_entries(log_path))
+    unsettled = [
+        u
+        for u in dict.fromkeys(urls)
+        if u not in latest
+        or (latest[u].get("status") is None and latest[u].get("error") != snapshot.DISALLOWED)
+    ]
+    mismatched = [
+        r["url"]
+        for r in latest.values()
+        if r.get("status") == 200 and payloads.get(r.get("final_url", "")) != r.get("sha256")
+    ]
+    stamps.sort()
+    window = start = 0
+    for end, stamp in enumerate(stamps):
+        while (stamp - stamps[start]).total_seconds() >= 60:
+            start += 1
+        window = max(window, end - start + 1)
+    nominal = int(60 // interval)
+    checks = {
+        "robots_ok": disallowed == 0,
+        "throttle_ok": window <= nominal + 2,
+        "all_urls_settled": not unsettled,
+        "payloads_match_log": not mismatched,
+    }
+    return {
+        "requests": len(stamps),
+        "sessions": sessions,
+        "first_request": _iso(stamps[0]) if stamps else None,
+        "last_request": _iso(stamps[-1]) if stamps else None,
+        "response_statuses": dict(sorted(statuses.items())),
+        "interval_s": interval,
+        "max_requests_in_any_60s": window,
+        "nominal_max_in_60s": nominal,
+        "requests_disallowed_by_robots": disallowed,
+        "urls_unsettled": len(unsettled),
+        "payload_mismatches": len(mismatched),
+        **checks,
+        "ok": all(checks.values()),
+    }
+
+
+def _archived_robots(status: int, body: bytes) -> snapshot.Robots:
+    """The rules a fetched ``robots.txt`` stands for (as :func:`snapshot.fetch_robots`)."""
+    if 200 <= status < 300:
+        return snapshot.parse_robots(body.decode("utf-8", errors="replace"))
+    if 400 <= status < 500:
+        return snapshot.Robots.allow_all()
+    return snapshot.Robots.disallow_all()
+
+
+def _iso(stamp: dt.datetime) -> str:
+    return stamp.astimezone(dt.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 # --------------------------------------------------------------------------- main
@@ -308,30 +419,44 @@ def site_entry(
         "urls": len(release.site_urls(website)),
         "robots": result.robots,
         "fetch_counts": result.counts,
-        "requests": result.requests,
-        "fetched_from": result.started_at,
-        "fetched_to": result.finished_at,
     }
     fields_path = FIELDS_DIR / f"{website}.yaml"
     if fields_path.is_file():
         entry["fields_yaml"] = _rel(fields_path)
         entry["fields_sha256"] = hashlib.sha256(fields_path.read_bytes()).hexdigest()
     if result.warc is None:
-        entry.update(included=False, excluded_reason=result.excluded_reason)
+        entry.update(
+            requests=result.requests,
+            checked_at=result.started_at,
+            included=False,
+            excluded_reason=result.excluded_reason,
+        )
+        entry.update(SITE_NOTES.get(website, {}))
         return entry
     warc = result.warc
+    log_path = data_dir / "fetchlog" / f"{website}.jsonl"
+    audit = audit_snapshot(
+        warc, log_path, release.site_urls(website), float(result.robots.get("interval_s", 1.0))
+    )
+    entry.update(
+        requests=audit["requests"],
+        fetched_from=audit["first_request"],
+        fetched_to=audit["last_request"],
+        audit=audit,
+    )
     entry["warc"] = _rel(warc)
     entry["warc_bytes"] = warc.stat().st_size
     entry["warc_sha256"] = _sha256_file(warc)
-    pages = snapshot_pages(warc, data_dir / "fetchlog" / f"{website}.jsonl")
+    pages = snapshot_pages(warc, log_path)
     entry["pages_200"] = len(pages)
     presence = label_presence(release, website, pages)
+    raw = label_presence(release, website, pages, extractor_input=False)
     entry["label_presence"] = presence
+    entry["label_presence_raw_html"] = {"overall": raw["overall"], "by_field": raw["by_field"]}
     overall = presence["overall"]
     if not pages:
         statuses = Counter(
-            str(r.get("status") or r.get("error"))
-            for r in fetch_log_entries(data_dir / "fetchlog" / f"{website}.jsonl")
+            str(r.get("status") or r.get("error")) for r in fetch_log_entries(log_path)
         )
         entry.update(
             included=False,
@@ -342,13 +467,13 @@ def site_entry(
         entry.update(
             included=False,
             excluded_reason=(
-                f"only {overall} of ground-truth values appear in the fetched HTML "
-                f"(threshold {min_presence}); fields below it: {low}. Values missing from the "
-                "server HTML are rendered client-side or have changed since annotation"
+                f"only {overall} of ground-truth values appear in the extractor input of the "
+                f"fetched pages (threshold {min_presence}); fields below it: {low}"
             ),
         )
     else:
         entry["included"] = True
+    entry.update(SITE_NOTES.get(website, {}))
     return entry
 
 
@@ -357,19 +482,26 @@ def main(argv: Iterable[str] | None = None) -> int:
     ap.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR)
     ap.add_argument("--sites", default="", help="comma-separated websites (default: all)")
     ap.add_argument("--release-only", action="store_true", help="download + verify only")
+    ap.add_argument(
+        "--offline",
+        action="store_true",
+        help="no network: rebuild the manifest from the release, WARCs and fetch logs on disk",
+    )
     ap.add_argument("--min-presence", type=float, default=DEFAULT_MIN_PRESENCE)
     args = ap.parse_args(list(argv) if argv is not None else None)
     data_dir: Path = args.data_dir.resolve()
 
-    release_info = fetch_release(data_dir)
+    release_info = fetch_release(data_dir, offline=args.offline)
     release = load_release(data_dir / "release" / "LiveWeb_IE")
     counts = release_counts(release)
     log(f"release ok: {counts}")
     if args.release_only:
         return 0
     websites = [w for w in release.websites() if not args.sites or w in args.sites.split(",")]
-    started = _now()
-    results = run_snapshots(release, websites, data_dir)
+    if args.offline:
+        results = recorded_results(websites, data_dir)
+    else:
+        results = run_snapshots(release, websites, data_dir)
     previous = _load_manifest()
     sites = dict(previous.get("sites", {})) if args.sites else {}
     for website in websites:
@@ -378,13 +510,53 @@ def main(argv: Iterable[str] | None = None) -> int:
             f"{website}: included={sites[website]['included']} "
             f"{sites[website].get('excluded_reason') or ''}"
         )
-    included = [w for w, s in sites.items() if s.get("included")]
-    manifest = {
+    manifest = build_manifest(release_info, counts, sites, data_dir, args.min_presence)
+    MANIFEST_PATH.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+    log(f"wrote {MANIFEST_PATH}: {manifest['summary']}")
+    return 0
+
+
+def recorded_results(websites: Sequence[str], data_dir: Path) -> dict[str, snapshot.SiteResult]:
+    """Every site's recorded snapshot outcome (``--offline``); fails if a site was never run."""
+    results: dict[str, snapshot.SiteResult] = {}
+    for website in websites:
+        recorded = snapshot.load_result(website, data_dir)
+        if recorded is None:
+            raise SystemExit(
+                f"{website}: no finished snapshot under {data_dir} (run without --offline)"
+            )
+        results[website] = recorded
+    return results
+
+
+def build_manifest(
+    release_info: dict[str, Any],
+    counts: dict[str, Any],
+    sites: dict[str, dict[str, Any]],
+    data_dir: Path,
+    min_presence: float,
+) -> dict[str, Any]:
+    """The manifest document from the per-site entries."""
+    included = sorted(w for w, s in sites.items() if s.get("included"))
+    excluded = sorted(w for w, s in sites.items() if not s.get("included"))
+    failing = sorted(w for w in included if not sites[w].get("audit", {}).get("ok"))
+    total = counts["websites"]
+    status = "ok" if len(included) == total else "partial" if included else "skipped"
+    if failing:
+        note = f"Not final: the snapshot audit fails for {', '.join(failing)}."
+    elif status == "partial":
+        note = STATUS_NOTE.format(excluded=len(excluded), total=total)
+    else:
+        note = "Final."
+    spans = [s for s in sites.values() if s.get("fetched_from")]
+    return {
         "dataset": "livewebie",
-        "status": "ok" if len(included) == counts["websites"] else "partial",
+        "status": status,
+        "status_note": note,
         "summary": (
-            f"{len(included)} of {counts['websites']} LiveWeb-IE websites snapshotted and usable; "
-            "excluded sites carry an excluded_reason"
+            f"{len(included)} of {total} LiveWeb-IE websites usable ({', '.join(included)}); "
+            f"excluded: {', '.join(excluded) or 'none'} (see each site's excluded_reason and "
+            "diagnosis)"
         ),
         "paper": {
             "title": "LiveWeb-IE: A Benchmark For Online Web Information Extraction",
@@ -400,20 +572,24 @@ def main(argv: Iterable[str] | None = None) -> int:
             "user_agent": snapshot.USER_AGENT,
             "min_interval_s_per_host": snapshot.MIN_INTERVAL_S,
             "robots": "RFC 9309; Crawl-delay honoured; Content-Signal ai-input=no excludes host",
-            "run_started": previous.get("snapshot", {}).get("run_started", started)
-            if args.sites
-            else started,
-            "run_finished": _now(),
+            "fetched_from": min((s["fetched_from"] for s in spans), default=None),
+            "fetched_to": max((s["fetched_to"] for s in spans), default=None),
+            "complete": not failing,
+            "audit": (
+                "per site under 'audit', recomputed from the WARC and fetch log at manifest time: "
+                "every request checked against the robots.txt archived before it, the request "
+                "rate per 60 s window (WARC-Date has 1 s resolution and is stamped at response "
+                "time), every benchmark URL settled, every logged 200 matching its archived "
+                "payload hash"
+            ),
+            "manifest_written": _now(),
             "data_dir": _rel(data_dir),
-            "min_label_presence": args.min_presence,
+            "min_label_presence": min_presence,
         },
         "evaluation_protocol": PROTOCOL_NOTES,
         "known_issues": KNOWN_ISSUES,
         "sites": dict(sorted(sites.items())),
     }
-    MANIFEST_PATH.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
-    log(f"wrote {MANIFEST_PATH} ({len(included)} sites included)")
-    return 0
 
 
 PERMISSIONS: dict[str, Any] = {
@@ -508,12 +684,98 @@ KNOWN_ISSUES: list[str] = [
     "Four release URLs contain U+FFFD or U+2019 (thecocktaildb.com 12756/178368/178369, "
     "themealdb.com 53062); they are requested percent-encoded, the WARC-Target-URI is the "
     "encoded form and the fetch log maps it back to the release URL.",
-    "iclr.cc / icml.cc / neurips.cc (checked 2026-10-24): titles are in the server HTML but the "
-    "author list appears only in a JSON-LD <script>, and the abstract links ('#abstract_details') "
-    "and author profile links ('papers.html?filter=author&search=...') are not in the server "
-    "HTML at all; they are rendered by JavaScript, so a script-free HTML extractor cannot "
-    "recover them from a plain-HTTP snapshot.",
+    "Label presence ('label_presence') is measured on the extractor input (clean_html: no "
+    "script, style, noscript, svg, iframe, template or head except title); "
+    "'label_presence_raw_html' is the same check on the raw HTML, script text included.",
 ]
+
+_CONFERENCE = (
+    "Excluded: the shared virtual-conference site (neurips.cc / iclr.cc / icml.cc) was "
+    "redesigned after annotation (checked on the archived pages 2026-10-27). Poster pages "
+    "(g_000): the author list is now one div.event-organizers text joined by '⋅' (U+22C5) "
+    "where the ground truth joins with ' · ' (U+00B7), and the '#abstract_details' link that "
+    "every abstract_link label holds no longer exists (the abstract is inline); only the title "
+    "still matches. Search pages (g_001, papers.html?filter=title&search=...): the labeled, "
+    "filtered list is rendered by JavaScript; the server HTML carries the complete unfiltered "
+    "paper list ({papers} poster links) inside <noscript>, which the extractor input drops, and "
+    "no author names or 'papers.html?filter=author' links at all."
+)
+
+SITE_NOTES: dict[str, dict[str, Any]] = {
+    "dp.la": {
+        "diagnosis": (
+            "Excluded: every page request (184 URLs, robots.txt Crawl-delay 2 s honoured, paths "
+            "allowed) was answered by CloudFront with HTTP 403 'Request blocked' "
+            "(x-cache: Error from cloudfront) while robots.txt itself was served; the block sits "
+            "in front of the site, and getting past it would mean disguising the client, which "
+            "the fetch policy rules out. Re-probed 2026-10-27 (robots.txt and one page): still "
+            "403."
+        ),
+    },
+    "fueleconomy.gov": {
+        "diagnosis": (
+            "Excluded: www.fueleconomy.gov closes the connection without an HTTP response to "
+            "GET /robots.txt (4 attempts with backoff per run) on every run, 2026-10-24 and "
+            "2026-10-27; RFC 9309 section 2.3.1.4 treats an unreachable robots.txt as complete "
+            "disallow, so no page was requested."
+        ),
+    },
+    "thesportsdb.com": {
+        "diagnosis": (
+            "Excluded: robots.txt carries 'Content-Signal: ai-train=no, search=yes, "
+            "ai-input=no'; ditto sends page content to an LLM during spec generation, which is "
+            "ai-input, so no page was requested."
+        ),
+    },
+    "iclr.cc": {"diagnosis": _CONFERENCE.format(papers="3,828")},
+    "icml.cc": {"diagnosis": _CONFERENCE.format(papers="3,340")},
+    "neurips.cc": {"diagnosis": _CONFERENCE.format(papers="4,538")},
+    "thecocktaildb.com": {
+        "field_notes": {
+            "cocktail_link": "letter-browse pages now link drinks as /drink/<id>; the annotation "
+            "has /drink/<id>-<slug>",
+            "cocktail_image_list": "letter-browse thumbnails now end in a size suffix "
+            "(<image url>/small); the annotation has the bare image URL",
+        },
+    },
+    "themealdb.com": {
+        "field_notes": {
+            "meal_image_list": "letter-browse thumbnails are now relative (/images/media/meals/"
+            "...); the annotation has absolute https://www.themealdb.com/... URLs",
+        },
+    },
+    "sandbox.oxylabs.io": {
+        "field_notes": {
+            "image": "Next.js lazy images: the <img> src in the HTML is a data: placeholder; the "
+            "/assets/*.svg path is only in <noscript>, script data and the og:image <meta>, all "
+            "dropped from the extractor input",
+            "image_list": "as image",
+            "platform": "the lower-case values ('playstation') come from the og:platform <meta> "
+            "in <head>; the page body shows other spellings ('Playstation platform')",
+        },
+    },
+    "scrapethissite.com": {
+        "field_notes": {
+            "title": "g_000 (pages/ajax-javascript/#<year>): the film table is filled by "
+            "JavaScript; the server HTML has an empty hidden table",
+            "turtle_name": "g_003 (pages/frames/): the content is a separate document loaded in "
+            "an <iframe> (/pages/frames/?frame=i), not part of the page",
+            "turtle_image": "as turtle_name",
+            "turtle_link": "as turtle_name",
+        },
+    },
+}
+"""Verified explanations, added to the site entries: why a site is excluded, and why an included
+site's field has (almost) no label value in the extractor input."""
+
+STATUS_NOTE = (
+    "Final. 'partial' because {excluded} of the {total} websites are excluded; each exclusion is "
+    "a property of "
+    "the site at snapshot time (robots.txt policy, a CDN block of the client, or a redesign "
+    "since annotation), recorded per site in excluded_reason and diagnosis, not an unfinished "
+    "fetch. Every included site's snapshot is complete: every benchmark URL has a settled fetch, "
+    "and the audit (robots.txt, request rate, payload hashes) passes."
+)
 
 
 def _load_manifest() -> dict[str, Any]:

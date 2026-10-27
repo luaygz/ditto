@@ -29,6 +29,7 @@ from cc import (
     INDEX_BASE,
     INDEX_CACHE,
     MANIFEST_JSON,
+    MAX_DATA_CONCURRENCY,
     NOISE_JSON,
     SELECTION_JSON,
     USER_AGENT,
@@ -75,11 +76,17 @@ def _journal_counts(site_dir: Path) -> Counter[str]:
     return counts
 
 
-def _throughput(site_dir: Path) -> dict[str, Any] | None:
+def _runs(site_dir: Path) -> list[dict[str, Any]]:
     path = site_dir / "download_runs.jsonl"
     if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+
+
+def _throughput(site_dir: Path) -> dict[str, Any] | None:
+    runs = _runs(site_dir)
+    if not runs:
         return None
-    runs = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
     fetched = sum(r["fetched_this_run"] for r in runs)
     seconds = sum(r["seconds_this_run"] for r in runs)
     nbytes = sum(r["bytes_this_run"] for r in runs)
@@ -90,7 +97,19 @@ def _throughput(site_dir: Path) -> dict[str, Any] | None:
         "records_per_second": round(fetched / seconds, 2) if seconds else None,
         "megabytes_per_second": round(nbytes / seconds / 1e6, 3) if seconds else None,
         "errors": sum(r["errors_this_run"] for r in runs),
+        "note": "round-robin runs (rows with 'started') share their wall time across domains",
     }
+
+
+def _total_seconds(site_dirs: list[Path]) -> float:
+    """Wall time of all download runs: a round-robin run (one ``started`` stamp shared by its
+    domains) counts once; older per-domain runs count per domain."""
+    seen: dict[Any, float] = {}
+    for site_dir in site_dirs:
+        for n, r in enumerate(_runs(site_dir)):
+            key = r.get("started", (site_dir.name, n))
+            seen[key] = max(seen.get(key, 0.0), float(r["seconds_this_run"]))
+    return sum(seen.values())
 
 
 def write_manifest(http_stats: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -147,7 +166,8 @@ def write_manifest(http_stats: dict[str, Any] | None = None) -> dict[str, Any]:
         if (INDEX_CACHE / crawl / "cluster.idx").exists()
     }
     throughput = [d["download"] for d in domains.values() if d["download"]]
-    seconds = sum(t["seconds"] for t in throughput)
+    seconds = _total_seconds([DATA_DIR / d for d in domains])
+    records = sum(t["records"] for t in throughput)
     manifest = {
         "dataset": "commoncrawl_silver",
         "written_at": dt.datetime.now(dt.UTC).replace(microsecond=0).isoformat(),
@@ -161,17 +181,16 @@ def write_manifest(http_stats: dict[str, Any] | None = None) -> dict[str, Any]:
             "records": f"{DATA_BASE}/<filename> (HTTP byte ranges offset..offset+length-1)",
         },
         "crawls": crawls,
+        "download_policy": doc.get("download"),
         "cluster_idx_sha256": cluster,
         "files": files,
         "domains": domains,
         "totals": dict(totals),
         "download_throughput": {
-            "records": sum(t["records"] for t in throughput),
+            "records": records,
             "seconds": round(seconds, 1),
-            "records_per_second": round(sum(t["records"] for t in throughput) / seconds, 2)
-            if seconds
-            else None,
-            "max_concurrent_requests": 4,
+            "records_per_second": round(records / seconds, 2) if seconds else None,
+            "max_concurrent_requests": MAX_DATA_CONCURRENCY,
         },
     }
     if http_stats:

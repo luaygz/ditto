@@ -1,14 +1,17 @@
 """Step 5: silver labels from each page's own JSON-LD.
 
     uv run python eval/datasets/commoncrawl_silver/labels.py [--only D ...] [--workers N]
+        [--no-manifest]
 
 For every selected domain, reads ``data/cc/<domain>/*.warc.gz`` (only the journaled, complete
 part of each file, so it can run while ``download.py`` is still appending), runs ``extruct`` on
 the original page, takes the page's own JSON-LD object of the vertical's target type and
 flattens it to the fields of ``fields/<vertical>.yaml``
-(:func:`ditto.evaluation.datasets.cc_silver.page_labels`). Writes
-``data/cc/<domain>/labels.jsonl`` (one row per labeled page, keyed by the WARC-Target-URI) and
-``labels_stats.json``. Labels are data: never committed.
+(:func:`ditto.evaluation.datasets.cc_silver.label_page`; identifier fields also get their
+displayed spelling as an alternative). Writes ``data/cc/<domain>/labels.jsonl`` (one row per
+labeled page, keyed by the WARC-Target-URI) and ``labels_stats.json``, then rewrites
+``manifest.json`` unless ``--no-manifest`` (use that while ``download.py`` is still running: it
+rewrites the manifest itself when it finishes). Labels are data: never committed.
 """
 
 from __future__ import annotations
@@ -30,13 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cc import DATA_DIR, DOMAINS_YAML, iter_warc_pages, url_path
 from manifest import write_manifest
 
-from ditto.evaluation.datasets.cc_silver import (
-    LABELS_FILE,
-    VERTICALS,
-    decode_body,
-    page_labels,
-)
-from ditto.fingerprint.dom import parse_html
+from ditto.evaluation.datasets.cc_silver import LABELS_FILE, VERTICALS, label_page
 from ditto.parallel import pmap
 
 
@@ -62,14 +59,14 @@ def label_file(chunk: Sequence[tuple[str, str, str, int]]) -> list[dict[str, Any
         for record in iter_warc_pages(Path(path), limit=limit):
             if record.status != 200:
                 continue
-            root = parse_html(decode_body(record.body, record.content_type))
-            found = page_labels(root, vertical, record.url)
+            found = label_page(record.body, record.content_type, vertical, record.url)
             out.append(
                 {
                     "url": record.url,
                     "type": found.type,
                     "n_objects": found.n_objects,
                     "labels": found.labels,
+                    "display_forms": found.display_forms,
                 }
             )
     return out
@@ -79,6 +76,7 @@ def summarize(rows: list[dict[str, Any]], vertical: str, detail: str) -> dict[st
     rx = re.compile(detail)
     fields = VERTICALS[vertical].fields
     filled: Counter[str] = Counter()
+    display: Counter[str] = Counter()
     by_kind: Counter[str] = Counter()
     for row in rows:
         is_detail = bool(rx.search(url_path(row["url"])))
@@ -90,6 +88,7 @@ def summarize(rows: list[dict[str, Any]], vertical: str, detail: str) -> dict[st
             for name in fields:
                 if row["labels"].get(name) not in (None, "", []):
                     filled[name] += 1
+            display.update(row.get("display_forms", []))
     labeled = sum(r["labels"] is not None for r in rows)
     return {
         "pages": len(rows),
@@ -98,6 +97,7 @@ def summarize(rows: list[dict[str, Any]], vertical: str, detail: str) -> dict[st
         "ambiguous_pages": sum(r["n_objects"] > 1 and r["labels"] is None for r in rows),
         **dict(by_kind),
         "field_fill_rate": {n: round(filled[n] / labeled, 3) if labeled else 0.0 for n in fields},
+        "display_form_added": dict(sorted(display.items())),
     }
 
 
@@ -105,6 +105,11 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--only", nargs="*")
     parser.add_argument("--workers", type=int, default=None)
+    parser.add_argument(
+        "--no-manifest",
+        action="store_true",
+        help="do not rewrite manifest.json (use while download.py is still running)",
+    )
     args = parser.parse_args(argv)
     doc = yaml.safe_load(DOMAINS_YAML.read_text())
     for entry in doc["selected"]:
@@ -141,7 +146,8 @@ def main(argv: list[str] | None = None) -> None:
             f"({stats['pages_per_second']} pages/s) fill={stats['field_fill_rate']}",
             flush=True,
         )
-    write_manifest()
+    if not args.no_manifest:
+        write_manifest()
 
 
 if __name__ == "__main__":

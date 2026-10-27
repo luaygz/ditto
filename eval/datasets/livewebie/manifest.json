@@ -1,7 +1,8 @@
 {
   "dataset": "livewebie",
   "status": "partial",
-  "summary": "9 of 15 LiveWeb-IE websites snapshotted and usable; excluded sites carry an excluded_reason",
+  "status_note": "Final. 'partial' because 6 of the 15 websites are excluded; each exclusion is a property of the site at snapshot time (robots.txt policy, a CDN block of the client, or a redesign since annotation), recorded per site in excluded_reason and diagnosis, not an unfinished fetch. Every included site's snapshot is complete: every benchmark URL has a settled fetch, and the audit (robots.txt, request rate, payload hashes) passes.",
+  "summary": "9 of 15 LiveWeb-IE websites usable (arxiv.org, books.toscrape.com, huggingface.co, marinespecies.org, quotes.toscrape.com, sandbox.oxylabs.io, scrapethissite.com, thecocktaildb.com, themealdb.com); excluded: dp.la, fueleconomy.gov, iclr.cc, icml.cc, neurips.cc, thesportsdb.com (see each site's excluded_reason and diagnosis)",
   "paper": {
     "title": "LiveWeb-IE: A Benchmark For Online Web Information Extraction",
     "arxiv": "https://arxiv.org/abs/2603.13773",
@@ -85,8 +86,11 @@
     "user_agent": "ditto-benchmark/1.0 (+https://github.com/luaygz/ditto)",
     "min_interval_s_per_host": 1.0,
     "robots": "RFC 9309; Crawl-delay honoured; Content-Signal ai-input=no excludes host",
-    "run_started": "2026-10-24T09:46:38Z",
-    "run_finished": "2026-10-24T09:58:40Z",
+    "fetched_from": "2026-10-24T09:32:30Z",
+    "fetched_to": "2026-10-24T12:32:04Z",
+    "complete": true,
+    "audit": "per site under 'audit', recomputed from the WARC and fetch log at manifest time: every request checked against the robots.txt archived before it, the request rate per 60 s window (WARC-Date has 1 s resolution and is stamped at response time), every benchmark URL settled, every logged 200 matching its archived payload hash",
+    "manifest_written": "2026-10-27T09:22:39Z",
     "data_dir": "data/livewebie",
     "min_label_presence": 0.5
   },
@@ -102,7 +106,9 @@
     "Release README swaps the Type II/III descriptions; dataset.json follows the paper (type_2 = several single-valued attributes, type_3 = one list-valued attribute).",
     "iclr.cc, icml.cc and neurips.cc g_000 'author' is queried as a list (type_3) but annotated as one ' · '-joined string per page; kept as published.",
     "Some group.jsonl files repeat URLs (4915 listed, 4874 unique); duplicates are fetched once.",
-    "Ground-truth values may contain newlines (huggingface.co titles); the parser keeps them."
+    "Ground-truth values may contain newlines (huggingface.co titles); the parser keeps them.",
+    "Four release URLs contain U+FFFD or U+2019 (thecocktaildb.com 12756/178368/178369, themealdb.com 53062); they are requested percent-encoded, the WARC-Target-URI is the encoded form and the fetch log maps it back to the release URL.",
+    "Label presence ('label_presence') is measured on the extractor input (clean_html: no script, style, noscript, svg, iframe, template or head except title); 'label_presence_raw_html' is the same check on the raw HTML, script text included."
   ],
   "sites": {
     "arxiv.org": {
@@ -132,11 +138,31 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 42,
-      "fetched_from": "2026-10-24T09:46:38Z",
-      "fetched_to": "2026-10-24T09:56:55Z",
       "fields_yaml": "eval/datasets/livewebie/fields/arxiv.org.yaml",
       "fields_sha256": "f4d97056f53ba8bc21139907d7dedd28cc74b166baa80648e2153b145750fbe3",
+      "requests": 89,
+      "fetched_from": "2026-10-24T09:32:30Z",
+      "fetched_to": "2026-10-24T09:56:55Z",
+      "audit": {
+        "requests": 89,
+        "sessions": 2,
+        "first_request": "2026-10-24T09:32:30Z",
+        "last_request": "2026-10-24T09:56:55Z",
+        "response_statuses": {
+          "200": 89
+        },
+        "interval_s": 15.0,
+        "max_requests_in_any_60s": 5,
+        "nominal_max_in_60s": 4,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/arxiv.org.warc.gz",
       "warc_bytes": 991830,
       "warc_sha256": "8ddc485a9200c29c884e6bfae566711f134d8f4ee07b68c7406eb76e71465e38",
@@ -152,6 +178,19 @@
           "g_001": 0.98,
           "g_002": 1.0
         },
+        "by_field": {
+          "author": 0.9578,
+          "author_profile_link": 0.9996,
+          "pdf_link": 1.0,
+          "pdf_link_list": 0.9994,
+          "subject": 1.0,
+          "subject_list": 1.0,
+          "title": 0.9783,
+          "title_list": 0.972
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 0.9801,
         "by_field": {
           "author": 0.9578,
           "author_profile_link": 0.9996,
@@ -192,11 +231,32 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 404,
-      "fetched_from": "2026-10-24T09:46:39Z",
-      "fetched_to": "2026-10-24T09:53:26Z",
       "fields_yaml": "eval/datasets/livewebie/fields/books.toscrape.com.yaml",
       "fields_sha256": "6ee2b1685ae822cc3c1d3e00c0bde564b2b12e94b1a8bb75715d150bdae59974",
+      "requests": 1102,
+      "fetched_from": "2026-10-24T09:32:31Z",
+      "fetched_to": "2026-10-24T09:53:25Z",
+      "audit": {
+        "requests": 1102,
+        "sessions": 2,
+        "first_request": "2026-10-24T09:32:31Z",
+        "last_request": "2026-10-24T09:53:25Z",
+        "response_statuses": {
+          "200": 1100,
+          "404": 2
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 60,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/books.toscrape.com.warc.gz",
       "warc_bytes": 5130111,
       "warc_sha256": "bff287e127bd7dd4808819cae38e70c4dfdaf7a85f89f0ec1a33669c5660a1b1",
@@ -212,6 +272,23 @@
           "g_001": 1.0,
           "g_002": 1.0
         },
+        "by_field": {
+          "book_image": 1.0,
+          "book_image_list": 1.0,
+          "book_link": 1.0,
+          "category": 1.0,
+          "count": 1.0,
+          "price": 1.0,
+          "price_list": 1.0,
+          "stock_status": 1.0,
+          "stock_status_list": 1.0,
+          "title": 1.0,
+          "title_list": 1.0,
+          "upc": 1.0
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 1.0,
         "by_field": {
           "book_image": 1.0,
           "book_image_list": 1.0,
@@ -258,11 +335,32 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 185,
-      "fetched_from": "2026-10-24T09:32:29Z",
-      "fetched_to": "2026-10-24T09:38:39Z",
       "fields_yaml": "eval/datasets/livewebie/fields/dp.la.yaml",
       "fields_sha256": "9926765b22382c5c7c41429d027d7036537d4711cdb281cc6bea2b8d47fa2e2f",
+      "requests": 185,
+      "fetched_from": "2026-10-24T09:32:30Z",
+      "fetched_to": "2026-10-24T09:38:39Z",
+      "audit": {
+        "requests": 185,
+        "sessions": 1,
+        "first_request": "2026-10-24T09:32:30Z",
+        "last_request": "2026-10-24T09:38:39Z",
+        "response_statuses": {
+          "200": 1,
+          "403": 184
+        },
+        "interval_s": 2.0,
+        "max_requests_in_any_60s": 30,
+        "nominal_max_in_60s": 30,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/dp.la.warc.gz",
       "warc_bytes": 321694,
       "warc_sha256": "f6d54a5d5f26e5b52d13220e3bfe80cc2c1dbf1d89f2b4ff9f79b6248f7675da",
@@ -276,8 +374,13 @@
         "by_group": {},
         "by_field": {}
       },
+      "label_presence_raw_html": {
+        "overall": null,
+        "by_field": {}
+      },
       "included": false,
-      "excluded_reason": "no page could be fetched (no HTTP 200)"
+      "excluded_reason": "no page fetched with HTTP 200 (outcomes: {'403': 184})",
+      "diagnosis": "Excluded: every page request (184 URLs, robots.txt Crawl-delay 2 s honoured, paths allowed) was answered by CloudFront with HTTP 403 'Request blocked' (x-cache: Error from cloudfront) while robots.txt itself was served; the block sits in front of the site, and getting past it would mean disguising the client, which the fetch policy rules out. Re-probed 2026-10-27 (robots.txt and one page): still 403."
     },
     "fueleconomy.gov": {
       "domain": "auto",
@@ -303,13 +406,13 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 4,
-      "fetched_from": "2026-10-24T09:46:39Z",
-      "fetched_to": "2026-10-24T09:47:13Z",
       "fields_yaml": "eval/datasets/livewebie/fields/fueleconomy.gov.yaml",
       "fields_sha256": "040dcad709bd219107b41559ab4fa358746b660ccebafb937d79e156d276cae1",
+      "requests": 4,
+      "checked_at": "2026-10-27T09:21:24Z",
       "included": false,
-      "excluded_reason": "robots.txt unreachable (RemoteProtocolError: Server disconnected without sending a response.); RFC 9309 requires assuming complete disallow"
+      "excluded_reason": "robots.txt unreachable (RemoteProtocolError: Server disconnected without sending a response.); RFC 9309 requires assuming complete disallow",
+      "diagnosis": "Excluded: www.fueleconomy.gov closes the connection without an HTTP response to GET /robots.txt (4 attempts with backoff per run) on every run, 2026-10-24 and 2026-10-27; RFC 9309 section 2.3.1.4 treats an unreachable robots.txt as complete disallow, so no page was requested."
     },
     "huggingface.co": {
       "domain": "academic",
@@ -337,25 +440,59 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 233,
-      "fetched_from": "2026-10-24T09:32:29Z",
-      "fetched_to": "2026-10-24T09:40:14Z",
       "fields_yaml": "eval/datasets/livewebie/fields/huggingface.co.yaml",
       "fields_sha256": "8de48a2d66ee31496f333bb4c991605cd88d6532a7fa84cdf6024503910dac1d",
+      "requests": 231,
+      "fetched_from": "2026-10-24T09:32:30Z",
+      "fetched_to": "2026-10-24T09:40:14Z",
+      "audit": {
+        "requests": 231,
+        "sessions": 1,
+        "first_request": "2026-10-24T09:32:30Z",
+        "last_request": "2026-10-24T09:40:14Z",
+        "response_statuses": {
+          "200": 231
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 60,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/huggingface.co.warc.gz",
       "warc_bytes": 9847338,
       "warc_sha256": "1c31b3e0afd73884089c0be2599891304a5d341e1033011373e2cc56b5b555c9",
       "pages_200": 230,
       "label_presence": {
-        "overall": 0.9971,
+        "overall": 0.9966,
         "values": 5611,
-        "found": 5595,
+        "found": 5592,
         "labeled_pages": 230,
         "labeled_pages_not_in_snapshot": 0,
         "by_group": {
           "g_000": 0.993,
-          "g_001": 0.9988
+          "g_001": 0.998
         },
+        "by_field": {
+          "author": 1.0,
+          "author_count": 0.9962,
+          "citing_model_link": 0.9053,
+          "model_citation_count": 0.9855,
+          "paper_link": 1.0,
+          "publish_date": 1.0,
+          "source_link": 1.0,
+          "title": 1.0,
+          "title_list": 0.9977
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 0.9971,
         "by_field": {
           "author": 1.0,
           "author_count": 0.9985,
@@ -396,25 +533,55 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 243,
-      "fetched_from": "2026-10-24T09:46:39Z",
-      "fetched_to": "2026-10-24T09:50:46Z",
       "fields_yaml": "eval/datasets/livewebie/fields/iclr.cc.yaml",
       "fields_sha256": "89a2349a914da26b85e90ed18eb487e0ec2b0d7c9e047573ff3c29c4af642eaa",
+      "requests": 294,
+      "fetched_from": "2026-10-24T09:32:31Z",
+      "fetched_to": "2026-10-24T09:50:46Z",
+      "audit": {
+        "requests": 294,
+        "sessions": 2,
+        "first_request": "2026-10-24T09:32:31Z",
+        "last_request": "2026-10-24T09:50:46Z",
+        "response_statuses": {
+          "200": 294
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 60,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/iclr.cc.warc.gz",
       "warc_bytes": 6361204,
       "warc_sha256": "c55fbfee03ed36197cba6dd487bc90a80bb064a02a63629f7b9426cac205fc5f",
       "pages_200": 292,
       "label_presence": {
-        "overall": 0.0985,
+        "overall": 0.0473,
         "values": 5897,
-        "found": 581,
+        "found": 279,
         "labeled_pages": 292,
         "labeled_pages_not_in_snapshot": 0,
         "by_group": {
           "g_000": 0.3298,
-          "g_001": 0.06
+          "g_001": 0.0002
         },
+        "by_field": {
+          "abstract_link": 0.0,
+          "author": 0.0004,
+          "author_profile_link": 0.0,
+          "title": 0.9893,
+          "title_list": 0.0
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 0.0985,
         "by_field": {
           "abstract_link": 0.0,
           "author": 0.0004,
@@ -424,7 +591,8 @@
         }
       },
       "included": false,
-      "excluded_reason": "only 0.0985 of ground-truth values appear in the fetched HTML (threshold 0.5): content is rendered client-side or has changed"
+      "excluded_reason": "only 0.0473 of ground-truth values appear in the extractor input of the fetched pages (threshold 0.5); fields below it: {'abstract_link': 0.0, 'author': 0.0004, 'author_profile_link': 0.0, 'title_list': 0.0}",
+      "diagnosis": "Excluded: the shared virtual-conference site (neurips.cc / iclr.cc / icml.cc) was redesigned after annotation (checked on the archived pages 2026-10-27). Poster pages (g_000): the author list is now one div.event-organizers text joined by '⋅' (U+22C5) where the ground truth joins with ' · ' (U+00B7), and the '#abstract_details' link that every abstract_link label holds no longer exists (the abstract is inline); only the title still matches. Search pages (g_001, papers.html?filter=title&search=...): the labeled, filtered list is rendered by JavaScript; the server HTML carries the complete unfiltered paper list (3,828 poster links) inside <noscript>, which the extractor input drops, and no author names or 'papers.html?filter=author' links at all."
     },
     "icml.cc": {
       "domain": "academic",
@@ -452,25 +620,55 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 71,
-      "fetched_from": "2026-10-24T09:46:39Z",
-      "fetched_to": "2026-10-24T09:47:55Z",
       "fields_yaml": "eval/datasets/livewebie/fields/icml.cc.yaml",
       "fields_sha256": "66f3652912b44f1c4474b88156f4cf03749d38f203125fb5e08197942fd90ae9",
+      "requests": 227,
+      "fetched_from": "2026-10-24T09:32:31Z",
+      "fetched_to": "2026-10-24T09:47:54Z",
+      "audit": {
+        "requests": 227,
+        "sessions": 2,
+        "first_request": "2026-10-24T09:32:31Z",
+        "last_request": "2026-10-24T09:47:54Z",
+        "response_statuses": {
+          "200": 227
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 60,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/icml.cc.warc.gz",
       "warc_bytes": 5107377,
       "warc_sha256": "5c4143ca1b951020b071570939ea1ce4f077480aafa93a26df19cf11a89cc3aa",
       "pages_200": 225,
       "label_presence": {
-        "overall": 0.127,
+        "overall": 0.062,
         "values": 3371,
-        "found": 428,
+        "found": 209,
         "labeled_pages": 225,
         "labeled_pages_not_in_snapshot": 0,
         "by_group": {
           "g_000": 0.3255,
-          "g_001": 0.0802
+          "g_001": 0.0
         },
+        "by_field": {
+          "abstract_link": 0.0,
+          "author": 0.0,
+          "author_profile_link": 0.0,
+          "title": 0.9766,
+          "title_list": 0.0
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 0.127,
         "by_field": {
           "abstract_link": 0.0,
           "author": 0.0,
@@ -480,7 +678,8 @@
         }
       },
       "included": false,
-      "excluded_reason": "only 0.127 of ground-truth values appear in the fetched HTML (threshold 0.5): content is rendered client-side or has changed"
+      "excluded_reason": "only 0.062 of ground-truth values appear in the extractor input of the fetched pages (threshold 0.5); fields below it: {'abstract_link': 0.0, 'author': 0.0, 'author_profile_link': 0.0, 'title_list': 0.0}",
+      "diagnosis": "Excluded: the shared virtual-conference site (neurips.cc / iclr.cc / icml.cc) was redesigned after annotation (checked on the archived pages 2026-10-27). Poster pages (g_000): the author list is now one div.event-organizers text joined by '⋅' (U+22C5) where the ground truth joins with ' · ' (U+00B7), and the '#abstract_details' link that every abstract_link label holds no longer exists (the abstract is inline); only the title still matches. Search pages (g_001, papers.html?filter=title&search=...): the labeled, filtered list is rendered by JavaScript; the server HTML carries the complete unfiltered paper list (3,340 poster links) inside <noscript>, which the extractor input drops, and no author names or 'papers.html?filter=author' links at all."
     },
     "marinespecies.org": {
       "domain": "academic",
@@ -510,11 +709,31 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 77,
-      "fetched_from": "2026-10-24T09:32:29Z",
-      "fetched_to": "2026-10-24T09:33:47Z",
       "fields_yaml": "eval/datasets/livewebie/fields/marinespecies.org.yaml",
       "fields_sha256": "ee06c7ecd017bd58a5ef5c80058571f65f267e42fc964fcb297b3f17c6d00d9e",
+      "requests": 77,
+      "fetched_from": "2026-10-24T09:32:30Z",
+      "fetched_to": "2026-10-24T09:33:47Z",
+      "audit": {
+        "requests": 77,
+        "sessions": 1,
+        "first_request": "2026-10-24T09:32:30Z",
+        "last_request": "2026-10-24T09:33:47Z",
+        "response_statuses": {
+          "200": 77
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 60,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/marinespecies.org.warc.gz",
       "warc_bytes": 1549576,
       "warc_sha256": "495459bb9c233d2e5e03d84c941dc5b5c77807415ba52983cfe292bf5bceede1",
@@ -531,6 +750,27 @@
           "g_002": 0.9973,
           "g_003": 0.98
         },
+        "by_field": {
+          "author": 1.0,
+          "author_profile_link": 1.0,
+          "country": 1.0,
+          "editor_profile_link": 0.9969,
+          "editor_type": 1.0,
+          "group": 1.0,
+          "group_image": 0.94,
+          "group_link": 1.0,
+          "institute": 0.9919,
+          "photo_title": 1.0,
+          "species": 1.0,
+          "species_image": 1.0,
+          "species_image_list": 0.7645,
+          "species_link": 1.0,
+          "species_link_list": 0.7716,
+          "species_list": 0.7859
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 0.8297,
         "by_field": {
           "author": 1.0,
           "author_profile_link": 1.0,
@@ -578,25 +818,55 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 312,
-      "fetched_from": "2026-10-24T09:32:29Z",
-      "fetched_to": "2026-10-24T09:37:44Z",
       "fields_yaml": "eval/datasets/livewebie/fields/neurips.cc.yaml",
       "fields_sha256": "d3d15d2fa6efc63a0dc8f05024bb3205c1327bcb23429f601e6cb34ea48d39f7",
+      "requests": 312,
+      "fetched_from": "2026-10-24T09:32:31Z",
+      "fetched_to": "2026-10-24T09:37:44Z",
+      "audit": {
+        "requests": 312,
+        "sessions": 1,
+        "first_request": "2026-10-24T09:32:31Z",
+        "last_request": "2026-10-24T09:37:44Z",
+        "response_statuses": {
+          "200": 312
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 60,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/neurips.cc.warc.gz",
       "warc_bytes": 7012514,
       "warc_sha256": "7e069d96d9997ab55238c79423671991e7d04c3444b8062d65383a2468df2188",
       "pages_200": 311,
       "label_presence": {
-        "overall": 0.1202,
+        "overall": 0.0584,
         "values": 5101,
-        "found": 613,
+        "found": 298,
         "labeled_pages": 311,
         "labeled_pages_not_in_snapshot": 0,
         "by_group": {
           "g_000": 0.3311,
-          "g_001": 0.075
+          "g_001": 0.0
         },
+        "by_field": {
+          "abstract_link": 0.0,
+          "author": 0.0013,
+          "author_profile_link": 0.0,
+          "title": 0.9833,
+          "title_list": 0.0
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 0.1202,
         "by_field": {
           "abstract_link": 0.0,
           "author": 0.0013,
@@ -606,7 +876,8 @@
         }
       },
       "included": false,
-      "excluded_reason": "only 0.1202 of ground-truth values appear in the fetched HTML (threshold 0.5): content is rendered client-side or has changed"
+      "excluded_reason": "only 0.0584 of ground-truth values appear in the extractor input of the fetched pages (threshold 0.5); fields below it: {'abstract_link': 0.0, 'author': 0.0013, 'author_profile_link': 0.0, 'title_list': 0.0}",
+      "diagnosis": "Excluded: the shared virtual-conference site (neurips.cc / iclr.cc / icml.cc) was redesigned after annotation (checked on the archived pages 2026-10-27). Poster pages (g_000): the author list is now one div.event-organizers text joined by '⋅' (U+22C5) where the ground truth joins with ' · ' (U+00B7), and the '#abstract_details' link that every abstract_link label holds no longer exists (the abstract is inline); only the title still matches. Search pages (g_001, papers.html?filter=title&search=...): the labeled, filtered list is rendered by JavaScript; the server HTML carries the complete unfiltered paper list (4,538 poster links) inside <noscript>, which the extractor input drops, and no author names or 'papers.html?filter=author' links at all."
     },
     "quotes.toscrape.com": {
       "domain": "other",
@@ -618,8 +889,8 @@
       ],
       "urls": 70,
       "robots": {
-        "url": "https://quotes.toscrape.com/robots.txt",
-        "final_url": "https://quotes.toscrape.com/robots.txt",
+        "url": "http://quotes.toscrape.com/robots.txt",
+        "final_url": "http://quotes.toscrape.com/robots.txt",
         "status": 404,
         "sha256": "e9639e3c4681ce85f852fbac48e2eeee5ba51296dbfec57c200d59b76237ab80",
         "mode": "allow_all",
@@ -635,14 +906,36 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 121,
-      "fetched_from": "2026-10-24T09:32:29Z",
-      "fetched_to": "2026-10-24T09:34:31Z",
       "fields_yaml": "eval/datasets/livewebie/fields/quotes.toscrape.com.yaml",
       "fields_sha256": "490a175a9e412d07892825c94b3740da74c036368bc32779dfb6b055a836d265",
+      "requests": 121,
+      "fetched_from": "2026-10-24T12:30:05Z",
+      "fetched_to": "2026-10-24T12:32:04Z",
+      "audit": {
+        "requests": 121,
+        "sessions": 1,
+        "first_request": "2026-10-24T12:30:05Z",
+        "last_request": "2026-10-24T12:32:04Z",
+        "response_statuses": {
+          "200": 70,
+          "308": 50,
+          "404": 1
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 61,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/quotes.toscrape.com.warc.gz",
-      "warc_bytes": 237132,
-      "warc_sha256": "1c9eb6c629a546806cd5aecca33e5f988da6bd4a1da7fc225155fe2978828bfe",
+      "warc_bytes": 237319,
+      "warc_sha256": "90b07cfd21d7d5f028ed39af1dbb63971a34ba434b2a4cd655524fc808dd7e66",
       "pages_200": 70,
       "label_presence": {
         "overall": 1.0,
@@ -655,6 +948,18 @@
           "g_001": 1.0,
           "g_002": 1.0
         },
+        "by_field": {
+          "author": 1.0,
+          "author_list": 1.0,
+          "author_profile_link": 1.0,
+          "birth": 1.0,
+          "quote": 1.0,
+          "tag_link": 1.0,
+          "tag_link_list": 1.0
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 1.0,
         "by_field": {
           "author": 1.0,
           "author_list": 1.0,
@@ -694,26 +999,63 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 447,
-      "fetched_from": "2026-10-24T09:46:39Z",
-      "fetched_to": "2026-10-24T09:54:07Z",
       "fields_yaml": "eval/datasets/livewebie/fields/sandbox.oxylabs.io.yaml",
       "fields_sha256": "dac27ba4f64147ba54c7ae91d89c02312b6bb88c202997224dd4eabe5ced0c6b",
+      "requests": 1145,
+      "fetched_from": "2026-10-24T09:32:30Z",
+      "fetched_to": "2026-10-24T09:54:07Z",
+      "audit": {
+        "requests": 1145,
+        "sessions": 2,
+        "first_request": "2026-10-24T09:32:30Z",
+        "last_request": "2026-10-24T09:54:07Z",
+        "response_statuses": {
+          "200": 1143,
+          "404": 2
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 61,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/sandbox.oxylabs.io.warc.gz",
       "warc_bytes": 13783258,
       "warc_sha256": "4afa4c9a88ac1c195ac9fb914f87f76c77dc6edb2995cc16a5a7a66d90928d02",
       "pages_200": 1143,
       "label_presence": {
-        "overall": 1.0,
+        "overall": 0.8261,
         "values": 27258,
-        "found": 27258,
+        "found": 22517,
         "labeled_pages": 1143,
         "labeled_pages_not_in_snapshot": 0,
         "by_group": {
-          "g_000": 1.0,
+          "g_000": 0.66,
           "g_001": 1.0,
-          "g_002": 1.0
+          "g_002": 0.8642
         },
+        "by_field": {
+          "developer": 1.0,
+          "game_count": 1.0,
+          "genre": 1.0,
+          "image": 0.0,
+          "image_list": 0.0,
+          "link": 1.0,
+          "platform": 0.3165,
+          "price": 1.0,
+          "price_list": 1.0,
+          "title": 1.0,
+          "title_list": 1.0
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 1.0,
         "by_field": {
           "developer": 1.0,
           "game_count": 1.0,
@@ -728,7 +1070,12 @@
           "title_list": 1.0
         }
       },
-      "included": true
+      "included": true,
+      "field_notes": {
+        "image": "Next.js lazy images: the <img> src in the HTML is a data: placeholder; the /assets/*.svg path is only in <noscript>, script data and the og:image <meta>, all dropped from the extractor input",
+        "image_list": "as image",
+        "platform": "the lower-case values ('playstation') come from the og:platform <meta> in <head>; the page body shows other spellings ('Playstation platform')"
+      }
     },
     "scrapethissite.com": {
       "domain": "other",
@@ -758,27 +1105,66 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 33,
-      "fetched_from": "2026-10-24T09:32:29Z",
-      "fetched_to": "2026-10-24T09:33:02Z",
       "fields_yaml": "eval/datasets/livewebie/fields/scrapethissite.com.yaml",
       "fields_sha256": "c4e1f2f5e386ad215ed6288c6692de7390e6259736070b824336e7bb690429ab",
+      "requests": 33,
+      "fetched_from": "2026-10-24T09:32:30Z",
+      "fetched_to": "2026-10-24T09:33:02Z",
+      "audit": {
+        "requests": 33,
+        "sessions": 1,
+        "first_request": "2026-10-24T09:32:30Z",
+        "last_request": "2026-10-24T09:33:02Z",
+        "response_statuses": {
+          "200": 33
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 33,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/scrapethissite.com.warc.gz",
       "warc_bytes": 207731,
       "warc_sha256": "27aad76ee9d4f265aed886f0c79ba560d864272b7bf7f2be721f941663388276",
       "pages_200": 32,
       "label_presence": {
-        "overall": 0.9645,
+        "overall": 0.962,
         "values": 3631,
-        "found": 3502,
+        "found": 3493,
         "labeled_pages": 32,
         "labeled_pages_not_in_snapshot": 0,
         "by_group": {
-          "g_000": 0.6667,
+          "g_000": 0.6322,
           "g_001": 1.0,
           "g_002": 1.0,
           "g_003": 0.0
         },
+        "by_field": {
+          "area": 1.0,
+          "awards": 0.9885,
+          "capital": 1.0,
+          "country": 1.0,
+          "goals_for": 1.0,
+          "nominations": 0.908,
+          "population": 1.0,
+          "team": 1.0,
+          "title": 0.0,
+          "turtle_image": 0.0,
+          "turtle_link": 0.0,
+          "turtle_name": 0.0,
+          "wins": 1.0,
+          "year": 1.0
+        }
+      },
+      "label_presence_raw_html": {
+        "overall": 0.9645,
         "by_field": {
           "area": 1.0,
           "awards": 1.0,
@@ -796,7 +1182,13 @@
           "year": 1.0
         }
       },
-      "included": true
+      "included": true,
+      "field_notes": {
+        "title": "g_000 (pages/ajax-javascript/#<year>): the film table is filled by JavaScript; the server HTML has an empty hidden table",
+        "turtle_name": "g_003 (pages/frames/): the content is a separate document loaded in an <iframe> (/pages/frames/?frame=i), not part of the page",
+        "turtle_image": "as turtle_name",
+        "turtle_link": "as turtle_name"
+      }
     },
     "thecocktaildb.com": {
       "domain": "food",
@@ -824,11 +1216,31 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 335,
-      "fetched_from": "2026-10-24T09:46:39Z",
-      "fetched_to": "2026-10-24T09:52:16Z",
       "fields_yaml": "eval/datasets/livewebie/fields/thecocktaildb.com.yaml",
       "fields_sha256": "94779fcdc7aee8b706913a30b6d62fdb7636a7f290485c7bb689cbc9c0d5425e",
+      "requests": 497,
+      "fetched_from": "2026-10-24T09:32:30Z",
+      "fetched_to": "2026-10-24T09:52:15Z",
+      "audit": {
+        "requests": 497,
+        "sessions": 2,
+        "first_request": "2026-10-24T09:32:30Z",
+        "last_request": "2026-10-24T09:52:15Z",
+        "response_statuses": {
+          "200": 497
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 60,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/thecocktaildb.com.warc.gz",
       "warc_bytes": 2200205,
       "warc_sha256": "69170665be569d8a340301e56fc3017cc732d504ae6722af907c6ef202d71655",
@@ -854,7 +1266,24 @@
           "ingredient_link": 0.9969
         }
       },
-      "included": true
+      "label_presence_raw_html": {
+        "overall": 0.8553,
+        "by_field": {
+          "cocktail": 1.0,
+          "cocktail_image": 1.0,
+          "cocktail_image_list": 0.0,
+          "cocktail_link": 0.0,
+          "cocktail_list": 1.0,
+          "ingredient": 1.0,
+          "ingredient_image": 0.9974,
+          "ingredient_link": 0.9969
+        }
+      },
+      "included": true,
+      "field_notes": {
+        "cocktail_link": "letter-browse pages now link drinks as /drink/<id>; the annotation has /drink/<id>-<slug>",
+        "cocktail_image_list": "letter-browse thumbnails now end in a size suffix (<image url>/small); the annotation has the bare image URL"
+      }
     },
     "themealdb.com": {
       "domain": "food",
@@ -882,11 +1311,31 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 50,
-      "fetched_from": "2026-10-24T09:46:39Z",
-      "fetched_to": "2026-10-24T09:47:29Z",
       "fields_yaml": "eval/datasets/livewebie/fields/themealdb.com.yaml",
       "fields_sha256": "0aa35bb36b0258d027c3bb58d9f5ed5d51f77500e811a6c17a1f9ca44a9be710",
+      "requests": 301,
+      "fetched_from": "2026-10-24T09:32:30Z",
+      "fetched_to": "2026-10-24T09:47:29Z",
+      "audit": {
+        "requests": 301,
+        "sessions": 2,
+        "first_request": "2026-10-24T09:32:30Z",
+        "last_request": "2026-10-24T09:47:29Z",
+        "response_statuses": {
+          "200": 301
+        },
+        "interval_s": 1.0,
+        "max_requests_in_any_60s": 60,
+        "nominal_max_in_60s": 60,
+        "requests_disallowed_by_robots": 0,
+        "urls_unsettled": 0,
+        "payload_mismatches": 0,
+        "robots_ok": true,
+        "throttle_ok": true,
+        "all_urls_settled": true,
+        "payloads_match_log": true,
+        "ok": true
+      },
       "warc": "data/livewebie/themealdb.com.warc.gz",
       "warc_bytes": 1582355,
       "warc_sha256": "623cb2a53b7e925fab97e82dcefd5a99a62810b301084de56d8e009bd129b20a",
@@ -913,7 +1362,24 @@
           "meal_list": 1.0
         }
       },
-      "included": true
+      "label_presence_raw_html": {
+        "overall": 0.9699,
+        "by_field": {
+          "flag_image": 0.9963,
+          "ingredient": 1.0,
+          "ingredient_image": 1.0,
+          "ingredient_link": 0.9983,
+          "meal": 1.0,
+          "meal_image": 0.9963,
+          "meal_image_list": 0.0,
+          "meal_link": 0.9868,
+          "meal_list": 1.0
+        }
+      },
+      "included": true,
+      "field_notes": {
+        "meal_image_list": "letter-browse thumbnails are now relative (/images/media/meals/...); the annotation has absolute https://www.themealdb.com/... URLs"
+      }
     },
     "thesportsdb.com": {
       "domain": "sports",
@@ -949,13 +1415,13 @@
         "errors": 0,
         "disallowed": 0
       },
-      "requests": 1,
-      "fetched_from": "2026-10-24T09:46:39Z",
-      "fetched_to": "2026-10-24T09:46:40Z",
       "fields_yaml": "eval/datasets/livewebie/fields/thesportsdb.com.yaml",
       "fields_sha256": "96ba57c8acd511f44aa5c936aa1235b6f316bfcf178d11a95c456b931e823a86",
+      "requests": 1,
+      "checked_at": "2026-10-27T09:21:24Z",
       "included": false,
-      "excluded_reason": "robots.txt Content-Signal ai-input=no; ditto feeds page content to an LLM during spec generation"
+      "excluded_reason": "robots.txt Content-Signal ai-input=no; ditto feeds page content to an LLM during spec generation",
+      "diagnosis": "Excluded: robots.txt carries 'Content-Signal: ai-train=no, search=yes, ai-input=no'; ditto sends page content to an LLM during spec generation, which is ai-input, so no page was requested."
     }
   }
 }

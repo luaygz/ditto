@@ -1,0 +1,345 @@
+{
+ "dataset": "commoncrawl_silver",
+ "written_at": "2026-10-27T09:30:18+00:00",
+ "selection_date": "2026-10-24",
+ "user_agent": "ditto-benchmark/1.0 (+https://github.com/luaygz/ditto)",
+ "sources": {
+  "crawl_list": "https://index.commoncrawl.org/collinfo.json",
+  "cdx_index": "https://data.commoncrawl.org/cc-index/collections/<crawl>/indexes/(ZipNum: cluster.idx + cdx-NNNNN.gz, the files behind https://index.commoncrawl.org/<crawl>-index)",
+  "records": "https://data.commoncrawl.org/<filename> (HTTP byte ranges offset..offset+length-1)"
+ },
+ "crawls": [
+  "CC-MAIN-2026-43",
+  "CC-MAIN-2026-39"
+ ],
+ "download_policy": {
+  "cap_per_domain": 2500,
+  "cap_reason": "Lowered from 20,000 to 2,500 pages per domain on 2026-10-27: at 4 concurrent requests Common Crawl's CloudFront WAF answered every range request with 403 'Request blocked' after about 2,250 records (~440 MB) per run, and 160,000 captures at the recommended pace of one request per second would take ~44 h. Pages downloaded before the change are kept (argos.co.uk: 6,701 detail pages).",
+  "tail_share": 0.2,
+  "data_concurrency": 1,
+  "min_interval_s": 1.0,
+  "slow_down": "403/429/503 from data.commoncrawl.org: backoff with jitter from 60 s doubling to 1800 s while blocked, one probe request each time"
+ },
+ "cluster_idx_sha256": {
+  "CC-MAIN-2026-43": "5be2d43599aa978d252433007bf7843aae4d241584500e7d1cd1ccff71fe33fb",
+  "CC-MAIN-2026-39": "8c64198308c824807805fd2cf09bf3d603531044c230e32a335afa4fda94ea41"
+ },
+ "files": {
+  "domains.yaml": "aada644b5c4448e3c078dddb3b3d5a890fad34e8171e879045fe79ea8a0d5abb",
+  "captures.jsonl.gz": "1a02938ac8d1bef9ac571a2166d9a927de19c4bec43835a7783533c03324bf34",
+  "selection_log.json": "ffa236d29b1846c225a57cfc81a27685680027185b84ce04709d32ceb3329be4",
+  "noise_check.json": "e72fb1ae1fb479bd0dd9e1f277e05b0f749116d8222c89eb2947cf97eb56070c",
+  "fields/event.yaml": "5147c4480ebbf579b1c334aa72b6d6146d31f965bffac3dbea9424b58f520da0",
+  "fields/job.yaml": "c826bac29fcff03e2560e991e4090fff4432cbccfe936cc4330a944fe3942a85",
+  "fields/product.yaml": "7c1ff38472dbed5d121563f5770862c48af36d16f2706c6e3bf5707838cff75b",
+  "fields/recipe.yaml": "3c532ff300e7af860611d8b032cc7541727c9eae717072bee4e619ed58ae8df6"
+ },
+ "domains": {
+  "argos.co.uk": {
+   "vertical": "product",
+   "target_type": "Product",
+   "captures": {
+    "index_html_captures": {
+     "CC-MAIN-2026-43": 17747,
+     "CC-MAIN-2026-39": 15620
+    },
+    "distinct_urls": 33133,
+    "distinct_pages": 33133,
+    "distinct_detail_pages": 20342,
+    "distinct_other_pages": 12791,
+    "cap": 2500,
+    "planned": 7201,
+    "planned_detail": 6701,
+    "planned_other": 500,
+    "kept_from_earlier_runs": 6701,
+    "downloaded": 6701,
+    "downloaded_detail": 6701,
+    "downloaded_other": 0
+   },
+   "warc_files": {
+    "captures-00000.warc.gz": {
+     "sha256": "7237987a789498514722bd8fee2a331e1d0886f56dc6bea29cbd03346b7859e3",
+     "bytes": 972165057,
+     "records": 5000
+    },
+    "captures-00001.warc.gz": {
+     "sha256": "3b2a84adfcc7fa338f99842411642a1f3e3b84b92498e909a9b39a5a4bcf948e",
+     "bytes": 332460090,
+     "records": 1701
+    }
+   },
+   "warc_bytes": 1304625147,
+   "download": {
+    "runs": 2,
+    "records": 4514,
+    "seconds": 1644.3,
+    "records_per_second": 2.75,
+    "megabytes_per_second": 0.535,
+    "errors": 30031,
+    "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   },
+   "labels": {
+    "file": "data/cc/argos.co.uk/labels.jsonl",
+    "sha256": "61a1f90e404d94191001136e838e3d6d99f11d1272062668dde2c8a48a58ef38",
+    "labeled_pages": 6695,
+    "pages": 6701
+   }
+  },
+  "ikea.com": {
+   "vertical": "product",
+   "target_type": "Product",
+   "captures": {
+    "index_html_captures": {
+     "CC-MAIN-2026-43": 28713,
+     "CC-MAIN-2026-39": 27251
+    },
+    "distinct_urls": 52880,
+    "distinct_pages": 52730,
+    "distinct_detail_pages": 33618,
+    "distinct_other_pages": 19112,
+    "cap": 2500,
+    "planned": 2500,
+    "planned_detail": 2000,
+    "planned_other": 500,
+    "kept_from_earlier_runs": 0,
+    "downloaded": 0,
+    "downloaded_detail": 0,
+    "downloaded_other": 0
+   },
+   "warc_files": {
+    "captures-00000.warc.gz": {
+     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "bytes": 0,
+     "records": 0
+    }
+   },
+   "warc_bytes": 0,
+   "download": {
+    "runs": 2,
+    "records": 0,
+    "seconds": 1440.3,
+    "records_per_second": 0.0,
+    "megabytes_per_second": 0.0,
+    "errors": 40000,
+    "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   }
+  },
+  "careerbuilder.com": {
+   "vertical": "job",
+   "target_type": "JobPosting",
+   "captures": {
+    "index_html_captures": {
+     "CC-MAIN-2026-43": 15682,
+     "CC-MAIN-2026-39": 16562
+    },
+    "distinct_urls": 32051,
+    "distinct_pages": 32050,
+    "distinct_detail_pages": 12332,
+    "distinct_other_pages": 19718,
+    "cap": 2500,
+    "planned": 2500,
+    "planned_detail": 2000,
+    "planned_other": 500,
+    "kept_from_earlier_runs": 0,
+    "downloaded": 0,
+    "downloaded_detail": 0,
+    "downloaded_other": 0
+   },
+   "warc_files": {
+    "captures-00000.warc.gz": {
+     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "bytes": 0,
+     "records": 0
+    }
+   },
+   "warc_bytes": 0,
+   "download": {
+    "runs": 1,
+    "records": 0,
+    "seconds": 803.5,
+    "records_per_second": 0.0,
+    "megabytes_per_second": 0.0,
+    "errors": 20000,
+    "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   }
+  },
+  "dice.com": {
+   "vertical": "job",
+   "target_type": "JobPosting",
+   "captures": {
+    "index_html_captures": {
+     "CC-MAIN-2026-43": 11685,
+     "CC-MAIN-2026-39": 11896
+    },
+    "distinct_urls": 22873,
+    "distinct_pages": 21556,
+    "distinct_detail_pages": 8964,
+    "distinct_other_pages": 12592,
+    "cap": 2500,
+    "planned": 2500,
+    "planned_detail": 2000,
+    "planned_other": 500,
+    "kept_from_earlier_runs": 0,
+    "downloaded": 0,
+    "downloaded_detail": 0,
+    "downloaded_other": 0
+   },
+   "warc_files": {
+    "captures-00000.warc.gz": {
+     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "bytes": 0,
+     "records": 0
+    }
+   },
+   "warc_bytes": 0,
+   "download": {
+    "runs": 1,
+    "records": 0,
+    "seconds": 800.0,
+    "records_per_second": 0.0,
+    "megabytes_per_second": 0.0,
+    "errors": 20000,
+    "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   }
+  },
+  "marmiton.org": {
+   "vertical": "recipe",
+   "target_type": "Recipe",
+   "captures": {
+    "index_html_captures": {
+     "CC-MAIN-2026-43": 13305,
+     "CC-MAIN-2026-39": 12923
+    },
+    "distinct_urls": 25846,
+    "distinct_pages": 25846,
+    "distinct_detail_pages": 13917,
+    "distinct_other_pages": 11929,
+    "cap": 2500,
+    "planned": 2500,
+    "planned_detail": 2000,
+    "planned_other": 500,
+    "kept_from_earlier_runs": 0,
+    "downloaded": 0,
+    "downloaded_detail": 0,
+    "downloaded_other": 0
+   },
+   "warc_files": {
+    "captures-00000.warc.gz": {
+     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "bytes": 0,
+     "records": 0
+    }
+   },
+   "warc_bytes": 0,
+   "download": {
+    "runs": 1,
+    "records": 0,
+    "seconds": 775.9,
+    "records_per_second": 0.0,
+    "megabytes_per_second": 0.0,
+    "errors": 20000,
+    "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   }
+  },
+  "food.ndtv.com": {
+   "vertical": "recipe",
+   "target_type": "Recipe",
+   "captures": {
+    "index_html_captures": {
+     "CC-MAIN-2026-43": 24262,
+     "CC-MAIN-2026-39": 23695
+    },
+    "distinct_urls": 46377,
+    "distinct_pages": 46349,
+    "distinct_detail_pages": 4085,
+    "distinct_other_pages": 42264,
+    "cap": 2500,
+    "planned": 2500,
+    "planned_detail": 2000,
+    "planned_other": 500,
+    "kept_from_earlier_runs": 0,
+    "downloaded": 0,
+    "downloaded_detail": 0,
+    "downloaded_other": 0
+   },
+   "warc_files": {
+    "captures-00000.warc.gz": {
+     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "bytes": 0,
+     "records": 0
+    }
+   },
+   "warc_bytes": 0,
+   "download": null
+  },
+  "ticketweb.com": {
+   "vertical": "event",
+   "target_type": "Event",
+   "captures": {
+    "index_html_captures": {
+     "CC-MAIN-2026-43": 14195,
+     "CC-MAIN-2026-39": 14585
+    },
+    "distinct_urls": 28272,
+    "distinct_pages": 28139,
+    "distinct_detail_pages": 22233,
+    "distinct_other_pages": 5906,
+    "cap": 2500,
+    "planned": 2500,
+    "planned_detail": 2000,
+    "planned_other": 500,
+    "kept_from_earlier_runs": 0,
+    "downloaded": 0,
+    "downloaded_detail": 0,
+    "downloaded_other": 0
+   },
+   "warc_files": {},
+   "warc_bytes": 0,
+   "download": null
+  },
+  "skiddle.com": {
+   "vertical": "event",
+   "target_type": "Event",
+   "captures": {
+    "index_html_captures": {
+     "CC-MAIN-2026-43": 12698,
+     "CC-MAIN-2026-39": 13935
+    },
+    "distinct_urls": 24475,
+    "distinct_pages": 24474,
+    "distinct_detail_pages": 8318,
+    "distinct_other_pages": 16156,
+    "cap": 2500,
+    "planned": 2500,
+    "planned_detail": 2000,
+    "planned_other": 500,
+    "kept_from_earlier_runs": 0,
+    "downloaded": 0,
+    "downloaded_detail": 0,
+    "downloaded_other": 0
+   },
+   "warc_files": {},
+   "warc_bytes": 0,
+   "download": null
+  }
+ },
+ "totals": {
+  "labeled_pages": 6695,
+  "warc_bytes": 1304625147,
+  "warc_records": 6701,
+  "planned": 24701
+ },
+ "download_throughput": {
+  "records": 4514,
+  "seconds": 5464.0,
+  "records_per_second": 0.83,
+  "max_concurrent_requests": 1
+ },
+ "last_run_http_stats": {
+  "requests": 0,
+  "retries": 0,
+  "bytes": 0,
+  "slow_downs": 0,
+  "slow_down_seconds": 0.0
+ }
+}

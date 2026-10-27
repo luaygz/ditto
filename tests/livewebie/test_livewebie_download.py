@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -28,6 +29,20 @@ def test_page_index_contains() -> None:
     assert not idx.contains("Tipping the Velvet")
     empty = download.PageIndex(b"")
     assert not empty.contains("x")
+
+
+def test_page_index_extractor_input_drops_scripts_and_head() -> None:
+    page = (
+        b"<html><head><meta property='og:image' content='/a.svg'></head><body><h1>T</h1>"
+        b"<noscript><img src='/b.svg'></noscript><script>var x = 'hidden text';</script>"
+        b"</body></html>"
+    )
+    clean = download.PageIndex(page)
+    raw = download.PageIndex(page, extractor_input=False)
+    for value in ("/a.svg", "/b.svg", "hidden text"):
+        assert raw.contains(value) and not clean.contains(value)
+    assert clean.contains("T")
+    assert not download.PageIndex(b"", extractor_input=False).contains("x")
 
 
 def _warc(path: Path, pages: dict[str, tuple[int, bytes]]) -> None:
@@ -161,3 +176,118 @@ def test_build_fields_render(release_root: Path, tmp_path: Path) -> None:
 def test_build_fields_main(release_root: Path, tmp_path: Path, capsys: Any) -> None:
     assert build_fields.main(["--release", str(release_root), "--out", str(tmp_path / "f")]) == 0
     assert "quotes.toscrape.com.yaml" in capsys.readouterr().out
+
+
+def _audited_snapshot(tmp_path: Path, *, gap_s: int, extra: str | None = None) -> Path:
+    """A WARC with robots.txt (Disallow: /private) and pages ``gap_s`` seconds apart."""
+    tmp_path.mkdir(parents=True, exist_ok=True)
+    warc = tmp_path / "s.warc.gz"
+    base = dt.datetime(2026, 10, 24, 9, 0, 0, tzinfo=dt.UTC)
+    urls = ["https://h.example/robots.txt", "https://h.example/a", "https://h.example/b"]
+    if extra:
+        urls.append(extra)
+    bodies = {
+        u: (b"User-agent: *\nDisallow: /private\n" if "robots" in u else u.encode()) for u in urls
+    }
+    with warc.open("wb") as fh:
+        writer = WARCWriter(fh, gzip=True)
+        for n, url in enumerate(urls):
+            snap.write_exchange(
+                writer,
+                snap.Exchange(
+                    url=url,
+                    method="GET",
+                    request_headers=[],
+                    status=200,
+                    reason="OK",
+                    http_version="HTTP/1.1",
+                    response_headers=[("Content-Type", "text/html")],
+                    body=bodies[url],
+                    fetched_at=base + dt.timedelta(seconds=gap_s * n),
+                ),
+            )
+    rows = [
+        {"url": u, "final_url": u, "status": 200, "sha256": hashlib.sha256(bodies[u]).hexdigest()}
+        for u in urls[1:]
+    ]
+    (tmp_path / "s.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    return warc
+
+
+def test_audit_snapshot_checks_robots_rate_settlement_and_hashes(tmp_path: Path) -> None:
+    urls = ["https://h.example/a", "https://h.example/b"]
+    warc = _audited_snapshot(tmp_path, gap_s=1)
+    audit = download.audit_snapshot(warc, tmp_path / "s.jsonl", urls, 1.0)
+    assert audit["ok"] and audit["requests"] == 3 and audit["sessions"] == 1
+    assert audit["first_request"] == "2026-10-24T09:00:00Z"
+    assert audit["response_statuses"] == {"200": 3} and audit["max_requests_in_any_60s"] == 3
+    slow = download.audit_snapshot(warc, tmp_path / "s.jsonl", urls, 120.0)
+    assert not slow["throttle_ok"] and slow["nominal_max_in_60s"] == 0  # 3 in 2 s, 120 s delay
+    missing = download.audit_snapshot(warc, tmp_path / "s.jsonl", [*urls, "https://h.example/c"], 1)
+    assert missing["urls_unsettled"] == 1 and not missing["ok"]
+    bad = _audited_snapshot(tmp_path / "x", gap_s=1, extra="https://h.example/private/1")
+    audit = download.audit_snapshot(bad, tmp_path / "x" / "s.jsonl", urls, 1.0)
+    assert audit["requests_disallowed_by_robots"] == 1 and not audit["robots_ok"]
+    log = tmp_path / "x" / "s.jsonl"
+    log.write_text(log.read_text().replace('"sha256": "', '"sha256": "0'))
+    assert download.audit_snapshot(bad, log, urls, 1.0)["payload_mismatches"] == 3
+
+
+def test_build_manifest_status_and_site_notes(
+    release_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    counts = {"websites": 3}
+    good = {"included": True, "audit": {"ok": True}, "fetched_from": "a", "fetched_to": "c"}
+    sites = {"x": good, "y": {**good, "fetched_from": "0"}, "z": {"included": False}}
+    manifest = download.build_manifest({}, counts, sites, release_root, 0.5)
+    assert manifest["status"] == "partial" and manifest["snapshot"]["complete"] is True
+    assert manifest["status_note"].startswith("Final. 'partial' because 1 of the 3 websites")
+    assert manifest["summary"].startswith("2 of 3 LiveWeb-IE websites usable (x, y); excluded: z")
+    assert manifest["snapshot"]["fetched_from"] == "0" and manifest["snapshot"]["fetched_to"] == "c"
+    broken = {**sites, "y": {**good, "audit": {"ok": False}}}
+    assert download.build_manifest({}, counts, broken, release_root, 0.5)["status_note"] == (
+        "Not final: the snapshot audit fails for y."
+    )
+    assert (
+        download.build_manifest({}, {"websites": 1}, {"z": {}}, release_root, 0.5)["status"]
+        == "skipped"
+    )
+    data_dir = _snapshot_dir(release_root)
+    monkeypatch.setitem(download.SITE_NOTES, "quotes.toscrape.com", {"diagnosis": "checked"})
+    gone = snap.SiteResult(
+        website="quotes.toscrape.com",
+        host="quotes.toscrape.com",
+        warc=None,
+        robots={},
+        counts={},
+        excluded_reason="robots.txt unreachable",
+        started_at="2026-10-27T09:00:00Z",
+        finished_at="b",
+        requests=4,
+    )
+    entry = download.site_entry(
+        load_release(release_root), "quotes.toscrape.com", gone, data_dir, 0.5
+    )
+    assert entry["diagnosis"] == "checked" and entry["checked_at"] == "2026-10-27T09:00:00Z"
+
+
+def test_recorded_results_offline(tmp_path: Path) -> None:
+    (tmp_path / "fetchlog").mkdir()
+    (tmp_path / "w.warc.gz").write_bytes(b"")
+    done = {
+        "website": "w",
+        "host": "w",
+        "warc": "/elsewhere/w.warc.gz",
+        "robots": {},
+        "counts": {},
+        "excluded_reason": None,
+        "started_at": "a",
+        "finished_at": "b",
+        "requests": 3,
+    }
+    (tmp_path / "fetchlog" / "w.done.json").write_text(json.dumps(done))
+    results = download.recorded_results(["w"], tmp_path)
+    assert results["w"].warc == tmp_path / "w.warc.gz" and results["w"].requests == 3
+    assert snap.load_result("nope", tmp_path) is None
+    with pytest.raises(SystemExit, match="no finished snapshot"):
+        download.recorded_results(["w", "nope"], tmp_path)
