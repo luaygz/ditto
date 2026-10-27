@@ -1,0 +1,110 @@
+{
+  "name": "cc_silver_crawl4ai",
+  "description": "Common Crawl silver set, Crawl4AI generate_schema on one sample page per template, applied to every labeled page.",
+  "created_at": "2026-10-27T15:31:52+00:00",
+  "config_path": "eval/configs/cc_silver_crawl4ai.yaml",
+  "config_sha256": "f8eec77c2d7b5b76540b15bc60ae1b8f1380e646dcfa863397381fc0600cc038",
+  "config": {
+    "name": "cc_silver_crawl4ai",
+    "description": "Common Crawl silver set, Crawl4AI generate_schema on one sample page per template, applied to every labeled page.",
+    "dataset": "cc_silver",
+    "dataset_options": {},
+    "selection": {
+      "split": "all",
+      "sites": [],
+      "verticals": [],
+      "max_sites": null
+    },
+    "method": {
+      "kind": "baseline",
+      "mode": "prompted",
+      "baseline": "crawl4ai_schema",
+      "params": {
+        "until": "extract",
+        "min_cluster_size": 20,
+        "union_min_tokens": 8000,
+        "union_max_tokens": 30000,
+        "max_repair_calls": 3,
+        "tail": "skip",
+        "concurrency": 4
+      }
+    },
+    "models": {
+      "baseline": "openai/gpt-6.1-sol"
+    },
+    "budget_usd": 1.5,
+    "sample": {
+      "pages_per_site": null,
+      "align_pages": 50,
+      "align_min_fraction": 0.1
+    },
+    "seeds": {
+      "run": 1,
+      "synth": 1
+    },
+    "workers": null,
+    "keep_runs": true
+  },
+  "dry_run": false,
+  "git": {
+    "commit": "7973e6e7662204bfac452d6bfaf59d6993f9fe32",
+    "dirty": false
+  },
+  "dataset_manifests": {
+    "commoncrawl_silver": {
+      "path": "eval/datasets/commoncrawl_silver/manifest.json",
+      "sha256": "8fe0e0c2d5d582ee378bbc9a43a2bc1a8586f80a69025b42a36174371125a55c"
+    },
+    "livewebie": {
+      "path": "eval/datasets/livewebie/manifest.json",
+      "sha256": "5d5994441eef34b0086380a2e2afd343e2d2a17d8595b2cde9773942097d38f8"
+    },
+    "swde": {
+      "path": "eval/datasets/swde/manifest.json",
+      "sha256": "e7c3b6fda04a7bc4514d968449de03233d6f32ba13722329796d2cbac75531cc"
+    }
+  },
+  "machine": {
+    "cpu_count": 16,
+    "memory_gb": 62.66,
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "processor": "",
+    "python": "3.11.15"
+  },
+  "work_dir": "data/eval/cc_silver_crawl4ai/20261027T153152Z",
+  "budget_usd": 1.5,
+  "cost_basis": "usd_per_1k_pages = tokens x standard-tier list prices (config/prices.yaml, no cache, batch or flex discounts) for every method; spend_usd = what was actually billed",
+  "metric_version": 2,
+  "match_columns": [
+    "norm",
+    "raw",
+    "canon"
+  ],
+  "ditto_version": "0.0.0",
+  "notes": [],
+  "status": "ok",
+  "models": {
+    "pinned": {
+      "baseline": "openai/gpt-6.1-sol"
+    },
+    "used": [
+      "openai/gpt-6.1-sol"
+    ]
+  },
+  "prompt_versions": [
+    "crawl4ai.generate_schema"
+  ],
+  "spend_usd": 2.07269,
+  "spend_by_site": {
+    "skiddle.com": 1.170598,
+    "careerbuilder.com": 0.902092,
+    "argos.co.uk": 0.0,
+    "food.ndtv.com": 0.0,
+    "ticketweb.com": 0.0,
+    "dice.com": 0.0,
+    "ikea.com": 0.0,
+    "marmiton.org": 0.0
+  },
+  "wall_seconds": 719.974
+}

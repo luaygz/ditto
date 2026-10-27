@@ -1,0 +1,9 @@
+site,vertical,status,pages,pages_scored,f1_norm,precision_norm,recall_norm,f1_raw,precision_raw,recall_raw,f1_canon,precision_canon,recall_canon,optional_recall_norm,ari,purity,over_merge,under_merge,n_templates,n_true_templates,input_tokens_per_1k_pages,output_tokens_per_1k_pages,calls_per_template,usd_per_1k_pages,spend_usd,pps_core_baseline,reason
+skiddle.com,event,ok,2500,2193,0.292442,0.314682,0.28583,0.291352,0.312416,0.285079,0.292724,0.315144,0.286033,,,,,,7,,235891.016872,6200.638395,3.375,0.533788,1.170598,,
+careerbuilder.com,job,ok,2500,1984,0.569011,0.667899,0.545897,0.500746,0.507623,0.4977,0.569095,0.667983,0.545981,,,,,,16,,196590.725806,6150.201613,3.25,0.454683,0.902092,,
+argos.co.uk,product,skipped,0,,,,,,,,,,,,,,,,,,,,,,,,evaluation budget of $1.50 reached
+food.ndtv.com,recipe,skipped,0,,,,,,,,,,,,,,,,,,,,,,,,evaluation budget of $1.50 reached
+ticketweb.com,event,skipped,0,,,,,,,,,,,,,,,,,,,,,,,,evaluation budget of $1.50 reached
+dice.com,job,skipped,0,,,,,,,,,,,,,,,,,,,,,,,,evaluation budget of $1.50 reached
+ikea.com,product,skipped,0,,,,,,,,,,,,,,,,,,,,,,,,evaluation budget of $1.50 reached
+marmiton.org,recipe,skipped,0,,,,,,,,,,,,,,,,,,,,,,,,evaluation budget of $1.50 reached

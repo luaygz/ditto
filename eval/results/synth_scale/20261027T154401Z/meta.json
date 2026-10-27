@@ -1,0 +1,101 @@
+{
+  "name": "synth_scale",
+  "description": "v0.1 gate: the synthetic default site at 100k pages (scaled to 20k on machines with fewer than 8 cores or less than 16 GB, stated in meta.json notes); clustering metrics and stage speed. No LLM.",
+  "created_at": "2026-10-27T15:44:01+00:00",
+  "config_path": "eval/configs/synth_scale.yaml",
+  "config_sha256": "e1957d7bf3c97bd9ca469c1d8007e7beb3ec37ea8b7a404a6ae6dc0586a5fb53",
+  "config": {
+    "name": "synth_scale",
+    "description": "v0.1 gate: the synthetic default site at 100k pages (scaled to 20k on machines with fewer than 8 cores or less than 16 GB, stated in meta.json notes); clustering metrics and stage speed. No LLM.",
+    "dataset": "synthetic",
+    "dataset_options": {
+      "params": "eval/synth/default.yaml",
+      "pages": 100000,
+      "scale_for_machine": true,
+      "scaled_pages": 20000,
+      "truth_only": true
+    },
+    "selection": {
+      "split": "all",
+      "sites": [],
+      "verticals": [],
+      "max_sites": null
+    },
+    "method": {
+      "kind": "ditto",
+      "mode": "prompted",
+      "baseline": null,
+      "params": {
+        "until": "cluster",
+        "min_cluster_size": 20,
+        "union_min_tokens": 8000,
+        "union_max_tokens": 30000,
+        "max_repair_calls": 3,
+        "tail": "skip",
+        "concurrency": 4
+      }
+    },
+    "models": {},
+    "budget_usd": 0.0,
+    "sample": {
+      "pages_per_site": null,
+      "align_pages": 50,
+      "align_min_fraction": 0.1
+    },
+    "seeds": {
+      "run": 1,
+      "synth": 1
+    },
+    "workers": null,
+    "keep_runs": false
+  },
+  "dry_run": false,
+  "git": {
+    "commit": "7973e6e7662204bfac452d6bfaf59d6993f9fe32",
+    "dirty": false
+  },
+  "dataset_manifests": {
+    "commoncrawl_silver": {
+      "path": "eval/datasets/commoncrawl_silver/manifest.json",
+      "sha256": "8fe0e0c2d5d582ee378bbc9a43a2bc1a8586f80a69025b42a36174371125a55c"
+    },
+    "livewebie": {
+      "path": "eval/datasets/livewebie/manifest.json",
+      "sha256": "5d5994441eef34b0086380a2e2afd343e2d2a17d8595b2cde9773942097d38f8"
+    },
+    "swde": {
+      "path": "eval/datasets/swde/manifest.json",
+      "sha256": "e7c3b6fda04a7bc4514d968449de03233d6f32ba13722329796d2cbac75531cc"
+    }
+  },
+  "machine": {
+    "cpu_count": 16,
+    "memory_gb": 62.66,
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "processor": "",
+    "python": "3.11.15"
+  },
+  "work_dir": "data/eval/synth_scale/20261027T154401Z",
+  "budget_usd": 0.0,
+  "cost_basis": "usd_per_1k_pages = tokens x standard-tier list prices (config/prices.yaml, no cache, batch or flex discounts) for every method; spend_usd = what was actually billed",
+  "metric_version": 2,
+  "match_columns": [
+    "norm",
+    "raw",
+    "canon"
+  ],
+  "ditto_version": "0.0.0",
+  "notes": [],
+  "status": "ok",
+  "models": {
+    "pinned": {},
+    "used": []
+  },
+  "prompt_versions": [],
+  "spend_usd": 0.0,
+  "spend_by_site": {
+    "default": 0.0
+  },
+  "wall_seconds": 46.54
+}

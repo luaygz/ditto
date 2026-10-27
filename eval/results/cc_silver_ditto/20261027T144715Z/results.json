@@ -1,0 +1,5358 @@
+{
+  "name": "cc_silver_ditto",
+  "dataset": "cc_silver",
+  "split": "all",
+  "method": {
+    "kind": "ditto",
+    "mode": "prompted",
+    "baseline": null,
+    "params": {
+      "until": "extract",
+      "min_cluster_size": 20,
+      "union_min_tokens": 8000,
+      "union_max_tokens": 30000,
+      "max_repair_calls": 3,
+      "tail": "skip",
+      "concurrency": 4
+    }
+  },
+  "method_label": "ditto (prompted)",
+  "status": "ok",
+  "reason": null,
+  "summary": {
+    "n_sites": 8,
+    "n_ok": 8,
+    "status_counts": {
+      "ok": 8
+    },
+    "accuracy": {
+      "per_vertical": {
+        "event": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.2949636206659084,
+            "recall": 0.2679037695941603,
+            "f1": 0.2720799284016471
+          },
+          "fields_norm_f1": {
+            "address": 0.0,
+            "endDate": 0.0,
+            "location": 0.9836680377449794,
+            "name": 0.5464614764639115,
+            "organizer": 0.0007092198581560284,
+            "performer": 0.28178438661710037,
+            "startDate": 0.0
+          },
+          "raw": {
+            "precision": 0.2947706974618562,
+            "recall": 0.2677646619628016,
+            "f1": 0.2719230563512371
+          },
+          "fields_raw_f1": {
+            "address": 0.0,
+            "endDate": 0.0,
+            "location": 0.9836680377449794,
+            "name": 0.5464614764639115,
+            "organizer": 0.0,
+            "performer": 0.2810408921933085,
+            "startDate": 0.0
+          },
+          "canon": {
+            "precision": 0.2949636206659084,
+            "recall": 0.2679037695941603,
+            "f1": 0.2720799284016471
+          },
+          "fields_canon_f1": {
+            "address": 0.0,
+            "endDate": 0.0,
+            "location": 0.9836680377449794,
+            "name": 0.5464614764639115,
+            "organizer": 0.0007092198581560284,
+            "performer": 0.28178438661710037,
+            "startDate": 0.0
+          }
+        },
+        "job": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.7076785686613645,
+            "recall": 0.6452508751494718,
+            "f1": 0.6539456695508739
+          },
+          "fields_norm_f1": {
+            "datePosted": 0.0,
+            "employmentType": 0.5750748731042881,
+            "hiringOrganization": 0.9994954591321897,
+            "location": 0.9026498560123901,
+            "salary": 0.446453829056375,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.48451996706070677,
+            "recall": 0.48422513408348855,
+            "f1": 0.48437226824229734
+          },
+          "fields_raw_f1": {
+            "datePosted": 0.0,
+            "employmentType": 0.0,
+            "hiringOrganization": 0.9994954591321897,
+            "location": 0.8947155194870824,
+            "salary": 0.012022630834512023,
+            "title": 1.0
+          },
+          "canon": {
+            "precision": 0.7077242557958674,
+            "recall": 0.6452963876198887,
+            "f1": 0.6539912691860768
+          },
+          "fields_canon_f1": {
+            "datePosted": 0.0,
+            "employmentType": 0.5750748731042881,
+            "hiringOrganization": 0.9994954591321897,
+            "location": 0.9029234538236077,
+            "salary": 0.446453829056375,
+            "title": 1.0
+          }
+        },
+        "product": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.5510035416614811,
+            "recall": 0.4497628457851692,
+            "f1": 0.45255174592527236
+          },
+          "fields_norm_f1": {
+            "availability": 0.0,
+            "brand": 0.49988669839111716,
+            "image": 0.0,
+            "name": 0.5189397845168348,
+            "price": 0.7823383113138883,
+            "priceCurrency": 0.049193548387096775,
+            "sku": 0.9864251267962905
+          },
+          "raw": {
+            "precision": 0.4735042406548292,
+            "recall": 0.4461388695584532,
+            "f1": 0.4493860044700164
+          },
+          "fields_raw_f1": {
+            "availability": 0.0,
+            "brand": 0.49988669839111716,
+            "image": 0.0,
+            "name": 0.5189397845168348,
+            "price": 0.012192024384048768,
+            "priceCurrency": 0.7971796451301447,
+            "sku": 0.9864251267962905
+          },
+          "canon": {
+            "precision": 0.5510035416614811,
+            "recall": 0.4497628457851692,
+            "f1": 0.45255174592527236
+          },
+          "fields_canon_f1": {
+            "availability": 0.0,
+            "brand": 0.49988669839111716,
+            "image": 0.0,
+            "name": 0.5189397845168348,
+            "price": 0.7823383113138883,
+            "priceCurrency": 0.049193548387096775,
+            "sku": 0.9864251267962905
+          }
+        },
+        "recipe": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.6896409649804346,
+            "recall": 0.658381246608174,
+            "f1": 0.6730701118975928
+          },
+          "fields_norm_f1": {
+            "author": 0.9270791540901544,
+            "cookTime": 0.818393417101785,
+            "ingredients": 0.5923827694676781,
+            "name": 0.40095285857572716,
+            "prepTime": 0.8078969483164113,
+            "recipeYield": 0.4917155238338007
+          },
+          "raw": {
+            "precision": 0.6779131682993367,
+            "recall": 0.658381246608174,
+            "f1": 0.6677014643283192
+          },
+          "fields_raw_f1": {
+            "author": 0.9270791540901544,
+            "cookTime": 0.7864546824048808,
+            "ingredients": 0.5923827694676781,
+            "name": 0.40095285857572716,
+            "prepTime": 0.8076237975976749,
+            "recipeYield": 0.4917155238338007
+          },
+          "canon": {
+            "precision": 0.6896409649804346,
+            "recall": 0.658381246608174,
+            "f1": 0.6730701118975928
+          },
+          "fields_canon_f1": {
+            "author": 0.9270791540901544,
+            "cookTime": 0.818393417101785,
+            "ingredients": 0.5923827694676781,
+            "name": 0.40095285857572716,
+            "prepTime": 0.8078969483164113,
+            "recipeYield": 0.4917155238338007
+          }
+        }
+      },
+      "overall": {
+        "n_sites": 8,
+        "n_verticals": 4,
+        "norm": {
+          "precision": 0.5608216739922971,
+          "recall": 0.5053246842842438,
+          "f1": 0.5129118639438466
+        },
+        "raw": {
+          "precision": 0.4826770183691822,
+          "recall": 0.46412747805322935,
+          "f1": 0.4683456983479675
+        },
+        "canon": {
+          "precision": 0.5608330957759229,
+          "recall": 0.505336062401848,
+          "f1": 0.5129232638526473
+        }
+      }
+    },
+    "accuracy_sample": {
+      "per_vertical": {
+        "event": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.31,
+            "recall": 0.29333333333333333,
+            "f1": 0.30114219114219115
+          },
+          "fields_norm_f1": {
+            "address": 0.0,
+            "endDate": 0.0,
+            "location": 0.9871794871794872,
+            "name": 0.5371794871794872,
+            "organizer": 0.0,
+            "performer": 0.7272727272727273,
+            "startDate": 0.0
+          },
+          "raw": {
+            "precision": 0.31,
+            "recall": 0.29333333333333333,
+            "f1": 0.30114219114219115
+          },
+          "fields_raw_f1": {
+            "address": 0.0,
+            "endDate": 0.0,
+            "location": 0.9871794871794872,
+            "name": 0.5371794871794872,
+            "organizer": 0.0,
+            "performer": 0.7272727272727273,
+            "startDate": 0.0
+          },
+          "canon": {
+            "precision": 0.31,
+            "recall": 0.29333333333333333,
+            "f1": 0.30114219114219115
+          },
+          "fields_canon_f1": {
+            "address": 0.0,
+            "endDate": 0.0,
+            "location": 0.9871794871794872,
+            "name": 0.5371794871794872,
+            "organizer": 0.0,
+            "performer": 0.7272727272727273,
+            "startDate": 0.0
+          }
+        },
+        "job": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.7326388888888888,
+            "recall": 0.6649305555555556,
+            "f1": 0.6756213450292398
+          },
+          "fields_norm_f1": {
+            "datePosted": 0.0,
+            "employmentType": 0.6078947368421053,
+            "hiringOrganization": 1.0,
+            "location": 0.9125,
+            "salary": 0.5333333333333333,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.48020833333333335,
+            "recall": 0.48020833333333335,
+            "f1": 0.48020833333333335
+          },
+          "fields_raw_f1": {
+            "datePosted": 0.0,
+            "employmentType": 0.0,
+            "hiringOrganization": 1.0,
+            "location": 0.88125,
+            "salary": 0.0,
+            "title": 1.0
+          },
+          "canon": {
+            "precision": 0.7326388888888888,
+            "recall": 0.6649305555555556,
+            "f1": 0.6756213450292398
+          },
+          "fields_canon_f1": {
+            "datePosted": 0.0,
+            "employmentType": 0.6078947368421053,
+            "hiringOrganization": 1.0,
+            "location": 0.9125,
+            "salary": 0.5333333333333333,
+            "title": 1.0
+          }
+        },
+        "product": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.5416666666666667,
+            "recall": 0.444047619047619,
+            "f1": 0.4461904761904762
+          },
+          "fields_norm_f1": {
+            "availability": 0.0,
+            "brand": 0.5,
+            "image": 0.0,
+            "name": 0.55,
+            "price": 0.7,
+            "priceCurrency": 0.04,
+            "sku": 1.0
+          },
+          "raw": {
+            "precision": 0.475462962962963,
+            "recall": 0.45119047619047614,
+            "f1": 0.45307017543859646
+          },
+          "fields_raw_f1": {
+            "availability": 0.0,
+            "brand": 0.5,
+            "image": 0.0,
+            "name": 0.55,
+            "price": 0.025,
+            "priceCurrency": 0.763157894736842,
+            "sku": 1.0
+          },
+          "canon": {
+            "precision": 0.5416666666666667,
+            "recall": 0.444047619047619,
+            "f1": 0.4461904761904762
+          },
+          "fields_canon_f1": {
+            "availability": 0.0,
+            "brand": 0.5,
+            "image": 0.0,
+            "name": 0.55,
+            "price": 0.7,
+            "priceCurrency": 0.04,
+            "sku": 1.0
+          }
+        },
+        "recipe": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.6169753636534672,
+            "recall": 0.5989198080979117,
+            "f1": 0.607555698351449
+          },
+          "fields_norm_f1": {
+            "author": 0.9728937728937729,
+            "cookTime": 0.6705882352941177,
+            "ingredients": 0.5518521819208033,
+            "name": 0.225,
+            "prepTime": 0.725,
+            "recipeYield": 0.5
+          },
+          "raw": {
+            "precision": 0.6077161043942079,
+            "recall": 0.5989198080979117,
+            "f1": 0.6031983998765034
+          },
+          "fields_raw_f1": {
+            "author": 0.9728937728937729,
+            "cookTime": 0.6444444444444444,
+            "ingredients": 0.5518521819208033,
+            "name": 0.225,
+            "prepTime": 0.725,
+            "recipeYield": 0.5
+          },
+          "canon": {
+            "precision": 0.6169753636534672,
+            "recall": 0.5989198080979117,
+            "f1": 0.607555698351449
+          },
+          "fields_canon_f1": {
+            "author": 0.9728937728937729,
+            "cookTime": 0.6705882352941177,
+            "ingredients": 0.5518521819208033,
+            "name": 0.225,
+            "prepTime": 0.725,
+            "recipeYield": 0.5
+          }
+        }
+      },
+      "overall": {
+        "n_sites": 8,
+        "n_verticals": 4,
+        "norm": {
+          "precision": 0.5503202298022557,
+          "recall": 0.5003078290086049,
+          "f1": 0.507627427678339
+        },
+        "raw": {
+          "precision": 0.46834685017262606,
+          "recall": 0.45591298773876365,
+          "f1": 0.4594047749476561
+        },
+        "canon": {
+          "precision": 0.5503202298022557,
+          "recall": 0.5003078290086049,
+          "f1": 0.507627427678339
+        }
+      }
+    },
+    "optional_field_recall": {
+      "pages": 273,
+      "norm": {
+        "recall": 0.003663003663003663,
+        "tp": 1,
+        "fn": 272
+      },
+      "raw": {
+        "recall": 0.0,
+        "tp": 0,
+        "fn": 273
+      },
+      "canon": {
+        "recall": 0.003663003663003663,
+        "tp": 1,
+        "fn": 272
+      },
+      "fields": {
+        "performer": {
+          "norm": {
+            "recall": 0.003663003663003663,
+            "tp": 1,
+            "fn": 272
+          },
+          "raw": {
+            "recall": 0.0,
+            "tp": 0,
+            "fn": 273
+          },
+          "canon": {
+            "recall": 0.003663003663003663,
+            "tp": 1,
+            "fn": 272
+          }
+        }
+      }
+    },
+    "groups": {},
+    "clustering": {
+      "n_clusters": 40.875,
+      "n_templates": 7.0,
+      "tail_pages": 71.75,
+      "n_sites": 8
+    },
+    "cost": {
+      "pages": 24701,
+      "templates": 56,
+      "calls": 116,
+      "input_tokens": 2615932,
+      "output_tokens": 80264,
+      "input_tokens_per_1k_pages": 105903.89053074774,
+      "output_tokens_per_1k_pages": 3249.423100279341,
+      "calls_per_template": 2.054910714285714,
+      "usd_per_1k_pages": 0.24430201206428892,
+      "price_estimated": false,
+      "extrapolated": false,
+      "spend_usd": 5.4562694,
+      "llm_latency_s_mean": 18.24416413476874
+    },
+    "cost_per_vertical": {
+      "event": {
+        "pages": 5000,
+        "templates": 12,
+        "calls": 39,
+        "input_tokens": 568848,
+        "output_tokens": 34821,
+        "input_tokens_per_1k_pages": 113769.6,
+        "output_tokens_per_1k_pages": 6964.2,
+        "calls_per_template": 3.357142857142857,
+        "usd_per_1k_pages": 0.2971812,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 1.2631956000000002,
+        "llm_latency_s_mean": 21.883036842105263
+      },
+      "job": {
+        "pages": 5000,
+        "templates": 24,
+        "calls": 52,
+        "input_tokens": 695399,
+        "output_tokens": 30302,
+        "input_tokens_per_1k_pages": 139079.8,
+        "output_tokens_per_1k_pages": 6060.4,
+        "calls_per_template": 2.3125,
+        "usd_per_1k_pages": 0.33876360000000005,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 1.4550868000000001,
+        "llm_latency_s_mean": 14.232197727272728
+      },
+      "product": {
+        "pages": 9701,
+        "templates": 10,
+        "calls": 12,
+        "input_tokens": 900446,
+        "output_tokens": 7010,
+        "input_tokens_per_1k_pages": 92819.91547263169,
+        "output_tokens_per_1k_pages": 722.6059169157819,
+        "calls_per_template": 1.25,
+        "usd_per_1k_pages": 0.1928658901144212,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 1.8009161999999999,
+        "llm_latency_s_mean": 15.017508333333332
+      },
+      "recipe": {
+        "pages": 5000,
+        "templates": 10,
+        "calls": 13,
+        "input_tokens": 451239,
+        "output_tokens": 8131,
+        "input_tokens_per_1k_pages": 90247.8,
+        "output_tokens_per_1k_pages": 1626.2,
+        "calls_per_template": 1.3,
+        "usd_per_1k_pages": 0.19675760000000003,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.9370708,
+        "llm_latency_s_mean": 21.843913636363638
+      }
+    },
+    "speed_pages_per_sec_per_core": {
+      "ingest": 746.16875,
+      "fingerprint": 33.8125,
+      "cluster": 2508.34625,
+      "analyze": 10.700000000000001,
+      "union": 11.47,
+      "probe": 11840.25625,
+      "generate": 18.62625,
+      "verify": 8.04875,
+      "review": 80.33625,
+      "extract": 50.011250000000004
+    },
+    "curves": {},
+    "unprompted_recall": null,
+    "unprompted_recall_per_vertical": null,
+    "union": null
+  },
+  "sites": [
+    {
+      "site": "skiddle.com",
+      "vertical": "event",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2500,
+      "n_labeled": 2193,
+      "accuracy": {
+        "site": "skiddle.com",
+        "vertical": "event",
+        "pages_scored": 2124,
+        "pages_without_prediction": 21,
+        "pages_excluded": 69,
+        "norm": {
+          "precision": 0.36831152080779944,
+          "recall": 0.35132229800761505,
+          "f1": 0.35957788069037344
+        },
+        "raw": {
+          "precision": 0.3679256743996949,
+          "recall": 0.3510440827448977,
+          "f1": 0.3592641365895535
+        },
+        "canon": {
+          "precision": 0.36831152080779944,
+          "recall": 0.35132229800761505,
+          "f1": 0.35957788069037344
+        },
+        "fields": {
+          "address": {
+            "norm": {
+              "tp": 0,
+              "fp": 2059,
+              "fn": 2117,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2059,
+              "fn": 2117,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 2059,
+              "fn": 2117,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "endDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 1256,
+              "fn": 2118,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1256,
+              "fn": 2118,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1256,
+              "fn": 2118,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 1999,
+              "fp": 14,
+              "fn": 121,
+              "tn": 0,
+              "precision": 0.9930452061599603,
+              "recall": 0.9429245283018868,
+              "f1": 0.9673360754899588
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 14,
+              "fn": 121,
+              "tn": 0,
+              "precision": 0.9930452061599603,
+              "recall": 0.9429245283018868,
+              "f1": 0.9673360754899588
+            },
+            "canon": {
+              "tp": 1999,
+              "fp": 14,
+              "fn": 121,
+              "tn": 0,
+              "precision": 0.9930452061599603,
+              "recall": 0.9429245283018868,
+              "f1": 0.9673360754899588
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 2063,
+              "fp": 0,
+              "fn": 61,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9712806026365348,
+              "f1": 0.9854310962502986
+            },
+            "raw": {
+              "tp": 2063,
+              "fp": 0,
+              "fn": 61,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9712806026365348,
+              "f1": 0.9854310962502986
+            },
+            "canon": {
+              "tp": 2063,
+              "fp": 0,
+              "fn": 61,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9712806026365348,
+              "f1": 0.9854310962502986
+            }
+          },
+          "startDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 2030,
+              "fn": 2123,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2030,
+              "fn": 2123,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 2030,
+              "fn": 2123,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "organizer": {
+            "norm": {
+              "tp": 1,
+              "fp": 861,
+              "fn": 1957,
+              "tn": 0,
+              "precision": 0.001160092807424594,
+              "recall": 0.0005107252298263534,
+              "f1": 0.0007092198581560284
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 862,
+              "fn": 1958,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 1,
+              "fp": 861,
+              "fn": 1957,
+              "tn": 0,
+              "precision": 0.001160092807424594,
+              "recall": 0.0005107252298263534,
+              "f1": 0.0007092198581560284
+            }
+          },
+          "performer": {
+            "norm": {
+              "tp": 379,
+              "fp": 270,
+              "fn": 317,
+              "tn": 0,
+              "precision": 0.5839753466872111,
+              "recall": 0.5445402298850575,
+              "f1": 0.5635687732342007
+            },
+            "raw": {
+              "tp": 378,
+              "fp": 271,
+              "fn": 318,
+              "tn": 0,
+              "precision": 0.5824345146379045,
+              "recall": 0.5431034482758621,
+              "f1": 0.562081784386617
+            },
+            "canon": {
+              "tp": 379,
+              "fp": 270,
+              "fn": 317,
+              "tn": 0,
+              "precision": 0.5839753466872111,
+              "recall": 0.5445402298850575,
+              "f1": 0.5635687732342007
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "skiddle.com",
+        "vertical": "event",
+        "pages_scored": 20,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.39999999999999997,
+          "recall": 0.36666666666666664,
+          "f1": 0.3822843822843823
+        },
+        "raw": {
+          "precision": 0.39999999999999997,
+          "recall": 0.36666666666666664,
+          "f1": 0.3822843822843823
+        },
+        "canon": {
+          "precision": 0.39999999999999997,
+          "recall": 0.36666666666666664,
+          "f1": 0.3822843822843823
+        },
+        "fields": {
+          "address": {
+            "norm": {
+              "tp": 0,
+              "fp": 19,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 19,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 19,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "endDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 12,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 12,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 12,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.95,
+              "f1": 0.9743589743589743
+            },
+            "raw": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.95,
+              "f1": 0.9743589743589743
+            },
+            "canon": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.95,
+              "f1": 0.9743589743589743
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.95,
+              "f1": 0.9743589743589743
+            },
+            "raw": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.95,
+              "f1": 0.9743589743589743
+            },
+            "canon": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.95,
+              "f1": 0.9743589743589743
+            }
+          },
+          "startDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 19,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 19,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 19,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "organizer": {
+            "norm": {
+              "tp": 0,
+              "fp": 8,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 8,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 8,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "performer": {
+            "norm": {
+              "tp": 4,
+              "fp": 1,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.8,
+              "recall": 0.6666666666666666,
+              "f1": 0.7272727272727273
+            },
+            "raw": {
+              "tp": 4,
+              "fp": 1,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.8,
+              "recall": 0.6666666666666666,
+              "f1": 0.7272727272727273
+            },
+            "canon": {
+              "tp": 4,
+              "fp": 1,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.8,
+              "recall": 0.6666666666666666,
+              "f1": 0.7272727272727273
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 273,
+        "norm": {
+          "recall": 0.003663003663003663,
+          "tp": 1,
+          "fn": 272
+        },
+        "raw": {
+          "recall": 0.0,
+          "tp": 0,
+          "fn": 273
+        },
+        "canon": {
+          "recall": 0.003663003663003663,
+          "tp": 1,
+          "fn": 272
+        },
+        "fields": {
+          "performer": {
+            "norm": {
+              "recall": 0.003663003663003663,
+              "tp": 1,
+              "fn": 272
+            },
+            "raw": {
+              "recall": 0.0,
+              "tp": 0,
+              "fn": 273
+            },
+            "canon": {
+              "recall": 0.003663003663003663,
+              "tp": 1,
+              "fn": 272
+            }
+          }
+        }
+      },
+      "clustering": {
+        "n_clusters": 18,
+        "n_templates": 7,
+        "tail_pages": 77
+      },
+      "cost": {
+        "pages": 2500,
+        "templates": 7,
+        "calls": 19,
+        "cached_calls": 0,
+        "input_tokens": 296530,
+        "output_tokens": 17126,
+        "input_tokens_per_1k_pages": 118612.0,
+        "output_tokens_per_1k_pages": 6850.400000000001,
+        "calls_per_template": 2.7142857142857144,
+        "usd_per_1k_pages": 0.305728,
+        "price_estimated": false,
+        "spend_usd": 0.6823350000000001,
+        "llm_latency_s_mean": 23.800273684210527,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 19,
+            "cached_calls": 0,
+            "input_tokens": 296530,
+            "output_tokens": 17126,
+            "usd_per_1k_pages": 0.305728
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 386.611
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 2.5718,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 972.07,
+          "pages_per_sec_per_core": 972.07
+        },
+        "fingerprint": {
+          "seconds": 4.0564,
+          "pages": 2500,
+          "workers": 16,
+          "pages_per_sec": 616.31,
+          "pages_per_sec_per_core": 38.52
+        },
+        "cluster": {
+          "seconds": 1.7321,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 1443.35,
+          "pages_per_sec_per_core": 1443.35
+        },
+        "analyze": {
+          "seconds": 14.3781,
+          "pages": 2423,
+          "workers": 16,
+          "pages_per_sec": 168.52,
+          "pages_per_sec_per_core": 10.53
+        },
+        "union": {
+          "seconds": 21.2356,
+          "pages": 504,
+          "workers": 7,
+          "pages_per_sec": 23.73,
+          "pages_per_sec_per_core": 3.39
+        },
+        "probe": {
+          "seconds": 0.1646,
+          "pages": 2423,
+          "workers": 1,
+          "pages_per_sec": 14720.17,
+          "pages_per_sec_per_core": 14720.17
+        },
+        "generate": {
+          "seconds": 57.2455,
+          "pages": 2423,
+          "workers": 4,
+          "pages_per_sec": 42.33,
+          "pages_per_sec_per_core": 10.58
+        },
+        "verify": {
+          "seconds": 22.8241,
+          "pages": 2423,
+          "workers": 16,
+          "pages_per_sec": 106.16,
+          "pages_per_sec_per_core": 6.63
+        },
+        "review": {
+          "seconds": 0.3129,
+          "pages": 40,
+          "workers": 1,
+          "pages_per_sec": 127.84,
+          "pages_per_sec_per_core": 127.84
+        },
+        "extract": {
+          "seconds": 2.677,
+          "pages": 2423,
+          "workers": 16,
+          "pages_per_sec": 905.11,
+          "pages_per_sec_per_core": 56.57
+        }
+      },
+      "spend_usd": 0.682335,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Event",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/whats-on/[^/]+/[^/]+/[^/]+/\\d+/?$",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 24475,
+          "distinct_detail_urls": 8318,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 823.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.skiddle.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 12698,
+            "CC-MAIN-2026-39": 13935
+          },
+          "distinct_urls": 24475,
+          "distinct_pages": 24474,
+          "distinct_detail_pages": 8318,
+          "distinct_other_pages": 16156,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2193
+      },
+      "run_dir": "data/eval/cc_silver_ditto/20261027T144715Z/skiddle.com/run"
+    },
+    {
+      "site": "careerbuilder.com",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2500,
+      "n_labeled": 1984,
+      "accuracy": {
+        "site": "careerbuilder.com",
+        "vertical": "job",
+        "pages_scored": 1831,
+        "pages_without_prediction": 0,
+        "pages_excluded": 153,
+        "norm": {
+          "precision": 0.7766678648308233,
+          "recall": 0.6518124778070379,
+          "f1": 0.669202066609842
+        },
+        "raw": {
+          "precision": 0.4915806430267087,
+          "recall": 0.49099097707227224,
+          "f1": 0.49128524538988977
+        },
+        "canon": {
+          "precision": 0.7767592390998291,
+          "recall": 0.6519035027478718,
+          "f1": 0.6692932658802478
+        },
+        "fields": {
+          "datePosted": {
+            "norm": {
+              "tp": 0,
+              "fp": 1831,
+              "fn": 1831,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1831,
+              "fn": 1831,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1831,
+              "fn": 1831,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "employmentType": {
+            "norm": {
+              "tp": 259,
+              "fp": 33,
+              "fn": 1572,
+              "tn": 0,
+              "precision": 0.886986301369863,
+              "recall": 0.14145275805570726,
+              "f1": 0.24399434762129063
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 292,
+              "fn": 1831,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 259,
+              "fp": 33,
+              "fn": 1572,
+              "tn": 0,
+              "precision": 0.886986301369863,
+              "recall": 0.14145275805570726,
+              "f1": 0.24399434762129063
+            }
+          },
+          "hiringOrganization": {
+            "norm": {
+              "tp": 1831,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1831,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 1831,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 1717,
+              "fp": 107,
+              "fn": 114,
+              "tn": 0,
+              "precision": 0.9413377192982456,
+              "recall": 0.9377389404696886,
+              "f1": 0.9395348837209302
+            },
+            "raw": {
+              "tp": 1688,
+              "fp": 136,
+              "fn": 143,
+              "tn": 0,
+              "precision": 0.9254385964912281,
+              "recall": 0.9219006007646096,
+              "f1": 0.9236662106703146
+            },
+            "canon": {
+              "tp": 1718,
+              "fp": 106,
+              "fn": 113,
+              "tn": 0,
+              "precision": 0.9418859649122807,
+              "recall": 0.9382850901146914,
+              "f1": 0.9400820793433653
+            }
+          },
+          "title": {
+            "norm": {
+              "tp": 1831,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1831,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 1831,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "salary": {
+            "norm": {
+              "tp": 588,
+              "fp": 119,
+              "fn": 119,
+              "tn": 0,
+              "precision": 0.8316831683168316,
+              "recall": 0.8316831683168316,
+              "f1": 0.8316831683168316
+            },
+            "raw": {
+              "tp": 17,
+              "fp": 690,
+              "fn": 690,
+              "tn": 0,
+              "precision": 0.024045261669024046,
+              "recall": 0.024045261669024046,
+              "f1": 0.024045261669024046
+            },
+            "canon": {
+              "tp": 588,
+              "fp": 119,
+              "fn": 119,
+              "tn": 0,
+              "precision": 0.8316831683168316,
+              "recall": 0.8316831683168316,
+              "f1": 0.8316831683168316
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "careerbuilder.com",
+        "vertical": "job",
+        "pages_scored": 16,
+        "pages_without_prediction": 0,
+        "pages_excluded": 4,
+        "norm": {
+          "precision": 0.8125,
+          "recall": 0.6770833333333334,
+          "f1": 0.6984649122807017
+        },
+        "raw": {
+          "precision": 0.46875,
+          "recall": 0.46875,
+          "f1": 0.46875
+        },
+        "canon": {
+          "precision": 0.8125,
+          "recall": 0.6770833333333334,
+          "f1": 0.6984649122807017
+        },
+        "fields": {
+          "datePosted": {
+            "norm": {
+              "tp": 0,
+              "fp": 16,
+              "fn": 16,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 16,
+              "fn": 16,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 16,
+              "fn": 16,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "employmentType": {
+            "norm": {
+              "tp": 3,
+              "fp": 0,
+              "fn": 13,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.1875,
+              "f1": 0.3157894736842105
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 3,
+              "fn": 16,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 3,
+              "fp": 0,
+              "fn": 13,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.1875,
+              "f1": 0.3157894736842105
+            }
+          },
+          "hiringOrganization": {
+            "norm": {
+              "tp": 16,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 16,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 16,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 14,
+              "fp": 2,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.875,
+              "recall": 0.875,
+              "f1": 0.875
+            },
+            "raw": {
+              "tp": 13,
+              "fp": 3,
+              "fn": 3,
+              "tn": 0,
+              "precision": 0.8125,
+              "recall": 0.8125,
+              "f1": 0.8125
+            },
+            "canon": {
+              "tp": 14,
+              "fp": 2,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.875,
+              "recall": 0.875,
+              "f1": 0.875
+            }
+          },
+          "title": {
+            "norm": {
+              "tp": 16,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 16,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 16,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "salary": {
+            "norm": {
+              "tp": 5,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 5,
+              "fn": 5,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 5,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "canon": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 23,
+        "n_templates": 16,
+        "tail_pages": 9
+      },
+      "cost": {
+        "pages": 2500,
+        "templates": 16,
+        "calls": 30,
+        "cached_calls": 0,
+        "input_tokens": 470422,
+        "output_tokens": 14535,
+        "input_tokens_per_1k_pages": 188168.80000000002,
+        "output_tokens_per_1k_pages": 5814.0,
+        "calls_per_template": 1.875,
+        "usd_per_1k_pages": 0.4344776000000001,
+        "price_estimated": false,
+        "spend_usd": 0.9481096000000001,
+        "llm_latency_s_mean": 11.081700000000001,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 30,
+            "cached_calls": 0,
+            "input_tokens": 470422,
+            "output_tokens": 14535,
+            "usd_per_1k_pages": 0.4344776000000001
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 188.831
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 3.3808,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 739.47,
+          "pages_per_sec_per_core": 739.47
+        },
+        "fingerprint": {
+          "seconds": 3.2902,
+          "pages": 2500,
+          "workers": 16,
+          "pages_per_sec": 759.84,
+          "pages_per_sec_per_core": 47.49
+        },
+        "cluster": {
+          "seconds": 1.0518,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 2376.81,
+          "pages_per_sec_per_core": 2376.81
+        },
+        "analyze": {
+          "seconds": 12.0089,
+          "pages": 2491,
+          "workers": 16,
+          "pages_per_sec": 207.43,
+          "pages_per_sec_per_core": 12.96
+        },
+        "union": {
+          "seconds": 11.6306,
+          "pages": 1041,
+          "workers": 16,
+          "pages_per_sec": 89.51,
+          "pages_per_sec_per_core": 5.59
+        },
+        "probe": {
+          "seconds": 0.3179,
+          "pages": 2491,
+          "workers": 1,
+          "pages_per_sec": 7835.4,
+          "pages_per_sec_per_core": 7835.4
+        },
+        "generate": {
+          "seconds": 78.1518,
+          "pages": 2491,
+          "workers": 4,
+          "pages_per_sec": 31.87,
+          "pages_per_sec_per_core": 7.97
+        },
+        "verify": {
+          "seconds": 22.103,
+          "pages": 2491,
+          "workers": 16,
+          "pages_per_sec": 112.7,
+          "pages_per_sec_per_core": 7.04
+        },
+        "review": {
+          "seconds": 0.5771,
+          "pages": 55,
+          "workers": 1,
+          "pages_per_sec": 95.31,
+          "pages_per_sec_per_core": 95.31
+        },
+        "extract": {
+          "seconds": 2.2717,
+          "pages": 2494,
+          "workers": 16,
+          "pages_per_sec": 1097.87,
+          "pages_per_sec_per_core": 68.62
+        }
+      },
+      "spend_usd": 0.94811,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "target_type": "JobPosting",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/job-details/[^/?]+",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 32051,
+          "distinct_detail_urls": 12332,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 798.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.careerbuilder.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 15682,
+            "CC-MAIN-2026-39": 16562
+          },
+          "distinct_urls": 32051,
+          "distinct_pages": 32050,
+          "distinct_detail_pages": 12332,
+          "distinct_other_pages": 19718,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 1984
+      },
+      "run_dir": "data/eval/cc_silver_ditto/20261027T144715Z/careerbuilder.com/run"
+    },
+    {
+      "site": "argos.co.uk",
+      "vertical": "product",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 7201,
+      "n_labeled": 6924,
+      "accuracy": {
+        "site": "argos.co.uk",
+        "vertical": "product",
+        "pages_scored": 6804,
+        "pages_without_prediction": 3,
+        "pages_excluded": 120,
+        "norm": {
+          "precision": 0.7947654756653433,
+          "recall": 0.6620105105333084,
+          "f1": 0.6621575041433578
+        },
+        "raw": {
+          "precision": 0.6623045630544527,
+          "recall": 0.6620105105333084,
+          "f1": 0.6621575041433578
+        },
+        "canon": {
+          "precision": 0.7947654756653433,
+          "recall": 0.6620105105333084,
+          "f1": 0.6621575041433578
+        },
+        "fields": {
+          "brand": {
+            "norm": {
+              "tp": 6618,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9995468962392388,
+              "f1": 0.9997733967822343
+            },
+            "raw": {
+              "tp": 6618,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9995468962392388,
+              "f1": 0.9997733967822343
+            },
+            "canon": {
+              "tp": 6618,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9995468962392388,
+              "f1": 0.9997733967822343
+            }
+          },
+          "image": {
+            "norm": {
+              "tp": 0,
+              "fp": 6801,
+              "fn": 6804,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 6801,
+              "fn": 6804,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 6801,
+              "fn": 6804,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 6801,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9995590828924162,
+              "f1": 0.9997794928335171
+            },
+            "raw": {
+              "tp": 6801,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9995590828924162,
+              "f1": 0.9997794928335171
+            },
+            "canon": {
+              "tp": 6801,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9995590828924162,
+              "f1": 0.9997794928335171
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 6801,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9995590828924162,
+              "f1": 0.9997794928335171
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 6801,
+              "fn": 6804,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 6801,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9995590828924162,
+              "f1": 0.9997794928335171
+            }
+          },
+          "priceCurrency": {
+            "norm": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 6804,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 6801,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9995590828924162,
+              "f1": 0.9997794928335171
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 6804,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "sku": {
+            "norm": {
+              "tp": 6623,
+              "fp": 178,
+              "fn": 181,
+              "tn": 0,
+              "precision": 0.9738273783267166,
+              "recall": 0.9733980011757789,
+              "f1": 0.9736126424108783
+            },
+            "raw": {
+              "tp": 6623,
+              "fp": 178,
+              "fn": 181,
+              "tn": 0,
+              "precision": 0.9738273783267166,
+              "recall": 0.9733980011757789,
+              "f1": 0.9736126424108783
+            },
+            "canon": {
+              "tp": 6623,
+              "fp": 178,
+              "fn": 181,
+              "tn": 0,
+              "precision": 0.9738273783267166,
+              "recall": 0.9733980011757789,
+              "f1": 0.9736126424108783
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "argos.co.uk",
+        "vertical": "product",
+        "pages_scored": 20,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666
+        },
+        "raw": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666
+        },
+        "canon": {
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666
+        },
+        "fields": {
+          "brand": {
+            "norm": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "image": {
+            "norm": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "priceCurrency": {
+            "norm": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 20,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 20,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "sku": {
+            "norm": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "canon": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 41,
+        "n_templates": 6,
+        "tail_pages": 78
+      },
+      "cost": {
+        "pages": 7201,
+        "templates": 6,
+        "calls": 6,
+        "cached_calls": 0,
+        "input_tokens": 462712,
+        "output_tokens": 3588,
+        "input_tokens_per_1k_pages": 64256.63102346896,
+        "output_tokens_per_1k_pages": 498.2641299819469,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.1334959033467574,
+        "price_estimated": false,
+        "spend_usd": 0.9145867999999999,
+        "llm_latency_s_mean": 15.501666666666665,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 6,
+            "cached_calls": 0,
+            "input_tokens": 462712,
+            "output_tokens": 3588,
+            "usd_per_1k_pages": 0.1334959033467574
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 435.414
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 25.2083,
+          "pages": 7201,
+          "workers": 2,
+          "pages_per_sec": 285.66,
+          "pages_per_sec_per_core": 142.83
+        },
+        "fingerprint": {
+          "seconds": 50.1677,
+          "pages": 7201,
+          "workers": 16,
+          "pages_per_sec": 143.54,
+          "pages_per_sec_per_core": 8.97
+        },
+        "cluster": {
+          "seconds": 19.3837,
+          "pages": 7201,
+          "workers": 1,
+          "pages_per_sec": 371.5,
+          "pages_per_sec_per_core": 371.5
+        },
+        "analyze": {
+          "seconds": 45.4592,
+          "pages": 2355,
+          "workers": 16,
+          "pages_per_sec": 51.8,
+          "pages_per_sec_per_core": 3.24
+        },
+        "union": {
+          "seconds": 193.8496,
+          "pages": 403,
+          "workers": 6,
+          "pages_per_sec": 2.08,
+          "pages_per_sec_per_core": 0.35
+        },
+        "probe": {
+          "seconds": 0.5783,
+          "pages": 7123,
+          "workers": 1,
+          "pages_per_sec": 12317.62,
+          "pages_per_sec_per_core": 12317.62
+        },
+        "generate": {
+          "seconds": 27.3626,
+          "pages": 7123,
+          "workers": 4,
+          "pages_per_sec": 260.32,
+          "pages_per_sec_per_core": 65.08
+        },
+        "verify": {
+          "seconds": 40.4359,
+          "pages": 7123,
+          "workers": 16,
+          "pages_per_sec": 176.16,
+          "pages_per_sec_per_core": 11.01
+        },
+        "review": {
+          "seconds": 0.6259,
+          "pages": 25,
+          "workers": 1,
+          "pages_per_sec": 39.95,
+          "pages_per_sec_per_core": 39.95
+        },
+        "extract": {
+          "seconds": 30.0821,
+          "pages": 7128,
+          "workers": 16,
+          "pages_per_sec": 236.95,
+          "pages_per_sec_per_core": 14.81
+        }
+      },
+      "spend_usd": 0.914587,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Product",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/product/(?:tuc)?\\d+",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 33133,
+          "distinct_detail_urls": 20342,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 3940.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.argos.co.uk/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 17747,
+            "CC-MAIN-2026-39": 15620
+          },
+          "distinct_urls": 33133,
+          "distinct_pages": 33133,
+          "distinct_detail_pages": 20342,
+          "distinct_other_pages": 12791,
+          "cap": 2500,
+          "planned": 7201,
+          "planned_detail": 6701,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 6701,
+          "downloaded": 7201,
+          "downloaded_detail": 6701,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 6924
+      },
+      "run_dir": "data/eval/cc_silver_ditto/20261027T144715Z/argos.co.uk/run"
+    },
+    {
+      "site": "food.ndtv.com",
+      "vertical": "recipe",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2500,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "food.ndtv.com",
+        "vertical": "recipe",
+        "pages_scored": 1994,
+        "pages_without_prediction": 0,
+        "pages_excluded": 6,
+        "norm": {
+          "precision": 0.7366554013827752,
+          "recall": 0.7113292980047721,
+          "f1": 0.7232811052055457
+        },
+        "raw": {
+          "precision": 0.7366554013827752,
+          "recall": 0.7113292980047721,
+          "f1": 0.7232811052055457
+        },
+        "canon": {
+          "precision": 0.7366554013827752,
+          "recall": 0.7113292980047721,
+          "f1": 0.7232811052055457
+        },
+        "fields": {
+          "author": {
+            "norm": {
+              "tp": 1503,
+              "fp": 78,
+              "fn": 305,
+              "tn": 0,
+              "precision": 0.9506641366223909,
+              "recall": 0.8313053097345132,
+              "f1": 0.8869873118914134
+            },
+            "raw": {
+              "tp": 1503,
+              "fp": 78,
+              "fn": 305,
+              "tn": 0,
+              "precision": 0.9506641366223909,
+              "recall": 0.8313053097345132,
+              "f1": 0.8869873118914134
+            },
+            "canon": {
+              "tp": 1503,
+              "fp": 78,
+              "fn": 305,
+              "tn": 0,
+              "precision": 0.9506641366223909,
+              "recall": 0.8313053097345132,
+              "f1": 0.8869873118914134
+            }
+          },
+          "cookTime": {
+            "norm": {
+              "tp": 1444,
+              "fp": 522,
+              "fn": 522,
+              "tn": 0,
+              "precision": 0.7344862665310274,
+              "recall": 0.7344862665310274,
+              "f1": 0.7344862665310274
+            },
+            "raw": {
+              "tp": 1444,
+              "fp": 522,
+              "fn": 522,
+              "tn": 0,
+              "precision": 0.7344862665310274,
+              "recall": 0.7344862665310274,
+              "f1": 0.7344862665310274
+            },
+            "canon": {
+              "tp": 1444,
+              "fp": 522,
+              "fn": 522,
+              "tn": 0,
+              "precision": 0.7344862665310274,
+              "recall": 0.7344862665310274,
+              "f1": 0.7344862665310274
+            }
+          },
+          "ingredients": {
+            "norm": {
+              "tp": 7189,
+              "fp": 16697,
+              "fn": 16697,
+              "tn": 0,
+              "precision": 0.3009712802478439,
+              "recall": 0.3009712802478439,
+              "f1": 0.3009712802478439
+            },
+            "raw": {
+              "tp": 7189,
+              "fp": 16697,
+              "fn": 16697,
+              "tn": 0,
+              "precision": 0.3009712802478439,
+              "recall": 0.3009712802478439,
+              "f1": 0.3009712802478439
+            },
+            "canon": {
+              "tp": 7189,
+              "fp": 16697,
+              "fn": 16697,
+              "tn": 0,
+              "precision": 0.3009712802478439,
+              "recall": 0.3009712802478439,
+              "f1": 0.3009712802478439
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 1599,
+              "fp": 395,
+              "fn": 395,
+              "tn": 0,
+              "precision": 0.8019057171514543,
+              "recall": 0.8019057171514543,
+              "f1": 0.8019057171514543
+            },
+            "raw": {
+              "tp": 1599,
+              "fp": 395,
+              "fn": 395,
+              "tn": 0,
+              "precision": 0.8019057171514543,
+              "recall": 0.8019057171514543,
+              "f1": 0.8019057171514543
+            },
+            "canon": {
+              "tp": 1599,
+              "fp": 395,
+              "fn": 395,
+              "tn": 0,
+              "precision": 0.8019057171514543,
+              "recall": 0.8019057171514543,
+              "f1": 0.8019057171514543
+            }
+          },
+          "prepTime": {
+            "norm": {
+              "tp": 1224,
+              "fp": 713,
+              "fn": 713,
+              "tn": 0,
+              "precision": 0.6319050077439339,
+              "recall": 0.6319050077439339,
+              "f1": 0.6319050077439339
+            },
+            "raw": {
+              "tp": 1224,
+              "fp": 713,
+              "fn": 713,
+              "tn": 0,
+              "precision": 0.6319050077439339,
+              "recall": 0.6319050077439339,
+              "f1": 0.6319050077439339
+            },
+            "canon": {
+              "tp": 1224,
+              "fp": 713,
+              "fn": 713,
+              "tn": 0,
+              "precision": 0.6319050077439339,
+              "recall": 0.6319050077439339,
+              "f1": 0.6319050077439339
+            }
+          },
+          "recipeYield": {
+            "norm": {
+              "tp": 1929,
+              "fp": 0,
+              "fn": 65,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9674022066198595,
+              "f1": 0.9834310476676014
+            },
+            "raw": {
+              "tp": 1929,
+              "fp": 0,
+              "fn": 65,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9674022066198595,
+              "f1": 0.9834310476676014
+            },
+            "canon": {
+              "tp": 1929,
+              "fp": 0,
+              "fn": 65,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9674022066198595,
+              "f1": 0.9834310476676014
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "food.ndtv.com",
+        "vertical": "recipe",
+        "pages_scored": 20,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.582023289665211,
+          "recall": 0.5736899563318777,
+          "f1": 0.5777497853917067
+        },
+        "raw": {
+          "precision": 0.582023289665211,
+          "recall": 0.5736899563318777,
+          "f1": 0.5777497853917067
+        },
+        "canon": {
+          "precision": 0.582023289665211,
+          "recall": 0.5736899563318777,
+          "f1": 0.5777497853917067
+        },
+        "fields": {
+          "author": {
+            "norm": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.95,
+              "f1": 0.9743589743589743
+            },
+            "raw": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.95,
+              "f1": 0.9743589743589743
+            },
+            "canon": {
+              "tp": 19,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.95,
+              "f1": 0.9743589743589743
+            }
+          },
+          "cookTime": {
+            "norm": {
+              "tp": 8,
+              "fp": 12,
+              "fn": 12,
+              "tn": 0,
+              "precision": 0.4,
+              "recall": 0.4,
+              "f1": 0.4
+            },
+            "raw": {
+              "tp": 8,
+              "fp": 12,
+              "fn": 12,
+              "tn": 0,
+              "precision": 0.4,
+              "recall": 0.4,
+              "f1": 0.4
+            },
+            "canon": {
+              "tp": 8,
+              "fp": 12,
+              "fn": 12,
+              "tn": 0,
+              "precision": 0.4,
+              "recall": 0.4,
+              "f1": 0.4
+            }
+          },
+          "ingredients": {
+            "norm": {
+              "tp": 44,
+              "fp": 185,
+              "fn": 185,
+              "tn": 0,
+              "precision": 0.19213973799126638,
+              "recall": 0.19213973799126638,
+              "f1": 0.19213973799126638
+            },
+            "raw": {
+              "tp": 44,
+              "fp": 185,
+              "fn": 185,
+              "tn": 0,
+              "precision": 0.19213973799126638,
+              "recall": 0.19213973799126638,
+              "f1": 0.19213973799126638
+            },
+            "canon": {
+              "tp": 44,
+              "fp": 185,
+              "fn": 185,
+              "tn": 0,
+              "precision": 0.19213973799126638,
+              "recall": 0.19213973799126638,
+              "f1": 0.19213973799126638
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 9,
+              "fp": 11,
+              "fn": 11,
+              "tn": 0,
+              "precision": 0.45,
+              "recall": 0.45,
+              "f1": 0.45
+            },
+            "raw": {
+              "tp": 9,
+              "fp": 11,
+              "fn": 11,
+              "tn": 0,
+              "precision": 0.45,
+              "recall": 0.45,
+              "f1": 0.45
+            },
+            "canon": {
+              "tp": 9,
+              "fp": 11,
+              "fn": 11,
+              "tn": 0,
+              "precision": 0.45,
+              "recall": 0.45,
+              "f1": 0.45
+            }
+          },
+          "prepTime": {
+            "norm": {
+              "tp": 9,
+              "fp": 11,
+              "fn": 11,
+              "tn": 0,
+              "precision": 0.45,
+              "recall": 0.45,
+              "f1": 0.45
+            },
+            "raw": {
+              "tp": 9,
+              "fp": 11,
+              "fn": 11,
+              "tn": 0,
+              "precision": 0.45,
+              "recall": 0.45,
+              "f1": 0.45
+            },
+            "canon": {
+              "tp": 9,
+              "fp": 11,
+              "fn": 11,
+              "tn": 0,
+              "precision": 0.45,
+              "recall": 0.45,
+              "f1": 0.45
+            }
+          },
+          "recipeYield": {
+            "norm": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "canon": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 15,
+        "n_templates": 5,
+        "tail_pages": 41
+      },
+      "cost": {
+        "pages": 2500,
+        "templates": 5,
+        "calls": 11,
+        "cached_calls": 0,
+        "input_tokens": 192693,
+        "output_tokens": 5683,
+        "input_tokens_per_1k_pages": 77077.2,
+        "output_tokens_per_1k_pages": 2273.2000000000003,
+        "calls_per_template": 2.2,
+        "usd_per_1k_pages": 0.1768864,
+        "price_estimated": false,
+        "spend_usd": 0.403285,
+        "llm_latency_s_mean": 11.980627272727274,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 11,
+            "cached_calls": 0,
+            "input_tokens": 192693,
+            "output_tokens": 5683,
+            "usd_per_1k_pages": 0.1768864
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 161.334
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 4.1956,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 595.87,
+          "pages_per_sec_per_core": 595.87
+        },
+        "fingerprint": {
+          "seconds": 6.4899,
+          "pages": 2500,
+          "workers": 16,
+          "pages_per_sec": 385.21,
+          "pages_per_sec_per_core": 24.08
+        },
+        "cluster": {
+          "seconds": 1.1196,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 2232.9,
+          "pages_per_sec_per_core": 2232.9
+        },
+        "analyze": {
+          "seconds": 14.1301,
+          "pages": 2459,
+          "workers": 16,
+          "pages_per_sec": 174.03,
+          "pages_per_sec_per_core": 10.88
+        },
+        "union": {
+          "seconds": 2.2791,
+          "pages": 300,
+          "workers": 3,
+          "pages_per_sec": 131.63,
+          "pages_per_sec_per_core": 43.88
+        },
+        "probe": {
+          "seconds": 0.1188,
+          "pages": 2459,
+          "workers": 1,
+          "pages_per_sec": 20706.67,
+          "pages_per_sec_per_core": 20706.67
+        },
+        "generate": {
+          "seconds": 33.861,
+          "pages": 2459,
+          "workers": 4,
+          "pages_per_sec": 72.62,
+          "pages_per_sec_per_core": 18.16
+        },
+        "verify": {
+          "seconds": 16.0454,
+          "pages": 2459,
+          "workers": 16,
+          "pages_per_sec": 153.25,
+          "pages_per_sec_per_core": 9.58
+        },
+        "review": {
+          "seconds": 0.2853,
+          "pages": 25,
+          "workers": 1,
+          "pages_per_sec": 87.64,
+          "pages_per_sec_per_core": 87.64
+        },
+        "extract": {
+          "seconds": 3.116,
+          "pages": 2459,
+          "workers": 16,
+          "pages_per_sec": 789.14,
+          "pages_per_sec_per_core": 49.32
+        }
+      },
+      "spend_usd": 0.403285,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Recipe",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/recipe-[a-z0-9-]+-\\d+/?$",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 46377,
+          "distinct_detail_urls": 4085,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 706.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://food.ndtv.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 24262,
+            "CC-MAIN-2026-39": 23695
+          },
+          "distinct_urls": 46377,
+          "distinct_pages": 46349,
+          "distinct_detail_pages": 4085,
+          "distinct_other_pages": 42264,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2000
+      },
+      "run_dir": "data/eval/cc_silver_ditto/20261027T144715Z/food.ndtv.com/run"
+    },
+    {
+      "site": "ticketweb.com",
+      "vertical": "event",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2500,
+      "n_labeled": 2008,
+      "accuracy": {
+        "site": "ticketweb.com",
+        "vertical": "event",
+        "pages_scored": 1852,
+        "pages_without_prediction": 0,
+        "pages_excluded": 156,
+        "norm": {
+          "precision": 0.22161572052401746,
+          "recall": 0.18448524118070553,
+          "f1": 0.18458197611292074
+        },
+        "raw": {
+          "precision": 0.22161572052401746,
+          "recall": 0.18448524118070553,
+          "f1": 0.18458197611292074
+        },
+        "canon": {
+          "precision": 0.22161572052401746,
+          "recall": 0.18448524118070553,
+          "f1": 0.18458197611292074
+        },
+        "fields": {
+          "address": {
+            "norm": {
+              "tp": 0,
+              "fp": 1852,
+              "fn": 1852,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1852,
+              "fn": 1852,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1852,
+              "fn": 1852,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 1852,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1852,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 1852,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 198,
+              "fp": 1634,
+              "fn": 1654,
+              "tn": 0,
+              "precision": 0.10807860262008734,
+              "recall": 0.10691144708423327,
+              "f1": 0.10749185667752444
+            },
+            "raw": {
+              "tp": 198,
+              "fp": 1634,
+              "fn": 1654,
+              "tn": 0,
+              "precision": 0.10807860262008734,
+              "recall": 0.10691144708423327,
+              "f1": 0.10749185667752444
+            },
+            "canon": {
+              "tp": 198,
+              "fp": 1634,
+              "fn": 1654,
+              "tn": 0,
+              "precision": 0.10807860262008734,
+              "recall": 0.10691144708423327,
+              "f1": 0.10749185667752444
+            }
+          },
+          "startDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 1750,
+              "fn": 1852,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1750,
+              "fn": 1852,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1750,
+              "fn": 1852,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "endDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 321,
+              "fn": 324,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 321,
+              "fn": 324,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 321,
+              "fn": 324,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "performer": {
+            "norm": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 8,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 8,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 8,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "ticketweb.com",
+        "vertical": "event",
+        "pages_scored": 20,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.22000000000000003,
+          "recall": 0.22000000000000003,
+          "f1": 0.22000000000000003
+        },
+        "raw": {
+          "precision": 0.22000000000000003,
+          "recall": 0.22000000000000003,
+          "f1": 0.22000000000000003
+        },
+        "canon": {
+          "precision": 0.22000000000000003,
+          "recall": 0.22000000000000003,
+          "f1": 0.22000000000000003
+        },
+        "fields": {
+          "address": {
+            "norm": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 2,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.1,
+              "recall": 0.1,
+              "f1": 0.1
+            },
+            "raw": {
+              "tp": 2,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.1,
+              "recall": 0.1,
+              "f1": 0.1
+            },
+            "canon": {
+              "tp": 2,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.1,
+              "recall": 0.1,
+              "f1": 0.1
+            }
+          },
+          "startDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 19,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 19,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 19,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "endDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "performer": {
+            "norm": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "canon": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 10,
+        "n_templates": 5,
+        "tail_pages": 13
+      },
+      "cost": {
+        "pages": 2500,
+        "templates": 5,
+        "calls": 20,
+        "cached_calls": 0,
+        "input_tokens": 272318,
+        "output_tokens": 17695,
+        "input_tokens_per_1k_pages": 108927.20000000001,
+        "output_tokens_per_1k_pages": 7078.0,
+        "calls_per_template": 4.0,
+        "usd_per_1k_pages": 0.2886344,
+        "price_estimated": false,
+        "spend_usd": 0.5808606000000001,
+        "llm_latency_s_mean": 19.965799999999998,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 20,
+            "cached_calls": 0,
+            "input_tokens": 272318,
+            "output_tokens": 17695,
+            "usd_per_1k_pages": 0.2886344
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 331.706
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 1.8183,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 1374.94,
+          "pages_per_sec_per_core": 1374.94
+        },
+        "fingerprint": {
+          "seconds": 2.0914,
+          "pages": 2500,
+          "workers": 16,
+          "pages_per_sec": 1195.34,
+          "pages_per_sec_per_core": 74.71
+        },
+        "cluster": {
+          "seconds": 0.3866,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 6466.88,
+          "pages_per_sec_per_core": 6466.88
+        },
+        "analyze": {
+          "seconds": 7.4422,
+          "pages": 2487,
+          "workers": 16,
+          "pages_per_sec": 334.18,
+          "pages_per_sec_per_core": 20.89
+        },
+        "union": {
+          "seconds": 14.0559,
+          "pages": 361,
+          "workers": 5,
+          "pages_per_sec": 25.68,
+          "pages_per_sec_per_core": 5.14
+        },
+        "probe": {
+          "seconds": 0.2349,
+          "pages": 2487,
+          "workers": 1,
+          "pages_per_sec": 10587.42,
+          "pages_per_sec_per_core": 10587.42
+        },
+        "generate": {
+          "seconds": 68.4848,
+          "pages": 2487,
+          "workers": 4,
+          "pages_per_sec": 36.31,
+          "pages_per_sec_per_core": 9.08
+        },
+        "verify": {
+          "seconds": 25.2696,
+          "pages": 2487,
+          "workers": 16,
+          "pages_per_sec": 98.42,
+          "pages_per_sec_per_core": 6.15
+        },
+        "review": {
+          "seconds": 0.1997,
+          "pages": 20,
+          "workers": 1,
+          "pages_per_sec": 100.14,
+          "pages_per_sec_per_core": 100.14
+        },
+        "extract": {
+          "seconds": 1.6597,
+          "pages": 2494,
+          "workers": 16,
+          "pages_per_sec": 1502.71,
+          "pages_per_sec_per_core": 93.92
+        }
+      },
+      "spend_usd": 0.580861,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Event",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "/event/[^/]+/\\d+",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 28272,
+          "distinct_detail_urls": 22280,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 413.0,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.ticketweb.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 14195,
+            "CC-MAIN-2026-39": 14585
+          },
+          "distinct_urls": 28272,
+          "distinct_pages": 28139,
+          "distinct_detail_pages": 22233,
+          "distinct_other_pages": 5906,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2008
+      },
+      "run_dir": "data/eval/cc_silver_ditto/20261027T144715Z/ticketweb.com/run"
+    },
+    {
+      "site": "dice.com",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2500,
+      "n_labeled": 1999,
+      "accuracy": {
+        "site": "dice.com",
+        "vertical": "job",
+        "pages_scored": 1982,
+        "pages_without_prediction": 0,
+        "pages_excluded": 17,
+        "norm": {
+          "precision": 0.6386892724919057,
+          "recall": 0.6386892724919057,
+          "f1": 0.6386892724919057
+        },
+        "raw": {
+          "precision": 0.4774592910947049,
+          "recall": 0.4774592910947049,
+          "f1": 0.4774592910947049
+        },
+        "canon": {
+          "precision": 0.6386892724919057,
+          "recall": 0.6386892724919057,
+          "f1": 0.6386892724919057
+        },
+        "fields": {
+          "datePosted": {
+            "norm": {
+              "tp": 0,
+              "fp": 1982,
+              "fn": 1982,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1982,
+              "fn": 1982,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1982,
+              "fn": 1982,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "employmentType": {
+            "norm": {
+              "tp": 1796,
+              "fp": 186,
+              "fn": 186,
+              "tn": 0,
+              "precision": 0.9061553985872856,
+              "recall": 0.9061553985872856,
+              "f1": 0.9061553985872856
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1982,
+              "fn": 1982,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 1796,
+              "fp": 186,
+              "fn": 186,
+              "tn": 0,
+              "precision": 0.9061553985872856,
+              "recall": 0.9061553985872856,
+              "f1": 0.9061553985872856
+            }
+          },
+          "hiringOrganization": {
+            "norm": {
+              "tp": 1980,
+              "fp": 2,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.9989909182643795,
+              "recall": 0.9989909182643795,
+              "f1": 0.9989909182643795
+            },
+            "raw": {
+              "tp": 1980,
+              "fp": 2,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.9989909182643795,
+              "recall": 0.9989909182643795,
+              "f1": 0.9989909182643795
+            },
+            "canon": {
+              "tp": 1980,
+              "fp": 2,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.9989909182643795,
+              "recall": 0.9989909182643795,
+              "f1": 0.9989909182643795
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 1664,
+              "fp": 258,
+              "fn": 258,
+              "tn": 0,
+              "precision": 0.8657648283038502,
+              "recall": 0.8657648283038502,
+              "f1": 0.8657648283038502
+            },
+            "raw": {
+              "tp": 1664,
+              "fp": 258,
+              "fn": 258,
+              "tn": 0,
+              "precision": 0.8657648283038502,
+              "recall": 0.8657648283038502,
+              "f1": 0.8657648283038502
+            },
+            "canon": {
+              "tp": 1664,
+              "fp": 258,
+              "fn": 258,
+              "tn": 0,
+              "precision": 0.8657648283038502,
+              "recall": 0.8657648283038502,
+              "f1": 0.8657648283038502
+            }
+          },
+          "title": {
+            "norm": {
+              "tp": 1982,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1982,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 1982,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "salary": {
+            "norm": {
+              "tp": 93,
+              "fp": 1426,
+              "fn": 1426,
+              "tn": 0,
+              "precision": 0.061224489795918366,
+              "recall": 0.061224489795918366,
+              "f1": 0.061224489795918366
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1519,
+              "fn": 1519,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 93,
+              "fp": 1426,
+              "fn": 1426,
+              "tn": 0,
+              "precision": 0.061224489795918366,
+              "recall": 0.061224489795918366,
+              "f1": 0.061224489795918366
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "dice.com",
+        "vertical": "job",
+        "pages_scored": 20,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.6527777777777778,
+          "recall": 0.6527777777777778,
+          "f1": 0.6527777777777778
+        },
+        "raw": {
+          "precision": 0.4916666666666667,
+          "recall": 0.4916666666666667,
+          "f1": 0.4916666666666667
+        },
+        "canon": {
+          "precision": 0.6527777777777778,
+          "recall": 0.6527777777777778,
+          "f1": 0.6527777777777778
+        },
+        "fields": {
+          "datePosted": {
+            "norm": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "employmentType": {
+            "norm": {
+              "tp": 18,
+              "fp": 2,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.9,
+              "recall": 0.9,
+              "f1": 0.9
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 18,
+              "fp": 2,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.9,
+              "recall": 0.9,
+              "f1": 0.9
+            }
+          },
+          "hiringOrganization": {
+            "norm": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 19,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.95,
+              "recall": 0.95,
+              "f1": 0.95
+            },
+            "raw": {
+              "tp": 19,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.95,
+              "recall": 0.95,
+              "f1": 0.95
+            },
+            "canon": {
+              "tp": 19,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.95,
+              "recall": 0.95,
+              "f1": 0.95
+            }
+          },
+          "title": {
+            "norm": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "salary": {
+            "norm": {
+              "tp": 1,
+              "fp": 14,
+              "fn": 14,
+              "tn": 0,
+              "precision": 0.06666666666666667,
+              "recall": 0.06666666666666667,
+              "f1": 0.06666666666666667
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 15,
+              "fn": 15,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 1,
+              "fp": 14,
+              "fn": 14,
+              "tn": 0,
+              "precision": 0.06666666666666667,
+              "recall": 0.06666666666666667,
+              "f1": 0.06666666666666667
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "canon": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 25,
+        "n_templates": 8,
+        "tail_pages": 65
+      },
+      "cost": {
+        "pages": 2500,
+        "templates": 8,
+        "calls": 22,
+        "cached_calls": 0,
+        "input_tokens": 224977,
+        "output_tokens": 15767,
+        "input_tokens_per_1k_pages": 89990.8,
+        "output_tokens_per_1k_pages": 6306.8,
+        "calls_per_template": 2.75,
+        "usd_per_1k_pages": 0.24304960000000003,
+        "price_estimated": false,
+        "spend_usd": 0.5069772,
+        "llm_latency_s_mean": 17.382695454545456,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 22,
+            "cached_calls": 0,
+            "input_tokens": 224977,
+            "output_tokens": 15767,
+            "usd_per_1k_pages": 0.24304960000000003
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 289.559
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 2.5947,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 963.51,
+          "pages_per_sec_per_core": 963.51
+        },
+        "fingerprint": {
+          "seconds": 5.3242,
+          "pages": 2500,
+          "workers": 16,
+          "pages_per_sec": 469.55,
+          "pages_per_sec_per_core": 29.35
+        },
+        "cluster": {
+          "seconds": 0.57,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 4385.69,
+          "pages_per_sec_per_core": 4385.69
+        },
+        "analyze": {
+          "seconds": 12.1689,
+          "pages": 2435,
+          "workers": 16,
+          "pages_per_sec": 200.1,
+          "pages_per_sec_per_core": 12.51
+        },
+        "union": {
+          "seconds": 12.4697,
+          "pages": 475,
+          "workers": 8,
+          "pages_per_sec": 38.09,
+          "pages_per_sec_per_core": 4.76
+        },
+        "probe": {
+          "seconds": 0.1386,
+          "pages": 2435,
+          "workers": 1,
+          "pages_per_sec": 17567.85,
+          "pages_per_sec_per_core": 17567.85
+        },
+        "generate": {
+          "seconds": 78.9987,
+          "pages": 2435,
+          "workers": 4,
+          "pages_per_sec": 30.82,
+          "pages_per_sec_per_core": 7.71
+        },
+        "verify": {
+          "seconds": 25.4369,
+          "pages": 2435,
+          "workers": 16,
+          "pages_per_sec": 95.73,
+          "pages_per_sec_per_core": 5.98
+        },
+        "review": {
+          "seconds": 0.3757,
+          "pages": 25,
+          "workers": 1,
+          "pages_per_sec": 66.54,
+          "pages_per_sec_per_core": 66.54
+        },
+        "extract": {
+          "seconds": 2.776,
+          "pages": 2482,
+          "workers": 16,
+          "pages_per_sec": 894.08,
+          "pages_per_sec_per_core": 55.88
+        }
+      },
+      "spend_usd": 0.506977,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "target_type": "JobPosting",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/job-detail/[0-9a-f-]+",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 22873,
+          "distinct_detail_urls": 8964,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 1567.0,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.dice.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 11685,
+            "CC-MAIN-2026-39": 11896
+          },
+          "distinct_urls": 22873,
+          "distinct_pages": 21556,
+          "distinct_detail_pages": 8964,
+          "distinct_other_pages": 12592,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 1999
+      },
+      "run_dir": "data/eval/cc_silver_ditto/20261027T144715Z/dice.com/run"
+    },
+    {
+      "site": "ikea.com",
+      "vertical": "product",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2500,
+      "n_labeled": 2010,
+      "accuracy": {
+        "site": "ikea.com",
+        "vertical": "product",
+        "pages_scored": 1971,
+        "pages_without_prediction": 5,
+        "pages_excluded": 39,
+        "norm": {
+          "precision": 0.30724160765761893,
+          "recall": 0.23751518103702995,
+          "f1": 0.24294598770718687
+        },
+        "raw": {
+          "precision": 0.28470391825520575,
+          "recall": 0.23026722858359805,
+          "f1": 0.236614504796675
+        },
+        "canon": {
+          "precision": 0.30724160765761893,
+          "recall": 0.23751518103702995,
+          "f1": 0.24294598770718687
+        },
+        "fields": {
+          "availability": {
+            "norm": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 1906,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 1906,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 1906,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "brand": {
+            "norm": {
+              "tp": 0,
+              "fp": 28,
+              "fn": 1969,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 28,
+              "fn": 1969,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 28,
+              "fn": 1969,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "image": {
+            "norm": {
+              "tp": 0,
+              "fp": 1960,
+              "fn": 1966,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1960,
+              "fn": 1966,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1960,
+              "fn": 1966,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 75,
+              "fp": 1891,
+              "fn": 1896,
+              "tn": 0,
+              "precision": 0.03814852492370295,
+              "recall": 0.0380517503805175,
+              "f1": 0.0381000762001524
+            },
+            "raw": {
+              "tp": 75,
+              "fp": 1891,
+              "fn": 1896,
+              "tn": 0,
+              "precision": 0.03814852492370295,
+              "recall": 0.0380517503805175,
+              "f1": 0.0381000762001524
+            },
+            "canon": {
+              "tp": 75,
+              "fp": 1891,
+              "fn": 1896,
+              "tn": 0,
+              "precision": 0.03814852492370295,
+              "recall": 0.0380517503805175,
+              "f1": 0.0381000762001524
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 1112,
+              "fp": 854,
+              "fn": 859,
+              "tn": 0,
+              "precision": 0.5656154628687691,
+              "recall": 0.5641806189751395,
+              "f1": 0.5648971297942595
+            },
+            "raw": {
+              "tp": 48,
+              "fp": 1918,
+              "fn": 1923,
+              "tn": 0,
+              "precision": 0.024415055951169887,
+              "recall": 0.0243531202435312,
+              "f1": 0.024384048768097535
+            },
+            "canon": {
+              "tp": 1112,
+              "fp": 854,
+              "fn": 859,
+              "tn": 0,
+              "precision": 0.5656154628687691,
+              "recall": 0.5641806189751395,
+              "f1": 0.5648971297942595
+            }
+          },
+          "priceCurrency": {
+            "norm": {
+              "tp": 122,
+              "fp": 387,
+              "fn": 1849,
+              "tn": 0,
+              "precision": 0.23968565815324164,
+              "recall": 0.06189751395230847,
+              "f1": 0.09838709677419355
+            },
+            "raw": {
+              "tp": 1086,
+              "fp": 596,
+              "fn": 885,
+              "tn": 0,
+              "precision": 0.6456599286563615,
+              "recall": 0.5509893455098934,
+              "f1": 0.5945797974267725
+            },
+            "canon": {
+              "tp": 122,
+              "fp": 387,
+              "fn": 1849,
+              "tn": 0,
+              "precision": 0.23968565815324164,
+              "recall": 0.06189751395230847,
+              "f1": 0.09838709677419355
+            }
+          },
+          "sku": {
+            "norm": {
+              "tp": 1966,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9984763839512443,
+              "f1": 0.9992376111817026
+            },
+            "raw": {
+              "tp": 1966,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9984763839512443,
+              "f1": 0.9992376111817026
+            },
+            "canon": {
+              "tp": 1966,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9984763839512443,
+              "f1": 0.9992376111817026
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "ikea.com",
+        "vertical": "product",
+        "pages_scored": 20,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.2833333333333333,
+          "recall": 0.22142857142857145,
+          "f1": 0.22571428571428573
+        },
+        "raw": {
+          "precision": 0.28425925925925927,
+          "recall": 0.2357142857142857,
+          "f1": 0.2394736842105263
+        },
+        "canon": {
+          "precision": 0.2833333333333333,
+          "recall": 0.22142857142857145,
+          "f1": 0.22571428571428573
+        },
+        "fields": {
+          "availability": {
+            "norm": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 19,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 19,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 19,
+              "tn": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "brand": {
+            "norm": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "image": {
+            "norm": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 2,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.1,
+              "recall": 0.1,
+              "f1": 0.1
+            },
+            "raw": {
+              "tp": 2,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.1,
+              "recall": 0.1,
+              "f1": 0.1
+            },
+            "canon": {
+              "tp": 2,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.1,
+              "recall": 0.1,
+              "f1": 0.1
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 8,
+              "fp": 12,
+              "fn": 12,
+              "tn": 0,
+              "precision": 0.4,
+              "recall": 0.4,
+              "f1": 0.4
+            },
+            "raw": {
+              "tp": 1,
+              "fp": 19,
+              "fn": 19,
+              "tn": 0,
+              "precision": 0.05,
+              "recall": 0.05,
+              "f1": 0.05
+            },
+            "canon": {
+              "tp": 8,
+              "fp": 12,
+              "fn": 12,
+              "tn": 0,
+              "precision": 0.4,
+              "recall": 0.4,
+              "f1": 0.4
+            }
+          },
+          "priceCurrency": {
+            "norm": {
+              "tp": 1,
+              "fp": 4,
+              "fn": 19,
+              "tn": 0,
+              "precision": 0.2,
+              "recall": 0.05,
+              "f1": 0.08
+            },
+            "raw": {
+              "tp": 10,
+              "fp": 8,
+              "fn": 10,
+              "tn": 0,
+              "precision": 0.5555555555555556,
+              "recall": 0.5,
+              "f1": 0.5263157894736842
+            },
+            "canon": {
+              "tp": 1,
+              "fp": 4,
+              "fn": 19,
+              "tn": 0,
+              "precision": 0.2,
+              "recall": 0.05,
+              "f1": 0.08
+            }
+          },
+          "sku": {
+            "norm": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "canon": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 175,
+        "n_templates": 4,
+        "tail_pages": 209
+      },
+      "cost": {
+        "pages": 2500,
+        "templates": 4,
+        "calls": 6,
+        "cached_calls": 0,
+        "input_tokens": 437734,
+        "output_tokens": 3422,
+        "input_tokens_per_1k_pages": 175093.6,
+        "output_tokens_per_1k_pages": 1368.8000000000002,
+        "calls_per_template": 1.5,
+        "usd_per_1k_pages": 0.36387520000000007,
+        "price_estimated": false,
+        "spend_usd": 0.8863293999999999,
+        "llm_latency_s_mean": 14.53335,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 6,
+            "cached_calls": 0,
+            "input_tokens": 437734,
+            "output_tokens": 3422,
+            "usd_per_1k_pages": 0.36387520000000007
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 172.807
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 9.5159,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 262.72,
+          "pages_per_sec_per_core": 262.72
+        },
+        "fingerprint": {
+          "seconds": 8.9466,
+          "pages": 2500,
+          "workers": 16,
+          "pages_per_sec": 279.44,
+          "pages_per_sec_per_core": 17.46
+        },
+        "cluster": {
+          "seconds": 4.565,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 547.65,
+          "pages_per_sec_per_core": 547.65
+        },
+        "analyze": {
+          "seconds": 22.7867,
+          "pages": 2291,
+          "workers": 16,
+          "pages_per_sec": 100.54,
+          "pages_per_sec_per_core": 6.28
+        },
+        "union": {
+          "seconds": 1.4667,
+          "pages": 40,
+          "workers": 1,
+          "pages_per_sec": 27.27,
+          "pages_per_sec_per_core": 27.27
+        },
+        "probe": {
+          "seconds": 1.4572,
+          "pages": 2291,
+          "workers": 1,
+          "pages_per_sec": 1572.22,
+          "pages_per_sec_per_core": 1572.22
+        },
+        "generate": {
+          "seconds": 41.8888,
+          "pages": 2291,
+          "workers": 4,
+          "pages_per_sec": 54.69,
+          "pages_per_sec_per_core": 13.67
+        },
+        "verify": {
+          "seconds": 30.9624,
+          "pages": 2095,
+          "workers": 16,
+          "pages_per_sec": 67.66,
+          "pages_per_sec_per_core": 4.23
+        },
+        "review": {
+          "seconds": 0.3023,
+          "pages": 15,
+          "workers": 1,
+          "pages_per_sec": 49.62,
+          "pages_per_sec_per_core": 49.62
+        },
+        "extract": {
+          "seconds": 6.0317,
+          "pages": 2106,
+          "workers": 16,
+          "pages_per_sec": 349.16,
+          "pages_per_sec_per_core": 21.82
+        }
+      },
+      "spend_usd": 0.886329,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Product",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "/p/[a-z0-9-]+-[s]?\\d+/?$",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 52880,
+          "distinct_detail_urls": 33618,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 830.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.ikea.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 28713,
+            "CC-MAIN-2026-39": 27251
+          },
+          "distinct_urls": 52880,
+          "distinct_pages": 52730,
+          "distinct_detail_pages": 33618,
+          "distinct_other_pages": 19112,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2010
+      },
+      "run_dir": "data/eval/cc_silver_ditto/20261027T144715Z/ikea.com/run"
+    },
+    {
+      "site": "marmiton.org",
+      "vertical": "recipe",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2500,
+      "n_labeled": 2007,
+      "accuracy": {
+        "site": "marmiton.org",
+        "vertical": "recipe",
+        "pages_scored": 1810,
+        "pages_without_prediction": 7,
+        "pages_excluded": 197,
+        "norm": {
+          "precision": 0.642626528578094,
+          "recall": 0.605433195211576,
+          "f1": 0.6228591185896398
+        },
+        "raw": {
+          "precision": 0.619170935215898,
+          "recall": 0.605433195211576,
+          "f1": 0.6121218234510929
+        },
+        "canon": {
+          "precision": 0.642626528578094,
+          "recall": 0.605433195211576,
+          "f1": 0.6228591185896398
+        },
+        "fields": {
+          "author": {
+            "norm": {
+              "tp": 1694,
+              "fp": 0,
+              "fn": 115,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9364289662797125,
+              "f1": 0.9671709962888952
+            },
+            "raw": {
+              "tp": 1694,
+              "fp": 0,
+              "fn": 115,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9364289662797125,
+              "f1": 0.9671709962888952
+            },
+            "canon": {
+              "tp": 1694,
+              "fp": 0,
+              "fn": 115,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9364289662797125,
+              "f1": 0.9671709962888952
+            }
+          },
+          "cookTime": {
+            "norm": {
+              "tp": 1510,
+              "fp": 28,
+              "fn": 299,
+              "tn": 0,
+              "precision": 0.9817945383615084,
+              "recall": 0.8347153123272526,
+              "f1": 0.9023005676725426
+            },
+            "raw": {
+              "tp": 1510,
+              "fp": 283,
+              "fn": 299,
+              "tn": 0,
+              "precision": 0.8421639709983268,
+              "recall": 0.8347153123272526,
+              "f1": 0.8384230982787341
+            },
+            "canon": {
+              "tp": 1510,
+              "fp": 28,
+              "fn": 299,
+              "tn": 0,
+              "precision": 0.9817945383615084,
+              "recall": 0.8347153123272526,
+              "f1": 0.9023005676725426
+            }
+          },
+          "ingredients": {
+            "norm": {
+              "tp": 13454,
+              "fp": 1746,
+              "fn": 1792,
+              "tn": 0,
+              "precision": 0.8851315789473684,
+              "recall": 0.8824609733700642,
+              "f1": 0.8837942586875123
+            },
+            "raw": {
+              "tp": 13454,
+              "fp": 1746,
+              "fn": 1792,
+              "tn": 0,
+              "precision": 0.8851315789473684,
+              "recall": 0.8824609733700642,
+              "f1": 0.8837942586875123
+            },
+            "canon": {
+              "tp": 13454,
+              "fp": 1746,
+              "fn": 1792,
+              "tn": 0,
+              "precision": 0.8851315789473684,
+              "recall": 0.8824609733700642,
+              "f1": 0.8837942586875123
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 0,
+              "fp": 1803,
+              "fn": 1810,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1803,
+              "fn": 1810,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1803,
+              "fn": 1810,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "prepTime": {
+            "norm": {
+              "tp": 1771,
+              "fp": 20,
+              "fn": 38,
+              "tn": 0,
+              "precision": 0.9888330541596874,
+              "recall": 0.9789939192924267,
+              "f1": 0.9838888888888889
+            },
+            "raw": {
+              "tp": 1771,
+              "fp": 22,
+              "fn": 38,
+              "tn": 0,
+              "precision": 0.9877300613496932,
+              "recall": 0.9789939192924267,
+              "f1": 0.9833425874514159
+            },
+            "canon": {
+              "tp": 1771,
+              "fp": 20,
+              "fn": 38,
+              "tn": 0,
+              "precision": 0.9888330541596874,
+              "recall": 0.9789939192924267,
+              "f1": 0.9838888888888889
+            }
+          },
+          "recipeYield": {
+            "norm": {
+              "tp": 0,
+              "fp": 1796,
+              "fn": 1809,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1796,
+              "fn": 1809,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1796,
+              "fn": 1809,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "marmiton.org",
+        "vertical": "recipe",
+        "pages_scored": 18,
+        "pages_without_prediction": 0,
+        "pages_excluded": 2,
+        "norm": {
+          "precision": 0.6519274376417233,
+          "recall": 0.6241496598639455,
+          "f1": 0.6373616113111912
+        },
+        "raw": {
+          "precision": 0.6334089191232048,
+          "recall": 0.6241496598639455,
+          "f1": 0.6286470143613001
+        },
+        "canon": {
+          "precision": 0.6519274376417233,
+          "recall": 0.6241496598639455,
+          "f1": 0.6373616113111912
+        },
+        "fields": {
+          "author": {
+            "norm": {
+              "tp": 17,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9444444444444444,
+              "f1": 0.9714285714285714
+            },
+            "raw": {
+              "tp": 17,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9444444444444444,
+              "f1": 0.9714285714285714
+            },
+            "canon": {
+              "tp": 17,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9444444444444444,
+              "f1": 0.9714285714285714
+            }
+          },
+          "cookTime": {
+            "norm": {
+              "tp": 16,
+              "fp": 0,
+              "fn": 2,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.8888888888888888,
+              "f1": 0.9411764705882353
+            },
+            "raw": {
+              "tp": 16,
+              "fp": 2,
+              "fn": 2,
+              "tn": 0,
+              "precision": 0.8888888888888888,
+              "recall": 0.8888888888888888,
+              "f1": 0.8888888888888888
+            },
+            "canon": {
+              "tp": 16,
+              "fp": 0,
+              "fn": 2,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.8888888888888888,
+              "f1": 0.9411764705882353
+            }
+          },
+          "ingredients": {
+            "norm": {
+              "tp": 134,
+              "fp": 13,
+              "fn": 13,
+              "tn": 0,
+              "precision": 0.9115646258503401,
+              "recall": 0.9115646258503401,
+              "f1": 0.9115646258503401
+            },
+            "raw": {
+              "tp": 134,
+              "fp": 13,
+              "fn": 13,
+              "tn": 0,
+              "precision": 0.9115646258503401,
+              "recall": 0.9115646258503401,
+              "f1": 0.9115646258503401
+            },
+            "canon": {
+              "tp": 134,
+              "fp": 13,
+              "fn": 13,
+              "tn": 0,
+              "precision": 0.9115646258503401,
+              "recall": 0.9115646258503401,
+              "f1": 0.9115646258503401
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 0,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "prepTime": {
+            "norm": {
+              "tp": 18,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 18,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 18,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "recipeYield": {
+            "norm": {
+              "tp": 0,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 18,
+              "fn": 18,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "canon": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 20,
+        "n_templates": 5,
+        "tail_pages": 82
+      },
+      "cost": {
+        "pages": 2500,
+        "templates": 5,
+        "calls": 2,
+        "cached_calls": 0,
+        "input_tokens": 258546,
+        "output_tokens": 2448,
+        "input_tokens_per_1k_pages": 103418.40000000001,
+        "output_tokens_per_1k_pages": 979.2,
+        "calls_per_template": 0.4,
+        "usd_per_1k_pages": 0.21662880000000004,
+        "price_estimated": false,
+        "spend_usd": 0.5337858,
+        "llm_latency_s_mean": 31.7072,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 2,
+            "cached_calls": 0,
+            "input_tokens": 258546,
+            "output_tokens": 2448,
+            "usd_per_1k_pages": 0.21662880000000004
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 144.788
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 2.7235,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 917.94,
+          "pages_per_sec_per_core": 917.94
+        },
+        "fingerprint": {
+          "seconds": 5.2221,
+          "pages": 2500,
+          "workers": 16,
+          "pages_per_sec": 478.73,
+          "pages_per_sec_per_core": 29.92
+        },
+        "cluster": {
+          "seconds": 1.1151,
+          "pages": 2500,
+          "workers": 1,
+          "pages_per_sec": 2241.99,
+          "pages_per_sec_per_core": 2241.99
+        },
+        "analyze": {
+          "seconds": 18.1765,
+          "pages": 2418,
+          "workers": 16,
+          "pages_per_sec": 133.03,
+          "pages_per_sec_per_core": 8.31
+        },
+        "union": {
+          "seconds": 67.1827,
+          "pages": 464,
+          "workers": 5,
+          "pages_per_sec": 6.91,
+          "pages_per_sec_per_core": 1.38
+        },
+        "probe": {
+          "seconds": 0.2568,
+          "pages": 2418,
+          "workers": 1,
+          "pages_per_sec": 9414.7,
+          "pages_per_sec_per_core": 9414.7
+        },
+        "generate": {
+          "seconds": 36.0631,
+          "pages": 2418,
+          "workers": 4,
+          "pages_per_sec": 67.05,
+          "pages_per_sec_per_core": 16.76
+        },
+        "verify": {
+          "seconds": 9.0788,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 220.29,
+          "pages_per_sec_per_core": 13.77
+        },
+        "review": {
+          "seconds": 0.0661,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 75.65,
+          "pages_per_sec_per_core": 75.65
+        },
+        "extract": {
+          "seconds": 3.1928,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 626.41,
+          "pages_per_sec_per_core": 39.15
+        }
+      },
+      "spend_usd": 0.533786,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Recipe",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/recettes/recette_[^/]+\\.aspx$",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 25846,
+          "distinct_detail_urls": 13917,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 1018.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.marmiton.org/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 13305,
+            "CC-MAIN-2026-39": 12923
+          },
+          "distinct_urls": 25846,
+          "distinct_pages": 25846,
+          "distinct_detail_pages": 13917,
+          "distinct_other_pages": 11929,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2007
+      },
+      "run_dir": "data/eval/cc_silver_ditto/20261027T144715Z/marmiton.org/run"
+    }
+  ]
+}

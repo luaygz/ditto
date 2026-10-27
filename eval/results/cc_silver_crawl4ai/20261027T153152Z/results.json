@@ -1,0 +1,1216 @@
+{
+  "name": "cc_silver_crawl4ai",
+  "dataset": "cc_silver",
+  "split": "all",
+  "method": {
+    "kind": "baseline",
+    "mode": "prompted",
+    "baseline": "crawl4ai_schema",
+    "params": {
+      "until": "extract",
+      "min_cluster_size": 20,
+      "union_min_tokens": 8000,
+      "union_max_tokens": 30000,
+      "max_repair_calls": 3,
+      "tail": "skip",
+      "concurrency": 4
+    }
+  },
+  "method_label": "crawl4ai_schema",
+  "status": "ok",
+  "reason": null,
+  "summary": {
+    "n_sites": 8,
+    "n_ok": 2,
+    "status_counts": {
+      "ok": 2,
+      "skipped": 6
+    },
+    "accuracy": {
+      "per_vertical": {
+        "event": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.314681936497702,
+            "recall": 0.285829804326445,
+            "f1": 0.292441672589575
+          },
+          "fields_norm_f1": {
+            "address": 0.002360578341693715,
+            "endDate": 0.0,
+            "location": 0.9777468706536857,
+            "name": 0.9778690394706822,
+            "organizer": 0.04168438962143769,
+            "performer": 0.04743083003952569,
+            "startDate": 0.0
+          },
+          "raw": {
+            "precision": 0.31241585306657005,
+            "recall": 0.28507914830483766,
+            "f1": 0.2913516358162952
+          },
+          "fields_raw_f1": {
+            "address": 0.002360578341693715,
+            "endDate": 0.0,
+            "location": 0.9777468706536857,
+            "name": 0.9778690394706822,
+            "organizer": 0.03998298596341982,
+            "performer": 0.041501976284584984,
+            "startDate": 0.0
+          },
+          "canon": {
+            "precision": 0.3151442573483724,
+            "recall": 0.2860330150559715,
+            "f1": 0.29272399895885787
+          },
+          "fields_canon_f1": {
+            "address": 0.002360578341693715,
+            "endDate": 0.0,
+            "location": 0.9777468706536857,
+            "name": 0.9778690394706822,
+            "organizer": 0.04168438962143769,
+            "performer": 0.04940711462450593,
+            "startDate": 0.0
+          }
+        },
+        "job": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.6678985956442216,
+            "recall": 0.5458973204072295,
+            "f1": 0.5690107093936682
+          },
+          "fields_norm_f1": {
+            "datePosted": 0.0,
+            "employmentType": 0.13101604278074866,
+            "hiringOrganization": 1.0,
+            "location": 0.9538228614685844,
+            "salary": 0.32922535211267606,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.507623337646787,
+            "recall": 0.49769968256691827,
+            "f1": 0.5007464641979383
+          },
+          "fields_raw_f1": {
+            "datePosted": 0.0,
+            "employmentType": 0.00267379679144385,
+            "hiringOrganization": 1.0,
+            "location": 0.9366641433257633,
+            "salary": 0.06514084507042253,
+            "title": 1.0
+          },
+          "canon": {
+            "precision": 0.6679828132625474,
+            "recall": 0.5459813257835736,
+            "f1": 0.5690948207571134
+          },
+          "fields_canon_f1": {
+            "datePosted": 0.0,
+            "employmentType": 0.13101604278074866,
+            "hiringOrganization": 1.0,
+            "location": 0.9543275296492556,
+            "salary": 0.32922535211267606,
+            "title": 1.0
+          }
+        }
+      },
+      "overall": {
+        "n_sites": 2,
+        "n_verticals": 2,
+        "norm": {
+          "precision": 0.4912902660709618,
+          "recall": 0.41586356236683725,
+          "f1": 0.43072619099162157
+        },
+        "raw": {
+          "precision": 0.41001959535667853,
+          "recall": 0.39138941543587796,
+          "f1": 0.39604905000711677
+        },
+        "canon": {
+          "precision": 0.49156353530545993,
+          "recall": 0.41600717041977253,
+          "f1": 0.43090940985798565
+        }
+      }
+    },
+    "accuracy_sample": null,
+    "optional_field_recall": null,
+    "groups": {},
+    "clustering": {
+      "n_clusters": 20.5,
+      "n_templates": 11.5,
+      "tail_pages": 43.0,
+      "n_sites": 2
+    },
+    "cost": {
+      "pages": 4177,
+      "templates": 16,
+      "calls": 53,
+      "input_tokens": 907345,
+      "output_tokens": 25800,
+      "input_tokens_per_1k_pages": 217224.0842710079,
+      "output_tokens_per_1k_pages": 6176.681829063921,
+      "calls_per_template": 3.3125,
+      "usd_per_1k_pages": 0.496214986832655,
+      "price_estimated": false,
+      "extrapolated": true,
+      "spend_usd": 2.0726899999999997,
+      "llm_latency_s_mean": null
+    },
+    "cost_per_vertical": {
+      "event": {
+        "pages": 2193,
+        "templates": 8,
+        "calls": 27,
+        "input_tokens": 517309,
+        "output_tokens": 13598,
+        "input_tokens_per_1k_pages": 235891.01687186502,
+        "output_tokens_per_1k_pages": 6200.638394892841,
+        "calls_per_template": 3.375,
+        "usd_per_1k_pages": 0.5337884176926585,
+        "price_estimated": false,
+        "extrapolated": true,
+        "spend_usd": 1.1705979999999998,
+        "llm_latency_s_mean": null
+      },
+      "job": {
+        "pages": 1984,
+        "templates": 8,
+        "calls": 26,
+        "input_tokens": 390036,
+        "output_tokens": 12202,
+        "input_tokens_per_1k_pages": 196590.7258064516,
+        "output_tokens_per_1k_pages": 6150.201612903225,
+        "calls_per_template": 3.25,
+        "usd_per_1k_pages": 0.45468346774193547,
+        "price_estimated": false,
+        "extrapolated": true,
+        "spend_usd": 0.9020920000000001,
+        "llm_latency_s_mean": null
+      }
+    },
+    "speed_pages_per_sec_per_core": {
+      "baseline": null
+    },
+    "curves": {},
+    "unprompted_recall": null,
+    "unprompted_recall_per_vertical": null,
+    "union": null
+  },
+  "sites": [
+    {
+      "site": "skiddle.com",
+      "vertical": "event",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2500,
+      "n_labeled": 2193,
+      "accuracy": {
+        "site": "skiddle.com",
+        "vertical": "event",
+        "pages_scored": 2193,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.314681936497702,
+          "recall": 0.285829804326445,
+          "f1": 0.292441672589575
+        },
+        "raw": {
+          "precision": 0.31241585306657005,
+          "recall": 0.28507914830483766,
+          "f1": 0.2913516358162952
+        },
+        "canon": {
+          "precision": 0.3151442573483724,
+          "recall": 0.2860330150559715,
+          "f1": 0.29272399895885787
+        },
+        "fields": {
+          "address": {
+            "norm": {
+              "tp": 4,
+              "fp": 1199,
+              "fn": 2182,
+              "tn": 0,
+              "precision": 0.0033250207813798837,
+              "recall": 0.0018298261665141812,
+              "f1": 0.002360578341693715
+            },
+            "raw": {
+              "tp": 4,
+              "fp": 1199,
+              "fn": 2182,
+              "tn": 0,
+              "precision": 0.0033250207813798837,
+              "recall": 0.0018298261665141812,
+              "f1": 0.002360578341693715
+            },
+            "canon": {
+              "tp": 4,
+              "fp": 1199,
+              "fn": 2182,
+              "tn": 0,
+              "precision": 0.0033250207813798837,
+              "recall": 0.0018298261665141812,
+              "f1": 0.002360578341693715
+            }
+          },
+          "endDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 2096,
+              "fn": 2187,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2096,
+              "fn": 2187,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 2096,
+              "fn": 2187,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 2109,
+              "fp": 16,
+              "fn": 80,
+              "tn": 0,
+              "precision": 0.9924705882352941,
+              "recall": 0.9634536317953404,
+              "f1": 0.9777468706536857
+            },
+            "raw": {
+              "tp": 2109,
+              "fp": 16,
+              "fn": 80,
+              "tn": 0,
+              "precision": 0.9924705882352941,
+              "recall": 0.9634536317953404,
+              "f1": 0.9777468706536857
+            },
+            "canon": {
+              "tp": 2109,
+              "fp": 16,
+              "fn": 80,
+              "tn": 0,
+              "precision": 0.9924705882352941,
+              "recall": 0.9634536317953404,
+              "f1": 0.9777468706536857
+            }
+          },
+          "name": {
+            "norm": {
+              "tp": 2143,
+              "fp": 47,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.9785388127853881,
+              "recall": 0.9772001823985408,
+              "f1": 0.9778690394706822
+            },
+            "raw": {
+              "tp": 2143,
+              "fp": 47,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.9785388127853881,
+              "recall": 0.9772001823985408,
+              "f1": 0.9778690394706822
+            },
+            "canon": {
+              "tp": 2143,
+              "fp": 47,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.9785388127853881,
+              "recall": 0.9772001823985408,
+              "f1": 0.9778690394706822
+            }
+          },
+          "startDate": {
+            "norm": {
+              "tp": 0,
+              "fp": 2095,
+              "fn": 2192,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2095,
+              "fn": 2192,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 2095,
+              "fn": 2192,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "organizer": {
+            "norm": {
+              "tp": 49,
+              "fp": 276,
+              "fn": 1977,
+              "tn": 0,
+              "precision": 0.15076923076923077,
+              "recall": 0.02418558736426456,
+              "f1": 0.04168438962143769
+            },
+            "raw": {
+              "tp": 47,
+              "fp": 278,
+              "fn": 1979,
+              "tn": 0,
+              "precision": 0.14461538461538462,
+              "recall": 0.02319842053307009,
+              "f1": 0.03998298596341982
+            },
+            "canon": {
+              "tp": 49,
+              "fp": 276,
+              "fn": 1977,
+              "tn": 0,
+              "precision": 0.15076923076923077,
+              "recall": 0.02418558736426456,
+              "f1": 0.04168438962143769
+            }
+          },
+          "performer": {
+            "norm": {
+              "tp": 24,
+              "fp": 285,
+              "fn": 679,
+              "tn": 0,
+              "precision": 0.07766990291262135,
+              "recall": 0.034139402560455195,
+              "f1": 0.04743083003952569
+            },
+            "raw": {
+              "tp": 21,
+              "fp": 288,
+              "fn": 682,
+              "tn": 0,
+              "precision": 0.06796116504854369,
+              "recall": 0.029871977240398292,
+              "f1": 0.041501976284584984
+            },
+            "canon": {
+              "tp": 25,
+              "fp": 284,
+              "fn": 678,
+              "tn": 0,
+              "precision": 0.08090614886731391,
+              "recall": 0.03556187766714083,
+              "f1": 0.04940711462450593
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 18,
+        "n_templates": 7,
+        "tail_pages": 77
+      },
+      "cost": {
+        "pages": 2193,
+        "templates": 8,
+        "calls": 27,
+        "input_tokens": 517309,
+        "output_tokens": 13598,
+        "input_tokens_per_1k_pages": 235891.01687186502,
+        "output_tokens_per_1k_pages": 6200.638394892841,
+        "calls_per_template": 3.375,
+        "calls_per_page": 0.012311901504787962,
+        "usd_per_1k_pages": 0.5337884176926585,
+        "price_estimated": false,
+        "spend_usd": 1.1705979999999998,
+        "extrapolated": true,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 428.024
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 400.2734,
+          "pages": 2193,
+          "pages_per_sec": 5.4788
+        }
+      },
+      "spend_usd": 1.170598,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "cost per 1,000 pages extrapolated from 2193 of 2500 pages",
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (8 templates), schema applied to 2193 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $1.1706 (0/27 calls from the schema cache)",
+        "extraction: 2193 pages in 31.78s"
+      ],
+      "site_meta": {
+        "target_type": "Event",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/whats-on/[^/]+/[^/]+/[^/]+/\\d+/?$",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 24475,
+          "distinct_detail_urls": 8318,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 823.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.skiddle.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 12698,
+            "CC-MAIN-2026-39": 13935
+          },
+          "distinct_urls": 24475,
+          "distinct_pages": 24474,
+          "distinct_detail_pages": 8318,
+          "distinct_other_pages": 16156,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2193
+      },
+      "run_dir": "data/eval/cc_silver_crawl4ai/20261027T153152Z/skiddle.com/run"
+    },
+    {
+      "site": "careerbuilder.com",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2500,
+      "n_labeled": 1984,
+      "accuracy": {
+        "site": "careerbuilder.com",
+        "vertical": "job",
+        "pages_scored": 1984,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.6678985956442216,
+          "recall": 0.5458973204072295,
+          "f1": 0.5690107093936682
+        },
+        "raw": {
+          "precision": 0.507623337646787,
+          "recall": 0.49769968256691827,
+          "f1": 0.5007464641979383
+        },
+        "canon": {
+          "precision": 0.6679828132625474,
+          "recall": 0.5459813257835736,
+          "f1": 0.5690948207571134
+        },
+        "fields": {
+          "datePosted": {
+            "norm": {
+              "tp": 0,
+              "fp": 1984,
+              "fn": 1984,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1984,
+              "fn": 1984,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "canon": {
+              "tp": 0,
+              "fp": 1984,
+              "fn": 1984,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "employmentType": {
+            "norm": {
+              "tp": 147,
+              "fp": 113,
+              "fn": 1837,
+              "tn": 0,
+              "precision": 0.5653846153846154,
+              "recall": 0.07409274193548387,
+              "f1": 0.13101604278074866
+            },
+            "raw": {
+              "tp": 3,
+              "fp": 257,
+              "fn": 1981,
+              "tn": 0,
+              "precision": 0.011538461538461539,
+              "recall": 0.0015120967741935483,
+              "f1": 0.00267379679144385
+            },
+            "canon": {
+              "tp": 147,
+              "fp": 113,
+              "fn": 1837,
+              "tn": 0,
+              "precision": 0.5653846153846154,
+              "recall": 0.07409274193548387,
+              "f1": 0.13101604278074866
+            }
+          },
+          "hiringOrganization": {
+            "norm": {
+              "tp": 1984,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1984,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 1984,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 1890,
+              "fp": 89,
+              "fn": 94,
+              "tn": 0,
+              "precision": 0.9550277918140475,
+              "recall": 0.9526209677419355,
+              "f1": 0.9538228614685844
+            },
+            "raw": {
+              "tp": 1856,
+              "fp": 123,
+              "fn": 128,
+              "tn": 0,
+              "precision": 0.9378473976755938,
+              "recall": 0.9354838709677419,
+              "f1": 0.9366641433257633
+            },
+            "canon": {
+              "tp": 1891,
+              "fp": 88,
+              "fn": 93,
+              "tn": 0,
+              "precision": 0.9555330975240021,
+              "recall": 0.953125,
+              "f1": 0.9543275296492556
+            }
+          },
+          "title": {
+            "norm": {
+              "tp": 1984,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1984,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "canon": {
+              "tp": 1984,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "salary": {
+            "norm": {
+              "tp": 187,
+              "fp": 197,
+              "fn": 565,
+              "tn": 0,
+              "precision": 0.4869791666666667,
+              "recall": 0.24867021276595744,
+              "f1": 0.32922535211267606
+            },
+            "raw": {
+              "tp": 37,
+              "fp": 347,
+              "fn": 715,
+              "tn": 0,
+              "precision": 0.09635416666666667,
+              "recall": 0.04920212765957447,
+              "f1": 0.06514084507042253
+            },
+            "canon": {
+              "tp": 187,
+              "fp": 197,
+              "fn": 565,
+              "tn": 0,
+              "precision": 0.4869791666666667,
+              "recall": 0.24867021276595744,
+              "f1": 0.32922535211267606
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 23,
+        "n_templates": 16,
+        "tail_pages": 9
+      },
+      "cost": {
+        "pages": 1984,
+        "templates": 8,
+        "calls": 26,
+        "input_tokens": 390036,
+        "output_tokens": 12202,
+        "input_tokens_per_1k_pages": 196590.7258064516,
+        "output_tokens_per_1k_pages": 6150.201612903225,
+        "calls_per_template": 3.25,
+        "calls_per_page": 0.01310483870967742,
+        "usd_per_1k_pages": 0.45468346774193547,
+        "price_estimated": false,
+        "spend_usd": 0.9020920000000001,
+        "extrapolated": true,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 291.255
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 270.015,
+          "pages": 1984,
+          "pages_per_sec": 7.3477
+        }
+      },
+      "spend_usd": 0.902092,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "cost per 1,000 pages extrapolated from 1984 of 2500 pages",
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (8 templates), schema applied to 1984 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.9021 (0/26 calls from the schema cache)",
+        "extraction: 1984 pages in 7.31s"
+      ],
+      "site_meta": {
+        "target_type": "JobPosting",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/job-details/[^/?]+",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 32051,
+          "distinct_detail_urls": 12332,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 798.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.careerbuilder.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 15682,
+            "CC-MAIN-2026-39": 16562
+          },
+          "distinct_urls": 32051,
+          "distinct_pages": 32050,
+          "distinct_detail_pages": 12332,
+          "distinct_other_pages": 19718,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 1984
+      },
+      "run_dir": "data/eval/cc_silver_crawl4ai/20261027T153152Z/careerbuilder.com/run"
+    },
+    {
+      "site": "argos.co.uk",
+      "vertical": "product",
+      "status": "skipped",
+      "reason": "evaluation budget of $1.50 reached",
+      "n_pages": 0,
+      "n_labeled": 6924,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Product",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/product/(?:tuc)?\\d+",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 33133,
+          "distinct_detail_urls": 20342,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 3940.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.argos.co.uk/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 17747,
+            "CC-MAIN-2026-39": 15620
+          },
+          "distinct_urls": 33133,
+          "distinct_pages": 33133,
+          "distinct_detail_pages": 20342,
+          "distinct_other_pages": 12791,
+          "cap": 2500,
+          "planned": 7201,
+          "planned_detail": 6701,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 6701,
+          "downloaded": 7201,
+          "downloaded_detail": 6701,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 6924
+      },
+      "run_dir": null
+    },
+    {
+      "site": "food.ndtv.com",
+      "vertical": "recipe",
+      "status": "skipped",
+      "reason": "evaluation budget of $1.50 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Recipe",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/recipe-[a-z0-9-]+-\\d+/?$",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 46377,
+          "distinct_detail_urls": 4085,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 706.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://food.ndtv.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 24262,
+            "CC-MAIN-2026-39": 23695
+          },
+          "distinct_urls": 46377,
+          "distinct_pages": 46349,
+          "distinct_detail_pages": 4085,
+          "distinct_other_pages": 42264,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2000
+      },
+      "run_dir": null
+    },
+    {
+      "site": "ticketweb.com",
+      "vertical": "event",
+      "status": "skipped",
+      "reason": "evaluation budget of $1.50 reached",
+      "n_pages": 0,
+      "n_labeled": 2008,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Event",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "/event/[^/]+/\\d+",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 28272,
+          "distinct_detail_urls": 22280,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 413.0,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.ticketweb.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 14195,
+            "CC-MAIN-2026-39": 14585
+          },
+          "distinct_urls": 28272,
+          "distinct_pages": 28139,
+          "distinct_detail_pages": 22233,
+          "distinct_other_pages": 5906,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2008
+      },
+      "run_dir": null
+    },
+    {
+      "site": "dice.com",
+      "vertical": "job",
+      "status": "skipped",
+      "reason": "evaluation budget of $1.50 reached",
+      "n_pages": 0,
+      "n_labeled": 1999,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "target_type": "JobPosting",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/job-detail/[0-9a-f-]+",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 22873,
+          "distinct_detail_urls": 8964,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 1567.0,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.dice.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 11685,
+            "CC-MAIN-2026-39": 11896
+          },
+          "distinct_urls": 22873,
+          "distinct_pages": 21556,
+          "distinct_detail_pages": 8964,
+          "distinct_other_pages": 12592,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 1999
+      },
+      "run_dir": null
+    },
+    {
+      "site": "ikea.com",
+      "vertical": "product",
+      "status": "skipped",
+      "reason": "evaluation budget of $1.50 reached",
+      "n_pages": 0,
+      "n_labeled": 2010,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Product",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "/p/[a-z0-9-]+-[s]?\\d+/?$",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 52880,
+          "distinct_detail_urls": 33618,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 830.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.ikea.com/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 28713,
+            "CC-MAIN-2026-39": 27251
+          },
+          "distinct_urls": 52880,
+          "distinct_pages": 52730,
+          "distinct_detail_pages": 33618,
+          "distinct_other_pages": 19112,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2010
+      },
+      "run_dir": null
+    },
+    {
+      "site": "marmiton.org",
+      "vertical": "recipe",
+      "status": "skipped",
+      "reason": "evaluation budget of $1.50 reached",
+      "n_pages": 0,
+      "n_labeled": 2007,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "target_type": "Recipe",
+        "crawls": [
+          "CC-MAIN-2026-43",
+          "CC-MAIN-2026-39"
+        ],
+        "detail_pattern": "^/recettes/recette_[^/]+\\.aspx$",
+        "selection_date": "2026-10-24",
+        "evidence": {
+          "distinct_html_urls": 25846,
+          "distinct_detail_urls": 13917,
+          "sampled_detail_pages": 50,
+          "jsonld_rate": 1.0,
+          "median_visible_words": 1018.5,
+          "robots_txt": {
+            "found": true,
+            "url": "https://www.marmiton.org/robots.txt",
+            "crawl": "CC-MAIN-2026-43",
+            "detail_urls_allowed": {
+              "CCBot": 1.0,
+              "ditto-benchmark": 1.0
+            }
+          },
+          "login_walled_pages": 0
+        },
+        "captures": {
+          "index_html_captures": {
+            "CC-MAIN-2026-43": 13305,
+            "CC-MAIN-2026-39": 12923
+          },
+          "distinct_urls": 25846,
+          "distinct_pages": 25846,
+          "distinct_detail_pages": 13917,
+          "distinct_other_pages": 11929,
+          "cap": 2500,
+          "planned": 2500,
+          "planned_detail": 2000,
+          "planned_other": 500,
+          "kept_from_earlier_runs": 0,
+          "downloaded": 2500,
+          "downloaded_detail": 2000,
+          "downloaded_other": 500
+        },
+        "labeled_pages": 2007
+      },
+      "run_dir": null
+    }
+  ]
+}
