@@ -1,0 +1,17 @@
+site,vertical,status,pages,pages_scored,f1_norm,precision_norm,recall_norm,f1_raw,precision_raw,recall_raw,optional_recall_norm,ari,purity,over_merge,under_merge,n_templates,n_true_templates,input_tokens_per_1k_pages,output_tokens_per_1k_pages,calls_per_template,usd_per_1k_pages,spend_usd,pps_core_baseline,reason
+auto-aol,auto,ok,2000,50,0.75,0.75,1.0,0.75,0.75,1.0,,,,,,1,,11460040.0,72640.0,50.0,23.64648,0.0,,
+book-abebooks,book,ok,2000,50,0.997753,0.995556,1.0,0.997753,0.995556,1.0,,,,,,1,,12403960.0,58180.0,50.0,25.38972,0.0,,
+camera-amazon,camera,ok,1767,50,0.913333,0.913333,0.913333,0.913333,0.913333,0.913333,,,,,,3,,10936040.0,52160.0,25.0,22.39368,0.0,,
+job-careerbuilder,job,ok,2000,50,0.745,0.745,0.993333,0.745,0.745,0.993333,,,,,,5,,7039940.0,34960.0,10.0,14.42948,0.0,,
+movie-allmovie,movie,ok,2000,50,0.78,0.78,0.78,0.78,0.78,0.78,,,,,,1,,7094500.0,46920.0,50.0,14.6582,0.0,,
+nbaplayer-espn,nbaplayer,ok,434,50,0.75,0.75,0.75,0.75,0.75,0.75,,,,,,1,,8758440.0,28120.0,50.0,17.79808,0.0,,
+restaurant-fodors,restaurant,ok,2000,50,0.71,0.71,0.71,0.71,0.71,0.71,,,,,,1,,7536560.0,44460.0,50.0,15.51772,0.0,,
+university-collegeboard,university,ok,2000,50,1.0,1.0,1.0,1.0,1.0,1.0,,,,,,1,,4519300.0,35200.0,50.0,9.3906,0.452724,,
+auto-autobytel,auto,ok,2000,50,1.0,1.0,1.0,1.0,1.0,1.0,,,,,,1,,8140640.0,46100.0,50.0,16.74228,0.837114,,
+book-amazon,book,ok,2000,50,0.6,0.6,0.6,0.6,0.6,0.6,,,,,,1,,33485440.0,63240.0,10.0,67.60328,3.380164,,
+camera-beachaudio,camera,failed,247,,,,,,,,,,,,,1,,,,,,,,TypeError: BaselineOutput.__init__() got an unexpected keyword argument 'prompt_version'
+job-dice,job,failed,2000,,,,,,,,,,,,,1,,,,,,,,TypeError: BaselineOutput.__init__() got an unexpected keyword argument 'prompt_version'
+movie-amctv,movie,failed,2000,,,,,,,,,,,,,1,,,,,,,,"ValueError: All strings must be XML compatible: Unicode or ASCII, no NULL bytes or control characters"
+nbaplayer-fanhouse,nbaplayer,failed,446,,,,,,,,,,,,,1,,,,,,,,TypeError: BaselineOutput.__init__() got an unexpected keyword argument 'prompt_version'
+restaurant-frommers,restaurant,failed,2000,,,,,,,,,,,,,1,,,,,,,,TypeError: BaselineOutput.__init__() got an unexpected keyword argument 'prompt_version'
+university-collegenavigator,university,failed,2000,,,,,,,,,,,,,2,,,,,,,,TypeError: BaselineOutput.__init__() got an unexpected keyword argument 'prompt_version'
