@@ -4,7 +4,7 @@ description: >-
 dataset: swde
 selection:
   split: test
-  sites: [auto-automotive, auto-autoweb, auto-carquotes, auto-cars, auto-kbb, book-barnesandnoble, book-bookdepository, book-booksamillion, book-borders, book-buy, camera-buy, camera-compsource, camera-ecost, camera-jr, camera-newegg, _dataset, job-hotjobs, job-job, job-jobcircle, job-jobtarget, job-monster, movie-boxofficemojo, movie-hollywood, movie-iheartmovies, movie-imdb, nbaplayer-foxsports, nbaplayer-msnca, nbaplayer-nba, nbaplayer-si, restaurant-gayot, restaurant-opentable, restaurant-pickarestaurant, restaurant-restaurantica, university-collegeprowler, university-collegetoolkit, university-ecampustours, university-embark]   # the sites finished within budget (Crawl4AI cost ~$0.3-1 per site)
+  sites: [auto-automotive, auto-autoweb, auto-carquotes, auto-cars, auto-kbb, book-barnesandnoble, book-bookdepository, book-booksamillion, book-borders, book-buy, camera-buy, camera-compsource, camera-ecost, camera-jr, camera-newegg, job-hotjobs, job-job, job-jobcircle, job-jobtarget, job-monster, movie-boxofficemojo, movie-hollywood, movie-iheartmovies, movie-imdb, nbaplayer-foxsports, nbaplayer-msnca, nbaplayer-nba, nbaplayer-si, restaurant-gayot, restaurant-opentable, restaurant-pickarestaurant, restaurant-restaurantica, university-collegeprowler, university-collegetoolkit, university-ecampustours, university-embark]   # the sites finished within budget (Crawl4AI cost ~$0.3-1 per site)
 method:
   kind: baseline
   baseline: crawl4ai_schema
