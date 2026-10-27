@@ -1,0 +1,65 @@
+site,vertical,status,pages,pages_scored,f1_norm,precision_norm,recall_norm,f1_raw,precision_raw,recall_raw,optional_recall_norm,ari,purity,over_merge,under_merge,n_templates,n_true_templates,input_tokens_per_1k_pages,output_tokens_per_1k_pages,calls_per_template,usd_per_1k_pages,spend_usd,pps_core_baseline,reason
+auto-automotive,auto,ok,1999,1999,0.75,0.75,0.75,0.75,0.75,0.75,,,,,,1,,19517.758879,378.189095,2.0,0.042817,0.085592,,
+book-barnesandnoble,book,ok,2000,2000,0.479576,0.5249,0.451,0.479576,0.5249,0.451,,,,,,2,,81117.5,2068.5,3.333333,0.18292,0.36584,,
+camera-buy,camera,ok,500,500,0.974,0.974,0.974,0.974,0.974,0.974,,,,,,1,,361318.0,1764.0,1.0,0.740276,0.370138,,
+job-hotjobs,job,ok,2000,2000,0.193246,0.341137,0.156125,0.193246,0.341137,0.156125,,,,,,1,,536494.0,19938.0,1.114286,1.272368,2.544736,,
+movie-boxofficemojo,movie,ok,2000,2000,0.946239,0.975125,0.9215,0.946239,0.975125,0.9215,,,,,,1,,5479.0,268.5,1.0,0.013643,0.027286,,
+nbaplayer-foxsports,nbaplayer,ok,425,425,0.75,0.75,0.75,0.25,0.25,0.25,,,,,,1,,69150.588235,731.764706,1.0,0.145619,0.061888,,
+restaurant-gayot,restaurant,ok,2000,2000,0.744625,0.744625,0.744625,0.744625,0.744625,0.744625,,,,,,1,,13294.0,577.5,1.5,0.032363,0.064726,,
+university-collegeprowler,university,ok,2000,2000,1.0,1.0,1.0,1.0,1.0,1.0,,,,,,1,,5149.5,82.0,1.0,0.011119,0.022238,,
+auto-autoweb,auto,ok,2000,2000,1.0,1.0,1.0,1.0,1.0,1.0,,,,,,1,,8716.0,736.5,2.0,0.024797,0.049594,,
+book-bookdepository,book,ok,2000,2000,0.995005,0.999,0.991167,0.995005,0.999,0.991167,,,,,,3,,33581.0,998.0,1.75,0.077142,0.154284,,
+camera-compsource,camera,ok,430,430,0.970543,0.970543,0.970543,0.970543,0.970543,0.970543,,,,,,1,,49493.023256,974.418605,1.0,0.10873,0.046754,,
+job-job,job,ok,2000,2000,1.0,1.0,1.0,0.75,0.75,0.75,,,,,,1,,6605.5,200.5,1.0,0.015216,0.030432,,
+movie-hollywood,movie,ok,2000,2000,0.937625,0.937625,0.937625,0.937625,0.937625,0.937625,,,,,,1,,7502.0,211.5,1.0,0.017119,0.034238,,
+nbaplayer-msnca,nbaplayer,ok,434,434,1.0,1.0,1.0,1.0,1.0,1.0,,,,,,1,,66875.576037,4133.640553,4.0,0.175088,0.075988,,
+restaurant-opentable,restaurant,ok,2000,2000,0.75,0.75,0.75,0.25,0.25,0.25,,,,,,2,,23370.5,496.0,2.0,0.051701,0.103402,,
+university-collegetoolkit,university,ok,2000,2000,0.963061,1.0,0.93,0.963061,1.0,0.93,,,,,,1,,26699.0,704.5,4.0,0.060443,0.120886,,
+auto-carquotes,auto,ok,2000,2000,0.5,0.5,0.5,0.5,0.5,0.5,,,,,,1,,4597.5,178.0,1.0,0.010975,0.02195,,
+book-booksamillion,book,ok,2000,2000,0.9443,0.9443,0.9443,0.3443,0.3443,0.3443,,,,,,2,,7089.5,466.0,1.0,0.018839,0.037678,,
+camera-ecost,camera,ok,923,923,1.0,1.0,1.0,1.0,1.0,1.0,,,,,,1,,20299.024919,323.943662,1.0,0.043837,0.040462,,
+job-jobcircle,job,ok,2000,2000,0.683877,0.70725,0.6645,0.683877,0.70725,0.6645,,,,,,1,,3858.0,229.5,1.0,0.010011,0.020022,,
+movie-iheartmovies,movie,ok,2000,2000,0.811677,0.811677,0.811677,0.811677,0.811677,0.811677,,,,,,1,,3454.5,153.5,1.0,0.008444,0.016888,,
+nbaplayer-nba,nbaplayer,ok,434,434,0.75,0.75,1.0,0.25,0.25,0.333333,,,,,,1,,28117.511521,864.0553,1.0,0.064876,0.028156,,
+restaurant-pickarestaurant,restaurant,ok,2000,2000,0.994803,0.995233,0.994375,0.5,0.5,0.5,,,,,,2,,67024.5,6273.0,2.5,0.196779,0.393558,,
+university-ecampustours,university,ok,1063,1063,0.75,0.75,0.75,0.75,0.75,0.75,,,,,,1,,6619.002822,485.418627,1.0,0.018092,0.019232,,
+auto-cars,auto,ok,657,657,0.606362,0.598266,0.614938,0.364143,0.363359,0.364938,,,,,,1,,66152.207002,2410.958904,2.5,0.156414,0.102764,,
+book-borders,book,ok,2000,2000,0.6004,0.6004,0.6004,0.6004,0.6004,0.6004,,,,,,1,,4900.0,250.5,1.0,0.012305,0.02461,,
+camera-jr,camera,ok,367,367,0.654913,0.64396,0.666667,0.654913,0.64396,0.666667,,,,,,1,,42528.610354,959.128065,1.0,0.094649,0.034736,,
+job-jobtarget,job,ok,2000,2000,1.0,1.0,1.0,1.0,1.0,1.0,,,,,,1,,164680.5,6996.5,1.0,0.399326,0.798652,,
+movie-imdb,movie,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+nbaplayer-si,nbaplayer,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+restaurant-restaurantica,restaurant,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+university-embark,university,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+auto-kbb,auto,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+book-buy,book,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+camera-newegg,camera,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+job-monster,job,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+movie-metacritic,movie,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+nbaplayer-slam,nbaplayer,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+restaurant-tripadvisor,restaurant,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+university-matchcollege,university,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+auto-motortrend,auto,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+book-christianbook,book,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+camera-onsale,camera,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+job-nettemps,job,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+movie-msn,movie,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+nbaplayer-usatoday,nbaplayer,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+restaurant-urbanspoon,restaurant,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+university-princetonreview,university,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+auto-msn,auto,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+book-deepdiscount,book,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+camera-pcnation,camera,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+job-rightitjobs,job,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+movie-rottentomatoes,movie,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+nbaplayer-wiki,nbaplayer,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+restaurant-usdiners,restaurant,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+university-studentaid,university,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+auto-yahoo,auto,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+book-waterstones,book,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+camera-thenerds,camera,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+job-techcentric,job,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+movie-yahoo,movie,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+nbaplayer-yahoo,nbaplayer,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+restaurant-zagat,restaurant,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached
+university-usnews,university,skipped,0,,,,,,,,,,,,,,,,,,,,,evaluation budget of $5.00 reached

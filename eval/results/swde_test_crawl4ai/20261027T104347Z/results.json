@@ -1,0 +1,6295 @@
+{
+  "name": "swde_test_crawl4ai",
+  "dataset": "swde",
+  "split": "test",
+  "method": {
+    "kind": "baseline",
+    "mode": "prompted",
+    "baseline": "crawl4ai_schema",
+    "params": {
+      "until": "extract",
+      "min_cluster_size": 20,
+      "union_min_tokens": 8000,
+      "union_max_tokens": 30000,
+      "max_repair_calls": 3,
+      "tail": "skip",
+      "concurrency": 4
+    }
+  },
+  "method_label": "crawl4ai_schema",
+  "status": "ok",
+  "reason": null,
+  "summary": {
+    "n_sites": 64,
+    "n_ok": 28,
+    "status_counts": {
+      "ok": 28,
+      "skipped": 36
+    },
+    "accuracy": {
+      "per_vertical": {
+        "auto": {
+          "n_sites": 4,
+          "norm": {
+            "precision": 0.712066474842247,
+            "recall": 0.716234520123839,
+            "f1": 0.7140904105320176
+          },
+          "fields_norm_f1": {
+            "engine": 0.8641429669485011,
+            "fuel_economy": 0.992218675179569,
+            "model": 0.75,
+            "price": 0.25
+          },
+          "raw": {
+            "precision": 0.6533396946564886,
+            "recall": 0.653734520123839,
+            "f1": 0.6535357417371253
+          },
+          "fields_raw_f1": {
+            "engine": 0.8641429669485011,
+            "fuel_economy": 0.75,
+            "model": 0.75,
+            "price": 0.25
+          }
+        },
+        "book": {
+          "n_sites": 4,
+          "norm": {
+            "precision": 0.76715,
+            "recall": 0.7467167754569191,
+            "f1": 0.7548204514597934
+          },
+          "fields_norm_f1": {
+            "author": 0.998,
+            "isbn_13": 0.9433455995093529,
+            "publication_date": 0.49550665778961384,
+            "publisher": 0.5,
+            "title": 0.83725
+          },
+          "raw": {
+            "precision": 0.61715,
+            "recall": 0.596716775456919,
+            "f1": 0.6048204514597934
+          },
+          "fields_raw_f1": {
+            "author": 0.998,
+            "isbn_13": 0.6933455995093529,
+            "publication_date": 0.24550665778961384,
+            "publisher": 0.25,
+            "title": 0.83725
+          }
+        },
+        "camera": {
+          "n_sites": 4,
+          "norm": {
+            "precision": 0.8971256679973808,
+            "recall": 0.9028023255813954,
+            "f1": 0.899863914674014
+          },
+          "fields_norm_f1": {
+            "manufacturer": 0.727906976744186,
+            "model": 0.9805,
+            "price": 0.9911847672778562
+          },
+          "raw": {
+            "precision": 0.8971256679973808,
+            "recall": 0.9028023255813954,
+            "f1": 0.899863914674014
+          },
+          "fields_raw_f1": {
+            "manufacturer": 0.727906976744186,
+            "model": 0.9805,
+            "price": 0.9911847672778562
+          }
+        },
+        "job": {
+          "n_sites": 4,
+          "norm": {
+            "precision": 0.7620967380478088,
+            "recall": 0.70515625,
+            "f1": 0.7192805688336155
+          },
+          "fields_norm_f1": {
+            "company": 0.7736265718972116,
+            "date_posted": 0.5991207034372502,
+            "location": 0.754375,
+            "title": 0.75
+          },
+          "raw": {
+            "precision": 0.6995967380478088,
+            "recall": 0.64265625,
+            "f1": 0.6567805688336155
+          },
+          "fields_raw_f1": {
+            "company": 0.5236265718972116,
+            "date_posted": 0.5991207034372502,
+            "location": 0.754375,
+            "title": 0.75
+          }
+        },
+        "movie": {
+          "n_sites": 3,
+          "norm": {
+            "precision": 0.9081422661263087,
+            "recall": 0.8902672661263087,
+            "f1": 0.8985137206738124
+          },
+          "fields_norm_f1": {
+            "director": 0.9693329693329694,
+            "genre": 0.650402397838568,
+            "mpaa_rating": 0.9921528488570454,
+            "title": 0.9821666666666666
+          },
+          "raw": {
+            "precision": 0.9081422661263087,
+            "recall": 0.8902672661263087,
+            "f1": 0.8985137206738124
+          },
+          "fields_raw_f1": {
+            "director": 0.9693329693329694,
+            "genre": 0.650402397838568,
+            "mpaa_rating": 0.9921528488570454,
+            "title": 0.9821666666666666
+          }
+        },
+        "nbaplayer": {
+          "n_sites": 3,
+          "norm": {
+            "precision": 0.8333333333333334,
+            "recall": 0.9166666666666666,
+            "f1": 0.8333333333333334
+          },
+          "fields_norm_f1": {
+            "height": 1.0,
+            "name": 0.6666666666666666,
+            "team": 0.6666666666666666,
+            "weight": 1.0
+          },
+          "raw": {
+            "precision": 0.5,
+            "recall": 0.5277777777777778,
+            "f1": 0.5
+          },
+          "fields_raw_f1": {
+            "height": 0.3333333333333333,
+            "name": 0.6666666666666666,
+            "team": 0.6666666666666666,
+            "weight": 0.3333333333333333
+          }
+        },
+        "restaurant": {
+          "n_sites": 3,
+          "norm": {
+            "precision": 0.8299527722027095,
+            "recall": 0.8296666666666667,
+            "f1": 0.8298094686534769
+          },
+          "fields_norm_f1": {
+            "address": 0.5702378746139077,
+            "cuisine": 0.828,
+            "name": 1.0,
+            "phone": 0.9209999999999999
+          },
+          "raw": {
+            "precision": 0.49820833333333336,
+            "recall": 0.49820833333333336,
+            "f1": 0.49820833333333336
+          },
+          "fields_raw_f1": {
+            "address": 0.24383333333333335,
+            "cuisine": 0.49466666666666664,
+            "name": 0.6666666666666666,
+            "phone": 0.5876666666666667
+          }
+        },
+        "university": {
+          "n_sites": 3,
+          "norm": {
+            "precision": 0.9166666666666666,
+            "recall": 0.8933333333333334,
+            "f1": 0.9043535620052771
+          },
+          "fields_norm_f1": {
+            "name": 1.0,
+            "phone": 0.5,
+            "type": 0.9815303430079156,
+            "website": 0.9815303430079156
+          },
+          "raw": {
+            "precision": 0.9166666666666666,
+            "recall": 0.8933333333333334,
+            "f1": 0.9043535620052771
+          },
+          "fields_raw_f1": {
+            "name": 1.0,
+            "phone": 0.5,
+            "type": 0.9815303430079156,
+            "website": 0.9815303430079156
+          }
+        }
+      },
+      "overall": {
+        "n_sites": 28,
+        "n_verticals": 8,
+        "norm": {
+          "precision": 0.8283167399020568,
+          "recall": 0.8251054754943912,
+          "f1": 0.8192581787706675
+        },
+        "raw": {
+          "precision": 0.7112786708534984,
+          "recall": 0.7006870727166133,
+          "f1": 0.7020095365896214
+        }
+      }
+    },
+    "accuracy_sample": null,
+    "optional_field_recall": null,
+    "groups": {},
+    "clustering": {
+      "n_clusters": 6.642857142857143,
+      "n_templates": 1.2142857142857142,
+      "tail_pages": 7.75,
+      "n_sites": 28
+    },
+    "cost": {
+      "pages": 43232,
+      "templates": 186,
+      "calls": 231,
+      "input_tokens": 2403640,
+      "output_tokens": 88945,
+      "input_tokens_per_1k_pages": 55598.63064396743,
+      "output_tokens_per_1k_pages": 2057.388045891932,
+      "calls_per_template": 1.5606292517006803,
+      "usd_per_1k_pages": 0.13177114174685414,
+      "price_estimated": false,
+      "extrapolated": false,
+      "spend_usd": 5.696729999999998,
+      "llm_latency_s_mean": null
+    },
+    "cost_per_vertical": {
+      "auto": {
+        "pages": 6656,
+        "templates": 5,
+        "calls": 10,
+        "input_tokens": 109105,
+        "output_tokens": 4169,
+        "input_tokens_per_1k_pages": 16391.97716346154,
+        "output_tokens_per_1k_pages": 626.3521634615385,
+        "calls_per_template": 1.875,
+        "usd_per_1k_pages": 0.039047475961538465,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.2599,
+        "llm_latency_s_mean": null
+      },
+      "book": {
+        "pages": 8000,
+        "templates": 10,
+        "calls": 20,
+        "input_tokens": 253376,
+        "output_tokens": 7566,
+        "input_tokens_per_1k_pages": 31672.0,
+        "output_tokens_per_1k_pages": 945.75,
+        "calls_per_template": 1.7708333333333335,
+        "usd_per_1k_pages": 0.0728015,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.5824119999999999,
+        "llm_latency_s_mean": null
+      },
+      "camera": {
+        "pages": 2220,
+        "templates": 10,
+        "calls": 10,
+        "input_tokens": 236285,
+        "output_tokens": 1952,
+        "input_tokens_per_1k_pages": 106434.68468468469,
+        "output_tokens_per_1k_pages": 879.2792792792793,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.22166216216216217,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.49209,
+        "llm_latency_s_mean": null
+      },
+      "job": {
+        "pages": 8000,
+        "templates": 142,
+        "calls": 154,
+        "input_tokens": 1423276,
+        "output_tokens": 54729,
+        "input_tokens_per_1k_pages": 177909.5,
+        "output_tokens_per_1k_pages": 6841.125,
+        "calls_per_template": 1.0285714285714285,
+        "usd_per_1k_pages": 0.42423025,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 3.3938419999999994,
+        "llm_latency_s_mean": null
+      },
+      "movie": {
+        "pages": 6000,
+        "templates": 3,
+        "calls": 3,
+        "input_tokens": 32871,
+        "output_tokens": 1267,
+        "input_tokens_per_1k_pages": 5478.5,
+        "output_tokens_per_1k_pages": 211.16666666666666,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.013068666666666666,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.078412,
+        "llm_latency_s_mean": null
+      },
+      "nbaplayer": {
+        "pages": 1293,
+        "templates": 3,
+        "calls": 6,
+        "input_tokens": 70616,
+        "output_tokens": 2480,
+        "input_tokens_per_1k_pages": 54614.07579273009,
+        "output_tokens_per_1k_pages": 1918.0201082753288,
+        "calls_per_template": 2.0,
+        "usd_per_1k_pages": 0.12840835266821346,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.166032,
+        "llm_latency_s_mean": null
+      },
+      "restaurant": {
+        "pages": 6000,
+        "templates": 10,
+        "calls": 22,
+        "input_tokens": 207378,
+        "output_tokens": 14693,
+        "input_tokens_per_1k_pages": 34563.0,
+        "output_tokens_per_1k_pages": 2448.8333333333335,
+        "calls_per_template": 2.0,
+        "usd_per_1k_pages": 0.09361433333333334,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.561686,
+        "llm_latency_s_mean": null
+      },
+      "university": {
+        "pages": 5063,
+        "templates": 3,
+        "calls": 6,
+        "input_tokens": 70733,
+        "output_tokens": 2089,
+        "input_tokens_per_1k_pages": 13970.57080782145,
+        "output_tokens_per_1k_pages": 412.6012245704128,
+        "calls_per_template": 2.0,
+        "usd_per_1k_pages": 0.03206715386134703,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.162356,
+        "llm_latency_s_mean": null
+      }
+    },
+    "speed_pages_per_sec_per_core": {
+      "baseline": null
+    },
+    "curves": {},
+    "unprompted_recall": null,
+    "unprompted_recall_per_vertical": null,
+    "union": null
+  },
+  "sites": [
+    {
+      "site": "auto-automotive",
+      "vertical": "auto",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 1999,
+      "n_labeled": 1999,
+      "accuracy": {
+        "site": "auto-automotive",
+        "vertical": "auto",
+        "pages_scored": 1999,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 0,
+              "fp": 1999,
+              "fn": 1999,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1999,
+              "fn": 1999,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 1999,
+        "templates": 1,
+        "calls": 2,
+        "input_tokens": 39016,
+        "output_tokens": 756,
+        "input_tokens_per_1k_pages": 19517.75887943972,
+        "output_tokens_per_1k_pages": 378.18909454727367,
+        "calls_per_template": 2.0,
+        "calls_per_page": 0.0010005002501250625,
+        "usd_per_1k_pages": 0.04281740870435218,
+        "price_estimated": false,
+        "spend_usd": 0.085592,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 57.413
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 41.3405,
+          "pages": 1999,
+          "pages_per_sec": 48.3545
+        }
+      },
+      "spend_usd": 0.085592,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 1999 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0856 (0/2 calls from the schema cache)",
+        "extraction: 1999 pages in 18.53s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "automotive",
+        "split": "test",
+        "pages": 1999,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/auto-automotive/run"
+    },
+    {
+      "site": "book-barnesandnoble",
+      "vertical": "book",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "book-barnesandnoble",
+        "vertical": "book",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.5248999999999999,
+          "recall": 0.45099999999999996,
+          "f1": 0.4795764796074824
+        },
+        "raw": {
+          "precision": 0.5248999999999999,
+          "recall": 0.45099999999999996,
+          "f1": 0.4795764796074824
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 1255,
+              "fp": 745,
+              "fn": 745,
+              "tn": 0,
+              "precision": 0.6275,
+              "recall": 0.6275,
+              "f1": 0.6275
+            },
+            "raw": {
+              "tp": 1255,
+              "fp": 745,
+              "fn": 745,
+              "tn": 0,
+              "precision": 0.6275,
+              "recall": 0.6275,
+              "f1": 0.6275
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 1994,
+              "fp": 6,
+              "fn": 6,
+              "tn": 0,
+              "precision": 0.997,
+              "recall": 0.997,
+              "f1": 0.997
+            },
+            "raw": {
+              "tp": 1994,
+              "fp": 6,
+              "fn": 6,
+              "tn": 0,
+              "precision": 0.997,
+              "recall": 0.997,
+              "f1": 0.997
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 1261,
+              "fp": 0,
+              "fn": 739,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.6305,
+              "f1": 0.7733823980374118
+            },
+            "raw": {
+              "tp": 1261,
+              "fp": 0,
+              "fn": 739,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.6305,
+              "f1": 0.7733823980374118
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 3,
+        "n_templates": 2,
+        "tail_pages": 1
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 3,
+        "calls": 10,
+        "input_tokens": 162235,
+        "output_tokens": 4137,
+        "input_tokens_per_1k_pages": 81117.5,
+        "output_tokens_per_1k_pages": 2068.5,
+        "calls_per_template": 3.3333333333333335,
+        "calls_per_page": 0.005,
+        "usd_per_1k_pages": 0.18292,
+        "price_estimated": false,
+        "spend_usd": 0.36583999999999994,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 110.133
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 98.6801,
+          "pages": 2000,
+          "pages_per_sec": 20.2675
+        }
+      },
+      "spend_usd": 0.36584,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (3 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.3658 (0/10 calls from the schema cache)",
+        "extraction: 2000 pages in 12.87s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "barnesandnoble",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/book-barnesandnoble/run"
+    },
+    {
+      "site": "camera-buy",
+      "vertical": "camera",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 500,
+      "n_labeled": 500,
+      "accuracy": {
+        "site": "camera-buy",
+        "vertical": "camera",
+        "pages_scored": 500,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9740000000000001,
+          "recall": 0.9740000000000001,
+          "f1": 0.9740000000000001
+        },
+        "raw": {
+          "precision": 0.9740000000000001,
+          "recall": 0.9740000000000001,
+          "f1": 0.9740000000000001
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 461,
+              "fp": 39,
+              "fn": 39,
+              "tn": 0,
+              "precision": 0.922,
+              "recall": 0.922,
+              "f1": 0.922
+            },
+            "raw": {
+              "tp": 461,
+              "fp": 39,
+              "fn": 39,
+              "tn": 0,
+              "precision": 0.922,
+              "recall": 0.922,
+              "f1": 0.922
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 500,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 500,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "manufacturer": {
+            "norm": {
+              "tp": 500,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 500,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 7,
+        "n_templates": 1,
+        "tail_pages": 20
+      },
+      "cost": {
+        "pages": 500,
+        "templates": 7,
+        "calls": 7,
+        "input_tokens": 180659,
+        "output_tokens": 882,
+        "input_tokens_per_1k_pages": 361318.0,
+        "output_tokens_per_1k_pages": 1764.0,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.014,
+        "usd_per_1k_pages": 0.740276,
+        "price_estimated": false,
+        "spend_usd": 0.370138,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 40.081
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 31.0289,
+          "pages": 500,
+          "pages_per_sec": 16.114
+        }
+      },
+      "spend_usd": 0.370138,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (7 templates), schema applied to 500 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.3701 (0/7 calls from the schema cache)",
+        "extraction: 500 pages in 8.28s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "buy",
+        "split": "test",
+        "pages": 500,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/camera-buy/run"
+    },
+    {
+      "site": "job-hotjobs",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "job-hotjobs",
+        "vertical": "job",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.3411369521912351,
+          "recall": 0.156125,
+          "f1": 0.1932457034372502
+        },
+        "raw": {
+          "precision": 0.3411369521912351,
+          "recall": 0.156125,
+          "f1": 0.1932457034372502
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "company": {
+            "norm": {
+              "tp": 376,
+              "fp": 1624,
+              "fn": 1624,
+              "tn": 0,
+              "precision": 0.188,
+              "recall": 0.188,
+              "f1": 0.188
+            },
+            "raw": {
+              "tp": 376,
+              "fp": 1624,
+              "fn": 1624,
+              "tn": 0,
+              "precision": 0.188,
+              "recall": 0.188,
+              "f1": 0.188
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 377,
+              "fp": 1623,
+              "fn": 1623,
+              "tn": 0,
+              "precision": 0.1885,
+              "recall": 0.1885,
+              "f1": 0.1885
+            },
+            "raw": {
+              "tp": 377,
+              "fp": 1623,
+              "fn": 1623,
+              "tn": 0,
+              "precision": 0.1885,
+              "recall": 0.1885,
+              "f1": 0.1885
+            }
+          },
+          "date_posted": {
+            "norm": {
+              "tp": 496,
+              "fp": 6,
+              "fn": 1504,
+              "tn": 0,
+              "precision": 0.9880478087649402,
+              "recall": 0.248,
+              "f1": 0.3964828137490008
+            },
+            "raw": {
+              "tp": 496,
+              "fp": 6,
+              "fn": 1504,
+              "tn": 0,
+              "precision": 0.9880478087649402,
+              "recall": 0.248,
+              "f1": 0.3964828137490008
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 105,
+        "n_templates": 1,
+        "tail_pages": 135
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 105,
+        "calls": 117,
+        "input_tokens": 1072988,
+        "output_tokens": 39876,
+        "input_tokens_per_1k_pages": 536494.0,
+        "output_tokens_per_1k_pages": 19938.0,
+        "calls_per_template": 1.1142857142857143,
+        "calls_per_page": 0.0585,
+        "usd_per_1k_pages": 1.272368,
+        "price_estimated": false,
+        "spend_usd": 2.5447359999999994,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 1039.971
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 1032.8725,
+          "pages": 2000,
+          "pages_per_sec": 1.9363
+        }
+      },
+      "spend_usd": 2.544736,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (105 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $2.5447 (0/117 calls from the schema cache)",
+        "extraction: 2000 pages in 9.96s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "hotjobs",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/job-hotjobs/run"
+    },
+    {
+      "site": "movie-boxofficemojo",
+      "vertical": "movie",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "movie-boxofficemojo",
+        "vertical": "movie",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.975125,
+          "recall": 0.9215,
+          "f1": 0.946239363642511
+        },
+        "raw": {
+          "precision": 0.975125,
+          "recall": 0.9215,
+          "f1": 0.946239363642511
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 1893,
+              "fp": 107,
+              "fn": 107,
+              "tn": 0,
+              "precision": 0.9465,
+              "recall": 0.9465,
+              "f1": 0.9465
+            },
+            "raw": {
+              "tp": 1893,
+              "fp": 107,
+              "fn": 107,
+              "tn": 0,
+              "precision": 0.9465,
+              "recall": 0.9465,
+              "f1": 0.9465
+            }
+          },
+          "director": {
+            "norm": {
+              "tp": 1663,
+              "fp": 0,
+              "fn": 337,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.8315,
+              "f1": 0.907998907998908
+            },
+            "raw": {
+              "tp": 1663,
+              "fp": 0,
+              "fn": 337,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.8315,
+              "f1": 0.907998907998908
+            }
+          },
+          "genre": {
+            "norm": {
+              "tp": 1908,
+              "fp": 92,
+              "fn": 92,
+              "tn": 0,
+              "precision": 0.954,
+              "recall": 0.954,
+              "f1": 0.954
+            },
+            "raw": {
+              "tp": 1908,
+              "fp": 92,
+              "fn": 92,
+              "tn": 0,
+              "precision": 0.954,
+              "recall": 0.954,
+              "f1": 0.954
+            }
+          },
+          "mpaa_rating": {
+            "norm": {
+              "tp": 1908,
+              "fp": 0,
+              "fn": 92,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.954,
+              "f1": 0.9764585465711362
+            },
+            "raw": {
+              "tp": 1908,
+              "fp": 0,
+              "fn": 92,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.954,
+              "f1": 0.9764585465711362
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 10958,
+        "output_tokens": 537,
+        "input_tokens_per_1k_pages": 5479.0,
+        "output_tokens_per_1k_pages": 268.5,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0005,
+        "usd_per_1k_pages": 0.013643,
+        "price_estimated": false,
+        "spend_usd": 0.027286,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 33.959
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 20.5093,
+          "pages": 2000,
+          "pages_per_sec": 97.5167
+        }
+      },
+      "spend_usd": 0.027286,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0273 (0/1 calls from the schema cache)",
+        "extraction: 2000 pages in 6.89s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "boxofficemojo",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/movie-boxofficemojo/run"
+    },
+    {
+      "site": "nbaplayer-foxsports",
+      "vertical": "nbaplayer",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 425,
+      "n_labeled": 425,
+      "accuracy": {
+        "site": "nbaplayer-foxsports",
+        "vertical": "nbaplayer",
+        "pages_scored": 425,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.25,
+          "recall": 0.25,
+          "f1": 0.25
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 0,
+              "fp": 425,
+              "fn": 425,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 425,
+              "fn": 425,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "team": {
+            "norm": {
+              "tp": 425,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 425,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "height": {
+            "norm": {
+              "tp": 425,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 425,
+              "fn": 425,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "weight": {
+            "norm": {
+              "tp": 425,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 425,
+              "fn": 425,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 425,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 29389,
+        "output_tokens": 311,
+        "input_tokens_per_1k_pages": 69150.58823529413,
+        "output_tokens_per_1k_pages": 731.7647058823529,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.002352941176470588,
+        "usd_per_1k_pages": 0.14561882352941177,
+        "price_estimated": false,
+        "spend_usd": 0.061888,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 17.571
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 12.4207,
+          "pages": 425,
+          "pages_per_sec": 34.217
+        }
+      },
+      "spend_usd": 0.061888,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 425 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0619 (0/1 calls from the schema cache)",
+        "extraction: 425 pages in 6.80s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "foxsports",
+        "split": "test",
+        "pages": 425,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/nbaplayer-foxsports/run"
+    },
+    {
+      "site": "restaurant-gayot",
+      "vertical": "restaurant",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "restaurant-gayot",
+        "vertical": "restaurant",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.744625,
+          "recall": 0.744625,
+          "f1": 0.744625
+        },
+        "raw": {
+          "precision": 0.744625,
+          "recall": 0.744625,
+          "f1": 0.744625
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "address": {
+            "norm": {
+              "tp": 1463,
+              "fp": 537,
+              "fn": 537,
+              "tn": 0,
+              "precision": 0.7315,
+              "recall": 0.7315,
+              "f1": 0.7315
+            },
+            "raw": {
+              "tp": 1463,
+              "fp": 537,
+              "fn": 537,
+              "tn": 0,
+              "precision": 0.7315,
+              "recall": 0.7315,
+              "f1": 0.7315
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 1526,
+              "fp": 474,
+              "fn": 474,
+              "tn": 0,
+              "precision": 0.763,
+              "recall": 0.763,
+              "f1": 0.763
+            },
+            "raw": {
+              "tp": 1526,
+              "fp": 474,
+              "fn": 474,
+              "tn": 0,
+              "precision": 0.763,
+              "recall": 0.763,
+              "f1": 0.763
+            }
+          },
+          "cuisine": {
+            "norm": {
+              "tp": 968,
+              "fp": 1032,
+              "fn": 1032,
+              "tn": 0,
+              "precision": 0.484,
+              "recall": 0.484,
+              "f1": 0.484
+            },
+            "raw": {
+              "tp": 968,
+              "fp": 1032,
+              "fn": 1032,
+              "tn": 0,
+              "precision": 0.484,
+              "recall": 0.484,
+              "f1": 0.484
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 3
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 2,
+        "calls": 3,
+        "input_tokens": 26588,
+        "output_tokens": 1155,
+        "input_tokens_per_1k_pages": 13294.0,
+        "output_tokens_per_1k_pages": 577.5,
+        "calls_per_template": 1.5,
+        "calls_per_page": 0.0015,
+        "usd_per_1k_pages": 0.032363,
+        "price_estimated": false,
+        "spend_usd": 0.064726,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 36.401
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 31.2242,
+          "pages": 2000,
+          "pages_per_sec": 64.053
+        }
+      },
+      "spend_usd": 0.064726,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (2 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0647 (0/3 calls from the schema cache)",
+        "extraction: 2000 pages in 4.79s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "gayot",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/restaurant-gayot/run"
+    },
+    {
+      "site": "university-collegeprowler",
+      "vertical": "university",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "university-collegeprowler",
+        "vertical": "university",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "website": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "type": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 10299,
+        "output_tokens": 164,
+        "input_tokens_per_1k_pages": 5149.5,
+        "output_tokens_per_1k_pages": 82.0,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0005,
+        "usd_per_1k_pages": 0.011119,
+        "price_estimated": false,
+        "spend_usd": 0.022238,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 20.488
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 12.624,
+          "pages": 2000,
+          "pages_per_sec": 158.4279
+        }
+      },
+      "spend_usd": 0.022238,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0222 (0/1 calls from the schema cache)",
+        "extraction: 2000 pages in 8.60s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "collegeprowler",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/university-collegeprowler/run"
+    },
+    {
+      "site": "auto-autoweb",
+      "vertical": "auto",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "auto-autoweb",
+        "vertical": "auto",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 2,
+        "input_tokens": 17432,
+        "output_tokens": 1473,
+        "input_tokens_per_1k_pages": 8716.0,
+        "output_tokens_per_1k_pages": 736.5,
+        "calls_per_template": 2.0,
+        "calls_per_page": 0.001,
+        "usd_per_1k_pages": 0.024797,
+        "price_estimated": false,
+        "spend_usd": 0.049594,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 58.072
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 51.6169,
+          "pages": 2000,
+          "pages_per_sec": 38.747
+        }
+      },
+      "spend_usd": 0.049594,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0496 (0/2 calls from the schema cache)",
+        "extraction: 2000 pages in 13.25s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "autoweb",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/auto-autoweb/run"
+    },
+    {
+      "site": "book-bookdepository",
+      "vertical": "book",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "book-bookdepository",
+        "vertical": "book",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.999,
+          "recall": 0.9911671018276763,
+          "f1": 0.995005326231691
+        },
+        "raw": {
+          "precision": 0.999,
+          "recall": 0.9911671018276763,
+          "f1": 0.995005326231691
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 1990,
+              "fp": 10,
+              "fn": 10,
+              "tn": 0,
+              "precision": 0.995,
+              "recall": 0.995,
+              "f1": 0.995
+            },
+            "raw": {
+              "tp": 1990,
+              "fp": 10,
+              "fn": 10,
+              "tn": 0,
+              "precision": 0.995,
+              "recall": 0.995,
+              "f1": 0.995
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 1976,
+              "fp": 0,
+              "fn": 0,
+              "tn": 24,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1976,
+              "fp": 0,
+              "fn": 0,
+              "tn": 24,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 1840,
+              "fp": 0,
+              "fn": 75,
+              "tn": 85,
+              "precision": 1.0,
+              "recall": 0.9608355091383812,
+              "f1": 0.9800266311584553
+            },
+            "raw": {
+              "tp": 1840,
+              "fp": 0,
+              "fn": 75,
+              "tn": 85,
+              "precision": 1.0,
+              "recall": 0.9608355091383812,
+              "f1": 0.9800266311584553
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 4,
+        "n_templates": 3,
+        "tail_pages": 1
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 4,
+        "calls": 7,
+        "input_tokens": 67162,
+        "output_tokens": 1996,
+        "input_tokens_per_1k_pages": 33581.0,
+        "output_tokens_per_1k_pages": 998.0,
+        "calls_per_template": 1.75,
+        "calls_per_page": 0.0035,
+        "usd_per_1k_pages": 0.077142,
+        "price_estimated": false,
+        "spend_usd": 0.154284,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 59.071
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 48.2464,
+          "pages": 2000,
+          "pages_per_sec": 41.4539
+        }
+      },
+      "spend_usd": 0.154284,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (4 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.1543 (0/7 calls from the schema cache)",
+        "extraction: 2000 pages in 7.37s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "bookdepository",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/book-bookdepository/run"
+    },
+    {
+      "site": "camera-compsource",
+      "vertical": "camera",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 430,
+      "n_labeled": 430,
+      "accuracy": {
+        "site": "camera-compsource",
+        "vertical": "camera",
+        "pages_scored": 430,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9705426356589147,
+          "recall": 0.9705426356589147,
+          "f1": 0.9705426356589147
+        },
+        "raw": {
+          "precision": 0.9705426356589147,
+          "recall": 0.9705426356589147,
+          "f1": 0.9705426356589147
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 430,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 430,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 430,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 430,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "manufacturer": {
+            "norm": {
+              "tp": 392,
+              "fp": 38,
+              "fn": 38,
+              "tn": 0,
+              "precision": 0.9116279069767442,
+              "recall": 0.9116279069767442,
+              "f1": 0.9116279069767442
+            },
+            "raw": {
+              "tp": 392,
+              "fp": 38,
+              "fn": 38,
+              "tn": 0,
+              "precision": 0.9116279069767442,
+              "recall": 0.9116279069767442,
+              "f1": 0.9116279069767442
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 430,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 21282,
+        "output_tokens": 419,
+        "input_tokens_per_1k_pages": 49493.023255813954,
+        "output_tokens_per_1k_pages": 974.4186046511628,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.002325581395348837,
+        "usd_per_1k_pages": 0.10873023255813953,
+        "price_estimated": false,
+        "spend_usd": 0.046754,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 22.193
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 18.2169,
+          "pages": 430,
+          "pages_per_sec": 23.6044
+        }
+      },
+      "spend_usd": 0.046754,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 430 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0468 (0/1 calls from the schema cache)",
+        "extraction: 430 pages in 5.85s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "compsource",
+        "split": "test",
+        "pages": 430,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/camera-compsource/run"
+    },
+    {
+      "site": "job-job",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "job-job",
+        "vertical": "job",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "company": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "date_posted": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 13211,
+        "output_tokens": 401,
+        "input_tokens_per_1k_pages": 6605.5,
+        "output_tokens_per_1k_pages": 200.5,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0005,
+        "usd_per_1k_pages": 0.015216,
+        "price_estimated": false,
+        "spend_usd": 0.030432,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 29.86
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 20.4329,
+          "pages": 2000,
+          "pages_per_sec": 97.8812
+        }
+      },
+      "spend_usd": 0.030432,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0304 (0/1 calls from the schema cache)",
+        "extraction: 2000 pages in 10.62s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "job",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/job-job/run"
+    },
+    {
+      "site": "movie-hollywood",
+      "vertical": "movie",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "movie-hollywood",
+        "vertical": "movie",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9376249999999999,
+          "recall": 0.9376249999999999,
+          "f1": 0.9376249999999999
+        },
+        "raw": {
+          "precision": 0.9376249999999999,
+          "recall": 0.9376249999999999,
+          "f1": 0.9376249999999999
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "director": {
+            "norm": {
+              "tp": 1977,
+              "fp": 0,
+              "fn": 0,
+              "tn": 23,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1977,
+              "fp": 0,
+              "fn": 0,
+              "tn": 23,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "genre": {
+            "norm": {
+              "tp": 1501,
+              "fp": 499,
+              "fn": 499,
+              "tn": 0,
+              "precision": 0.7505,
+              "recall": 0.7505,
+              "f1": 0.7505
+            },
+            "raw": {
+              "tp": 1501,
+              "fp": 499,
+              "fn": 499,
+              "tn": 0,
+              "precision": 0.7505,
+              "recall": 0.7505,
+              "f1": 0.7505
+            }
+          },
+          "mpaa_rating": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 15004,
+        "output_tokens": 423,
+        "input_tokens_per_1k_pages": 7502.0,
+        "output_tokens_per_1k_pages": 211.5,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0005,
+        "usd_per_1k_pages": 0.017119,
+        "price_estimated": false,
+        "spend_usd": 0.034238,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 35.68
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 25.0368,
+          "pages": 2000,
+          "pages_per_sec": 79.8824
+        }
+      },
+      "spend_usd": 0.034238,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0342 (0/1 calls from the schema cache)",
+        "extraction: 2000 pages in 14.38s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "hollywood",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/movie-hollywood/run"
+    },
+    {
+      "site": "nbaplayer-msnca",
+      "vertical": "nbaplayer",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 434,
+      "n_labeled": 434,
+      "accuracy": {
+        "site": "nbaplayer-msnca",
+        "vertical": "nbaplayer",
+        "pages_scored": 434,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "team": {
+            "norm": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "height": {
+            "norm": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "weight": {
+            "norm": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 434,
+        "templates": 1,
+        "calls": 4,
+        "input_tokens": 29024,
+        "output_tokens": 1794,
+        "input_tokens_per_1k_pages": 66875.57603686635,
+        "output_tokens_per_1k_pages": 4133.640552995392,
+        "calls_per_template": 4.0,
+        "calls_per_page": 0.009216589861751152,
+        "usd_per_1k_pages": 0.17508755760368663,
+        "price_estimated": false,
+        "spend_usd": 0.075988,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 54.264
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 51.8121,
+          "pages": 434,
+          "pages_per_sec": 8.3764
+        }
+      },
+      "spend_usd": 0.075988,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 434 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0760 (0/4 calls from the schema cache)",
+        "extraction: 434 pages in 5.03s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "msnca",
+        "split": "test",
+        "pages": 434,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/nbaplayer-msnca/run"
+    },
+    {
+      "site": "restaurant-opentable",
+      "vertical": "restaurant",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "restaurant-opentable",
+        "vertical": "restaurant",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.25,
+          "recall": 0.25,
+          "f1": 0.25
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "address": {
+            "norm": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "cuisine": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 2,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 2,
+        "calls": 4,
+        "input_tokens": 46741,
+        "output_tokens": 992,
+        "input_tokens_per_1k_pages": 23370.5,
+        "output_tokens_per_1k_pages": 496.0,
+        "calls_per_template": 2.0,
+        "calls_per_page": 0.002,
+        "usd_per_1k_pages": 0.051701,
+        "price_estimated": false,
+        "spend_usd": 0.103402,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 52.003
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 31.2766,
+          "pages": 2000,
+          "pages_per_sec": 63.9455
+        }
+      },
+      "spend_usd": 0.103402,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (2 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.1034 (0/4 calls from the schema cache)",
+        "extraction: 2000 pages in 11.52s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "opentable",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/restaurant-opentable/run"
+    },
+    {
+      "site": "university-collegetoolkit",
+      "vertical": "university",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "university-collegetoolkit",
+        "vertical": "university",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 0.93,
+          "f1": 0.9630606860158312
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 0.93,
+          "f1": 0.9630606860158312
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2000,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2000,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            }
+          },
+          "website": {
+            "norm": {
+              "tp": 1790,
+              "fp": 0,
+              "fn": 210,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.895,
+              "f1": 0.9445910290237467
+            },
+            "raw": {
+              "tp": 1790,
+              "fp": 0,
+              "fn": 210,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.895,
+              "f1": 0.9445910290237467
+            }
+          },
+          "type": {
+            "norm": {
+              "tp": 1790,
+              "fp": 0,
+              "fn": 210,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.895,
+              "f1": 0.9445910290237467
+            },
+            "raw": {
+              "tp": 1790,
+              "fp": 0,
+              "fn": 210,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.895,
+              "f1": 0.9445910290237467
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 4,
+        "input_tokens": 53398,
+        "output_tokens": 1409,
+        "input_tokens_per_1k_pages": 26699.0,
+        "output_tokens_per_1k_pages": 704.5,
+        "calls_per_template": 4.0,
+        "calls_per_page": 0.002,
+        "usd_per_1k_pages": 0.060443,
+        "price_estimated": false,
+        "spend_usd": 0.120886,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 63.824
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 46.4878,
+          "pages": 2000,
+          "pages_per_sec": 43.022
+        }
+      },
+      "spend_usd": 0.120886,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.1209 (0/4 calls from the schema cache)",
+        "extraction: 2000 pages in 15.88s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "collegetoolkit",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/university-collegetoolkit/run"
+    },
+    {
+      "site": "auto-carquotes",
+      "vertical": "auto",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "auto-carquotes",
+        "vertical": "auto",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "raw": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 1679,
+              "fp": 0,
+              "fn": 0,
+              "tn": 321,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 9195,
+        "output_tokens": 356,
+        "input_tokens_per_1k_pages": 4597.5,
+        "output_tokens_per_1k_pages": 178.0,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0005,
+        "usd_per_1k_pages": 0.010975,
+        "price_estimated": false,
+        "spend_usd": 0.02195,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 20.61
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 14.5632,
+          "pages": 2000,
+          "pages_per_sec": 137.3326
+        }
+      },
+      "spend_usd": 0.02195,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0220 (0/1 calls from the schema cache)",
+        "extraction: 2000 pages in 7.63s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "carquotes",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/auto-carquotes/run"
+    },
+    {
+      "site": "book-booksamillion",
+      "vertical": "book",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "book-booksamillion",
+        "vertical": "book",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9442999999999999,
+          "recall": 0.9442999999999999,
+          "f1": 0.9442999999999999
+        },
+        "raw": {
+          "precision": 0.3443,
+          "recall": 0.3443,
+          "f1": 0.3443
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 1443,
+              "fp": 557,
+              "fn": 557,
+              "tn": 0,
+              "precision": 0.7215,
+              "recall": 0.7215,
+              "f1": 0.7215
+            },
+            "raw": {
+              "tp": 1443,
+              "fp": 557,
+              "fn": 557,
+              "tn": 0,
+              "precision": 0.7215,
+              "recall": 0.7215,
+              "f1": 0.7215
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 2,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 2,
+        "calls": 2,
+        "input_tokens": 14179,
+        "output_tokens": 932,
+        "input_tokens_per_1k_pages": 7089.5,
+        "output_tokens_per_1k_pages": 466.0,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.001,
+        "usd_per_1k_pages": 0.018839,
+        "price_estimated": false,
+        "spend_usd": 0.037678,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 42.265
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 32.6939,
+          "pages": 2000,
+          "pages_per_sec": 61.1735
+        }
+      },
+      "spend_usd": 0.037678,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (2 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0377 (0/2 calls from the schema cache)",
+        "extraction: 2000 pages in 9.93s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "booksamillion",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/book-booksamillion/run"
+    },
+    {
+      "site": "camera-ecost",
+      "vertical": "camera",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 923,
+      "n_labeled": 923,
+      "accuracy": {
+        "site": "camera-ecost",
+        "vertical": "camera",
+        "pages_scored": 923,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 923,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 923,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 911,
+              "fp": 0,
+              "fn": 0,
+              "tn": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 911,
+              "fp": 0,
+              "fn": 0,
+              "tn": 12,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "manufacturer": {
+            "norm": {
+              "tp": 917,
+              "fp": 0,
+              "fn": 0,
+              "tn": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 917,
+              "fp": 0,
+              "fn": 0,
+              "tn": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 923,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 18736,
+        "output_tokens": 299,
+        "input_tokens_per_1k_pages": 20299.024918743227,
+        "output_tokens_per_1k_pages": 323.943661971831,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0010834236186348862,
+        "usd_per_1k_pages": 0.04383748645720476,
+        "price_estimated": false,
+        "spend_usd": 0.040462,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 30.623
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 19.7475,
+          "pages": 923,
+          "pages_per_sec": 46.7401
+        }
+      },
+      "spend_usd": 0.040462,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 923 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0405 (0/1 calls from the schema cache)",
+        "extraction: 923 pages in 11.92s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "ecost",
+        "split": "test",
+        "pages": 923,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/camera-ecost/run"
+    },
+    {
+      "site": "job-jobcircle",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "job-jobcircle",
+        "vertical": "job",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.7072499999999999,
+          "recall": 0.6645,
+          "f1": 0.6838765718972115
+        },
+        "raw": {
+          "precision": 0.7072499999999999,
+          "recall": 0.6645,
+          "f1": 0.6838765718972115
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "company": {
+            "norm": {
+              "tp": 1658,
+              "fp": 0,
+              "fn": 342,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.829,
+              "f1": 0.9065062875888463
+            },
+            "raw": {
+              "tp": 1658,
+              "fp": 0,
+              "fn": 342,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.829,
+              "f1": 0.9065062875888463
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 1658,
+              "fp": 342,
+              "fn": 342,
+              "tn": 0,
+              "precision": 0.829,
+              "recall": 0.829,
+              "f1": 0.829
+            },
+            "raw": {
+              "tp": 1658,
+              "fp": 342,
+              "fn": 342,
+              "tn": 0,
+              "precision": 0.829,
+              "recall": 0.829,
+              "f1": 0.829
+            }
+          },
+          "date_posted": {
+            "norm": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 7716,
+        "output_tokens": 459,
+        "input_tokens_per_1k_pages": 3858.0,
+        "output_tokens_per_1k_pages": 229.5,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0005,
+        "usd_per_1k_pages": 0.010011,
+        "price_estimated": false,
+        "spend_usd": 0.020022,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 27.281
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 15.5191,
+          "pages": 2000,
+          "pages_per_sec": 128.8734
+        }
+      },
+      "spend_usd": 0.020022,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0200 (0/1 calls from the schema cache)",
+        "extraction: 2000 pages in 5.50s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "jobcircle",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/job-jobcircle/run"
+    },
+    {
+      "site": "movie-iheartmovies",
+      "vertical": "movie",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "movie-iheartmovies",
+        "vertical": "movie",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.811676798378926,
+          "recall": 0.811676798378926,
+          "f1": 0.811676798378926
+        },
+        "raw": {
+          "precision": 0.811676798378926,
+          "recall": 0.811676798378926,
+          "f1": 0.811676798378926
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "director": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "genre": {
+            "norm": {
+              "tp": 487,
+              "fp": 1487,
+              "fn": 1487,
+              "tn": 26,
+              "precision": 0.24670719351570417,
+              "recall": 0.24670719351570417,
+              "f1": 0.24670719351570417
+            },
+            "raw": {
+              "tp": 487,
+              "fp": 1487,
+              "fn": 1487,
+              "tn": 26,
+              "precision": 0.24670719351570417,
+              "recall": 0.24670719351570417,
+              "f1": 0.24670719351570417
+            }
+          },
+          "mpaa_rating": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 6909,
+        "output_tokens": 307,
+        "input_tokens_per_1k_pages": 3454.5,
+        "output_tokens_per_1k_pages": 153.5,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0005,
+        "usd_per_1k_pages": 0.008444,
+        "price_estimated": false,
+        "spend_usd": 0.016888,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 21.11
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 16.0598,
+          "pages": 2000,
+          "pages_per_sec": 124.5349
+        }
+      },
+      "spend_usd": 0.016888,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0169 (0/1 calls from the schema cache)",
+        "extraction: 2000 pages in 8.55s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "iheartmovies",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/movie-iheartmovies/run"
+    },
+    {
+      "site": "nbaplayer-nba",
+      "vertical": "nbaplayer",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 434,
+      "n_labeled": 434,
+      "accuracy": {
+        "site": "nbaplayer-nba",
+        "vertical": "nbaplayer",
+        "pages_scored": 434,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.25,
+          "recall": 0.3333333333333333,
+          "f1": 0.25
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "team": {
+            "norm": {
+              "tp": 0,
+              "fp": 409,
+              "fn": 0,
+              "tn": 25,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 409,
+              "fn": 0,
+              "tn": 25,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            }
+          },
+          "height": {
+            "norm": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 434,
+              "fn": 434,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "weight": {
+            "norm": {
+              "tp": 434,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 434,
+              "fn": 434,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 434,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 12203,
+        "output_tokens": 375,
+        "input_tokens_per_1k_pages": 28117.511520737324,
+        "output_tokens_per_1k_pages": 864.0552995391704,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.002304147465437788,
+        "usd_per_1k_pages": 0.06487557603686636,
+        "price_estimated": false,
+        "spend_usd": 0.028156,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 17.845
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 12.9683,
+          "pages": 434,
+          "pages_per_sec": 33.4663
+        }
+      },
+      "spend_usd": 0.028156,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 434 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0282 (0/1 calls from the schema cache)",
+        "extraction: 434 pages in 4.87s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "nba",
+        "split": "test",
+        "pages": 434,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/nbaplayer-nba/run"
+    },
+    {
+      "site": "restaurant-pickarestaurant",
+      "vertical": "restaurant",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "restaurant-pickarestaurant",
+        "vertical": "restaurant",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9952333166081284,
+          "recall": 0.994375,
+          "f1": 0.9948034059604307
+        },
+        "raw": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 2000,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "address": {
+            "norm": {
+              "tp": 1955,
+              "fp": 38,
+              "fn": 45,
+              "tn": 0,
+              "precision": 0.9809332664325138,
+              "recall": 0.9775,
+              "f1": 0.9792136238417231
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1993,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "cuisine": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 6,
+        "n_templates": 2,
+        "tail_pages": 11
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 6,
+        "calls": 15,
+        "input_tokens": 134049,
+        "output_tokens": 12546,
+        "input_tokens_per_1k_pages": 67024.5,
+        "output_tokens_per_1k_pages": 6273.0,
+        "calls_per_template": 2.5,
+        "calls_per_page": 0.0075,
+        "usd_per_1k_pages": 0.196779,
+        "price_estimated": false,
+        "spend_usd": 0.393558,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 345.362
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 338.3822,
+          "pages": 2000,
+          "pages_per_sec": 5.9105
+        }
+      },
+      "spend_usd": 0.393558,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (6 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.3936 (0/15 calls from the schema cache)",
+        "extraction: 2000 pages in 18.06s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "pickarestaurant",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/restaurant-pickarestaurant/run"
+    },
+    {
+      "site": "university-ecampustours",
+      "vertical": "university",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 1063,
+      "n_labeled": 1063,
+      "accuracy": {
+        "site": "university-ecampustours",
+        "vertical": "university",
+        "pages_scored": 1063,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 1063,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1063,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 0,
+              "fp": 1063,
+              "fn": 1063,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1063,
+              "fn": 1063,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "website": {
+            "norm": {
+              "tp": 1063,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1063,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "type": {
+            "norm": {
+              "tp": 1063,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1063,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 1063,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 7036,
+        "output_tokens": 516,
+        "input_tokens_per_1k_pages": 6619.002822201317,
+        "output_tokens_per_1k_pages": 485.41862652869236,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0009407337723424271,
+        "usd_per_1k_pages": 0.018092191909689557,
+        "price_estimated": false,
+        "spend_usd": 0.019232,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 19.537
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 15.9531,
+          "pages": 1063,
+          "pages_per_sec": 66.633
+        }
+      },
+      "spend_usd": 0.019232,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 1063 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0192 (0/1 calls from the schema cache)",
+        "extraction: 1063 pages in 2.72s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "ecampustours",
+        "split": "test",
+        "pages": 1063,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/university-ecampustours/run"
+    },
+    {
+      "site": "auto-cars",
+      "vertical": "auto",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 657,
+      "n_labeled": 657,
+      "accuracy": {
+        "site": "auto-cars",
+        "vertical": "auto",
+        "pages_scored": 657,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.5982658993689882,
+          "recall": 0.614938080495356,
+          "f1": 0.6063616421280702
+        },
+        "raw": {
+          "precision": 0.3633587786259542,
+          "recall": 0.36493808049535603,
+          "f1": 0.3641429669485011
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 657,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 657,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 0,
+              "fp": 647,
+              "fn": 647,
+              "tn": 10,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 647,
+              "fn": 647,
+              "tn": 10,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 297,
+              "fp": 358,
+              "fn": 349,
+              "tn": 2,
+              "precision": 0.4534351145038168,
+              "recall": 0.45975232198142413,
+              "f1": 0.4565718677940046
+            },
+            "raw": {
+              "tp": 297,
+              "fp": 358,
+              "fn": 349,
+              "tn": 2,
+              "precision": 0.4534351145038168,
+              "recall": 0.45975232198142413,
+              "f1": 0.4565718677940046
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 607,
+              "fp": 39,
+              "fn": 0,
+              "tn": 11,
+              "precision": 0.9396284829721362,
+              "recall": 1.0,
+              "f1": 0.9688747007182761
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 646,
+              "fn": 607,
+              "tn": 11,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 10
+      },
+      "cost": {
+        "pages": 657,
+        "templates": 2,
+        "calls": 5,
+        "input_tokens": 43462,
+        "output_tokens": 1584,
+        "input_tokens_per_1k_pages": 66152.20700152207,
+        "output_tokens_per_1k_pages": 2410.9589041095887,
+        "calls_per_template": 2.5,
+        "calls_per_page": 0.0076103500761035,
+        "usd_per_1k_pages": 0.15641400304414002,
+        "price_estimated": false,
+        "spend_usd": 0.102764,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 51.285
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 48.1278,
+          "pages": 657,
+          "pages_per_sec": 13.6512
+        }
+      },
+      "spend_usd": 0.102764,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (2 templates), schema applied to 657 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.1028 (0/5 calls from the schema cache)",
+        "extraction: 657 pages in 9.07s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "cars",
+        "split": "test",
+        "pages": 657,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/auto-cars/run"
+    },
+    {
+      "site": "book-borders",
+      "vertical": "book",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "book-borders",
+        "vertical": "book",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.6003999999999999,
+          "recall": 0.6003999999999999,
+          "f1": 0.6003999999999999
+        },
+        "raw": {
+          "precision": 0.6003999999999999,
+          "recall": 0.6003999999999999,
+          "f1": 0.6003999999999999
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 0,
+              "fp": 1965,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1965,
+              "fn": 2000,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 4,
+              "fp": 1996,
+              "fn": 1996,
+              "tn": 0,
+              "precision": 0.002,
+              "recall": 0.002,
+              "f1": 0.002
+            },
+            "raw": {
+              "tp": 4,
+              "fp": 1996,
+              "fn": 1996,
+              "tn": 0,
+              "precision": 0.002,
+              "recall": 0.002,
+              "f1": 0.002
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 9800,
+        "output_tokens": 501,
+        "input_tokens_per_1k_pages": 4900.0,
+        "output_tokens_per_1k_pages": 250.5,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0005,
+        "usd_per_1k_pages": 0.012305,
+        "price_estimated": false,
+        "spend_usd": 0.02461,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 41.026
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 20.5733,
+          "pages": 2000,
+          "pages_per_sec": 97.2132
+        }
+      },
+      "spend_usd": 0.02461,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0246 (0/1 calls from the schema cache)",
+        "extraction: 2000 pages in 10.87s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "borders",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/book-borders/run"
+    },
+    {
+      "site": "camera-jr",
+      "vertical": "camera",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 367,
+      "n_labeled": 367,
+      "accuracy": {
+        "site": "camera-jr",
+        "vertical": "camera",
+        "pages_scored": 367,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.6439600363306085,
+          "recall": 0.6666666666666666,
+          "f1": 0.6549130230371415
+        },
+        "raw": {
+          "precision": 0.6439600363306085,
+          "recall": 0.6666666666666666,
+          "f1": 0.6549130230371415
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 367,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 367,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 342,
+              "fp": 25,
+              "fn": 0,
+              "tn": 0,
+              "precision": 0.9318801089918256,
+              "recall": 1.0,
+              "f1": 0.9647390691114246
+            },
+            "raw": {
+              "tp": 342,
+              "fp": 25,
+              "fn": 0,
+              "tn": 0,
+              "precision": 0.9318801089918256,
+              "recall": 1.0,
+              "f1": 0.9647390691114246
+            }
+          },
+          "manufacturer": {
+            "norm": {
+              "tp": 0,
+              "fp": 367,
+              "fn": 367,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 367,
+              "fn": 367,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 367,
+        "templates": 1,
+        "calls": 1,
+        "input_tokens": 15608,
+        "output_tokens": 352,
+        "input_tokens_per_1k_pages": 42528.61035422343,
+        "output_tokens_per_1k_pages": 959.1280653950953,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0027247956403269754,
+        "usd_per_1k_pages": 0.09464850136239782,
+        "price_estimated": false,
+        "spend_usd": 0.034736,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 21.507
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 15.804,
+          "pages": 367,
+          "pages_per_sec": 23.2219
+        }
+      },
+      "spend_usd": 0.034736,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (1 templates), schema applied to 367 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.0347 (0/1 calls from the schema cache)",
+        "extraction: 367 pages in 6.75s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "jr",
+        "split": "test",
+        "pages": 367,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/camera-jr/run"
+    },
+    {
+      "site": "job-jobtarget",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "job-jobtarget",
+        "vertical": "job",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "company": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "date_posted": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 35,
+        "n_templates": 1,
+        "tail_pages": 36
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 35,
+        "calls": 35,
+        "input_tokens": 329361,
+        "output_tokens": 13993,
+        "input_tokens_per_1k_pages": 164680.5,
+        "output_tokens_per_1k_pages": 6996.5,
+        "calls_per_template": 1.0,
+        "calls_per_page": 0.0175,
+        "usd_per_1k_pages": 0.399326,
+        "price_estimated": false,
+        "spend_usd": 0.798652,
+        "extrapolated": false,
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "pages_failed": 0,
+        "wall_seconds": 332.618
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 315.1983,
+          "pages": 2000,
+          "pages_per_sec": 6.3452
+        }
+      },
+      "spend_usd": 0.798652,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "crawl4ai.generate_schema"
+      ],
+      "notes": [
+        "crawl4ai JsonCssExtractionStrategy.generate_schema (CSS, validate=True, max_refinements=3) with openai/gpt-6.1-sol on one seeded random sample page per template (35 templates), schema applied to 2000 pages",
+        "cost_usd prices all tokens from config/prices.yaml; actually spent this run: $0.7987 (0/35 calls from the schema cache)",
+        "extraction: 2000 pages in 5.43s"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "jobtarget",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_crawl4ai/20261027T104347Z/job-jobtarget/run"
+    },
+    {
+      "site": "movie-imdb",
+      "vertical": "movie",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "imdb",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "nbaplayer-si",
+      "vertical": "nbaplayer",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 515,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "si",
+        "split": "test",
+        "pages": 515,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "restaurant-restaurantica",
+      "vertical": "restaurant",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "restaurantica",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "university-embark",
+      "vertical": "university",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "embark",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "auto-kbb",
+      "vertical": "auto",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "kbb",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "book-buy",
+      "vertical": "book",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "buy",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "camera-newegg",
+      "vertical": "camera",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 220,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "newegg",
+        "split": "test",
+        "pages": 220,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "job-monster",
+      "vertical": "job",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "monster",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "movie-metacritic",
+      "vertical": "movie",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "metacritic",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "nbaplayer-slam",
+      "vertical": "nbaplayer",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 423,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "slam",
+        "split": "test",
+        "pages": 423,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "restaurant-tripadvisor",
+      "vertical": "restaurant",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "tripadvisor",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "university-matchcollege",
+      "vertical": "university",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "matchcollege",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "auto-motortrend",
+      "vertical": "auto",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 1267,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "motortrend",
+        "split": "test",
+        "pages": 1267,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "book-christianbook",
+      "vertical": "book",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "christianbook",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "camera-onsale",
+      "vertical": "camera",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 261,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "onsale",
+        "split": "test",
+        "pages": 261,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "job-nettemps",
+      "vertical": "job",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "nettemps",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "movie-msn",
+      "vertical": "movie",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "msn",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "nbaplayer-usatoday",
+      "vertical": "nbaplayer",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 436,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "usatoday",
+        "split": "test",
+        "pages": 436,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "restaurant-urbanspoon",
+      "vertical": "restaurant",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "urbanspoon",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "university-princetonreview",
+      "vertical": "university",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 615,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "princetonreview",
+        "split": "test",
+        "pages": 615,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "auto-msn",
+      "vertical": "auto",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "msn",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "book-deepdiscount",
+      "vertical": "book",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "deepdiscount",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "camera-pcnation",
+      "vertical": "camera",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 234,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "pcnation",
+        "split": "test",
+        "pages": 234,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "job-rightitjobs",
+      "vertical": "job",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "rightitjobs",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "movie-rottentomatoes",
+      "vertical": "movie",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "rottentomatoes",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "nbaplayer-wiki",
+      "vertical": "nbaplayer",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 420,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "wiki",
+        "split": "test",
+        "pages": 420,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "restaurant-usdiners",
+      "vertical": "restaurant",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "usdiners",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "university-studentaid",
+      "vertical": "university",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "studentaid",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "auto-yahoo",
+      "vertical": "auto",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "yahoo",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "book-waterstones",
+      "vertical": "book",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "waterstones",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "camera-thenerds",
+      "vertical": "camera",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 309,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "thenerds",
+        "split": "test",
+        "pages": 309,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "job-techcentric",
+      "vertical": "job",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "techcentric",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "movie-yahoo",
+      "vertical": "movie",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "yahoo",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "nbaplayer-yahoo",
+      "vertical": "nbaplayer",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 438,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "yahoo",
+        "split": "test",
+        "pages": 438,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "restaurant-zagat",
+      "vertical": "restaurant",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "zagat",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    },
+    {
+      "site": "university-usnews",
+      "vertical": "university",
+      "status": "skipped",
+      "reason": "evaluation budget of $5.00 reached",
+      "n_pages": 0,
+      "n_labeled": 1027,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": null,
+      "cost": {},
+      "speed": {},
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "usnews",
+        "split": "test",
+        "pages": 1027,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": null
+    }
+  ]
+}
