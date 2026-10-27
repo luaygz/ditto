@@ -1,6 +1,6 @@
 [project]
 name = "ditto-extract"
-version = "0.0.0"
+version = "1.0.0"
 description = "Extract a whole downloaded website into JSON with roughly one LLM call per page template."
 readme = "README.md"
 license = "MIT"
