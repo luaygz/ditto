@@ -49,7 +49,7 @@ One line per decision, with the reason. Newest at the bottom of each section.
 - Model ranking drops `-pro`, `-chat-latest`, `-codex`, `-deep-research`, `-instruct` to last resort; highest numeric version wins; undated alias beats dated snapshots.
 - Cache key = SHA-256 of `{v:1, prompt_version, provider/model, messages, max_tokens, json_schema}`; `base_url` excluded (use another `DITTO_CACHE_DIR` per endpoint).
 - Structured output never delegated: the JSON schema is rendered into the system prompt, not sent as `response_format`.
-- Retries: up to 6 attempts, exponential backoff with jitter (1–60 s), `Retry-After` honoured up to 300 s, `insufficient_quota` not retried, SDK retries disabled.
+- Retries: up to 6 attempts, exponential backoff with equal jitter (1 s doubling, capped at 60 s), `Retry-After` honoured as the minimum wait up to that 60 s cap (header values over 300 s are ignored), `insufficient_quota` not retried, SDK retries disabled.
 - Budget guard reserves a worst-case projection (input chars ÷ 3 + `max_tokens` output) while a call runs, so concurrent calls cannot overspend; scopes: global ledger vs `LLM_BUDGET_USD`, optional per-run `DITTO_RUN_BUDGET_USD`.
 - Cached calls record `cost_usd: 0` and `list_cost_usd` (uncached price) for cost tables.
 - Flex-tier calls are billed at the tier multiplier from `prices.yaml` (0.5) in the ledger; `list_cost_usd` stays at standard prices.

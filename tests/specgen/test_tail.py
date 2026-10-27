@@ -15,6 +15,7 @@ from ditto.ingest import PageStore, ingest
 from ditto.llm.base import BudgetExceeded, CacheMiss, Completion, Message, Usage
 from ditto.run import RunDir, read_json
 from ditto.schema import FieldRequest, FieldsSchema
+from ditto.specgen.models import GeneratedBy, Spec
 from ditto.specgen.tail import compact_page, tail_direct_run
 from ditto.union import count_tokens
 
@@ -203,6 +204,31 @@ def test_tail_direct_rows_have_the_extraction_shape(run: RunDir) -> None:
     # The model saw the cleaned page, not the scripts.
     assert "window.track" not in llm.calls[0][-1]["content"]
     assert "tail_direct" in read_json(run.timings_json)
+
+
+def test_tail_clusters_with_a_final_spec_are_left_to_extraction(run: RunDir) -> None:
+    def spec(tid: str, status: str) -> Spec:
+        by = GeneratedBy(model="openai/gpt-6.1-sol", prompt_version="specgen.v2")
+        return Spec.model_validate(
+            {
+                "template_id": tid,
+                "site": "events.example.org",
+                "status": status,
+                "generated_by": by,
+                "fields": {},
+                "not_present": {"title": "-"},
+            }
+        )
+
+    spec("t_one", "final").save(run.spec("t_one"))  # e.g. made by --tail spec
+    spec("t_two", "draft").save(run.spec("t_two"))  # not verified: still sent
+    llm = FakeLLM(good_answer)
+    result = tail_direct_run(run, SCHEMA, llm=llm)
+    assert result.pages == 1 and len(llm.calls) == 1
+    rows = [
+        json.loads(x) for x in run.out_jsonl("events.example.org", None).read_text().splitlines()
+    ]
+    assert [r["_meta"]["cluster_id"] for r in rows] == ["t_two"]
 
 
 def test_invalid_answer_is_retried_then_recorded(run: RunDir) -> None:

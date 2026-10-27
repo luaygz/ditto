@@ -63,6 +63,18 @@ def _fail(message: object) -> None:
     raise typer.Exit(code=1)
 
 
+def yaml_message(exc: Exception) -> str:
+    """One line for a YAML syntax error: the problem and where (``line 2, column 3``)."""
+    problem = getattr(exc, "problem", None)
+    mark = getattr(exc, "problem_mark", None)
+    text = " ".join(str(problem or exc).split())
+    if mark is not None:
+        name = getattr(mark, "name", "")
+        where = f"line {mark.line + 1}, column {mark.column + 1}"
+        text += f" ({name}, {where})" if name and not name.startswith("<") else f" ({where})"
+    return f"not valid YAML: {text}"
+
+
 def budget_message(exc: BudgetExceeded) -> str:
     """One line with the budget totals (the LLM layer's message already states them; a bare
     ``BudgetExceeded("...")`` with keyword totals gets them appended)."""
@@ -85,6 +97,8 @@ def budget_message(exc: BudgetExceeded) -> str:
 @contextmanager
 def _guard() -> Iterator[None]:
     """Turn expected failures into one ``error:`` line and exit status 1 (no traceback)."""
+    import yaml
+
     from ditto.llm.base import BudgetExceeded, LLMError
     from ditto.pipeline import CheckpointRequired
 
@@ -92,7 +106,9 @@ def _guard() -> Iterator[None]:
         yield
     except BudgetExceeded as exc:
         _fail(budget_message(exc))
-    except (CheckpointRequired, LLMError, ValueError, FileNotFoundError) as exc:
+    except yaml.YAMLError as exc:
+        _fail(yaml_message(exc))
+    except (CheckpointRequired, LLMError, ValueError, FileNotFoundError, FileExistsError) as exc:
         _fail(exc)
 
 
@@ -259,7 +275,9 @@ def verify(
 
 @app.command()
 def review(
-    run: RunArg, yes: Annotated[bool, typer.Option("--yes", "-y", help="Skip sign-off.")] = False
+    run: RunArg,
+    yes: Annotated[bool, typer.Option("--yes", "-y", help="Skip sign-off.")] = False,
+    no_cache: NoCache = False,
 ) -> None:
     """Show five extracted records per template for sign-off; saves golden samples."""
     from ditto.checkpoints import review_run
@@ -268,7 +286,7 @@ def review(
     rd = _run_dir(run)
     with _guard():
         require_terminal(yes, "ditto review")
-        review_run(rd, yes=yes)
+        review_run(rd, yes=yes, no_cache=no_cache)
 
 
 @app.command()
@@ -382,9 +400,11 @@ def synth_generate(
 
 def main() -> None:
     try:
-        from dotenv import load_dotenv
+        from dotenv import find_dotenv, load_dotenv
 
-        load_dotenv()
+        # The working directory's .env (searched upward), as ditto.llm.settings reads it; the
+        # default search starts beside this file, i.e. inside site-packages once installed.
+        load_dotenv(find_dotenv(usecwd=True))
     except ImportError:  # pragma: no cover
         pass
     try:

@@ -5,6 +5,7 @@ LLM (no network): the happy paths and the clean one-line failures (exit 1) and u
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -20,7 +21,7 @@ import ditto.cli
 import ditto.llm
 import ditto.llm.client
 import ditto.verify
-from ditto.cli import app, budget_message
+from ditto.cli import app, budget_message, yaml_message
 from ditto.cluster.models import Clusters
 from ditto.llm.base import BudgetExceeded
 from ditto.run import RunDir, read_json
@@ -165,6 +166,26 @@ def test_main_entry_point(
     with pytest.raises(SystemExit) as exc:
         ditto.cli.main()
     assert exc.value.code == 0 and "ingest" in capsys.readouterr().out and loaded == [True]
+
+
+def test_main_loads_the_working_directory_env(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    (tmp_path / ".env").write_text("DITTO_WORKERS=3\n")
+    work = tmp_path / "a" / "b"
+    work.mkdir(parents=True)
+    monkeypatch.chdir(work)  # searched from here upward
+    for name in ("DITTO_WORKERS", "OPENAI_API_KEY"):  # unset now, restored afterwards
+        monkeypatch.setenv(name, "x")
+        monkeypatch.delenv(name)
+    # python-dotenv's default search starts beside the calling file (site-packages once
+    # installed) unless a tracer such as coverage runs: pretend none does
+    monkeypatch.setattr(sys, "gettrace", lambda: None)
+    monkeypatch.setattr(sys, "argv", ["ditto", "--help"])
+    with pytest.raises(SystemExit):
+        ditto.cli.main()
+    capsys.readouterr()
+    assert os.environ.get("DITTO_WORKERS") == "3"
 
 
 def test_prompted_flow_stage_by_stage(confirmed: RunDir, llms: FakeLLMs) -> None:
@@ -335,6 +356,59 @@ def test_bad_fields_yaml_is_a_clean_error(run: RunDir, tmp_path: Path) -> None:
     bad = tmp_path / "fields.yaml"
     bad.write_text("fields: 12\n")
     assert invoke("probe", run.root, "--schema", bad).exit_code == 1
+
+
+BAD_YAML = "title: [unclosed\npublished: when it was published\n"
+
+
+@pytest.mark.parametrize("command", ["probe", "generate", "extract", "run"])
+def test_fields_yaml_syntax_error_is_a_clean_error(
+    run: RunDir, tmp_path: Path, command: str
+) -> None:
+    bad = tmp_path / "fields.yaml"
+    bad.write_text(BAD_YAML)
+    args: dict[str, tuple[str | Path, ...]] = {
+        "probe": ("probe", run.root, "--schema", bad),
+        "generate": ("generate", run.root, "--schema", bad),
+        "extract": ("extract", run.root, "--tail", "direct", "--schema", bad),
+        "run": ("run", SITE, "--out", tmp_path / "x", "--schema", bad, "--yes"),
+    }
+    line = one_line_error(invoke(*args[command]), "not valid YAML", "(line 2, column 10)")
+    assert line == "error: not valid YAML: expected ',' or ']', but got ':' (line 2, column 10)"
+    assert not (tmp_path / "x").exists()
+
+
+def test_yaml_message_names_the_file_when_known(tmp_path: Path) -> None:
+    import yaml
+
+    bad = tmp_path / "x.yaml"
+    bad.write_text(BAD_YAML)
+    with bad.open() as fh, pytest.raises(yaml.YAMLError) as info:
+        yaml.safe_load(fh)
+    want = f"not valid YAML: expected ',' or ']', but got ':' ({bad}, line 2, column 10)"
+    assert yaml_message(info.value) == want
+    assert yaml_message(yaml.YAMLError("bad\n  thing")) == "not valid YAML: bad thing"
+
+
+def test_synth_refuses_to_overwrite_a_foreign_directory(tmp_path: Path) -> None:
+    params = tmp_path / "tiny.yaml"
+    params.write_text(
+        "templates: 2\npages_median: 25\npages_sigma: 0.1\npages_min: 22\npages_max: 28\n"
+        "total_pages: 50\ntail_templates: 0\n"
+    )
+    mine = tmp_path / "out" / "site" / "mine.html"
+    mine.parent.mkdir(parents=True)
+    mine.write_text("<p>keep me</p>")
+    result = invoke("synth", "generate", "--params", params, "--out", tmp_path / "out")
+    one_line_error(result, "is not a synthetic site", "refusing to overwrite")
+    assert mine.exists()
+
+
+def test_review_passes_no_cache_to_repairs(confirmed: RunDir, monkeypatch: Any) -> None:
+    seen: list[dict[str, Any]] = []
+    monkeypatch.setattr(ditto.checkpoints, "review_run", lambda run, **kw: seen.append(kw))
+    ok("review", confirmed.root, "--yes", "--no-cache")
+    assert seen == [{"yes": True, "no_cache": True}]
 
 
 def test_budget_refusal_before_generation(

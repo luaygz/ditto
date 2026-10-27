@@ -22,9 +22,18 @@ import orjson
 from ditto.run import RunDir
 from ditto.schema import FieldsSchema, Mapping
 
+_WARC_SUFFIXES = (".warc.gz", ".warc")
 
-def _default_run_dir(src: Path) -> Path:
-    return Path.cwd() / "ditto-runs" / (src.stem or "site")
+
+def _default_run_dir(src: Path, *, warc: bool = False) -> Path:
+    """``./ditto-runs/<name>``: the directory's whole name (``pages.v2`` stays ``pages.v2``), or a
+    WARC file's name without ``.warc``/``.warc.gz``."""
+    name = src.name
+    if warc:
+        lower = name.lower()
+        suffix = next((s for s in _WARC_SUFFIXES if lower.endswith(s)), "")
+        name = name[: len(name) - len(suffix)]
+    return Path.cwd() / "ditto-runs" / (name or "site")
 
 
 @dataclass
@@ -79,7 +88,7 @@ class Site:
         from ditto.ingest import ingest
 
         items = [Path(paths)] if isinstance(paths, (str, Path)) else [Path(p) for p in paths]
-        out = Path(run_dir) if run_dir else _default_run_dir(items[0])
+        out = Path(run_dir) if run_dir else _default_run_dir(items[0], warc=True)
         ingest(items if len(items) > 1 else items[0], out, workers=workers)
         return cls(out)
 

@@ -11,7 +11,9 @@ carries the exact errors back (``ditto.llm.complete_json``). After a second fail
 that validate on their own are kept and the failing ones are recorded with their candidate ids
 in ``generation.json`` so verification's path-induced fallback can build them.
 
-Prompted runs with ``mapping.json``: excluded and unmapped templates are skipped. Entries the
+Prompted runs with ``mapping.json``: excluded and unmapped templates are skipped, except tail
+clusters under ``--tail spec`` (the probe maps non-tail templates only), which are generated
+as without a mapping: every requested field asked for over the full union page. Entries the
 user chose (provenance ``user``) bind: fields marked ``absent`` are not asked for (they go to
 ``not_present``) and mapped ones are stated as confirmed. Entries the probe proposed unseen
 (provenance ``auto``, e.g. ``confirm --yes``) are stated as ranked suggestions the model checks
@@ -976,8 +978,13 @@ def generate_run(
     selected = _select_templates(clusters, min_cluster_size, tail, template_ids)
     plans: list[_Plan] = []
     for cluster in selected:
+        # The probe maps non-tail templates only: a selected tail cluster (--tail spec) missing
+        # from mapping.json is generated as without a mapping.
+        unmapped_tail = (
+            mapping is not None and cluster.is_tail and cluster.template_id not in mapping.templates
+        )
         try:
-            plans.append(_plan(run, cluster, mode, schema, mapping))
+            plans.append(_plan(run, cluster, mode, schema, None if unmapped_tail else mapping))
         except _Skip as skip:
             result.templates[cluster.template_id] = TemplateGeneration(
                 template_id=cluster.template_id,

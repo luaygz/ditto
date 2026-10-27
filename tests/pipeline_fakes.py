@@ -4,8 +4,10 @@ fake LLM that answers every role offline.
 Generation answers are valid specs built from the template's candidate table with the same
 path-induced selectors verification falls back to: in prompted mode for the candidates
 ``mapping.json`` assigns to each field (fields without a usable selector go to
-``not_present``), in unprompted mode for the first field candidates. Probe answers mark every
-asked field absent, repair answers change nothing, tail answers are empty rows.
+``not_present``; a template the mapping lacks, a tail cluster under ``--tail spec``, gets its
+first field candidate as ``title``), in unprompted mode for the first field candidates. Probe
+answers mark every asked field absent, repair answers change nothing, tail answers are empty
+rows.
 """
 
 from __future__ import annotations
@@ -40,10 +42,16 @@ def spec_answer(run: RunDir, template_id: str, messages: list[Message]) -> dict[
             if c.is_field and len(wanted) < UNPROMPTED_FIELDS:
                 wanted[f"field_{c.id}"] = [c.id]
     elif run.mapping_json.exists():
-        tm = Mapping.load(run.mapping_json).templates[template_id]
-        for name, use in tm.fields.items():
-            if use != ABSENT:
-                wanted[name] = [use] if isinstance(use, str) else list(use)
+        tm = Mapping.load(run.mapping_json).templates.get(template_id)
+        if tm is None:  # never probed (a tail cluster): its first usable field candidate as title
+            field_ids = (c.id for c in table.candidates if c.is_field)
+            first = next((cid for cid in field_ids if induced_field([cid], table)), None)
+            if first is not None:
+                wanted["title"] = [first]
+        else:
+            for name, use in tm.fields.items():
+                if use != ABSENT:
+                    wanted[name] = [use] if isinstance(use, str) else list(use)
     else:
         return {"fields": {}, "not_present": {n: "fake: no mapping" for n in FIELD_NAMES}}
     fields: dict[str, Any] = {}
@@ -109,11 +117,13 @@ class FakeLLM:
 
 
 class FakeLLMs:
-    """Stand-in for ``ditto.llm.get_llm``: hands out one :class:`FakeLLM` per request."""
+    """Stand-in for ``ditto.llm.get_llm``: hands out one :class:`FakeLLM` per request and records
+    each request's ``role``, ``settings`` and ``no_cache`` in ``requests``."""
 
     def __init__(self, fail: Exception | None = None) -> None:
         self.fail = fail
         self.made: list[FakeLLM] = []
+        self.requests: list[dict[str, Any]] = []
 
     def __call__(
         self,
@@ -124,6 +134,7 @@ class FakeLLMs:
         no_cache: bool = False,
         **_: Any,
     ) -> FakeLLM:
+        self.requests.append({"role": role, "settings": settings, "no_cache": no_cache})
         model = SMALL if role in ("probe", "tail_direct") else MODEL
         llm = FakeLLM(run, role, model=model, fail=self.fail)
         self.made.append(llm)

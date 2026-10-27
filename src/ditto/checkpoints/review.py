@@ -30,6 +30,7 @@ from ditto.textutil import normalize_ws
 
 if TYPE_CHECKING:
     from ditto.llm.base import LLM
+    from ditto.llm.settings import Settings
 
 CONTEXT_WIDTH = 120
 DEFAULT_NOTE = "rejected at review"
@@ -236,6 +237,8 @@ def _repair(
     rejections: dict[str, dict[str, str]],
     llm: LLM | None,
     workers: int | None,
+    settings: Settings | None,
+    no_cache: bool,
 ) -> dict[str, Any]:
     """Send the rejected fields with the user's notes through repair (role ``repair``)."""
     from ditto.verify import repair_rejected
@@ -243,7 +246,7 @@ def _repair(
     if llm is None:
         from ditto.llm import get_llm
 
-        llm = get_llm("repair", run=run)
+        llm = get_llm("repair", settings=settings, run=run, no_cache=no_cache)
     reports = repair_rejected(run, rejections, llm=llm, workers=workers)
     return {"called": True, "templates": sorted(reports)}
 
@@ -260,13 +263,16 @@ def review_run(
     llm: LLM | None = None,
     repair: bool = True,
     workers: int | None = None,
+    settings: Settings | None = None,
+    no_cache: bool = False,
 ) -> ReviewResult:
     """Review ``n`` extracted records per verified template and record the sign-off.
 
     ``yes`` approves every sample without showing it. Rejected fields (with the user's note)
     go to ``review.json`` and, when ``repair`` is on, through ``ditto.verify.repair_rejected``
-    (role ``repair``; ``llm`` defaults to the configured one). Approved samples, minus rejected
-    fields, are written to ``golden/<tid>.jsonl``.
+    (role ``repair``: ``llm``, else one built only then from ``settings``/``no_cache`` as the
+    caller's other LLMs are). Approved samples, minus rejected fields, are written to
+    ``golden/<tid>.jsonl``.
     """
     t0 = time.perf_counter()
     con = make_console(console)
@@ -326,7 +332,7 @@ def review_run(
     rejections = result.rejections
     if rejections:
         result.repair = (
-            _repair(run, rejections, llm, workers)
+            _repair(run, rejections, llm, workers, settings, no_cache)
             if repair
             else {"called": False, "reason": "repair disabled"}
         )

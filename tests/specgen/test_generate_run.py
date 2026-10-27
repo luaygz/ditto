@@ -414,6 +414,22 @@ def test_unmapped_template_is_skipped(run: RunDir) -> None:
     assert result.templates["t_prof"].reason == "not in mapping.json"
 
 
+def test_tail_spec_generates_tail_clusters_the_probe_never_mapped(run: RunDir) -> None:
+    candidates().model_copy(update={"template_id": "t_list"}).save(run.candidates("t_list"))
+    write_union(run, "t_list", UNION_HTML)
+    # mapping.json covers non-tail templates only (the probe skips the tail)
+    mapping = Mapping(templates={"t_other": TemplateMapping(fields={"name": "c1"})})
+    llm = FakeLLM([GOOD])
+    result = generate_run(
+        run, mode="prompted", schema=SCHEMA, mapping=mapping, llm=llm, tail="spec"
+    )
+    assert result.templates["t_prof"].reason == "not in mapping.json"  # non-tail: still skipped
+    assert [c["template_id"] for c in llm.calls] == ["t_list"]
+    assert result.templates["t_list"].status == "ok" and run.draft_spec("t_list").exists()
+    prompt = llm.calls[0]["messages"][-1]["content"]
+    assert "`phone`" in prompt and "Confirmed mapping" not in prompt  # every field, unmapped
+
+
 def _fake_union(monkeypatch: pytest.MonkeyPatch, built: list[dict[str, Any]]) -> None:
     class Page:
         html = UNION_HTML

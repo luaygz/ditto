@@ -70,7 +70,11 @@ def stage_analyze(
     tables = analyze_run(run, include_tail=include_tail, workers=workers)
     template_ids = list(tables)
     unions = build_union_run(
-        run, min_tokens=min_tokens, max_tokens=max_tokens, template_ids=template_ids
+        run,
+        min_tokens=min_tokens,
+        max_tokens=max_tokens,
+        template_ids=template_ids,
+        workers=workers,
     )
     _log(f"analyze: {len(tables)} candidate tables, {len(unions)} union pages")
     return tables
@@ -180,7 +184,14 @@ def continue_run(run: RunDir, opts: RunOptions, schema: Any) -> RunDir:
     )
     verify_run(run, max_repair_calls=opts.max_repair_calls, llm=repair_llm, workers=opts.workers)
     require_terminal(opts.yes, "the review checkpoint (ditto review)")
-    review_run(run, yes=opts.yes, input_fn=opts.input_fn)
+    review_run(
+        run,
+        yes=opts.yes,
+        input_fn=opts.input_fn,
+        llm=repair_llm,
+        settings=opts.settings,
+        no_cache=opts.no_cache,
+    )
     extract_run(run, workers=opts.workers)
     if opts.tail == "direct" and schema is not None:
         from ditto.specgen.tail import tail_direct_run

@@ -1,9 +1,10 @@
 """Stage 10, ``--tail direct``: one small-model call per long-tail page.
 
-Pages of clusters below the minimum size (``is_tail``) get no spec. With ``--tail direct`` each
-such page is sent, cleaned and compacted, to the small model, which extracts the prompted schema
-directly. Rows have the extraction JSONL shape with ``template_id: null`` and are written to
-``out/<site>/_tail.jsonl`` (``RunDir.out_jsonl(site, None)``).
+Pages of clusters below the minimum size (``is_tail``) get no spec unless ``--tail spec`` made
+one. With ``--tail direct`` each page of a tail cluster without a final spec is sent, cleaned and
+compacted, to the small model, which extracts the prompted schema directly. Rows have the
+extraction JSONL shape with ``template_id: null`` and are written to ``out/<site>/_tail.jsonl``
+(``RunDir.out_jsonl(site, None)``).
 """
 
 from __future__ import annotations
@@ -25,6 +26,7 @@ from ditto.llm.base import LLM, BudgetExceeded, LLMError, Message
 from ditto.run import RunDir
 from ditto.schema import FieldRequest, FieldsSchema
 from ditto.specgen.generate import RecordingLLM
+from ditto.specgen.models import Spec
 from ditto.specgen.prompts import Prompt, load_prompt
 from ditto.union import count_tokens
 
@@ -270,12 +272,18 @@ def tail_row(
     return row
 
 
+def _has_final_spec(run: RunDir, template_id: str) -> bool:
+    path = run.spec(template_id)
+    return path.exists() and Spec.load(path).status == "final"
+
+
 def tail_pages(run: RunDir, store: PageStore) -> list[TailPage]:
+    """Pages of tail clusters without a final spec (extraction covers the others)."""
     clusters = Clusters.load(run.clusters_json)
     pages = [
         TailPage(pid, store.url(pid), c.template_id)
         for c in clusters.clusters
-        if c.is_tail
+        if c.is_tail and not _has_final_spec(run, c.template_id)
         for pid in c.page_ids
     ]
     return sorted(pages, key=lambda p: p.page_id)
@@ -293,7 +301,8 @@ def tail_direct_run(
     concurrency: int = 4,
     max_page_tokens: int = PAGE_TOKENS,
 ) -> TailResult:
-    """Extract ``schema`` from every tail page with one small-model call each.
+    """Extract ``schema`` from every page of a tail cluster without a final spec with one
+    small-model call each.
 
     Refuses (raises ``BudgetExceeded``) when the projected cost exceeds the remaining budget;
     a budget abort mid-run writes the rows done so far and lists the pages not processed.

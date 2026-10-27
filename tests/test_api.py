@@ -196,5 +196,11 @@ def test_default_run_dir(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Non
     monkeypatch.chdir(tmp_path)
     write_warc(tmp_path / "crawl.warc.gz", _fixture_pages(2))
     site = Site.from_warc(tmp_path / "crawl.warc.gz")
-    assert site.run.root == tmp_path / "ditto-runs" / "crawl.warc"
+    assert site.run.root == tmp_path / "ditto-runs" / "crawl"  # .warc.gz stripped
     assert site.run.read_meta()["n_pages"] == 2
+
+    pages = tmp_path / "pages.v2"  # a directory keeps its whole name
+    pages.mkdir()
+    for i, (_, html) in enumerate(_fixture_pages(2)):
+        (pages / f"p{i}.html").write_text(html)
+    assert Site.from_dir(pages).run.root == tmp_path / "ditto-runs" / "pages.v2"
