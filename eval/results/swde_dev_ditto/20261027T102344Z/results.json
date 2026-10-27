@@ -1,0 +1,6201 @@
+{
+  "name": "swde_dev_ditto",
+  "dataset": "swde",
+  "split": "dev",
+  "method": {
+    "kind": "ditto",
+    "mode": "prompted",
+    "baseline": null,
+    "params": {
+      "until": "extract",
+      "min_cluster_size": 20,
+      "union_min_tokens": 8000,
+      "union_max_tokens": 30000,
+      "max_repair_calls": 3,
+      "tail": "skip",
+      "concurrency": 4
+    }
+  },
+  "method_label": "ditto (prompted)",
+  "status": "ok",
+  "reason": null,
+  "summary": {
+    "n_sites": 16,
+    "n_ok": 16,
+    "status_counts": {
+      "ok": 16
+    },
+    "accuracy": {
+      "per_vertical": {
+        "auto": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.8634942471235618,
+            "recall": 0.9957436154231347,
+            "f1": 0.8673527964899929
+          },
+          "fields_norm_f1": {
+            "engine": 0.5,
+            "fuel_economy": 0.9758783429470372,
+            "model": 1.0,
+            "price": 0.9935328430129343
+          },
+          "raw": {
+            "precision": 0.8634942471235618,
+            "recall": 0.9957436154231347,
+            "f1": 0.8673527964899929
+          },
+          "fields_raw_f1": {
+            "engine": 0.5,
+            "fuel_economy": 0.9758783429470372,
+            "model": 1.0,
+            "price": 0.9935328430129343
+          }
+        },
+        "book": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.7941731776903425,
+            "recall": 0.7995445344129555,
+            "f1": 0.7967759183958918
+          },
+          "fields_norm_f1": {
+            "author": 0.999746835443038,
+            "isbn_13": 0.999746835443038,
+            "publication_date": 0.5,
+            "publisher": 0.48539857932123126,
+            "title": 0.9989873417721519
+          },
+          "raw": {
+            "precision": 0.7941731776903425,
+            "recall": 0.7995445344129555,
+            "f1": 0.7967759183958918
+          },
+          "fields_raw_f1": {
+            "author": 0.999746835443038,
+            "isbn_13": 0.999746835443038,
+            "publication_date": 0.5,
+            "publisher": 0.48539857932123126,
+            "title": 0.9989873417721519
+          }
+        },
+        "camera": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.8063400576368875,
+            "recall": 0.8014747589336358,
+            "f1": 0.8038879359634077
+          },
+          "fields_norm_f1": {
+            "manufacturer": 0.9959977129788451,
+            "model": 0.4156660949113779,
+            "price": 1.0
+          },
+          "raw": {
+            "precision": 0.8063400576368875,
+            "recall": 0.8014747589336358,
+            "f1": 0.8038879359634077
+          },
+          "fields_raw_f1": {
+            "manufacturer": 0.9959977129788451,
+            "model": 0.4156660949113779,
+            "price": 1.0
+          }
+        },
+        "job": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 1.0,
+            "recall": 0.9963861641713991,
+            "f1": 0.9981844823728068
+          },
+          "fields_norm_f1": {
+            "company": 0.9988357050452781,
+            "date_posted": 1.0,
+            "location": 0.996752403221616,
+            "title": 0.998965338851526
+          },
+          "raw": {
+            "precision": 1.0,
+            "recall": 0.9963861641713991,
+            "f1": 0.9981844823728068
+          },
+          "fields_raw_f1": {
+            "company": 0.9988357050452781,
+            "date_posted": 1.0,
+            "location": 0.996752403221616,
+            "title": 0.998965338851526
+          }
+        },
+        "movie": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.8196321321321322,
+            "recall": 0.8196321321321322,
+            "f1": 0.8196321321321322
+          },
+          "fields_norm_f1": {
+            "director": 0.5,
+            "genre": 1.0,
+            "mpaa_rating": 0.7785285285285286,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.8196321321321322,
+            "recall": 0.8196321321321322,
+            "f1": 0.8196321321321322
+          },
+          "fields_raw_f1": {
+            "director": 0.5,
+            "genre": 1.0,
+            "mpaa_rating": 0.7785285285285286,
+            "title": 1.0
+          }
+        },
+        "nbaplayer": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.875,
+            "recall": 0.875,
+            "f1": 0.875
+          },
+          "fields_norm_f1": {
+            "height": 1.0,
+            "name": 0.5,
+            "team": 1.0,
+            "weight": 1.0
+          },
+          "raw": {
+            "precision": 0.75,
+            "recall": 0.75,
+            "f1": 0.75
+          },
+          "fields_raw_f1": {
+            "height": 1.0,
+            "name": 0.5,
+            "team": 0.5,
+            "weight": 1.0
+          }
+        },
+        "restaurant": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.8546672297610267,
+            "recall": 0.8546046984953939,
+            "f1": 0.8546359563059354
+          },
+          "fields_norm_f1": {
+            "address": 0.5397897897897898,
+            "cuisine": 0.9997498749374687,
+            "name": 0.9657158409034348,
+            "phone": 0.9132883195930481
+          },
+          "raw": {
+            "precision": 0.8546672297610267,
+            "recall": 0.8546046984953939,
+            "f1": 0.8546359563059354
+          },
+          "fields_raw_f1": {
+            "address": 0.5397897897897898,
+            "cuisine": 0.9997498749374687,
+            "name": 0.9657158409034348,
+            "phone": 0.9132883195930481
+          }
+        },
+        "university": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_norm_f1": {
+            "name": 1.0,
+            "phone": 1.0,
+            "type": 1.0,
+            "website": 1.0
+          },
+          "raw": {
+            "precision": 0.9999374687343672,
+            "recall": 0.9999374687343672,
+            "f1": 0.9999374687343672
+          },
+          "fields_raw_f1": {
+            "name": 0.9997498749374687,
+            "phone": 1.0,
+            "type": 1.0,
+            "website": 1.0
+          }
+        }
+      },
+      "overall": {
+        "n_sites": 16,
+        "n_verticals": 8,
+        "norm": {
+          "precision": 0.8766633555429938,
+          "recall": 0.8927982379460814,
+          "f1": 0.8769336527075209
+        },
+        "raw": {
+          "precision": 0.8610305391347898,
+          "recall": 0.8771654215378772,
+          "f1": 0.8613008362993168
+        }
+      }
+    },
+    "accuracy_sample": {
+      "per_vertical": {
+        "auto": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.8574999999999999,
+            "recall": 0.99,
+            "f1": 0.8617254184680191
+          },
+          "fields_norm_f1": {
+            "engine": 0.5,
+            "fuel_economy": 0.9623655913978495,
+            "model": 1.0,
+            "price": 0.9845360824742269
+          },
+          "raw": {
+            "precision": 0.8574999999999999,
+            "recall": 0.99,
+            "f1": 0.8617254184680191
+          },
+          "fields_raw_f1": {
+            "engine": 0.5,
+            "fuel_economy": 0.9623655913978495,
+            "model": 1.0,
+            "price": 0.9845360824742269
+          }
+        },
+        "book": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.7916666666666667,
+            "recall": 0.8,
+            "f1": 0.7956521739130434
+          },
+          "fields_norm_f1": {
+            "author": 1.0,
+            "isbn_13": 1.0,
+            "publication_date": 0.5,
+            "publisher": 0.4782608695652174,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.7916666666666667,
+            "recall": 0.8,
+            "f1": 0.7956521739130434
+          },
+          "fields_raw_f1": {
+            "author": 1.0,
+            "isbn_13": 1.0,
+            "publication_date": 0.5,
+            "publisher": 0.4782608695652174,
+            "title": 1.0
+          }
+        },
+        "camera": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.7933333333333332,
+            "recall": 0.7933333333333332,
+            "f1": 0.7933333333333332
+          },
+          "fields_norm_f1": {
+            "manufacturer": 1.0,
+            "model": 0.38,
+            "price": 1.0
+          },
+          "raw": {
+            "precision": 0.7933333333333332,
+            "recall": 0.7933333333333332,
+            "f1": 0.7933333333333332
+          },
+          "fields_raw_f1": {
+            "manufacturer": 1.0,
+            "model": 0.38,
+            "price": 1.0
+          }
+        },
+        "job": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 1.0,
+            "recall": 0.9965277777777777,
+            "f1": 0.9982456140350877
+          },
+          "fields_norm_f1": {
+            "company": 0.9947368421052631,
+            "date_posted": 1.0,
+            "location": 1.0,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 1.0,
+            "recall": 0.9965277777777777,
+            "f1": 0.9982456140350877
+          },
+          "fields_raw_f1": {
+            "company": 0.9947368421052631,
+            "date_posted": 1.0,
+            "location": 1.0,
+            "title": 1.0
+          }
+        },
+        "movie": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.8325,
+            "recall": 0.8325,
+            "f1": 0.8325
+          },
+          "fields_norm_f1": {
+            "director": 0.5,
+            "genre": 1.0,
+            "mpaa_rating": 0.8300000000000001,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.8325,
+            "recall": 0.8325,
+            "f1": 0.8325
+          },
+          "fields_raw_f1": {
+            "director": 0.5,
+            "genre": 1.0,
+            "mpaa_rating": 0.8300000000000001,
+            "title": 1.0
+          }
+        },
+        "nbaplayer": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.875,
+            "recall": 0.875,
+            "f1": 0.875
+          },
+          "fields_norm_f1": {
+            "height": 1.0,
+            "name": 0.5,
+            "team": 1.0,
+            "weight": 1.0
+          },
+          "raw": {
+            "precision": 0.75,
+            "recall": 0.75,
+            "f1": 0.75
+          },
+          "fields_raw_f1": {
+            "height": 1.0,
+            "name": 0.5,
+            "team": 0.5,
+            "weight": 1.0
+          }
+        },
+        "restaurant": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 0.8494897959183674,
+            "recall": 0.8494897959183674,
+            "f1": 0.8494897959183674
+          },
+          "fields_norm_f1": {
+            "address": 0.5612244897959183,
+            "cuisine": 1.0,
+            "name": 0.9693877551020409,
+            "phone": 0.8673469387755102
+          },
+          "raw": {
+            "precision": 0.8494897959183674,
+            "recall": 0.8494897959183674,
+            "f1": 0.8494897959183674
+          },
+          "fields_raw_f1": {
+            "address": 0.5612244897959183,
+            "cuisine": 1.0,
+            "name": 0.9693877551020409,
+            "phone": 0.8673469387755102
+          }
+        },
+        "university": {
+          "n_sites": 2,
+          "norm": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_norm_f1": {
+            "name": 1.0,
+            "phone": 1.0,
+            "type": 1.0,
+            "website": 1.0
+          },
+          "raw": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_raw_f1": {
+            "name": 1.0,
+            "phone": 1.0,
+            "type": 1.0,
+            "website": 1.0
+          }
+        }
+      },
+      "overall": {
+        "n_sites": 16,
+        "n_verticals": 8,
+        "norm": {
+          "precision": 0.8749362244897959,
+          "recall": 0.8921063633786848,
+          "f1": 0.8757432919584813
+        },
+        "raw": {
+          "precision": 0.8593112244897959,
+          "recall": 0.8764813633786848,
+          "f1": 0.8601182919584813
+        }
+      }
+    },
+    "optional_field_recall": null,
+    "groups": {},
+    "clustering": {
+      "n_clusters": 9.5625,
+      "n_templates": 1.4375,
+      "tail_pages": 12.9375,
+      "n_sites": 16
+    },
+    "cost": {
+      "pages": 26894,
+      "templates": 23,
+      "calls": 36,
+      "input_tokens": 881390,
+      "output_tokens": 20343,
+      "input_tokens_per_1k_pages": 32772.73741354949,
+      "output_tokens_per_1k_pages": 756.4140700527998,
+      "calls_per_template": 1.7208333333333332,
+      "usd_per_1k_pages": 0.07310961552762699,
+      "price_estimated": false,
+      "extrapolated": false,
+      "spend_usd": 0.0,
+      "llm_latency_s_mean": null
+    },
+    "cost_per_vertical": {
+      "auto": {
+        "pages": 4000,
+        "templates": 2,
+        "calls": 7,
+        "input_tokens": 70980,
+        "output_tokens": 2938,
+        "input_tokens_per_1k_pages": 17745.0,
+        "output_tokens_per_1k_pages": 734.5,
+        "calls_per_template": 3.5,
+        "usd_per_1k_pages": 0.042835,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "book": {
+        "pages": 4000,
+        "templates": 2,
+        "calls": 8,
+        "input_tokens": 369399,
+        "output_tokens": 4518,
+        "input_tokens_per_1k_pages": 92349.75,
+        "output_tokens_per_1k_pages": 1129.5,
+        "calls_per_template": 4.0,
+        "usd_per_1k_pages": 0.19599450000000002,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "camera": {
+        "pages": 2014,
+        "templates": 4,
+        "calls": 5,
+        "input_tokens": 160191,
+        "output_tokens": 2374,
+        "input_tokens_per_1k_pages": 79538.72889771599,
+        "output_tokens_per_1k_pages": 1178.7487586891757,
+        "calls_per_template": 1.1666666666666665,
+        "usd_per_1k_pages": 0.17086494538232375,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "job": {
+        "pages": 4000,
+        "templates": 6,
+        "calls": 7,
+        "input_tokens": 116626,
+        "output_tokens": 4655,
+        "input_tokens_per_1k_pages": 29156.5,
+        "output_tokens_per_1k_pages": 1163.75,
+        "calls_per_template": 1.1,
+        "usd_per_1k_pages": 0.0699505,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "movie": {
+        "pages": 4000,
+        "templates": 2,
+        "calls": 2,
+        "input_tokens": 35265,
+        "output_tokens": 1646,
+        "input_tokens_per_1k_pages": 8816.25,
+        "output_tokens_per_1k_pages": 411.5,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.021747500000000003,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "nbaplayer": {
+        "pages": 880,
+        "templates": 2,
+        "calls": 2,
+        "input_tokens": 29712,
+        "output_tokens": 1004,
+        "input_tokens_per_1k_pages": 33763.63636363636,
+        "output_tokens_per_1k_pages": 1140.909090909091,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.07893636363636362,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "restaurant": {
+        "pages": 4000,
+        "templates": 2,
+        "calls": 2,
+        "input_tokens": 32169,
+        "output_tokens": 1235,
+        "input_tokens_per_1k_pages": 8042.25,
+        "output_tokens_per_1k_pages": 308.75,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.019172,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "university": {
+        "pages": 4000,
+        "templates": 3,
+        "calls": 3,
+        "input_tokens": 67048,
+        "output_tokens": 1973,
+        "input_tokens_per_1k_pages": 16762.0,
+        "output_tokens_per_1k_pages": 493.25,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.0384565,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      }
+    },
+    "speed_pages_per_sec_per_core": {
+      "ingest": 1356.1768749999999,
+      "fingerprint": 79.235,
+      "cluster": 12231.649374999999,
+      "analyze": 20.456875,
+      "union": 73.0575,
+      "probe": 82050.910625,
+      "generate": 18872.44,
+      "verify": 54.169375,
+      "review": 209.010625,
+      "extract": 130.95375
+    },
+    "curves": {},
+    "unprompted_recall": null,
+    "union": null
+  },
+  "sites": [
+    {
+      "site": "auto-aol",
+      "vertical": "auto",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "auto-aol",
+        "vertical": "auto",
+        "pages_scored": 1997,
+        "pages_without_prediction": 0,
+        "pages_excluded": 3,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.9914872308462694,
+          "f1": 0.7467664215064671
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.9914872308462694,
+          "f1": 0.7467664215064671
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 1997,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1997,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 1946,
+              "fp": 0,
+              "fn": 51,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9744616925388082,
+              "f1": 0.9870656860258686
+            },
+            "raw": {
+              "tp": 1946,
+              "fp": 0,
+              "fn": 51,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9744616925388082,
+              "f1": 0.9870656860258686
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 0,
+              "fp": 1117,
+              "fn": 0,
+              "tn": 880,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1117,
+              "fn": 0,
+              "tn": 880,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 1842,
+              "fp": 0,
+              "fn": 0,
+              "tn": 155,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1842,
+              "fp": 0,
+              "fn": 0,
+              "tn": 155,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "auto-aol",
+        "vertical": "auto",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.98,
+          "f1": 0.7422680412371134
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.98,
+          "f1": 0.7422680412371134
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 47,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.94,
+              "f1": 0.9690721649484536
+            },
+            "raw": {
+              "tp": 47,
+              "fp": 0,
+              "fn": 3,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.94,
+              "f1": 0.9690721649484536
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 0,
+              "fp": 28,
+              "fn": 0,
+              "tn": 22,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 28,
+              "fn": 0,
+              "tn": 22,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 45,
+              "fp": 0,
+              "fn": 0,
+              "tn": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 45,
+              "fp": 0,
+              "fn": 0,
+              "tn": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 4,
+        "cached_calls": 4,
+        "input_tokens": 45870,
+        "output_tokens": 1347,
+        "input_tokens_per_1k_pages": 22935.0,
+        "output_tokens_per_1k_pages": 673.5,
+        "calls_per_template": 4.0,
+        "usd_per_1k_pages": 0.052605,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 4,
+            "cached_calls": 4,
+            "input_tokens": 45870,
+            "output_tokens": 1347,
+            "usd_per_1k_pages": 0.052605
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 20.911
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.1518,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 13174.86,
+          "pages_per_sec_per_core": 1646.86
+        },
+        "fingerprint": {
+          "seconds": 1.3826,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1446.51,
+          "pages_per_sec_per_core": 90.41
+        },
+        "cluster": {
+          "seconds": 0.7861,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 2544.24,
+          "pages_per_sec_per_core": 2544.24
+        },
+        "analyze": {
+          "seconds": 5.2565,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 380.48,
+          "pages_per_sec_per_core": 23.78
+        },
+        "union": {
+          "seconds": 3.27,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 30.58,
+          "pages_per_sec_per_core": 30.58
+        },
+        "probe": {
+          "seconds": 0.02,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 100079.08,
+          "pages_per_sec_per_core": 100079.08
+        },
+        "generate": {
+          "seconds": 0.0343,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 58360.17,
+          "pages_per_sec_per_core": 58360.17
+        },
+        "verify": {
+          "seconds": 7.9886,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 250.36,
+          "pages_per_sec_per_core": 15.65
+        },
+        "review": {
+          "seconds": 0.0517,
+          "pages": 18,
+          "workers": 1,
+          "pages_per_sec": 347.85,
+          "pages_per_sec_per_core": 347.85
+        },
+        "extract": {
+          "seconds": 0.7703,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 2596.5,
+          "pages_per_sec_per_core": 162.28
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "aol",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/auto-aol/run"
+    },
+    {
+      "site": "book-abebooks",
+      "vertical": "book",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "book-abebooks",
+        "vertical": "book",
+        "pages_scored": 1995,
+        "pages_without_prediction": 0,
+        "pages_excluded": 5,
+        "norm": {
+          "precision": 0.9886503067484662,
+          "recall": 1.0,
+          "f1": 0.9941594317284925
+        },
+        "raw": {
+          "precision": 0.9886503067484662,
+          "recall": 1.0,
+          "f1": 0.9941594317284925
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 1995,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1995,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 1995,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1995,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 1995,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1995,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 1845,
+              "fp": 111,
+              "fn": 0,
+              "tn": 39,
+              "precision": 0.9432515337423313,
+              "recall": 1.0,
+              "f1": 0.9707971586424625
+            },
+            "raw": {
+              "tp": 1845,
+              "fp": 111,
+              "fn": 0,
+              "tn": 39,
+              "precision": 0.9432515337423313,
+              "recall": 1.0,
+              "f1": 0.9707971586424625
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 1988,
+              "fp": 0,
+              "fn": 0,
+              "tn": 7,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1988,
+              "fp": 0,
+              "fn": 0,
+              "tn": 7,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "book-abebooks",
+        "vertical": "book",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9833333333333334,
+          "recall": 1.0,
+          "f1": 0.9913043478260869
+        },
+        "raw": {
+          "precision": 0.9833333333333334,
+          "recall": 1.0,
+          "f1": 0.9913043478260869
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 44,
+              "fp": 4,
+              "fn": 0,
+              "tn": 2,
+              "precision": 0.9166666666666666,
+              "recall": 1.0,
+              "f1": 0.9565217391304348
+            },
+            "raw": {
+              "tp": 44,
+              "fp": 4,
+              "fn": 0,
+              "tn": 2,
+              "precision": 0.9166666666666666,
+              "recall": 1.0,
+              "f1": 0.9565217391304348
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 4,
+        "cached_calls": 4,
+        "input_tokens": 35943,
+        "output_tokens": 2391,
+        "input_tokens_per_1k_pages": 17971.5,
+        "output_tokens_per_1k_pages": 1195.5,
+        "calls_per_template": 4.0,
+        "usd_per_1k_pages": 0.047898,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 4,
+            "cached_calls": 4,
+            "input_tokens": 35943,
+            "output_tokens": 2391,
+            "usd_per_1k_pages": 0.047898
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 19.765
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.208,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 9616.2,
+          "pages_per_sec_per_core": 1202.02
+        },
+        "fingerprint": {
+          "seconds": 1.7447,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1146.36,
+          "pages_per_sec_per_core": 71.65
+        },
+        "cluster": {
+          "seconds": 0.127,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 15753.13,
+          "pages_per_sec_per_core": 15753.13
+        },
+        "analyze": {
+          "seconds": 6.1649,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 324.41,
+          "pages_per_sec_per_core": 20.28
+        },
+        "union": {
+          "seconds": 2.807,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 35.63,
+          "pages_per_sec_per_core": 35.63
+        },
+        "probe": {
+          "seconds": 0.0162,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 123145.1,
+          "pages_per_sec_per_core": 123145.1
+        },
+        "generate": {
+          "seconds": 0.0333,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 60119.39,
+          "pages_per_sec_per_core": 60119.39
+        },
+        "verify": {
+          "seconds": 7.0807,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 282.46,
+          "pages_per_sec_per_core": 17.65
+        },
+        "review": {
+          "seconds": 0.0403,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 124.18,
+          "pages_per_sec_per_core": 124.18
+        },
+        "extract": {
+          "seconds": 1.035,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1932.35,
+          "pages_per_sec_per_core": 120.77
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "abebooks",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/book-abebooks/run"
+    },
+    {
+      "site": "camera-amazon",
+      "vertical": "camera",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 1767,
+      "n_labeled": 1767,
+      "accuracy": {
+        "site": "camera-amazon",
+        "vertical": "camera",
+        "pages_scored": 1763,
+        "pages_without_prediction": 0,
+        "pages_excluded": 4,
+        "norm": {
+          "precision": 0.9460134486071086,
+          "recall": 0.9362828512006051,
+          "f1": 0.9411092052601487
+        },
+        "raw": {
+          "precision": 0.9460134486071086,
+          "recall": 0.9362828512006051,
+          "f1": 0.9411092052601487
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 1454,
+              "fp": 281,
+              "fn": 309,
+              "tn": 0,
+              "precision": 0.8380403458213257,
+              "recall": 0.8247305728871243,
+              "f1": 0.8313321898227558
+            },
+            "raw": {
+              "tp": 1454,
+              "fp": 281,
+              "fn": 309,
+              "tn": 0,
+              "precision": 0.8380403458213257,
+              "recall": 0.8247305728871243,
+              "f1": 0.8313321898227558
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 1763,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1763,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "manufacturer": {
+            "norm": {
+              "tp": 1735,
+              "fp": 0,
+              "fn": 28,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9841179807146909,
+              "f1": 0.9919954259576901
+            },
+            "raw": {
+              "tp": 1735,
+              "fp": 0,
+              "fn": 28,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9841179807146909,
+              "f1": 0.9919954259576901
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "camera-amazon",
+        "vertical": "camera",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9199999999999999,
+          "recall": 0.9199999999999999,
+          "f1": 0.9199999999999999
+        },
+        "raw": {
+          "precision": 0.9199999999999999,
+          "recall": 0.9199999999999999,
+          "f1": 0.9199999999999999
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 38,
+              "fp": 12,
+              "fn": 12,
+              "tn": 0,
+              "precision": 0.76,
+              "recall": 0.76,
+              "f1": 0.76
+            },
+            "raw": {
+              "tp": 38,
+              "fp": 12,
+              "fn": 12,
+              "tn": 0,
+              "precision": 0.76,
+              "recall": 0.76,
+              "f1": 0.76
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "manufacturer": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 3,
+        "n_templates": 3,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 1767,
+        "templates": 3,
+        "calls": 4,
+        "cached_calls": 4,
+        "input_tokens": 122513,
+        "output_tokens": 1750,
+        "input_tokens_per_1k_pages": 69333.89926428976,
+        "output_tokens_per_1k_pages": 990.3791737408036,
+        "calls_per_template": 1.3333333333333333,
+        "usd_per_1k_pages": 0.14857159026598754,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 4,
+            "cached_calls": 4,
+            "input_tokens": 122513,
+            "output_tokens": 1750,
+            "usd_per_1k_pages": 0.14857159026598754
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 45.624
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.2206,
+          "pages": 1767,
+          "workers": 7,
+          "pages_per_sec": 8011.51,
+          "pages_per_sec_per_core": 1144.5
+        },
+        "fingerprint": {
+          "seconds": 2.0243,
+          "pages": 1767,
+          "workers": 16,
+          "pages_per_sec": 872.91,
+          "pages_per_sec_per_core": 54.56
+        },
+        "cluster": {
+          "seconds": 3.001,
+          "pages": 1767,
+          "workers": 1,
+          "pages_per_sec": 588.79,
+          "pages_per_sec_per_core": 588.79
+        },
+        "analyze": {
+          "seconds": 8.4009,
+          "pages": 1767,
+          "workers": 16,
+          "pages_per_sec": 210.33,
+          "pages_per_sec_per_core": 13.15
+        },
+        "union": {
+          "seconds": 5.2572,
+          "pages": 228,
+          "workers": 3,
+          "pages_per_sec": 43.37,
+          "pages_per_sec_per_core": 14.46
+        },
+        "probe": {
+          "seconds": 0.0955,
+          "pages": 1767,
+          "workers": 1,
+          "pages_per_sec": 18499.89,
+          "pages_per_sec_per_core": 18499.89
+        },
+        "generate": {
+          "seconds": 5.3445,
+          "pages": 1767,
+          "workers": 3,
+          "pages_per_sec": 330.62,
+          "pages_per_sec_per_core": 110.21
+        },
+        "verify": {
+          "seconds": 3.2682,
+          "pages": 1767,
+          "workers": 16,
+          "pages_per_sec": 540.66,
+          "pages_per_sec_per_core": 33.79
+        },
+        "review": {
+          "seconds": 0.0678,
+          "pages": 10,
+          "workers": 1,
+          "pages_per_sec": 147.58,
+          "pages_per_sec_per_core": 147.58
+        },
+        "extract": {
+          "seconds": 1.0081,
+          "pages": 1767,
+          "workers": 16,
+          "pages_per_sec": 1752.82,
+          "pages_per_sec_per_core": 109.55
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "amazon",
+        "split": "dev",
+        "pages": 1767,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/camera-amazon/run"
+    },
+    {
+      "site": "job-careerbuilder",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "job-careerbuilder",
+        "vertical": "job",
+        "pages_scored": 1937,
+        "pages_without_prediction": 6,
+        "pages_excluded": 63,
+        "norm": {
+          "precision": 1.0,
+          "recall": 0.9927723283427982,
+          "f1": 0.9963689647456135
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 0.9927723283427982,
+          "f1": 0.9963689647456135
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 1929,
+              "fp": 0,
+              "fn": 8,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9958699019101703,
+              "f1": 0.9979306777030522
+            },
+            "raw": {
+              "tp": 1929,
+              "fp": 0,
+              "fn": 8,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9958699019101703,
+              "f1": 0.9979306777030522
+            }
+          },
+          "company": {
+            "norm": {
+              "tp": 1928,
+              "fp": 0,
+              "fn": 9,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9953536396489416,
+              "f1": 0.9976714100905563
+            },
+            "raw": {
+              "tp": 1928,
+              "fp": 0,
+              "fn": 9,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9953536396489416,
+              "f1": 0.9976714100905563
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 1912,
+              "fp": 0,
+              "fn": 25,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9870934434692824,
+              "f1": 0.993504806443232
+            },
+            "raw": {
+              "tp": 1912,
+              "fp": 0,
+              "fn": 25,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9870934434692824,
+              "f1": 0.993504806443232
+            }
+          },
+          "date_posted": {
+            "norm": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 1937,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 1937,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "job-careerbuilder",
+        "vertical": "job",
+        "pages_scored": 48,
+        "pages_without_prediction": 0,
+        "pages_excluded": 2,
+        "norm": {
+          "precision": 1.0,
+          "recall": 0.9930555555555555,
+          "f1": 0.9964912280701754
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 0.9930555555555555,
+          "f1": 0.9964912280701754
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 48,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 48,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "company": {
+            "norm": {
+              "tp": 47,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9791666666666666,
+              "f1": 0.9894736842105263
+            },
+            "raw": {
+              "tp": 47,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9791666666666666,
+              "f1": 0.9894736842105263
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 48,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 48,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "date_posted": {
+            "norm": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 48,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 48,
+              "precision": null,
+              "recall": null,
+              "f1": null
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 34,
+        "n_templates": 5,
+        "tail_pages": 72
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 5,
+        "calls": 6,
+        "cached_calls": 6,
+        "input_tokens": 106123,
+        "output_tokens": 4144,
+        "input_tokens_per_1k_pages": 53061.5,
+        "output_tokens_per_1k_pages": 2072.0,
+        "calls_per_template": 1.2,
+        "usd_per_1k_pages": 0.126843,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 6,
+            "cached_calls": 6,
+            "input_tokens": 106123,
+            "output_tokens": 4144,
+            "usd_per_1k_pages": 0.126843
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 39.325
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.2716,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 7363.39,
+          "pages_per_sec_per_core": 920.42
+        },
+        "fingerprint": {
+          "seconds": 1.8779,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1065.0,
+          "pages_per_sec_per_core": 66.56
+        },
+        "cluster": {
+          "seconds": 4.5515,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 439.41,
+          "pages_per_sec_per_core": 439.41
+        },
+        "analyze": {
+          "seconds": 7.8106,
+          "pages": 1928,
+          "workers": 16,
+          "pages_per_sec": 246.84,
+          "pages_per_sec_per_core": 15.43
+        },
+        "union": {
+          "seconds": 15.8489,
+          "pages": 290,
+          "workers": 5,
+          "pages_per_sec": 18.3,
+          "pages_per_sec_per_core": 3.66
+        },
+        "probe": {
+          "seconds": 0.1056,
+          "pages": 1928,
+          "workers": 1,
+          "pages_per_sec": 18250.97,
+          "pages_per_sec_per_core": 18250.97
+        },
+        "generate": {
+          "seconds": 0.0934,
+          "pages": 1928,
+          "workers": 4,
+          "pages_per_sec": 20649.26,
+          "pages_per_sec_per_core": 5162.31
+        },
+        "verify": {
+          "seconds": 7.0231,
+          "pages": 1928,
+          "workers": 16,
+          "pages_per_sec": 274.52,
+          "pages_per_sec_per_core": 17.16
+        },
+        "review": {
+          "seconds": 0.095,
+          "pages": 15,
+          "workers": 1,
+          "pages_per_sec": 157.83,
+          "pages_per_sec_per_core": 157.83
+        },
+        "extract": {
+          "seconds": 1.2558,
+          "pages": 1994,
+          "workers": 16,
+          "pages_per_sec": 1587.77,
+          "pages_per_sec_per_core": 99.24
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "careerbuilder",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/job-careerbuilder/run"
+    },
+    {
+      "site": "movie-allmovie",
+      "vertical": "movie",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "movie-allmovie",
+        "vertical": "movie",
+        "pages_scored": 1998,
+        "pages_without_prediction": 0,
+        "pages_excluded": 2,
+        "norm": {
+          "precision": 0.8892642642642643,
+          "recall": 0.8892642642642643,
+          "f1": 0.8892642642642643
+        },
+        "raw": {
+          "precision": 0.8892642642642643,
+          "recall": 0.8892642642642643,
+          "f1": 0.8892642642642643
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "director": {
+            "norm": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "genre": {
+            "norm": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "mpaa_rating": {
+            "norm": {
+              "tp": 1113,
+              "fp": 885,
+              "fn": 885,
+              "tn": 0,
+              "precision": 0.5570570570570571,
+              "recall": 0.5570570570570571,
+              "f1": 0.5570570570570571
+            },
+            "raw": {
+              "tp": 1113,
+              "fp": 885,
+              "fn": 885,
+              "tn": 0,
+              "precision": 0.5570570570570571,
+              "recall": 0.5570570570570571,
+              "f1": 0.5570570570570571
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "movie-allmovie",
+        "vertical": "movie",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.915,
+          "recall": 0.915,
+          "f1": 0.915
+        },
+        "raw": {
+          "precision": 0.915,
+          "recall": 0.915,
+          "f1": 0.915
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "director": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "genre": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "mpaa_rating": {
+            "norm": {
+              "tp": 33,
+              "fp": 17,
+              "fn": 17,
+              "tn": 0,
+              "precision": 0.66,
+              "recall": 0.66,
+              "f1": 0.66
+            },
+            "raw": {
+              "tp": 33,
+              "fp": 17,
+              "fn": 17,
+              "tn": 0,
+              "precision": 0.66,
+              "recall": 0.66,
+              "f1": 0.66
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "cached_calls": 1,
+        "input_tokens": 26272,
+        "output_tokens": 1003,
+        "input_tokens_per_1k_pages": 13136.0,
+        "output_tokens_per_1k_pages": 501.5,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.031287,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 1,
+            "cached_calls": 1,
+            "input_tokens": 26272,
+            "output_tokens": 1003,
+            "usd_per_1k_pages": 0.031287
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 33.219
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.2357,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 8484.56,
+          "pages_per_sec_per_core": 1060.57
+        },
+        "fingerprint": {
+          "seconds": 1.4194,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1409.09,
+          "pages_per_sec_per_core": 88.07
+        },
+        "cluster": {
+          "seconds": 0.1474,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 13572.38,
+          "pages_per_sec_per_core": 13572.38
+        },
+        "analyze": {
+          "seconds": 6.785,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 294.77,
+          "pages_per_sec_per_core": 18.42
+        },
+        "union": {
+          "seconds": 0.884,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 113.12,
+          "pages_per_sec_per_core": 113.12
+        },
+        "probe": {
+          "seconds": 0.0486,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 41148.44,
+          "pages_per_sec_per_core": 41148.44
+        },
+        "generate": {
+          "seconds": 0.9201,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 2173.59,
+          "pages_per_sec_per_core": 2173.59
+        },
+        "verify": {
+          "seconds": 1.2804,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1561.98,
+          "pages_per_sec_per_core": 97.62
+        },
+        "review": {
+          "seconds": 0.0297,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 168.18,
+          "pages_per_sec_per_core": 168.18
+        },
+        "extract": {
+          "seconds": 0.7989,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 2503.51,
+          "pages_per_sec_per_core": 156.47
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "allmovie",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/movie-allmovie/run"
+    },
+    {
+      "site": "nbaplayer-espn",
+      "vertical": "nbaplayer",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 434,
+      "n_labeled": 434,
+      "accuracy": {
+        "site": "nbaplayer-espn",
+        "vertical": "nbaplayer",
+        "pages_scored": 433,
+        "pages_without_prediction": 0,
+        "pages_excluded": 1,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 0,
+              "fp": 433,
+              "fn": 433,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 433,
+              "fn": 433,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "team": {
+            "norm": {
+              "tp": 433,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 433,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "height": {
+            "norm": {
+              "tp": 433,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 433,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "weight": {
+            "norm": {
+              "tp": 433,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 433,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "nbaplayer-espn",
+        "vertical": "nbaplayer",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 0,
+              "fp": 50,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 50,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "team": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "height": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "weight": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 434,
+        "templates": 1,
+        "calls": 1,
+        "cached_calls": 1,
+        "input_tokens": 20512,
+        "output_tokens": 508,
+        "input_tokens_per_1k_pages": 47262.67281105991,
+        "output_tokens_per_1k_pages": 1170.5069124423962,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.10623041474654377,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 1,
+            "cached_calls": 1,
+            "input_tokens": 20512,
+            "output_tokens": 508,
+            "usd_per_1k_pages": 0.10623041474654377
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 9.643
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.1078,
+          "pages": 434,
+          "workers": 2,
+          "pages_per_sec": 4026.75,
+          "pages_per_sec_per_core": 2013.37
+        },
+        "fingerprint": {
+          "seconds": 0.5937,
+          "pages": 434,
+          "workers": 7,
+          "pages_per_sec": 731.07,
+          "pages_per_sec_per_core": 104.44
+        },
+        "cluster": {
+          "seconds": 0.105,
+          "pages": 434,
+          "workers": 1,
+          "pages_per_sec": 4131.57,
+          "pages_per_sec_per_core": 4131.57
+        },
+        "analyze": {
+          "seconds": 2.486,
+          "pages": 434,
+          "workers": 16,
+          "pages_per_sec": 174.58,
+          "pages_per_sec_per_core": 10.91
+        },
+        "union": {
+          "seconds": 1.3925,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 71.82,
+          "pages_per_sec_per_core": 71.82
+        },
+        "probe": {
+          "seconds": 0.02,
+          "pages": 434,
+          "workers": 1,
+          "pages_per_sec": 21692.95,
+          "pages_per_sec_per_core": 21692.95
+        },
+        "generate": {
+          "seconds": 1.4266,
+          "pages": 434,
+          "workers": 1,
+          "pages_per_sec": 304.21,
+          "pages_per_sec_per_core": 304.21
+        },
+        "verify": {
+          "seconds": 0.3899,
+          "pages": 434,
+          "workers": 16,
+          "pages_per_sec": 1113.13,
+          "pages_per_sec_per_core": 69.57
+        },
+        "review": {
+          "seconds": 0.0155,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 322.01,
+          "pages_per_sec_per_core": 322.01
+        },
+        "extract": {
+          "seconds": 0.343,
+          "pages": 434,
+          "workers": 14,
+          "pages_per_sec": 1265.12,
+          "pages_per_sec_per_core": 90.37
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "espn",
+        "split": "dev",
+        "pages": 434,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/nbaplayer-espn/run"
+    },
+    {
+      "site": "restaurant-fodors",
+      "vertical": "restaurant",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "restaurant-fodors",
+        "vertical": "restaurant",
+        "pages_scored": 1998,
+        "pages_without_prediction": 0,
+        "pages_excluded": 2,
+        "norm": {
+          "precision": 0.7095845845845846,
+          "recall": 0.7095845845845846,
+          "f1": 0.7095845845845846
+        },
+        "raw": {
+          "precision": 0.7095845845845846,
+          "recall": 0.7095845845845846,
+          "f1": 0.7095845845845846
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 1862,
+              "fp": 136,
+              "fn": 136,
+              "tn": 0,
+              "precision": 0.9319319319319319,
+              "recall": 0.9319319319319319,
+              "f1": 0.9319319319319319
+            },
+            "raw": {
+              "tp": 1862,
+              "fp": 136,
+              "fn": 136,
+              "tn": 0,
+              "precision": 0.9319319319319319,
+              "recall": 0.9319319319319319,
+              "f1": 0.9319319319319319
+            }
+          },
+          "address": {
+            "norm": {
+              "tp": 159,
+              "fp": 1839,
+              "fn": 1839,
+              "tn": 0,
+              "precision": 0.07957957957957958,
+              "recall": 0.07957957957957958,
+              "f1": 0.07957957957957958
+            },
+            "raw": {
+              "tp": 159,
+              "fp": 1839,
+              "fn": 1839,
+              "tn": 0,
+              "precision": 0.07957957957957958,
+              "recall": 0.07957957957957958,
+              "f1": 0.07957957957957958
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 1652,
+              "fp": 346,
+              "fn": 346,
+              "tn": 0,
+              "precision": 0.8268268268268268,
+              "recall": 0.8268268268268268,
+              "f1": 0.8268268268268268
+            },
+            "raw": {
+              "tp": 1652,
+              "fp": 346,
+              "fn": 346,
+              "tn": 0,
+              "precision": 0.8268268268268268,
+              "recall": 0.8268268268268268,
+              "f1": 0.8268268268268268
+            }
+          },
+          "cuisine": {
+            "norm": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "restaurant-fodors",
+        "vertical": "restaurant",
+        "pages_scored": 49,
+        "pages_without_prediction": 0,
+        "pages_excluded": 1,
+        "norm": {
+          "precision": 0.6989795918367347,
+          "recall": 0.6989795918367347,
+          "f1": 0.6989795918367347
+        },
+        "raw": {
+          "precision": 0.6989795918367347,
+          "recall": 0.6989795918367347,
+          "f1": 0.6989795918367347
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 46,
+              "fp": 3,
+              "fn": 3,
+              "tn": 0,
+              "precision": 0.9387755102040817,
+              "recall": 0.9387755102040817,
+              "f1": 0.9387755102040817
+            },
+            "raw": {
+              "tp": 46,
+              "fp": 3,
+              "fn": 3,
+              "tn": 0,
+              "precision": 0.9387755102040817,
+              "recall": 0.9387755102040817,
+              "f1": 0.9387755102040817
+            }
+          },
+          "address": {
+            "norm": {
+              "tp": 6,
+              "fp": 43,
+              "fn": 43,
+              "tn": 0,
+              "precision": 0.12244897959183673,
+              "recall": 0.12244897959183673,
+              "f1": 0.12244897959183673
+            },
+            "raw": {
+              "tp": 6,
+              "fp": 43,
+              "fn": 43,
+              "tn": 0,
+              "precision": 0.12244897959183673,
+              "recall": 0.12244897959183673,
+              "f1": 0.12244897959183673
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 36,
+              "fp": 13,
+              "fn": 13,
+              "tn": 0,
+              "precision": 0.7346938775510204,
+              "recall": 0.7346938775510204,
+              "f1": 0.7346938775510204
+            },
+            "raw": {
+              "tp": 36,
+              "fp": 13,
+              "fn": 13,
+              "tn": 0,
+              "precision": 0.7346938775510204,
+              "recall": 0.7346938775510204,
+              "f1": 0.7346938775510204
+            }
+          },
+          "cuisine": {
+            "norm": {
+              "tp": 49,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 49,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "cached_calls": 1,
+        "input_tokens": 12913,
+        "output_tokens": 693,
+        "input_tokens_per_1k_pages": 6456.5,
+        "output_tokens_per_1k_pages": 346.5,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.016378,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 1,
+            "cached_calls": 1,
+            "input_tokens": 12913,
+            "output_tokens": 693,
+            "usd_per_1k_pages": 0.016378
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 25.526
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.3306,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 6049.79,
+          "pages_per_sec_per_core": 756.22
+        },
+        "fingerprint": {
+          "seconds": 1.9105,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1046.82,
+          "pages_per_sec_per_core": 65.43
+        },
+        "cluster": {
+          "seconds": 0.1653,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 12098.55,
+          "pages_per_sec_per_core": 12098.55
+        },
+        "analyze": {
+          "seconds": 5.4027,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 370.19,
+          "pages_per_sec_per_core": 23.14
+        },
+        "union": {
+          "seconds": 0.8568,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 116.71,
+          "pages_per_sec_per_core": 116.71
+        },
+        "probe": {
+          "seconds": 0.0149,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 134591.9,
+          "pages_per_sec_per_core": 134591.9
+        },
+        "generate": {
+          "seconds": 0.8942,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 2236.57,
+          "pages_per_sec_per_core": 2236.57
+        },
+        "verify": {
+          "seconds": 1.105,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1809.91,
+          "pages_per_sec_per_core": 113.12
+        },
+        "review": {
+          "seconds": 0.0254,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 196.78,
+          "pages_per_sec_per_core": 196.78
+        },
+        "extract": {
+          "seconds": 0.8996,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 2223.24,
+          "pages_per_sec_per_core": 138.95
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "fodors",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/restaurant-fodors/run"
+    },
+    {
+      "site": "university-collegeboard",
+      "vertical": "university",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "university-collegeboard",
+        "vertical": "university",
+        "pages_scored": 1996,
+        "pages_without_prediction": 0,
+        "pages_excluded": 4,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "website": {
+            "norm": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "type": {
+            "norm": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1996,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "university-collegeboard",
+        "vertical": "university",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "website": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "type": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "cached_calls": 1,
+        "input_tokens": 16327,
+        "output_tokens": 758,
+        "input_tokens_per_1k_pages": 8163.5,
+        "output_tokens_per_1k_pages": 379.0,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.020117,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 1,
+            "cached_calls": 1,
+            "input_tokens": 16327,
+            "output_tokens": 758,
+            "usd_per_1k_pages": 0.020117
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 13.264
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.2285,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 8754.25,
+          "pages_per_sec_per_core": 1094.28
+        },
+        "fingerprint": {
+          "seconds": 0.982,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 2036.59,
+          "pages_per_sec_per_core": 127.29
+        },
+        "cluster": {
+          "seconds": 0.1228,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 16292.56,
+          "pages_per_sec_per_core": 16292.56
+        },
+        "analyze": {
+          "seconds": 3.3563,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 595.89,
+          "pages_per_sec_per_core": 37.24
+        },
+        "union": {
+          "seconds": 6.839,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 14.62,
+          "pages_per_sec_per_core": 14.62
+        },
+        "probe": {
+          "seconds": 0.0162,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 123202.03,
+          "pages_per_sec_per_core": 123202.03
+        },
+        "generate": {
+          "seconds": 0.0342,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 58464.79,
+          "pages_per_sec_per_core": 58464.79
+        },
+        "verify": {
+          "seconds": 0.8374,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 2388.25,
+          "pages_per_sec_per_core": 149.27
+        },
+        "review": {
+          "seconds": 0.0209,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 239.0,
+          "pages_per_sec_per_core": 239.0
+        },
+        "extract": {
+          "seconds": 0.5945,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 3364.3,
+          "pages_per_sec_per_core": 210.27
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "collegeboard",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/university-collegeboard/run"
+    },
+    {
+      "site": "auto-autobytel",
+      "vertical": "auto",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "auto-autobytel",
+        "vertical": "auto",
+        "pages_scored": 1999,
+        "pages_without_prediction": 0,
+        "pages_excluded": 1,
+        "norm": {
+          "precision": 0.9769884942471235,
+          "recall": 1.0,
+          "f1": 0.9879391714735186
+        },
+        "raw": {
+          "precision": 0.9769884942471235,
+          "recall": 1.0,
+          "f1": 0.9879391714735186
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 1993,
+              "fp": 0,
+              "fn": 0,
+              "tn": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1993,
+              "fp": 0,
+              "fn": 0,
+              "tn": 6,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 1815,
+              "fp": 184,
+              "fn": 0,
+              "tn": 0,
+              "precision": 0.9079539769884942,
+              "recall": 1.0,
+              "f1": 0.9517566858940745
+            },
+            "raw": {
+              "tp": 1815,
+              "fp": 184,
+              "fn": 0,
+              "tn": 0,
+              "precision": 0.9079539769884942,
+              "recall": 1.0,
+              "f1": 0.9517566858940745
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "auto-autobytel",
+        "vertical": "auto",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.965,
+          "recall": 1.0,
+          "f1": 0.9811827956989247
+        },
+        "raw": {
+          "precision": 0.965,
+          "recall": 1.0,
+          "f1": 0.9811827956989247
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 43,
+              "fp": 7,
+              "fn": 0,
+              "tn": 0,
+              "precision": 0.86,
+              "recall": 1.0,
+              "f1": 0.9247311827956989
+            },
+            "raw": {
+              "tp": 43,
+              "fp": 7,
+              "fn": 0,
+              "tn": 0,
+              "precision": 0.86,
+              "recall": 1.0,
+              "f1": 0.9247311827956989
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 3,
+        "cached_calls": 3,
+        "input_tokens": 25110,
+        "output_tokens": 1591,
+        "input_tokens_per_1k_pages": 12555.0,
+        "output_tokens_per_1k_pages": 795.5,
+        "calls_per_template": 3.0,
+        "usd_per_1k_pages": 0.033065,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 3,
+            "cached_calls": 3,
+            "input_tokens": 25110,
+            "output_tokens": 1591,
+            "usd_per_1k_pages": 0.033065
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 11.729
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.2657,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 7527.53,
+          "pages_per_sec_per_core": 940.94
+        },
+        "fingerprint": {
+          "seconds": 2.273,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 879.9,
+          "pages_per_sec_per_core": 54.99
+        },
+        "cluster": {
+          "seconds": 0.1455,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 13741.75,
+          "pages_per_sec_per_core": 13741.75
+        },
+        "analyze": {
+          "seconds": 4.4098,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 453.54,
+          "pages_per_sec_per_core": 28.35
+        },
+        "union": {
+          "seconds": 0.7229,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 138.33,
+          "pages_per_sec_per_core": 138.33
+        },
+        "probe": {
+          "seconds": 0.0086,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 232507.34,
+          "pages_per_sec_per_core": 232507.34
+        },
+        "generate": {
+          "seconds": 0.0209,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 95561.84,
+          "pages_per_sec_per_core": 95561.84
+        },
+        "verify": {
+          "seconds": 2.5091,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 797.1,
+          "pages_per_sec_per_core": 49.82
+        },
+        "review": {
+          "seconds": 0.0242,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 206.79,
+          "pages_per_sec_per_core": 206.79
+        },
+        "extract": {
+          "seconds": 0.7224,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 2768.54,
+          "pages_per_sec_per_core": 173.03
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "autobytel",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/auto-autobytel/run"
+    },
+    {
+      "site": "book-amazon",
+      "vertical": "book",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "book-amazon",
+        "vertical": "book",
+        "pages_scored": 1976,
+        "pages_without_prediction": 2,
+        "pages_excluded": 24,
+        "norm": {
+          "precision": 0.5996960486322188,
+          "recall": 0.5990890688259108,
+          "f1": 0.5993924050632911
+        },
+        "raw": {
+          "precision": 0.5996960486322188,
+          "recall": 0.5990890688259108,
+          "f1": 0.5993924050632911
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 1971,
+              "fp": 3,
+              "fn": 5,
+              "tn": 0,
+              "precision": 0.9984802431610942,
+              "recall": 0.9974696356275303,
+              "f1": 0.9979746835443037
+            },
+            "raw": {
+              "tp": 1971,
+              "fp": 3,
+              "fn": 5,
+              "tn": 0,
+              "precision": 0.9984802431610942,
+              "recall": 0.9974696356275303,
+              "f1": 0.9979746835443037
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 1974,
+              "fp": 0,
+              "fn": 2,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9989878542510121,
+              "f1": 0.999493670886076
+            },
+            "raw": {
+              "tp": 1974,
+              "fp": 0,
+              "fn": 2,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9989878542510121,
+              "f1": 0.999493670886076
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 1974,
+              "fp": 0,
+              "fn": 2,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9989878542510121,
+              "f1": 0.999493670886076
+            },
+            "raw": {
+              "tp": 1974,
+              "fp": 0,
+              "fn": 2,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9989878542510121,
+              "f1": 0.999493670886076
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 0,
+              "fp": 1969,
+              "fn": 1970,
+              "tn": 6,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1969,
+              "fn": 1970,
+              "tn": 6,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 0,
+              "fp": 1968,
+              "fn": 1970,
+              "tn": 6,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1968,
+              "fn": 1970,
+              "tn": 6,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "book-amazon",
+        "vertical": "book",
+        "pages_scored": 49,
+        "pages_without_prediction": 0,
+        "pages_excluded": 1,
+        "norm": {
+          "precision": 0.6,
+          "recall": 0.6,
+          "f1": 0.6
+        },
+        "raw": {
+          "precision": 0.6,
+          "recall": 0.6,
+          "f1": 0.6
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 49,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 49,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 49,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 49,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 49,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 49,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 0,
+              "fp": 49,
+              "fn": 49,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 49,
+              "fn": 49,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 0,
+              "fp": 49,
+              "fn": 49,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 49,
+              "fn": 49,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 99,
+        "n_templates": 1,
+        "tail_pages": 132
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 4,
+        "cached_calls": 4,
+        "input_tokens": 333456,
+        "output_tokens": 2127,
+        "input_tokens_per_1k_pages": 166728.0,
+        "output_tokens_per_1k_pages": 1063.5,
+        "calls_per_template": 4.0,
+        "usd_per_1k_pages": 0.344091,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 4,
+            "cached_calls": 4,
+            "input_tokens": 333456,
+            "output_tokens": 2127,
+            "usd_per_1k_pages": 0.344091
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 137.548
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.9754,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 2050.42,
+          "pages_per_sec_per_core": 256.3
+        },
+        "fingerprint": {
+          "seconds": 6.1491,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 325.25,
+          "pages_per_sec_per_core": 20.33
+        },
+        "cluster": {
+          "seconds": 67.6089,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 29.58,
+          "pages_per_sec_per_core": 29.58
+        },
+        "analyze": {
+          "seconds": 21.7808,
+          "pages": 1868,
+          "workers": 16,
+          "pages_per_sec": 85.76,
+          "pages_per_sec_per_core": 5.36
+        },
+        "union": {
+          "seconds": 14.7203,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 6.79,
+          "pages_per_sec_per_core": 6.79
+        },
+        "probe": {
+          "seconds": 0.6043,
+          "pages": 1868,
+          "workers": 1,
+          "pages_per_sec": 3090.98,
+          "pages_per_sec_per_core": 3090.98
+        },
+        "generate": {
+          "seconds": 0.1834,
+          "pages": 1868,
+          "workers": 1,
+          "pages_per_sec": 10184.57,
+          "pages_per_sec_per_core": 10184.57
+        },
+        "verify": {
+          "seconds": 20.54,
+          "pages": 1868,
+          "workers": 16,
+          "pages_per_sec": 90.94,
+          "pages_per_sec_per_core": 5.68
+        },
+        "review": {
+          "seconds": 0.0629,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 79.48,
+          "pages_per_sec_per_core": 79.48
+        },
+        "extract": {
+          "seconds": 2.6311,
+          "pages": 1998,
+          "workers": 16,
+          "pages_per_sec": 759.39,
+          "pages_per_sec_per_core": 47.46
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "repair.v1",
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "amazon",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/book-amazon/run"
+    },
+    {
+      "site": "camera-beachaudio",
+      "vertical": "camera",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 247,
+      "n_labeled": 247,
+      "accuracy": {
+        "site": "camera-beachaudio",
+        "vertical": "camera",
+        "pages_scored": 245,
+        "pages_without_prediction": 0,
+        "pages_excluded": 2,
+        "norm": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666
+        },
+        "raw": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 0,
+              "fp": 244,
+              "fn": 245,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 244,
+              "fn": 245,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 245,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 245,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "manufacturer": {
+            "norm": {
+              "tp": 245,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 245,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "camera-beachaudio",
+        "vertical": "camera",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666
+        },
+        "raw": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 0,
+              "fp": 50,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 50,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "manufacturer": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 247,
+        "templates": 1,
+        "calls": 1,
+        "cached_calls": 1,
+        "input_tokens": 37678,
+        "output_tokens": 624,
+        "input_tokens_per_1k_pages": 152542.51012145748,
+        "output_tokens_per_1k_pages": 2526.315789473684,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.3303481781376518,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 1,
+            "cached_calls": 1,
+            "input_tokens": 37678,
+            "output_tokens": 624,
+            "usd_per_1k_pages": 0.3303481781376518
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 10.897
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.0475,
+          "pages": 247,
+          "workers": 1,
+          "pages_per_sec": 5203.7,
+          "pages_per_sec_per_core": 5203.7
+        },
+        "fingerprint": {
+          "seconds": 0.4499,
+          "pages": 247,
+          "workers": 4,
+          "pages_per_sec": 549.01,
+          "pages_per_sec_per_core": 137.25
+        },
+        "cluster": {
+          "seconds": 0.0568,
+          "pages": 247,
+          "workers": 1,
+          "pages_per_sec": 4352.32,
+          "pages_per_sec_per_core": 4352.32
+        },
+        "analyze": {
+          "seconds": 2.2268,
+          "pages": 247,
+          "workers": 16,
+          "pages_per_sec": 110.92,
+          "pages_per_sec_per_core": 6.93
+        },
+        "union": {
+          "seconds": 1.4534,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 68.8,
+          "pages_per_sec_per_core": 68.8
+        },
+        "probe": {
+          "seconds": 0.1007,
+          "pages": 247,
+          "workers": 1,
+          "pages_per_sec": 2453.55,
+          "pages_per_sec_per_core": 2453.55
+        },
+        "generate": {
+          "seconds": 1.4983,
+          "pages": 247,
+          "workers": 1,
+          "pages_per_sec": 164.86,
+          "pages_per_sec_per_core": 164.86
+        },
+        "verify": {
+          "seconds": 0.3901,
+          "pages": 247,
+          "workers": 16,
+          "pages_per_sec": 633.2,
+          "pages_per_sec_per_core": 39.57
+        },
+        "review": {
+          "seconds": 0.0191,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 261.52,
+          "pages_per_sec_per_core": 261.52
+        },
+        "extract": {
+          "seconds": 0.3023,
+          "pages": 247,
+          "workers": 8,
+          "pages_per_sec": 817.2,
+          "pages_per_sec_per_core": 102.15
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "beachaudio",
+        "split": "dev",
+        "pages": 247,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/camera-beachaudio/run"
+    },
+    {
+      "site": "job-dice",
+      "vertical": "job",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "job-dice",
+        "vertical": "job",
+        "pages_scored": 1999,
+        "pages_without_prediction": 0,
+        "pages_excluded": 1,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "company": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "date_posted": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "job-dice",
+        "vertical": "job",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "company": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "location": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "date_posted": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 3,
+        "n_templates": 1,
+        "tail_pages": 2
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "cached_calls": 1,
+        "input_tokens": 10503,
+        "output_tokens": 511,
+        "input_tokens_per_1k_pages": 5251.5,
+        "output_tokens_per_1k_pages": 255.5,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.013058,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 1,
+            "cached_calls": 1,
+            "input_tokens": 10503,
+            "output_tokens": 511,
+            "usd_per_1k_pages": 0.013058
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 7.168
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.2957,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 6764.2,
+          "pages_per_sec_per_core": 845.52
+        },
+        "fingerprint": {
+          "seconds": 0.9776,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 2045.91,
+          "pages_per_sec_per_core": 127.87
+        },
+        "cluster": {
+          "seconds": 0.1236,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 16183.74,
+          "pages_per_sec_per_core": 16183.74
+        },
+        "analyze": {
+          "seconds": 2.4056,
+          "pages": 1998,
+          "workers": 16,
+          "pages_per_sec": 830.58,
+          "pages_per_sec_per_core": 51.91
+        },
+        "union": {
+          "seconds": 0.4156,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 240.62,
+          "pages_per_sec_per_core": 240.62
+        },
+        "probe": {
+          "seconds": 0.0147,
+          "pages": 1998,
+          "workers": 1,
+          "pages_per_sec": 135550.26,
+          "pages_per_sec_per_core": 135550.26
+        },
+        "generate": {
+          "seconds": 0.4484,
+          "pages": 1998,
+          "workers": 1,
+          "pages_per_sec": 4455.89,
+          "pages_per_sec_per_core": 4455.89
+        },
+        "verify": {
+          "seconds": 1.6347,
+          "pages": 1998,
+          "workers": 16,
+          "pages_per_sec": 1222.26,
+          "pages_per_sec_per_core": 76.39
+        },
+        "review": {
+          "seconds": 0.0179,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 278.6,
+          "pages_per_sec_per_core": 278.6
+        },
+        "extract": {
+          "seconds": 0.5663,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 3531.66,
+          "pages_per_sec_per_core": 220.73
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "dice",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/job-dice/run"
+    },
+    {
+      "site": "movie-amctv",
+      "vertical": "movie",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "movie-amctv",
+        "vertical": "movie",
+        "pages_scored": 1998,
+        "pages_without_prediction": 0,
+        "pages_excluded": 2,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "director": {
+            "norm": {
+              "tp": 0,
+              "fp": 1978,
+              "fn": 1978,
+              "tn": 20,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 1978,
+              "fn": 1978,
+              "tn": 20,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "genre": {
+            "norm": {
+              "tp": 1993,
+              "fp": 0,
+              "fn": 0,
+              "tn": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1993,
+              "fp": 0,
+              "fn": 0,
+              "tn": 5,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "mpaa_rating": {
+            "norm": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "movie-amctv",
+        "vertical": "movie",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "director": {
+            "norm": {
+              "tp": 0,
+              "fp": 50,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 50,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "genre": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "mpaa_rating": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "cached_calls": 1,
+        "input_tokens": 8993,
+        "output_tokens": 643,
+        "input_tokens_per_1k_pages": 4496.5,
+        "output_tokens_per_1k_pages": 321.5,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.012208,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 1,
+            "cached_calls": 1,
+            "input_tokens": 8993,
+            "output_tokens": 643,
+            "usd_per_1k_pages": 0.012208
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 8.916
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.2623,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 7623.91,
+          "pages_per_sec_per_core": 952.99
+        },
+        "fingerprint": {
+          "seconds": 1.1413,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1752.34,
+          "pages_per_sec_per_core": 109.52
+        },
+        "cluster": {
+          "seconds": 0.0575,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 34754.77,
+          "pages_per_sec_per_core": 34754.77
+        },
+        "analyze": {
+          "seconds": 2.9732,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 672.69,
+          "pages_per_sec_per_core": 42.04
+        },
+        "union": {
+          "seconds": 0.6411,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 155.99,
+          "pages_per_sec_per_core": 155.99
+        },
+        "probe": {
+          "seconds": 0.0191,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 104492.31,
+          "pages_per_sec_per_core": 104492.31
+        },
+        "generate": {
+          "seconds": 0.6754,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 2961.07,
+          "pages_per_sec_per_core": 2961.07
+        },
+        "verify": {
+          "seconds": 1.9618,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1019.46,
+          "pages_per_sec_per_core": 63.72
+        },
+        "review": {
+          "seconds": 0.0313,
+          "pages": 9,
+          "workers": 1,
+          "pages_per_sec": 287.18,
+          "pages_per_sec_per_core": 287.18
+        },
+        "extract": {
+          "seconds": 0.6347,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 3151.28,
+          "pages_per_sec_per_core": 196.96
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "amctv",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/movie-amctv/run"
+    },
+    {
+      "site": "nbaplayer-fanhouse",
+      "vertical": "nbaplayer",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 446,
+      "n_labeled": 446,
+      "accuracy": {
+        "site": "nbaplayer-fanhouse",
+        "vertical": "nbaplayer",
+        "pages_scored": 445,
+        "pages_without_prediction": 0,
+        "pages_excluded": 1,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 445,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 445,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "team": {
+            "norm": {
+              "tp": 445,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 445,
+              "fn": 445,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "height": {
+            "norm": {
+              "tp": 445,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 445,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "weight": {
+            "norm": {
+              "tp": 445,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 445,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "nbaplayer-fanhouse",
+        "vertical": "nbaplayer",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1": 0.75
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "team": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 0,
+              "fp": 50,
+              "fn": 50,
+              "tn": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "height": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "weight": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 446,
+        "templates": 1,
+        "calls": 1,
+        "cached_calls": 1,
+        "input_tokens": 9200,
+        "output_tokens": 496,
+        "input_tokens_per_1k_pages": 20627.802690582957,
+        "output_tokens_per_1k_pages": 1112.1076233183855,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.05237668161434977,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 1,
+            "cached_calls": 1,
+            "input_tokens": 9200,
+            "output_tokens": 496,
+            "usd_per_1k_pages": 0.05237668161434977
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 7.395
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.1199,
+          "pages": 446,
+          "workers": 2,
+          "pages_per_sec": 3720.66,
+          "pages_per_sec_per_core": 1860.33
+        },
+        "fingerprint": {
+          "seconds": 0.7649,
+          "pages": 446,
+          "workers": 7,
+          "pages_per_sec": 583.06,
+          "pages_per_sec_per_core": 83.29
+        },
+        "cluster": {
+          "seconds": 0.0137,
+          "pages": 446,
+          "workers": 1,
+          "pages_per_sec": 32622.42,
+          "pages_per_sec_per_core": 32622.42
+        },
+        "analyze": {
+          "seconds": 2.8132,
+          "pages": 446,
+          "workers": 16,
+          "pages_per_sec": 158.54,
+          "pages_per_sec_per_core": 9.91
+        },
+        "union": {
+          "seconds": 1.2633,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 79.16,
+          "pages_per_sec_per_core": 79.16
+        },
+        "probe": {
+          "seconds": 0.0083,
+          "pages": 446,
+          "workers": 1,
+          "pages_per_sec": 53478.32,
+          "pages_per_sec_per_core": 53478.32
+        },
+        "generate": {
+          "seconds": 1.2928,
+          "pages": 446,
+          "workers": 1,
+          "pages_per_sec": 345.0,
+          "pages_per_sec_per_core": 345.0
+        },
+        "verify": {
+          "seconds": 0.4536,
+          "pages": 446,
+          "workers": 16,
+          "pages_per_sec": 983.32,
+          "pages_per_sec_per_core": 61.46
+        },
+        "review": {
+          "seconds": 0.0206,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 242.54,
+          "pages_per_sec_per_core": 242.54
+        },
+        "extract": {
+          "seconds": 0.4301,
+          "pages": 446,
+          "workers": 14,
+          "pages_per_sec": 1036.93,
+          "pages_per_sec_per_core": 74.07
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "fanhouse",
+        "split": "dev",
+        "pages": 446,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/nbaplayer-fanhouse/run"
+    },
+    {
+      "site": "restaurant-frommers",
+      "vertical": "restaurant",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "restaurant-frommers",
+        "vertical": "restaurant",
+        "pages_scored": 1999,
+        "pages_without_prediction": 0,
+        "pages_excluded": 1,
+        "norm": {
+          "precision": 0.9997498749374687,
+          "recall": 0.9996248124062032,
+          "f1": 0.9996873280272861
+        },
+        "raw": {
+          "precision": 0.9997498749374687,
+          "recall": 0.9996248124062032,
+          "f1": 0.9996873280272861
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 1998,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.9994997498749375,
+              "recall": 0.9994997498749375,
+              "f1": 0.9994997498749375
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.9994997498749375,
+              "recall": 0.9994997498749375,
+              "f1": 0.9994997498749375
+            }
+          },
+          "address": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9994997498749375,
+              "f1": 0.9997498123592694
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 1,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 0.9994997498749375,
+              "f1": 0.9997498123592694
+            }
+          },
+          "cuisine": {
+            "norm": {
+              "tp": 1998,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.9994997498749375,
+              "recall": 0.9994997498749375,
+              "f1": 0.9994997498749375
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.9994997498749375,
+              "recall": 0.9994997498749375,
+              "f1": 0.9994997498749375
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "restaurant-frommers",
+        "vertical": "restaurant",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "address": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "cuisine": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 1
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 1,
+        "cached_calls": 1,
+        "input_tokens": 19256,
+        "output_tokens": 542,
+        "input_tokens_per_1k_pages": 9628.0,
+        "output_tokens_per_1k_pages": 271.0,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.021966,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 1,
+            "cached_calls": 1,
+            "input_tokens": 19256,
+            "output_tokens": 542,
+            "usd_per_1k_pages": 0.021966
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 56.619
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.274,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 7299.15,
+          "pages_per_sec_per_core": 912.39
+        },
+        "fingerprint": {
+          "seconds": 2.7896,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 716.95,
+          "pages_per_sec_per_core": 44.81
+        },
+        "cluster": {
+          "seconds": 0.0727,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 27498.76,
+          "pages_per_sec_per_core": 27498.76
+        },
+        "analyze": {
+          "seconds": 9.8051,
+          "pages": 1999,
+          "workers": 16,
+          "pages_per_sec": 203.87,
+          "pages_per_sec_per_core": 12.74
+        },
+        "union": {
+          "seconds": 1.6832,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 59.41,
+          "pages_per_sec_per_core": 59.41
+        },
+        "probe": {
+          "seconds": 0.0123,
+          "pages": 1999,
+          "workers": 1,
+          "pages_per_sec": 162740.67,
+          "pages_per_sec_per_core": 162740.67
+        },
+        "generate": {
+          "seconds": 1.7166,
+          "pages": 1999,
+          "workers": 1,
+          "pages_per_sec": 1164.48,
+          "pages_per_sec_per_core": 1164.48
+        },
+        "verify": {
+          "seconds": 3.4113,
+          "pages": 1999,
+          "workers": 16,
+          "pages_per_sec": 585.99,
+          "pages_per_sec_per_core": 36.62
+        },
+        "review": {
+          "seconds": 0.0326,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 153.59,
+          "pages_per_sec_per_core": 153.59
+        },
+        "extract": {
+          "seconds": 1.1502,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1738.89,
+          "pages_per_sec_per_core": 108.68
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "frommers",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/restaurant-frommers/run"
+    },
+    {
+      "site": "university-collegenavigator",
+      "vertical": "university",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "university-collegenavigator",
+        "vertical": "university",
+        "pages_scored": 1999,
+        "pages_without_prediction": 0,
+        "pages_excluded": 1,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 0.9998749374687343,
+          "recall": 0.9998749374687343,
+          "f1": 0.9998749374687343
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 1,
+              "fn": 1,
+              "tn": 0,
+              "precision": 0.9994997498749375,
+              "recall": 0.9994997498749375,
+              "f1": 0.9994997498749375
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "website": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "type": {
+            "norm": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1999,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": {
+        "site": "university-collegenavigator",
+        "vertical": "university",
+        "pages_scored": 50,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "website": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "type": {
+            "norm": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 50,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "optional_field_recall": {
+        "pages": 0,
+        "norm": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "raw": {
+          "recall": null,
+          "tp": 0,
+          "fn": 0
+        },
+        "fields": {}
+      },
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 2,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 2,
+        "calls": 2,
+        "cached_calls": 2,
+        "input_tokens": 50721,
+        "output_tokens": 1215,
+        "input_tokens_per_1k_pages": 25360.5,
+        "output_tokens_per_1k_pages": 607.5,
+        "calls_per_template": 1.0,
+        "usd_per_1k_pages": 0.056796,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null,
+        "by_model": {
+          "openai/gpt-6.1-sol": {
+            "calls": 2,
+            "cached_calls": 2,
+            "input_tokens": 50721,
+            "output_tokens": 1215,
+            "usd_per_1k_pages": 0.056796
+          }
+        },
+        "models": [
+          "openai/gpt-6.1-sol"
+        ],
+        "wall_seconds": 72.509
+      },
+      "speed": {
+        "ingest": {
+          "seconds": 0.2814,
+          "pages": 2000,
+          "workers": 8,
+          "pages_per_sec": 7107.33,
+          "pages_per_sec_per_core": 888.42
+        },
+        "fingerprint": {
+          "seconds": 5.8725,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 340.57,
+          "pages_per_sec_per_core": 21.29
+        },
+        "cluster": {
+          "seconds": 1.8142,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 1102.42,
+          "pages_per_sec_per_core": 1102.42
+        },
+        "analyze": {
+          "seconds": 16.2016,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 123.44,
+          "pages_per_sec_per_core": 7.72
+        },
+        "union": {
+          "seconds": 5.2023,
+          "pages": 100,
+          "workers": 1,
+          "pages_per_sec": 19.22,
+          "pages_per_sec_per_core": 19.22
+        },
+        "probe": {
+          "seconds": 0.0528,
+          "pages": 2000,
+          "workers": 1,
+          "pages_per_sec": 37890.78,
+          "pages_per_sec_per_core": 37890.78
+        },
+        "generate": {
+          "seconds": 5.2605,
+          "pages": 2000,
+          "workers": 2,
+          "pages_per_sec": 380.19,
+          "pages_per_sec_per_core": 190.09
+        },
+        "verify": {
+          "seconds": 6.3716,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 313.89,
+          "pages_per_sec_per_core": 19.62
+        },
+        "review": {
+          "seconds": 0.0382,
+          "pages": 5,
+          "workers": 1,
+          "pages_per_sec": 131.06,
+          "pages_per_sec_per_core": 131.06
+        },
+        "extract": {
+          "seconds": 1.4832,
+          "pages": 2000,
+          "workers": 16,
+          "pages_per_sec": 1348.45,
+          "pages_per_sec_per_core": 84.28
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [
+        "openai/gpt-6.1-sol"
+      ],
+      "prompt_versions": [
+        "specgen.v2"
+      ],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "collegenavigator",
+        "split": "dev",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_dev_ditto/20261027T102344Z/university-collegenavigator/run"
+    }
+  ]
+}
