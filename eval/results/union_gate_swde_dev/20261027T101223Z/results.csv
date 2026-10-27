@@ -1,0 +1,2 @@
+scope,n_sites,f1_norm,precision_norm,recall_norm,f1_raw,precision_raw,recall_raw,input_tokens_per_1k_pages,output_tokens_per_1k_pages,calls_per_template,usd_per_1k_pages,spend_usd,pps_core_analyze,pps_core_cluster,pps_core_fingerprint,pps_core_ingest,pps_core_union
+overall,16,,,,,,,0.0,0.0,0.0,0.0,0.0,22.24375,12188.549375,78.799375,1419.74,46.09875
