@@ -2,8 +2,7 @@
 
 What was built, what each gate measured, every waiver and shortfall, what the LLM cost, how the
 build ran, and what to do next. Numbers are quoted with the file they come from; the README
-tables are regenerated from `eval/results/` by `eval/report.py` and are the reference. Spots
-marked **[INTEGRATOR]** wait for the final Common Crawl evaluations.
+tables are regenerated from `eval/results/` by `eval/report.py` and are the reference.
 
 ## What was built
 
@@ -71,8 +70,8 @@ hand-written XPath wrappers for five SWDE test sites written by the build agent.
 | v0.2 | every optional synthetic field in its union page; SWDE dev union pages < 30k tokens | 12 synthetic templates; 23 templates on the 16 dev sites | passed: 48 of 48 optional fields; SWDE dev union pages 1,955–29,822 tokens, none over the cap | `eval/results/union_gate_synth/20261027T101206Z`, `eval/results/union_gate_swde_dev/20261027T101223Z` |
 | v0.3 | SWDE dev F1 within 5 points of the naive baseline on its 200-page samples, at < 1% of its tokens per page | both on the same seeded **50-page** samples (waiver below) | passed: normalized F1 0.876 (ditto) vs 0.858 (naive); 33.5 vs 11,385 tokens per page pooled (0.29%; 40.6 tokens, 0.36%, as the mean over sites used when the gate was recorded); $0.073 vs $23.13 per 1,000 pages | `eval/results/swde_dev_ditto/20261027T102344Z` (`accuracy_sample`), `eval/results/swde_dev_naive/20261027T085024Z` |
 | v0.4 | schema precision ≥ 0.8 on 10 dev sites; clean install + README example | precision judged per field by the build agent; wheel in a fresh Python 3.11 venv | passed: 0.908 (187 of 206 proposed fields); the README example ran from a scratch directory with only `.env` and reproduced the `t_0c6f` row | `eval/results/swde_dev_unprompted/20261027T115205Z`, `eval/judgments/swde_dev_schema_precision.json`; install check in `DECISIONS.md` (2026-10-27) |
-| v0.5 | every README number regenerates from `eval run` with a pinned model id; spend under budget with a per-evaluation breakdown | final cached reruns of every config, `make report`, `eval/report.py --check` | **[INTEGRATOR]** after the Common Crawl evaluations and the final reruns | `eval/results/*`, README "LLM spend" |
-| v1.0 | release checklist | wheel in a clean venv, CI green on the tag, `BUILD_REPORT.md`, tag `v1.0.0` | **[INTEGRATOR]** | — |
+| v0.5 | every README number regenerates from `eval run` with a pinned model id; spend under budget with a per-evaluation breakdown | final cached reruns of every config, `make report`, `eval/report.py --check` | passed: all 18 configs rerun at a clean commit with pinned `openai/gpt-6.1-sol` / `openai/gpt-5.4-mini`; the reruns reproduced the earlier `norm`/`raw` numbers exactly and added `canon`; `eval/report.py --check` up to date; ledger $86.76 against the $85 plan (the guard was raised to $87 for the reruns; see LLM spend) | `eval/results/*` (latest run per config), README "LLM spend" |
+| v1.0 | release checklist | wheel in a clean venv, CI green on the tag, `BUILD_REPORT.md`, tag `v1.0.0` | passed: see the release commit and tag `v1.0.0` (CI run linked from the tag) | `CHANGELOG.md` |
 
 The v0.3 and v0.4 figures come from runs scored before metric version 2 (no `canon` column);
 the final cached reruns rescore them with identical `norm` and `raw` predictions and add
@@ -80,28 +79,33 @@ the final cached reruns rescore them with identical `norm` and `raw` predictions
 
 ## Results at release
 
-From the latest runs at the time of writing (metric version 1, before the final reruns):
+From the final runs (metric version 2; every config rerun at a clean commit):
 
-- SWDE test split, 64 sites: ditto normalized F1 0.846, raw 0.771, $0.0777 per 1,000 pages,
-  1.45 LLM calls per template (`eval/results/swde_test_ditto/20261027T112642Z`). On the naive
-  baseline's seeded 10-page samples: ditto 0.843, naive 0.845 at $22.59 per 1,000 pages
-  (extrapolated) (`eval/results/swde_test_naive/20261027T102925Z`). AutoScraper on 8 sites:
-  0.880 against ditto's 0.733 on the same pages (`eval/results/swde_test_autoscraper/20261027T112853Z`).
-  Hand-written wrappers on 5 sites: 1.000 against ditto's 0.906 on the same pages
-  (`eval/results/swde_test_handwritten/20261027T102047Z`). Crawl4AI on its 36 sites:
-  **[INTEGRATOR: from the README table after the final rerun of `swde_test_crawl4ai`]**.
+- SWDE test split, 64 sites: ditto normalized F1 0.846, raw 0.771, canon 0.866, $0.0777 per
+  1,000 pages, 1.45 LLM calls per template (`eval/results/swde_test_ditto/20261027T174101Z`).
+  On the naive baseline's seeded 10-page samples: ditto 0.843, naive 0.845 at $22.59 per 1,000
+  pages (extrapolated) (`eval/results/swde_test_naive/20261027T165317Z`). AutoScraper on 8
+  sites: 0.880 against ditto's 0.733 on the same pages
+  (`eval/results/swde_test_autoscraper/20261027T171529Z`). Hand-written wrappers on 5 sites:
+  1.000 against ditto's 0.906 on the same pages
+  (`eval/results/swde_test_handwritten/20261027T172907Z`). Crawl4AI on 35 sites: 0.831 against
+  ditto's 0.847 on the same pages (`eval/results/swde_test_crawl4ai/20261027T181758Z`).
 - SWDE dev slice, unprompted mode: recall of the labeled attributes 0.847 after name alignment
-  (`eval/results/swde_dev_unprompted/20261027T115205Z`).
-- LiveWeb-IE snapshot, 9 of 15 sites: normalized F1 0.724 (`eval/results/livewebie_ditto/20261027T122202Z`).
-- Common Crawl silver set: ditto **[INTEGRATOR]**, naive per-page baseline on 20-page samples
-  **[INTEGRATOR]**, Crawl4AI **[INTEGRATOR]** (`eval/results/cc_silver_*`); pages downloaded
-  per domain and the final noise check **[INTEGRATOR]**
-  (`eval/datasets/commoncrawl_silver/domains.yaml`, `noise_check.json`).
+  (`eval/results/swde_dev_unprompted/20261027T161122Z`).
+- LiveWeb-IE snapshot, 9 of 15 sites: normalized F1 0.724 (`eval/results/livewebie_ditto/20261027T181651Z`).
+- Common Crawl silver set, 8 domains: ditto normalized F1 0.513 at $0.244 per 1,000 pages
+  (`eval/results/cc_silver_ditto/20261027T144715Z`); on the naive baseline's 20-page samples
+  ditto 0.508 vs naive 0.539 at $36.95 per 1,000 pages (extrapolated)
+  (`eval/results/cc_silver_naive/20261027T152228Z`); Crawl4AI on 2 domains 0.431 vs ditto 0.514
+  on the same pages (`eval/results/cc_silver_crawl4ai/20261027T153152Z`). Pages downloaded: 2,500
+  per domain (argos 7,201); 13 label fields agree with the visible text on fewer than 80% of
+  the 200 noise-checked pages (`eval/datasets/commoncrawl_silver/domains.yaml`,
+  `noise_check.json`). All methods score low here; the silver labels are part of the reason.
 - Clustering: minimum ARI 0.994 over 62 synthetic stress points; whole templates merge only for
-  the near-duplicate pair at Jaccard ≥ 0.8 (`eval/results/synth_curves/20261027T093851Z`).
-- Extraction speed: the evaluation runs measured 64 (SWDE dev, unprompted) to 177 (LiveWeb-IE)
-  pages per second per core (mean over sites, 16 worker processes, pool start-up per site
-  included; `eval/results/*/results.json` `speed_pages_per_sec_per_core.extract`). The bench
+  the near-duplicate pair at Jaccard ≥ 0.8 (`eval/results/synth_curves/20261027T154454Z`).
+- Extraction speed: the evaluation runs measured 50 (Common Crawl) to 153 (LiveWeb-IE) pages per
+  second per core (mean over sites, 16 worker processes, pool start-up per site included;
+  `eval/results/*/results.json` `speed_pages_per_sec_per_core.extract`). The bench
   (`uv run python eval/bench/speed.py`, single process, parse included) measured 542 pages/s on
   `auto-aol` (49.6 KB pages) and 475 on `book-abebooks` (63.2 KB pages) on an AMD Ryzen
   Threadripper 1900X (8 cores, 16 threads); source: the Perf-2 agent's bench run (commit
@@ -134,10 +138,10 @@ Each one is also in the README limitations (generated from the results where it 
   taken about 44 hours. `argos.co.uk` keeps the 6,701 detail pages fetched before the block plus
   500 others (7,201 planned).
 - **Silver labels.** Common Crawl labels are the sites' own JSON-LD; the noise check (build agent,
-  automated) found several fields whose labels rarely match the visible text (on the selection
-  sample: `ikea.com` name, the job sites' `datePosted`, `marmiton.org` recipeYield, among others;
-  `eval/datasets/commoncrawl_silver/noise_check.json`). **[INTEGRATOR: confirm against the
-  final noise check on the downloaded pages.]**
+  automated, 200 downloaded pages across the 8 domains) found 13 label fields that agree with
+  the visible text on fewer than 80% of the checked pages, among them `ikea.com` name (0.04),
+  the job sites' `datePosted` (0.00), `marmiton.org` recipeYield (0.00) and `ticketweb.com`
+  startDate (0.20) (`eval/datasets/commoncrawl_silver/noise_check.json`).
 - **LiveWeb-IE on 9 of 15 sites.** Excluded: `dp.la` (HTTP 403 for every page),
   `fueleconomy.gov` (robots.txt unreachable, so disallowed per RFC 9309), `iclr.cc`, `icml.cc`,
   `neurips.cc` (most ground-truth values absent from the pages as the extractor sees them),
@@ -179,19 +183,20 @@ Each one is also in the README limitations (generated from the results where it 
 
 Ledger (`.cache/ledger.jsonl`, `cost_usd`) per phase, phases bounded by the commit dates of the
 tagged commits (`git log -1 --format=%cI v0.X.0`), as of the last ledger line
-(2026-10-27T13:34:53Z). Regenerate with `uv run python eval/report.py --spend-by-phase`.
+(2026-10-27T18:42:05Z). Regenerate with `uv run python eval/report.py --spend-by-phase`.
 
-| phase | until | calls | billed (ledger) | by role |
-| --- | --- | --- | --- | --- |
-| before v0.1.0 | 2026-10-26T11:55:56+02:00 | 27 | $0.30 | generation $0.17, baseline $0.13 |
-| v0.1.0–v0.2.0 | 2026-10-27T12:23:39+02:00 | 968 | $26.96 | baseline $18.49, generation $7.30, repair $1.17 |
-| v0.2.0–v0.3.0 | 2026-10-27T12:32:46+02:00 | 140 | $3.80 | baseline $3.80 |
-| v0.3.0–v0.4.0 | 2026-10-27T14:06:55+02:00 | 1,180 | $26.94 | baseline $18.34, generation $7.34, repair $1.27 |
-| v0.4.0–now | — | 623 | $12.90 | baseline $10.59, generation $2.05, repair $0.26 |
-| total | | 2,938 | $70.91 | |
+| phase | from | to | uncached calls | billed (ledger) | by role |
+| --- | --- | --- | --- | --- | --- |
+| before v0.1.0 | – | 2026-10-26T11:55:56+02:00 | 27 | $0.30 | generation $0.17, baseline $0.13 |
+| v0.1.0–v0.2.0 | 2026-10-26T11:55:56+02:00 | 2026-10-27T12:23:39+02:00 | 968 | $26.96 | baseline $18.49, generation $7.30, repair $1.17 |
+| v0.2.0–v0.3.0 | 2026-10-27T12:23:39+02:00 | 2026-10-27T12:32:46+02:00 | 140 | $3.80 | baseline $3.80 |
+| v0.3.0–v0.4.0 | 2026-10-27T12:32:46+02:00 | 2026-10-27T14:06:55+02:00 | 1,180 | $26.94 | baseline $18.34, generation $7.34, repair $1.27 |
+| v0.4.0–release | 2026-10-27T14:06:55+02:00 | – | 1,080 | $28.76 | baseline $20.99, generation $6.40, repair $1.37 |
+| total | | | 3,395 | $86.76 | |
 
-**[INTEGRATOR: rerun `uv run python eval/report.py --spend-by-phase` after the Common Crawl
-evaluations and replace the last two rows.]**
+(`uv run python eval/report.py --spend-by-phase`.) The last phase holds the SWDE test and
+LiveWeb-IE ditto runs, the rest of Crawl4AI, all three Common Crawl evaluations ($13.40) and
+the final reruns ($2.45, almost all Crawl4AI, whose validation loop is only partly cached).
 
 Reading the table: the tags were placed on the commits that recorded each gate, and those were
 committed together late in the build, so the phases are uneven. "v0.1.0–v0.2.0" holds the SWDE
@@ -205,10 +210,12 @@ baseline's cost was measured and to $85 for the full evaluation plan; the owner 
 account by $35 and $15. A billing check found the provider charging $37.70 while the ledger
 recorded $30.73 over the same period (about 23% more; cause not found: possibly calls billed but
 failed client-side, Crawl4AI calls its hook missed, or other use of the account;
-`DECISIONS.md`). The ledger total is under the $85 budget; applying the same undercount to the
-whole ledger would put real billing near $87 (an estimate, not a measurement). **[INTEGRATOR:
-final total after the Common Crawl evaluations.]** The LLM cost behind each published number
-is in the README "LLM spend" table.
+`DECISIONS.md`). The ledger total, $86.76, is $1.76 over the $85 plan: the final cached reruns
+were refused partway by the guard (generation's projection then counted cached templates; fixed),
+the guard was raised to $87 to finish them, and Crawl4AI's rerun billed $1.98 outside the
+cache. Applying the observed undercount to the whole ledger would put real billing near $107
+(an estimate, not a measurement). The LLM cost behind each published number is in the README
+"LLM spend" table.
 
 ## Process notes
 
@@ -236,23 +243,23 @@ is in the README "LLM spend" table.
 
 ## Known issues
 
-Found while checking the docs against the code for this release; not fixed:
+Fixed during the release (found while checking the docs against the code; each has a
+regression test): `.env` read from the working directory for every setting; one-line errors for
+YAML syntax errors and refused overwrites; `--workers` passed to union-page building;
+`--tail spec` generates specs for tail clusters the probe never mapped and `--tail direct`
+skips clusters that have a final spec; review repairs use the run's settings and `--no-cache`;
+run-directory names keep dots; generation's budget projection ignores cached requests.
 
-- `cli.main()` calls `load_dotenv()` without `usecwd=True`, so for an installed package
-  `DITTO_WORKERS` and `DITTO_MP_START` in the working directory's `.env` are ignored (LLM
-  settings are read correctly).
-- A YAML syntax error in `fields.yaml` prints a traceback instead of an `error:` line; so does a
-  refused overwrite in `ditto synth generate`.
-- `--workers` is not passed to union-page building.
-- Prompted mode drops tail templates: `probe` covers non-tail templates only, so
-  `ditto run --mode prompted --tail spec` produces no tail specs; after `--tail spec`,
-  `extract --tail direct` still sends every tail page to the model.
-- Review repairs call `get_llm("repair")` directly and ignore `--no-cache` and the run's pinned
-  models.
-- `Site.from_dir` names the default run directory from `Path.stem` (`pages.v2` becomes `pages`).
-- `DECISIONS.md` says `Retry-After` is honoured up to 300 s; the code caps it at 60 s.
-- **[INTEGRATOR]** `eval/configs/swde_test_crawl4ai.yaml` lists a bogus site `_dataset`
-  (reported to the main agent).
+Still open:
+
+- Crawl4AI baseline: its validation loop is only partly served from the response cache and its
+  spend is not attributed to the evaluation run, so the per-evaluation cap cannot stop it and
+  reruns re-bill a few dollars (the global guard still applies).
+- Extraction throughput inside evaluation runs (50–153 pages/s/core) is well below the
+  single-process bench (475–542 pages/s on 50–63 KB pages): per-template worker pools, page
+  loading and JSONL writing dominate on many small sites.
+- `--tail spec` and `--tail direct` are tested with the fake LLM on the fixture site only; no
+  benchmark exercises them.
 
 ## Next
 

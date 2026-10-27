@@ -377,11 +377,14 @@ LLM cost per 1,000 pages (log scale; every method's tokens at the same standard-
 
 Read from the latest run of each config:
 
-- ditto (prompted) (`swde_test_ditto`): [eval/results/swde_test_ditto/20261027T112642Z/](../eval/results/swde_test_ditto/20261027T112642Z); regenerate with `uv run ditto eval run eval/configs/swde_test_ditto.yaml`
-- naive per-page LLM (`swde_test_naive`): [eval/results/swde_test_naive/20261027T102925Z/](../eval/results/swde_test_naive/20261027T102925Z); regenerate with `uv run ditto eval run eval/configs/swde_test_naive.yaml`
-- Crawl4AI generate_schema (`swde_test_crawl4ai`): [eval/results/swde_test_crawl4ai/20261027T104347Z/](../eval/results/swde_test_crawl4ai/20261027T104347Z); regenerate with `uv run ditto eval run eval/configs/swde_test_crawl4ai.yaml`
-- AutoScraper (`swde_test_autoscraper`): [eval/results/swde_test_autoscraper/20261027T112853Z/](../eval/results/swde_test_autoscraper/20261027T112853Z); regenerate with `uv run ditto eval run eval/configs/swde_test_autoscraper.yaml`
-- hand-written XPath (build agent) (`swde_test_handwritten`): [eval/results/swde_test_handwritten/20261027T102047Z/](../eval/results/swde_test_handwritten/20261027T102047Z); regenerate with `uv run ditto eval run eval/configs/swde_test_handwritten.yaml`
+- ditto (prompted) (`swde_test_ditto`): [eval/results/swde_test_ditto/20261027T174101Z/](../eval/results/swde_test_ditto/20261027T174101Z); regenerate with `uv run ditto eval run eval/configs/swde_test_ditto.yaml`
+- naive per-page LLM (`swde_test_naive`): [eval/results/swde_test_naive/20261027T165317Z/](../eval/results/swde_test_naive/20261027T165317Z); regenerate with `uv run ditto eval run eval/configs/swde_test_naive.yaml`
+- Crawl4AI generate_schema (`swde_test_crawl4ai`): [eval/results/swde_test_crawl4ai/20261027T181758Z/](../eval/results/swde_test_crawl4ai/20261027T181758Z); regenerate with `uv run ditto eval run eval/configs/swde_test_crawl4ai.yaml`
+- AutoScraper (`swde_test_autoscraper`): [eval/results/swde_test_autoscraper/20261027T171529Z/](../eval/results/swde_test_autoscraper/20261027T171529Z); regenerate with `uv run ditto eval run eval/configs/swde_test_autoscraper.yaml`
+- hand-written XPath (build agent) (`swde_test_handwritten`): [eval/results/swde_test_handwritten/20261027T172907Z/](../eval/results/swde_test_handwritten/20261027T172907Z); regenerate with `uv run ditto eval run eval/configs/swde_test_handwritten.yaml`
+- ditto (prompted) (`cc_silver_ditto`): [eval/results/cc_silver_ditto/20261027T144715Z/](../eval/results/cc_silver_ditto/20261027T144715Z); regenerate with `uv run ditto eval run eval/configs/cc_silver_ditto.yaml`
+- naive per-page LLM (`cc_silver_naive`): [eval/results/cc_silver_naive/20261027T152228Z/](../eval/results/cc_silver_naive/20261027T152228Z); regenerate with `uv run ditto eval run eval/configs/cc_silver_naive.yaml`
+- Crawl4AI generate_schema (`cc_silver_crawl4ai`): [eval/results/cc_silver_crawl4ai/20261027T153152Z/](../eval/results/cc_silver_crawl4ai/20261027T153152Z); regenerate with `uv run ditto eval run eval/configs/cc_silver_crawl4ai.yaml`
 
 Then rewrite these tables and charts with `uv run python eval/report.py`.
 <!-- results:headline:end -->
@@ -393,15 +396,15 @@ Then rewrite these tables and charts with `uv run python eval/report.py`.
 
 | method | scored on | pages scored | F1 norm | F1 raw | F1 canon | input tokens / 1k pages | output tokens / 1k pages | LLM calls / template | $ / 1k pages | speed | status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ditto (prompted) | 64 sites, all labeled pages the LLM did not see | 96,659 | 0.846 | 0.771 | – | 35,574 | 652 | 1.45 | $0.0777 | 80 pages/s/core (extract) | ok |
-| naive per-page LLM | 64 sites, seeded 10-page sample per site | 640 | 0.845 | 0.773 | – | 11,025,011 | 53,805 | 9.39 | $22.59 (extrapolated) | 0.99 pages/s (wall) | ok |
-| ↳ ditto, same sites and pages | the same 64 sites, same samples minus pages the LLM saw | 634 | 0.843 | 0.769 | – | 35,574 | 652 | 1.45 | $0.0777 | 80 pages/s/core (extract) | ok |
-| Crawl4AI generate_schema | 28 of 64 sites, all labeled pages | 43,232 | 0.819 | 0.702 | – | 55,599 | 2,057 | 1.56 | $0.1318 | 17.72 pages/s (wall) | ok on 28 of 64 sites (36 skipped) |
-| ↳ ditto, same sites and pages | the same 28 sites, labeled pages the LLM did not see | 42,900 | 0.839 | 0.722 | – | 27,823 | 649 | 1.36 | $0.0621 | 92 pages/s/core (extract) | ok |
-| AutoScraper | 8 of 64 sites, seeded 10-page sample per site | 80 | 0.880 | 0.781 | – | 15,053,888 | 405,562 | 51.00 | $34.16 (extrapolated) | 0.03 pages/s (wall) | ok |
-| ↳ ditto, same sites and pages | the same 8 sites, same samples minus pages the LLM saw | 79 | 0.733 | 0.671 | – | 34,828 | 661 | 2.12 | $0.0763 | 91 pages/s/core (extract) | ok |
-| hand-written XPath (build agent) | 5 of 64 sites, all labeled pages | 7,465 | 1.000 | 1.000 | – | 0 | 0 | 0.00 | $0 | 1,050.64 pages/s (wall) | ok on 5 of 64 sites (59 not_run) |
-| ↳ ditto, same sites and pages | the same 5 sites, labeled pages the LLM did not see | 7,362 | 0.906 | 0.906 | – | 29,613 | 754 | 1.00 | $0.0668 | 76 pages/s/core (extract) | ok |
+| ditto (prompted) | 64 sites, all labeled pages the LLM did not see | 96,659 | 0.846 | 0.771 | 0.866 | 35,574 | 652 | 1.45 | $0.0777 | 83 pages/s/core (extract) | ok |
+| naive per-page LLM | 64 sites, seeded 10-page sample per site | 640 | 0.845 | 0.773 | 0.891 | 11,025,011 | 53,805 | 9.39 | $22.59 (extrapolated) | 65.42 pages/s (wall) | ok |
+| ↳ ditto, same sites and pages | the same 64 sites, same samples minus pages the LLM saw | 634 | 0.843 | 0.769 | 0.863 | 35,574 | 652 | 1.45 | $0.0777 | 83 pages/s/core (extract) | ok |
+| Crawl4AI generate_schema | 35 of 64 sites, all labeled pages | 53,967 | 0.831 | 0.720 | 0.842 | 58,248 | 1,952 | 1.55 | $0.1360 | 144.83 pages/s (wall) | ok on 35 of 36 sites (1 failed) |
+| ↳ ditto, same sites and pages | the same 35 sites, labeled pages the LLM did not see | 53,617 | 0.847 | 0.735 | 0.865 | 26,789 | 625 | 1.46 | $0.0598 | 91 pages/s/core (extract) | ok |
+| AutoScraper | 8 of 64 sites, seeded 10-page sample per site | 80 | 0.880 | 0.781 | 0.880 | 15,053,888 | 405,562 | 51.00 | $34.16 (extrapolated) | 0.10 pages/s (wall) | ok |
+| ↳ ditto, same sites and pages | the same 8 sites, same samples minus pages the LLM saw | 79 | 0.733 | 0.671 | 0.774 | 34,828 | 661 | 2.12 | $0.0763 | 84 pages/s/core (extract) | ok |
+| hand-written XPath (build agent) | 5 of 64 sites, all labeled pages | 7,465 | 1.000 | 1.000 | 1.000 | 0 | 0 | 0.00 | $0 | 1,101.29 pages/s (wall) | ok on 5 of 64 sites (59 not_run) |
+| ↳ ditto, same sites and pages | the same 5 sites, labeled pages the LLM did not see | 7,362 | 0.906 | 0.906 | 0.906 | 29,613 | 754 | 1.00 | $0.0668 | 69 pages/s/core (extract) | ok |
 
 `↳ ditto, same sites and pages` rows: ditto scored on exactly the sites and pages of the baseline row above them (the same seeded sample for a sampled baseline, less any page the LLM saw while generating a spec), with ditto's cost on those sites.
 
@@ -411,57 +414,57 @@ Per vertical (mean of its sites; each method on its own sites and pages):
 
 | vertical | method | sites | P norm | R norm | F1 norm | F1 raw | F1 canon |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| auto | ditto (prompted) | 8 | 0.762 | 0.764 | 0.763 | 0.703 | – |
-| auto | naive per-page LLM | 8 | 0.819 | 0.819 | 0.819 | 0.787 | – |
-| auto | Crawl4AI generate_schema | 4 | 0.712 | 0.716 | 0.714 | 0.654 | – |
-| auto | AutoScraper | 1 | 1.000 | 0.800 | 0.833 | 0.833 | – |
-| auto | hand-written XPath (build agent) | 1 | 1.000 | 1.000 | 1.000 | 1.000 | – |
-| book | ditto (prompted) | 8 | 0.928 | 0.928 | 0.928 | 0.827 | – |
-| book | naive per-page LLM | 8 | 0.935 | 0.935 | 0.935 | 0.835 | – |
-| book | Crawl4AI generate_schema | 4 | 0.767 | 0.747 | 0.755 | 0.605 | – |
-| book | AutoScraper | 1 | 1.000 | 0.980 | 0.989 | 0.989 | – |
-| book | hand-written XPath (build agent) | 1 | 0.999 | 0.999 | 0.999 | 0.999 | – |
-| camera | ditto (prompted) | 8 | 0.706 | 0.708 | 0.707 | 0.707 | – |
-| camera | naive per-page LLM | 8 | 0.846 | 0.854 | 0.850 | 0.841 | – |
-| camera | Crawl4AI generate_schema | 4 | 0.897 | 0.903 | 0.900 | 0.900 | – |
-| camera | AutoScraper | 1 | 0.667 | 0.667 | 0.667 | 0.667 | – |
-| job | ditto (prompted) | 8 | 0.906 | 0.906 | 0.906 | 0.875 | – |
-| job | naive per-page LLM | 8 | 0.887 | 0.919 | 0.887 | 0.831 | – |
-| job | Crawl4AI generate_schema | 4 | 0.762 | 0.705 | 0.719 | 0.657 | – |
-| job | AutoScraper | 1 | 0.900 | 0.750 | 0.793 | 0.793 | – |
-| movie | ditto (prompted) | 8 | 0.979 | 0.982 | 0.980 | 0.980 | – |
-| movie | naive per-page LLM | 8 | 0.887 | 0.887 | 0.887 | 0.887 | – |
-| movie | Crawl4AI generate_schema | 3 | 0.908 | 0.890 | 0.899 | 0.899 | – |
-| movie | AutoScraper | 1 | 1.000 | 0.925 | 0.956 | 0.956 | – |
-| movie | hand-written XPath (build agent) | 1 | 1.000 | 1.000 | 1.000 | 1.000 | – |
-| nbaplayer | ditto (prompted) | 8 | 0.875 | 0.905 | 0.874 | 0.593 | – |
-| nbaplayer | naive per-page LLM | 8 | 0.819 | 0.850 | 0.819 | 0.537 | – |
-| nbaplayer | Crawl4AI generate_schema | 3 | 0.833 | 0.917 | 0.833 | 0.500 | – |
-| nbaplayer | AutoScraper | 1 | 1.000 | 1.000 | 1.000 | 0.250 | – |
-| nbaplayer | hand-written XPath (build agent) | 1 | 1.000 | 1.000 | 1.000 | 1.000 | – |
-| restaurant | ditto (prompted) | 8 | 0.796 | 0.796 | 0.796 | 0.668 | – |
-| restaurant | naive per-page LLM | 8 | 0.679 | 0.679 | 0.679 | 0.585 | – |
-| restaurant | Crawl4AI generate_schema | 3 | 0.830 | 0.830 | 0.830 | 0.498 | – |
-| restaurant | AutoScraper | 1 | 1.000 | 0.700 | 0.805 | 0.762 | – |
-| university | ditto (prompted) | 8 | 0.844 | 0.833 | 0.812 | 0.812 | – |
-| university | naive per-page LLM | 8 | 0.884 | 0.906 | 0.884 | 0.881 | – |
-| university | Crawl4AI generate_schema | 3 | 0.917 | 0.893 | 0.904 | 0.904 | – |
-| university | AutoScraper | 1 | 1.000 | 1.000 | 1.000 | 1.000 | – |
-| university | hand-written XPath (build agent) | 1 | 1.000 | 1.000 | 1.000 | 1.000 | – |
+| auto | ditto (prompted) | 8 | 0.762 | 0.764 | 0.763 | 0.703 | 0.810 |
+| auto | naive per-page LLM | 8 | 0.819 | 0.819 | 0.819 | 0.787 | 0.859 |
+| auto | Crawl4AI generate_schema | 5 | 0.770 | 0.773 | 0.771 | 0.723 | 0.771 |
+| auto | AutoScraper | 1 | 1.000 | 0.800 | 0.833 | 0.833 | 0.833 |
+| auto | hand-written XPath (build agent) | 1 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+| book | ditto (prompted) | 8 | 0.928 | 0.928 | 0.928 | 0.827 | 0.928 |
+| book | naive per-page LLM | 8 | 0.935 | 0.935 | 0.935 | 0.835 | 0.935 |
+| book | Crawl4AI generate_schema | 5 | 0.813 | 0.797 | 0.803 | 0.643 | 0.803 |
+| book | AutoScraper | 1 | 1.000 | 0.980 | 0.989 | 0.989 | 0.989 |
+| book | hand-written XPath (build agent) | 1 | 0.999 | 0.999 | 0.999 | 0.999 | 0.999 |
+| camera | ditto (prompted) | 8 | 0.706 | 0.708 | 0.707 | 0.707 | 0.707 |
+| camera | naive per-page LLM | 8 | 0.846 | 0.854 | 0.850 | 0.841 | 0.850 |
+| camera | Crawl4AI generate_schema | 5 | 0.911 | 0.916 | 0.914 | 0.914 | 0.914 |
+| camera | AutoScraper | 1 | 0.667 | 0.667 | 0.667 | 0.667 | 0.667 |
+| job | ditto (prompted) | 8 | 0.906 | 0.906 | 0.906 | 0.875 | 0.906 |
+| job | naive per-page LLM | 8 | 0.887 | 0.919 | 0.887 | 0.831 | 0.887 |
+| job | Crawl4AI generate_schema | 4 | 0.762 | 0.705 | 0.719 | 0.657 | 0.719 |
+| job | AutoScraper | 1 | 0.900 | 0.750 | 0.793 | 0.793 | 0.793 |
+| movie | ditto (prompted) | 8 | 0.979 | 0.982 | 0.980 | 0.980 | 0.980 |
+| movie | naive per-page LLM | 8 | 0.887 | 0.887 | 0.887 | 0.887 | 0.981 |
+| movie | Crawl4AI generate_schema | 4 | 0.874 | 0.860 | 0.867 | 0.867 | 0.937 |
+| movie | AutoScraper | 1 | 1.000 | 0.925 | 0.956 | 0.956 | 0.956 |
+| movie | hand-written XPath (build agent) | 1 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+| nbaplayer | ditto (prompted) | 8 | 0.875 | 0.905 | 0.874 | 0.593 | 0.874 |
+| nbaplayer | naive per-page LLM | 8 | 0.819 | 0.850 | 0.819 | 0.537 | 0.819 |
+| nbaplayer | Crawl4AI generate_schema | 4 | 0.875 | 0.938 | 0.875 | 0.500 | 0.875 |
+| nbaplayer | AutoScraper | 1 | 1.000 | 1.000 | 1.000 | 0.250 | 1.000 |
+| nbaplayer | hand-written XPath (build agent) | 1 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+| restaurant | ditto (prompted) | 8 | 0.796 | 0.796 | 0.796 | 0.668 | 0.913 |
+| restaurant | naive per-page LLM | 8 | 0.679 | 0.679 | 0.679 | 0.585 | 0.913 |
+| restaurant | Crawl4AI generate_schema | 4 | 0.779 | 0.778 | 0.779 | 0.530 | 0.793 |
+| restaurant | AutoScraper | 1 | 1.000 | 0.700 | 0.805 | 0.762 | 0.805 |
+| university | ditto (prompted) | 8 | 0.844 | 0.833 | 0.812 | 0.812 | 0.812 |
+| university | naive per-page LLM | 8 | 0.884 | 0.906 | 0.884 | 0.881 | 0.884 |
+| university | Crawl4AI generate_schema | 4 | 0.938 | 0.912 | 0.924 | 0.924 | 0.924 |
+| university | AutoScraper | 1 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+| university | hand-written XPath (build agent) | 1 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 
 Speed per stage, pages per second per core (mean over sites; LLM wait excluded from verify):
 
 | config | ingest | fingerprint | cluster | analyze | union | generate | verify | extract | LLM latency (mean) | machine |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| swde_test_ditto | 784 | 53 | 10,775 | 15 | 57 | 108 | 39 | 80 | 11.4 s | 16 cores, 62.66 GB |
+| swde_test_ditto | 838 | 50 | 10,695 | 16 | 58 | 18,412 | 38 | 83 | – | 16 cores, 62.66 GB |
 
 Read from the latest run of each config:
 
-- ditto (prompted) (`swde_test_ditto`): [eval/results/swde_test_ditto/20261027T112642Z/](../eval/results/swde_test_ditto/20261027T112642Z); regenerate with `uv run ditto eval run eval/configs/swde_test_ditto.yaml`
-- naive per-page LLM (`swde_test_naive`): [eval/results/swde_test_naive/20261027T102925Z/](../eval/results/swde_test_naive/20261027T102925Z); regenerate with `uv run ditto eval run eval/configs/swde_test_naive.yaml`
-- Crawl4AI generate_schema (`swde_test_crawl4ai`): [eval/results/swde_test_crawl4ai/20261027T104347Z/](../eval/results/swde_test_crawl4ai/20261027T104347Z); regenerate with `uv run ditto eval run eval/configs/swde_test_crawl4ai.yaml`
-- AutoScraper (`swde_test_autoscraper`): [eval/results/swde_test_autoscraper/20261027T112853Z/](../eval/results/swde_test_autoscraper/20261027T112853Z); regenerate with `uv run ditto eval run eval/configs/swde_test_autoscraper.yaml`
-- hand-written XPath (build agent) (`swde_test_handwritten`): [eval/results/swde_test_handwritten/20261027T102047Z/](../eval/results/swde_test_handwritten/20261027T102047Z); regenerate with `uv run ditto eval run eval/configs/swde_test_handwritten.yaml`
+- ditto (prompted) (`swde_test_ditto`): [eval/results/swde_test_ditto/20261027T174101Z/](../eval/results/swde_test_ditto/20261027T174101Z); regenerate with `uv run ditto eval run eval/configs/swde_test_ditto.yaml`
+- naive per-page LLM (`swde_test_naive`): [eval/results/swde_test_naive/20261027T165317Z/](../eval/results/swde_test_naive/20261027T165317Z); regenerate with `uv run ditto eval run eval/configs/swde_test_naive.yaml`
+- Crawl4AI generate_schema (`swde_test_crawl4ai`): [eval/results/swde_test_crawl4ai/20261027T181758Z/](../eval/results/swde_test_crawl4ai/20261027T181758Z); regenerate with `uv run ditto eval run eval/configs/swde_test_crawl4ai.yaml`
+- AutoScraper (`swde_test_autoscraper`): [eval/results/swde_test_autoscraper/20261027T171529Z/](../eval/results/swde_test_autoscraper/20261027T171529Z); regenerate with `uv run ditto eval run eval/configs/swde_test_autoscraper.yaml`
+- hand-written XPath (build agent) (`swde_test_handwritten`): [eval/results/swde_test_handwritten/20261027T172907Z/](../eval/results/swde_test_handwritten/20261027T172907Z); regenerate with `uv run ditto eval run eval/configs/swde_test_handwritten.yaml`
 
 Then rewrite these tables and charts with `uv run python eval/report.py`.
 
@@ -469,10 +472,10 @@ Then rewrite these tables and charts with `uv run python eval/report.py`.
 
 | method | scored on | pages scored | F1 norm | F1 raw | F1 canon | input tokens / 1k pages | output tokens / 1k pages | LLM calls / template | $ / 1k pages | speed | status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ditto (prompted) | 16 sites, all labeled pages the LLM did not see | 26,777 | 0.877 | 0.861 | – | 32,773 | 756 | 1.72 | $0.0731 | 131 pages/s/core (extract) | ok |
-| ditto (unprompted) | 16 sites, all labeled pages the LLM did not see | 26,484 | 0.849 | 0.833 | 0.849 | 43,173 | 3,365 | 2.92 | $0.1200 | 64 pages/s/core (extract) | ok |
-| naive per-page LLM | 16 sites, seeded 50-page sample per site | 800 | 0.858 | 0.842 | – | 11,340,619 | 44,742 | 41.88 | $23.13 (extrapolated) | 15.75 pages/s (wall) | ok |
-| ↳ ditto, same sites and pages | the same 16 sites, same samples minus pages the LLM saw | 796 | 0.876 | 0.860 | – | 32,773 | 756 | 1.72 | $0.0731 | 131 pages/s/core (extract) | ok |
+| ditto (prompted) | 16 sites, all labeled pages the LLM did not see | 26,777 | 0.877 | 0.861 | 0.892 | 32,773 | 756 | 1.72 | $0.0731 | 105 pages/s/core (extract) | ok |
+| ditto (unprompted) | 16 sites, all labeled pages the LLM did not see | 26,484 | 0.849 | 0.833 | 0.849 | 43,173 | 3,365 | 2.92 | $0.1200 | 61 pages/s/core (extract) | ok |
+| naive per-page LLM | 16 sites, seeded 50-page sample per site | 800 | 0.858 | 0.842 | 0.880 | 11,340,619 | 44,742 | 41.88 | $23.13 (extrapolated) | 79.28 pages/s (wall) | ok |
+| ↳ ditto, same sites and pages | the same 16 sites, same samples minus pages the LLM saw | 796 | 0.876 | 0.860 | 0.890 | 32,773 | 756 | 1.72 | $0.0731 | 105 pages/s/core (extract) | ok |
 
 `↳ ditto, same sites and pages` rows: ditto scored on exactly the sites and pages of the baseline row above them (the same seeded sample for a sampled baseline, less any page the LLM saw while generating a spec), with ditto's cost on those sites.
 
@@ -485,43 +488,43 @@ Per vertical (mean of its sites; each method on its own sites and pages):
 
 | vertical | method | sites | P norm | R norm | F1 norm | F1 raw | F1 canon |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| auto | ditto (prompted) | 2 | 0.863 | 0.996 | 0.867 | 0.867 | – |
+| auto | ditto (prompted) | 2 | 0.863 | 0.996 | 0.867 | 0.867 | 0.867 |
 | auto | ditto (unprompted) | 2 | 1.000 | 0.750 | 0.750 | 0.750 | 0.750 |
-| auto | naive per-page LLM | 2 | 0.875 | 1.000 | 0.875 | 0.875 | – |
-| book | ditto (prompted) | 2 | 0.794 | 0.800 | 0.797 | 0.797 | – |
+| auto | naive per-page LLM | 2 | 0.875 | 1.000 | 0.875 | 0.875 | 0.875 |
+| book | ditto (prompted) | 2 | 0.794 | 0.800 | 0.797 | 0.797 | 0.797 |
 | book | ditto (unprompted) | 2 | 0.999 | 0.884 | 0.892 | 0.892 | 0.892 |
-| book | naive per-page LLM | 2 | 0.798 | 0.800 | 0.799 | 0.799 | – |
-| camera | ditto (prompted) | 2 | 0.806 | 0.801 | 0.804 | 0.804 | – |
+| book | naive per-page LLM | 2 | 0.798 | 0.800 | 0.799 | 0.799 | 0.799 |
+| camera | ditto (prompted) | 2 | 0.806 | 0.801 | 0.804 | 0.804 | 0.804 |
 | camera | ditto (unprompted) | 2 | 0.991 | 0.991 | 0.991 | 0.991 | 0.991 |
-| camera | naive per-page LLM | 2 | 0.823 | 0.823 | 0.823 | 0.823 | – |
-| job | ditto (prompted) | 2 | 1.000 | 0.996 | 0.998 | 0.998 | – |
+| camera | naive per-page LLM | 2 | 0.823 | 0.823 | 0.823 | 0.823 | 0.823 |
+| job | ditto (prompted) | 2 | 1.000 | 0.996 | 0.998 | 0.998 | 0.998 |
 | job | ditto (unprompted) | 2 | 0.998 | 0.977 | 0.987 | 0.987 | 0.987 |
-| job | naive per-page LLM | 2 | 0.873 | 0.997 | 0.873 | 0.873 | – |
-| movie | ditto (prompted) | 2 | 0.820 | 0.820 | 0.820 | 0.820 | – |
+| job | naive per-page LLM | 2 | 0.873 | 0.997 | 0.873 | 0.873 | 0.873 |
+| movie | ditto (prompted) | 2 | 0.820 | 0.820 | 0.820 | 0.820 | 0.820 |
 | movie | ditto (unprompted) | 2 | 0.926 | 0.695 | 0.695 | 0.695 | 0.695 |
-| movie | naive per-page LLM | 2 | 0.765 | 0.765 | 0.765 | 0.765 | – |
-| nbaplayer | ditto (prompted) | 2 | 0.875 | 0.875 | 0.875 | 0.750 | – |
+| movie | naive per-page LLM | 2 | 0.765 | 0.765 | 0.765 | 0.765 | 0.795 |
+| nbaplayer | ditto (prompted) | 2 | 0.875 | 0.875 | 0.875 | 0.750 | 0.875 |
 | nbaplayer | ditto (unprompted) | 2 | 1.000 | 0.875 | 0.875 | 0.750 | 0.875 |
-| nbaplayer | naive per-page LLM | 2 | 0.875 | 0.875 | 0.875 | 0.750 | – |
-| restaurant | ditto (prompted) | 2 | 0.855 | 0.855 | 0.855 | 0.855 | – |
+| nbaplayer | naive per-page LLM | 2 | 0.875 | 0.875 | 0.875 | 0.750 | 0.875 |
+| restaurant | ditto (prompted) | 2 | 0.855 | 0.855 | 0.855 | 0.855 | 0.978 |
 | restaurant | ditto (unprompted) | 2 | 0.971 | 0.853 | 0.853 | 0.853 | 0.853 |
-| restaurant | naive per-page LLM | 2 | 0.855 | 0.855 | 0.855 | 0.855 | – |
-| university | ditto (prompted) | 2 | 1.000 | 1.000 | 1.000 | 1.000 | – |
+| restaurant | naive per-page LLM | 2 | 0.855 | 0.855 | 0.855 | 0.855 | 1.000 |
+| university | ditto (prompted) | 2 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 | university | ditto (unprompted) | 2 | 1.000 | 0.750 | 0.750 | 0.750 | 0.750 |
-| university | naive per-page LLM | 2 | 1.000 | 1.000 | 1.000 | 1.000 | – |
+| university | naive per-page LLM | 2 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
 
 Speed per stage, pages per second per core (mean over sites; LLM wait excluded from verify):
 
 | config | ingest | fingerprint | cluster | analyze | union | generate | verify | extract | LLM latency (mean) | machine |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| swde_dev_ditto | 1,356 | 79 | 12,232 | 20 | 73 | 18,872 | 54 | 131 | – | 16 cores, 62.66 GB |
-| swde_dev_unprompted | 912 | 52 | 10,414 | 14 | 39 | 19,827 | 11 | 64 | – | 16 cores, 62.66 GB |
+| swde_dev_ditto | 1,167 | 62 | 8,425 | 19 | 74 | 15,920 | 46 | 105 | – | 16 cores, 62.66 GB |
+| swde_dev_unprompted | 847 | 49 | 9,554 | 15 | 31 | 15,565 | 10 | 61 | – | 16 cores, 62.66 GB |
 
 Read from the latest run of each config:
 
-- ditto (prompted) (`swde_dev_ditto`): [eval/results/swde_dev_ditto/20261027T102344Z/](../eval/results/swde_dev_ditto/20261027T102344Z); regenerate with `uv run ditto eval run eval/configs/swde_dev_ditto.yaml`
-- ditto (unprompted) (`swde_dev_unprompted`): [eval/results/swde_dev_unprompted/20261027T115205Z/](../eval/results/swde_dev_unprompted/20261027T115205Z); regenerate with `uv run ditto eval run eval/configs/swde_dev_unprompted.yaml`
-- naive per-page LLM (`swde_dev_naive`): [eval/results/swde_dev_naive/20261027T085024Z/](../eval/results/swde_dev_naive/20261027T085024Z); regenerate with `uv run ditto eval run eval/configs/swde_dev_naive.yaml`
+- ditto (prompted) (`swde_dev_ditto`): [eval/results/swde_dev_ditto/20261027T155851Z/](../eval/results/swde_dev_ditto/20261027T155851Z); regenerate with `uv run ditto eval run eval/configs/swde_dev_ditto.yaml`
+- ditto (unprompted) (`swde_dev_unprompted`): [eval/results/swde_dev_unprompted/20261027T161122Z/](../eval/results/swde_dev_unprompted/20261027T161122Z); regenerate with `uv run ditto eval run eval/configs/swde_dev_unprompted.yaml`
+- naive per-page LLM (`swde_dev_naive`): [eval/results/swde_dev_naive/20261027T160842Z/](../eval/results/swde_dev_naive/20261027T160842Z); regenerate with `uv run ditto eval run eval/configs/swde_dev_naive.yaml`
 
 Then rewrite these tables and charts with `uv run python eval/report.py`.
 <!-- results:swde:end -->
@@ -533,15 +536,43 @@ Then rewrite these tables and charts with `uv run python eval/report.py`.
 
 | method | scored on | pages scored | F1 norm | F1 raw | F1 canon | input tokens / 1k pages | output tokens / 1k pages | LLM calls / template | $ / 1k pages | speed | status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ditto (prompted) | all labeled pages the LLM did not see | – | – | – | – | – | – | – | – | – | not run yet |
-| naive per-page LLM | seeded 20-page sample per site | – | – | – | – | – | – | – | – | – | not run yet |
-| Crawl4AI generate_schema | all labeled pages | – | – | – | – | – | – | – | – | – | not run yet |
+| ditto (prompted) | 8 sites, all labeled pages the LLM did not see | 20,368 | 0.513 | 0.468 | 0.513 | 105,904 | 3,249 | 2.05 | $0.2443 | 50 pages/s/core (extract) | ok |
+| naive per-page LLM | 8 sites, seeded 20-page sample per site | 160 | 0.539 | 0.468 | 0.539 | 17,710,162 | 153,088 | 10.08 | $36.95 (extrapolated) | 0.42 pages/s (wall) | ok |
+| ↳ ditto, same sites and pages | the same 8 sites, same samples minus pages the LLM saw | 154 | 0.508 | 0.459 | 0.508 | 105,904 | 3,249 | 2.05 | $0.2443 | 50 pages/s/core (extract) | ok |
+| Crawl4AI generate_schema | 2 of 8 sites, all labeled pages | 4,177 | 0.431 | 0.396 | 0.431 | 217,224 | 6,177 | 3.31 | $0.4962 (extrapolated) | 6.23 pages/s (wall) | ok on 2 of 8 sites (6 skipped) |
+| ↳ ditto, same sites and pages | the same 2 sites, labeled pages the LLM did not see | 3,955 | 0.514 | 0.425 | 0.514 | 153,390 | 6,332 | 2.29 | $0.3701 | 63 pages/s/core (extract) | ok |
+
+`↳ ditto, same sites and pages` rows: ditto scored on exactly the sites and pages of the baseline row above them (the same seeded sample for a sampled baseline, less any page the LLM saw while generating a spec), with ditto's cost on those sites.
+
+- ditto (prompted): the LLM saw 757 of 21,125 labeled pages (3.58%) while generating 56 specs; they are left out of every ditto score.
+- ditto (prompted), optional-field recall (attribute on the page but on none of the pages the LLM saw for its template; 273 pages): normalized 0.004, raw 0.000
+
+Per vertical (mean of its sites; each method on its own sites and pages):
+
+| vertical | method | sites | P norm | R norm | F1 norm | F1 raw | F1 canon |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| event | ditto (prompted) | 2 | 0.295 | 0.268 | 0.272 | 0.272 | 0.272 |
+| event | naive per-page LLM | 2 | 0.356 | 0.325 | 0.332 | 0.320 | 0.332 |
+| event | Crawl4AI generate_schema | 1 | 0.315 | 0.286 | 0.292 | 0.291 | 0.293 |
+| job | ditto (prompted) | 2 | 0.708 | 0.645 | 0.654 | 0.484 | 0.654 |
+| job | naive per-page LLM | 2 | 0.687 | 0.651 | 0.662 | 0.479 | 0.662 |
+| job | Crawl4AI generate_schema | 1 | 0.668 | 0.546 | 0.569 | 0.501 | 0.569 |
+| product | ditto (prompted) | 2 | 0.551 | 0.450 | 0.453 | 0.449 | 0.453 |
+| product | naive per-page LLM | 2 | 0.594 | 0.574 | 0.580 | 0.495 | 0.580 |
+| recipe | ditto (prompted) | 2 | 0.690 | 0.658 | 0.673 | 0.668 | 0.673 |
+| recipe | naive per-page LLM | 2 | 0.590 | 0.577 | 0.583 | 0.577 | 0.583 |
+
+Speed per stage, pages per second per core (mean over sites; LLM wait excluded from verify):
+
+| config | ingest | fingerprint | cluster | analyze | union | generate | verify | extract | LLM latency (mean) | machine |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| cc_silver_ditto | 746 | 34 | 2,508 | 11 | 11 | 19 | 8 | 50 | 18.2 s | 16 cores, 62.66 GB |
 
 Read from the latest run of each config:
 
-- ditto (prompted) (`cc_silver_ditto`): not run yet; regenerate with `uv run ditto eval run eval/configs/cc_silver_ditto.yaml`
-- naive per-page LLM (`cc_silver_naive`): not run yet; regenerate with `uv run ditto eval run eval/configs/cc_silver_naive.yaml`
-- Crawl4AI generate_schema (`cc_silver_crawl4ai`): not run yet; regenerate with `uv run ditto eval run eval/configs/cc_silver_crawl4ai.yaml`
+- ditto (prompted) (`cc_silver_ditto`): [eval/results/cc_silver_ditto/20261027T144715Z/](../eval/results/cc_silver_ditto/20261027T144715Z); regenerate with `uv run ditto eval run eval/configs/cc_silver_ditto.yaml`
+- naive per-page LLM (`cc_silver_naive`): [eval/results/cc_silver_naive/20261027T152228Z/](../eval/results/cc_silver_naive/20261027T152228Z); regenerate with `uv run ditto eval run eval/configs/cc_silver_naive.yaml`
+- Crawl4AI generate_schema (`cc_silver_crawl4ai`): [eval/results/cc_silver_crawl4ai/20261027T153152Z/](../eval/results/cc_silver_crawl4ai/20261027T153152Z); regenerate with `uv run ditto eval run eval/configs/cc_silver_crawl4ai.yaml`
 
 Then rewrite these tables and charts with `uv run python eval/report.py`.
 
@@ -549,17 +580,17 @@ Domains (selected 2026-10-24; from [eval/datasets/commoncrawl_silver/domains.yam
 
 | domain | vertical | JSON-LD type | HTML captures in the index, per crawl | distinct URLs | pages downloaded of planned |
 | --- | --- | --- | --- | --- | --- |
-| `argos.co.uk` | product | Product | CC-MAIN-2026-43: 17,747; CC-MAIN-2026-39: 15,620 | 33,133 | 6,701 of 7,201 (6,701 detail, 0 other) |
-| `ikea.com` | product | Product | CC-MAIN-2026-43: 28,713; CC-MAIN-2026-39: 27,251 | 52,880 | 0 of 2,500 (0 detail, 0 other) |
-| `careerbuilder.com` | job | JobPosting | CC-MAIN-2026-43: 15,682; CC-MAIN-2026-39: 16,562 | 32,051 | 0 of 2,500 (0 detail, 0 other) |
-| `dice.com` | job | JobPosting | CC-MAIN-2026-43: 11,685; CC-MAIN-2026-39: 11,896 | 22,873 | 0 of 2,500 (0 detail, 0 other) |
-| `marmiton.org` | recipe | Recipe | CC-MAIN-2026-43: 13,305; CC-MAIN-2026-39: 12,923 | 25,846 | 0 of 2,500 (0 detail, 0 other) |
-| `food.ndtv.com` | recipe | Recipe | CC-MAIN-2026-43: 24,262; CC-MAIN-2026-39: 23,695 | 46,377 | 0 of 2,500 (0 detail, 0 other) |
-| `ticketweb.com` | event | Event | CC-MAIN-2026-43: 14,195; CC-MAIN-2026-39: 14,585 | 28,272 | 0 of 2,500 (0 detail, 0 other) |
-| `skiddle.com` | event | Event | CC-MAIN-2026-43: 12,698; CC-MAIN-2026-39: 13,935 | 24,475 | 0 of 2,500 (0 detail, 0 other) |
+| `argos.co.uk` | product | Product | CC-MAIN-2026-43: 17,747; CC-MAIN-2026-39: 15,620 | 33,133 | 7,201 of 7,201 (6,701 detail, 500 other) |
+| `ikea.com` | product | Product | CC-MAIN-2026-43: 28,713; CC-MAIN-2026-39: 27,251 | 52,880 | 2,500 of 2,500 (2,000 detail, 500 other) |
+| `careerbuilder.com` | job | JobPosting | CC-MAIN-2026-43: 15,682; CC-MAIN-2026-39: 16,562 | 32,051 | 2,500 of 2,500 (2,000 detail, 500 other) |
+| `dice.com` | job | JobPosting | CC-MAIN-2026-43: 11,685; CC-MAIN-2026-39: 11,896 | 22,873 | 2,500 of 2,500 (2,000 detail, 500 other) |
+| `marmiton.org` | recipe | Recipe | CC-MAIN-2026-43: 13,305; CC-MAIN-2026-39: 12,923 | 25,846 | 2,500 of 2,500 (2,000 detail, 500 other) |
+| `food.ndtv.com` | recipe | Recipe | CC-MAIN-2026-43: 24,262; CC-MAIN-2026-39: 23,695 | 46,377 | 2,500 of 2,500 (2,000 detail, 500 other) |
+| `ticketweb.com` | event | Event | CC-MAIN-2026-43: 14,195; CC-MAIN-2026-39: 14,585 | 28,272 | 2,500 of 2,500 (2,000 detail, 500 other) |
+| `skiddle.com` | event | Event | CC-MAIN-2026-43: 12,698; CC-MAIN-2026-39: 13,935 | 24,475 | 2,500 of 2,500 (2,000 detail, 500 other) |
 
-Label-noise check: each JSON-LD label compared with the text the extractor sees, on 200 pages from the domain-selection sample, 8 domains; performed by build agent (automated script noise_check.py), not a human ([eval/datasets/commoncrawl_silver/noise_check.json](../eval/datasets/commoncrawl_silver/noise_check.json), `uv run python eval/datasets/commoncrawl_silver/noise_check.py`).
-Fields agreeing on fewer than 80% of the checked pages: `careerbuilder.com` datePosted 0.00 (25 pages); `careerbuilder.com` employmentType 0.56 (25 pages); `dice.com` datePosted 0.00 (25 pages); `ikea.com` name 0.04 (25 pages); `ikea.com` priceCurrency 0.52 (25 pages); `ikea.com` availability 0.00 (24 pages); `marmiton.org` recipeYield 0.00 (25 pages); `marmiton.org` ingredients 0.44 (25 pages); `skiddle.com` endDate 0.68 (25 pages); `skiddle.com` organizer 0.35 (23 pages); `ticketweb.com` startDate 0.16 (25 pages); `ticketweb.com` endDate 0.00 (4 pages).
+Label-noise check: each JSON-LD label compared with the text the extractor sees, on 200 pages from a sample of the downloaded pages, 8 domains; performed by build agent (automated script noise_check.py), not a human ([eval/datasets/commoncrawl_silver/noise_check.json](../eval/datasets/commoncrawl_silver/noise_check.json), `uv run python eval/datasets/commoncrawl_silver/noise_check.py`).
+Fields agreeing on fewer than 80% of the checked pages: `careerbuilder.com` datePosted 0.00 (25 pages); `careerbuilder.com` employmentType 0.60 (25 pages); `dice.com` datePosted 0.00 (25 pages); `dice.com` employmentType 0.72 (25 pages); `ikea.com` name 0.04 (25 pages); `ikea.com` priceCurrency 0.76 (25 pages); `ikea.com` availability 0.00 (23 pages); `marmiton.org` recipeYield 0.00 (25 pages); `marmiton.org` ingredients 0.48 (25 pages); `skiddle.com` endDate 0.76 (25 pages); `skiddle.com` organizer 0.42 (24 pages); `ticketweb.com` startDate 0.20 (25 pages); `ticketweb.com` endDate 0.00 (4 pages).
 
 | domain | field | labeled pages | agreement | item agreement (lists) |
 | --- | --- | --- | --- | --- |
@@ -573,45 +604,45 @@ Fields agreeing on fewer than 80% of the checked pages: `careerbuilder.com` date
 | careerbuilder.com | hiringOrganization | 25 | 1.000 | – |
 | careerbuilder.com | location | 25 | 0.960 | – |
 | careerbuilder.com | datePosted | 25 | 0.000 | – |
-| careerbuilder.com | employmentType | 25 | 0.560 | – |
-| careerbuilder.com | salary | 8 | 1.000 | – |
+| careerbuilder.com | employmentType | 25 | 0.600 | – |
+| careerbuilder.com | salary | 10 | 1.000 | – |
 | dice.com | title | 25 | 1.000 | – |
 | dice.com | hiringOrganization | 25 | 1.000 | – |
-| dice.com | location | 23 | 1.000 | – |
+| dice.com | location | 24 | 1.000 | – |
 | dice.com | datePosted | 25 | 0.000 | – |
-| dice.com | employmentType | 25 | 1.000 | – |
+| dice.com | employmentType | 25 | 0.720 | – |
 | dice.com | salary | 20 | 1.000 | – |
 | food.ndtv.com | name | 25 | 1.000 | – |
-| food.ndtv.com | prepTime | 25 | 0.880 | – |
-| food.ndtv.com | cookTime | 25 | 0.880 | – |
+| food.ndtv.com | prepTime | 25 | 0.800 | – |
+| food.ndtv.com | cookTime | 25 | 0.800 | – |
 | food.ndtv.com | recipeYield | 25 | 1.000 | – |
 | food.ndtv.com | ingredients | 25 | 1.000 | 1.000 |
-| food.ndtv.com | author | 22 | 1.000 | – |
+| food.ndtv.com | author | 24 | 1.000 | – |
 | ikea.com | name | 25 | 0.040 | – |
 | ikea.com | price | 25 | 1.000 | – |
-| ikea.com | priceCurrency | 25 | 0.520 | – |
-| ikea.com | availability | 24 | 0.000 | – |
+| ikea.com | priceCurrency | 25 | 0.760 | – |
+| ikea.com | availability | 23 | 0.000 | – |
 | ikea.com | brand | 25 | 1.000 | – |
 | ikea.com | sku | 25 | 1.000 | – |
 | ikea.com | image | 25 | 1.000 | – |
 | marmiton.org | name | 25 | 1.000 | – |
 | marmiton.org | prepTime | 25 | 1.000 | – |
-| marmiton.org | cookTime | 25 | 0.920 | – |
+| marmiton.org | cookTime | 25 | 0.960 | – |
 | marmiton.org | recipeYield | 25 | 0.000 | – |
-| marmiton.org | ingredients | 25 | 0.440 | 0.877 |
+| marmiton.org | ingredients | 25 | 0.480 | 0.882 |
 | marmiton.org | author | 25 | 1.000 | – |
 | skiddle.com | name | 25 | 1.000 | – |
 | skiddle.com | startDate | 25 | 1.000 | – |
-| skiddle.com | endDate | 25 | 0.680 | – |
+| skiddle.com | endDate | 25 | 0.760 | – |
 | skiddle.com | location | 25 | 1.000 | – |
-| skiddle.com | address | 25 | 0.920 | – |
-| skiddle.com | organizer | 23 | 0.348 | – |
-| skiddle.com | performer | 8 | 0.875 | – |
+| skiddle.com | address | 25 | 1.000 | – |
+| skiddle.com | organizer | 24 | 0.417 | – |
+| skiddle.com | performer | 7 | 1.000 | – |
 | ticketweb.com | name | 25 | 1.000 | – |
-| ticketweb.com | startDate | 25 | 0.160 | – |
+| ticketweb.com | startDate | 25 | 0.200 | – |
+| ticketweb.com | endDate | 4 | 0.000 | – |
 | ticketweb.com | location | 25 | 1.000 | – |
 | ticketweb.com | address | 25 | 1.000 | – |
-| ticketweb.com | endDate | 4 | 0.000 | – |
 <!-- results:cc_silver:end -->
 
 ### LiveWeb-IE
@@ -640,7 +671,7 @@ Input tokens per 1k pages 145,738, LLM calls per template 2.28, $ per 1k pages $
 
 Read from the latest run of each config:
 
-- ditto (prompted) (`livewebie_ditto`): [eval/results/livewebie_ditto/20261027T122202Z/](../eval/results/livewebie_ditto/20261027T122202Z); regenerate with `uv run ditto eval run eval/configs/livewebie_ditto.yaml`
+- ditto (prompted) (`livewebie_ditto`): [eval/results/livewebie_ditto/20261027T181651Z/](../eval/results/livewebie_ditto/20261027T181651Z); regenerate with `uv run ditto eval run eval/configs/livewebie_ditto.yaml`
 
 Then rewrite these tables and charts with `uv run python eval/report.py`.
 <!-- results:livewebie:end -->
@@ -652,9 +683,9 @@ Then rewrite these tables and charts with `uv run python eval/report.py`.
 
 | evaluation | pages | true templates | clusters found | ARI | purity | over-merged clusters | under-merged templates | fingerprint pages/s/core | cluster pages/s/core | status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| synth_default | 10,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 316 | 11,283 | ok |
-| synth_nightly | – | – | – | – | – | – | – | – | – | not run yet |
-| synth_scale | 100,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 374 | 54,879 | ok |
+| synth_default | 10,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 279 | 9,667 | ok |
+| synth_nightly | 10,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 321 | 12,395 | ok |
+| synth_scale | 100,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 305 | 40,698 | ok |
 
 **Stress curves** (`synth_curves`: one parameter at a time from the defaults)
 
@@ -746,10 +777,10 @@ Every point:
 
 Read from the latest run of each config:
 
-- ditto (clustering) (`synth_default`): [eval/results/synth_default/20261026T095112Z/](../eval/results/synth_default/20261026T095112Z); regenerate with `uv run ditto eval run eval/configs/synth_default.yaml`
-- ditto (clustering) (`synth_nightly`): not run yet; regenerate with `uv run ditto eval run eval/configs/synth_nightly.yaml`
-- ditto (clustering) (`synth_scale`): [eval/results/synth_scale/20261026T095119Z/](../eval/results/synth_scale/20261026T095119Z); regenerate with `uv run ditto eval run eval/configs/synth_scale.yaml`
-- ditto (clustering) (`synth_curves`): [eval/results/synth_curves/20261027T093851Z/](../eval/results/synth_curves/20261027T093851Z); regenerate with `uv run ditto eval run eval/configs/synth_curves.yaml`
+- ditto (clustering) (`synth_default`): [eval/results/synth_default/20261027T154354Z/](../eval/results/synth_default/20261027T154354Z); regenerate with `uv run ditto eval run eval/configs/synth_default.yaml`
+- ditto (clustering) (`synth_nightly`): [eval/results/synth_nightly/20261027T154448Z/](../eval/results/synth_nightly/20261027T154448Z); regenerate with `uv run ditto eval run eval/configs/synth_nightly.yaml`
+- ditto (clustering) (`synth_scale`): [eval/results/synth_scale/20261027T154401Z/](../eval/results/synth_scale/20261027T154401Z); regenerate with `uv run ditto eval run eval/configs/synth_scale.yaml`
+- ditto (clustering) (`synth_curves`): [eval/results/synth_curves/20261027T154454Z/](../eval/results/synth_curves/20261027T154454Z); regenerate with `uv run ditto eval run eval/configs/synth_curves.yaml`
 
 Then rewrite these tables and charts with `uv run python eval/report.py`.
 <!-- results:clustering:end -->
@@ -764,8 +795,8 @@ Then rewrite these tables and charts with `uv run python eval/report.py`.
 
 Read from the latest run of each config:
 
-- ditto (union) (`union_gate_synth`): [eval/results/union_gate_synth/20261027T101206Z/](../eval/results/union_gate_synth/20261027T101206Z); regenerate with `uv run ditto eval run eval/configs/union_gate_synth.yaml`
-- ditto (union) (`union_gate_swde_dev`): [eval/results/union_gate_swde_dev/20261027T101223Z/](../eval/results/union_gate_swde_dev/20261027T101223Z); regenerate with `uv run ditto eval run eval/configs/union_gate_swde_dev.yaml`
+- ditto (union) (`union_gate_synth`): [eval/results/union_gate_synth/20261027T155113Z/](../eval/results/union_gate_synth/20261027T155113Z); regenerate with `uv run ditto eval run eval/configs/union_gate_synth.yaml`
+- ditto (union) (`union_gate_swde_dev`): [eval/results/union_gate_swde_dev/20261027T155131Z/](../eval/results/union_gate_swde_dev/20261027T155131Z); regenerate with `uv run ditto eval run eval/configs/union_gate_swde_dev.yaml`
 
 Then rewrite these tables and charts with `uv run python eval/report.py`.
 <!-- results:union:end -->
@@ -775,40 +806,40 @@ Then rewrite these tables and charts with `uv run python eval/report.py`.
 <!-- results:spend:start -->
 | evaluation | method | status | LLM cost of the published run | billed in kept runs (ledger) | budget cap | latest run |
 | --- | --- | --- | --- | --- | --- | --- |
-| `cc_silver_crawl4ai` | Crawl4AI generate_schema | not run yet | – | – | $1.50 | – |
-| `cc_silver_ditto` | ditto (prompted) | not run yet | – | – | $6.00 | – |
-| `cc_silver_naive` | naive per-page LLM | not run yet | – | – | $6.00 | – |
-| `livewebie_ditto` | ditto (prompted) | ok | $1.33 | $0.9047 | $4.00 | [20261027T122202Z](../eval/results/livewebie_ditto/20261027T122202Z) |
-| `swde_dev_ditto` | ditto (prompted) | ok | $1.97 | $0 | $3.00 | [20261027T102344Z](../eval/results/swde_dev_ditto/20261027T102344Z) |
-| `swde_dev_naive` | naive per-page LLM | ok | $18.50 | $11.74 (3 runs) | $10.00 | [20261027T085024Z](../eval/results/swde_dev_naive/20261027T085024Z) |
-| `swde_dev_unprompted` | ditto (unprompted) | ok | $3.23 | $0 | $3.00 | [20261027T115205Z](../eval/results/swde_dev_unprompted/20261027T115205Z) |
-| `swde_test_autoscraper` | AutoScraper | ok | $2.73 | $2.26 | $5.00 | [20261027T112853Z](../eval/results/swde_test_autoscraper/20261027T112853Z) |
-| `swde_test_crawl4ai` | Crawl4AI generate_schema | ok on 28 of 64 sites (36 skipped) | $5.70 | $5.70 | $1.00 | [20261027T104347Z](../eval/results/swde_test_crawl4ai/20261027T104347Z) |
-| `swde_test_ditto` | ditto (prompted) | ok | $7.56 | $6.87 | $10.00 | [20261027T112642Z](../eval/results/swde_test_ditto/20261027T112642Z) |
-| `swde_test_handwritten` | hand-written XPath (build agent) | ok on 5 of 64 sites (59 not_run) | $0 | $0 | $0.0100 | [20261027T102047Z](../eval/results/swde_test_handwritten/20261027T102047Z) |
-| `swde_test_naive` | naive per-page LLM | ok | $14.46 | $14.46 | $16.00 | [20261027T102925Z](../eval/results/swde_test_naive/20261027T102925Z) |
-| `synth_curves` | ditto (clustering) | ok | $0 | $0 | no LLM | [20261027T093851Z](../eval/results/synth_curves/20261027T093851Z) |
-| `synth_default` | ditto (clustering) | ok | $0 | $0 | no LLM | [20261026T095112Z](../eval/results/synth_default/20261026T095112Z) |
-| `synth_nightly` | ditto (clustering) | not run yet | – | – | no LLM | – |
-| `synth_scale` | ditto (clustering) | ok | $0 | $0 | no LLM | [20261026T095119Z](../eval/results/synth_scale/20261026T095119Z) |
-| `union_gate_swde_dev` | ditto (union) | ok | $0 | $0 | no LLM | [20261027T101223Z](../eval/results/union_gate_swde_dev/20261027T101223Z) |
-| `union_gate_synth` | ditto (union) | ok | $0 | $0 | no LLM | [20261027T101206Z](../eval/results/union_gate_synth/20261027T101206Z) |
+| `cc_silver_crawl4ai` | Crawl4AI generate_schema | ok on 2 of 8 sites (6 skipped) | $2.07 | $2.07 | $1.50 | [20261027T153152Z](../eval/results/cc_silver_crawl4ai/20261027T153152Z) |
+| `cc_silver_ditto` | ditto (prompted) | ok | $6.03 | $5.46 | $6.00 | [20261027T144715Z](../eval/results/cc_silver_ditto/20261027T144715Z) |
+| `cc_silver_naive` | naive per-page LLM | ok | $5.91 | $5.88 | $6.00 | [20261027T152228Z](../eval/results/cc_silver_naive/20261027T152228Z) |
+| `livewebie_ditto` | ditto (prompted) | ok | $1.33 | $0.9047 (2 runs) | $4.00 | [20261027T181651Z](../eval/results/livewebie_ditto/20261027T181651Z) |
+| `swde_dev_ditto` | ditto (prompted) | ok | $1.97 | $0 (2 runs) | $3.00 | [20261027T155851Z](../eval/results/swde_dev_ditto/20261027T155851Z) |
+| `swde_dev_naive` | naive per-page LLM | ok | $18.50 | $11.74 (4 runs) | $10.00 | [20261027T160842Z](../eval/results/swde_dev_naive/20261027T160842Z) |
+| `swde_dev_unprompted` | ditto (unprompted) | ok | $3.23 | $0 (2 runs) | $3.00 | [20261027T161122Z](../eval/results/swde_dev_unprompted/20261027T161122Z) |
+| `swde_test_autoscraper` | AutoScraper | ok | $2.73 | $2.26 (2 runs) | $5.00 | [20261027T171529Z](../eval/results/swde_test_autoscraper/20261027T171529Z) |
+| `swde_test_crawl4ai` | Crawl4AI generate_schema | ok on 35 of 36 sites (1 failed) | $7.34 | $5.70 (2 runs) | $1.00 | [20261027T181758Z](../eval/results/swde_test_crawl4ai/20261027T181758Z) |
+| `swde_test_ditto` | ditto (prompted) | ok | $7.56 | $6.87 (2 runs) | $10.00 | [20261027T174101Z](../eval/results/swde_test_ditto/20261027T174101Z) |
+| `swde_test_handwritten` | hand-written XPath (build agent) | ok on 5 of 64 sites (59 not_run) | $0 | $0 (2 runs) | $0.0100 | [20261027T172907Z](../eval/results/swde_test_handwritten/20261027T172907Z) |
+| `swde_test_naive` | naive per-page LLM | ok | $14.46 | $14.46 (2 runs) | $16.00 | [20261027T165317Z](../eval/results/swde_test_naive/20261027T165317Z) |
+| `synth_curves` | ditto (clustering) | ok | $0 | $0 (2 runs) | no LLM | [20261027T154454Z](../eval/results/synth_curves/20261027T154454Z) |
+| `synth_default` | ditto (clustering) | ok | $0 | $0 (2 runs) | no LLM | [20261027T154354Z](../eval/results/synth_default/20261027T154354Z) |
+| `synth_nightly` | ditto (clustering) | ok | $0 | $0 | no LLM | [20261027T154448Z](../eval/results/synth_nightly/20261027T154448Z) |
+| `synth_scale` | ditto (clustering) | ok | $0 | $0 (2 runs) | no LLM | [20261027T154401Z](../eval/results/synth_scale/20261027T154401Z) |
+| `union_gate_swde_dev` | ditto (union) | ok | $0 | $0 (2 runs) | no LLM | [20261027T155131Z](../eval/results/union_gate_swde_dev/20261027T155131Z) |
+| `union_gate_synth` | ditto (union) | ok | $0 | $0 (2 runs) | no LLM | [20261027T155113Z](../eval/results/union_gate_synth/20261027T155113Z) |
 
-Total LLM cost of the published results: $55.47, every token behind them (cached calls included) at the standard list prices of `config/prices.yaml`, i.e. what rerunning them from an empty cache costs. Billed in the 16 runs kept under `eval/results/`: $41.94 (`meta.json` `spend_usd`, ditto's ledger; a rerun answered from the cache bills $0, and runs kept for the audit trail count too). Rewrite with `uv run python eval/report.py`.
+Total LLM cost of the published results: $71.14, every token behind them (cached calls included) at the standard list prices of `config/prices.yaml`, i.e. what rerunning them from an empty cache costs. Billed in the 34 runs kept under `eval/results/`: $55.34 (`meta.json` `spend_usd`, ditto's ledger; a rerun answered from the cache bills $0, and runs kept for the audit trail count too). Rewrite with `uv run python eval/report.py`.
 <!-- results:spend:end -->
 
 ### Models and prompt versions
 
 <!-- results:models:start -->
-Models used by the published results: `openai/gpt-6.1-sol` (8 evaluations). Prompt versions: `autoscraper@3d78f8a`, `crawl4ai.generate_schema`, `naive_baseline.v1`, `repair.v1`, `specgen.v2`.
+Models used by the published results: `openai/gpt-6.1-sol` (11 evaluations). Prompt versions: `autoscraper@3d78f8a`, `crawl4ai.generate_schema`, `naive_baseline.v1`, `repair.v1`, `specgen.v2`.
 
 Pinned in `eval/configs/*.yaml` (a run fails if the LLM layer resolves another id): baseline: `openai/gpt-6.1-sol`; generation: `openai/gpt-6.1-sol`; probe: `openai/gpt-5.4-mini`; repair: `openai/gpt-6.1-sol`; tail_direct: `openai/gpt-5.4-mini`.
 
 | evaluation | pinned models (config) | models used | prompt versions |
 | --- | --- | --- | --- |
-| `cc_silver_crawl4ai` | baseline: `openai/gpt-6.1-sol` | not run yet | – |
-| `cc_silver_ditto` | generation: `openai/gpt-6.1-sol`, probe: `openai/gpt-5.4-mini`, repair: `openai/gpt-6.1-sol`, tail_direct: `openai/gpt-5.4-mini` | not run yet | – |
-| `cc_silver_naive` | baseline: `openai/gpt-6.1-sol` | not run yet | – |
+| `cc_silver_crawl4ai` | baseline: `openai/gpt-6.1-sol` | `openai/gpt-6.1-sol` | `crawl4ai.generate_schema` |
+| `cc_silver_ditto` | generation: `openai/gpt-6.1-sol`, probe: `openai/gpt-5.4-mini`, repair: `openai/gpt-6.1-sol`, tail_direct: `openai/gpt-5.4-mini` | `openai/gpt-6.1-sol` | `repair.v1`, `specgen.v2` |
+| `cc_silver_naive` | baseline: `openai/gpt-6.1-sol` | `openai/gpt-6.1-sol` | `naive_baseline.v1` |
 | `livewebie_ditto` | generation: `openai/gpt-6.1-sol`, probe: `openai/gpt-5.4-mini`, repair: `openai/gpt-6.1-sol`, tail_direct: `openai/gpt-5.4-mini` | `openai/gpt-6.1-sol` | `repair.v1`, `specgen.v2` |
 | `swde_dev_ditto` | generation: `openai/gpt-6.1-sol`, probe: `openai/gpt-5.4-mini`, repair: `openai/gpt-6.1-sol`, tail_direct: `openai/gpt-5.4-mini` | `openai/gpt-6.1-sol` | `repair.v1`, `specgen.v2` |
 | `swde_dev_naive` | baseline: `openai/gpt-6.1-sol` | `openai/gpt-6.1-sol` | `naive_baseline.v1` |

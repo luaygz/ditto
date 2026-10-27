@@ -154,7 +154,7 @@ pages. Per-page baselines' cost per 1,000 pages is extrapolated from their sampl
 
 LLM cost per 1,000 pages (log scale; every method's tokens at the same standard-tier list prices from `config/prices.yaml`) against normalized F1. Black star: ditto on every site. Each baseline (circle) is joined by a dotted line to ditto (star, same colour) scored on exactly that baseline's sites and pages. A method without LLM cost sits at the left edge.
 
-Sources (latest run per config): [swde_test_ditto](eval/results/swde_test_ditto/20261027T112642Z) · [swde_test_naive](eval/results/swde_test_naive/20261027T102925Z) · [swde_test_crawl4ai](eval/results/swde_test_crawl4ai/20261027T104347Z) · [swde_test_autoscraper](eval/results/swde_test_autoscraper/20261027T112853Z) · [swde_test_handwritten](eval/results/swde_test_handwritten/20261027T102047Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
+Sources (latest run per config): [swde_test_ditto](eval/results/swde_test_ditto/20261027T174101Z) · [swde_test_naive](eval/results/swde_test_naive/20261027T165317Z) · [swde_test_crawl4ai](eval/results/swde_test_crawl4ai/20261027T181758Z) · [swde_test_autoscraper](eval/results/swde_test_autoscraper/20261027T171529Z) · [swde_test_handwritten](eval/results/swde_test_handwritten/20261027T172907Z) · [cc_silver_ditto](eval/results/cc_silver_ditto/20261027T144715Z) · [cc_silver_naive](eval/results/cc_silver_naive/20261027T152228Z) · [cc_silver_crawl4ai](eval/results/cc_silver_crawl4ai/20261027T153152Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
 <!-- results:headline:end -->
 
 ### SWDE
@@ -167,35 +167,35 @@ per vertical are the development slice (tuning allowed); the other 64 are the fr
 
 | method | scored on | pages scored | F1 norm | F1 raw | F1 canon | input tokens / 1k pages | output tokens / 1k pages | LLM calls / template | $ / 1k pages | speed | status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ditto (prompted) | 64 sites, all labeled pages the LLM did not see | 96,659 | 0.846 | 0.771 | – | 35,574 | 652 | 1.45 | $0.0777 | 80 pages/s/core (extract) | ok |
-| naive per-page LLM | 64 sites, seeded 10-page sample per site | 640 | 0.845 | 0.773 | – | 11,025,011 | 53,805 | 9.39 | $22.59 (extrapolated) | 0.99 pages/s (wall) | ok |
-| ↳ ditto, same sites and pages | the same 64 sites, same samples minus pages the LLM saw | 634 | 0.843 | 0.769 | – | 35,574 | 652 | 1.45 | $0.0777 | 80 pages/s/core (extract) | ok |
-| Crawl4AI generate_schema | 28 of 64 sites, all labeled pages | 43,232 | 0.819 | 0.702 | – | 55,599 | 2,057 | 1.56 | $0.1318 | 17.72 pages/s (wall) | ok on 28 of 64 sites (36 skipped) |
-| ↳ ditto, same sites and pages | the same 28 sites, labeled pages the LLM did not see | 42,900 | 0.839 | 0.722 | – | 27,823 | 649 | 1.36 | $0.0621 | 92 pages/s/core (extract) | ok |
-| AutoScraper | 8 of 64 sites, seeded 10-page sample per site | 80 | 0.880 | 0.781 | – | 15,053,888 | 405,562 | 51.00 | $34.16 (extrapolated) | 0.03 pages/s (wall) | ok |
-| ↳ ditto, same sites and pages | the same 8 sites, same samples minus pages the LLM saw | 79 | 0.733 | 0.671 | – | 34,828 | 661 | 2.12 | $0.0763 | 91 pages/s/core (extract) | ok |
-| hand-written XPath (build agent) | 5 of 64 sites, all labeled pages | 7,465 | 1.000 | 1.000 | – | 0 | 0 | 0.00 | $0 | 1,050.64 pages/s (wall) | ok on 5 of 64 sites (59 not_run) |
-| ↳ ditto, same sites and pages | the same 5 sites, labeled pages the LLM did not see | 7,362 | 0.906 | 0.906 | – | 29,613 | 754 | 1.00 | $0.0668 | 76 pages/s/core (extract) | ok |
+| ditto (prompted) | 64 sites, all labeled pages the LLM did not see | 96,659 | 0.846 | 0.771 | 0.866 | 35,574 | 652 | 1.45 | $0.0777 | 83 pages/s/core (extract) | ok |
+| naive per-page LLM | 64 sites, seeded 10-page sample per site | 640 | 0.845 | 0.773 | 0.891 | 11,025,011 | 53,805 | 9.39 | $22.59 (extrapolated) | 65.42 pages/s (wall) | ok |
+| ↳ ditto, same sites and pages | the same 64 sites, same samples minus pages the LLM saw | 634 | 0.843 | 0.769 | 0.863 | 35,574 | 652 | 1.45 | $0.0777 | 83 pages/s/core (extract) | ok |
+| Crawl4AI generate_schema | 35 of 64 sites, all labeled pages | 53,967 | 0.831 | 0.720 | 0.842 | 58,248 | 1,952 | 1.55 | $0.1360 | 144.83 pages/s (wall) | ok on 35 of 36 sites (1 failed) |
+| ↳ ditto, same sites and pages | the same 35 sites, labeled pages the LLM did not see | 53,617 | 0.847 | 0.735 | 0.865 | 26,789 | 625 | 1.46 | $0.0598 | 91 pages/s/core (extract) | ok |
+| AutoScraper | 8 of 64 sites, seeded 10-page sample per site | 80 | 0.880 | 0.781 | 0.880 | 15,053,888 | 405,562 | 51.00 | $34.16 (extrapolated) | 0.10 pages/s (wall) | ok |
+| ↳ ditto, same sites and pages | the same 8 sites, same samples minus pages the LLM saw | 79 | 0.733 | 0.671 | 0.774 | 34,828 | 661 | 2.12 | $0.0763 | 84 pages/s/core (extract) | ok |
+| hand-written XPath (build agent) | 5 of 64 sites, all labeled pages | 7,465 | 1.000 | 1.000 | 1.000 | 0 | 0 | 0.00 | $0 | 1,101.29 pages/s (wall) | ok on 5 of 64 sites (59 not_run) |
+| ↳ ditto, same sites and pages | the same 5 sites, labeled pages the LLM did not see | 7,362 | 0.906 | 0.906 | 0.906 | 29,613 | 754 | 1.00 | $0.0668 | 69 pages/s/core (extract) | ok |
 
 - ditto (prompted): the LLM saw 738 of 97,397 labeled pages (0.76%) while generating 78 specs; they are left out of every ditto score.
 
-Sources (latest run per config): [swde_test_ditto](eval/results/swde_test_ditto/20261027T112642Z) · [swde_test_naive](eval/results/swde_test_naive/20261027T102925Z) · [swde_test_crawl4ai](eval/results/swde_test_crawl4ai/20261027T104347Z) · [swde_test_autoscraper](eval/results/swde_test_autoscraper/20261027T112853Z) · [swde_test_handwritten](eval/results/swde_test_handwritten/20261027T102047Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
+Sources (latest run per config): [swde_test_ditto](eval/results/swde_test_ditto/20261027T174101Z) · [swde_test_naive](eval/results/swde_test_naive/20261027T165317Z) · [swde_test_crawl4ai](eval/results/swde_test_crawl4ai/20261027T181758Z) · [swde_test_autoscraper](eval/results/swde_test_autoscraper/20261027T171529Z) · [swde_test_handwritten](eval/results/swde_test_handwritten/20261027T172907Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
 
 **SWDE development slice (tuning allowed)**
 
 | method | scored on | pages scored | F1 norm | F1 raw | F1 canon | input tokens / 1k pages | output tokens / 1k pages | LLM calls / template | $ / 1k pages | speed | status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ditto (prompted) | 16 sites, all labeled pages the LLM did not see | 26,777 | 0.877 | 0.861 | – | 32,773 | 756 | 1.72 | $0.0731 | 131 pages/s/core (extract) | ok |
-| ditto (unprompted) | 16 sites, all labeled pages the LLM did not see | 26,484 | 0.849 | 0.833 | 0.849 | 43,173 | 3,365 | 2.92 | $0.1200 | 64 pages/s/core (extract) | ok |
-| naive per-page LLM | 16 sites, seeded 50-page sample per site | 800 | 0.858 | 0.842 | – | 11,340,619 | 44,742 | 41.88 | $23.13 (extrapolated) | 15.75 pages/s (wall) | ok |
-| ↳ ditto, same sites and pages | the same 16 sites, same samples minus pages the LLM saw | 796 | 0.876 | 0.860 | – | 32,773 | 756 | 1.72 | $0.0731 | 131 pages/s/core (extract) | ok |
+| ditto (prompted) | 16 sites, all labeled pages the LLM did not see | 26,777 | 0.877 | 0.861 | 0.892 | 32,773 | 756 | 1.72 | $0.0731 | 105 pages/s/core (extract) | ok |
+| ditto (unprompted) | 16 sites, all labeled pages the LLM did not see | 26,484 | 0.849 | 0.833 | 0.849 | 43,173 | 3,365 | 2.92 | $0.1200 | 61 pages/s/core (extract) | ok |
+| naive per-page LLM | 16 sites, seeded 50-page sample per site | 800 | 0.858 | 0.842 | 0.880 | 11,340,619 | 44,742 | 41.88 | $23.13 (extrapolated) | 79.28 pages/s (wall) | ok |
+| ↳ ditto, same sites and pages | the same 16 sites, same samples minus pages the LLM saw | 796 | 0.876 | 0.860 | 0.890 | 32,773 | 756 | 1.72 | $0.0731 | 105 pages/s/core (extract) | ok |
 
 - ditto (prompted): the LLM saw 117 of 26,894 labeled pages (0.44%) while generating 23 specs; they are left out of every ditto score.
 - ditto (unprompted): the LLM saw 410 of 26,894 labeled pages (1.52%) while generating 23 specs; they are left out of every ditto score.
 - ditto (unprompted), recall of the labeled attributes after aligning the LLM's field names to label names by value overlap: normalized 0.847, raw 0.831, canon 0.847
 - ditto (unprompted), schema precision: 0.908 (187 of 206 proposed fields on 10 sites judged entity attributes; judged field by field by the build agent, not a human ([eval/judgments/swde_dev_schema_precision.json](eval/judgments/swde_dev_schema_precision.json)))
 
-Sources (latest run per config): [swde_dev_ditto](eval/results/swde_dev_ditto/20261027T102344Z) · [swde_dev_unprompted](eval/results/swde_dev_unprompted/20261027T115205Z) · [swde_dev_naive](eval/results/swde_dev_naive/20261027T085024Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
+Sources (latest run per config): [swde_dev_ditto](eval/results/swde_dev_ditto/20261027T155851Z) · [swde_dev_unprompted](eval/results/swde_dev_unprompted/20261027T161122Z) · [swde_dev_naive](eval/results/swde_dev_naive/20261027T160842Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
 <!-- results:swde:end -->
 
 ### Common Crawl silver set
@@ -209,26 +209,31 @@ label-noise check against the visible text was performed by the build agent, not
 
 | method | scored on | pages scored | F1 norm | F1 raw | F1 canon | input tokens / 1k pages | output tokens / 1k pages | LLM calls / template | $ / 1k pages | speed | status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ditto (prompted) | all labeled pages the LLM did not see | – | – | – | – | – | – | – | – | – | not run yet |
-| naive per-page LLM | seeded 20-page sample per site | – | – | – | – | – | – | – | – | – | not run yet |
-| Crawl4AI generate_schema | all labeled pages | – | – | – | – | – | – | – | – | – | not run yet |
+| ditto (prompted) | 8 sites, all labeled pages the LLM did not see | 20,368 | 0.513 | 0.468 | 0.513 | 105,904 | 3,249 | 2.05 | $0.2443 | 50 pages/s/core (extract) | ok |
+| naive per-page LLM | 8 sites, seeded 20-page sample per site | 160 | 0.539 | 0.468 | 0.539 | 17,710,162 | 153,088 | 10.08 | $36.95 (extrapolated) | 0.42 pages/s (wall) | ok |
+| ↳ ditto, same sites and pages | the same 8 sites, same samples minus pages the LLM saw | 154 | 0.508 | 0.459 | 0.508 | 105,904 | 3,249 | 2.05 | $0.2443 | 50 pages/s/core (extract) | ok |
+| Crawl4AI generate_schema | 2 of 8 sites, all labeled pages | 4,177 | 0.431 | 0.396 | 0.431 | 217,224 | 6,177 | 3.31 | $0.4962 (extrapolated) | 6.23 pages/s (wall) | ok on 2 of 8 sites (6 skipped) |
+| ↳ ditto, same sites and pages | the same 2 sites, labeled pages the LLM did not see | 3,955 | 0.514 | 0.425 | 0.514 | 153,390 | 6,332 | 2.29 | $0.3701 | 63 pages/s/core (extract) | ok |
 
-Sources (latest run per config): `cc_silver_ditto` (not run) · `cc_silver_naive` (not run) · `cc_silver_crawl4ai` (not run). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
+- ditto (prompted): the LLM saw 757 of 21,125 labeled pages (3.58%) while generating 56 specs; they are left out of every ditto score.
+- ditto (prompted), optional-field recall (attribute on the page but on none of the pages the LLM saw for its template; 273 pages): normalized 0.004, raw 0.000
+
+Sources (latest run per config): [cc_silver_ditto](eval/results/cc_silver_ditto/20261027T144715Z) · [cc_silver_naive](eval/results/cc_silver_naive/20261027T152228Z) · [cc_silver_crawl4ai](eval/results/cc_silver_crawl4ai/20261027T153152Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
 
 Domains (selected 2026-10-24; from [eval/datasets/commoncrawl_silver/domains.yaml](eval/datasets/commoncrawl_silver/domains.yaml)); download cap 2,500 pages per domain, detail pages first, then a sample of other pages:
 
 | domain | vertical | JSON-LD type | HTML captures in the index, per crawl | distinct URLs | pages downloaded of planned |
 | --- | --- | --- | --- | --- | --- |
-| `argos.co.uk` | product | Product | CC-MAIN-2026-43: 17,747; CC-MAIN-2026-39: 15,620 | 33,133 | 6,701 of 7,201 |
-| `ikea.com` | product | Product | CC-MAIN-2026-43: 28,713; CC-MAIN-2026-39: 27,251 | 52,880 | 0 of 2,500 |
-| `careerbuilder.com` | job | JobPosting | CC-MAIN-2026-43: 15,682; CC-MAIN-2026-39: 16,562 | 32,051 | 0 of 2,500 |
-| `dice.com` | job | JobPosting | CC-MAIN-2026-43: 11,685; CC-MAIN-2026-39: 11,896 | 22,873 | 0 of 2,500 |
-| `marmiton.org` | recipe | Recipe | CC-MAIN-2026-43: 13,305; CC-MAIN-2026-39: 12,923 | 25,846 | 0 of 2,500 |
-| `food.ndtv.com` | recipe | Recipe | CC-MAIN-2026-43: 24,262; CC-MAIN-2026-39: 23,695 | 46,377 | 0 of 2,500 |
-| `ticketweb.com` | event | Event | CC-MAIN-2026-43: 14,195; CC-MAIN-2026-39: 14,585 | 28,272 | 0 of 2,500 |
-| `skiddle.com` | event | Event | CC-MAIN-2026-43: 12,698; CC-MAIN-2026-39: 13,935 | 24,475 | 0 of 2,500 |
+| `argos.co.uk` | product | Product | CC-MAIN-2026-43: 17,747; CC-MAIN-2026-39: 15,620 | 33,133 | 7,201 of 7,201 |
+| `ikea.com` | product | Product | CC-MAIN-2026-43: 28,713; CC-MAIN-2026-39: 27,251 | 52,880 | 2,500 of 2,500 |
+| `careerbuilder.com` | job | JobPosting | CC-MAIN-2026-43: 15,682; CC-MAIN-2026-39: 16,562 | 32,051 | 2,500 of 2,500 |
+| `dice.com` | job | JobPosting | CC-MAIN-2026-43: 11,685; CC-MAIN-2026-39: 11,896 | 22,873 | 2,500 of 2,500 |
+| `marmiton.org` | recipe | Recipe | CC-MAIN-2026-43: 13,305; CC-MAIN-2026-39: 12,923 | 25,846 | 2,500 of 2,500 |
+| `food.ndtv.com` | recipe | Recipe | CC-MAIN-2026-43: 24,262; CC-MAIN-2026-39: 23,695 | 46,377 | 2,500 of 2,500 |
+| `ticketweb.com` | event | Event | CC-MAIN-2026-43: 14,195; CC-MAIN-2026-39: 14,585 | 28,272 | 2,500 of 2,500 |
+| `skiddle.com` | event | Event | CC-MAIN-2026-43: 12,698; CC-MAIN-2026-39: 13,935 | 24,475 | 2,500 of 2,500 |
 
-Label-noise check: each JSON-LD label compared with the text the extractor sees, on 200 pages from the domain-selection sample, 8 domains; performed by build agent (automated script noise_check.py), not a human ([eval/datasets/commoncrawl_silver/noise_check.json](eval/datasets/commoncrawl_silver/noise_check.json), `uv run python eval/datasets/commoncrawl_silver/noise_check.py`). 12 fields agree on fewer than 80% of the checked pages; they are listed under [Limitations](#limitations).
+Label-noise check: each JSON-LD label compared with the text the extractor sees, on 200 pages from a sample of the downloaded pages, 8 domains; performed by build agent (automated script noise_check.py), not a human ([eval/datasets/commoncrawl_silver/noise_check.json](eval/datasets/commoncrawl_silver/noise_check.json), `uv run python eval/datasets/commoncrawl_silver/noise_check.py`). 13 fields agree on fewer than 80% of the checked pages; they are listed under [Limitations](#limitations).
 <!-- results:cc_silver:end -->
 
 ### LiveWeb-IE
@@ -253,7 +258,7 @@ Excluded: `dp.la` (no page fetched with HTTP 200); `fueleconomy.gov` (robots.txt
 
 Input tokens per 1k pages 145,738, LLM calls per template 2.28, $ per 1k pages $0.3762.
 
-Sources (latest run per config): [livewebie_ditto](eval/results/livewebie_ditto/20261027T122202Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
+Sources (latest run per config): [livewebie_ditto](eval/results/livewebie_ditto/20261027T181651Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
 <!-- results:livewebie:end -->
 
 ### Clustering
@@ -266,9 +271,9 @@ parameter at a time from the defaults.
 
 | evaluation | pages | true templates | clusters found | ARI | purity | over-merged clusters | under-merged templates | fingerprint pages/s/core | cluster pages/s/core | status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| synth_default | 10,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 316 | 11,283 | ok |
-| synth_nightly | – | – | – | – | – | – | – | – | – | not run yet |
-| synth_scale | 100,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 374 | 54,879 | ok |
+| synth_default | 10,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 279 | 9,667 | ok |
+| synth_nightly | 10,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 321 | 12,395 | ok |
+| synth_scale | 100,000 | 15 | 15 | 1.000 | 1.000 | 0 | 0 | 305 | 40,698 | ok |
 
 **Stress curves** (`synth_curves`: one parameter at a time from the defaults)
 
@@ -291,7 +296,7 @@ parameter at a time from the defaults.
 | table_rows | [0, 0]: 1.000 · [0, 12] (default): 1.000 · [0, 100]: 1.000 · [0, 300]: 1.000 | 1.000 | 1.000 | [chart](docs/img/synth_table_rows.png) |
 | templates | 2: 1.000 · 12 (default): 1.000 · 50: 1.000 · 100: 1.000 · 200: 0.999 | 0.999 | 0.997 | [chart](docs/img/synth_templates.png) |
 
-Sources (latest run per config): [synth_default](eval/results/synth_default/20261026T095112Z) · `synth_nightly` (not run) · [synth_scale](eval/results/synth_scale/20261026T095119Z) · [synth_curves](eval/results/synth_curves/20261027T093851Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
+Sources (latest run per config): [synth_default](eval/results/synth_default/20261027T154354Z) · [synth_nightly](eval/results/synth_nightly/20261027T154448Z) · [synth_scale](eval/results/synth_scale/20261027T154401Z) · [synth_curves](eval/results/synth_curves/20261027T154454Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
 <!-- results:clustering:end -->
 
 ### LLM spend
@@ -304,21 +309,22 @@ phase in [BUILD_REPORT.md](BUILD_REPORT.md).
 <!-- results:spend:start -->
 | evaluation | method | status | LLM cost of the published run | billed in kept runs (ledger) | budget cap | latest run |
 | --- | --- | --- | --- | --- | --- | --- |
-| `livewebie_ditto` | ditto (prompted) | ok | $1.33 | $0.9047 | $4.00 | [20261027T122202Z](eval/results/livewebie_ditto/20261027T122202Z) |
-| `swde_dev_ditto` | ditto (prompted) | ok | $1.97 | $0 | $3.00 | [20261027T102344Z](eval/results/swde_dev_ditto/20261027T102344Z) |
-| `swde_dev_naive` | naive per-page LLM | ok | $18.50 | $11.74 (3 runs) | $10.00 | [20261027T085024Z](eval/results/swde_dev_naive/20261027T085024Z) |
-| `swde_dev_unprompted` | ditto (unprompted) | ok | $3.23 | $0 | $3.00 | [20261027T115205Z](eval/results/swde_dev_unprompted/20261027T115205Z) |
-| `swde_test_autoscraper` | AutoScraper | ok | $2.73 | $2.26 | $5.00 | [20261027T112853Z](eval/results/swde_test_autoscraper/20261027T112853Z) |
-| `swde_test_crawl4ai` | Crawl4AI generate_schema | ok on 28 of 64 sites (36 skipped) | $5.70 | $5.70 | $1.00 | [20261027T104347Z](eval/results/swde_test_crawl4ai/20261027T104347Z) |
-| `swde_test_ditto` | ditto (prompted) | ok | $7.56 | $6.87 | $10.00 | [20261027T112642Z](eval/results/swde_test_ditto/20261027T112642Z) |
-| `swde_test_handwritten` | hand-written XPath (build agent) | ok on 5 of 64 sites (59 not_run) | $0 | $0 | $0.0100 | [20261027T102047Z](eval/results/swde_test_handwritten/20261027T102047Z) |
-| `swde_test_naive` | naive per-page LLM | ok | $14.46 | $14.46 | $16.00 | [20261027T102925Z](eval/results/swde_test_naive/20261027T102925Z) |
+| `cc_silver_crawl4ai` | Crawl4AI generate_schema | ok on 2 of 8 sites (6 skipped) | $2.07 | $2.07 | $1.50 | [20261027T153152Z](eval/results/cc_silver_crawl4ai/20261027T153152Z) |
+| `cc_silver_ditto` | ditto (prompted) | ok | $6.03 | $5.46 | $6.00 | [20261027T144715Z](eval/results/cc_silver_ditto/20261027T144715Z) |
+| `cc_silver_naive` | naive per-page LLM | ok | $5.91 | $5.88 | $6.00 | [20261027T152228Z](eval/results/cc_silver_naive/20261027T152228Z) |
+| `livewebie_ditto` | ditto (prompted) | ok | $1.33 | $0.9047 (2 runs) | $4.00 | [20261027T181651Z](eval/results/livewebie_ditto/20261027T181651Z) |
+| `swde_dev_ditto` | ditto (prompted) | ok | $1.97 | $0 (2 runs) | $3.00 | [20261027T155851Z](eval/results/swde_dev_ditto/20261027T155851Z) |
+| `swde_dev_naive` | naive per-page LLM | ok | $18.50 | $11.74 (4 runs) | $10.00 | [20261027T160842Z](eval/results/swde_dev_naive/20261027T160842Z) |
+| `swde_dev_unprompted` | ditto (unprompted) | ok | $3.23 | $0 (2 runs) | $3.00 | [20261027T161122Z](eval/results/swde_dev_unprompted/20261027T161122Z) |
+| `swde_test_autoscraper` | AutoScraper | ok | $2.73 | $2.26 (2 runs) | $5.00 | [20261027T171529Z](eval/results/swde_test_autoscraper/20261027T171529Z) |
+| `swde_test_crawl4ai` | Crawl4AI generate_schema | ok on 35 of 36 sites (1 failed) | $7.34 | $5.70 (2 runs) | $1.00 | [20261027T181758Z](eval/results/swde_test_crawl4ai/20261027T181758Z) |
+| `swde_test_ditto` | ditto (prompted) | ok | $7.56 | $6.87 (2 runs) | $10.00 | [20261027T174101Z](eval/results/swde_test_ditto/20261027T174101Z) |
+| `swde_test_handwritten` | hand-written XPath (build agent) | ok on 5 of 64 sites (59 not_run) | $0 | $0 (2 runs) | $0.0100 | [20261027T172907Z](eval/results/swde_test_handwritten/20261027T172907Z) |
+| `swde_test_naive` | naive per-page LLM | ok | $14.46 | $14.46 (2 runs) | $16.00 | [20261027T165317Z](eval/results/swde_test_naive/20261027T165317Z) |
 
-Run without any LLM call: [synth_curves](eval/results/synth_curves/20261027T093851Z), [synth_default](eval/results/synth_default/20261026T095112Z), [synth_scale](eval/results/synth_scale/20261026T095119Z), [union_gate_swde_dev](eval/results/union_gate_swde_dev/20261027T101223Z), [union_gate_synth](eval/results/union_gate_synth/20261027T101206Z).
+Run without any LLM call: [synth_curves](eval/results/synth_curves/20261027T154454Z), [synth_default](eval/results/synth_default/20261027T154354Z), [synth_nightly](eval/results/synth_nightly/20261027T154448Z), [synth_scale](eval/results/synth_scale/20261027T154401Z), [union_gate_swde_dev](eval/results/union_gate_swde_dev/20261027T155131Z), [union_gate_synth](eval/results/union_gate_synth/20261027T155113Z).
 
-Not run yet: `cc_silver_crawl4ai`, `cc_silver_ditto`, `cc_silver_naive`, `synth_nightly`.
-
-Total LLM cost of the published results: $55.47, every token behind them (cached calls included) at the standard list prices of `config/prices.yaml`, i.e. what rerunning them from an empty cache costs. Billed in the 16 runs kept under `eval/results/`: $41.94 (`meta.json` `spend_usd`, ditto's ledger; a rerun answered from the cache bills $0, and runs kept for the audit trail count too). Rewrite with `uv run python eval/report.py`.
+Total LLM cost of the published results: $71.14, every token behind them (cached calls included) at the standard list prices of `config/prices.yaml`, i.e. what rerunning them from an empty cache costs. Billed in the 34 runs kept under `eval/results/`: $55.34 (`meta.json` `spend_usd`, ditto's ledger; a rerun answered from the cache bills $0, and runs kept for the audit trail count too). Rewrite with `uv run python eval/report.py`.
 <!-- results:spend:end -->
 
 ## Models and prompt versions
@@ -328,7 +334,7 @@ Prompts are versioned files in [`prompts/`](prompts/): `specgen.v2`, `repair.v1`
 kept for the record). Every spec records the model and prompt version that produced it.
 
 <!-- results:models:start -->
-Models used by the published results: `openai/gpt-6.1-sol` (8 evaluations). Prompt versions: `autoscraper@3d78f8a`, `crawl4ai.generate_schema`, `naive_baseline.v1`, `repair.v1`, `specgen.v2`.
+Models used by the published results: `openai/gpt-6.1-sol` (11 evaluations). Prompt versions: `autoscraper@3d78f8a`, `crawl4ai.generate_schema`, `naive_baseline.v1`, `repair.v1`, `specgen.v2`.
 
 Pinned in `eval/configs/*.yaml` (a run fails if the LLM layer resolves another id): baseline: `openai/gpt-6.1-sol`; generation: `openai/gpt-6.1-sol`; probe: `openai/gpt-5.4-mini`; repair: `openai/gpt-6.1-sol`; tail_direct: `openai/gpt-5.4-mini`.
 
@@ -342,22 +348,25 @@ results and dataset files.
 
 <!-- results:limitations:start -->
 - **The per-page baseline ran on page samples**: seeded samples of 50 on the SWDE dev slice, 10 on the SWDE test split, 20 on the Common Crawl silver set (pages per site) instead of the planned 200, to fit the LLM budget. Its cost per 1,000 pages is extrapolated from the sample, and ditto is compared with it on the same sampled pages.
-- **Crawl4AI generate_schema** on the SWDE test split covers 28 of 64 sites (budget: Crawl4AI cost more per site than estimated); the tables compare it with ditto on the same sites and pages.
+- **Crawl4AI generate_schema** on the SWDE test split covers 35 of 64 sites (budget: Crawl4AI cost more per site than estimated); the tables compare it with ditto on the same sites and pages.
 - **AutoScraper** on the SWDE test split covers 8 of 64 sites, on a seeded 10-page sample per site (budget: one site per vertical, as it makes many model calls per template); the tables compare it with ditto on the same sites and pages.
 - **hand-written XPath (build agent)** on the SWDE test split covers 5 of 64 sites (the build agent wrote wrappers for these sites only); the tables compare it with ditto on the same sites and pages.
-- **Common Crawl capped at 2,500 pages per domain** (`argos.co.uk` 7,201: pages fetched before the cap was lowered are kept) instead of the planned 20,000: Common Crawl's CloudFront firewall blocked this machine's IP when it fetched at 4 concurrent requests, and at the polite rate of one request per second 20,000 pages per domain did not fit the time available. When this was generated, 6,701 of the 24,701 planned pages had been downloaded.
-- **Common Crawl labels are silver**: they come from each site's own JSON-LD, not from people. The label-noise check (by the build agent, not a human) found labels that agree with the visible text on fewer than 80% of the checked pages: `careerbuilder.com` datePosted 0.00 (25 pages); `careerbuilder.com` employmentType 0.56 (25 pages); `dice.com` datePosted 0.00 (25 pages); `ikea.com` name 0.04 (25 pages); `ikea.com` priceCurrency 0.52 (25 pages); `ikea.com` availability 0.00 (24 pages); `marmiton.org` recipeYield 0.00 (25 pages); `marmiton.org` ingredients 0.44 (25 pages); `skiddle.com` endDate 0.68 (25 pages); `skiddle.com` organizer 0.35 (23 pages); `ticketweb.com` startDate 0.16 (25 pages); `ticketweb.com` endDate 0.00 (4 pages); a miss on such a field is often a label problem, not an extraction error.
+- **Crawl4AI generate_schema** on the Common Crawl silver set covers 2 of 8 sites (budget: Crawl4AI cost more per site than estimated); the tables compare it with ditto on the same sites and pages.
+- **Common Crawl capped at 2,500 pages per domain** (`argos.co.uk` 7,201: pages fetched before the cap was lowered are kept) instead of the planned 20,000: Common Crawl's CloudFront firewall blocked this machine's IP when it fetched at 4 concurrent requests, and at the polite rate of one request per second 20,000 pages per domain did not fit the time available.
+- **Common Crawl labels are silver**: they come from each site's own JSON-LD, not from people. The label-noise check (by the build agent, not a human) found labels that agree with the visible text on fewer than 80% of the checked pages: `careerbuilder.com` datePosted 0.00 (25 pages); `careerbuilder.com` employmentType 0.60 (25 pages); `dice.com` datePosted 0.00 (25 pages); `dice.com` employmentType 0.72 (25 pages); `ikea.com` name 0.04 (25 pages); `ikea.com` priceCurrency 0.76 (25 pages); `ikea.com` availability 0.00 (23 pages); `marmiton.org` recipeYield 0.00 (25 pages); `marmiton.org` ingredients 0.48 (25 pages); `skiddle.com` endDate 0.76 (25 pages); `skiddle.com` organizer 0.42 (24 pages); `ticketweb.com` startDate 0.20 (25 pages); `ticketweb.com` endDate 0.00 (4 pages); a miss on such a field is often a label problem, not an extraction error.
 - **LiveWeb-IE on 9 of 15 sites** (exclusion reasons in the LiveWeb-IE section), scored on a frozen snapshot with field definitions instead of the live sites and free-form queries, so its numbers are not comparable with the paper's. The release is licensed for non-commercial research only; the snapshot stays out of the repository.
 - **Synthetic templates are separable by construction** (the generator re-rolls templates until every pair differs clearly, except the designated near-duplicate pairs), so the clustering curves are near-perfect: minimum ARI 0.994 over 62 points; templates merge only at near_duplicate_jaccard = 0.8, near_duplicate_jaccard = 0.9, templates = 100. They show scale and robustness to markup noise, not accuracy on real sites.
 - **SWDE label problems dominate ditto's remaining dev misses**: of its 11,656 misses under `norm` on the dev slice, an estimated 72% are label problems (truncated, over-long or missing labels), 11% real errors and 17% formatting differences, from a stratified sample of 84 misses classified by the build agent, not a human (`eval/analysis/swde_dev_misses.md`).
-- **Extraction speed in the evaluation runs** falls short of the target of 500 pages per second per core: 177 on `livewebie_ditto`, 131 on `swde_dev_ditto`, 64 on `swde_dev_unprompted`, 80 on `swde_test_ditto` pages/s/core (parse included, mean over sites; per-core figures divide by the number of worker processes, on a machine with 16 logical CPUs).
+- **Extraction speed in the evaluation runs** falls short of the target of 500 pages per second per core: 50 on `cc_silver_ditto`, 153 on `livewebie_ditto`, 105 on `swde_dev_ditto`, 61 on `swde_dev_unprompted`, 83 on `swde_test_ditto` pages/s/core (parse included, mean over sites; per-core figures divide by the number of worker processes, on a machine with 16 logical CPUs).
 <!-- results:limitations:end -->
 
 - **Cost of template-level baselines.** AutoScraper's cost per 1,000 pages scales its 10-page
   sample's cost linearly, but it writes its rules once per template and reuses them, so on whole
   sites it would cost far less per page. Crawl4AI's token counts come from a hook that recorded
-  less than the ledger billed for the same calls, so its cost is likely understated. OpenAI's
-  Flex tier was mostly unavailable, so baselines were billed at standard prices.
+  less than the ledger billed for the same calls, so its cost is likely understated; rerunning
+  its configs is not free either (its validation loop is only partly served from the response
+  cache: the last SWDE rerun billed $1.98, and one listed site stopped at the budget guard).
+  OpenAI's Flex tier was mostly unavailable, so baselines were billed at standard prices.
 - **Judged by the build agent.** The schema-precision judgment, the Common Crawl label-noise
   check, the SWDE dev miss classification and the hand-written wrappers are the work of the
   build agent (the LLM that built ditto), not of a human.

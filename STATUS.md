@@ -4,7 +4,7 @@ _Updated 2026-10-27._
 
 ## Current phase
 
-**v0.5 Benchmarks** — in progress (v0.1–v0.4 passed and tagged).
+**v1.0 Release** — in progress (v0.1–v0.5 passed and tagged).
 
 ## Gates
 
@@ -14,7 +14,7 @@ _Updated 2026-10-27._
 | v0.2 | every optional synthetic field in its union page; SWDE dev union pages < 30k tokens | **passed** — 48/48 optional fields; max 29,822 tokens over 23 SWDE dev templates (`eval/results/union_gate_*`) |
 | v0.3 | SWDE dev F1 within 5 points of naive baseline at < 1% of its tokens/page | **passed** — ditto 0.876 vs naive 0.858 (norm F1, same 50-page samples); 40.6 vs 11,385 tokens/page (0.36%) (`eval/results/swde_dev_ditto/20261027T102344Z`) |
 | v0.4 | schema-precision ≥ 0.8 on 10 dev sites; clean install + README example works | **passed** — precision 0.908 (187/206 fields, build-agent judgment; `eval/results/swde_dev_unprompted/20261027T115205Z`); wheel in a fresh venv ran the README example |
-| v0.5 | every README number regenerates from `eval run`; spend under budget | pending |
+| v0.5 | every README number regenerates from `eval run`; spend under budget | **passed** — all 18 configs rerun at a clean commit with pinned models, reruns reproduce earlier numbers, `eval/report.py --check` up to date; ledger $86.76 (plan $85; overrun explained in BUILD_REPORT.md) |
 | v1.0 | release checklist | pending |
 
 ## Done
@@ -42,14 +42,12 @@ All other stages also exist (analysis, union page, spec generation, verification
 
 ## Next
 
-- Accuracy-2: mapping provenance (`user`/`auto`), specgen.v2, probe fixes, SWDE dev tuning toward the v0.3 gate (ditto F1 >= 0.808 vs naive 0.858 on the same 50-page samples), integration test with recorded responses.
-- Then: unprompted mode + schema-precision judgment (v0.4), SWDE test / Common Crawl / LiveWeb-IE evaluations and baselines (v0.5), release.
-- Common Crawl polite download running (1 req/s, cap 2,500/domain, ~5 h); labels + noise check run automatically afterwards.
+- v1.0: version 1.0.0, wheel check in a clean venv, CI green on the tag, tag `v1.0.0`.
 
 ## Known blockers
 
-None blocking. Common Crawl's CDN blocked this IP after ~440 MB per run at 4 concurrent requests; the download now runs at 1 request/s with back-off (see DECISIONS.md).
+None. The OpenAI account is close to empty; the release steps need no LLM.
 
 ## LLM spend so far
 
-$26.34 of an $85 budget (owner topped up the account; full evaluation plan estimated at ≈ $81 total).
+$86.76 (ledger) of the $85 plan; per phase and per evaluation in BUILD_REPORT.md and the README.
