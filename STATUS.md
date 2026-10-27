@@ -1,10 +1,10 @@
 # Status
 
-_Updated 2026-10-27._
+_Updated 2026-10-28._
 
 ## Current phase
 
-**v1.0 Release** — in progress (v0.1–v0.5 passed and tagged).
+**Released v1.0.0** — all six gates passed and tagged (v0.1.0–v1.0.0).
 
 ## Gates
 
@@ -15,7 +15,7 @@ _Updated 2026-10-27._
 | v0.3 | SWDE dev F1 within 5 points of naive baseline at < 1% of its tokens/page | **passed** — ditto 0.876 vs naive 0.858 (norm F1, same 50-page samples); 40.6 vs 11,385 tokens/page (0.36%) (`eval/results/swde_dev_ditto/20261027T102344Z`) |
 | v0.4 | schema-precision ≥ 0.8 on 10 dev sites; clean install + README example works | **passed** — precision 0.908 (187/206 fields, build-agent judgment; `eval/results/swde_dev_unprompted/20261027T115205Z`); wheel in a fresh venv ran the README example |
 | v0.5 | every README number regenerates from `eval run`; spend under budget | **passed** — all 18 configs rerun at a clean commit with pinned models, reruns reproduce earlier numbers, `eval/report.py --check` up to date; ledger $86.76 (plan $85; overrun explained in BUILD_REPORT.md) |
-| v1.0 | release checklist | pending |
+| v1.0 | release checklist | **passed** — wheel 1.0.0 installs in a clean venv and runs the fixture offline (recorded responses) and with a key; CI green on all 6 jobs + nightly; BUILD_REPORT.md |
 
 ## Done
 
@@ -42,7 +42,7 @@ All other stages also exist (analysis, union page, spec generation, verification
 
 ## Next
 
-- v1.0: version 1.0.0, wheel check in a clean venv, CI green on the tag, tag `v1.0.0`.
+Done. Post-v1 ideas are in BUILD_REPORT.md ("Next"). Publishing to PyPI needs the owner's token (`make publish`).
 
 ## Known blockers
 
