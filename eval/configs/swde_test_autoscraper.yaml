@@ -4,7 +4,7 @@ description: >-
 dataset: swde
 selection:
   split: test
-  max_sites: 8               # one site per vertical (sites run round-robin across verticals); budget
+  sites: [auto-automotive, book-barnesandnoble, camera-buy, job-hotjobs, movie-boxofficemojo, nbaplayer-foxsports, restaurant-gayot, university-collegeprowler]   # first test site per vertical (budget)
 method:
   kind: baseline
   baseline: autoscraper
