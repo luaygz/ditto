@@ -1,15 +1,16 @@
 name: swde_test_autoscraper
 description: >-
-  SWDE frozen test split, AutoScraper (EMNLP 2024) with its model calls on the OpenAI adapter; recorded as not run when it cannot be made to run in bounded effort.
+  SWDE frozen test split, AutoScraper (EMNLP 2024) with its model calls on the OpenAI adapter; recorded as not run when it cannot be made to run in bounded effort. Budget-limited to 8 test sites, one per vertical.
 dataset: swde
 selection:
   split: test
+  max_sites: 8               # one site per vertical (sites run round-robin across verticals); budget
 method:
   kind: baseline
   baseline: autoscraper
 models:                      # pinned; same main model as ditto so the comparison is fair
   baseline: openai/gpt-6.1-sol
-budget_usd: 2.0            # real (uncached) spend cap; sites are run round-robin across verticals
+budget_usd: 5.0           # real (uncached) spend cap; sites are run round-robin across verticals
 sample:
   pages_per_site: 10          # seeded sample per site (budget-limited; brief cap 200); baselines run on it, ditto also scores it
 seeds:

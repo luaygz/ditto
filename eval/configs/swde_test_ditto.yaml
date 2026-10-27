@@ -1,6 +1,6 @@
 name: swde_test_ditto
 description: >-
-  SWDE frozen test split (eight sites per vertical), ditto prompted mode; run once. Also scores the 20-page samples the naive baseline runs on.
+  SWDE frozen test split (eight sites per vertical), ditto prompted mode; run once. Also scores the 10-page samples the naive baseline runs on.
 dataset: swde
 selection:
   split: test
