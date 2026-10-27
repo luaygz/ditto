@@ -6,12 +6,17 @@
  "requested_pages": 200,
  "pages": 200,
  "pages_per_domain": {
-  "argos.co.uk": 200
+  "argos.co.uk": 25,
+  "ikea.com": 25,
+  "careerbuilder.com": 25,
+  "dice.com": 25,
+  "marmiton.org": 25,
+  "food.ndtv.com": 25,
+  "ticketweb.com": 25,
+  "skiddle.com": 25
  },
  "domains_checked": [
-  "argos.co.uk"
- ],
- "domains_missing": [
+  "argos.co.uk",
   "ikea.com",
   "careerbuilder.com",
   "dice.com",
@@ -20,102 +25,461 @@
   "ticketweb.com",
   "skiddle.com"
  ],
- "complete": false,
+ "domains_missing": [],
+ "complete": true,
  "labels_stale": [],
  "pool": {
   "argos.co.uk": {
    "labels": true,
-   "labeled_pages": 6695,
+   "labeled_pages": 6924,
    "labels_stale": false
   },
   "ikea.com": {
-   "labels": false
+   "labels": true,
+   "labeled_pages": 2010,
+   "labels_stale": false
   },
   "careerbuilder.com": {
-   "labels": false
+   "labels": true,
+   "labeled_pages": 1984,
+   "labels_stale": false
   },
   "dice.com": {
-   "labels": false
+   "labels": true,
+   "labeled_pages": 1999,
+   "labels_stale": false
   },
   "marmiton.org": {
-   "labels": false
+   "labels": true,
+   "labeled_pages": 2007,
+   "labels_stale": false
   },
   "food.ndtv.com": {
-   "labels": false
+   "labels": true,
+   "labeled_pages": 2000,
+   "labels_stale": false
   },
   "ticketweb.com": {
-   "labels": false
+   "labels": true,
+   "labeled_pages": 2008,
+   "labels_stale": false
   },
   "skiddle.com": {
-   "labels": false
+   "labels": true,
+   "labeled_pages": 2193,
+   "labels_stale": false
   }
  },
  "method": "Each label value is compared with the page the extractor sees (all <script>, <style>, <noscript>, <svg>, <iframe>, <template> and <head> content except <title> removed). Text is normalized (case, whitespace, HTML entities, currency symbols, thousands separators, trailing punctuation) and a label agrees when it occurs as a substring of the normalized visible text; for scalar labels with alternative spellings (ISO durations, dates, schema.org enumerations, prices, salary ranges, currency code or symbol, an identifier's displayed spelling) any alternative counts, and a currency symbol is looked up in the un-normalized visible text. URL labels agree when their file name occurs in a src/href/srcset/content attribute. List labels (ingredients) report the share of pages whose every item agrees and the item-level rate. Empty labels are not counted. Substring matching is lenient for short values (a currency symbol or code anywhere on the page agrees).",
  "per_vertical_field": {
-  "product": {
+  "event": {
    "name": {
-    "labeled": 200,
-    "agree": 200,
+    "labeled": 50,
+    "agree": 50,
     "rate": 1.0
    },
+   "startDate": {
+    "labeled": 50,
+    "agree": 30,
+    "rate": 0.6
+   },
+   "endDate": {
+    "labeled": 29,
+    "agree": 19,
+    "rate": 0.655
+   },
+   "location": {
+    "labeled": 50,
+    "agree": 50,
+    "rate": 1.0
+   },
+   "address": {
+    "labeled": 50,
+    "agree": 50,
+    "rate": 1.0
+   },
+   "organizer": {
+    "labeled": 24,
+    "agree": 10,
+    "rate": 0.417
+   },
+   "performer": {
+    "labeled": 7,
+    "agree": 7,
+    "rate": 1.0
+   }
+  },
+  "job": {
+   "title": {
+    "labeled": 50,
+    "agree": 50,
+    "rate": 1.0
+   },
+   "hiringOrganization": {
+    "labeled": 50,
+    "agree": 50,
+    "rate": 1.0
+   },
+   "location": {
+    "labeled": 49,
+    "agree": 48,
+    "rate": 0.98
+   },
+   "datePosted": {
+    "labeled": 50,
+    "agree": 0,
+    "rate": 0.0
+   },
+   "employmentType": {
+    "labeled": 50,
+    "agree": 33,
+    "rate": 0.66
+   },
+   "salary": {
+    "labeled": 30,
+    "agree": 30,
+    "rate": 1.0
+   }
+  },
+  "product": {
+   "name": {
+    "labeled": 50,
+    "agree": 26,
+    "rate": 0.52
+   },
    "price": {
-    "labeled": 200,
-    "agree": 200,
+    "labeled": 50,
+    "agree": 50,
     "rate": 1.0
    },
    "priceCurrency": {
-    "labeled": 200,
-    "agree": 200,
-    "rate": 1.0
+    "labeled": 50,
+    "agree": 44,
+    "rate": 0.88
    },
    "brand": {
-    "labeled": 197,
-    "agree": 197,
+    "labeled": 50,
+    "agree": 50,
     "rate": 1.0
    },
    "sku": {
-    "labeled": 200,
-    "agree": 200,
+    "labeled": 50,
+    "agree": 50,
     "rate": 1.0
    },
    "image": {
-    "labeled": 200,
-    "agree": 198,
-    "rate": 0.99
+    "labeled": 50,
+    "agree": 50,
+    "rate": 1.0
+   },
+   "availability": {
+    "labeled": 23,
+    "agree": 0,
+    "rate": 0.0
+   }
+  },
+  "recipe": {
+   "name": {
+    "labeled": 50,
+    "agree": 50,
+    "rate": 1.0
+   },
+   "prepTime": {
+    "labeled": 50,
+    "agree": 45,
+    "rate": 0.9
+   },
+   "cookTime": {
+    "labeled": 50,
+    "agree": 44,
+    "rate": 0.88
+   },
+   "recipeYield": {
+    "labeled": 50,
+    "agree": 25,
+    "rate": 0.5
+   },
+   "ingredients": {
+    "labeled": 50,
+    "agree": 37,
+    "rate": 0.74,
+    "items": 577,
+    "item_rate": 0.957,
+    "rate_definition": "share of pages where every list item agrees"
+   },
+   "author": {
+    "labeled": 49,
+    "agree": 49,
+    "rate": 1.0
    }
   }
  },
  "per_domain_field": {
   "argos.co.uk": {
    "name": {
-    "labeled": 200,
-    "agree": 200,
+    "labeled": 25,
+    "agree": 25,
     "rate": 1.0
    },
    "price": {
-    "labeled": 200,
-    "agree": 200,
+    "labeled": 25,
+    "agree": 25,
     "rate": 1.0
    },
    "priceCurrency": {
-    "labeled": 200,
-    "agree": 200,
+    "labeled": 25,
+    "agree": 25,
     "rate": 1.0
    },
    "brand": {
-    "labeled": 197,
-    "agree": 197,
+    "labeled": 25,
+    "agree": 25,
     "rate": 1.0
    },
    "sku": {
-    "labeled": 200,
-    "agree": 200,
+    "labeled": 25,
+    "agree": 25,
     "rate": 1.0
    },
    "image": {
-    "labeled": 200,
-    "agree": 198,
-    "rate": 0.99
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   }
+  },
+  "careerbuilder.com": {
+   "title": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "hiringOrganization": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "location": {
+    "labeled": 25,
+    "agree": 24,
+    "rate": 0.96
+   },
+   "datePosted": {
+    "labeled": 25,
+    "agree": 0,
+    "rate": 0.0
+   },
+   "employmentType": {
+    "labeled": 25,
+    "agree": 15,
+    "rate": 0.6
+   },
+   "salary": {
+    "labeled": 10,
+    "agree": 10,
+    "rate": 1.0
+   }
+  },
+  "dice.com": {
+   "title": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "hiringOrganization": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "location": {
+    "labeled": 24,
+    "agree": 24,
+    "rate": 1.0
+   },
+   "datePosted": {
+    "labeled": 25,
+    "agree": 0,
+    "rate": 0.0
+   },
+   "employmentType": {
+    "labeled": 25,
+    "agree": 18,
+    "rate": 0.72
+   },
+   "salary": {
+    "labeled": 20,
+    "agree": 20,
+    "rate": 1.0
+   }
+  },
+  "food.ndtv.com": {
+   "name": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "prepTime": {
+    "labeled": 25,
+    "agree": 20,
+    "rate": 0.8
+   },
+   "cookTime": {
+    "labeled": 25,
+    "agree": 20,
+    "rate": 0.8
+   },
+   "recipeYield": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "ingredients": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0,
+    "items": 366,
+    "item_rate": 1.0,
+    "rate_definition": "share of pages where every list item agrees"
+   },
+   "author": {
+    "labeled": 24,
+    "agree": 24,
+    "rate": 1.0
+   }
+  },
+  "ikea.com": {
+   "name": {
+    "labeled": 25,
+    "agree": 1,
+    "rate": 0.04
+   },
+   "price": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "priceCurrency": {
+    "labeled": 25,
+    "agree": 19,
+    "rate": 0.76
+   },
+   "availability": {
+    "labeled": 23,
+    "agree": 0,
+    "rate": 0.0
+   },
+   "brand": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "sku": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "image": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   }
+  },
+  "marmiton.org": {
+   "name": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "prepTime": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "cookTime": {
+    "labeled": 25,
+    "agree": 24,
+    "rate": 0.96
+   },
+   "recipeYield": {
+    "labeled": 25,
+    "agree": 0,
+    "rate": 0.0
+   },
+   "ingredients": {
+    "labeled": 25,
+    "agree": 12,
+    "rate": 0.48,
+    "items": 211,
+    "item_rate": 0.882,
+    "rate_definition": "share of pages where every list item agrees"
+   },
+   "author": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   }
+  },
+  "skiddle.com": {
+   "name": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "startDate": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "endDate": {
+    "labeled": 25,
+    "agree": 19,
+    "rate": 0.76
+   },
+   "location": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "address": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "organizer": {
+    "labeled": 24,
+    "agree": 10,
+    "rate": 0.417
+   },
+   "performer": {
+    "labeled": 7,
+    "agree": 7,
+    "rate": 1.0
+   }
+  },
+  "ticketweb.com": {
+   "name": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "startDate": {
+    "labeled": 25,
+    "agree": 5,
+    "rate": 0.2
+   },
+   "endDate": {
+    "labeled": 4,
+    "agree": 0,
+    "rate": 0.0
+   },
+   "location": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
+   },
+   "address": {
+    "labeled": 25,
+    "agree": 25,
+    "rate": 1.0
    }
   }
  },

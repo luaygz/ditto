@@ -52,9 +52,9 @@ selected:
     planned_detail: 6701
     planned_other: 500
     kept_from_earlier_runs: 6701
-    downloaded: 6701
+    downloaded: 7201
     downloaded_detail: 6701
-    downloaded_other: 0
+    downloaded_other: 500
 - domain: ikea.com
   vertical: product
   target_type: Product
@@ -90,9 +90,9 @@ selected:
     planned_detail: 2000
     planned_other: 500
     kept_from_earlier_runs: 0
-    downloaded: 0
-    downloaded_detail: 0
-    downloaded_other: 0
+    downloaded: 2500
+    downloaded_detail: 2000
+    downloaded_other: 500
 - domain: careerbuilder.com
   vertical: job
   target_type: JobPosting
@@ -128,9 +128,9 @@ selected:
     planned_detail: 2000
     planned_other: 500
     kept_from_earlier_runs: 0
-    downloaded: 0
-    downloaded_detail: 0
-    downloaded_other: 0
+    downloaded: 2500
+    downloaded_detail: 2000
+    downloaded_other: 500
 - domain: dice.com
   vertical: job
   target_type: JobPosting
@@ -166,9 +166,9 @@ selected:
     planned_detail: 2000
     planned_other: 500
     kept_from_earlier_runs: 0
-    downloaded: 0
-    downloaded_detail: 0
-    downloaded_other: 0
+    downloaded: 2500
+    downloaded_detail: 2000
+    downloaded_other: 500
 - domain: marmiton.org
   vertical: recipe
   target_type: Recipe
@@ -204,9 +204,9 @@ selected:
     planned_detail: 2000
     planned_other: 500
     kept_from_earlier_runs: 0
-    downloaded: 0
-    downloaded_detail: 0
-    downloaded_other: 0
+    downloaded: 2500
+    downloaded_detail: 2000
+    downloaded_other: 500
 - domain: food.ndtv.com
   vertical: recipe
   target_type: Recipe
@@ -242,9 +242,9 @@ selected:
     planned_detail: 2000
     planned_other: 500
     kept_from_earlier_runs: 0
-    downloaded: 0
-    downloaded_detail: 0
-    downloaded_other: 0
+    downloaded: 2500
+    downloaded_detail: 2000
+    downloaded_other: 500
 - domain: ticketweb.com
   vertical: event
   target_type: Event
@@ -280,9 +280,9 @@ selected:
     planned_detail: 2000
     planned_other: 500
     kept_from_earlier_runs: 0
-    downloaded: 0
-    downloaded_detail: 0
-    downloaded_other: 0
+    downloaded: 2500
+    downloaded_detail: 2000
+    downloaded_other: 500
 - domain: skiddle.com
   vertical: event
   target_type: Event
@@ -318,9 +318,9 @@ selected:
     planned_detail: 2000
     planned_other: 500
     kept_from_earlier_runs: 0
-    downloaded: 0
-    downloaded_detail: 0
-    downloaded_other: 0
+    downloaded: 2500
+    downloaded_detail: 2000
+    downloaded_other: 500
 rejected:
 - domain: food.com
   vertical: recipe
@@ -805,3 +805,11 @@ download:
   min_interval_s: 1.0
   slow_down: '403/429/503 from data.commoncrawl.org: backoff with jitter from 60 s doubling to 1800 s
     while blocked, one probe request each time'
+  last_run:
+    finished: '2026-10-27T14:40:19Z'
+    http:
+      requests: 18003
+      retries: 0
+      bytes: 1254313294
+      slow_downs: 3
+      slow_down_seconds: 205.6294305237613

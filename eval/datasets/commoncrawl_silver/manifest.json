@@ -1,6 +1,6 @@
 {
  "dataset": "commoncrawl_silver",
- "written_at": "2026-10-27T09:30:18+00:00",
+ "written_at": "2026-10-27T14:46:34+00:00",
  "selection_date": "2026-10-24",
  "user_agent": "ditto-benchmark/1.0 (+https://github.com/luaygz/ditto)",
  "sources": {
@@ -18,17 +18,27 @@
   "tail_share": 0.2,
   "data_concurrency": 1,
   "min_interval_s": 1.0,
-  "slow_down": "403/429/503 from data.commoncrawl.org: backoff with jitter from 60 s doubling to 1800 s while blocked, one probe request each time"
+  "slow_down": "403/429/503 from data.commoncrawl.org: backoff with jitter from 60 s doubling to 1800 s while blocked, one probe request each time",
+  "last_run": {
+   "finished": "2026-10-27T14:40:19Z",
+   "http": {
+    "requests": 18003,
+    "retries": 0,
+    "bytes": 1254313294,
+    "slow_downs": 3,
+    "slow_down_seconds": 205.6294305237613
+   }
+  }
  },
  "cluster_idx_sha256": {
   "CC-MAIN-2026-43": "5be2d43599aa978d252433007bf7843aae4d241584500e7d1cd1ccff71fe33fb",
   "CC-MAIN-2026-39": "8c64198308c824807805fd2cf09bf3d603531044c230e32a335afa4fda94ea41"
  },
  "files": {
-  "domains.yaml": "aada644b5c4448e3c078dddb3b3d5a890fad34e8171e879045fe79ea8a0d5abb",
+  "domains.yaml": "1844c5fb902e84952aea6c68d36b128edd09e294d50a370d6a56d798b753123b",
   "captures.jsonl.gz": "1a02938ac8d1bef9ac571a2166d9a927de19c4bec43835a7783533c03324bf34",
   "selection_log.json": "ffa236d29b1846c225a57cfc81a27685680027185b84ce04709d32ceb3329be4",
-  "noise_check.json": "e72fb1ae1fb479bd0dd9e1f277e05b0f749116d8222c89eb2947cf97eb56070c",
+  "noise_check.json": "2d11757736819c1521f6d3366a7fcdcc61727157435d01a9deb5f6bd76ecfeb9",
   "fields/event.yaml": "5147c4480ebbf579b1c334aa72b6d6146d31f965bffac3dbea9424b58f520da0",
   "fields/job.yaml": "c826bac29fcff03e2560e991e4090fff4432cbccfe936cc4330a944fe3942a85",
   "fields/product.yaml": "7c1ff38472dbed5d121563f5770862c48af36d16f2706c6e3bf5707838cff75b",
@@ -52,9 +62,9 @@
     "planned_detail": 6701,
     "planned_other": 500,
     "kept_from_earlier_runs": 6701,
-    "downloaded": 6701,
+    "downloaded": 7201,
     "downloaded_detail": 6701,
-    "downloaded_other": 0
+    "downloaded_other": 500
    },
    "warc_files": {
     "captures-00000.warc.gz": {
@@ -63,26 +73,26 @@
      "records": 5000
     },
     "captures-00001.warc.gz": {
-     "sha256": "3b2a84adfcc7fa338f99842411642a1f3e3b84b92498e909a9b39a5a4bcf948e",
-     "bytes": 332460090,
-     "records": 1701
+     "sha256": "55b23c126e36288ab338f4aff981d732bf9ca1489342d8dc65fea666ce042e14",
+     "bytes": 406034857,
+     "records": 2201
     }
    },
-   "warc_bytes": 1304625147,
+   "warc_bytes": 1378199914,
    "download": {
-    "runs": 2,
-    "records": 4514,
-    "seconds": 1644.3,
-    "records_per_second": 2.75,
-    "megabytes_per_second": 0.535,
+    "runs": 3,
+    "records": 5014,
+    "seconds": 20175.5,
+    "records_per_second": 0.25,
+    "megabytes_per_second": 0.047,
     "errors": 30031,
     "note": "round-robin runs (rows with 'started') share their wall time across domains"
    },
    "labels": {
     "file": "data/cc/argos.co.uk/labels.jsonl",
-    "sha256": "61a1f90e404d94191001136e838e3d6d99f11d1272062668dde2c8a48a58ef38",
-    "labeled_pages": 6695,
-    "pages": 6701
+    "sha256": "a50b357ed945f6225ab25942ea8f3dd599f023ac50b06ed23a8ed54c1469a2de",
+    "labeled_pages": 6924,
+    "pages": 7201
    }
   },
   "ikea.com": {
@@ -102,26 +112,32 @@
     "planned_detail": 2000,
     "planned_other": 500,
     "kept_from_earlier_runs": 0,
-    "downloaded": 0,
-    "downloaded_detail": 0,
-    "downloaded_other": 0
+    "downloaded": 2500,
+    "downloaded_detail": 2000,
+    "downloaded_other": 500
    },
    "warc_files": {
     "captures-00000.warc.gz": {
-     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-     "bytes": 0,
-     "records": 0
+     "sha256": "c1bcde0ba02d0859279c0201558174c4998e893afeaa37ac816b0118a1f84c08",
+     "bytes": 402580316,
+     "records": 2500
     }
    },
-   "warc_bytes": 0,
+   "warc_bytes": 402580316,
    "download": {
-    "runs": 2,
-    "records": 0,
-    "seconds": 1440.3,
-    "records_per_second": 0.0,
-    "megabytes_per_second": 0.0,
+    "runs": 3,
+    "records": 2500,
+    "seconds": 19971.5,
+    "records_per_second": 0.13,
+    "megabytes_per_second": 0.02,
     "errors": 40000,
     "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   },
+   "labels": {
+    "file": "data/cc/ikea.com/labels.jsonl",
+    "sha256": "68b2bc6aeb567d3dc709e2e305891c4b0630951b0ce5337a4b730e9c04469bda",
+    "labeled_pages": 2010,
+    "pages": 2500
    }
   },
   "careerbuilder.com": {
@@ -141,26 +157,32 @@
     "planned_detail": 2000,
     "planned_other": 500,
     "kept_from_earlier_runs": 0,
-    "downloaded": 0,
-    "downloaded_detail": 0,
-    "downloaded_other": 0
+    "downloaded": 2500,
+    "downloaded_detail": 2000,
+    "downloaded_other": 500
    },
    "warc_files": {
     "captures-00000.warc.gz": {
-     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-     "bytes": 0,
-     "records": 0
+     "sha256": "d1e0d21a64ede69b7a3f484d66bcee6411c0c88ec8e87dc2af13599a0508a7a3",
+     "bytes": 168390600,
+     "records": 2500
     }
    },
-   "warc_bytes": 0,
+   "warc_bytes": 168390600,
    "download": {
-    "runs": 1,
-    "records": 0,
-    "seconds": 803.5,
-    "records_per_second": 0.0,
-    "megabytes_per_second": 0.0,
+    "runs": 2,
+    "records": 2500,
+    "seconds": 19334.7,
+    "records_per_second": 0.13,
+    "megabytes_per_second": 0.009,
     "errors": 20000,
     "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   },
+   "labels": {
+    "file": "data/cc/careerbuilder.com/labels.jsonl",
+    "sha256": "fb170f7dcde25b9f51e5c0957e3c03bb31b9ee61c75aed2669c19cf55d44156d",
+    "labeled_pages": 1984,
+    "pages": 2500
    }
   },
   "dice.com": {
@@ -180,26 +202,32 @@
     "planned_detail": 2000,
     "planned_other": 500,
     "kept_from_earlier_runs": 0,
-    "downloaded": 0,
-    "downloaded_detail": 0,
-    "downloaded_other": 0
+    "downloaded": 2500,
+    "downloaded_detail": 2000,
+    "downloaded_other": 500
    },
    "warc_files": {
     "captures-00000.warc.gz": {
-     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-     "bytes": 0,
-     "records": 0
+     "sha256": "684ed81fdca3fa3ab75352a3f65c127c6a628432221442db38943ad3d73996b4",
+     "bytes": 121621533,
+     "records": 2500
     }
    },
-   "warc_bytes": 0,
+   "warc_bytes": 121621533,
    "download": {
-    "runs": 1,
-    "records": 0,
-    "seconds": 800.0,
-    "records_per_second": 0.0,
-    "megabytes_per_second": 0.0,
+    "runs": 2,
+    "records": 2500,
+    "seconds": 19331.2,
+    "records_per_second": 0.13,
+    "megabytes_per_second": 0.006,
     "errors": 20000,
     "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   },
+   "labels": {
+    "file": "data/cc/dice.com/labels.jsonl",
+    "sha256": "3bdc6d37b0c71fba89f88b995b3864a49a11a9cc573638445304b33b21c00705",
+    "labeled_pages": 1999,
+    "pages": 2500
    }
   },
   "marmiton.org": {
@@ -219,26 +247,32 @@
     "planned_detail": 2000,
     "planned_other": 500,
     "kept_from_earlier_runs": 0,
-    "downloaded": 0,
-    "downloaded_detail": 0,
-    "downloaded_other": 0
+    "downloaded": 2500,
+    "downloaded_detail": 2000,
+    "downloaded_other": 500
    },
    "warc_files": {
     "captures-00000.warc.gz": {
-     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-     "bytes": 0,
-     "records": 0
+     "sha256": "3ac09c665c5edd46b952f1f6754f1a53d36b08972b234a346e3192ee58e057d7",
+     "bytes": 98722595,
+     "records": 2500
     }
    },
-   "warc_bytes": 0,
+   "warc_bytes": 98722595,
    "download": {
-    "runs": 1,
-    "records": 0,
-    "seconds": 775.9,
-    "records_per_second": 0.0,
-    "megabytes_per_second": 0.0,
+    "runs": 2,
+    "records": 2500,
+    "seconds": 19307.1,
+    "records_per_second": 0.13,
+    "megabytes_per_second": 0.005,
     "errors": 20000,
     "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   },
+   "labels": {
+    "file": "data/cc/marmiton.org/labels.jsonl",
+    "sha256": "8a6b541a9f7b0c06481fab52a40f2aa51612ce484002d0e57283987877f6493a",
+    "labeled_pages": 2007,
+    "pages": 2500
    }
   },
   "food.ndtv.com": {
@@ -258,19 +292,33 @@
     "planned_detail": 2000,
     "planned_other": 500,
     "kept_from_earlier_runs": 0,
-    "downloaded": 0,
-    "downloaded_detail": 0,
-    "downloaded_other": 0
+    "downloaded": 2500,
+    "downloaded_detail": 2000,
+    "downloaded_other": 500
    },
    "warc_files": {
     "captures-00000.warc.gz": {
-     "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-     "bytes": 0,
-     "records": 0
+     "sha256": "032349ff4a3e27eecc1ab515aefff857dce0f5dc403a93d2ad4780a09256428f",
+     "bytes": 222081555,
+     "records": 2500
     }
    },
-   "warc_bytes": 0,
-   "download": null
+   "warc_bytes": 222081555,
+   "download": {
+    "runs": 1,
+    "records": 2500,
+    "seconds": 18531.2,
+    "records_per_second": 0.13,
+    "megabytes_per_second": 0.012,
+    "errors": 0,
+    "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   },
+   "labels": {
+    "file": "data/cc/food.ndtv.com/labels.jsonl",
+    "sha256": "b001d0b00c015d1e77e8827e3e736bcd00a6fff52b3022a2e364b5dfc2001984",
+    "labeled_pages": 2000,
+    "pages": 2500
+   }
   },
   "ticketweb.com": {
    "vertical": "event",
@@ -289,13 +337,33 @@
     "planned_detail": 2000,
     "planned_other": 500,
     "kept_from_earlier_runs": 0,
-    "downloaded": 0,
-    "downloaded_detail": 0,
-    "downloaded_other": 0
+    "downloaded": 2500,
+    "downloaded_detail": 2000,
+    "downloaded_other": 500
    },
-   "warc_files": {},
-   "warc_bytes": 0,
-   "download": null
+   "warc_files": {
+    "captures-00000.warc.gz": {
+     "sha256": "7ab7e752a683c5a7dff2463895ab53d1d7ccbcb58216b897658efa3f97940f69",
+     "bytes": 72530735,
+     "records": 2500
+    }
+   },
+   "warc_bytes": 72530735,
+   "download": {
+    "runs": 1,
+    "records": 2500,
+    "seconds": 18531.2,
+    "records_per_second": 0.13,
+    "megabytes_per_second": 0.004,
+    "errors": 0,
+    "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   },
+   "labels": {
+    "file": "data/cc/ticketweb.com/labels.jsonl",
+    "sha256": "23b598200c3bf408e3bf3c7ab58eff339415d4a6848e230364558a077d3513ec",
+    "labeled_pages": 2008,
+    "pages": 2500
+   }
   },
   "skiddle.com": {
    "vertical": "event",
@@ -314,32 +382,45 @@
     "planned_detail": 2000,
     "planned_other": 500,
     "kept_from_earlier_runs": 0,
-    "downloaded": 0,
-    "downloaded_detail": 0,
-    "downloaded_other": 0
+    "downloaded": 2500,
+    "downloaded_detail": 2000,
+    "downloaded_other": 500
    },
-   "warc_files": {},
-   "warc_bytes": 0,
-   "download": null
+   "warc_files": {
+    "captures-00000.warc.gz": {
+     "sha256": "d435d47bf30fb479b0c3bfc034741276d01cea5d1b93808e52024b5256d0f746",
+     "bytes": 94811193,
+     "records": 2500
+    }
+   },
+   "warc_bytes": 94811193,
+   "download": {
+    "runs": 1,
+    "records": 2500,
+    "seconds": 18531.2,
+    "records_per_second": 0.13,
+    "megabytes_per_second": 0.005,
+    "errors": 0,
+    "note": "round-robin runs (rows with 'started') share their wall time across domains"
+   },
+   "labels": {
+    "file": "data/cc/skiddle.com/labels.jsonl",
+    "sha256": "fead1c4a82ac3cfecd3e829a89eec7824a346adcf1faf0ad70d9646891fca40d",
+    "labeled_pages": 2193,
+    "pages": 2500
+   }
   }
  },
  "totals": {
-  "labeled_pages": 6695,
-  "warc_bytes": 1304625147,
-  "warc_records": 6701,
+  "labeled_pages": 21125,
+  "warc_bytes": 2558938441,
+  "warc_records": 24701,
   "planned": 24701
  },
  "download_throughput": {
-  "records": 4514,
-  "seconds": 5464.0,
-  "records_per_second": 0.83,
+  "records": 22514,
+  "seconds": 23995.2,
+  "records_per_second": 0.94,
   "max_concurrent_requests": 1
- },
- "last_run_http_stats": {
-  "requests": 0,
-  "retries": 0,
-  "bytes": 0,
-  "slow_downs": 0,
-  "slow_down_seconds": 0.0
  }
 }
