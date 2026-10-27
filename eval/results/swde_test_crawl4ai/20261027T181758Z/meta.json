@@ -1,0 +1,175 @@
+{
+  "name": "swde_test_crawl4ai",
+  "description": "SWDE frozen test split, Crawl4AI JsonCssExtractionStrategy.generate_schema on one sample page per template, applied to every labeled page.",
+  "created_at": "2026-10-27T18:17:58+00:00",
+  "config_path": "eval/configs/swde_test_crawl4ai.yaml",
+  "config_sha256": "000222797cde4b107d0d1f57ad7c8d4649d9eb0569b28372b72d92763a65162c",
+  "config": {
+    "name": "swde_test_crawl4ai",
+    "description": "SWDE frozen test split, Crawl4AI JsonCssExtractionStrategy.generate_schema on one sample page per template, applied to every labeled page.",
+    "dataset": "swde",
+    "dataset_options": {},
+    "selection": {
+      "split": "test",
+      "sites": [
+        "auto-automotive",
+        "auto-autoweb",
+        "auto-carquotes",
+        "auto-cars",
+        "auto-kbb",
+        "book-barnesandnoble",
+        "book-bookdepository",
+        "book-booksamillion",
+        "book-borders",
+        "book-buy",
+        "camera-buy",
+        "camera-compsource",
+        "camera-ecost",
+        "camera-jr",
+        "camera-newegg",
+        "job-hotjobs",
+        "job-job",
+        "job-jobcircle",
+        "job-jobtarget",
+        "job-monster",
+        "movie-boxofficemojo",
+        "movie-hollywood",
+        "movie-iheartmovies",
+        "movie-imdb",
+        "nbaplayer-foxsports",
+        "nbaplayer-msnca",
+        "nbaplayer-nba",
+        "nbaplayer-si",
+        "restaurant-gayot",
+        "restaurant-opentable",
+        "restaurant-pickarestaurant",
+        "restaurant-restaurantica",
+        "university-collegeprowler",
+        "university-collegetoolkit",
+        "university-ecampustours",
+        "university-embark"
+      ],
+      "verticals": [],
+      "max_sites": null
+    },
+    "method": {
+      "kind": "baseline",
+      "mode": "prompted",
+      "baseline": "crawl4ai_schema",
+      "params": {
+        "until": "extract",
+        "min_cluster_size": 20,
+        "union_min_tokens": 8000,
+        "union_max_tokens": 30000,
+        "max_repair_calls": 3,
+        "tail": "skip",
+        "concurrency": 4
+      }
+    },
+    "models": {
+      "baseline": "openai/gpt-6.1-sol"
+    },
+    "budget_usd": 1.0,
+    "sample": {
+      "pages_per_site": null,
+      "align_pages": 50,
+      "align_min_fraction": 0.1
+    },
+    "seeds": {
+      "run": 1,
+      "synth": 1
+    },
+    "workers": null,
+    "keep_runs": true
+  },
+  "dry_run": false,
+  "git": {
+    "commit": "28c54ef788c52ce98ea9a6f7dc7b12f4cdd12f1a",
+    "dirty": false
+  },
+  "dataset_manifests": {
+    "commoncrawl_silver": {
+      "path": "eval/datasets/commoncrawl_silver/manifest.json",
+      "sha256": "8fe0e0c2d5d582ee378bbc9a43a2bc1a8586f80a69025b42a36174371125a55c"
+    },
+    "livewebie": {
+      "path": "eval/datasets/livewebie/manifest.json",
+      "sha256": "5d5994441eef34b0086380a2e2afd343e2d2a17d8595b2cde9773942097d38f8"
+    },
+    "swde": {
+      "path": "eval/datasets/swde/manifest.json",
+      "sha256": "e7c3b6fda04a7bc4514d968449de03233d6f32ba13722329796d2cbac75531cc"
+    }
+  },
+  "machine": {
+    "cpu_count": 16,
+    "memory_gb": 62.66,
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "processor": "",
+    "python": "3.11.15"
+  },
+  "work_dir": "data/eval/swde_test_crawl4ai/20261027T181758Z",
+  "budget_usd": 1.0,
+  "cost_basis": "usd_per_1k_pages = tokens x standard-tier list prices (config/prices.yaml, no cache, batch or flex discounts) for every method; spend_usd = what was actually billed",
+  "metric_version": 2,
+  "match_columns": [
+    "norm",
+    "raw",
+    "canon"
+  ],
+  "ditto_version": "0.0.0",
+  "notes": [],
+  "status": "ok",
+  "models": {
+    "pinned": {
+      "baseline": "openai/gpt-6.1-sol"
+    },
+    "used": [
+      "openai/gpt-6.1-sol"
+    ]
+  },
+  "prompt_versions": [
+    "crawl4ai.generate_schema"
+  ],
+  "spend_usd": 0.0,
+  "spend_by_site": {
+    "auto-automotive": 0.0,
+    "book-barnesandnoble": 0.0,
+    "camera-buy": 0.0,
+    "job-hotjobs": 0.0,
+    "movie-boxofficemojo": 0.0,
+    "nbaplayer-foxsports": 0.0,
+    "restaurant-gayot": 0.0,
+    "university-collegeprowler": 0.0,
+    "auto-autoweb": 0.0,
+    "book-bookdepository": 0.0,
+    "camera-compsource": 0.0,
+    "job-job": 0.0,
+    "movie-hollywood": 0.0,
+    "nbaplayer-msnca": 0.0,
+    "restaurant-opentable": 0.0,
+    "university-collegetoolkit": 0.0,
+    "auto-carquotes": 0.0,
+    "book-booksamillion": 0.0,
+    "camera-ecost": 0.0,
+    "job-jobcircle": 0.0,
+    "movie-iheartmovies": 0.0,
+    "nbaplayer-nba": 0.0,
+    "restaurant-pickarestaurant": 0.0,
+    "university-ecampustours": 0.0,
+    "auto-cars": 0.0,
+    "book-borders": 0.0,
+    "camera-jr": 0.0,
+    "job-jobtarget": 0.0,
+    "movie-imdb": 0.0,
+    "nbaplayer-si": 0.0,
+    "restaurant-restaurantica": 0.0,
+    "university-embark": 0.0,
+    "auto-kbb": 0.0,
+    "book-buy": 0.0,
+    "camera-newegg": 0.0,
+    "job-monster": 0
+  },
+  "wall_seconds": 1447.05
+}
