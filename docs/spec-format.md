@@ -193,8 +193,9 @@ What each field type extracts:
 
 Values are strings (elements read as whitespace-normalized text, `text()`/`@attr` results
 trimmed), numbers only from `cast`. Selectors are compiled once per process; a selector that
-fails at evaluation time yields no matches. A field is *missing* on a page when its value is
-`null`, `[]` or `{}`.
+fails at evaluation time yields no matches. `normalize-space` treats U+00A0 (no-break space)
+as a space, like the rest of ditto. A field is *missing* on a page when its value is `null`,
+`[]` or `{}`.
 
 ## Value types (`type_check`)
 

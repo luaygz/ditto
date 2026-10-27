@@ -193,3 +193,57 @@ def test_warc_timestamp() -> None:
     assert warc_timestamp("2024-01-01T00:00:00.5Z") > warc_timestamp("2024-01-01T00:00:00Z")
     assert warc_timestamp(None) == float("-inf")
     assert warc_timestamp("yesterday") == float("-inf")
+
+
+def _records(path: Path) -> list[tuple[bytes, bytes]]:
+    """(raw record bytes, warcio body) of every response record in ``path``."""
+    out = []
+    data = path.read_bytes()
+    with open(path, "rb") as fh:
+        it = ArchiveIterator(fh)
+        for rec in it:
+            if rec.rec_type != "response":
+                continue
+            body = rec.content_stream().read()
+            start, length = it.get_record_offset(), it.get_record_length()
+            out.append((data[start : start + length], body))
+    return out
+
+
+def test_plain_payload_matches_warcio_or_declines(warcs: tuple[Path, Path]) -> None:
+    from ditto.ingest.warc import plain_payload
+
+    plain = declined = 0
+    for path in warcs:
+        for raw, body in _records(path):
+            got = plain_payload(raw)
+            if got is None:
+                declined += 1
+            else:
+                plain += 1
+                assert got == body
+    assert plain >= 6 and declined == 2  # gzip-encoded and chunked bodies go to warcio
+
+
+def test_plain_payload_declines_unusual_records() -> None:
+    from ditto.ingest.warc import plain_payload
+
+    head = b"WARC/1.0\r\nWARC-Type: response\r\nContent-Type: application/http\r\n"
+    http = b"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<p>x</p>"
+    ok = head + f"Content-Length: {len(http)}\r\n\r\n".encode() + http + b"\r\n\r\n"
+    assert plain_payload(ok) == b"<p>x</p>"
+    assert plain_payload(gzip.compress(ok)) == b"<p>x</p>"
+    for bad in (
+        ok.replace(b"WARC-Type: response", b"WARC-Type: resource"),
+        ok.replace(b"application/http", b"text/html"),
+        ok.replace(b"Content-Length", b"X-Length"),
+        ok.replace(b"\r\nContent-Type: text/html", b"\nContent-Type: text/html"),
+        ok.replace(b"Content-Type: text/html", b"Content-Type: text/html\r\n folded"),
+        ok.replace(b"HTTP/1.1 200 OK", b"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked"),
+        ok[: len(ok) - 10],  # block shorter than its Content-Length
+        gzip.compress(ok)[:-4],  # truncated gzip member
+        gzip.compress(ok) + b"junk",
+        b"\x1f\x8bnot gzip",
+        b"no blank line",
+    ):
+        assert plain_payload(bad) is None

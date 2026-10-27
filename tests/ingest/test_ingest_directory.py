@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pytest
 from ingest_helpers import write_tree
+from lxml import etree
 
 from ditto.ingest import PageStore, ingest, read_html
 from ditto.run import RunDir
@@ -136,6 +137,28 @@ def test_encodings_round_trip(site: Path, tmp_path: Path) -> None:
     assert index.encoding == "utf-8"
     assert "<h1>Café</h1>" in read_html(run.root, index.page_id)
     assert read_html(str(run.root), index.page_id) == store.read_html(index.page_id)
+
+
+def test_read_page_gives_raw_bytes_and_encoding(site: Path, tmp_path: Path) -> None:
+    from ditto.fingerprint.dom import clean_etree, clean_html
+    from ditto.ingest import read_page
+
+    run = ingest(site, tmp_path / "run").run
+    store = PageStore.open(run)
+    for pid in store.ids():
+        raw, encoding = read_page(run.root, pid)
+        assert (raw, encoding) == (store.read_bytes(pid), store.record(pid).encoding)
+        want = etree.tostring(clean_html(store.read_html(pid)))
+        assert etree.tostring(clean_etree(raw, encoding)) == want
+
+
+def test_cached_store_refresh(site: Path, tmp_path: Path) -> None:
+    run = ingest(site, tmp_path / "run").run
+    cached = PageStore.cached(run.root)
+    assert PageStore.cached(run.root) is cached
+    fresh = PageStore.cached(run.root, refresh=True)
+    assert fresh is not cached and PageStore.cached(run.root) is fresh
+    assert len(fresh) == len(cached)
 
 
 def test_urls_tsv_is_detected_at_root(site: Path, tmp_path: Path) -> None:

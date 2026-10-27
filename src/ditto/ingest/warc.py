@@ -5,6 +5,7 @@ from __future__ import annotations
 import io
 import math
 import os
+import zlib
 from collections import Counter
 from collections.abc import Sequence
 from datetime import UTC, datetime
@@ -126,6 +127,68 @@ def read_warc_payload(path: str, offset: int, length: int) -> bytes:
     with open(path, "rb") as fh:
         fh.seek(offset)
         raw = fh.read(length)
+    body = plain_payload(raw)
+    if body is not None:
+        return body
     record = next(iter(ArchiveIterator(io.BytesIO(raw))))
-    body: bytes = record.content_stream().read()
-    return body
+    content: bytes = record.content_stream().read()
+    return content
+
+
+_BLANK_LINE = b"\r\n\r\n"
+_CODED = frozenset({b"transfer-encoding", b"content-encoding"})
+
+
+def _header_lines(block: bytes) -> list[bytes] | None:
+    """CRLF header lines after the first line; None when any line has a bare CR or LF or a
+    header is folded or has no colon (warcio's lenient parsing decides those)."""
+    first, *lines = block.split(b"\r\n")
+    if b"\n" in first or b"\r" in first:
+        return None
+    for line in lines:
+        if b"\n" in line or b"\r" in line or line[:1] in (b" ", b"\t") or b":" not in line:
+            return None
+    return lines
+
+
+def plain_payload(raw: bytes) -> bytes | None:
+    """The HTTP body of one WARC ``response`` record (a gzip member or plain bytes) when it is
+    plain: strict CRLF headers and no ``Transfer-Encoding``/``Content-Encoding``. That is the
+    bytes after the HTTP header block, up to the WARC ``Content-Length``, exactly what warcio's
+    ``content_stream()`` returns, without its per-record stream machinery. None for anything
+    else, which warcio then reads."""
+    data = raw
+    if raw[:2] == b"\x1f\x8b":
+        member = zlib.decompressobj(31)
+        try:
+            data = member.decompress(raw)
+        except zlib.error:
+            return None
+        if not member.eof or member.unused_data:
+            return None
+    end = data.find(_BLANK_LINE)
+    if end < 0 or not data.startswith(b"WARC/"):
+        return None
+    lines = _header_lines(data[:end])
+    if lines is None:
+        return None
+    fields = {}
+    for line in lines:
+        name, _, value = line.partition(b":")
+        fields[name.strip().lower()] = value.strip()
+    if fields.get(b"warc-type") != b"response":
+        return None
+    if not fields.get(b"content-type", b"").lower().startswith(b"application/http"):
+        return None
+    try:
+        size = int(fields[b"content-length"])
+    except (KeyError, ValueError):
+        return None
+    block = data[end + len(_BLANK_LINE) : end + len(_BLANK_LINE) + size]
+    http_end = block.find(_BLANK_LINE)
+    if len(block) != size or http_end < 0 or not block.startswith(b"HTTP/"):
+        return None
+    http = _header_lines(block[:http_end])
+    if http is None or any(line.partition(b":")[0].strip().lower() in _CODED for line in http):
+        return None
+    return block[http_end + len(_BLANK_LINE) :]

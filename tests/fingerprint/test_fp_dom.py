@@ -6,6 +6,7 @@ from lxml import etree
 from ditto.fingerprint.dom import (
     Step,
     canonical_classes,
+    clean_etree,
     clean_html,
     is_utility_class,
     iter_paths,
@@ -183,8 +184,6 @@ def test_attribute_values_with_markup_chars_are_dropped() -> None:
 
 
 def test_clean_etree_matches_clean_html() -> None:
-    from ditto.fingerprint.dom import clean_etree
-
     plain = clean_etree(PAGE)
     rich = clean_html(PAGE)
     assert not isinstance(plain, type(rich))
@@ -211,3 +210,84 @@ def test_step_label_fast_path_and_tag_label() -> None:
     span = root.find(".//span")
     assert span is not None
     assert step_label(span) == "span"
+
+
+def _xml(root: etree._Element) -> str:
+    return etree.tostring(root.getroottree(), encoding="unicode")
+
+
+@pytest.mark.parametrize(
+    ("data", "encoding"),
+    [
+        ("<p>caf\u00e9 \u20ac \U0001f600</p>".encode(), "utf-8"),
+        (b"\xef\xbb\xbf<p>caf\xc3\xa9</p>", "utf-8-sig"),
+        ("<p>caf\u00e9</p>".encode(), "utf-8-sig"),  # utf-8-sig without a BOM
+        ("<p>Cr\u00e8me \u2019s</p>".encode("cp1252"), "cp1252"),
+        (b'<?xml version="1.0" encoding="utf-8"?>\n<html><body>x \xc3\xa9</body></html>', "utf8"),
+        ('\u00a0<?xml version="1.0"?><p>x</p>'.encode(), "utf-8"),
+        (b" \n\x1c<?xml version='1.0'?><p>x</p>", "utf-8"),
+        (b"<p>caf\xe9 \xff ok</p>", "utf-8"),  # invalid UTF-8: decoded with replacement
+        (b'<meta charset="iso-8859-1"><p>caf\xc3\xa9</p>', "utf-8"),
+        (b" \t\r\n", "utf-8"),
+        ("\u00a0\u3000".encode(), "utf-8"),
+        (b"<!-- only a comment -->", "utf-8"),
+        (b"\xef\xbb\xbf\xef\xbb\xbf<p>x</p>", "utf-8-sig"),
+    ],
+)
+def test_bytes_parse_matches_decoded_text(data: bytes, encoding: str) -> None:
+    want = _xml(clean_html(data.decode(encoding, errors="replace")))
+    assert _xml(clean_etree(data, encoding)) == want
+    assert _xml(clean_html(data, encoding)) == want
+
+
+@pytest.mark.parametrize("encoding", ["utf-8", "cp1252", None])
+def test_xml_invalid_characters_are_removed(encoding: str | None) -> None:
+    page = '<p title="O\x1bToole\x00 a\x0cb">x\x1by\x00z\x0bw \ufffe\uffff</p>'
+    data = page.encode("utf-8" if encoding is None else encoding, errors="ignore")
+    for root in (clean_html(data, encoding), clean_html(page)):
+        p = root.find(".//p")
+        assert p is not None
+        title, text = p.get("title"), p.text
+        assert title == "OToole\ufffd a b"  # lxml turns NUL into U+FFFD itself
+        assert text is not None and text.startswith("xy\ufffdz w")
+        assert "\ufffe" not in text and "\uffff" not in text
+        p.set("title", title)  # setters accept every value of the cleaned tree
+        p.text = text
+
+
+def test_lone_surrogates_are_dropped() -> None:
+    root = clean_html('<p title="a\udc80b">c\ud800d</p>')
+    p = root.find(".//p")
+    assert p is not None and p.get("title") == "ab" and p.text == "cd"
+
+
+@pytest.mark.parametrize("encoding", ["utf-8", "cp1252", None])
+def test_character_references_to_xml_invalid_characters_are_removed(
+    encoding: str | None,
+) -> None:
+    # SWDE movie-amctv: <a title="Biography for actor Peter O&#27;Toole">
+    page = (
+        '<a title="Peter O&#27;Toole &#x1B;x&#0000027y">O&#27Toole &#11;w&#xc;v</a>'
+        "<p>a&#xFFFE;b&#65535;c &#0; &#xD800; &#1114112; &#39;&#160;&#x2019;&#13;</p>"
+    )
+    data = page.encode("utf-8") if encoding is None else page.encode(encoding)
+    for root in (clean_html(data, encoding), clean_html(page), clean_etree(data, encoding)):
+        a, p = root.find(".//a"), root.find(".//p")
+        assert a is not None and p is not None
+        assert a.get("title") == "Peter OToole xy"
+        assert a.text == "OToole  w v"  # whitespace controls become spaces
+        assert p.text == "abc \ufffd \ufffd \ufffd '\u00a0\u2019\r"
+        a.set("title", a.get("title") or "")  # setters accept every value of the cleaned tree
+        p.text = p.text
+
+
+def test_valid_character_references_leave_the_tree_alone() -> None:
+    from ditto.fingerprint.dom import _refers_to_forbidden
+
+    assert not _refers_to_forbidden(b"&#39; &#x27; &#160; &#8217; &#9; &#xA; &#13; &#x10FFFF;")
+    assert not _refers_to_forbidden(b"&#; &#x; &#xg; &amp;#27;")
+    for ref in (b"&#27", b"&#x1b", b"&#X1B;", b"&#000011;", b"&#xFFFE;", b"&#65535;"):
+        assert _refers_to_forbidden(b"a " + ref + b" b"), ref
+    # code points libxml2 turns into U+FFFD count too (a false alarm costs one tree pass)
+    for ref in (b"&#0;", b"&#xD800;", b"&#1114112;", b"&#x123456789;", b"&#99999999999;"):
+        assert _refers_to_forbidden(ref), ref

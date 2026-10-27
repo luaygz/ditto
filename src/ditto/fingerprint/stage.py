@@ -42,19 +42,19 @@ def _init_worker(root: str) -> None:
     _SENT.clear()
 
 
-def fingerprint_html(html: str) -> PageFingerprint:
-    """Clean and fingerprint one page's HTML."""
-    return fingerprint_tree(clean_etree(html))
+def fingerprint_html(html: str | bytes, encoding: str | None = None) -> PageFingerprint:
+    """Clean and fingerprint one page (text, or bytes decoded with ``encoding``)."""
+    return fingerprint_tree(clean_etree(html, encoding))
 
 
 def _fingerprint_chunk(page_ids: Sequence[int]) -> _Chunk:
-    from ditto.ingest import read_html
+    from ditto.ingest import PageStore
 
     fps: list[PageFingerprint] = []
     errors: dict[int, str] = {}
     for pid in page_ids:
         try:
-            fps.append(fingerprint_html(read_html(_ROOT, pid)))
+            fps.append(fingerprint_html(*PageStore.cached(_ROOT).read_page(pid)))
         except Exception as exc:  # one unreadable page must not stop the stage
             errors[pid] = f"{type(exc).__name__}: {exc}"
             fps.append(PageFingerprint.empty())
@@ -82,7 +82,8 @@ def fingerprint_run(run: RunDir, *, workers: int | None = None) -> FingerprintSt
     from ditto.ingest import PageStore
 
     start = time.perf_counter()
-    n_pages = len(PageStore.open(run))
+    # Fresh store, shared with forked workers through the per-process cache.
+    n_pages = len(PageStore.cached(run.root, refresh=True))
     n_chunks = -(-n_pages // CHUNK_SIZE)
     n_workers = max(1, min(default_workers() if workers is None else workers, n_chunks))
     writer = FingerprintWriter(run.fingerprints_dir)

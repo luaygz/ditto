@@ -5,6 +5,14 @@ from __future__ import annotations
 
 from ditto.ingest.encoding import detect_encoding
 from ditto.ingest.stage import IngestResult, ingest
-from ditto.ingest.store import PageRecord, PageStore, read_html
+from ditto.ingest.store import PageRecord, PageStore, read_html, read_page
 
-__all__ = ["IngestResult", "PageRecord", "PageStore", "detect_encoding", "ingest", "read_html"]
+__all__ = [
+    "IngestResult",
+    "PageRecord",
+    "PageStore",
+    "detect_encoding",
+    "ingest",
+    "read_html",
+    "read_page",
+]

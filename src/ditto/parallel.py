@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import multiprocessing as mp
 import os
+import sys
 from collections.abc import Callable, Iterable, Iterator, Sequence
 from typing import TypeVar
 
@@ -35,16 +36,23 @@ def chunked(items: Sequence[T], size: int) -> list[Sequence[T]]:
     return [items[i : i + size] for i in range(0, len(items), size)]
 
 
+def start_method() -> str:
+    """Multiprocessing start method: fork on Linux (fastest), spawn elsewhere (the macOS
+    default). ``DITTO_MP_START`` (fork|spawn|forkserver) overrides it, e.g.
+    ``DITTO_MP_START=spawn`` emulates macOS on Linux."""
+    method = os.environ.get("DITTO_MP_START", "").strip().lower()
+    if not method:
+        return "fork" if sys.platform.startswith("linux") else "spawn"
+    available = mp.get_all_start_methods()
+    if method not in available:
+        raise ValueError(
+            f"DITTO_MP_START={method!r} is not available (choose from {', '.join(available)})"
+        )
+    return method
+
+
 def _context() -> mp.context.BaseContext:
-    # fork is fastest on Linux; spawn elsewhere (macOS default) for safety.
-    method = (
-        "fork"
-        if "fork" in mp.get_all_start_methods()
-        and os.name == "posix"
-        and os.uname().sysname == "Linux"
-        else "spawn"
-    )
-    return mp.get_context(method)
+    return mp.get_context(start_method())
 
 
 def pmap(

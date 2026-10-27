@@ -373,3 +373,336 @@ def test_evaluate_on_subtree_is_relative() -> None:
     assert [etree.tostring(e, encoding="unicode") for e in evaluate("./th", row)] == [
         "<th>Warranty</th>"
     ]
+
+
+@pytest.mark.parametrize(
+    ("expr", "fast"),
+    [
+        ("//div[@id='x']/h1", "/descendant::div[@id='x']/h1"),
+        (
+            "//main[@id='m']//h1[contains(concat(' ',normalize-space(@class),' '),' t ')]",
+            "/descendant::main[@id='m']/descendant::h1[contains(@class,'t')][contains(concat("
+            "' ',normalize-space(@class),' '),' t ')]",
+        ),
+        (
+            'p[contains(concat(" ", normalize-space( @class ), " "), " a-b ")][1]',
+            'p[contains(@class,"a-b")][contains(concat(" ", normalize-space( @class ), " "), '
+            '" a-b ")][1]',
+        ),
+        (
+            "//a[contains(concat(' ',normalize-space(@class),' '),' a b ')]",
+            "/descendant::a[contains(concat(' ',normalize-space(@class),' '),' a b ')]",
+        ),
+        (".//th[normalize-space()='Topic']", "./descendant::th[normalize-space()='Topic']"),
+        ("//li[a[1]]", "/descendant::li[a[1]]"),
+        (
+            "//tr[td[@class='l'][starts-with(., 'X')]]",
+            "/descendant::tr[td[@class='l'][starts-with(., 'X')]]",
+        ),
+        ("//div[@a and @b]//*[@c]", "/descendant::div[@a and @b]/descendant::*[@c]"),
+        ("//div[div]", "/descendant::div[div]"),
+        ("//x[@n * 2 > 3]", "/descendant::x[@n * 2 > 3]"),
+        ("//a[not(@href)] | //b[@x|@y]", "/descendant::a[not(@href)] | /descendant::b[@x|@y]"),
+        ("//text()[normalize-space()]", "/descendant::text()[normalize-space()]"),
+        ("(//a[@x])[1]", "(/descendant::a[@x])[1]"),
+        ("//a[.='//b[@c]']", "/descendant::a[.='//b[@c]']"),
+        ("//td[preceding-sibling::th]", "/descendant::td[preceding-sibling::th]"),
+        ("//a[count(b) = 0]", "/descendant::a[count(b) = 0]"),
+        ("//li[text()]", "/descendant::li[text()]"),
+    ],
+)
+def test_fast_xpath_rewrites_node_by_node_predicates(expr: str, fast: str) -> None:
+    from ditto.extract.runner import fast_xpath
+
+    assert fast_xpath(expr) == fast
+
+
+@pytest.mark.parametrize(
+    "expr",
+    [
+        "//div",  # libxml2 already scans descendants once
+        "//li[1]",
+        "//li[last()]",
+        "//li[position() < 3]",
+        "//a[@x][2]",
+        "//text()[normalize-space()][1]",
+        "//li[count(a)]",
+        "//a[string-length(.)]",
+        "//li[$v]",
+        "//li['x']",
+        "//li[(@x)]",
+        "//@href[.='x']",
+        "//self::div[@a]",
+        "//li[last()-1]/a",
+        "//\u00e9l[@a]",  # does not tokenize: left alone
+        "//a[@x",
+        "a b",
+    ],
+)
+def test_fast_xpath_leaves_positional_and_unknown_steps(expr: str) -> None:
+    from ditto.extract.runner import fast_xpath
+
+    assert fast_xpath(expr) == expr
+
+
+TRICKY = """<html><body>
+<div id="a" class="box x"><ul><li>1<a href="/1">one</a></li><li>2</li><li>3<a>three</a></li></ul>
+  <div class="box"><ul><li>4</li><li>5<a href="/5">five</a></li></ul></div></div>
+<table><tr><th>K</th><th>V</th></tr><tr><td>k1</td><td>v1</td></tr><tr><td>k2</td><td> </td></tr>
+</table><p>t1<b>b</b>t2</p><p class="x"> </p><p class="boxes xx">y</p></body></html>"""
+
+
+@pytest.mark.parametrize(
+    "expr",
+    [
+        "//li[a]",
+        "//li[a][1]",
+        "//li[1]",
+        "//div[contains(concat(' ',normalize-space(@class),' '),' box ')]//li[a[@href]]/a",
+        "//ul[li]/li[last()]",
+        "//tr[td[1]='k2']/td[2]",
+        "//td[count(preceding-sibling::td) = 1]",
+        "//text()[normalize-space()][1]",
+        "//text()[normalize-space()]",
+        "//p[@class]|//li[a]",
+        "(//li[a])[2]",
+        "//div[@id='a']//div//li[. = '4']",
+        "//*[@class='x']",
+        "count(//li[a])",
+        "//li[a and position() > 1]",
+        "//*[contains(concat(' ',normalize-space(@class),' '),' x ')][1]",
+        "(//*[contains(concat(' ',normalize-space(@class),' '),' box ')])[2]//li",
+        "//div[contains(concat(' ',normalize-space(@class),' '),' bo ')]",
+        "//p[contains(concat(' ',normalize-space(@class),' '),' x ')]/text()",
+    ],
+)
+def test_compiled_xpath_selects_what_the_expression_says(expr: str) -> None:
+    root = clean_html(TRICKY)
+    rows = root.xpath("//ul")
+    for node in [root, *rows]:
+        want = etree.XPath(expr)(node)
+        got = compile_xpath(expr)(node)
+        if isinstance(want, list):
+            assert [id(x) if isinstance(x, etree._Element) else x for x in got] == [
+                id(x) if isinstance(x, etree._Element) else x for x in want
+            ]
+        else:
+            assert got == want
+
+
+def test_compile_xpath_raises_for_invalid_selector() -> None:
+    with pytest.raises(etree.XPathSyntaxError):
+        compile_xpath("//a[@x")
+    assert evaluate("//a[@x", ROOT) == []
+
+
+ANCHORED = """<html><body>
+<div id="main"><h1>Title</h1><ul id="list"><li><a href="/1">one</a></li><li>two</li></ul>
+  <div id="dup"><p>outer</p><div id="dup"><p>inner</p></div></div></div>
+<span id="dup">third</span><p id="it's">quoted</p><section id="s"><b>x</b></section>
+<div id="s">not a section</div></body></html>"""
+
+
+@pytest.mark.parametrize(
+    ("expr", "anchor"),
+    [
+        ("//div[@id='main']//h1", ("div", "main", ".//h1")),
+        ('//div[ @id = "main" ]/h1/text()', ("div", "main", "./h1/text()")),
+        ("//*[@id='list']", ("*", "list", None)),
+        ("//ul[@id='list']/li[a]/a/@href", ("ul", "list", "./li[a]/a/@href")),
+        (
+            "//div[@id='main']/following-sibling::span[1]",
+            ("div", "main", "./following-sibling::span[1]"),
+        ),
+        ("//div[@id='main']/..", ("div", "main", "./..")),
+    ],
+)
+def test_id_anchor_splits_anchor_and_rest(expr: str, anchor: tuple[str, str, str | None]) -> None:
+    from ditto.extract.runner import _id_anchor
+
+    found = _id_anchor(expr)
+    assert found is not None and (found.tag, found.id, found.rest) == anchor
+
+
+@pytest.mark.parametrize(
+    "expr",
+    [
+        "//div[@id='main'][1]//h1",  # another predicate on the anchor
+        "//div[@id='main']//h1 | //h2",  # union
+        "//div[@id='main']//li = 'two'",  # operator
+        "(//div[@id='main']//li)[1]",
+        "//div[@class='main']//h1",
+        "//div[@id=$x]//h1",
+        "//div[@id='main' or @id='x']",
+        "//x:div[@id='main']",
+        "//text()[@id='main']",
+        "/html//div[@id='main']",
+        ".//div[@id='main']",
+        "//div[@id='main']]",
+    ],
+)
+def test_id_anchor_rejects_other_shapes(expr: str) -> None:
+    from ditto.extract.runner import _id_anchor
+
+    assert _id_anchor(expr) is None
+
+
+@pytest.mark.parametrize(
+    "expr",
+    [
+        "//div[@id='main']//h1",
+        "//div[@id='main']",
+        "//*[@id='list']/li",
+        "//ul[@id='list']/li[a]/a/@href",
+        "//ul[@id='list']//text()",
+        "//div[@id='dup']//p",  # nested duplicates: evaluated as written
+        "//*[@id='dup']",
+        "//span[@id='dup']",  # one span among three ids 'dup'
+        '//p[@id="it\'s"]',
+        "//section[@id='s']/b",
+        "//div[@id='s']",
+        "//div[@id='nope']//p",
+        "//div[@id='main']/..",
+        "//div[@id='main']//h1[",  # invalid: no matches either way
+        "//div[@id='main']//h1 | //p",
+    ],
+)
+def test_anchored_evaluation_selects_what_the_expression_says(expr: str) -> None:
+    from ditto.extract.runner import Anchors, _evaluate
+
+    root = clean_html(ANCHORED)
+    ids = frozenset({"main", "list", "dup", "it's", "s", "nope"})
+    anchors = Anchors(root, ids)
+    for node in (root, *root.iter("li")):
+        want = evaluate(expr, node)
+        got = _evaluate(expr, node, anchors)
+        assert [id(x) if isinstance(x, etree._Element) else x for x in got] == [
+            id(x) if isinstance(x, etree._Element) else x for x in want
+        ]
+    assert _evaluate("//div[@id='main']//h1", root, Anchors(root, frozenset())) == evaluate(
+        "//div[@id='main']//h1", root
+    )
+
+
+def test_apply_spec_collects_anchor_ids_of_every_field_type() -> None:
+    from ditto.extract.runner import Anchors
+
+    spec = Spec.model_validate(
+        {
+            "template_id": "t_x",
+            "site": "x.example",
+            "generated_by": {"model": "m", "prompt_version": "specgen.v1"},
+            "fields": {
+                "title": {"type": "scalar", "candidates": ["//div[@id='main']/h1", "//h1"]},
+                "shared": {"type": "scalar", "candidates": ["//*[@id='s']/b", "//*[@id='s']"]},
+                "items": {"type": "list", "candidates": ["//ul[@id='list']/li", "//li[a]"]},
+                "rows": {
+                    "type": "record_list",
+                    "container": "//div[@id='main']/ul/li",
+                    "columns": {"text": ".", "link": "./a/@href"},
+                },
+                "kv": {
+                    "type": "key_value",
+                    "pairs": "//section[@id='s']",
+                    "key": "./b",
+                    "value": "./b",
+                },
+            },
+        }
+    )
+    root = clean_html(ANCHORED)
+    assert Anchors.for_spec(spec, root).ids == {"main", "list", "s"}
+    assert apply_spec(spec, root) == {
+        "title": "Title",
+        "shared": "x",
+        "items": ["one", "two"],
+        "rows": [{"text": "one", "link": "/1"}, {"text": "two", "link": None}],
+        "kv": {"x": "x"},
+        "_meta": {"missing": [], "spec_version": spec.spec_version},
+    }
+
+
+NBSP_PAGE = """<html><body><table class="info">
+<tr><td>Type:\u00a0\u00a0</td><td>Public</td></tr>
+<tr><td>\u00a0Size:</td><td>Large</td></tr>
+<tr><td>Plain:</td><td>Value</td></tr></table>
+<p class="a\u00a0b">nbsp class</p></body></html>"""
+
+
+@pytest.mark.parametrize(
+    ("expr", "want"),
+    [
+        ("//td[normalize-space(.)='Type:']/following-sibling::td[1]", ["Public"]),
+        ("//td[normalize-space()='Size:']/following-sibling::td[1]", ["Large"]),
+        ("//td[normalize-space(text())='Plain:']/following-sibling::td[1]", ["Value"]),
+        ("//td[normalize-space(.)='Type:\u00a0']", []),  # literals are left alone
+        ("//td[contains(., 'Type:\u00a0')]/following-sibling::td[1]", ["Public"]),
+        ("normalize-space(//table[@class='info']//td[1])", ["Type:"]),
+        ("//p[contains(concat(' ',normalize-space(@class),' '),' b ')]", ["nbsp class"]),
+    ],
+)
+def test_normalize_space_treats_nbsp_as_space(expr: str, want: list[str]) -> None:
+    root = clean_html(NBSP_PAGE)
+    got = [x if isinstance(x, str) else x.text_content() for x in evaluate(expr, root)]
+    assert got == want
+
+
+def test_spec_apply_and_extraction_path_share_nbsp_semantics() -> None:
+    from ditto.fingerprint.dom import clean_etree
+
+    spec = Spec.model_validate(
+        {
+            "template_id": "t_nbsp",
+            "site": "x.example",
+            "generated_by": {"model": "m", "prompt_version": "specgen.v1"},
+            "fields": {
+                "type": {
+                    "type": "scalar",
+                    "candidates": [
+                        "//td[normalize-space(.)='Type:']/following-sibling::td[1]",
+                        "//table[@class='info']//tr[1]/td[2]",
+                    ],
+                },
+                "info": {
+                    "type": "key_value",
+                    "pairs": "//table[@class='info']//tr",
+                    "key": "./td[1]",
+                    "value": "./td[normalize-space()='Large']",
+                },
+            },
+        }
+    )
+    want = {
+        "type": "Public",
+        "info": {"Type": None, "Size": "Large", "Plain": None},
+        "_meta": {"missing": [], "spec_version": spec.spec_version},
+    }
+    data = NBSP_PAGE.encode()
+    assert spec.apply(NBSP_PAGE) == want  # standalone Spec.apply
+    assert apply_spec_html(spec, data, "utf-8") == want
+    assert apply_spec(spec, clean_etree(data, "utf-8")) == want  # what extract_run does
+
+
+@pytest.mark.parametrize(
+    ("expr", "rewritten"),
+    [
+        ("//td[normalize-space()='x']", "//td[normalize-space(translate(.,'\u00a0',' '))='x']"),
+        (
+            "//td[normalize-space( td[1] ) = 'a']",
+            "//td[normalize-space(translate( td[1] ,'\u00a0',' ')) = 'a']",
+        ),
+        (
+            "normalize-space(concat(normalize-space(),'x'))",
+            "normalize-space(translate(concat(normalize-space(translate(.,'\u00a0',' ')),'x'),"
+            "'\u00a0',' '))",
+        ),
+        ("//td['normalize-space()']", "//td['normalize-space()']"),
+        ("//normalize-space", "//normalize-space"),
+        ("//td[normalize-space(]", "//td[normalize-space(]"),
+        ("a b", "a b"),
+    ],
+)
+def test_nbsp_as_space_rewrites_only_normalize_space_calls(expr: str, rewritten: str) -> None:
+    from ditto.extract.runner import nbsp_as_space
+
+    assert nbsp_as_space(expr) == rewritten

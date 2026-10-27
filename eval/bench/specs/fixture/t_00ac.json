@@ -1,0 +1,77 @@
+{
+  "spec_version": "1",
+  "template_id": "t_00ac",
+  "site": "www.munoz-tyler.com",
+  "status": "final",
+  "generated_by": {
+    "model": "openai/gpt-6.1-sol",
+    "prompt_version": "specgen.v1",
+    "pages_seen": [
+      "https://www.munoz-tyler.com/courses/introduction-to-sql-10627/"
+    ],
+    "mode": "prompted",
+    "repair_calls": 0,
+    "created_at": "2026-10-26T09:49:18+00:00"
+  },
+  "fields": {
+    "title": {
+      "description": "Main course heading.",
+      "optional": false,
+      "degraded": false,
+      "selection_reason": "candidates[0] wins with score 1.000 = presence 1.000 (rate 1.000, analysis expects 1.000) × multiplicity 1.000 × type 1.000 (any); candidates[1] 1.000 (tie broken toward fewer positional steps: 0 vs 1)",
+      "source_candidates": [
+        "c7"
+      ],
+      "stats": {
+        "presence_rate": 1.0,
+        "expected_presence": 1.0,
+        "multiplicity": 1.0,
+        "type_check_pass": 1.0,
+        "pages_scored": 31,
+        "failure_rate": 0.0
+      },
+      "candidates": [
+        "//main[@id='main']//h1[contains(concat(' ',normalize-space(@class),' '),' class-title ')]",
+        "//header[contains(concat(' ',normalize-space(@class),' '),' class-header ')]/h1"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [],
+      "type_check": "text",
+      "type": "scalar"
+    },
+    "tags": {
+      "description": "Topics listed in the course syllabus.",
+      "optional": false,
+      "degraded": false,
+      "selection_reason": "candidates[0] wins with score 0.000 = presence 1.000 (rate 0.968, analysis expects 0.968) × multiplicity 0.000 × type 1.000 (any); candidates[1] 0.000 (tie)",
+      "source_candidates": [
+        "c39"
+      ],
+      "stats": {
+        "presence_rate": 0.9677,
+        "expected_presence": 0.9677,
+        "multiplicity": 0.0,
+        "type_check_pass": 1.0,
+        "pages_scored": 31,
+        "failure_rate": 0.0
+      },
+      "candidates": [
+        "//main[@id='main']//table[.//th[normalize-space()='Topic']]/tbody/tr/td[count(ancestor::table//th[normalize-space()='Topic']/preceding-sibling::th)+1]",
+        "//table[contains(concat(' ',normalize-space(@class),' '),' class-syllabus ')]/tbody/tr/td[count(ancestor::table//th[normalize-space()='Topic']/preceding-sibling::th)+1]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [],
+      "type_check": "text",
+      "type": "list"
+    }
+  },
+  "not_present": {
+    "published": "marked absent for this template in mapping.json"
+  }
+}

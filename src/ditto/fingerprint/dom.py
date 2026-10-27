@@ -14,11 +14,13 @@ This module defines the *structural path* format every later stage relies on:
 
 The cleaned tree is what the extractor, the analysis and the LLM see: ``<script>``, ``<style>``,
 ``<noscript>``, ``<svg>``, ``<iframe>``, ``<template>``, comments, processing instructions and
-everything in ``<head>`` except ``<title>`` are removed.
+everything in ``<head>`` except ``<title>`` are removed, and so are characters XML forbids
+(see ``parse_html``), so every text and attribute value can be written back with lxml.
 """
 
 from __future__ import annotations
 
+import codecs
 import re
 import threading
 from collections.abc import Iterator
@@ -365,47 +367,191 @@ def split_path(path: str) -> tuple[list[Step], str | None]:
 
 _PARSERS = threading.local()
 
+# ASCII characters that ``\s`` matches in a str pattern (``str.isspace``), as bytes: whitespace
+# before an XML declaration looks the same to ``_XML_DECL`` in text and to this in UTF-8 bytes.
+_LEADING_SPACE = re.compile(rb"[ \t\n\r\x0b\x0c\x1c-\x1f]*")
 
-def _parser(plain: bool) -> etree.HTMLParser:
-    """Per-thread reusable parser (lxml parsers must not be shared between threads)."""
-    key = "plain" if plain else "html"
+# XML-invalid characters that lxml's HTML parser keeps (it turns NUL into U+FFFD itself) but no
+# lxml setter accepts afterwards ("All strings must be XML compatible"). Control characters
+# that are whitespace to Python become spaces, so whitespace-normalized text stays the same;
+# the other controls, U+FFFE, U+FFFF and lone surrogates are dropped.
+_CONTROL_SPACES = b"\x0b\x0c\x1c\x1d\x1e\x1f"
+_CONTROL_DROP = bytes([*range(0x01, 0x09), *range(0x0E, 0x1C)])
+_TO_SPACE = bytes.maketrans(_CONTROL_SPACES, b" " * len(_CONTROL_SPACES))
+_FLAG_CONTROLS = bytes.maketrans(
+    _CONTROL_SPACES + _CONTROL_DROP, bytes(len(_CONTROL_SPACES) + len(_CONTROL_DROP))
+)
+_XML_INVALID = re.compile("[\x01-\x08\x0b\x0c\x0e-\x1f\ufffe\uffff\ud800-\udfff]")
+_SURROGATES = re.compile("[\ud800-\udfff]")
+
+# libxml2 resolves numeric character references the HTML5 way: NUL, surrogates and code points
+# past U+10FFFF become U+FFFD, but the other C0 controls, U+FFFE and U+FFFF are kept (SWDE
+# movie-amctv writes ``O&#27;Toole``), so a page referring to one is sanitized after parsing.
+# Digits are capped: a longer number is past U+10FFFF anyway (a harmless false alarm).
+_CHAR_REF = re.compile(rb"&#(?:[xX]0*([0-9a-fA-F]{1,7})|0*([0-9]{1,8}))")
+
+
+def _xml_forbidden(code: int) -> bool:
+    """Whether XML 1.0 forbids the character with code point ``code``."""
+    return (
+        (code < 0x20 and code not in (0x9, 0xA, 0xD))
+        or 0xD800 <= code <= 0xDFFF
+        or code in (0xFFFE, 0xFFFF)
+        or code > 0x10FFFF
+    )
+
+
+def _refers_to_forbidden(source: bytes) -> bool:
+    """Whether ``source`` has a numeric character reference to a character XML forbids."""
+    for m in _CHAR_REF.finditer(source):
+        hexa, dec = m.groups()
+        if _xml_forbidden(int(hexa, 16) if hexa is not None else int(dec)):
+            return True
+    return False
+
+
+def _xml_safe(data: bytes, nonchars: bool) -> bytes:
+    """UTF-8 ``data`` without XML-invalid characters; ``nonchars``: it may hold U+FFFE/U+FFFF
+    (whose UTF-8 sequences cannot straddle characters, nor can an ASCII control byte)."""
+    if data.translate(_FLAG_CONTROLS) != data:
+        data = data.translate(_TO_SPACE, _CONTROL_DROP)
+    if nonchars:
+        data = data.replace(b"\xef\xbf\xbe", b"").replace(b"\xef\xbf\xbf", b"")
+    return data
+
+
+def _xml_safe_text(text: str) -> str:
+    """``_xml_safe`` for one string value of an already parsed tree."""
+    return _XML_INVALID.sub(lambda m: " " if m.group().isspace() else "", text)
+
+
+def _sanitize_tree(root: etree._Element) -> None:
+    """Apply ``_xml_safe_text`` to every text, tail and attribute value (for pages lxml decoded
+    itself, which never pass through ``_xml_safe``, and pages whose character references
+    resolve to XML-invalid characters)."""
+    find = _XML_INVALID.search
+    for el in root.iter():
+        if el.text and find(el.text):
+            el.text = _xml_safe_text(el.text)
+        if el.tail and find(el.tail):
+            el.tail = _xml_safe_text(el.tail)
+        for name, value in el.items():
+            text = str(value)  # HTML trees hold str values; the stubs also allow bytes
+            if find(text):
+                el.set(name, _xml_safe_text(text))
+
+
+def _parser(plain: bool, utf8: bool = False) -> etree.HTMLParser:
+    """Per-thread reusable parser (lxml parsers must not be shared between threads). ``utf8``
+    parsers read bytes as UTF-8, ignoring any ``<meta charset>``."""
+    key = ("plain" if plain else "html") + ("-utf8" if utf8 else "")
     parser: etree.HTMLParser | None = getattr(_PARSERS, key, None)
     if parser is None:
         cls = etree.HTMLParser if plain else html.HTMLParser
-        parser = cls(remove_comments=True, remove_pis=True)
+        if utf8:
+            parser = cls(remove_comments=True, remove_pis=True, encoding="utf-8")
+        else:
+            parser = cls(remove_comments=True, remove_pis=True)
         setattr(_PARSERS, key, parser)
     return parser
 
 
-def _parse(data: bytes | str, encoding: str | None, plain: bool) -> etree._Element:
-    if isinstance(data, bytes) and encoding:
-        data = data.decode(encoding, errors="replace")
-    if isinstance(data, str):
-        data = _XML_DECL.sub("", data, count=1)
-    parser = _parser(plain)
-    root: etree._Element | None = None
-    if data.strip():
+@lru_cache(maxsize=256)
+def _codec_name(encoding: str) -> str | None:
+    try:
+        return codecs.lookup(encoding).name
+    except LookupError:
+        return None
+
+
+def _utf8_page(data: bytes, encoding: str) -> bytes | None:
+    """``data`` made XML-safe when it can go to libxml2 without decoding: valid UTF-8 declared
+    as UTF-8 (``utf-8-sig``: its one leading BOM removed, as the codec does) that is not blank
+    and opens (after ASCII whitespace) with neither ``<?`` nor a non-ASCII character, so the
+    decoded text has no XML declaration to remove and the same blankness. Otherwise None."""
+    codec = _codec_name(encoding)
+    if codec == "utf-8-sig":
+        if data.startswith(codecs.BOM_UTF8):
+            data = data[len(codecs.BOM_UTF8) :]
+    elif codec != "utf-8":
+        return None
+    start = cast(re.Match[bytes], _LEADING_SPACE.match(data)).end()
+    if start == len(data) or data[start] >= 0x80 or data.startswith(b"<?", start):
+        return None
+    nonchars = False
+    if not data.isascii():
         try:
-            root = etree.fromstring(data, parser)
+            text = data.decode("utf-8")
+        except UnicodeDecodeError:
+            return None
+        nonchars = "\ufffe" in text or "\uffff" in text
+    return _xml_safe(data, nonchars)
+
+
+def _utf8_text(text: str) -> bytes:
+    """``text`` as UTF-8 for libxml2: XML declaration removed, XML-safe, empty when blank."""
+    text = _XML_DECL.sub("", text, count=1)
+    if not text.strip():
+        return b""
+    try:
+        data = text.encode("utf-8")
+    except UnicodeEncodeError:  # lone surrogates
+        text = _SURROGATES.sub("", text)
+        data = text.encode("utf-8")
+    return _xml_safe(data, "\ufffe" in text or "\uffff" in text)
+
+
+def _source(data: bytes | str, encoding: str | None) -> tuple[bytes, bool]:
+    """What ``_parse`` hands libxml2, and whether lxml must sniff its encoding (bytes without
+    ``encoding``; everything else is XML-safe UTF-8)."""
+    if isinstance(data, str):
+        return _utf8_text(data), False
+    if not encoding:
+        return data, True
+    fast = _utf8_page(data, encoding)
+    return (fast if fast is not None else _utf8_text(data.decode(encoding, "replace"))), False
+
+
+def _parse(data: bytes | str, encoding: str | None, plain: bool) -> etree._Element:
+    """Parse bytes (decoded with ``encoding``, or sniffed by lxml without one) or text into a
+    tree free of XML-invalid characters (see ``_xml_safe``; those written as character
+    references, or in pages lxml decodes itself, are removed from the parsed tree).
+
+    Text and decodable bytes reach libxml2 as UTF-8 with the encoding stated. That yields the
+    same tree as handing lxml the decoded string (lxml passes its internal Latin-1/UCS-2/UCS-4
+    buffer with the encoding stated, which libxml2 then converts) at less cost, and valid UTF-8
+    pages skip the Python decode altogether."""
+    source, sniffed = _source(data, encoding)
+    parser = _parser(plain, utf8=not sniffed)
+    root: etree._Element | None = None
+    if source.strip():
+        try:
+            root = etree.fromstring(source, parser)
         except etree.XMLSyntaxError:  # e.g. a document that is only a comment
             root = None
     if root is None:
         root = etree.fromstring("<html></html>", parser)
+    elif sniffed or _refers_to_forbidden(source):
+        _sanitize_tree(root)
     return root
 
 
 def parse_html(data: bytes | str, encoding: str | None = None) -> html.HtmlElement:
     """Parse a page with lxml's HTML parser. ``data`` may be bytes (decoded with ``encoding``
     when given, else by lxml's own sniffing) or an already-decoded string. Empty or
-    unparseable input yields an empty ``<html>`` document."""
+    unparseable input yields an empty ``<html>`` document. XML-invalid characters, which no
+    lxml setter would accept again, are removed, whether written as such or as character
+    references (``&#27;``): control characters that are whitespace to Python (``\\v``, ``\\f``,
+    ``\\x1c``-``\\x1f``) become spaces; other controls, U+FFFE, U+FFFF and lone surrogates are
+    dropped (lxml itself turns NUL into U+FFFD)."""
     return cast(html.HtmlElement, _parse(data, encoding, plain=False))
 
 
-def clean_tree(root: _E) -> _E:
-    """Strip non-content elements in place and return ``root``."""
+def _clean(root: _E, comments: bool) -> _E:
     etree.strip_elements(root, *STRIP_TAGS, with_tail=False)
-    etree.strip_tags(root, etree.Comment, etree.ProcessingInstruction)
-    for head in root.findall("head"):
+    if comments:
+        etree.strip_tags(root, etree.Comment, etree.ProcessingInstruction)
+    for head in root.iterchildren("head"):
         for child in list(head):
             if not isinstance(child.tag, str) or child.tag.lower() != "title":
                 head.remove(child)
@@ -413,16 +559,26 @@ def clean_tree(root: _E) -> _E:
     return root
 
 
+def clean_tree(root: _E) -> _E:
+    """Strip non-content elements in place and return ``root``."""
+    return _clean(root, comments=True)
+
+
+# Trees from ``_parse`` are cleaned with ``comments=False``: its parsers never create comment or
+# processing-instruction nodes (lxml unsets those SAX callbacks), so there is nothing to strip.
+
+
 def clean_html(data: bytes | str, encoding: str | None = None) -> html.HtmlElement:
     """Parse and clean a page: the exact tree the extractor, analysis and LLM operate on."""
-    return clean_tree(parse_html(data, encoding))
+    return _clean(parse_html(data, encoding), comments=False)
 
 
 def clean_etree(data: bytes | str, encoding: str | None = None) -> etree._Element:
     """``clean_html`` with plain ``lxml.etree`` elements instead of ``lxml.html`` ones: the same
     tags, attributes, text and structural paths, without the per-node Python element-class
-    lookup (several times faster to traverse). For read-only bulk passes like fingerprinting."""
-    return clean_tree(_parse(data, encoding, plain=True))
+    lookup (faster to traverse and to return from XPath). For bulk passes (fingerprinting,
+    extraction) whose results do not depend on the element class."""
+    return _clean(_parse(data, encoding, plain=True), comments=False)
 
 
 def own_text(el: etree._Element) -> str:

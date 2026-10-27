@@ -1,0 +1,142 @@
+{
+  "spec_version": "1",
+  "template_id": "bench",
+  "site": "book-abebooks",
+  "status": "final",
+  "generated_by": {
+    "model": "hand-written (Perf agent, speed benchmark)",
+    "prompt_version": "bench.v1",
+    "pages_seen": [
+      "0000",
+      "0001"
+    ],
+    "mode": "prompted",
+    "repair_calls": 0,
+    "created_at": "2026-10-26"
+  },
+  "fields": {
+    "title": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@id='bookdetail']/h2[contains(concat(' ',normalize-space(@class),' '),' plptitle ')]",
+        "//div[@id='searchResultsHeader']/h2/em"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    },
+    "author": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@id='bookdetail']/h3/a",
+        "//div[contains(concat(' ',normalize-space(@class),' '),' contentSidebar ')]/p/a[@class='author']"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [],
+      "type": "list"
+    },
+    "isbn_13": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@id='bookmetadata']/text()[contains(.,'ISBN 13')]/following-sibling::strong[1]",
+        "//div[@id='bookdetail']/h1[contains(concat(' ',normalize-space(@class),' '),' isbn ')]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "regex('97[89]\\d{10}')"
+      ],
+      "type": "scalar"
+    },
+    "publisher": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@id='bookmetadata']/text()[contains(.,'Publisher')]/following-sibling::strong[1]",
+        "//td[contains(concat(' ',normalize-space(@class),' '),' result-details ')]/div[contains(concat(' ',normalize-space(@class),' '),' result-description ')]/p"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "split(',', 0)"
+      ],
+      "type": "scalar"
+    },
+    "publication_date": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@id='bookmetadata']/text()[contains(.,'Publication Date')]/following-sibling::strong[1]",
+        "//div[@id='bookmetadata']/strong[4]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "regex('\\d{4}')"
+      ],
+      "type": "scalar"
+    },
+    "offers": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "type": "record_list",
+      "container": "//div[@id='searchResultsContainer']/table[contains(concat(' ',normalize-space(@class),' '),' result ')]/tr",
+      "container_alternates": [],
+      "columns": {
+        "title": "./td[contains(concat(' ',normalize-space(@class),' '),' result-details ')]/b/a",
+        "link": "./td[contains(concat(' ',normalize-space(@class),' '),' result-details ')]/b/a/@href",
+        "description": "./td[contains(concat(' ',normalize-space(@class),' '),' result-details ')]/div[contains(concat(' ',normalize-space(@class),' '),' result-description ')]/p"
+      },
+      "column_source": "llm",
+      "transforms": {
+        "description": [
+          "normalize_ws"
+        ]
+      }
+    },
+    "more_by_author": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[contains(concat(' ',normalize-space(@class),' '),' contentSidebar ')]/ul/li/a",
+        "//div[@id='content-pane']//ul/li/a[contains(@href,'/products/isbn/')]"
+      ],
+      "selected": 0,
+      "fallbacks": [],
+      "transforms": [],
+      "type": "list"
+    }
+  },
+  "not_present": {}
+}

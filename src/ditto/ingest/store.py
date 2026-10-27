@@ -93,10 +93,12 @@ class PageStore:
         return cls(run, records)
 
     @classmethod
-    def cached(cls, run_root: Path | str) -> PageStore:
-        """The store for ``run_root``, opened once per process (for pmap workers)."""
+    def cached(cls, run_root: Path | str, *, refresh: bool = False) -> PageStore:
+        """The store for ``run_root``, opened once per process (for pmap workers). A stage
+        calls it with ``refresh=True`` before starting workers: forked workers then inherit
+        the freshly read records instead of each reading ``pages.sqlite`` again."""
         key = os.fspath(run_root)
-        store = _CACHE.get(key)
+        store = None if refresh else _CACHE.get(key)
         if store is None:
             store = _CACHE[key] = cls.open(key)
         return store
@@ -136,6 +138,11 @@ class PageStore:
         """The page decoded with its detected encoding (undecodable bytes replaced)."""
         return self.read_bytes(page_id).decode(self.record(page_id).encoding, errors="replace")
 
+    def read_page(self, page_id: int) -> tuple[bytes, str]:
+        """Raw bytes and detected encoding: ``dom.clean_etree(*store.read_page(pid))`` builds
+        the same tree as ``clean_html(store.read_html(pid))`` without decoding valid UTF-8."""
+        return self.read_bytes(page_id), self.record(page_id).encoding
+
 
 _CACHE: dict[str, PageStore] = {}
 
@@ -148,3 +155,8 @@ def clear_cache() -> None:
 def read_html(run_root: Path | str, page_id: int) -> str:
     """Decoded HTML of one page through the per-process cached store (for pmap workers)."""
     return PageStore.cached(run_root).read_html(page_id)
+
+
+def read_page(run_root: Path | str, page_id: int) -> tuple[bytes, str]:
+    """Raw bytes and encoding of one page through the per-process cached store."""
+    return PageStore.cached(run_root).read_page(page_id)

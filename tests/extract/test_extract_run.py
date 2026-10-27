@@ -121,10 +121,19 @@ def test_parallel_extraction_matches_serial(
     _spec("t_prod").save(run.spec("t_prod"))
     extract_run(run, workers=1)
     serial = run.out_jsonl(run.site, "t_prod").read_bytes()
-    monkeypatch.setattr("ditto.extract.stage.PAGES_PER_CHUNK", 8)
-    summary = extract_run(run, workers=3)
+    monkeypatch.setattr("ditto.extract.stage.MIN_PAGES_PER_CHUNK", 4)
+    summary = extract_run(run, workers=3)  # 40 pages in chunks of 4: 10 chunks on 3 workers
     assert run.out_jsonl(run.site, "t_prod").read_bytes() == serial
     assert summary.workers == 3 and summary.templates["t_prod"].filled["name"] == 40
+
+
+def test_chunk_size_balances_workers() -> None:
+    from ditto.extract.stage import MAX_PAGES_PER_CHUNK, MIN_PAGES_PER_CHUNK, chunk_size
+
+    assert chunk_size(2000, 16) == 32  # four chunks per worker
+    assert chunk_size(100, 16) == MIN_PAGES_PER_CHUNK
+    assert chunk_size(1_000_000, 4) == MAX_PAGES_PER_CHUNK
+    assert chunk_size(0, 1) == MIN_PAGES_PER_CHUNK
 
 
 def test_tail_cluster_with_final_spec_is_extracted(tmp_path: Path) -> None:

@@ -1,0 +1,103 @@
+{
+  "spec_version": "1",
+  "template_id": "t_b071",
+  "site": "www.munoz-tyler.com",
+  "status": "final",
+  "generated_by": {
+    "model": "openai/gpt-6.1-sol",
+    "prompt_version": "specgen.v1",
+    "pages_seen": [
+      "https://www.munoz-tyler.com/movies/10955/the-white"
+    ],
+    "mode": "prompted",
+    "repair_calls": 0,
+    "created_at": "2026-10-26T09:49:36+00:00"
+  },
+  "fields": {
+    "title": {
+      "description": "Main movie title.",
+      "optional": false,
+      "degraded": false,
+      "selection_reason": "candidates[0] wins with score 1.000 = presence 1.000 (rate 1.000, analysis expects 1.000) × multiplicity 1.000 × type 1.000 (any); candidates[1] 1.000 (tie)",
+      "source_candidates": [
+        "c5"
+      ],
+      "stats": {
+        "presence_rate": 1.0,
+        "expected_presence": 1.0,
+        "multiplicity": 1.0,
+        "type_check_pass": 1.0,
+        "pages_scored": 36,
+        "failure_rate": 0.0
+      },
+      "candidates": [
+        "//main[@id='main']//h1",
+        "//header[contains(concat(' ',normalize-space(@class),' '),' feature-header ')]/h1"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [],
+      "type_check": "text",
+      "type": "scalar"
+    },
+    "published": {
+      "description": "Movie release date.",
+      "optional": false,
+      "degraded": false,
+      "selection_reason": "candidates[1] wins with score 1.000 = presence 1.000 (rate 1.000, analysis expects 1.000) × multiplicity 1.000 × type 1.000 (date); candidates[0] 1.000 (tie broken toward fewer positional steps: 0 vs 1)",
+      "source_candidates": [
+        "c15"
+      ],
+      "stats": {
+        "presence_rate": 1.0,
+        "expected_presence": 1.0,
+        "multiplicity": 1.0,
+        "type_check_pass": 1.0,
+        "pages_scored": 36,
+        "failure_rate": 0.0
+      },
+      "candidates": [
+        "//main[@id='main']//strong[normalize-space()='Released']/following-sibling::span[1]",
+        "//article[contains(concat(' ',normalize-space(@class),' '),' feature ')]//span[contains(concat(' ',normalize-space(@class),' '),' feature-release-date ')]"
+      ],
+      "selected": 1,
+      "fallbacks": [
+        0
+      ],
+      "transforms": [],
+      "type_check": "date",
+      "type": "scalar"
+    },
+    "tags": {
+      "description": "Movie plot keywords.",
+      "optional": false,
+      "degraded": false,
+      "selection_reason": "candidates[0] wins with score 1.000 = presence 1.000 (rate 1.000, analysis expects 1.000) × multiplicity 1.000 × type 1.000 (any); candidates[1] 1.000 (tie broken toward fewer positional steps: 1 vs 2)",
+      "source_candidates": [
+        "c17"
+      ],
+      "stats": {
+        "presence_rate": 1.0,
+        "expected_presence": 1.0,
+        "multiplicity": 1.0,
+        "type_check_pass": 1.0,
+        "pages_scored": 36,
+        "failure_rate": 0.0
+      },
+      "candidates": [
+        "//main[@id='main']//section[h2[normalize-space()='Plot keywords']]//a",
+        "//ul[contains(concat(' ',normalize-space(@class),' '),' feature-keywords ')]/li/a"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [],
+      "type_check": "text",
+      "type": "list"
+    }
+  },
+  "not_present": {}
+}

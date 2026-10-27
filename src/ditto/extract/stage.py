@@ -1,8 +1,9 @@
 """Stage 8: run the final specs over every page of their clusters (no LLM) into JSONL.
 
 One row per page: ``{url, page_id, template_id, <fields...>, _meta: {missing, spec_version}}``
-in ``out/<site>/<template_id>.jsonl``. Pages are parsed, cleaned and extracted in worker
-processes; the parent only writes the serialized rows, in page order.
+in ``out/<site>/<template_id>.jsonl``. Pages are parsed (raw bytes straight to libxml2 when they
+are valid UTF-8), cleaned and extracted in worker processes; the parent only writes the
+serialized rows, in page order.
 """
 
 from __future__ import annotations
@@ -17,12 +18,22 @@ import orjson
 
 from ditto.cluster.models import Clusters
 from ditto.extract.runner import apply_spec, is_missing
-from ditto.fingerprint.dom import clean_html
-from ditto.parallel import chunked, default_workers, pmap
+from ditto.fingerprint.dom import clean_etree
+from ditto.parallel import default_workers, pmap
 from ditto.run import RunDir
 from ditto.specgen.models import Spec
 
-PAGES_PER_CHUNK = 256
+# Chunks are sized so every worker gets about four of them (load balance across templates of
+# different cost), within these bounds (IPC and per-chunk overhead below, latency above).
+MIN_PAGES_PER_CHUNK = 32
+MAX_PAGES_PER_CHUNK = 256
+CHUNKS_PER_WORKER = 4
+
+
+def chunk_size(n_items: int, workers: int) -> int:
+    """Pages per chunk for ``n_items`` pages on ``workers`` processes."""
+    per = -(-n_items // max(1, workers * CHUNKS_PER_WORKER))
+    return max(MIN_PAGES_PER_CHUNK, min(MAX_PAGES_PER_CHUNK, per))
 
 
 @dataclass
@@ -72,24 +83,27 @@ class _Chunk:
     cpu: float
 
 
-def _extract_chunk(items: Sequence[tuple[int, int, str]]) -> _Chunk:
-    from ditto.ingest import read_html
+def _extract_chunk(items: Sequence[tuple[int, int]]) -> _Chunk:
+    from ditto.ingest import PageStore
 
     start = time.process_time()
-    root: Path = _STATE["root"]
+    store = PageStore.cached(_STATE["root"])
     specs: tuple[Spec, ...] = _STATE["specs"]
     parts: dict[int, list[bytes]] = {}
     filled: dict[int, list[int]] = {}
     pages: dict[int, int] = {}
-    for pid, si, url in items:
+    dumps, newline = orjson.dumps, orjson.OPT_APPEND_NEWLINE
+    for pid, si in items:
         spec = specs[si]
-        values = apply_spec(spec, clean_html(read_html(root, pid)))
+        values = apply_spec(spec, clean_etree(*store.read_page(pid)))
         counts = filled.setdefault(si, [0] * len(spec.fields))
         for i, name in enumerate(spec.fields):
             counts[i] += not is_missing(values[name])
-        parts.setdefault(si, []).append(orjson.dumps(row_for(spec, pid, url, values)))
+        parts.setdefault(si, []).append(
+            dumps(row_for(spec, pid, store.url(pid), values), option=newline)
+        )
         pages[si] = pages.get(si, 0) + 1
-    data = {si: b"\n".join(rows) + b"\n" for si, rows in parts.items()}
+    data = {si: b"".join(rows) for si, rows in parts.items()}
     return _Chunk(data, filled, pages, time.process_time() - start)
 
 
@@ -163,11 +177,13 @@ def extract_run(run: RunDir, *, workers: int | None = None) -> ExtractSummary:
     site = run.site
     clusters = Clusters.load(run.clusters_json)
     jobs, skipped = _final_specs(run, clusters)
-    store = PageStore.open(run)
+    # Fresh store, shared with forked workers through the per-process cache.
+    PageStore.cached(run.root, refresh=True)
     specs = tuple(spec for spec, _ in jobs)
-    items = [(pid, si, store.url(pid)) for si, (_, pids) in enumerate(jobs) for pid in pids]
-    n_chunks = len(chunked(items, PAGES_PER_CHUNK))
-    used = default_workers(n_chunks) if workers is None else max(1, min(workers, n_chunks))
+    items = [(pid, si) for si, (_, pids) in enumerate(jobs) for pid in pids]
+    wanted = default_workers() if workers is None else max(1, workers)
+    size = chunk_size(len(items), wanted)
+    used = max(1, min(wanted, -(-len(items) // size)))
     summary = ExtractSummary(site=site, workers=used, skipped=skipped)
     for spec in specs:
         path = run.out_jsonl(site, spec.template_id)
@@ -183,7 +199,7 @@ def extract_run(run: RunDir, *, workers: int | None = None) -> ExtractSummary:
             _extract_chunk,
             items,
             workers=used,
-            chunk_size=PAGES_PER_CHUNK,
+            chunk_size=size,
             initializer=_init,
             initargs=(str(run.root), specs),
         ):

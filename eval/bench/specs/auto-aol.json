@@ -1,0 +1,148 @@
+{
+  "spec_version": "1",
+  "template_id": "bench",
+  "site": "auto-aol",
+  "status": "final",
+  "generated_by": {
+    "model": "hand-written (Perf agent, speed benchmark)",
+    "prompt_version": "bench.v1",
+    "pages_seen": [
+      "0000",
+      "0001"
+    ],
+    "mode": "prompted",
+    "repair_calls": 0,
+    "created_at": "2026-10-26"
+  },
+  "fields": {
+    "model": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@id='page_title']/h1",
+        "//div[@id='page_header']//h1"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    },
+    "price": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[contains(concat(' ',normalize-space(@class),' '),' retailPrice ')]/span[contains(concat(' ',normalize-space(@class),' '),' msrp ')]",
+        "//span[@class='msrp']"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [],
+      "type": "scalar"
+    },
+    "fuel_economy": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//ul[@id='vitals_list']/li[contains(concat(' ',normalize-space(@class),' '),' mpg ')]/div[contains(concat(' ',normalize-space(@class),' '),' value ')]",
+        "//li[@class='mpg']//div[@class='value']"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [
+        "normalize_ws"
+      ],
+      "type": "scalar"
+    },
+    "engine": {
+      "optional": true,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//ul[@id='vitals_list']/li[.//span[normalize-space()='Engine:']]/div[@class='value']",
+        "//div[@id='specs']//td[normalize-space()='Engine']/following-sibling::td[1]"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [],
+      "type": "scalar"
+    },
+    "vitals": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "type": "key_value",
+      "pairs": "//ul[@id='vitals_list']/li",
+      "pairs_alternates": [],
+      "key": "./div[@class='txt']/span",
+      "value": "./div[@class='value']",
+      "transforms": {}
+    },
+    "other_years": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@id='ymm_other_years']/ul/li/a",
+        "//div[contains(concat(' ',normalize-space(@class),' '),' genPromo ')]/ul/li/a"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [],
+      "type": "list"
+    },
+    "used_listings": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "type": "record_list",
+      "container": "//div[@id='vastUsed']//div[contains(concat(' ',normalize-space(@class),' '),' guts ')]/ul/li",
+      "container_alternates": [],
+      "columns": {
+        "name": "./div[@class='desc']/a",
+        "link": "./div[@class='desc']/a/@href",
+        "price": "./div[@class='desc']/span[contains(concat(' ',normalize-space(@class),' '),' price ')]"
+      },
+      "column_source": "llm",
+      "transforms": {}
+    },
+    "related": {
+      "optional": false,
+      "degraded": false,
+      "source_candidates": [],
+      "stats": {},
+      "candidates": [
+        "//div[@id='seo_block']//div[contains(concat(' ',normalize-space(@class),' '),' list ')]/ul/li/a/@href",
+        "//div[@id='ymm_rel_links']/ul/li/a/@href"
+      ],
+      "selected": 0,
+      "fallbacks": [
+        1
+      ],
+      "transforms": [],
+      "type": "list"
+    }
+  },
+  "not_present": {}
+}
