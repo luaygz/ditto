@@ -311,25 +311,26 @@ Then rewrite these tables and charts with `uv run python eval/report.py`.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | ditto (prompted) | all labeled pages the LLM did not see | – | – | – | – | – | – | – | – | not run yet |
 | ditto (unprompted) | all labeled pages the LLM did not see | – | – | – | – | – | – | – | – | not run yet |
-| naive per-page LLM | seeded 50-page sample per site | 350 | 0.807 | 0.807 | 9,318,497 | 48,206 | 40.71 | $19.12 (extrapolated) | 0.91 pages/s (wall) | ok on 7 of 16 sites (9 skipped) |
+| naive per-page LLM | seeded 50-page sample per site | 500 | 0.822 | 0.822 | 11,137,486 | 48,198 | 39.50 | $22.76 (extrapolated) | 2.44 pages/s (wall) | ok on 10 of 16 sites (6 failed) |
 
 Per vertical (mean of its sites):
 
 | vertical | method | sites | P norm | R norm | F1 norm | F1 raw |
 | --- | --- | --- | --- | --- | --- | --- |
-| auto | naive per-page LLM | 1 | 0.750 | 1.000 | 0.750 | 0.750 |
-| book | naive per-page LLM | 1 | 0.996 | 1.000 | 0.998 | 0.998 |
+| auto | naive per-page LLM | 2 | 0.875 | 1.000 | 0.875 | 0.875 |
+| book | naive per-page LLM | 2 | 0.798 | 0.800 | 0.799 | 0.799 |
 | camera | naive per-page LLM | 1 | 0.913 | 0.913 | 0.913 | 0.913 |
 | job | naive per-page LLM | 1 | 0.745 | 0.993 | 0.745 | 0.745 |
 | movie | naive per-page LLM | 1 | 0.780 | 0.780 | 0.780 | 0.780 |
 | nbaplayer | naive per-page LLM | 1 | 0.750 | 0.750 | 0.750 | 0.750 |
 | restaurant | naive per-page LLM | 1 | 0.710 | 0.710 | 0.710 | 0.710 |
+| university | naive per-page LLM | 1 | 1.000 | 1.000 | 1.000 | 1.000 |
 
 Read from the latest run of each config:
 
 - ditto (prompted) (`swde_dev_ditto`): not run yet; regenerate with `uv run ditto eval run eval/configs/swde_dev_ditto.yaml`
 - ditto (unprompted) (`swde_dev_unprompted`): not run yet; regenerate with `uv run ditto eval run eval/configs/swde_dev_unprompted.yaml`
-- naive per-page LLM (`swde_dev_naive`): [eval/results/swde_dev_naive/20261026T100810Z/](../eval/results/swde_dev_naive/20261026T100810Z); regenerate with `uv run ditto eval run eval/configs/swde_dev_naive.yaml`
+- naive per-page LLM (`swde_dev_naive`): [eval/results/swde_dev_naive/20261026T101546Z/](../eval/results/swde_dev_naive/20261026T101546Z); regenerate with `uv run ditto eval run eval/configs/swde_dev_naive.yaml`
 
 Then rewrite these tables and charts with `uv run python eval/report.py`.
 <!-- results:swde:end -->
@@ -439,7 +440,7 @@ Then rewrite these tables and charts with `uv run python eval/report.py`.
 | `cc_silver_naive` | naive per-page LLM | not run yet | – | $5.00 | – |
 | `livewebie_ditto` | ditto (prompted) | not run yet | – | $4.00 | – |
 | `swde_dev_ditto` | ditto (prompted) | not run yet | – | $3.00 | – |
-| `swde_dev_naive` | naive per-page LLM | ok on 7 of 16 sites (9 skipped) | $6.60 | $10.00 | [20261026T100810Z](../eval/results/swde_dev_naive/20261026T100810Z) |
+| `swde_dev_naive` | naive per-page LLM | ok on 10 of 16 sites (6 failed) | $4.67 | $10.00 | [20261026T101546Z](../eval/results/swde_dev_naive/20261026T101546Z) |
 | `swde_dev_unprompted` | ditto (unprompted) | not run yet | – | $3.00 | – |
 | `swde_test_autoscraper` | AutoScraper | not run yet | – | $2.00 | – |
 | `swde_test_crawl4ai` | Crawl4AI generate_schema | not run yet | – | $1.00 | – |
@@ -453,7 +454,7 @@ Then rewrite these tables and charts with `uv run python eval/report.py`.
 | `union_gate_swde_dev` | ditto (union) | not run yet | – | no LLM | – |
 | `union_gate_synth` | ditto (union) | not run yet | – | no LLM | – |
 
-Total billed for the latest run of every evaluation: $6.60. Spend is what the provider billed (`meta.json` `spend_usd`): cached calls cost nothing and flex-tier calls half, so the $ / 1k pages columns, which price every token at standard-tier list prices, are the ones to compare. Rewrite with `uv run python eval/report.py`.
+Total billed for the latest run of every evaluation: $4.67. Spend is what the provider billed (`meta.json` `spend_usd`): cached calls cost nothing and flex-tier calls half, so the $ / 1k pages columns, which price every token at standard-tier list prices, are the ones to compare. Rewrite with `uv run python eval/report.py`.
 <!-- results:spend:end -->
 
 ### Models and prompt versions

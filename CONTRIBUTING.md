@@ -6,6 +6,10 @@
 uv sync --all-extras          # Python 3.11+, creates .venv from uv.lock
 cp .env.example .env          # only needed for live LLM tests and real runs
 make check                    # ruff, ruff format --check, mypy --strict, pytest with coverage >= 80%
+make test-spawn               # the suite with spawned workers (DITTO_MP_START=spawn, the macOS default)
+make docs                     # regenerate docs/spec.schema.json and docs/spec-format.md from the spec models
+make report                   # charts and results tables from the latest eval/results/ (eval/report.py)
+make install-check            # build the wheel, install it in a clean venv, smoke-test `ditto --help`
 ```
 
 The test suite needs no API key and makes no network calls. Tests marked `@pytest.mark.live`
@@ -30,6 +34,7 @@ environment wins). `.env.example` lists the common ones.
 | `DITTO_CACHE_DIR` | `.cache` | Response cache (`<dir>/llm/`) and spend ledger. The integration test points it at `tests/fixtures/llm`. |
 | `DITTO_LLM_OFFLINE` | off | `1`/`true`: answer only from the cache; a miss raises `CacheMiss` instead of calling the provider. Cannot be combined with `--no-cache`. |
 | `DITTO_WORKERS` | all cores | Default worker processes for page-level work (`--workers` wins). |
+| `DITTO_MP_START` | `fork` on Linux, `spawn` elsewhere | Worker start method (`fork`, `spawn`, `forkserver`); `spawn` on Linux emulates macOS. |
 | `EDITOR` | | Editor `ditto confirm` opens `probe.yaml` in; unset means a terminal walk-through. |
 
 ### Service tiers

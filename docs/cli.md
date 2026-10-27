@@ -30,11 +30,13 @@ Conventions shared by every command:
   stored). It cannot be combined with `DITTO_LLM_OFFLINE=1`.
 - `.env` in the current directory (or a parent) is read at startup; see
   [Configuration](#configuration).
-- Exit status: `0` on success; `1` with a one-line `error: ...` message for expected failures (a
-  missing file, an invalid `fields.yaml`, a provider error, a checkpoint without a terminal, the
-  LLM budget, which the message reports with its totals); `2` for usage errors (an unknown
-  option, a missing required argument, an invalid `--mode` or `--tail` value, a `RUN` that is not
-  a run directory).
+- Exit status: `0` on success; `1` with exactly one `error: ...` line on stderr for expected
+  failures (a missing file, an invalid `fields.yaml` or `probe.yaml`, `confirm` before `probe`, a
+  provider error, a checkpoint without a terminal and without `--yes`, the LLM budget, which the
+  message reports with its projected cost, remaining budget, budget and spend); `2` for usage
+  errors (an unknown option, a missing required argument, a source path that does not exist, an
+  invalid `--mode` or `--tail` value, prompted mode without `--schema`, a `RUN` that is not a run
+  directory).
 
 ## ditto ingest
 
@@ -132,7 +134,9 @@ ditto generate RUN [--mode prompted|unprompted] [--schema fields.yaml] [--min-cl
 One main-model call per template. Prompted runs use `mapping.json` when it exists. Writes
 `specs/draft/<template>.json`, `generation.json` and, in unprompted mode,
 `schema_proposal.json`. If the LLM budget runs out mid-way, the drafts written so far are kept,
-the unprocessed templates are listed and the command exits with status 1.
+the unprocessed templates are listed and the command exits with status 1 (`error: generation
+stopped early: ...`). On success it prints `generate: <N> ok[, <N> partial, ...]; wrote
+<run>/generation.json`.
 
 ## ditto verify
 
@@ -148,7 +152,8 @@ ditto verify RUN [--max-repair-calls 3] [--workers N] [--no-cache]
 
 Runs every candidate selector on every page of its cluster, picks the winners, repairs failing
 fields within the call budget and may merge or split clusters. Writes the final
-`specs/<template>.json` and `verify/<template>.json`.
+`specs/<template>.json` and `verify/<template>.json`. If the LLM budget runs out during repairs,
+it prints `warning: repairs stopped, ...`, finalizes the specs anyway and exits 0.
 
 ## ditto review
 
@@ -206,7 +211,8 @@ ditto run SRC... --out RUN [--mode prompted|unprompted] [--schema fields.yaml] [
 Order: ingest, cluster, analyze, then (prompted) probe and the mapping checkpoint, generate,
 (unprompted) the schema checkpoint, verify, the review checkpoint, extract, and the tail when
 `--tail direct`. Without `--yes` the checkpoints ask in the terminal; without a terminal the
-command exits with an error asking for `--yes`.
+command refuses before ingesting, with an error asking for `--yes`. It ends by printing
+`wrote <run>/report.md`.
 
 ## ditto eval run
 
@@ -259,6 +265,7 @@ on the parameters and the seed.
 | `DITTO_CACHE_DIR` | `.cache` | Response cache and spend ledger location. |
 | `DITTO_LLM_OFFLINE` | off | Serve recorded responses only; a cache miss is an error. |
 | `DITTO_WORKERS` | all cores | Default worker processes. |
+| `DITTO_MP_START` | `fork` on Linux, `spawn` elsewhere | Worker start method: `fork`, `spawn` or `forkserver`. |
 
 More detail in [CONTRIBUTING.md](../CONTRIBUTING.md#environment-variables).
 

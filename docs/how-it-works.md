@@ -84,15 +84,22 @@ repeated sibling blocks (`ul > li`, `div.card`) with two or more varying parts b
 
 One page per template is built for the LLM. The base is the page, among up to 100 sampled ones,
 that covers the most candidates (smaller page, then lower id, on ties). Every field candidate the
-base lacks is spliced in from a donor page after the nearest shared preceding sibling.
+base lacks is spliced in from a donor page after the nearest shared preceding sibling; a
+candidate none of those 100 pages carries is looked for in the rest of the analysis sample (up
+to 2,000 pages, read until every missing candidate is found; `union/<template>.json` records
+`searched_pages`). A missing labeled row or section is spliced as a row of its own, never inside
+another field's row with the same path, and a label and value that share one path are spliced
+together with their parent. Rare value cells of a detected table (record columns or key-value
+values the analysis classed as noise) are shown and annotated too.
+
 Candidates are annotated with HTML comments only (`<!-- c17 · optional · on 41% of pages ·
-e.g. … -->`, `c18 @href · …` for attributes), so nothing the LLM sees is selectable that real
-pages lack. Long text is cut (120 characters, 300 inside candidates, 80 for links) and
-attributes are pruned. The page must fit 30,000 tokens (tiktoken `o200k_base`); when it does
-not, subtrees without candidates are dropped, repeated siblings are collapsed by variant in
-steps (never key-value lists or siblings with distinct labels, where each repetition is a
-different field), candidate text is cut further, and finally the rarest candidates are dropped.
-Small pages are never padded.
+e.g. … -->`, `c18 @href · …` for attributes, `c43 · noise · …` for rare table cells), so nothing
+the LLM sees is selectable that real pages lack. Long text is cut (120 characters, 300 inside
+candidates, 80 for links) and attributes are pruned. The page must fit 30,000 tokens (tiktoken
+`o200k_base`); when it does not, subtrees without candidates are dropped, repeated siblings are
+collapsed by variant in steps (never key-value lists or siblings with distinct labels, where each
+repetition is a different field), candidate text is cut further, and finally the rarest
+candidates are dropped. Small pages are never padded.
 
 ## 6. Generate a spec (one LLM call)
 

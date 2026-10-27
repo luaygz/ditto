@@ -129,7 +129,8 @@ spec = Spec.load("runs/example/specs/t_b071.json")
 row = spec.apply(html)     # {"title": ..., "published": ..., "tags": [...], "_meta": {...}}
 ```
 
-`Spec.load(path).apply(html)` is the call to embed in your own scraper. Reference:
+`Spec.load(path).apply(html)` is the call to embed in your own scraper. On macOS and Windows
+(spawned worker processes), keep API calls under `if __name__ == "__main__":`. Reference:
 [docs/python-api.md](docs/python-api.md).
 
 ## Results
@@ -176,9 +177,9 @@ Sources (latest run per config): `swde_test_ditto` (not run) · `swde_test_naive
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | ditto (prompted) | all labeled pages the LLM did not see | – | – | – | – | – | – | – | – | not run yet |
 | ditto (unprompted) | all labeled pages the LLM did not see | – | – | – | – | – | – | – | – | not run yet |
-| naive per-page LLM | seeded 50-page sample per site | 350 | 0.807 | 0.807 | 9,318,497 | 48,206 | 40.71 | $19.12 (extrapolated) | 0.91 pages/s (wall) | ok on 7 of 16 sites (9 skipped) |
+| naive per-page LLM | seeded 50-page sample per site | 500 | 0.822 | 0.822 | 11,137,486 | 48,198 | 39.50 | $22.76 (extrapolated) | 2.44 pages/s (wall) | ok on 10 of 16 sites (6 failed) |
 
-Sources (latest run per config): `swde_dev_ditto` (not run) · `swde_dev_unprompted` (not run) · [swde_dev_naive](eval/results/swde_dev_naive/20261026T100810Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
+Sources (latest run per config): `swde_dev_ditto` (not run) · `swde_dev_unprompted` (not run) · [swde_dev_naive](eval/results/swde_dev_naive/20261026T101546Z). Regenerate with `uv run ditto eval run eval/configs/<name>.yaml`, then `uv run python eval/report.py`.
 <!-- results:swde:end -->
 
 ### Common Crawl silver set
@@ -258,13 +259,13 @@ Sources (latest run per config): [synth_default](eval/results/synth_default/2026
 <!-- results:spend:start -->
 | evaluation | method | status | spend (billed) | budget cap | results |
 | --- | --- | --- | --- | --- | --- |
-| `swde_dev_naive` | naive per-page LLM | ok on 7 of 16 sites (9 skipped) | $6.60 | $10.00 | [20261026T100810Z](eval/results/swde_dev_naive/20261026T100810Z) |
+| `swde_dev_naive` | naive per-page LLM | ok on 10 of 16 sites (6 failed) | $4.67 | $10.00 | [20261026T101546Z](eval/results/swde_dev_naive/20261026T101546Z) |
 
 Run without any LLM call: [synth_default](eval/results/synth_default/20261026T095112Z), [synth_scale](eval/results/synth_scale/20261026T095119Z).
 
 Not run yet: `cc_silver_crawl4ai`, `cc_silver_ditto`, `cc_silver_naive`, `livewebie_ditto`, `swde_dev_ditto`, `swde_dev_unprompted`, `swde_test_autoscraper`, `swde_test_crawl4ai`, `swde_test_ditto`, `swde_test_handwritten`, `swde_test_naive`, `synth_curves`, `synth_nightly`, `union_gate_swde_dev`, `union_gate_synth`.
 
-Total billed for the latest run of every evaluation: $6.60. Spend is what the provider billed (`meta.json` `spend_usd`): cached calls cost nothing and flex-tier calls half, so the $ / 1k pages columns, which price every token at standard-tier list prices, are the ones to compare. Rewrite with `uv run python eval/report.py`.
+Total billed for the latest run of every evaluation: $4.67. Spend is what the provider billed (`meta.json` `spend_usd`): cached calls cost nothing and flex-tier calls half, so the $ / 1k pages columns, which price every token at standard-tier list prices, are the ones to compare. Rewrite with `uv run python eval/report.py`.
 <!-- results:spend:end -->
 
 ## Models and prompt versions

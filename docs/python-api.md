@@ -8,6 +8,11 @@ The API runs the same stages as the CLI on the same run directory, so a run can 
 Python and continued with `ditto <command>` (or the other way round). Stages that need an LLM read
 the same `.env` settings as the CLI ([cli.md](cli.md#configuration)).
 
+Page-level work runs in worker processes. Where they are spawned rather than forked (macOS and
+Windows by default, or `DITTO_MP_START=spawn`), each worker re-imports your script, so a script
+that calls the API must keep those calls under `if __name__ == "__main__":`, as usual with
+`multiprocessing`.
+
 ## A whole site
 
 ```python
@@ -59,7 +64,9 @@ Accepts the probe's proposal and writes `mapping.json`. `edits` overrides it per
 field: `{"t_0c6f": {"tags": "c12", "price": "absent"}}`, where a value is a candidate id, a list of
 ids (or a table id) for record and key-value groups, or `"absent"`. Edits go through `probe.yaml`
 and are validated like a hand edit: an unknown template, field or candidate raises
-`ditto.checkpoints.ConfirmError` and leaves `probe.yaml` unchanged.
+`ditto.checkpoints.ConfirmError` and nothing is written. Edited fields count as chosen by a person
+(binding for generation); the rest of the accepted proposal is passed to the LLM as suggestions
+([how-it-works.md](how-it-works.md#6-generate-a-spec-one-llm-call)).
 
 ### `FieldsSchema`
 

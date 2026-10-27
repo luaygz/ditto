@@ -16,15 +16,25 @@ All notable changes to this project are documented here. The format follows
   results read "not run yet". `eval/report.py --check` fails when a table is out of date.
 - `docs/cli.md`, `docs/benchmarks.md` and `docs/python-api.md`.
 - Union-page gate evaluations (`eval/configs/union_gate_*.yaml`).
-- `ditto run --probe-llm` help text; one-line `error:` messages with budget totals when an LLM
-  budget is exceeded; checkpoints without a terminal and without `--yes` stop with an error
-  asking for `--yes`.
+- CLI: `ditto run --probe-llm` help text; expected failures (including an exceeded LLM budget,
+  reported with its totals, and a checkpoint without a terminal and without `--yes`) print one
+  `error:` line and exit 1; usage errors (missing source paths, prompted mode without
+  `--schema`, an invalid `--tail` per command) exit 2 before any work; `verify` warns and still
+  finalizes specs when repairs stop on the budget.
 - Baselines fall back to the default service tier when Flex has no capacity and report pages
   that got no answer.
 - Baseline runs record their prompt version (`BaselineOutput.prompt_version`) in `meta.json`.
+- `DITTO_MP_START=fork|spawn|forkserver` overrides the worker start method (default `fork` on
+  Linux, `spawn` elsewhere); `make test-spawn` runs the suite with spawned workers.
+- `make docs` (spec schema docs), `make report` (`eval/report.py`) and `make install-check`
+  (wheel in a clean virtual environment).
 
 ### Changed
 
+- Union pages: a field candidate missing from the 100-page base sample is searched for in the
+  rest of the analysis sample (`union/<template>.json` `searched_pages`); missing labeled rows
+  are spliced as rows of their own and label-value pairs sharing one path with their parent;
+  rare table value cells (classed noise) are shown and annotated.
 - `confirm --yes` mappings are suggestions, not binding: every mapped field records whether a
   person chose it (`user`) or the probe's proposal was accepted unseen (`auto`); generation binds
   only `user` choices and passes `auto` ones as ranked suggestions (`prompts/specgen.v2.md`).
