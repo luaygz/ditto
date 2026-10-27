@@ -1,0 +1,118 @@
+{
+  "name": "livewebie_ditto",
+  "description": "LiveWeb-IE snapshot (third-party modern check, 15 permission-granted sites), ditto prompted mode with each site's queries translated to fields.yaml; reported by complexity type. Recorded as not run when the snapshot is unavailable.",
+  "created_at": "2026-10-27T12:22:02+00:00",
+  "config_path": "eval/configs/livewebie_ditto.yaml",
+  "config_sha256": "b9684870bbb7310e6523181fe716729e080fb537943d4accaf42ae0e0e4176f9",
+  "config": {
+    "name": "livewebie_ditto",
+    "description": "LiveWeb-IE snapshot (third-party modern check, 15 permission-granted sites), ditto prompted mode with each site's queries translated to fields.yaml; reported by complexity type. Recorded as not run when the snapshot is unavailable.",
+    "dataset": "livewebie",
+    "dataset_options": {},
+    "selection": {
+      "split": "test",
+      "sites": [],
+      "verticals": [],
+      "max_sites": null
+    },
+    "method": {
+      "kind": "ditto",
+      "mode": "prompted",
+      "baseline": null,
+      "params": {
+        "until": "extract",
+        "min_cluster_size": 20,
+        "union_min_tokens": 8000,
+        "union_max_tokens": 30000,
+        "max_repair_calls": 3,
+        "tail": "skip",
+        "concurrency": 4
+      }
+    },
+    "models": {
+      "generation": "openai/gpt-6.1-sol",
+      "repair": "openai/gpt-6.1-sol",
+      "probe": "openai/gpt-5.4-mini",
+      "tail_direct": "openai/gpt-5.4-mini"
+    },
+    "budget_usd": 4.0,
+    "sample": {
+      "pages_per_site": null,
+      "align_pages": 50,
+      "align_min_fraction": 0.1
+    },
+    "seeds": {
+      "run": 1,
+      "synth": 1
+    },
+    "workers": null,
+    "keep_runs": true
+  },
+  "dry_run": false,
+  "git": {
+    "commit": "5bb0f7b1aa1cb9345dfc66fa5ee1fa6994291e58",
+    "dirty": false
+  },
+  "dataset_manifests": {
+    "commoncrawl_silver": {
+      "path": "eval/datasets/commoncrawl_silver/manifest.json",
+      "sha256": "004b03229d3a8bea973349d57e39dc3beada6387b9c712661669cdd582a297c1"
+    },
+    "livewebie": {
+      "path": "eval/datasets/livewebie/manifest.json",
+      "sha256": "5d5994441eef34b0086380a2e2afd343e2d2a17d8595b2cde9773942097d38f8"
+    },
+    "swde": {
+      "path": "eval/datasets/swde/manifest.json",
+      "sha256": "e7c3b6fda04a7bc4514d968449de03233d6f32ba13722329796d2cbac75531cc"
+    }
+  },
+  "machine": {
+    "cpu_count": 16,
+    "memory_gb": 62.66,
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "processor": "",
+    "python": "3.11.15"
+  },
+  "work_dir": "data/eval/livewebie_ditto/20261027T122202Z",
+  "budget_usd": 4.0,
+  "cost_basis": "usd_per_1k_pages = tokens x standard-tier list prices (config/prices.yaml, no cache, batch or flex discounts) for every method; spend_usd = what was actually billed",
+  "metric_version": 2,
+  "match_columns": [
+    "norm",
+    "raw",
+    "canon"
+  ],
+  "ditto_version": "0.0.0",
+  "notes": [],
+  "status": "ok",
+  "models": {
+    "pinned": {
+      "generation": "openai/gpt-6.1-sol",
+      "repair": "openai/gpt-6.1-sol",
+      "probe": "openai/gpt-5.4-mini",
+      "tail_direct": "openai/gpt-5.4-mini"
+    },
+    "used": [
+      "openai/gpt-6.1-sol"
+    ]
+  },
+  "prompt_versions": [
+    "repair.v1",
+    "specgen.v2"
+  ],
+  "spend_usd": 0.904689,
+  "spend_by_site": {
+    "arxiv.org": 0.07533,
+    "books.toscrape.com": 0.063967,
+    "sandbox.oxylabs.io": 0.122438,
+    "thecocktaildb.com": 0.044083,
+    "quotes.toscrape.com": 0.032647,
+    "huggingface.co": 0.408762,
+    "themealdb.com": 0.035571,
+    "scrapethissite.com": 0.012744,
+    "marinespecies.org": 0.109146
+  },
+  "wall_seconds": 392.214
+}
