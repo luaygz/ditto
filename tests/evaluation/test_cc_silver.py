@@ -878,7 +878,8 @@ def test_http_backoff_is_capped_and_other_errors_still_fail() -> None:
     cc, http, starts = polite_http([403] * 8 + [206, 404])
     assert http.fetch_range("crawl-data/x.warc.gz", 0, 3) == b"012"
     gaps = [b - a for a, b in itertools.pairwise(starts)]
-    assert max(gaps) <= cc.SLOW_DOWN_MAX_S and gaps[-1] >= 0.75 * cc.SLOW_DOWN_MAX_S
+    # gaps are differences of accumulated clock floats: allow rounding error at the cap
+    assert max(gaps) <= cc.SLOW_DOWN_MAX_S + 1e-6 and gaps[-1] >= 0.75 * cc.SLOW_DOWN_MAX_S
     with pytest.raises(cc.FetchError, match="HTTP 404"):
         http.fetch_range("crawl-data/x.warc.gz", 0, 3)
     _, head, _ = polite_http([429, 200])
