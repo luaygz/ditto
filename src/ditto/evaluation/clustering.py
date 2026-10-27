@@ -35,8 +35,8 @@ def _contingency(
         raise ValueError(f"{len(true_labels)} true labels but {len(pred_labels)} predicted")
     t = _codes(true_labels, none_singleton=False)
     p = _codes(pred_labels, none_singleton=True)
-    n_true = int(t.max()) + 1 if len(t) else 0
-    n_pred = int(p.max()) + 1 if len(p) else 0
+    n_true = int(np.max(t)) + 1 if len(t) else 0
+    n_pred = int(np.max(p)) + 1 if len(p) else 0
     cells, counts = np.unique(t * max(n_pred, 1) + p, return_counts=True)
     return cells // max(n_pred, 1), cells % max(n_pred, 1), counts.astype(np.int64), n_true, n_pred
 
@@ -69,7 +69,7 @@ def _majority_share(keys: I64, counts: I64, n_keys: int) -> float:
         return 1.0
     best = np.zeros(n_keys, dtype=np.int64)
     np.maximum.at(best, keys, counts)
-    return float(best.sum() / counts.sum())
+    return int(best.sum()) / int(counts.sum())
 
 
 def purity(true_labels: Sequence[Hashable], pred_labels: Sequence[Hashable | None]) -> float:

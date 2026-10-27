@@ -386,7 +386,7 @@ def repair_rejected(
             present = np.zeros(verifier.n_pages, np.int32)
             for n in names:
                 present += plans[n].presence
-            idx = int(present.argmax()) if verifier.n_pages else 0
+            idx = int(np.argmax(present)) if verifier.n_pages else 0
             page_id = int(verifier.page_ids[idx])
             record = RepairRecord(
                 call=report.repair_calls + 1,

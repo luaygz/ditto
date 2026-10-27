@@ -5,6 +5,7 @@ LLM (no network): the happy paths and the clean one-line failures (exit 1) and u
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -58,10 +59,18 @@ def one_line_error(result: Result, *needles: str) -> str:
     return lines[0]
 
 
+_ANSI = re.compile(r"\x1b\[[0-9;]*[A-Za-z]")
+
+
+def plain(text: str) -> str:
+    """Rich output without colour codes or box/wrap whitespace (CI forces colour on)."""
+    return " ".join(_ANSI.sub("", text).replace("│", " ").split())
+
+
 def usage_error(result: Result, message: str) -> None:
     """Exit 2 with ``message`` in Typer's (possibly wrapped, boxed) error panel."""
     assert result.exit_code == 2, result.output
-    text = " ".join(result.output.replace("│", " ").split())
+    text = plain(result.output)
     assert message in text, text
 
 
@@ -117,7 +126,7 @@ def confirmed(run: RunDir) -> RunDir:
 
 # -- happy paths ---------------------------------------------------------------------------------
 def test_help_lists_every_command() -> None:
-    out = ok("--help").stdout
+    out = plain(ok("--help").stdout)
     for cmd in (
         "ingest",
         "cluster",
@@ -133,7 +142,7 @@ def test_help_lists_every_command() -> None:
         "synth",
     ):
         assert cmd in out
-    assert "--probe-llm" in ok("run", "--help").stdout
+    assert "--probe-llm" in plain(ok("run", "--help").stdout)
 
 
 def test_ingest_cluster_analyze_outputs(analyzed: Path) -> None:

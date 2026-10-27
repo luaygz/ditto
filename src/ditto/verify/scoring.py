@@ -164,7 +164,7 @@ def score_candidate(
     matched = obs.matched
     presence_rate = float(matched.mean()) if n else 0.0
     if exp.mask is not None and exp.known:
-        presence_score = float((matched & exp.mask).sum() / exp.mask.sum())
+        presence_score = int((matched & exp.mask).sum()) / int(exp.mask.sum())
     elif exp.analysis_p:
         presence_score = min(1.0, presence_rate / exp.analysis_p)
     else:
