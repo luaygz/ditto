@@ -9,6 +9,11 @@ models:
     output: 10.00
     cached_input: 0.10
     source: https://developers.openai.com/api/docs/pricing
+  openai/gpt-6.1-terra:
+    input: 1.00
+    output: 5.00
+    cached_input: 0.05
+    source: https://developers.openai.com/api/docs/pricing (read 2026-10-27)
   openai/gpt-5.4-mini:
     input: 0.75
     output: 4.50
