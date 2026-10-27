@@ -150,7 +150,9 @@ def test_winners_stats_and_final_spec(tmp_path: Path) -> None:
 
     tags = spec.fields["tags"]
     assert isinstance(tags, ListField) and tags.selected == 1
-    assert (report.fields["tags"].candidates[0].multiplicity or 0) < 1.0
+    first, every = report.fields["tags"].candidates[:2]
+    assert first.multiplicity == every.multiplicity == 1.0  # li[1] reads part of the path...
+    assert first.positional_steps > every.positional_steps  # ... and loses on its index
 
     pubs = spec.fields["pubs"]
     assert isinstance(pubs, RecordListField)
@@ -215,6 +217,34 @@ def test_repair_cap_then_degraded(tmp_path: Path) -> None:
     assert name.stats.model_extra["failure_rate"] == round(13 / 33, 4)
     assert "degraded" in (name.selection_reason or "")
     assert report.fields["name"].failures_by_group == {"1": 8, "2": 5}
+
+
+def test_repair_that_rewrites_passing_values_is_rejected(tmp_path: Path) -> None:
+    run, _ = _site(tmp_path, 20, n_b=8)
+    cut = ["regex('([0-9]+)$', 1)"]  # the draft reads only the number of "Person 7"
+    save_draft(run, _fields(["//h1[@itemprop='name']", "//*[@itemprop='name']"]))
+    draft = Spec.load(run.draft_spec(TID))
+    name = draft.fields["name"].model_copy(update={"transforms": cut})
+    draft.fields["name"] = name
+    draft.save(run.draft_spec(TID))
+    fixed = NAME_FIX["fields"]["name"]["candidates"]
+    whole = {"fields": {"name": {"type": "scalar", "candidates": fixed, "transforms": []}}}
+    llm = FakeLLM([whole])
+    reports = verify_run(run, max_repair_calls=1, llm=llm, workers=1, merge_split=False)
+    # the answer fills the 8 failing pages but replaces the 20 passing numbers with whole names
+    assert reports[TID].repairs[0].accepted == []
+    spec = Spec.load(run.spec(TID))
+    assert spec.fields["name"].transforms == cut and spec.fields["name"].degraded
+
+    run2, _ = _site(tmp_path / "kept", 20, n_b=8)
+    save_draft(run2, _fields(["//h1[@itemprop='name']", "//*[@itemprop='name']"]))
+    draft.save(run2.draft_spec(TID))
+    kept = {"fields": {"name": {"type": "scalar", "candidates": fixed, "transforms": cut}}}
+    reports = verify_run(
+        run2, max_repair_calls=1, llm=FakeLLM([kept]), workers=1, merge_split=False
+    )
+    assert reports[TID].repairs[0].accepted == ["name"]
+    assert not Spec.load(run2.spec(TID)).fields["name"].degraded
 
 
 def test_no_llm_marks_failing_fields_degraded(tmp_path: Path) -> None:
@@ -320,6 +350,24 @@ def test_split_moves_the_failing_signature_group(tmp_path: Path) -> None:
     assert events and events[0]["action"] == "split" and events[0]["fields"] == ["name"]
     assert reports[child.template_id].spec_source == "split_parent"
     assert reports[TID].n_pages == 24
+
+
+def test_selector_errors_do_not_split(tmp_path: Path) -> None:
+    # one markup variant, two signature groups; the name selector misses every page of the
+    # second group although the analysis sees the name's path there: a selector error, which
+    # repair handles, not a different template
+    pages = [(f"{BASE}a{i:03d}", staff_page(i)) for i in range(24)]
+    pages += [(f"{BASE}z{i:03d}", staff_page(500 + i)) for i in range(6)]
+    run = build_run(tmp_path, pages)
+    urls = [u for u, _ in pages]
+    save_clusters(run, [ids_of(run, urls[:24]), ids_of(run, urls[24:])])
+    staff_table(run, pages[0][1], size=30)
+    miss = "[not(starts-with(normalize-space(),'Person 5'))]"
+    save_draft(run, _fields([f"//h1[@itemprop='name']{miss}", f"//*[@itemprop='name']{miss}"]))
+    reports = verify_run(run, max_repair_calls=0, workers=1, merge_split=True)
+    assert reports[TID].fields["name"].failures == 6  # the misses are counted as failures
+    assert [c.template_id for c in Clusters.load(run.clusters_json).clusters] == [TID]
+    assert reports[TID].merge_split == []
 
 
 def test_merge_carries_pages_into_the_larger_cluster(tmp_path: Path) -> None:

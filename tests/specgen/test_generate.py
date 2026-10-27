@@ -11,7 +11,7 @@ import pytest
 
 from ditto.analyze.models import Candidate, CandidateTable, Table, TableColumn
 from ditto.llm.base import CacheMiss, Completion, Message, Usage
-from ditto.schema import FieldRequest
+from ditto.schema import Alternative, FieldRequest
 from ditto.specgen.generate import (
     TemplateInput,
     build_messages,
@@ -273,12 +273,38 @@ def test_tables_and_fields_sections() -> None:
     tables = format_tables(candidate_table())
     assert "T1 record_list: 1-9 rows" in tables and "Title (c4, header cell)" in tables
     assert "keys seen: Email, Office" in tables
-    inp = make_input(mapped={"name": ["c1"]})
+    inp = make_input(
+        mapped={"name": ["c1"]},
+        suggested={
+            "email": [
+                Alternative(
+                    id="c3", use="c3", kind="mandatory", label="Office", examples=["B-204"]
+                ),
+                Alternative(id="T1", use=["c4", "c5"], kind="record_list table"),
+            ]
+        },
+        unmatched=["phone"],
+    )
     section = format_fields_section(inp)
-    assert "`email` (type_check email): contact email" in section
     assert "`name`: full name. Confirmed mapping: c1" in section
-    assert "mapping.json" in section
+    assert (
+        "`email` (type_check email): contact email. Probe suggestions, best first: "
+        'c3 (mandatory, label "Office", e.g. "B-204"); T1 = [c4, c5] (record_list table)'
+    ) in section
+    assert "`phone`: phone number. Probe found no candidate" in section
+    assert "`publications` (record_list)\n" in section + "\n"  # no marker without a mapping
     assert "choose the entity fields" in format_fields_section(make_input(mode="unprompted"))
+
+
+def test_v2_prompt_explains_the_mapping_markers() -> None:
+    prompt = load_prompt("specgen")
+    assert prompt.id == "specgen.v2"
+    for marker in (
+        "Confirmed mapping",
+        "Probe suggestions, best first",
+        "Probe found no candidate",
+    ):
+        assert marker in prompt.text
 
 
 def test_messages_fill_every_placeholder() -> None:
@@ -306,7 +332,7 @@ def test_prompted_happy_path() -> None:
     assert isinstance(spec, Spec)
     assert spec.template_id == "t_aaaa" and spec.site == "example.org"
     assert spec.generated_by.model == MODEL
-    assert spec.generated_by.prompt_version == "specgen.v1"
+    assert spec.generated_by.prompt_version == "specgen.v2"
     assert spec.generated_by.mode == "prompted"
     assert spec.generated_by.pages_seen[0] == "https://example.org/staff/a-khoury"
     assert spec.generated_by.created_at
@@ -317,7 +343,7 @@ def test_prompted_happy_path() -> None:
     assert getattr(email, "type_check", None) == "email"
     assert spec.fields["name"].optional is False
     assert spec.fields["publications"].optional is True
-    assert llm.calls[0]["prompt_version"] == "specgen.v1"
+    assert llm.calls[0]["prompt_version"] == "specgen.v2"
     assert llm.calls[0]["template_id"] == "t_aaaa"
     # The draft spec works on a real page.
     row = spec.apply(PAGE)

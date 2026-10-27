@@ -26,13 +26,16 @@ from lxml import etree
 
 from ditto.extract.runner import evaluate, key_values, record_rows
 from ditto.fingerprint.dom import ATTR_SEP, PATH_SEP, clean_html, own_text, step_label
-from ditto.parallel import pmap
+from ditto.parallel import pmap, start_method
 from ditto.specgen.models import KeyValueField, RecordListField
 from ditto.specgen.transforms import apply_transforms, to_text
 from ditto.specgen.typecheck import check_value
 from ditto.textutil import hash64, normalize_ws
 
 PAGES_PER_CHUNK = 64
+# Without fork, a worker pool costs a process start plus imports per template: templates this
+# small are verified in-process instead.
+SPAWN_MIN_PAGES = 500
 NO_VALUE = -1.0
 
 
@@ -288,6 +291,8 @@ def evaluate_probes(
         out = _empty(len(items), len(probes))
         out.page_ids[:] = [pid for pid, _ in items]
         return out
+    if len(items) < SPAWN_MIN_PAGES and start_method() != "fork":
+        workers = 1
     parts = list(
         pmap(
             _eval_chunk,

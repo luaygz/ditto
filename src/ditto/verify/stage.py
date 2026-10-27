@@ -188,6 +188,19 @@ def _reverify(
     return outcome
 
 
+def split_presence(out: TemplateOutcome) -> dict[str, np.ndarray[Any, np.dtype[np.bool_]]]:
+    """Field presence as the split rule may read it. A page counts as lacking a field only when
+    extraction missed it *and* the analysis does not see the field's anchor path there: a miss
+    where the path exists is a selector error (repair's job), not a template difference. A
+    field without a checkable anchor path never drives a split."""
+    out_presence: dict[str, np.ndarray[Any, np.dtype[np.bool_]]] = {}
+    for name, present in out.presence.items():
+        anchor = out.anchors.get(name)
+        if anchor is not None:
+            out_presence[name] = present | anchor
+    return out_presence
+
+
 def _apply_splits(
     run: RunDir,
     clusters: Clusters,
@@ -201,7 +214,8 @@ def _apply_splits(
         if out.report.status != "final":
             continue
         groups = [group_of.get(int(p), -1) for p in out.page_ids]
-        plans += plan_splits(tid, out.page_ids.tolist(), groups, out.presence, sig_hash)
+        presence = split_presence(out)
+        plans += plan_splits(tid, out.page_ids.tolist(), groups, presence, sig_hash)
     if not plans:
         return clusters, False
     clusters = apply_splits(clusters, plans, url_of=_url_lookup(run))

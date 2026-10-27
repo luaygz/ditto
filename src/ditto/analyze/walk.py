@@ -10,8 +10,11 @@ Structures detected on a single page (cross-page acceptance happens in analysis)
 * ``dl``: children of ``<dl>``; every ``dd`` pairs with the nearest preceding ``dt``.
 * ``alt``: a parent whose element children alternate between two step labels ``(A B+)+`` with at
   least two ``A`` (dl-like markup built from divs or spans).
-* ``pair``: a row element with exactly two text-bearing element children (key, value) and no
-  own text, or one leading key child followed by tail text (``<li><b>Brand:</b> Acme</li>``).
+* ``pair``: a row element with two text-bearing element children (key, value) and no own text,
+  ignoring up to two text-less siblings such as spacer cells (``<tr><td><img></td><td>Phone</td>
+  <td>555</td></tr>``); one leading key child followed by tail text (``<li><b>Brand:</b> Acme
+  </li>``); or leading key text followed by one value child (``<li>Genre: <span>Drama</span>
+  </li>``, the row's own text is the key).
 * ``tbl``: a ``<table>``: an optional header row (a ``thead`` row, or a first row of at least two
   ``th``) over body rows; column indexes are expanded by ``colspan``.
 
@@ -41,6 +44,8 @@ VALUE_PREFIX_CHARS = 200
 """Value cells are compared across pages by this many leading characters."""
 VALUE_MAX_ELEMENTS = 60
 """A value or table cell with more elements is a page section (layout), not a cell."""
+PAIR_MAX_CHILDREN = 4
+"""A pair row holds at most this many element children; all but key and value are text-less."""
 NO_STRUCT_TAGS = frozenset(
     {
         "html",
@@ -372,22 +377,29 @@ def _detect_pair(
     depth: int,
     inherited: KvRef | None,
 ) -> KvRef | None:
-    """Detect a pair row; returns the KvRef for the row's own text (tail-value pattern)."""
+    """Detect a pair row; returns the KvRef for the row's own text (the value in the tail-value
+    pattern, the key in the leading-text pattern)."""
     struct = "pair|" + path
-    if len(children) == 2 and not text:
-        key = _key_text(children[0])
+    if not text:
+        pair = _pair_children(children)
+        if pair is None:
+            return inherited
+        k, v = pair
+        key = _key_text(children[k])
         if key is None:
             return inherited
-        value = _value_text(children[1])
+        value = _value_text(children[v])
         if value is None:
             return inherited
-        ctx.pend_kv[children[0]] = (struct, key, "k")
-        ctx.pend_kv[children[1]] = (struct, key, "v")
+        ctx.pend_kv[children[k]] = (struct, key, "k")
+        ctx.pend_kv[children[v]] = (struct, key, "v")
         ctx.page.kv_rows.append(
-            KvRow(struct, path, child_paths[0], key, value, ctx.tr_table.get(el))
+            KvRow(struct, path, child_paths[k], key, value, ctx.tr_table.get(el))
         )
         return inherited
-    if len(children) == 1 and text and not (el.text or "").strip():
+    if len(children) != 1:
+        return inherited
+    if not (el.text or "").strip():
         key = _key_text(children[0])
         if key is None:
             return inherited
@@ -398,7 +410,31 @@ def _detect_pair(
             )
         )
         return KvRef(struct, key, "v", depth)
-    return inherited
+    if (children[0].tail or "").strip() or len(text) > KV_KEY_MAX_CHARS:
+        return inherited
+    value = _value_text(children[0])
+    if value is None:
+        return inherited
+    ctx.pend_kv[children[0]] = (struct, text, "v")
+    ctx.page.kv_rows.append(KvRow(struct, path, path, text, value, ctx.tr_table.get(el)))
+    return KvRef(struct, text, "k", depth)
+
+
+def _pair_children(children: list[etree._Element]) -> tuple[int, int] | None:
+    """Indexes of the key and value children of a pair row: both children of a two-child row,
+    else the only two text-bearing children of a row of up to ``PAIR_MAX_CHILDREN`` small
+    children."""
+    if len(children) == 2:
+        return 0, 1
+    if not 2 < len(children) <= PAIR_MAX_CHILDREN:
+        return None
+    texted: list[int] = []
+    for i, child in enumerate(children):
+        if len(child) >= VALUE_MAX_ELEMENTS or _VALUE_TOO_BIG(child):
+            return None
+        if any(chunk.strip() for chunk in child.itertext()):
+            texted.append(i)
+    return (texted[0], texted[1]) if len(texted) == 2 else None
 
 
 def _detect_table(

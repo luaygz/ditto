@@ -11,12 +11,15 @@ carries the exact errors back (``ditto.llm.complete_json``). After a second fail
 that validate on their own are kept and the failing ones are recorded with their candidate ids
 in ``generation.json`` so verification's path-induced fallback can build them.
 
-Prompted runs with ``mapping.json``: excluded and unmapped templates are skipped, fields the
-mapping marks ``absent`` are not asked for (they go to ``not_present``), the mapping is stated
-in the prompt, and the union page is rebuilt trimmed to the mapped candidates' neighborhoods via
-``ditto.union.build_union_run(..., focus=...)``; that overwrites ``union/<tid>.html`` with the
-page the model actually saw. Unprompted runs rebuild a union page left focused by an earlier
-prompted run.
+Prompted runs with ``mapping.json``: excluded and unmapped templates are skipped. Entries the
+user chose (provenance ``user``) bind: fields marked ``absent`` are not asked for (they go to
+``not_present``) and mapped ones are stated as confirmed. Entries the probe proposed unseen
+(provenance ``auto``, e.g. ``confirm --yes``) are stated as ranked suggestions the model checks
+against the page; an auto ``absent`` field is still asked for. The union page is rebuilt trimmed
+to the neighborhoods of the confirmed candidates and of every suggestion via
+``ditto.union.build_union_run(..., focus=...)`` (that overwrites ``union/<tid>.html`` with the
+page the model actually saw); when some requested field has neither, the full union page is
+used. Unprompted runs rebuild a union page left focused by an earlier prompted run.
 """
 
 from __future__ import annotations
@@ -50,7 +53,14 @@ from ditto.llm import (
     run_concurrently,
 )
 from ditto.run import RunDir, read_json, write_json
-from ditto.schema import ABSENT, FieldRequest, FieldsSchema, Mapping, TemplateMapping
+from ditto.schema import (
+    ABSENT,
+    Alternative,
+    FieldRequest,
+    FieldsSchema,
+    Mapping,
+    TemplateMapping,
+)
 from ditto.specgen.models import (
     RESERVED_FIELD_NAMES,
     FieldType,
@@ -163,7 +173,10 @@ class TemplateInput:
     shown: set[str] | None = None  # candidate ids annotated on the union page (None: unknown)
     fields: list[FieldRequest] = field(default_factory=list)  # prompted: fields to ask for
     mapped: dict[str, list[str]] = field(default_factory=dict)  # field -> confirmed cand. ids
-    absent: list[str] = field(default_factory=list)  # fields mapping.json marks absent
+    absent: list[str] = field(default_factory=list)  # fields mapping.json marks absent (user)
+    # field -> the probe's ranked suggestions (provenance auto), proposal first
+    suggested: dict[str, list[Alternative]] = field(default_factory=dict)
+    unmatched: list[str] = field(default_factory=list)  # auto "absent": the probe found nothing
     focused: bool = False
 
 
@@ -337,19 +350,32 @@ def format_template_context(inp: TemplateInput) -> str:
     return " ".join(parts)
 
 
+def _alternative_text(alt: Alternative) -> str:
+    ids = alt.use if isinstance(alt.use, list) else [alt.use]
+    head = alt.id if ids == [alt.id] else f"{alt.id} = [{', '.join(ids)}]"
+    bits = [alt.kind] if alt.kind else []
+    if alt.label:
+        bits.append("label " + json.dumps(_clip(alt.label, LABEL_CHARS), ensure_ascii=False))
+    if alt.examples:
+        bits.append(
+            "e.g. "
+            + " · ".join(
+                json.dumps(_clip(e, EXAMPLE_CHARS), ensure_ascii=False) for e in alt.examples[:3]
+            )
+        )
+    return head + (f" ({', '.join(bits)})" if bits else "")
+
+
 def format_fields_section(inp: TemplateInput) -> str:
+    """Requested fields with their mapping state; the prompt file (``specgen.v2``) explains the
+    three markers: ``Confirmed mapping``, ``Probe suggestions`` and ``Probe found no
+    candidate``."""
     if inp.mode == "unprompted":
         return (
             "## Fields\n\nNone requested: choose the entity fields yourself from the candidate "
             "table and the union page."
         )
     lines = ["## Requested fields", ""]
-    if inp.mapped:
-        lines += [
-            "The user confirmed which candidates hold the fields (mapping.json); write the "
-            "selectors for exactly those candidates.",
-            "",
-        ]
     for f in inp.fields:
         attrs = [a for a in (f.type, f.type_check and f"type_check {f.type_check}") if a]
         line = f"- `{f.name}`"
@@ -362,6 +388,12 @@ def format_fields_section(inp: TemplateInput) -> str:
             )
         if f.name in inp.mapped:
             line += ". Confirmed mapping: " + ", ".join(inp.mapped[f.name])
+        elif f.name in inp.suggested:
+            line += ". Probe suggestions, best first: " + "; ".join(
+                _alternative_text(a) for a in inp.suggested[f.name]
+            )
+        elif f.name in inp.unmatched:
+            line += ". Probe found no candidate"
         lines.append(line)
     return "\n".join(lines)
 
@@ -736,6 +768,29 @@ class _Plan:
     mapped: dict[str, list[str]]
     absent: list[str]
     focus: set[str] | None
+    suggested: dict[str, list[Alternative]] = field(default_factory=dict)
+    unmatched: list[str] = field(default_factory=list)
+
+
+def _alt_ids(use: str | list[str]) -> list[str]:
+    return [use] if isinstance(use, str) else list(use)
+
+
+def _suggestions(
+    alternatives: Sequence[Alternative], chosen: list[str], known: set[str]
+) -> list[Alternative]:
+    """The probe's ranked alternatives restricted to known candidate ids, the mapped proposal
+    first (added when the stored alternatives lack it)."""
+    out: list[Alternative] = []
+    for alt in alternatives:
+        ids = [i for i in _alt_ids(alt.use) if i in known]
+        if ids:
+            use: str | list[str] = ids if isinstance(alt.use, list) else ids[0]
+            out.append(alt.model_copy(update={"use": use}))
+    if chosen and not any(_alt_ids(a.use) == chosen for a in out):
+        lead = chosen[0] if len(chosen) == 1 else chosen
+        out.insert(0, Alternative(id=chosen[0], use=lead))
+    return out
 
 
 def _select_templates(
@@ -775,26 +830,45 @@ def _plan(
     fields: list[FieldRequest] = []
     mapped: dict[str, list[str]] = {}
     absent: list[str] = []
+    suggested: dict[str, list[Alternative]] = {}
+    unmatched: list[str] = []
     focus: set[str] | None = None
     if mode == "prompted":
         assert schema is not None
-        known = {c.id for c in table.candidates}
+        known = {c.id for c in table.candidates if _CID.match(c.id)}
+        full_page = tm is None  # some requested field has nothing to focus on
         for f in schema.fields:
             value = tm.fields.get(f.name) if tm is not None else None
-            if value == ABSENT:
+            auto = tm is not None and tm.provenance_of(f.name) == "auto"
+            if value == ABSENT and not auto:
                 absent.append(f.name)
                 continue
             fields.append(f)
-            if value is not None:
-                ids = [value] if isinstance(value, str) else list(value)
-                ids = [i for i in ids if i in known and _CID.match(i)]
+            if tm is None:
+                continue
+            if value is None or value == ABSENT:
+                if value == ABSENT:
+                    unmatched.append(f.name)
+                full_page = True
+                continue
+            ids = [i for i in _alt_ids(value) if i in known]
+            if not auto:
                 if ids:
                     mapped[f.name] = ids
+                else:
+                    full_page = True
+                continue
+            alts = _suggestions(tm.alternatives.get(f.name, []), ids, known)
+            if alts:
+                suggested[f.name] = alts
+            else:
+                full_page = True
         if not fields:
             raise _Skip("every requested field is marked absent in mapping.json")
-        if mapped:
+        if not full_page:
             focus = {i for ids in mapped.values() for i in ids}
-    return _Plan(cluster, table, fields, mapped, absent, focus)
+            focus |= {i for alts in suggested.values() for a in alts for i in _alt_ids(a.use)}
+    return _Plan(cluster, table, fields, mapped, absent, focus or None, suggested, unmatched)
 
 
 def _union_pages(run: RunDir, plans: list[_Plan]) -> dict[str, tuple[str, dict[str, Any]]]:
@@ -845,6 +919,8 @@ def _template_input(
         fields=plan.fields,
         mapped=plan.mapped,
         absent=plan.absent,
+        suggested=plan.suggested,
+        unmatched=plan.unmatched,
         focused=bool(plan.focus),
     )
 

@@ -35,10 +35,12 @@ def _scores(kind, obs, exp, xpaths):  # type: ignore[no-untyped-def]
 def test_positional_steps_counts_unanchored_element_steps() -> None:
     assert positional_steps("//h1[@itemprop='name']") == 0
     assert positional_steps("//header//h1") == 2
-    assert positional_steps("//dt[normalize-space()='Email']/following-sibling::dd[1]//a") == 2
+    assert positional_steps("//dt[normalize-space()='Email']/following-sibling::dd[1]//a") == 3
     assert positional_steps("//a/@href") == 1
     assert positional_steps("//h1[@id='x'] | //div/h2") == 2
     assert positional_steps(".") == 0
+    assert positional_steps("//ul[@id='t']/li[1]") == 2  # an index counts once more
+    assert positional_steps("//ul[@id='t']/li") == 1
 
 
 def test_multiplicity_penalty_picks_single_node_candidate() -> None:
@@ -96,13 +98,46 @@ def test_list_multiplicity_against_path_counts_and_rows_against_siblings() -> No
     counts = np.array([2, 3, 1], np.int32)
     exp = Expectation(mask=counts > 0, counts=counts, analysis_p=1.0)
     assert multiplicity("list", Obs.build([2, 3, 1]), exp) == 1.0
-    assert multiplicity("list", Obs.build([1, 1, 1]), exp) == 1 / 3
+    # part of a shared path (one labelled row of a details block) is fine...
+    assert multiplicity("list", Obs.build([1, 1, 1]), exp) == 1.0
+    # ... nodes beyond the source path are not
+    assert multiplicity("list", Obs.build([3, 3, 2]), exp) == 1 / 3
     rows_ok = Obs.build([2, 3, 1], siblings=[2, 3, -1])
     rows_first = Obs.build([1, 1, 1], siblings=[2, 3, -1])
     assert multiplicity("rows", rows_ok, Expectation()) == 1.0
     assert multiplicity("rows", rows_first, Expectation()) == 0.0
     s = score_candidate("rows", rows_ok, Expectation(), xpath="//tr[td]")
     assert (s.rows_min, s.rows_max) == (1, 3)
+
+
+def test_label_anchored_subset_beats_a_whole_shared_path() -> None:
+    # a details block whose rows all share one path; the director is one labelled row and is
+    # missing on one page in 60, so the analysis (which sees the shared path everywhere)
+    # expects it on every page
+    n = 60
+    counts = np.full(n, 6, np.int32)
+    exp = Expectation(mask=np.ones(n, bool), counts=counts, analysis_p=1.0)
+    director = Obs.build([1] * (n - 1) + [0], vhash=list(range(n)))
+    everything = Obs.build([6] * n, vhash=list(range(100, 100 + n)))
+    xpaths = [
+        "//div[@id='details']//li[starts-with(normalize-space(),'Director:')]/a",
+        "//div[@id='details']/ul/li/span/a",
+    ]
+    scores = _scores("list", [director, everything], exp, xpaths)
+    assert scores[0].score < scores[1].score == 1.0  # presence 59/60 against the whole path
+    assert choose_winner(scores) == 0  # within PRESENCE_TIE: fewer positional steps wins
+    assert "within 0.02 of the winner, tie broken toward fewer positional steps: 1 vs 4" in (
+        selection_reason(scores, 0, None)
+    )
+    # a real shortfall is not a tie
+    sparse = Obs.build([1] * (n // 2) + [0] * (n // 2), vhash=list(range(n)))
+    assert choose_winner(_scores("list", [sparse, everything], exp, xpaths)) == 1
+    # neither is a multiplicity difference (a scalar matching several nodes on some pages)
+    one = Expectation(mask=np.ones(n, bool), counts=np.ones(n, np.int32), analysis_p=1.0)
+    exact = Obs.build([1] * n, vhash=list(range(n)))
+    multi = Obs.build([1] * (n - 1) + [2], vhash=list(range(n)))
+    s = _scores("scalar", [exact, multi], one, ["//main/div/h1", "//h1[@itemprop='name']"])
+    assert choose_winner(s) == 0
 
 
 def test_agreement_and_fallbacks_need_98_percent() -> None:

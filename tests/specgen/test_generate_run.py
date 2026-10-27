@@ -15,7 +15,7 @@ from ditto.cluster.models import Cluster, Clusters, SignatureGroup
 from ditto.ingest import PageStore, ingest
 from ditto.llm.base import BudgetExceeded, Completion, Message, Usage
 from ditto.run import RunDir, read_json
-from ditto.schema import FieldRequest, FieldsSchema, Mapping, TemplateMapping
+from ditto.schema import Alternative, FieldRequest, FieldsSchema, Mapping, TemplateMapping
 from ditto.specgen import generate as generate_mod
 from ditto.specgen import generate_run
 from ditto.specgen.models import Spec
@@ -295,7 +295,7 @@ def test_prompted_run_writes_draft_and_generation_json(run: RunDir) -> None:
     assert entry["status"] == "ok" and entry["draft"] == "specs/draft/t_prof.json"
     assert entry["calls"] == 1 and entry["prompt_tokens"] > 500
     assert entry["not_present"] == {"phone": "no phone shown"}
-    assert gen["mode"] == "prompted" and gen["prompt_version"] == "specgen.v1"
+    assert gen["mode"] == "prompted" and gen["prompt_version"] == "specgen.v2"
     assert gen["model"] == MODEL and gen["unprocessed"] == [] and gen["aborted"] is None
     assert gen["projected_cost_usd"] > 0
     assert "t_list" not in gen["templates"]
@@ -412,6 +412,94 @@ def test_unmapped_template_is_skipped(run: RunDir) -> None:
     assert llm.calls == []
     assert result.templates["t_prof"].status == "skipped"
     assert result.templates["t_prof"].reason == "not in mapping.json"
+
+
+def _fake_union(monkeypatch: pytest.MonkeyPatch, built: list[dict[str, Any]]) -> None:
+    class Page:
+        html = UNION_HTML
+
+        def __init__(self, focus: set[str] | None) -> None:
+            self.focus = focus
+
+        def meta(self) -> dict[str, Any]:
+            return {"base_url": "u0", "donor_urls": [], "focus": sorted(self.focus or []) or None}
+
+    def fake_build(rd: RunDir, **kw: Any) -> dict[str, Page]:
+        built.append(kw)
+        focus = kw.get("focus") or {}
+        return {tid: Page(focus.get(tid)) for tid in kw["template_ids"]}
+
+    monkeypatch.setattr(generate_mod, "build_union_run", fake_build)
+
+
+def test_auto_entries_are_suggestions_and_keep_alternatives_in_focus(
+    run: RunDir, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    built: list[dict[str, Any]] = []
+    _fake_union(monkeypatch, built)
+    mapping = Mapping(
+        schema_fields=SCHEMA.names(),
+        templates={
+            "t_prof": TemplateMapping(
+                fields={"name": "c1", "email": "c3", "publications": ["c4", "c5"], "phone": "c2"},
+                provenance={"name": "user", "email": "auto", "publications": "auto"},
+                alternatives={
+                    "email": [
+                        Alternative(id="c3", use="c3", kind="mandatory", label="Office"),
+                        Alternative(id="c2", use="c2", kind="optional", label="Email"),
+                        Alternative(id="c99", use="c99"),  # unknown id: dropped
+                    ],
+                },
+            ),
+            "t_list": TemplateMapping(included=False),
+        },
+    )
+    llm = FakeLLM([answer({"name": NAME, "email": EMAIL, "publications": PUBS, "phone": NAME})])
+    result = generate_run(
+        run, mode="prompted", schema=SCHEMA, mapping=mapping, llm=llm, min_cluster_size=1
+    )
+    assert result.templates["t_prof"].status in ("ok", "partial")
+    prompt = llm.calls[0]["messages"][-1]["content"]
+    # phone has no provenance entry: an old-style (binding) user mapping
+    assert "`name`: full name. Confirmed mapping: c1" in prompt
+    assert "Confirmed mapping: c2" in prompt
+    assert (
+        'Probe suggestions, best first: c3 (mandatory, label "Office"); '
+        'c2 (optional, label "Email")'
+    ) in prompt
+    assert "c99" not in prompt.split("## Candidate table")[0]
+    # the stored alternatives lack the group proposal, so it is added as the only suggestion
+    assert "Probe suggestions, best first: c4 = [c4, c5]" in prompt
+    assert built[0]["focus"] == {"t_prof": {"c1", "c2", "c3", "c4", "c5"}}
+
+
+def test_auto_absent_is_still_asked_for_on_the_full_union_page(
+    run: RunDir, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    built: list[dict[str, Any]] = []
+    _fake_union(monkeypatch, built)
+    mapping = Mapping(
+        schema_fields=SCHEMA.names(),
+        templates={
+            "t_prof": TemplateMapping(
+                fields={"name": "c1", "email": "c2", "publications": "absent", "phone": "absent"},
+                provenance={"publications": "auto", "phone": "user"},
+            ),
+            "t_list": TemplateMapping(included=False),
+        },
+    )
+    llm = FakeLLM([answer({"name": NAME, "email": EMAIL, "publications": PUBS})])
+    result = generate_run(
+        run, mode="prompted", schema=SCHEMA, mapping=mapping, llm=llm, min_cluster_size=1
+    )
+    prompt = llm.calls[0]["messages"][-1]["content"]
+    assert "`publications` (record_list). Probe found no candidate" in prompt
+    assert "`phone`" not in prompt  # a user's absent stays binding
+    assert all(b.get("focus") is None for b in built)  # publications needs the whole page
+    t = result.templates["t_prof"]
+    assert not t.focused
+    assert t.spec is not None and "publications" in t.spec.fields
+    assert t.spec.not_present["phone"].startswith("marked absent")
 
 
 def test_unprompted_writes_schema_proposal(run: RunDir) -> None:

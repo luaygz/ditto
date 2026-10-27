@@ -67,11 +67,35 @@ class FieldsSchema(BaseModel):
         return next((f for f in self.fields if f.name == name), None)
 
 
+Provenance = Literal["user", "auto"]
+
+
+class Alternative(BaseModel):
+    """One of the probe's ranked candidates (or whole tables) for a field."""
+
+    id: str = Field(description="Candidate id (`c17`) or table id (`tb1`).")
+    use: str | list[str] = Field(description="Candidate id(s) the mapping gets for this choice.")
+    score: float = 0.0
+    kind: str | None = Field(None, description="Candidate class, or `<kind> table`.")
+    label: str | None = Field(None, description="Label hint, table key or column name.")
+    examples: list[str] = Field(default_factory=list)
+
+
 class TemplateMapping(BaseModel):
     included: bool = True
     # field name -> candidate id ("c17"), list of candidate ids (record/kv groups), or "absent"
     fields: dict[str, str | list[str]] = Field(default_factory=dict)
+    # field name -> who chose the entry: "user" (confirmed interactively, in the editor or via
+    # explicit edits; binding for generation) or "auto" (the probe's proposal accepted unseen,
+    # e.g. `confirm --yes`; generation treats it as a suggestion). A field without an entry is
+    # "user", which is how mapping.json files written before provenance existed are read.
+    provenance: dict[str, Provenance] = Field(default_factory=dict)
+    # field name -> the probe's ranked alternatives (best first, at most three)
+    alternatives: dict[str, list[Alternative]] = Field(default_factory=dict)
     note: str | None = None
+
+    def provenance_of(self, name: str) -> Provenance:
+        return self.provenance.get(name, "user")
 
 
 class Mapping(BaseModel):

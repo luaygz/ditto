@@ -3,6 +3,12 @@
 ``--yes`` (or a non-interactive caller) accepts ``probe.yaml`` as it stands (the probe's
 proposal plus any hand edits). Interactively, ``$EDITOR`` opens ``probe.yaml`` and the saved file
 is read back; without an editor each ambiguous field is asked in the terminal.
+
+Every mapped field records its provenance: ``user`` when a person chose it (an interactive
+answer, an explicit ``edits`` entry, a ``use`` that differs from the probe's proposal, or a field
+marked ``confirmed: true`` in probe.yaml), else ``auto`` (the probe's proposal accepted unseen).
+Generation binds ``user`` entries and treats ``auto`` ones as suggestions, so the probe's ranked
+alternatives are kept with each field.
 """
 
 from __future__ import annotations
@@ -10,6 +16,7 @@ from __future__ import annotations
 import os
 import shlex
 import subprocess
+from collections.abc import Mapping as MappingABC
 from typing import Any
 
 import yaml
@@ -20,6 +27,7 @@ from ditto.analyze.models import CandidateTable
 from ditto.checkpoints._common import InputFn, ask, make_console, short, split_names
 from ditto.checkpoints.match import usable_candidates
 from ditto.checkpoints.probe import (
+    CandidateInfo,
     FieldProbe,
     ProbeResult,
     TemplateProbe,
@@ -27,7 +35,10 @@ from ditto.checkpoints.probe import (
     write_probe_yaml,
 )
 from ditto.run import RunDir
-from ditto.schema import ABSENT, Mapping, TemplateMapping
+from ditto.schema import ABSENT, Alternative, Mapping, Provenance, TemplateMapping
+
+Edits = MappingABC[str, MappingABC[str, str | list[str]]]
+ALTERNATIVES = 3  # ranked probe candidates kept per field in mapping.json
 
 _ABSENT_WORDS = frozenset({"", ABSENT, "-", "none", "null", "no"})
 
@@ -98,6 +109,18 @@ def parse_use(raw: Any, ids: _Ids, problems: list[str], where: str) -> str | lis
     return out[0] if len(out) == 1 and not isinstance(raw, list) else out
 
 
+def alternative(ci: CandidateInfo) -> Alternative:
+    """A probe candidate as stored in ``mapping.json``."""
+    return Alternative(
+        id=ci.id,
+        use=ci.use,
+        score=ci.score,
+        kind=ci.cls,
+        label=ci.key or ci.label_hint,
+        examples=ci.examples[:3],
+    )
+
+
 def _key_notes(tp: TemplateProbe, fields: dict[str, str | list[str]]) -> list[str]:
     """Generation hints for fields matched as one key of a key/value table."""
     return [
@@ -138,6 +161,8 @@ def mapping_from_yaml(probe: ProbeResult, data: Any, tables: dict[str, Candidate
         problems += [f"{tid}.{f}: unknown field" for f in yfields if f not in fields_wanted]
         ids = _Ids(tables.get(tid))
         fields: dict[str, str | list[str]] = {}
+        provenance: dict[str, Provenance] = {}
+        alternatives: dict[str, list[Alternative]] = {}
         for name in fields_wanted:
             fp = tp.fields.get(name)
             default: Any = fp.use if fp is not None else ABSENT
@@ -145,13 +170,26 @@ def mapping_from_yaml(probe: ProbeResult, data: Any, tables: dict[str, Candidate
             raw = fentry.get("use", default) if isinstance(fentry, dict) else fentry
             if fentry is None:
                 raw = default
-            fields[name] = parse_use(raw, ids, problems, f"{tid}.{name}")
+            where = f"{tid}.{name}"
+            fields[name] = parse_use(raw, ids, problems, where)
+            confirmed = fentry.get("confirmed", False) if isinstance(fentry, dict) else False
+            if not isinstance(confirmed, bool):
+                problems.append(f"{where}.confirmed: expected true or false, got {confirmed!r}")
+                confirmed = False
+            proposal = parse_use(default, ids, [], where)
+            provenance[name] = "user" if confirmed or fields[name] != proposal else "auto"
+            if fp is not None and fp.candidates:
+                alternatives[name] = [alternative(ci) for ci in fp.candidates[:ALTERNATIVES]]
         notes = _key_notes(tp, fields)
         user_note = entry.get("note")
         if isinstance(user_note, str) and user_note.strip():
             notes.insert(0, user_note.strip())
         out[tid] = TemplateMapping(
-            included=include, fields=fields, note="; ".join(notes) if notes else None
+            included=include,
+            fields=fields,
+            provenance=provenance,
+            alternatives=alternatives,
+            note="; ".join(notes) if notes else None,
         )
     if problems:
         raise ConfirmError(problems)
@@ -187,14 +225,25 @@ def _yaml_template(data: dict[str, Any], tid: str) -> dict[str, Any]:
 
 
 def _set_use(data: dict[str, Any], tid: str, name: str, use: str | list[str]) -> None:
+    """Write a person's choice into probe.yaml data (marked confirmed, so a later ``--yes``
+    keeps it as a user decision)."""
     entry = _yaml_template(data, tid)
     if not isinstance(entry.get("fields"), dict):
         entry["fields"] = {}
     fentry = entry["fields"].get(name)
     if isinstance(fentry, dict):
         fentry["use"] = use
+        fentry["confirmed"] = True
     else:
-        entry["fields"][name] = {"use": use}
+        entry["fields"][name] = {"use": use, "confirmed": True}
+
+
+def apply_edits(data: dict[str, Any], edits: Edits) -> None:
+    """Explicit ``{template_id: {field: id | [ids] | "absent"}}`` choices into probe.yaml data
+    (validated later by :func:`mapping_from_yaml`)."""
+    for tid, fields in edits.items():
+        for name, use in fields.items():
+            _set_use(data, tid, name, use)
 
 
 def _candidate_table(fp: FieldProbe) -> RichTable:
@@ -322,12 +371,15 @@ def confirm_run(
     editor: str | None = None,
     input_fn: InputFn = input,
     console: Console | None = None,
+    edits: Edits | None = None,
 ) -> Mapping:
     """Confirm the probe proposal and write ``mapping.json``.
 
     ``yes`` (or ``interactive=False``) accepts ``probe.yaml`` as it stands. Otherwise the editor
     (``editor`` or ``$EDITOR``; pass ``""`` to force the prompt) opens ``probe.yaml``, or, with
-    no editor, each ambiguous field is asked through ``input_fn``.
+    no editor, each ambiguous field is asked through ``input_fn``. ``edits``
+    (``{template_id: {field: id | [ids] | "absent"}}``) are explicit user choices written into
+    ``probe.yaml`` first; their fields get provenance ``user``.
     """
     if not run.probe_json.exists():
         raise FileNotFoundError(f"{run.probe_json} not found: run the probe first")
@@ -335,6 +387,13 @@ def confirm_run(
     if not run.probe_yaml.exists():
         write_probe_yaml(probe, run.probe_yaml)
     tables = _load_tables(run, probe)
+    if edits:
+        data = read_yaml(run.probe_yaml)
+        if not isinstance(data, dict):
+            raise ConfirmError(["expected a top-level `templates:` mapping"])
+        apply_edits(data, edits)
+        mapping_from_yaml(probe, data, tables)  # raises before anything is written
+        run.probe_yaml.write_text(dump_probe_yaml(data), encoding="utf-8")
     con = make_console(console)
     if yes or not interactive:
         mapping = mapping_from_yaml(probe, read_yaml(run.probe_yaml), tables)

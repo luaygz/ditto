@@ -10,7 +10,17 @@ from pathlib import Path
 
 import pytest
 import yaml
-from checkpoint_builders import clusters, job_schema, job_table, kv_table, listing_table, make_run
+from checkpoint_builders import (
+    BODY,
+    cand,
+    clusters,
+    job_schema,
+    job_table,
+    kv_table,
+    listing_table,
+    make_run,
+    table,
+)
 from rich.console import Console
 
 from ditto.checkpoints import ConfirmError, confirm_run, probe_run
@@ -49,21 +59,35 @@ def test_yes_accepts_the_proposal(run: RunDir) -> None:
     on_disk = json.loads(run.mapping_json.read_text())
     assert on_disk["version"] == 1
     assert on_disk["schema_fields"] == job_schema().names()
-    assert on_disk["templates"]["t_job1"] == {
-        "included": True,
-        "fields": {
-            "title": "c2",
-            "company": "c4",
-            "location": "c5",
-            "date_posted": "c6",
-            "salary": "c7",  # ambiguous: the best guess is proposed
-            "remote_policy": "absent",
-        },
-        "note": None,
+    job = on_disk["templates"]["t_job1"]
+    assert job["included"] is True and job["note"] is None
+    assert job["fields"] == {
+        "title": "c2",
+        "company": "c4",
+        "location": "c5",
+        "date_posted": "c6",
+        "salary": "c7",  # ambiguous: the best guess is proposed
+        "remote_policy": "absent",
     }
+    # nobody looked at the proposal: every entry is auto, so generation only gets suggestions
+    assert set(job["provenance"].values()) == {"auto"}
+    assert set(job["provenance"]) == set(job["fields"])
+    # the ranked alternatives travel with each field (best first, the proposal leading)
+    salary = job["alternatives"]["salary"]
+    assert salary[0]["id"] == "c7" and salary[0]["use"] == "c7"
+    assert salary[0]["label"] == "Cost to company" and salary[0]["examples"]
+    assert "remote_policy" not in job["alternatives"]  # nothing scored high enough to list
     assert on_disk["templates"]["t_list1"]["included"] is False
     assert Mapping.load(run.mapping_json) == mapping
     assert mapping.included_templates() == ["t_job1"]
+
+
+def test_old_mapping_without_provenance_is_binding(tmp_path: Path) -> None:
+    path = tmp_path / "mapping.json"
+    path.write_text(json.dumps({"templates": {"t_1": {"fields": {"a": "c1", "b": "absent"}}}}))
+    tm = Mapping.load(path).templates["t_1"]
+    assert tm.provenance == {} and tm.alternatives == {}
+    assert tm.provenance_of("a") == "user" and tm.provenance_of("b") == "user"
 
 
 def test_hand_edited_yaml_is_used_with_yes(run: RunDir) -> None:
@@ -139,9 +163,67 @@ def test_interactive_walk_resolves_ambiguous_and_excluded(run: RunDir) -> None:
 def test_interactive_walk_retries_invalid_answers(run: RunDir) -> None:
     input_fn = scripted("c3", "c99", "1", "")
     mapping = confirm_run(run, editor="", input_fn=input_fn, console=quiet())
-    assert mapping.templates["t_job1"].fields["salary"] == "c7"
+    job = mapping.templates["t_job1"]
+    assert job.fields["salary"] == "c7"
     assert mapping.templates["t_list1"].included is False
     assert len(input_fn.prompts) == 4  # type: ignore[attr-defined]
+    # the person answered for salary (even picking the proposal): user; nothing else was asked
+    assert job.provenance["salary"] == "user"
+    assert {f for f, p in job.provenance.items() if p == "auto"} == set(job.fields) - {"salary"}
+    assert confirm_run(run, yes=True, console=quiet()) == mapping  # kept via `confirmed: true`
+
+
+def test_hand_edits_and_confirmed_flag_set_user_provenance(run: RunDir) -> None:
+    data = yaml.safe_load(run.probe_yaml.read_text())
+    fields = data["templates"]["t_job1"]["fields"]
+    fields["title"]["use"] = "c1"  # changed: user
+    fields["company"]["confirmed"] = True  # unchanged but checked: user
+    run.probe_yaml.write_text(yaml.safe_dump(data))
+    prov = confirm_run(run, yes=True, console=quiet()).templates["t_job1"].provenance
+    assert prov["title"] == prov["company"] == "user"
+    assert prov["location"] == prov["salary"] == prov["remote_policy"] == "auto"
+    fields["company"]["confirmed"] = "yes"
+    run.probe_yaml.write_text(yaml.safe_dump(data))
+    with pytest.raises(ConfirmError, match="confirmed: expected true or false"):
+        confirm_run(run, yes=True, console=quiet())
+
+
+def test_explicit_edits_are_user_choices(run: RunDir) -> None:
+    mapping = confirm_run(
+        run, yes=True, console=quiet(), edits={"t_job1": {"salary": "c9", "title": "c2"}}
+    )
+    job = mapping.templates["t_job1"]
+    assert job.fields["salary"] == "c9" and job.fields["title"] == "c2"
+    assert job.provenance["salary"] == job.provenance["title"] == "user"
+    assert job.provenance["company"] == "auto"
+    data = yaml.safe_load(run.probe_yaml.read_text())
+    assert data["templates"]["t_job1"]["fields"]["salary"] == {
+        **data["templates"]["t_job1"]["fields"]["salary"],
+        "use": "c9",
+        "confirmed": True,
+    }
+    run.mapping_json.unlink()
+    with pytest.raises(ConfirmError, match="unknown candidate id 'c42'"):
+        confirm_run(run, yes=True, console=quiet(), edits={"t_job1": {"salary": "c42"}})
+    assert not run.mapping_json.exists()
+    assert yaml.safe_load(run.probe_yaml.read_text()) == data  # nothing written on error
+
+
+def test_yes_records_tied_candidates_as_auto_with_alternatives(tmp_path: Path) -> None:
+    # two equally good candidates: --yes takes the first, but says so (auto + both ranked)
+    tied = table(
+        "t_tie",
+        [
+            cand("c1", f"{BODY} > div.a > span", label="Price", examples=["$10", "$12"]),
+            cand("c2", f"{BODY} > div.b > span", label="Price", examples=["$99", "$80"]),
+        ],
+    )
+    run = make_run(tmp_path / "r", [tied], clusters({"t_tie": 30}))
+    probe = probe_run(run, FieldsSchema.from_obj({"price": "the price"}))
+    assert probe.templates["t_tie"].fields["price"].status == "ambiguous"
+    tm = confirm_run(run, yes=True, console=quiet()).templates["t_tie"]
+    assert tm.fields["price"] == "c1" and tm.provenance["price"] == "auto"
+    assert [a.id for a in tm.alternatives["price"]] == ["c1", "c2"]
 
 
 def test_interactive_walk_accepts_other_candidate_ids(run: RunDir) -> None:

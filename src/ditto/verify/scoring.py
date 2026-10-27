@@ -5,13 +5,18 @@ Per candidate (brief, stage 7):
 * presence — share of the pages where the analysis finds the field's path that the selector
   fills (``presence_score``); the raw ``presence_rate`` over all pages is reported too;
 * multiplicity — scalar: share of matched pages with exactly one node; list: share of pages
-  whose value count equals the analysis path's node count; record_list/key_value: share of
-  sampled pages whose matched row count equals the real sibling count;
+  whose value count does not exceed the analysis path's node count (a list may read part of
+  a path that several fields share, such as one labelled row of a details block, but never
+  nodes beyond it); record_list/key_value: share of sampled pages whose matched row count
+  equals the real sibling count;
 * type check — share of matched pages whose value passes the field's type check;
 * agreement — share of the pages where two candidates both match on which their values agree.
 
 Winner: highest ``presence × multiplicity × type_pass`` (rounded to 3 decimals), ties broken
-toward fewer positional steps, then higher mean agreement, then the lower index.
+toward fewer positional steps, then higher mean agreement, then the lower index. Candidates
+with the same multiplicity and type pass whose scores differ by at most ``PRESENCE_TIE`` count
+as tied: the analysis' expected presence comes from the source path, which overstates a field
+that reads only part of a shared path, and the winner's fallbacks fill such small gaps.
 """
 
 from __future__ import annotations
@@ -31,6 +36,7 @@ Kind = Literal["scalar", "list", "rows"]
 
 FALLBACK_AGREEMENT = 0.98
 SCORE_DECIMALS = 3
+PRESENCE_TIE = 0.02
 OK, MISSING, MULTIPLE, TYPE = 0, 1, 2, 3
 FAILURE_NAMES = {MISSING: "missing", MULTIPLE: "multiple", TYPE: "type"}
 
@@ -39,16 +45,18 @@ _AXIS = (
     r"|preceding|parent|ancestor|ancestor-or-self|self)::)?"
 )
 _POSITIONAL_STEP = re.compile(rf"^{_AXIS}(?:[A-Za-z][\w.-]*|\*)(?:\[\s*\d+\s*\])*$")
+_INDEX = re.compile(r"\[\s*\d+\s*\]")
 _STRING = re.compile(r"'[^']*'|\"[^\"]*\"")
 
 
 def positional_steps(xpath: str) -> int:
-    """Element steps that carry no anchor (a bare tag, optionally with a numeric index)."""
+    """Element steps that carry no anchor (a bare tag, optionally with a numeric index); a
+    numeric index counts once more (``li[1]`` is less general than ``li``)."""
     count = 0
     for branch in _STRING.sub("''", xpath).split("|"):
         for step in split_steps(branch.strip()):
             if step and step not in (".", "..") and _POSITIONAL_STEP.match(step):
-                count += 1
+                count += 1 + len(_INDEX.findall(step))
     return count
 
 
@@ -137,7 +145,7 @@ def multiplicity(kind: Kind, obs: Obs, exp: Expectation) -> float | None:
         both = obs.matched & (exp.counts > 0)
         if not both.any():
             return 1.0 if obs.matched.any() else None
-        return _mean(obs.values[both] == exp.counts[both])
+        return _mean(obs.values[both] <= exp.counts[both])
     measured = (obs.siblings >= 0) & (obs.nodes > 0)
     return _mean(obs.nodes[measured] == obs.siblings[measured])
 
@@ -212,15 +220,40 @@ def winner_key(s: CandidateScore) -> tuple[float, int, float, int]:
     return (-round(s.score, SCORE_DECIMALS), s.positional_steps, -_mean_agreement(s), s.index)
 
 
+def tied(a: CandidateScore, b: CandidateScore) -> bool:
+    """Same multiplicity and type pass, scores within ``PRESENCE_TIE`` of each other."""
+    gap = abs(round(a.score, SCORE_DECIMALS) - round(b.score, SCORE_DECIMALS))
+    return (
+        a.multiplicity == b.multiplicity
+        and a.type_check_pass == b.type_check_pass
+        and gap <= PRESENCE_TIE + 1e-9
+    )
+
+
+def ranking(scores: Sequence[CandidateScore]) -> list[int]:
+    """Candidate indices (into ``scores``), best first: by score, except that among candidates
+    tied with the best remaining one the fewest positional steps, then the highest mean
+    agreement, then the lowest index goes first."""
+    remaining = sorted(range(len(scores)), key=lambda i: winner_key(scores[i]))
+    out: list[int] = []
+    while remaining:
+        lead = scores[remaining[0]]
+        group = [i for i in remaining if tied(scores[i], lead)]
+        pick = min(group, key=lambda i: winner_key(scores[i])[1:])
+        out.append(pick)
+        remaining.remove(pick)
+    return out
+
+
 def choose_winner(scores: Sequence[CandidateScore]) -> int:
     """Index (into ``scores``) of the winning candidate."""
-    return min(range(len(scores)), key=lambda i: winner_key(scores[i]))
+    return ranking(scores)[0]
 
 
 def fallback_indices(scores: Sequence[CandidateScore], winner: int) -> list[int]:
     """Candidates agreeing with the winner on >= 98% of the pages where both match."""
     out = []
-    for i in sorted(range(len(scores)), key=lambda i: winner_key(scores[i])):
+    for i in ranking(scores):
         if i == winner:
             continue
         agree = scores[i].agreement.get(str(winner))
@@ -243,14 +276,16 @@ def selection_reason(scores: Sequence[CandidateScore], winner: int, value_type: 
         if i == winner:
             continue
         note = f"{s.role} {s.score:.3f}"
-        if round(s.score, SCORE_DECIMALS) == round(w.score, SCORE_DECIMALS):
+        if tied(s, w):
+            close = round(s.score, SCORE_DECIMALS) != round(w.score, SCORE_DECIMALS)
+            prefix = f"within {PRESENCE_TIE} of the winner, " if close else ""
             if s.positional_steps != w.positional_steps:
                 note += (
-                    f" (tie broken toward fewer positional steps: "
+                    f" ({prefix}tie broken toward fewer positional steps: "
                     f"{w.positional_steps} vs {s.positional_steps})"
                 )
             else:
-                note += " (tie)"
+                note += f" ({prefix}tie)"
         parts.append(note)
     return "; ".join(parts)
 

@@ -4,14 +4,16 @@ from __future__ import annotations
 
 from checkpoint_builders import BODY, cand, job_table, kv_table, table
 
+from ditto.analyze.models import CandidateTable, Table, TableColumn
 from ditto.checkpoints.match import (
+    expects_list,
     match_template,
     name_variants,
     phrase_similarity,
     tokens,
     usable_candidates,
 )
-from ditto.schema import ABSENT, FieldsSchema
+from ditto.schema import ABSENT, FieldRequest, FieldsSchema
 
 
 def match(t, fields):  # type: ignore[no-untyped-def]
@@ -223,3 +225,126 @@ def test_list_field_prefers_repeating_candidate() -> None:
     )
     got = match(t, {"tags": {"type": "list"}})["tags"]
     assert got.use == "c1"
+
+
+def test_expects_list_from_type_name_and_description() -> None:
+    assert expects_list(FieldRequest(name="tags"))
+    assert expects_list(FieldRequest(name="ingredients"))
+    assert expects_list(FieldRequest(name="plotKeywords"))
+    assert expects_list(FieldRequest(name="genre", description="the genre or genres"))
+    assert expects_list(FieldRequest(name="author", description="a page may list several"))
+    assert expects_list(FieldRequest(name="item", type="list"))
+    for singular in ("title", "address", "status", "price", "analysis"):
+        assert not expects_list(FieldRequest(name=singular, description="the " + singular))
+    assert not expects_list(FieldRequest(name="tags", type="scalar"))  # declared type wins
+
+
+def test_plural_field_prefers_a_list_over_a_scalar_badge() -> None:
+    # an article's badge ("Top rated") sits in a key/value block whose keys include "Label";
+    # the real tags are a repeated list labelled "Topics" (fixture T04)
+    kv = Table(
+        id="tb0",
+        kind="key_value",
+        container_path=f"{BODY} > div.summary",
+        row_path=f"{BODY} > div.summary > p",
+        p=1.0,
+        keys_seen=["Label", "Posted"],
+    )
+    t = table(
+        "t_a",
+        [
+            cand(
+                "c7",
+                f"{BODY} > div.summary > p > span.badge",
+                label="Label",
+                examples=["Top rated", "Staff pick"],
+                table_id="tb0",
+                table_role="kv_value",
+                column="Label",
+            ),
+            cand(
+                "c31",
+                f"{BODY} > section > ul > li > a",
+                "list",
+                repeat=(1, 5),
+                label="Topics",
+                examples=["camera", "return"],
+            ),
+        ],
+        [kv],
+    )
+    got = match(t, {"tags": "the topic tags, keywords or topics listed on the page"})["tags"]
+    assert (got.status, got.use) == ("found", "c31")
+    assert all(s.id != "c7" for s in got.ranked)  # "Label" is no longer a synonym of tags
+    # a plural field still takes a single node when nothing repeats, just with less confidence
+    single = table("t_b", [cand("c1", f"{BODY} > span.x", label="Topics", examples=["a, b"])])
+    one = match(single, ["topics"])["topics"]
+    assert one.use == "c1" and "plural field, single node" in one.ranked[0].reasons
+
+
+def _course_table() -> CandidateTable:
+    syllabus = Table(
+        id="tb3",
+        kind="record_list",
+        container_path=f"{BODY} > section.syllabus-section > table.syllabus",
+        row_path=f"{BODY} > section.syllabus-section > table.syllabus > tr",
+        p=0.86,
+        columns=[
+            TableColumn(name="Week", candidate_id="c38"),
+            TableColumn(name="Topic", candidate_id="c39"),
+        ],
+    )
+    cell = f"{BODY} > section.syllabus-section > table.syllabus > tr > td"
+    return table(
+        "t_course",
+        [
+            cand(
+                "c28",
+                f"{BODY} > section > ul.class-topics > li.class-topics-item",
+                "list",
+                repeat=(1, 5),
+                label="What you'll learn",
+                examples=["Machine learning", "UX research"],
+            ),
+            cand(
+                "c38",
+                cell,
+                "list",
+                p=0.86,
+                repeat=(1, 5),
+                label="Week",
+                examples=["1", "2"],
+                table_id="tb3",
+                table_role="record_column",
+                column="Week",
+            ),
+            cand(
+                "c39",
+                cell,
+                "list",
+                p=0.86,
+                repeat=(1, 5),
+                label="Topic",
+                examples=["Write Coach in Data analysis"],
+                table_id="tb3",
+                table_role="record_column",
+                column="Topic",
+            ),
+        ],
+        [syllabus],
+    )
+
+
+def test_standalone_list_beats_a_record_column_for_a_plain_list_field() -> None:
+    # fixture T01: tags must be the course's topic list, not the syllabus table's Topic column
+    desc = "the topic tags, keywords or topics listed on the page"
+    got = match(_course_table(), {"tags": desc})["tags"]
+    assert got.use == "c28"
+    assert [s.id for s in got.ranked[:2]] == ["c28", "c39"]
+    assert "one column of record table tb3" in got.ranked[1].reasons
+    # ... unless the description names the table
+    named = match(_course_table(), {"tags": "the topics of each week in the syllabus"})["tags"]
+    assert named.use == "c39"
+    # a requested record_list still gets the table
+    rows = match(_course_table(), {"syllabus": {"type": "record_list"}})["syllabus"]
+    assert rows.use == ["c38", "c39"]

@@ -9,6 +9,7 @@ import time
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from dataclasses import field as dc_field
 from pathlib import Path
 from typing import Any
 
@@ -64,9 +65,9 @@ from ditto.verify.scoring import (
     fallback_indices,
     fill_agreement,
     page_failures,
+    ranking,
     score_candidate,
     selection_reason,
-    winner_key,
 )
 
 FAIL_SCORE = 0.05  # every candidate below this -> path-induced fallback
@@ -74,6 +75,7 @@ FAILURE_TOLERANCE = 0.01  # failure rate above this -> repair target, then degra
 OPTIONAL_BELOW = 0.95
 ROW_SAMPLE = 200
 MAX_FAILURE_EXAMPLES = 10
+REPAIR_KEEPS = 0.98  # share of the passing pages' values an accepted repair must leave unchanged
 
 FieldItem = tuple[str, SpecField, Sequence[CandidateOrigin], bool]
 
@@ -156,6 +158,19 @@ def better(new: FieldPlan, old: FieldPlan) -> bool:
     return new.winner_score > old.winner_score + 1e-9
 
 
+def keeps_values(new: FieldPlan, old: FieldPlan) -> bool:
+    """Whether ``new`` gives the same value as ``old`` on (almost) every page where ``old``
+    extracts a value without failing. A repair fixes failing pages; it must not rewrite the
+    pages that already pass. Dropping the regex that cuts a value out of a longer text, for
+    instance, turns every miss into the whole text and every hit into the wrong value."""
+    passing = (old.codes == 0) & old.eff.matched
+    total = int(passing.sum())
+    if total == 0:
+        return True
+    same = passing & new.eff.matched & (new.eff.vhash == old.eff.vhash)
+    return int(same.sum()) >= REPAIR_KEEPS * total
+
+
 @dataclass
 class TemplateOutcome:
     """Final state of one verified template (what merge/split and the writers need)."""
@@ -165,6 +180,9 @@ class TemplateOutcome:
     page_ids: np.ndarray[Any, np.dtype[np.int64]]
     presence: dict[str, np.ndarray[Any, np.dtype[np.bool_]]]
     table: CandidateTable | None
+    # field -> pages where the analysis sees the field's anchor path (its most common source
+    # candidate); None when the field has no checkable source candidate
+    anchors: dict[str, np.ndarray[Any, np.dtype[np.bool_]] | None] = dc_field(default_factory=dict)
 
 
 class TemplateVerifier:
@@ -224,6 +242,16 @@ class TemplateVerifier:
         if not mask.any():
             return Expectation(analysis_p=p)
         return Expectation(mask, counts, p)
+
+    def anchor_present(self, field: SpecField) -> np.ndarray[Any, np.dtype[np.bool_]] | None:
+        """Pages holding the path of the field's anchor (its source candidate with the highest
+        analysis presence); None when the field has no source candidate whose path was
+        counted."""
+        cands = [c for c in self.sources(field) if c.path in self.path_counts]
+        if not cands:
+            return None
+        anchor = max(cands, key=lambda c: c.p)  # first of equals: the earliest source
+        return self.path_counts[anchor.path] > 0
 
     def value_type(self, field: SpecField) -> str | None:
         """The type to check: the field's ``type_check``, else the analysis value type of its
@@ -476,9 +504,10 @@ class TemplateVerifier:
         require_better: bool = True,
     ) -> list[str]:
         """Score the repaired fields (and their combinations with the old winners) and keep
-        the ones that beat the current field. With ``require_better=False`` (reviewer
-        rejections) a repaired field that matches anything replaces the rejected one.
-        Returns the accepted field names."""
+        the ones that beat the current field without changing its passing values (see
+        :func:`keeps_values`). With ``require_better=False`` (reviewer rejections) a repaired
+        field that matches anything replaces the rejected one. Returns the accepted field
+        names."""
         items: list[FieldItem] = []
         for name, new in repaired.items():
             old = plans[name]
@@ -494,7 +523,9 @@ class TemplateVerifier:
         for new_plan in self.score_fields(items) if items else []:
             current = plans[new_plan.name]
             first = new_plan.name not in accepted
-            if require_better or not first:
+            if require_better:
+                ok = better(new_plan, current) and keeps_values(new_plan, current)
+            elif not first:
                 ok = better(new_plan, current)
             else:
                 ok = new_plan.winner_score > 0
@@ -613,7 +644,7 @@ class TemplateVerifier:
             update["fallbacks"] = plan.order[1:]
         else:
             sels = [x for _, x in selectors_of(f)]
-            ranked = sorted(range(len(sels)), key=lambda i: winner_key(plan.scores[i]))
+            ranked = ranking(plan.scores)
             alternates = [sels[i] for i in ranked if i != plan.winner][:2]
             if isinstance(f, RecordListField):
                 update["container"] = sels[plan.winner]
@@ -691,6 +722,7 @@ class TemplateVerifier:
             page_ids=self.page_ids,
             presence={n: p.presence for n, p in plans.items()},
             table=self.table,
+            anchors={n: self.anchor_present(p.field) for n, p in plans.items()},
         )
 
     def verify(

@@ -10,7 +10,10 @@ can only lower it:
   specific types (email, price, date);
 - type factor: share of the candidate's example values passing the expected type check;
 - example factor: shape agreement between the user's examples and the candidate's;
-- shape factor: scalar vs list vs record_list vs key_value;
+- shape factor: scalar vs list vs record_list vs key_value. A field that is plural without a
+  declared type (``tags``, ``ingredients``, "a page may list several") prefers repeated nodes,
+  and a plain list field prefers a standalone list over one column of a record table unless the
+  description names that table;
 - a small presence tie-breaker.
 
 Labels, boilerplate and noise are never fields; neither are key/header cells of tables.
@@ -41,6 +44,8 @@ FieldStatus = Literal["found", "ambiguous", "missing"]
 
 SYNONYM_DISCOUNT = 0.92
 SPECIFIC_TYPES = ("email", "price", "date")
+INFERRED_LIST_SCALAR = 0.8  # plural field (no declared type), candidate is not repeated
+RECORD_COLUMN_FOR_LIST = 0.55  # plain list field, candidate is one column of a record table
 
 # Small synonym list: phrases in one group name the same thing.
 SYNONYMS: tuple[tuple[str, ...], ...] = (
@@ -76,7 +81,7 @@ SYNONYMS: tuple[tuple[str, ...], ...] = (
     ("image", "photo", "picture", "img", "thumbnail", "logo"),
     ("rating", "stars", "score", "review score"),
     ("category", "genre", "section", "department"),
-    ("tags", "keywords", "labels", "topics"),
+    ("tags", "keywords", "topics"),
     ("employment type", "job type", "contract type", "type of employment"),
 )
 
@@ -108,6 +113,9 @@ STOPWORDS = frozenset(
 )
 # Tokens that say little about *which* field this is ("company name" is about the company).
 GENERIC = frozenset(["name", "value", "text", "info", "information", "field", "data", "label"])
+# Description phrases that say a page holds several values of the field.
+_LIST_PHRASES = re.compile(r"\b(?:lists? of|one or more|list several|may list)\b")
+_WORDS = re.compile(r"[a-z]+")
 
 # Field-name keywords implying a value type (softer than an explicit type_check).
 _NAME_TYPES: tuple[tuple[str, frozenset[str]], ...] = (
@@ -331,6 +339,52 @@ def expected_type(req: FieldRequest) -> tuple[str | None, bool]:
     return None, False
 
 
+def _plural(word: str) -> bool:
+    """Crude English plural test for one lowercase word (``tags``, ``categories``)."""
+    return len(word) > 3 and word.endswith("s") and not word.endswith(("ss", "us", "is"))
+
+
+def expects_list(req: FieldRequest) -> bool:
+    """True when the field holds several values per page: declared ``list``, or (no declared
+    type) a plural name, the plural of the name in the description, or a phrase like "a page
+    may list several"."""
+    if req.type is not None:
+        return req.type == "list"
+    words = _WORDS.findall(_CAMEL.sub(" ", req.name).lower())
+    if not words:
+        return False
+    head = words[-1]
+    if _plural(head):
+        return True
+    desc = req.description.lower()
+    if any(w != head and _plural(w) and _stem(w) == head for w in _WORDS.findall(desc)):
+        return True
+    return bool(_LIST_PHRASES.search(desc))
+
+
+def _content(text: str | None) -> set[str]:
+    return {t for t in tokens(text) if len(t) >= 3 and t not in GENERIC}
+
+
+def table_name_tokens(table: Table, by_id: dict[str, Candidate]) -> frozenset[str]:
+    """Words that name a table itself (not its columns): identifiers of its container and the
+    container's parent, and the labels of its header cells (usually the section heading)."""
+    out: set[str] = set()
+    try:
+        steps, _ = split_path(table.container_path)
+    except ValueError:
+        steps = []
+    for step in steps[-2:]:
+        for _, text in _step_identifiers(step):
+            out |= _content(text)
+    for cand in by_id.values():
+        if cand.table_id == table.id and cand.table_role == "record_header":
+            out |= _content(cand.label_hint)
+    for col in table.columns:
+        out -= _content(col.name)
+    return frozenset(out)
+
+
 def _norm_value(v: str) -> str:
     return normalize_ws(v).casefold()
 
@@ -405,6 +459,7 @@ class FieldContext:
     desc: frozenset[str]  # content tokens of the description
     kind: str | None  # expected value type
     firm: bool  # kind comes from type_check / examples, not just the name
+    listish: bool = False  # several values per page (declared list or plural, see expects_list)
     # (source tokens, human) -> (score before the source weight, variant used); label texts and
     # path identifiers repeat across candidates, so each is compared with the variants once
     _seen: dict[tuple[tuple[str, ...], bool], tuple[float, tuple[str, ...] | None, float]] = field(
@@ -420,6 +475,7 @@ class FieldContext:
             desc=frozenset(t for t in tokens(req.description) if len(t) >= 3 and t not in GENERIC),
             kind=kind,
             firm=firm,
+            listish=expects_list(req),
         )
 
     def source_match(self, src: LabelSource) -> tuple[float, tuple[str, ...] | None, float]:
@@ -459,6 +515,7 @@ class Prepared:
     tables: dict[str, Table]
     table_sources: dict[str, list[LabelSource]]
     by_id: dict[str, Candidate]
+    table_names: dict[str, frozenset[str]] = field(default_factory=dict)
     type_pass: dict[tuple[str, str], float] = field(default_factory=dict)
 
     def type_fraction(self, cand: Candidate, kind: str) -> float:
@@ -496,6 +553,7 @@ def prepare(table: CandidateTable) -> Prepared:
         tables=tables,
         table_sources={t.id: table_label_sources(t, by_id) for t in table.tables},
         by_id=by_id,
+        table_names={t.id: table_name_tokens(t, by_id) for t in table.tables},
     )
 
 
@@ -552,6 +610,24 @@ def _shape_factor(req: FieldRequest, cand: Candidate | None, table: Table | None
     return 0.7 if cand.table_id else 0.5
 
 
+def _list_factor(ctx: FieldContext, cand: Candidate, prep: Prepared) -> tuple[float, str | None]:
+    """``(factor, reason)`` for a field that holds several values per page: without a declared
+    type a single node is a weak match (a declared ``list`` is handled by ``_shape_factor``),
+    and one column of a record table is a weak stand-in for a plain list unless the description
+    names that table."""
+    if not ctx.listish:
+        return 1.0, None
+    repeated = cand.cls == "list" or cand.repeat_max > 1
+    if not repeated:
+        if ctx.req.type is None:
+            return INFERRED_LIST_SCALAR, "plural field, single node"
+        return 1.0, None
+    in_record = cand.table_role == "record_column" and cand.table_id is not None
+    if in_record and not ctx.desc & prep.table_names.get(cand.table_id or "", frozenset()):
+        return RECORD_COLUMN_FOR_LIST, f"one column of record table {cand.table_id}"
+    return 1.0, None
+
+
 def _type_terms(
     ctx: FieldContext, cand: Candidate, prep: Prepared
 ) -> tuple[float, float, str | None]:
@@ -599,6 +675,10 @@ def score_candidate(ctx: FieldContext, cand: Candidate, prep: Prepared) -> Score
     if twhy:
         reasons.append(twhy)
     factor *= _shape_factor(req, cand, None)
+    lfactor, lwhy = _list_factor(ctx, cand, prep)
+    factor *= lfactor
+    if lwhy:
+        reasons.append(lwhy)
     score = evidence * factor * (0.9 + 0.1 * min(cand.p, 1.0))
     key = src.text if src is not None and src.kind == "key" and label >= AMBIGUOUS else None
     return Scored(

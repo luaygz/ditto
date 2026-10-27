@@ -324,3 +324,67 @@ def test_leading_child_label_and_single_row_header_table() -> None:
     # a header over one row: each column is a mandatory scalar labelled by its <th>
     mass = cand(result, "html > body > table.one > tr > td", "Mass")
     assert (mass.cls, mass.label_hint, mass.repeat_max) == ("mandatory", "Mass", 1)
+
+
+def test_pair_rows_with_spacer_cells_and_leading_key_text_are_key_value() -> None:
+    rows = [("Cuisine", lambda i: ["Thai", "Deli"][i % 2]), ("Phone", lambda i: f"555-01{i:02d}")]
+    rows += [("Hours", lambda i: f"{i % 5 + 8}am-9pm")]
+
+    def page(i: int) -> str:
+        shown = [r for k, r in enumerate(rows) if (i + k) % 4 != 0]  # rows vary per page
+        spacer = "<td><img src='/s.gif'></td>"
+        table = "".join(
+            f"<tr>{spacer}<td><span><b>{key}</b></span></td><td><span>{value(i)}</span></td>"
+            f"{spacer}</tr>"
+            for key, value in shown
+        )
+        facts = "".join(
+            f"<li>{key}: <span>{value(i)}</span></li>" for key, value in reversed(shown)
+        )
+        return (
+            f"<html><body><table class='info'>{table}</table>"
+            f"<ul class='facts'>{facts}</ul></body></html>"
+        )
+
+    result = analyze_pages("t_p", [(i, page(i)) for i in range(24)], cluster_size=24)
+    info = "html > body > table.info"
+    kv = next(t for t in result.tables if t.container_path == info)
+    assert (kv.kind, kv.layout, kv.row_path) == ("key_value", "pairs", f"{info} > tr")
+    assert set(kv.keys_seen) == {"Cuisine", "Phone", "Hours"}
+    phone = cand(result, f"{info} > tr > td > span", "Phone")
+    assert (phone.label_hint, phone.table_role, phone.examples[0]) == (
+        "Phone",
+        "kv_value",
+        "555-0100",
+    )
+    key = result.by_id(kv.key_candidate or "")
+    assert (key.path, key.cls, key.table_role) == (
+        f"{info} > tr > td > span > b",
+        "label",
+        "kv_key",
+    )
+
+    facts = "html > body > ul.facts"
+    lead = next(t for t in result.tables if t.container_path == facts)
+    assert (lead.kind, lead.layout, lead.row_path) == ("key_value", "pairs", f"{facts} > li")
+    assert set(lead.keys_seen) == {"Cuisine:", "Phone:", "Hours:"}
+    cuisine = cand(result, f"{facts} > li > span", "Cuisine:")
+    assert (cuisine.label_hint, cuisine.table_role) == ("Cuisine:", "kv_value")
+    key = result.by_id(lead.key_candidate or "")
+    assert (key.path, key.cls, key.table_role) == (f"{facts} > li", "label", "kv_key")
+    found = locate_candidates(clean_html(page(2)), result)
+    assert [el.text for el in found[phone.id]] == ["555-0102"]
+    assert [el.text for el in found[cuisine.id]] == ["Thai"]
+
+
+def test_text_less_cells_beyond_two_or_a_trailing_tail_are_no_pair() -> None:
+    def page(i: int) -> str:
+        three = "".join(f"<tr><td>Key {k}</td><td>v{i}</td><td>x{i}</td></tr>" for k in range(3))
+        tails = "".join(f"<li>Size: <b>{i}</b> cm</li><li>Mass: <b>{i}</b> g</li>" for _ in "a")
+        return (
+            f"<html><body><table class='three'>{three}</table><ul class='tails'>{tails}</ul>"
+            "</body></html>"
+        )
+
+    result = analyze_pages("t_n", [(i, page(i)) for i in range(12)], cluster_size=12)
+    assert not [t for t in result.tables if t.kind == "key_value"]

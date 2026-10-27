@@ -168,6 +168,9 @@ YAML_HEADER = """\
 #   include: true | false   generate a spec for this template or skip it
 #   use: c17                the candidate holding the field; a list [c4, c5] for record or
 #                           key/value groups (a table id like tb1 also works); or `absent`
+#   confirmed: true         you checked this field: generation must use `use` as given.
+#                           A changed `use` counts as confirmed; an unchanged, unconfirmed
+#                           proposal is only a suggestion the generator checks against the page.
 # Everything else (status, candidates with scores and examples) is informational.
 """
 

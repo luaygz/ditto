@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
+import pytest
 from verify_sitekit import cls, staff_page, text_path
 
 from ditto.extract.runner import evaluate
 from ditto.fingerprint.dom import clean_html
 from ditto.specgen.models import KeyValueField, RecordListField
+from ditto.verify import pages
 from ditto.verify.pages import (
     PathProbe,
     RowsProbe,
@@ -90,3 +94,22 @@ def test_path_probe_observation() -> None:
     tree = clean_html(PAGE)
     obs = observe(PathProbe(text_path(PAGE, "topic7-1")), tree)
     assert obs.nodes == obs.values == 3
+
+
+def test_small_templates_skip_the_worker_pool_without_fork(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    seen: list[int | None] = []
+
+    def fake_pmap(fn, items, *, workers=None, **kw):  # type: ignore[no-untyped-def]
+        seen.append(workers)
+        return iter([pages._empty(len(items), 1)])
+
+    monkeypatch.setattr(pages, "pmap", fake_pmap)
+    probe = SelectorProbe("//h1", (), None)
+    monkeypatch.setenv("DITTO_MP_START", "spawn")
+    pages.evaluate_probes(Path("/nonexistent"), list(range(40)), [probe], workers=8)
+    pages.evaluate_probes(Path("/nonexistent"), list(range(pages.SPAWN_MIN_PAGES)), [probe])
+    monkeypatch.setenv("DITTO_MP_START", "fork")
+    pages.evaluate_probes(Path("/nonexistent"), list(range(40)), [probe], workers=8)
+    assert seen == [1, None, 8]
