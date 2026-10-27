@@ -1,0 +1,3405 @@
+{
+  "name": "swde_test_handwritten",
+  "dataset": "swde",
+  "split": "test",
+  "method": {
+    "kind": "baseline",
+    "mode": "prompted",
+    "baseline": "handwritten",
+    "params": {
+      "until": "extract",
+      "min_cluster_size": 20,
+      "union_min_tokens": 8000,
+      "union_max_tokens": 30000,
+      "max_repair_calls": 3,
+      "tail": "skip",
+      "concurrency": 4
+    }
+  },
+  "method_label": "handwritten",
+  "status": "ok",
+  "reason": null,
+  "summary": {
+    "n_sites": 64,
+    "n_ok": 5,
+    "status_counts": {
+      "not_run": 59,
+      "ok": 5
+    },
+    "accuracy": {
+      "per_vertical": {
+        "auto": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_norm_f1": {
+            "engine": 1.0,
+            "fuel_economy": 1.0,
+            "model": 1.0,
+            "price": 1.0
+          },
+          "raw": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_raw_f1": {
+            "engine": 1.0,
+            "fuel_economy": 1.0,
+            "model": 1.0,
+            "price": 1.0
+          }
+        },
+        "book": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 0.9994,
+            "recall": 0.9994,
+            "f1": 0.9994
+          },
+          "fields_norm_f1": {
+            "author": 0.997,
+            "isbn_13": 1.0,
+            "publication_date": 1.0,
+            "publisher": 1.0,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 0.9994,
+            "recall": 0.9994,
+            "f1": 0.9994
+          },
+          "fields_raw_f1": {
+            "author": 0.997,
+            "isbn_13": 1.0,
+            "publication_date": 1.0,
+            "publisher": 1.0,
+            "title": 1.0
+          }
+        },
+        "movie": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_norm_f1": {
+            "director": 1.0,
+            "genre": 1.0,
+            "mpaa_rating": 1.0,
+            "title": 1.0
+          },
+          "raw": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_raw_f1": {
+            "director": 1.0,
+            "genre": 1.0,
+            "mpaa_rating": 1.0,
+            "title": 1.0
+          }
+        },
+        "nbaplayer": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_norm_f1": {
+            "height": 1.0,
+            "name": 1.0,
+            "team": 1.0,
+            "weight": 1.0
+          },
+          "raw": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_raw_f1": {
+            "height": 1.0,
+            "name": 1.0,
+            "team": 1.0,
+            "weight": 1.0
+          }
+        },
+        "university": {
+          "n_sites": 1,
+          "norm": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_norm_f1": {
+            "name": 1.0,
+            "phone": 1.0,
+            "type": 1.0,
+            "website": 1.0
+          },
+          "raw": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "fields_raw_f1": {
+            "name": 1.0,
+            "phone": 1.0,
+            "type": 1.0,
+            "website": 1.0
+          }
+        }
+      },
+      "overall": {
+        "n_sites": 5,
+        "n_verticals": 5,
+        "norm": {
+          "precision": 0.9998799999999999,
+          "recall": 0.9998799999999999,
+          "f1": 0.9998799999999999
+        },
+        "raw": {
+          "precision": 0.9998799999999999,
+          "recall": 0.9998799999999999,
+          "f1": 0.9998799999999999
+        }
+      }
+    },
+    "accuracy_sample": null,
+    "optional_field_recall": null,
+    "groups": {},
+    "clustering": {
+      "n_clusters": 2.2,
+      "n_templates": 1.4,
+      "tail_pages": 2.2,
+      "n_sites": 5
+    },
+    "cost": {
+      "pages": 7465,
+      "templates": 11,
+      "calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "input_tokens_per_1k_pages": 0.0,
+      "output_tokens_per_1k_pages": 0.0,
+      "calls_per_template": 0.0,
+      "usd_per_1k_pages": 0.0,
+      "price_estimated": false,
+      "extrapolated": false,
+      "spend_usd": 0.0,
+      "llm_latency_s_mean": null
+    },
+    "cost_per_vertical": {
+      "auto": {
+        "pages": 2000,
+        "templates": 5,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "book": {
+        "pages": 2000,
+        "templates": 3,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "movie": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "nbaplayer": {
+        "pages": 438,
+        "templates": 1,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      },
+      "university": {
+        "pages": 1027,
+        "templates": 1,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "extrapolated": false,
+        "spend_usd": 0.0,
+        "llm_latency_s_mean": null
+      }
+    },
+    "speed_pages_per_sec_per_core": {
+      "baseline": null
+    },
+    "curves": {},
+    "unprompted_recall": null,
+    "union": null
+  },
+  "sites": [
+    {
+      "site": "auto-automotive",
+      "vertical": "auto",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'auto-automotive'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 1999,
+      "n_labeled": 1999,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 13.824
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "automotive",
+        "split": "test",
+        "pages": 1999,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/auto-automotive/run"
+    },
+    {
+      "site": "book-barnesandnoble",
+      "vertical": "book",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "book-barnesandnoble",
+        "vertical": "book",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 0.9994,
+          "recall": 0.9994,
+          "f1": 0.9994
+        },
+        "raw": {
+          "precision": 0.9994,
+          "recall": 0.9994,
+          "f1": 0.9994
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "author": {
+            "norm": {
+              "tp": 1994,
+              "fp": 6,
+              "fn": 6,
+              "tn": 0,
+              "precision": 0.997,
+              "recall": 0.997,
+              "f1": 0.997
+            },
+            "raw": {
+              "tp": 1994,
+              "fp": 6,
+              "fn": 6,
+              "tn": 0,
+              "precision": 0.997,
+              "recall": 0.997,
+              "f1": 0.997
+            }
+          },
+          "isbn_13": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "publisher": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "publication_date": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 3,
+        "n_templates": 2,
+        "tail_pages": 1
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 3,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "calls_per_page": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "extrapolated": false,
+        "models": [],
+        "pages_failed": 0,
+        "wall_seconds": 11.61
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 1.2655,
+          "pages": 2000,
+          "pages_per_sec": 1580.3406
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [
+        "hand-written XPath wrapper book-barnesandnoble.json (written by the build agent, not a human; see generated_by in the spec) applied with Spec.apply to 2000 pages in 1.25s; no model calls"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "barnesandnoble",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/book-barnesandnoble/run"
+    },
+    {
+      "site": "camera-buy",
+      "vertical": "camera",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'camera-buy'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 500,
+      "n_labeled": 500,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 7,
+        "n_templates": 1,
+        "tail_pages": 20
+      },
+      "cost": {
+        "wall_seconds": 6.996
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "buy",
+        "split": "test",
+        "pages": 500,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/camera-buy/run"
+    },
+    {
+      "site": "job-hotjobs",
+      "vertical": "job",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'job-hotjobs'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 105,
+        "n_templates": 1,
+        "tail_pages": 135
+      },
+      "cost": {
+        "wall_seconds": 6.867
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "hotjobs",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/job-hotjobs/run"
+    },
+    {
+      "site": "movie-boxofficemojo",
+      "vertical": "movie",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'movie-boxofficemojo'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 6.227
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "boxofficemojo",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/movie-boxofficemojo/run"
+    },
+    {
+      "site": "nbaplayer-foxsports",
+      "vertical": "nbaplayer",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'nbaplayer-foxsports'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 425,
+      "n_labeled": 425,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 5.84
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "foxsports",
+        "split": "test",
+        "pages": 425,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/nbaplayer-foxsports/run"
+    },
+    {
+      "site": "restaurant-gayot",
+      "vertical": "restaurant",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'restaurant-gayot'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 3
+      },
+      "cost": {
+        "wall_seconds": 4.663
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "gayot",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/restaurant-gayot/run"
+    },
+    {
+      "site": "university-collegeprowler",
+      "vertical": "university",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'university-collegeprowler'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 7.357
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "collegeprowler",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/university-collegeprowler/run"
+    },
+    {
+      "site": "auto-autoweb",
+      "vertical": "auto",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'auto-autoweb'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 5.474
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "autoweb",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/auto-autoweb/run"
+    },
+    {
+      "site": "book-bookdepository",
+      "vertical": "book",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'book-bookdepository'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 4,
+        "n_templates": 3,
+        "tail_pages": 1
+      },
+      "cost": {
+        "wall_seconds": 9.663
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "bookdepository",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/book-bookdepository/run"
+    },
+    {
+      "site": "camera-compsource",
+      "vertical": "camera",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'camera-compsource'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 430,
+      "n_labeled": 430,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 3.838
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "compsource",
+        "split": "test",
+        "pages": 430,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/camera-compsource/run"
+    },
+    {
+      "site": "job-job",
+      "vertical": "job",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'job-job'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 8.038
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "job",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/job-job/run"
+    },
+    {
+      "site": "movie-hollywood",
+      "vertical": "movie",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'movie-hollywood'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 8.868
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "hollywood",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/movie-hollywood/run"
+    },
+    {
+      "site": "nbaplayer-msnca",
+      "vertical": "nbaplayer",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'nbaplayer-msnca'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 434,
+      "n_labeled": 434,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 2.144
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "msnca",
+        "split": "test",
+        "pages": 434,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/nbaplayer-msnca/run"
+    },
+    {
+      "site": "restaurant-opentable",
+      "vertical": "restaurant",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'restaurant-opentable'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 2,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 18.714
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "opentable",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/restaurant-opentable/run"
+    },
+    {
+      "site": "university-collegetoolkit",
+      "vertical": "university",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'university-collegetoolkit'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 9.213
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "collegetoolkit",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/university-collegetoolkit/run"
+    },
+    {
+      "site": "auto-carquotes",
+      "vertical": "auto",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'auto-carquotes'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 3.898
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "carquotes",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/auto-carquotes/run"
+    },
+    {
+      "site": "book-booksamillion",
+      "vertical": "book",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'book-booksamillion'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 2,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 4.943
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "booksamillion",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/book-booksamillion/run"
+    },
+    {
+      "site": "camera-ecost",
+      "vertical": "camera",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'camera-ecost'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 923,
+      "n_labeled": 923,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 5.998
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "ecost",
+        "split": "test",
+        "pages": 923,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/camera-ecost/run"
+    },
+    {
+      "site": "job-jobcircle",
+      "vertical": "job",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'job-jobcircle'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 4.437
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "jobcircle",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/job-jobcircle/run"
+    },
+    {
+      "site": "movie-iheartmovies",
+      "vertical": "movie",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'movie-iheartmovies'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 3.59
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "iheartmovies",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/movie-iheartmovies/run"
+    },
+    {
+      "site": "nbaplayer-nba",
+      "vertical": "nbaplayer",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'nbaplayer-nba'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 434,
+      "n_labeled": 434,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 1.985
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "nba",
+        "split": "test",
+        "pages": 434,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/nbaplayer-nba/run"
+    },
+    {
+      "site": "restaurant-pickarestaurant",
+      "vertical": "restaurant",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'restaurant-pickarestaurant'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 6,
+        "n_templates": 2,
+        "tail_pages": 11
+      },
+      "cost": {
+        "wall_seconds": 4.958
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "pickarestaurant",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/restaurant-pickarestaurant/run"
+    },
+    {
+      "site": "university-ecampustours",
+      "vertical": "university",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'university-ecampustours'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 1063,
+      "n_labeled": 1063,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 1.762
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "ecampustours",
+        "split": "test",
+        "pages": 1063,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/university-ecampustours/run"
+    },
+    {
+      "site": "auto-cars",
+      "vertical": "auto",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'auto-cars'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 657,
+      "n_labeled": 657,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 10
+      },
+      "cost": {
+        "wall_seconds": 2.052
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "cars",
+        "split": "test",
+        "pages": 657,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/auto-cars/run"
+    },
+    {
+      "site": "book-borders",
+      "vertical": "book",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'book-borders'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 6.82
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "borders",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/book-borders/run"
+    },
+    {
+      "site": "camera-jr",
+      "vertical": "camera",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'camera-jr'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 367,
+      "n_labeled": 367,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 3.839
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "jr",
+        "split": "test",
+        "pages": 367,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/camera-jr/run"
+    },
+    {
+      "site": "job-jobtarget",
+      "vertical": "job",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'job-jobtarget'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 35,
+        "n_templates": 1,
+        "tail_pages": 36
+      },
+      "cost": {
+        "wall_seconds": 8.641
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "jobtarget",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/job-jobtarget/run"
+    },
+    {
+      "site": "movie-imdb",
+      "vertical": "movie",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "movie-imdb",
+        "vertical": "movie",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "title": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "director": {
+            "norm": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1998,
+              "fp": 0,
+              "fn": 0,
+              "tn": 2,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "genre": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "mpaa_rating": {
+            "norm": {
+              "tp": 1986,
+              "fp": 0,
+              "fn": 0,
+              "tn": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1986,
+              "fp": 0,
+              "fn": 0,
+              "tn": 14,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 1,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "calls_per_page": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "extrapolated": false,
+        "models": [],
+        "pages_failed": 0,
+        "wall_seconds": 23.182
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 1.956,
+          "pages": 2000,
+          "pages_per_sec": 1022.5001
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [
+        "hand-written XPath wrapper movie-imdb.json (written by the build agent, not a human; see generated_by in the spec) applied with Spec.apply to 2000 pages in 1.92s; no model calls"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "imdb",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/movie-imdb/run"
+    },
+    {
+      "site": "nbaplayer-si",
+      "vertical": "nbaplayer",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'nbaplayer-si'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 515,
+      "n_labeled": 515,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 3.863
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "si",
+        "split": "test",
+        "pages": 515,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/nbaplayer-si/run"
+    },
+    {
+      "site": "restaurant-restaurantica",
+      "vertical": "restaurant",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'restaurant-restaurantica'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 2,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 7.852
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "restaurantica",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/restaurant-restaurantica/run"
+    },
+    {
+      "site": "university-embark",
+      "vertical": "university",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'university-embark'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 7.465
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "embark",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/university-embark/run"
+    },
+    {
+      "site": "auto-kbb",
+      "vertical": "auto",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'auto-kbb'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 10.83
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "kbb",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/auto-kbb/run"
+    },
+    {
+      "site": "book-buy",
+      "vertical": "book",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'book-buy'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 24,
+        "n_templates": 1,
+        "tail_pages": 25
+      },
+      "cost": {
+        "wall_seconds": 14.573
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "buy",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/book-buy/run"
+    },
+    {
+      "site": "camera-newegg",
+      "vertical": "camera",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'camera-newegg'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 220,
+      "n_labeled": 220,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 2.776
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "newegg",
+        "split": "test",
+        "pages": 220,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/camera-newegg/run"
+    },
+    {
+      "site": "job-monster",
+      "vertical": "job",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'job-monster'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 337,
+        "n_templates": 1,
+        "tail_pages": 354
+      },
+      "cost": {
+        "wall_seconds": 14.506
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "monster",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/job-monster/run"
+    },
+    {
+      "site": "movie-metacritic",
+      "vertical": "movie",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'movie-metacritic'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 16.576
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "metacritic",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/movie-metacritic/run"
+    },
+    {
+      "site": "nbaplayer-slam",
+      "vertical": "nbaplayer",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'nbaplayer-slam'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 423,
+      "n_labeled": 423,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 1.758
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "slam",
+        "split": "test",
+        "pages": 423,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/nbaplayer-slam/run"
+    },
+    {
+      "site": "restaurant-tripadvisor",
+      "vertical": "restaurant",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'restaurant-tripadvisor'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 6,
+        "n_templates": 6,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 16.128
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "tripadvisor",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/restaurant-tripadvisor/run"
+    },
+    {
+      "site": "university-matchcollege",
+      "vertical": "university",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'university-matchcollege'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 1
+      },
+      "cost": {
+        "wall_seconds": 13.02
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "matchcollege",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/university-matchcollege/run"
+    },
+    {
+      "site": "auto-motortrend",
+      "vertical": "auto",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'auto-motortrend'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 1267,
+      "n_labeled": 1267,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 7.493
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "motortrend",
+        "split": "test",
+        "pages": 1267,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/auto-motortrend/run"
+    },
+    {
+      "site": "book-christianbook",
+      "vertical": "book",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'book-christianbook'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 10,
+        "n_templates": 1,
+        "tail_pages": 14
+      },
+      "cost": {
+        "wall_seconds": 15.823
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "christianbook",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/book-christianbook/run"
+    },
+    {
+      "site": "camera-onsale",
+      "vertical": "camera",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'camera-onsale'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 261,
+      "n_labeled": 261,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 3,
+        "n_templates": 1,
+        "tail_pages": 7
+      },
+      "cost": {
+        "wall_seconds": 2.852
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "onsale",
+        "split": "test",
+        "pages": 261,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/camera-onsale/run"
+    },
+    {
+      "site": "job-nettemps",
+      "vertical": "job",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'job-nettemps'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 3.41
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "nettemps",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/job-nettemps/run"
+    },
+    {
+      "site": "movie-msn",
+      "vertical": "movie",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'movie-msn'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 4
+      },
+      "cost": {
+        "wall_seconds": 9.499
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "msn",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/movie-msn/run"
+    },
+    {
+      "site": "nbaplayer-usatoday",
+      "vertical": "nbaplayer",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'nbaplayer-usatoday'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 436,
+      "n_labeled": 436,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 2.446
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "usatoday",
+        "split": "test",
+        "pages": 436,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/nbaplayer-usatoday/run"
+    },
+    {
+      "site": "restaurant-urbanspoon",
+      "vertical": "restaurant",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'restaurant-urbanspoon'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 4,
+        "n_templates": 1,
+        "tail_pages": 4
+      },
+      "cost": {
+        "wall_seconds": 13.746
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "urbanspoon",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/restaurant-urbanspoon/run"
+    },
+    {
+      "site": "university-princetonreview",
+      "vertical": "university",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'university-princetonreview'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 615,
+      "n_labeled": 615,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 2
+      },
+      "cost": {
+        "wall_seconds": 4.187
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "princetonreview",
+        "split": "test",
+        "pages": 615,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/university-princetonreview/run"
+    },
+    {
+      "site": "auto-msn",
+      "vertical": "auto",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'auto-msn'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 2,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 18.357
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "msn",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/auto-msn/run"
+    },
+    {
+      "site": "book-deepdiscount",
+      "vertical": "book",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'book-deepdiscount'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 1
+      },
+      "cost": {
+        "wall_seconds": 11.574
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "deepdiscount",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/book-deepdiscount/run"
+    },
+    {
+      "site": "camera-pcnation",
+      "vertical": "camera",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'camera-pcnation'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 234,
+      "n_labeled": 234,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 1.37
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "pcnation",
+        "split": "test",
+        "pages": 234,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/camera-pcnation/run"
+    },
+    {
+      "site": "job-rightitjobs",
+      "vertical": "job",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'job-rightitjobs'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 3.448
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "rightitjobs",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/job-rightitjobs/run"
+    },
+    {
+      "site": "movie-rottentomatoes",
+      "vertical": "movie",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'movie-rottentomatoes'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 23.542
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "rottentomatoes",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/movie-rottentomatoes/run"
+    },
+    {
+      "site": "nbaplayer-wiki",
+      "vertical": "nbaplayer",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'nbaplayer-wiki'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 420,
+      "n_labeled": 420,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 370,
+        "n_templates": 1,
+        "tail_pages": 374
+      },
+      "cost": {
+        "wall_seconds": 4.905
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "wiki",
+        "split": "test",
+        "pages": 420,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/nbaplayer-wiki/run"
+    },
+    {
+      "site": "restaurant-usdiners",
+      "vertical": "restaurant",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'restaurant-usdiners'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 6.912
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "usdiners",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/restaurant-usdiners/run"
+    },
+    {
+      "site": "university-studentaid",
+      "vertical": "university",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'university-studentaid'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 4.702
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "studentaid",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/university-studentaid/run"
+    },
+    {
+      "site": "auto-yahoo",
+      "vertical": "auto",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": {
+        "site": "auto-yahoo",
+        "vertical": "auto",
+        "pages_scored": 2000,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "model": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "price": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "engine": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "fuel_economy": {
+            "norm": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 2000,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 5,
+        "n_templates": 2,
+        "tail_pages": 10
+      },
+      "cost": {
+        "pages": 2000,
+        "templates": 5,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "calls_per_page": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "extrapolated": false,
+        "models": [],
+        "pages_failed": 0,
+        "wall_seconds": 14.677
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 1.3231,
+          "pages": 2000,
+          "pages_per_sec": 1511.6032
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [
+        "hand-written XPath wrapper auto-yahoo.json (written by the build agent, not a human; see generated_by in the spec) applied with Spec.apply to 2000 pages in 1.30s; no model calls"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "yahoo",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "model",
+          "price",
+          "engine",
+          "fuel_economy"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/auto-yahoo/run"
+    },
+    {
+      "site": "book-waterstones",
+      "vertical": "book",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'book-waterstones'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 9.086
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "waterstones",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "author",
+          "isbn_13",
+          "publisher",
+          "publication_date"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/book-waterstones/run"
+    },
+    {
+      "site": "camera-thenerds",
+      "vertical": "camera",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'camera-thenerds'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 309,
+      "n_labeled": 309,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 3.506
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "thenerds",
+        "split": "test",
+        "pages": 309,
+        "attributes": [
+          "model",
+          "price",
+          "manufacturer"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/camera-thenerds/run"
+    },
+    {
+      "site": "job-techcentric",
+      "vertical": "job",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'job-techcentric'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 2,
+        "n_templates": 1,
+        "tail_pages": 1
+      },
+      "cost": {
+        "wall_seconds": 13.843
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "techcentric",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "company",
+          "location",
+          "date_posted"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/job-techcentric/run"
+    },
+    {
+      "site": "movie-yahoo",
+      "vertical": "movie",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'movie-yahoo'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 7,
+        "n_templates": 1,
+        "tail_pages": 10
+      },
+      "cost": {
+        "wall_seconds": 5.857
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "yahoo",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "title",
+          "director",
+          "genre",
+          "mpaa_rating"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/movie-yahoo/run"
+    },
+    {
+      "site": "nbaplayer-yahoo",
+      "vertical": "nbaplayer",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 438,
+      "n_labeled": 438,
+      "accuracy": {
+        "site": "nbaplayer-yahoo",
+        "vertical": "nbaplayer",
+        "pages_scored": 438,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 438,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 438,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "team": {
+            "norm": {
+              "tp": 438,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 438,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "height": {
+            "norm": {
+              "tp": 438,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 438,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "weight": {
+            "norm": {
+              "tp": 438,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 438,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 438,
+        "templates": 1,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "calls_per_page": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "extrapolated": false,
+        "models": [],
+        "pages_failed": 0,
+        "wall_seconds": 3.419
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 0.6428,
+          "pages": 438,
+          "pages_per_sec": 681.4322
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [
+        "hand-written XPath wrapper nbaplayer-yahoo.json (written by the build agent, not a human; see generated_by in the spec) applied with Spec.apply to 438 pages in 0.64s; no model calls"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "yahoo",
+        "split": "test",
+        "pages": 438,
+        "attributes": [
+          "name",
+          "team",
+          "height",
+          "weight"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/nbaplayer-yahoo/run"
+    },
+    {
+      "site": "restaurant-zagat",
+      "vertical": "restaurant",
+      "status": "not_run",
+      "reason": "no hand-written wrapper for site 'restaurant-zagat'; available: ['auto-yahoo', 'book-barnesandnoble', 'movie-imdb', 'nbaplayer-yahoo', 'university-usnews']",
+      "n_pages": 2000,
+      "n_labeled": 2000,
+      "accuracy": null,
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "wall_seconds": 7.769
+      },
+      "speed": {},
+      "spend_usd": 0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "zagat",
+        "split": "test",
+        "pages": 2000,
+        "attributes": [
+          "name",
+          "address",
+          "phone",
+          "cuisine"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/restaurant-zagat/run"
+    },
+    {
+      "site": "university-usnews",
+      "vertical": "university",
+      "status": "ok",
+      "reason": null,
+      "n_pages": 1027,
+      "n_labeled": 1027,
+      "accuracy": {
+        "site": "university-usnews",
+        "vertical": "university",
+        "pages_scored": 1027,
+        "pages_without_prediction": 0,
+        "pages_excluded": 0,
+        "norm": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "raw": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "fields": {
+          "name": {
+            "norm": {
+              "tp": 1027,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1027,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "phone": {
+            "norm": {
+              "tp": 1027,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1027,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "website": {
+            "norm": {
+              "tp": 1027,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1027,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          },
+          "type": {
+            "norm": {
+              "tp": 1027,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            },
+            "raw": {
+              "tp": 1027,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0
+            }
+          }
+        }
+      },
+      "accuracy_sample": null,
+      "optional_field_recall": null,
+      "clustering": {
+        "n_clusters": 1,
+        "n_templates": 1,
+        "tail_pages": 0
+      },
+      "cost": {
+        "pages": 1027,
+        "templates": 1,
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "input_tokens_per_1k_pages": 0.0,
+        "output_tokens_per_1k_pages": 0.0,
+        "calls_per_template": 0.0,
+        "calls_per_page": 0.0,
+        "usd_per_1k_pages": 0.0,
+        "price_estimated": false,
+        "spend_usd": 0.0,
+        "extrapolated": false,
+        "models": [],
+        "pages_failed": 0,
+        "wall_seconds": 6.564
+      },
+      "speed": {
+        "baseline": {
+          "seconds": 1.9178,
+          "pages": 1027,
+          "pages_per_sec": 535.5049
+        }
+      },
+      "spend_usd": 0.0,
+      "models": [],
+      "prompt_versions": [],
+      "notes": [
+        "hand-written XPath wrapper university-usnews.json (written by the build agent, not a human; see generated_by in the spec) applied with Spec.apply to 1027 pages in 1.88s; no model calls"
+      ],
+      "site_meta": {
+        "dataset": "swde",
+        "site": "usnews",
+        "split": "test",
+        "pages": 1027,
+        "attributes": [
+          "name",
+          "phone",
+          "website",
+          "type"
+        ],
+        "fallback_urls": 0,
+        "entities_decoded": true
+      },
+      "run_dir": "data/eval/swde_test_handwritten/20261027T102047Z/university-usnews/run"
+    }
+  ]
+}

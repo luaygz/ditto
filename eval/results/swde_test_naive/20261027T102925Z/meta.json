@@ -1,0 +1,160 @@
+{
+  "name": "swde_test_naive",
+  "description": "SWDE frozen test split, naive per-page LLM baseline on a seeded 20-page sample per site; cost per 1,000 pages extrapolated. Run last (most expensive).",
+  "created_at": "2026-10-27T10:29:25+00:00",
+  "config_path": "eval/configs/swde_test_naive.yaml",
+  "config_sha256": "d41695015ff3063f2f9d507f26a5aa638ae77a073cbc2cf0af78bdb90cd2b0eb",
+  "config": {
+    "name": "swde_test_naive",
+    "description": "SWDE frozen test split, naive per-page LLM baseline on a seeded 20-page sample per site; cost per 1,000 pages extrapolated. Run last (most expensive).",
+    "dataset": "swde",
+    "dataset_options": {},
+    "selection": {
+      "split": "test",
+      "sites": [],
+      "verticals": [],
+      "max_sites": null
+    },
+    "method": {
+      "kind": "baseline",
+      "mode": "prompted",
+      "baseline": "naive_llm",
+      "params": {
+        "until": "extract",
+        "min_cluster_size": 20,
+        "union_min_tokens": 8000,
+        "union_max_tokens": 30000,
+        "max_repair_calls": 3,
+        "tail": "skip",
+        "concurrency": 4
+      }
+    },
+    "models": {
+      "baseline": "openai/gpt-6.1-sol"
+    },
+    "budget_usd": 16.0,
+    "sample": {
+      "pages_per_site": 10,
+      "align_pages": 50,
+      "align_min_fraction": 0.1
+    },
+    "seeds": {
+      "run": 1,
+      "synth": 1
+    },
+    "workers": null,
+    "keep_runs": true
+  },
+  "dry_run": false,
+  "git": {
+    "commit": "58c297d64a6de6c5c5731f3995dcec6058226186",
+    "dirty": false
+  },
+  "dataset_manifests": {
+    "commoncrawl_silver": {
+      "path": "eval/datasets/commoncrawl_silver/manifest.json",
+      "sha256": "004b03229d3a8bea973349d57e39dc3beada6387b9c712661669cdd582a297c1"
+    },
+    "livewebie": {
+      "path": "eval/datasets/livewebie/manifest.json",
+      "sha256": "5d5994441eef34b0086380a2e2afd343e2d2a17d8595b2cde9773942097d38f8"
+    },
+    "swde": {
+      "path": "eval/datasets/swde/manifest.json",
+      "sha256": "e7c3b6fda04a7bc4514d968449de03233d6f32ba13722329796d2cbac75531cc"
+    }
+  },
+  "machine": {
+    "cpu_count": 16,
+    "memory_gb": 62.66,
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "processor": "",
+    "python": "3.11.15"
+  },
+  "work_dir": "data/eval/swde_test_naive/20261027T102925Z",
+  "budget_usd": 16.0,
+  "cost_basis": "usd_per_1k_pages = tokens x standard-tier list prices (config/prices.yaml, no cache, batch or flex discounts) for every method; spend_usd = what was actually billed",
+  "ditto_version": "0.0.0",
+  "notes": [],
+  "status": "ok",
+  "models": {
+    "pinned": {
+      "baseline": "openai/gpt-6.1-sol"
+    },
+    "used": [
+      "openai/gpt-6.1-sol"
+    ]
+  },
+  "prompt_versions": [
+    "naive_baseline.v1"
+  ],
+  "spend_usd": 14.456364,
+  "spend_by_site": {
+    "auto-automotive": 0.35802,
+    "book-barnesandnoble": 0.252212,
+    "camera-buy": 0.64052,
+    "job-hotjobs": 0.122292,
+    "movie-boxofficemojo": 0.11926,
+    "nbaplayer-foxsports": 0.52645,
+    "restaurant-gayot": 0.136556,
+    "university-collegeprowler": 0.212066,
+    "auto-autoweb": 0.124846,
+    "book-bookdepository": 0.163142,
+    "camera-compsource": 0.41409,
+    "job-job": 0.198598,
+    "movie-hollywood": 0.309484,
+    "nbaplayer-msnca": 0.223768,
+    "restaurant-opentable": 0.183236,
+    "university-collegetoolkit": 0.24524,
+    "auto-carquotes": 0.112516,
+    "book-booksamillion": 0.135234,
+    "camera-ecost": 0.409908,
+    "job-jobcircle": 0.110474,
+    "movie-iheartmovies": 0.07927,
+    "nbaplayer-nba": 0.198282,
+    "restaurant-pickarestaurant": 0.090872,
+    "university-ecampustours": 0.058644,
+    "auto-cars": 0.122636,
+    "book-borders": 0.15742,
+    "camera-jr": 0.319278,
+    "job-jobtarget": 0.073792,
+    "movie-imdb": 0.319464,
+    "nbaplayer-si": 0.341724,
+    "restaurant-restaurantica": 0.092892,
+    "university-embark": 0.126098,
+    "auto-kbb": 0.225782,
+    "book-buy": 0.218298,
+    "camera-newegg": 0.4682,
+    "job-monster": 0.081832,
+    "movie-metacritic": 0.282812,
+    "nbaplayer-slam": 0.189696,
+    "restaurant-tripadvisor": 0.410158,
+    "university-matchcollege": 0.299754,
+    "auto-motortrend": 0.321516,
+    "book-christianbook": 0.26725,
+    "camera-onsale": 0.353032,
+    "job-nettemps": 0.077238,
+    "movie-msn": 0.16848,
+    "nbaplayer-usatoday": 0.246172,
+    "restaurant-urbanspoon": 0.211142,
+    "university-princetonreview": 0.148904,
+    "auto-msn": 0.326014,
+    "book-deepdiscount": 0.204658,
+    "camera-pcnation": 0.18824,
+    "job-rightitjobs": 0.068376,
+    "movie-rottentomatoes": 0.536218,
+    "nbaplayer-wiki": 0.361468,
+    "restaurant-usdiners": 0.152358,
+    "university-studentaid": 0.11985,
+    "auto-yahoo": 0.21559,
+    "book-waterstones": 0.171744,
+    "camera-thenerds": 0.274562,
+    "job-techcentric": 0.142946,
+    "movie-yahoo": 0.128678,
+    "nbaplayer-yahoo": 0.319762,
+    "restaurant-zagat": 0.199942,
+    "university-usnews": 0.097408
+  },
+  "wall_seconds": 860.801
+}

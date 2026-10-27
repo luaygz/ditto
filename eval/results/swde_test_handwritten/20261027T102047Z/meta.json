@@ -1,0 +1,152 @@
+{
+  "name": "swde_test_handwritten",
+  "description": "Hand-written XPath wrappers for 5 SWDE test sites, written by the build agent before looking at generated specs (selector-quality ceiling). No LLM; other sites are recorded as not run.",
+  "created_at": "2026-10-27T10:20:47+00:00",
+  "config_path": "eval/configs/swde_test_handwritten.yaml",
+  "config_sha256": "72d99336f60c619e300e7d8ebf1f168557dc5fd41645deea97abd35d96f0dc17",
+  "config": {
+    "name": "swde_test_handwritten",
+    "description": "Hand-written XPath wrappers for 5 SWDE test sites, written by the build agent before looking at generated specs (selector-quality ceiling). No LLM; other sites are recorded as not run.",
+    "dataset": "swde",
+    "dataset_options": {},
+    "selection": {
+      "split": "test",
+      "sites": [],
+      "verticals": [],
+      "max_sites": null
+    },
+    "method": {
+      "kind": "baseline",
+      "mode": "prompted",
+      "baseline": "handwritten",
+      "params": {
+        "until": "extract",
+        "min_cluster_size": 20,
+        "union_min_tokens": 8000,
+        "union_max_tokens": 30000,
+        "max_repair_calls": 3,
+        "tail": "skip",
+        "concurrency": 4
+      }
+    },
+    "models": {},
+    "budget_usd": 0.01,
+    "sample": {
+      "pages_per_site": null,
+      "align_pages": 50,
+      "align_min_fraction": 0.1
+    },
+    "seeds": {
+      "run": 1,
+      "synth": 1
+    },
+    "workers": null,
+    "keep_runs": true
+  },
+  "dry_run": false,
+  "git": {
+    "commit": "4b1129ded6705a44ec9a7111e5d290d3a518770e",
+    "dirty": true
+  },
+  "dataset_manifests": {
+    "commoncrawl_silver": {
+      "path": "eval/datasets/commoncrawl_silver/manifest.json",
+      "sha256": "004b03229d3a8bea973349d57e39dc3beada6387b9c712661669cdd582a297c1"
+    },
+    "livewebie": {
+      "path": "eval/datasets/livewebie/manifest.json",
+      "sha256": "5d5994441eef34b0086380a2e2afd343e2d2a17d8595b2cde9773942097d38f8"
+    },
+    "swde": {
+      "path": "eval/datasets/swde/manifest.json",
+      "sha256": "e7c3b6fda04a7bc4514d968449de03233d6f32ba13722329796d2cbac75531cc"
+    }
+  },
+  "machine": {
+    "cpu_count": 16,
+    "memory_gb": 62.66,
+    "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "processor": "",
+    "python": "3.11.15"
+  },
+  "work_dir": "data/eval/swde_test_handwritten/20261027T102047Z",
+  "budget_usd": 0.01,
+  "cost_basis": "usd_per_1k_pages = tokens x standard-tier list prices (config/prices.yaml, no cache, batch or flex discounts) for every method; spend_usd = what was actually billed",
+  "ditto_version": "0.0.0",
+  "notes": [],
+  "status": "ok",
+  "models": {
+    "pinned": {},
+    "used": []
+  },
+  "prompt_versions": [],
+  "spend_usd": 0.0,
+  "spend_by_site": {
+    "auto-automotive": 0,
+    "book-barnesandnoble": 0.0,
+    "camera-buy": 0,
+    "job-hotjobs": 0,
+    "movie-boxofficemojo": 0,
+    "nbaplayer-foxsports": 0,
+    "restaurant-gayot": 0,
+    "university-collegeprowler": 0,
+    "auto-autoweb": 0,
+    "book-bookdepository": 0,
+    "camera-compsource": 0,
+    "job-job": 0,
+    "movie-hollywood": 0,
+    "nbaplayer-msnca": 0,
+    "restaurant-opentable": 0,
+    "university-collegetoolkit": 0,
+    "auto-carquotes": 0,
+    "book-booksamillion": 0,
+    "camera-ecost": 0,
+    "job-jobcircle": 0,
+    "movie-iheartmovies": 0,
+    "nbaplayer-nba": 0,
+    "restaurant-pickarestaurant": 0,
+    "university-ecampustours": 0,
+    "auto-cars": 0,
+    "book-borders": 0,
+    "camera-jr": 0,
+    "job-jobtarget": 0,
+    "movie-imdb": 0.0,
+    "nbaplayer-si": 0,
+    "restaurant-restaurantica": 0,
+    "university-embark": 0,
+    "auto-kbb": 0,
+    "book-buy": 0,
+    "camera-newegg": 0,
+    "job-monster": 0,
+    "movie-metacritic": 0,
+    "nbaplayer-slam": 0,
+    "restaurant-tripadvisor": 0,
+    "university-matchcollege": 0,
+    "auto-motortrend": 0,
+    "book-christianbook": 0,
+    "camera-onsale": 0,
+    "job-nettemps": 0,
+    "movie-msn": 0,
+    "nbaplayer-usatoday": 0,
+    "restaurant-urbanspoon": 0,
+    "university-princetonreview": 0,
+    "auto-msn": 0,
+    "book-deepdiscount": 0,
+    "camera-pcnation": 0,
+    "job-rightitjobs": 0,
+    "movie-rottentomatoes": 0,
+    "nbaplayer-wiki": 0,
+    "restaurant-usdiners": 0,
+    "university-studentaid": 0,
+    "auto-yahoo": 0.0,
+    "book-waterstones": 0,
+    "camera-thenerds": 0,
+    "job-techcentric": 0,
+    "movie-yahoo": 0,
+    "nbaplayer-yahoo": 0.0,
+    "restaurant-zagat": 0,
+    "university-usnews": 0.0
+  },
+  "wall_seconds": 516.248
+}
