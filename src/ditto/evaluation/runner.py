@@ -24,12 +24,12 @@ import subprocess
 import sys
 import time
 import traceback
-from collections import defaultdict
-from collections.abc import Callable, Iterable, Mapping, Sequence
+from collections import Counter, defaultdict
+from collections.abc import Callable, Iterable, Mapping, Sequence, Set
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
-from statistics import fmean
+from statistics import fmean, median
 from typing import Any
 from urllib.parse import urlsplit
 
@@ -64,6 +64,14 @@ from ditto.parallel import cpu_count, memory_gb
 from ditto.pipeline import RunOptions, continue_run, stage_analyze, stage_cluster, stage_ingest
 from ditto.run import RunDir, read_json, write_json
 from ditto.schema import FieldsSchema
+from ditto.union.coverage import (
+    FieldCoverage,
+    FieldPath,
+    KnownField,
+    page_text_items,
+    template_coverage,
+)
+from ditto.union.tree import label_key
 
 # -- hooks (the real stages by default; tests substitute fakes) -----------------------------------
 
@@ -159,6 +167,8 @@ class SiteOutcome:
     notes: list[str] = field(default_factory=list)
     spend_usd: float = 0.0
     run_dir: Path | None = None
+    union: dict[str, Any] | None = None
+    """``until: union``: union-page tokens per template and optional-field coverage."""
 
     def to_dict(self) -> dict[str, Any]:
         out: dict[str, Any] = {
@@ -187,6 +197,8 @@ class SiteOutcome:
             }
         if self.alignment is not None:
             out["alignment"] = self.alignment
+        if self.union is not None:
+            out["union"] = self.union
         return out
 
 
@@ -277,6 +289,99 @@ def speed_summary(run: RunDir) -> dict[str, Any]:
     return dict(data) if isinstance(data, dict) else {}
 
 
+def union_templates(run: RunDir) -> list[dict[str, Any]]:
+    """One row per ``union/<tid>.json``: tokens and how the union page was built."""
+    rows: list[dict[str, Any]] = []
+    for path in sorted(run.union_dir.glob("*.json")):
+        m = read_json(path)
+        rows.append(
+            {
+                "template_id": str(m.get("template_id") or path.stem),
+                "tokens": int(m.get("tokens") or 0),
+                "under_min": bool(m.get("under_min")),
+                "base_page_id": m.get("base_page_id"),
+                "base_url": m.get("base_url"),
+                "donor_page_ids": list(m.get("donor_page_ids") or []),
+                "spliced": list(m.get("spliced") or []),
+                "budget_skipped": list(m.get("budget_skipped") or []),
+                "missing": list(m.get("missing") or []),
+                "shown": len(m.get("shown") or []),
+                "collapse_level": m.get("collapse_level"),
+                "dropped": len(m.get("dropped") or []),
+            }
+        )
+    return rows
+
+
+def truth_templates_file(site: EvalSite) -> Path | None:
+    """``truth/templates.json`` of a synthetic site (next to its ``site/`` input), if any."""
+    dirs = [site.meta.get("site_dir"), *(p.parent for p in site.input_paths[:1])]
+    for d in dirs:
+        if d:
+            path = Path(d) / "truth" / "templates.json"
+            if path.is_file():
+                return path
+    return None
+
+
+def _is_optional(definition: Mapping[str, Any]) -> bool:
+    return bool(definition.get("optional")) or float(definition.get("presence", 1.0)) < 1.0
+
+
+def label_strings(value: Any, column: str | None = None) -> list[str]:
+    """A label value as the strings shown on the page: a scalar (or its alternatives), list
+    items, key-value values, record cells (``column``: that column's cells only)."""
+    if value is None or value == "":
+        return []
+    if isinstance(value, Mapping):
+        return [str(v) for v in value.values() if v not in (None, "")]
+    if not isinstance(value, list):
+        return [str(value)]
+    out: list[str] = []
+    for item in value:
+        if isinstance(item, Mapping):
+            cells = [item.get(column)] if column else list(item.values())
+            out.extend(str(c) for c in cells if c not in (None, ""))
+        elif item not in (None, ""):
+            out.append(str(item))
+    return out
+
+
+def optional_fields(
+    tdef: Mapping[str, Any], labels: Mapping[str, Mapping[str, Any]], keys: Iterable[str]
+) -> list[KnownField]:
+    """The optional fields of one synthetic template (``truth/templates.json`` entry) with their
+    values on ``keys``: fields marked optional or with presence under 1 (scalars; lists, tables
+    and key-value blocks when optional) and optional record columns, named ``table.column``.
+    Each carries the labels of the template's other fields and columns."""
+    defs = [d for d in tdef.get("fields") or [] if isinstance(d, Mapping)]
+    every = [str(x) for d in defs for x in (d.get("label"), *_column_labels(d)) if x]
+    keys = list(keys)
+    out: list[KnownField] = []
+    for d in defs:
+        name = str(d["name"])
+        columns = [c for c in d.get("columns") or [] if isinstance(c, Mapping)]
+        items: list[tuple[str, str | None, set[str]]] = []
+        if _is_optional(d):
+            items.append((name, None, {str(x) for x in (d.get("label"), *_column_labels(d)) if x}))
+        for c in columns:
+            if _is_optional(c):
+                own = {str(x) for x in (d.get("label"), c.get("label")) if x}
+                items.append((f"{name}.{c['name']}", str(c["name"]), own))
+        for item, column, own in items:
+            values = {
+                k: v for k in keys if (v := label_strings(labels.get(k, {}).get(name), column))
+            }
+            mine = {label_key(x) for x in own}
+            others = tuple(sorted({x for x in every if label_key(x) not in mine}))
+            out.append(KnownField(item, values, others))
+    return out
+
+
+def _column_labels(definition: Mapping[str, Any]) -> list[Any]:
+    return [c.get("label") for c in definition.get("columns") or [] if isinstance(c, Mapping)]
+
+
 # -- the run ---------------------------------------------------------------------------------------
 
 
@@ -342,7 +447,10 @@ class _Runner:
         out.run_dir = run.root
         out.n_pages = len(urls)
         self._clustering(site, run, urls, out)
-        if params.until == "extract":
+        if params.until == "union":
+            self._analyze(run)
+            out.union = self._union(site, run, urls)
+        elif params.until == "extract":
             if cfg.method.mode == "prompted" and site.fields_schema_path is None:
                 raise ValueError(f"site {site.name} has no fields.yaml for prompted mode")
             schema = (
@@ -350,13 +458,7 @@ class _Runner:
                 if cfg.method.mode == "prompted" and site.fields_schema_path
                 else None
             )
-            self.hooks.analyze(
-                run,
-                include_tail=params.tail == "spec",
-                workers=cfg.workers,
-                min_tokens=params.union_min_tokens,
-                max_tokens=params.union_max_tokens,
-            )
+            self._analyze(run)
             opts = self.hooks.run_options(
                 mode=cfg.method.mode,
                 schema=site.fields_schema_path if cfg.method.mode == "prompted" else None,
@@ -381,6 +483,114 @@ class _Runner:
             str(u["prompt_version"]) for u in usage if u.get("prompt_version")
         )
         out.speed = speed_summary(run)
+
+    def _analyze(self, run: RunDir) -> None:
+        """Analysis and union pages (``stage_analyze``) with the config's parameters."""
+        params = self.cfg.method.params
+        self.hooks.analyze(
+            run,
+            include_tail=params.tail == "spec",
+            workers=self.cfg.workers,
+            min_tokens=params.union_min_tokens,
+            max_tokens=params.union_max_tokens,
+        )
+
+    def _union(self, site: EvalSite, run: RunDir, urls: Mapping[int, str]) -> dict[str, Any]:
+        """Union-page report of one site: tokens and build facts per template, and (synthetic
+        sites with ``truth/templates.json``) optional-field coverage per true template."""
+        rows = union_templates(run)
+        tokens = [int(r["tokens"]) for r in rows]
+        limit = self.cfg.method.params.union_max_tokens
+        return {
+            "n_templates": len(rows),
+            "max_tokens_limit": limit,
+            "max_tokens": max(tokens, default=None),
+            "median_tokens": median(tokens) if tokens else None,
+            "min_tokens": min(tokens, default=None),
+            "over_budget": sum(t > limit for t in tokens),
+            "under_min": sum(bool(r["under_min"]) for r in rows),
+            "with_missing_candidates": sum(bool(r["missing"]) for r in rows),
+            "templates": rows,
+            "coverage": self._union_coverage(site, run, urls, {r["template_id"] for r in rows}),
+        }
+
+    def _union_coverage(
+        self, site: EvalSite, run: RunDir, urls: Mapping[int, str], unions: Set[str]
+    ) -> dict[str, Any] | None:
+        from ditto.analyze.models import CandidateTable
+        from ditto.cluster.models import Clusters
+
+        truth = truth_templates_file(site)
+        data = read_json(truth) if truth is not None else None
+        tdefs = data.get("templates") if isinstance(data, dict) else None
+        if not isinstance(tdefs, list):
+            return None
+        clusters = Clusters.load(run.clusters_json)
+        key_pid = {k: pid for pid, url in urls.items() if (k := site.key_for_url(url))}
+        pages_of: dict[str, list[str]] = defaultdict(list)
+        for key, true_tid in site.truth_templates.items():
+            if key in key_pid:
+                pages_of[true_tid].append(key)
+        cache: dict[str, list[tuple[str, str]]] = {}
+
+        def items(key: str) -> list[tuple[str, str]]:
+            if key not in cache:
+                cache[key] = page_text_items(self.hooks.read_html(run, key_pid[key]))
+            return cache[key]
+
+        rows: list[dict[str, Any]] = []
+        tails = 0
+        for tdef in tdefs:
+            if tdef.get("is_tail"):
+                tails += 1
+                continue
+            true_tid = str(tdef["template_id"])
+            keys = sorted(pages_of.get(true_tid, []))
+            known = optional_fields(tdef, site.labels, keys)
+            # an optional field no page of the template has cannot be shown: listed, not counted
+            fields = [f for f in known if f.values]
+            never = [f.name for f in known if not f.values]
+            votes = Counter(clusters.template_of(key_pid[k]) for k in keys)
+            tid, n = min(votes.items(), key=lambda kv: (-kv[1], str(kv[0])), default=(None, 0))
+            if tid is None or tid not in unions:
+                results = [
+                    FieldCoverage(
+                        f.name,
+                        FieldPath(None, 0, 0, 0),
+                        covered=False,
+                        reason="no_union_page",
+                        detail=f"the template's pages fall in cluster {tid}, which has no "
+                        "union page",
+                    )
+                    for f in fields
+                ]
+            else:
+                table = CandidateTable.load(run.candidates(tid))
+                html = run.union_html(tid).read_text(encoding="utf-8")
+                results = template_coverage(fields, table, html, items)
+            rows.append(
+                {
+                    "true_template": true_tid,
+                    "template_id": tid,
+                    "pages": len(keys),
+                    "cluster_share": round(n / len(keys), 4) if keys else None,
+                    "optional_total": len(results),
+                    "covered": sum(r.covered for r in results),
+                    "covered_fields": [r.name for r in results if r.covered],
+                    "missing": [r.to_dict() for r in results if not r.covered],
+                    "never_present": never,
+                }
+            )
+        total = sum(int(r["optional_total"]) for r in rows)
+        covered = sum(int(r["covered"]) for r in rows)
+        return {
+            "optional_total": total,
+            "covered": covered,
+            "rate": covered / total if total else None,
+            "never_present": sum(len(r["never_present"]) for r in rows),
+            "tail_templates_skipped": tails,
+            "templates": rows,
+        }
 
     def _score_ditto(
         self, site: EvalSite, run: RunDir, urls: Mapping[int, str], out: SiteOutcome
@@ -553,15 +763,22 @@ class _Runner:
             "spend_usd": spend,
             "extrapolated": pages_run < out.n_pages,
             "models": [result.model] if result.model else [],
+            "pages_failed": result.pages_failed,
         }
         if pages_run < out.n_pages:
             out.notes.append(
                 f"cost per 1,000 pages extrapolated from {pages_run} of {out.n_pages} pages"
             )
         out.notes.extend(result.notes)
+        if 0 < result.pages_failed < pages_run:
+            out.notes.append(
+                f"{result.pages_failed} of {pages_run} baseline pages failed (scored as empty)"
+            )
         out.spend_usd = spend
         if result.model:
             out.models.add(result.model)
+        if result.prompt_version:
+            out.prompt_versions.add(result.prompt_version)
         out.speed = {
             "baseline": {
                 "seconds": round(seconds, 4),
@@ -569,6 +786,9 @@ class _Runner:
                 "pages_per_sec": round(pages_run / seconds, 4) if seconds > 0 else None,
             }
         }
+        if pages_run > 0 and result.pages_failed >= pages_run:
+            out.status = "failed"
+            out.reason = f"all {pages_run} baseline pages failed (see notes)"
 
     # -- loop ------------------------------------------------------------------------------------
     def run_site(self, site: EvalSite, out: SiteOutcome) -> None:
@@ -718,6 +938,72 @@ def _mean_speed(outcomes: Sequence[SiteOutcome]) -> dict[str, float | None]:
     return {stage: _mean(values) for stage, values in stages.items()}
 
 
+def _union_summary(outcomes: Sequence[SiteOutcome]) -> dict[str, Any] | None:
+    """The v0.2 gate over every site's union report: every union page within the token cap and
+    (synthetic) every optional field covered, with every site run."""
+    rows = [o for o in outcomes if o.union is not None]
+    if not rows:
+        return None
+    unions = [o.union for o in rows if o.union is not None]
+    tokens = [int(t["tokens"]) for u in unions for t in u["templates"]]
+    coverage: dict[str, Any] | None = None
+    covs = [(o.site.name, o.union["coverage"]) for o in rows if o.union and o.union["coverage"]]
+    if covs:
+        total = sum(int(c["optional_total"]) for _, c in covs)
+        covered = sum(int(c["covered"]) for _, c in covs)
+        coverage = {
+            "sites": len(covs),
+            "templates": sum(len(c["templates"]) for _, c in covs),
+            "optional_total": total,
+            "covered": covered,
+            "rate": covered / total if total else None,
+            "never_present": sum(int(c["never_present"]) for _, c in covs),
+            "missing": [
+                {
+                    "site": name,
+                    "true_template": t["true_template"],
+                    "template_id": t["template_id"],
+                    "field": m["field"],
+                    "reason": m["reason"],
+                }
+                for name, c in covs
+                for t in c["templates"]
+                for m in t["missing"]
+            ],
+        }
+    over = sum(int(u["over_budget"]) for u in unions)
+    tokens_ok = bool(tokens) and over == 0
+    coverage_ok = None if coverage is None else coverage["covered"] == coverage["optional_total"]
+    all_run = all(o.status == "ok" for o in outcomes)
+    return {
+        "n_sites": len(rows),
+        "n_templates": len(tokens),
+        "max_tokens_limit": max(int(u["max_tokens_limit"]) for u in unions),
+        "tokens": (
+            {"min": min(tokens), "median": median(tokens), "max": max(tokens)} if tokens else None
+        ),
+        "per_site": {
+            o.site.name: {
+                "n_templates": o.union["n_templates"],
+                "max_tokens": o.union["max_tokens"],
+                "median_tokens": o.union["median_tokens"],
+            }
+            for o in rows
+            if o.union is not None
+        },
+        "over_budget": over,
+        "under_min": sum(int(u["under_min"]) for u in unions),
+        "with_missing_candidates": sum(int(u["with_missing_candidates"]) for u in unions),
+        "coverage": coverage,
+        "gate": {
+            "all_sites_run": all_run,
+            "tokens_under_max": tokens_ok,
+            "coverage_complete": coverage_ok,
+            "pass": all_run and tokens_ok and coverage_ok is not False,
+        },
+    }
+
+
 def _mean_clustering(outcomes: Sequence[SiteOutcome]) -> dict[str, Any] | None:
     rows = [o.clustering for o in outcomes if o.clustering]
     if not rows:
@@ -804,6 +1090,7 @@ def summarize(outcomes: Sequence[SiteOutcome]) -> dict[str, Any]:
             if unprompted
             else None
         ),
+        "union": _union_summary(outcomes),
     }
 
 
@@ -901,6 +1188,13 @@ def _site_row(o: SiteOutcome, stages: Sequence[str]) -> dict[str, Any]:
     for k in ("ari", "purity", "over_merge", "under_merge", "n_templates", "n_true_templates"):
         row[k] = _num((o.clustering or {}).get(k))
     row.update(_cost_cols(o.cost))
+    if o.union is not None:
+        cov = o.union["coverage"] or {}
+        row["union_templates"] = o.union["n_templates"]
+        row["union_max_tokens"] = o.union["max_tokens"]
+        row["union_median_tokens"] = _num(o.union["median_tokens"])
+        row["union_optional_covered"] = cov.get("covered")
+        row["union_optional_total"] = cov.get("optional_total")
     for stage in stages:
         entry = o.speed.get(stage)
         row[f"pps_core_{stage}"] = (

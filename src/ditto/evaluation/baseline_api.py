@@ -48,6 +48,8 @@ class BaselineOutput:
     pages_failed: int = 0
     """Pages whose call errored (provider/LLM error or invalid answer after the retry); they
     score as empty. When every processed page failed the harness marks the site failed."""
+    prompt_version: str | None = None
+    """Prompt id the baseline used (e.g. ``naive_baseline.v1``), recorded in ``meta.json``."""
 
 
 class NotRun(Exception):

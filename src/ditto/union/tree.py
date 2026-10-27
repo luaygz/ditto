@@ -26,6 +26,15 @@ _LABEL_CACHE_MAX = 200_000
 # Table layouts whose candidates split one path by key / column (as the analysis does);
 # "rows" tables and tables without a layout keep path-level candidates.
 SPLIT_LAYOUTS = frozenset({"dl", "alternating", "pairs", "table"})
+# Table roles of value cells: shown on the union page even when the analysis classed them noise
+SHOWN_TABLE_ROLES = frozenset({"record_column", "kv_value"})
+
+
+def shown_candidate(c: Candidate) -> bool:
+    """Whether the union page shows (annotates, splices) candidate ``c``: every field candidate,
+    plus value cells of a detected table that are too rare to be fields (a record column or a
+    key-value key on under 2% of pages; the generation prompt lists them too)."""
+    return c.is_field or (c.table_id is not None and c.table_role in SHOWN_TABLE_ROLES)
 
 
 def splits_columns(table: Table | None) -> bool:
@@ -131,6 +140,7 @@ class CandIndex:
 
     table: CandidateTable
     fields: dict[str, Candidate]
+    """The candidates the union page shows (``shown_candidate``), by id."""
     tables: dict[str, Table]
     key_paths: dict[str, str]
     container_paths: dict[str, str]
@@ -149,10 +159,11 @@ class CandIndex:
                 key_paths[t.id] = split_candidate_path(key.path)[0]
         path_class: dict[str, str] = {}
         for c in table.candidates:
-            # a path holding any field candidate counts as a field path
-            if c.is_field or c.path not in path_class:
-                path_class[c.path] = "field" if c.is_field else c.cls
-        fields = {c.id: c for c in table.candidates if c.is_field}
+            # a path holding any shown candidate counts as a field path
+            shown = shown_candidate(c)
+            if shown or c.path not in path_class:
+                path_class[c.path] = "field" if shown else c.cls
+        fields = {c.id: c for c in table.candidates if shown_candidate(c)}
         return cls(
             table=table,
             fields=fields,

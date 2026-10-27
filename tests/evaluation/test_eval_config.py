@@ -26,6 +26,8 @@ EXPECTED = {
     "cc_silver_naive",
     "cc_silver_crawl4ai",
     "livewebie_ditto",
+    "union_gate_synth",
+    "union_gate_swde_dev",
 }
 
 
@@ -101,3 +103,12 @@ def test_selection_passes_dataset_options_and_synth_seed() -> None:
     assert sel.split == "dev" and sel.sites == ("a",) and sel.max_sites == 2
     assert sel.options == {"pages": 10, "seed": 1}
     assert cfg.method.label == "ditto (prompted)"
+
+
+def test_union_gate_configs_stop_after_the_union_stage_without_an_llm() -> None:
+    for name in ("union_gate_synth", "union_gate_swde_dev"):
+        cfg = EvalConfig.load(CONFIGS / f"{name}.yaml")
+        assert cfg.method.params.until == "union" and not cfg.uses_llm
+        assert cfg.method.label == "ditto (union)" and cfg.budget_usd == 0.0
+        assert cfg.method.params.union_max_tokens == 30_000
+    assert EvalConfig.load(CONFIGS / "union_gate_swde_dev.yaml").selection.split == "dev"

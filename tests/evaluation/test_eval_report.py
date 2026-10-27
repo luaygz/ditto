@@ -20,6 +20,7 @@ PINNED = {"generation": "openai/gpt-6.1-sol", "repair": "openai/gpt-6.1-sol"}
 
 @pytest.fixture(scope="module")
 def report() -> ModuleType:
+    pytest.importorskip("matplotlib")  # the `eval` extra; report.py draws the charts with it
     spec = importlib.util.spec_from_file_location("ditto_eval_report", REPORT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)

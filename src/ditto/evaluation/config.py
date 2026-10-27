@@ -34,8 +34,10 @@ class SelectionConfig(_Strict):
 class DittoParams(_Strict):
     """Pipeline parameters (defaults are the product defaults)."""
 
-    until: Literal["cluster", "extract"] = "extract"
-    """``cluster`` stops after clustering (clustering-only evaluations, no LLM)."""
+    until: Literal["cluster", "union", "extract"] = "extract"
+    """``cluster`` stops after clustering (clustering-only evaluations); ``union`` after the
+    analysis and the union pages (the v0.2 gate: union tokens, optional-field coverage). Neither
+    calls an LLM."""
     min_cluster_size: int = 20
     union_min_tokens: int = 8000
     union_max_tokens: int = 30000
@@ -65,6 +67,8 @@ class MethodConfig(_Strict):
             return str(self.baseline)
         if self.params.until == "cluster":
             return "ditto (clustering)"
+        if self.params.until == "union":
+            return "ditto (union)"
         return f"ditto ({self.mode})"
 
 

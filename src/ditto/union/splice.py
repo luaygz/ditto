@@ -4,13 +4,14 @@ A candidate missing from the base page is copied from a donor page as a minimal 
 plus its label sibling (a key-value candidate: its row, or its key and value cells; a record
 column: its table). The unit is inserted under the base element with the same path as the
 unit's parent, after the nearest preceding sibling both pages share, else appended; missing
-ancestors are created as shallow copies of the donor's.
+ancestors are created as shallow copies of the donor's. Candidates are spliced most frequent
+first, within an optional token budget (the caller estimates each unit's tokens).
 """
 
 from __future__ import annotations
 
 import copy
-from collections.abc import Callable, Iterable, Mapping
+from collections.abc import Callable, Collection, Iterable, Mapping, Sequence
 from dataclasses import dataclass
 
 from ditto.analyze.models import Candidate
@@ -30,6 +31,7 @@ from ditto.union.tree import (
     locate,
     preceding_elements,
     short_text,
+    split_candidate_path,
     splits_columns,
 )
 
@@ -68,22 +70,24 @@ def choose_base(surveys: list[PageSurvey], focus: set[str] | None = None) -> Pag
     return min(surveys, key=key)
 
 
-def choose_donors(
-    surveys: list[PageSurvey], base_id: int, missing: Iterable[str]
-) -> list[tuple[int, frozenset[str]]]:
-    """Greedy set cover: repeatedly the page holding the most still-missing candidates."""
-    remaining = set(missing)
-    pool = [s for s in surveys if s.page_id != base_id]
-    donors: list[tuple[int, frozenset[str]]] = []
-    while remaining and pool:
-        best = max(pool, key=lambda s: (len(s.present & remaining), -s.size, -s.page_id))
-        gain = best.present & remaining
-        if not gain:
-            break
-        donors.append((best.page_id, frozenset(gain)))
-        remaining -= gain
-        pool.remove(best)
-    return donors
+DONOR_CACHE = 8  # parsed donor pages kept open while splicing
+
+
+@dataclass
+class SpliceResult:
+    spliced: list[str]
+    """Candidates spliced (each with its own unit), in splice order."""
+    donors: list[int]
+    """Donor pages used, in first-use order."""
+    over_budget: list[str]
+    """Candidates some surveyed page has that were not spliced because the budget was spent."""
+    spent: int = 0
+    """Estimated tokens the spliced units add."""
+
+
+UnitCost = Callable[[Sequence[Element], Collection[str]], int]
+"""Estimated tokens the inserted elements of one splice (carrying the given candidate ids) add
+to the union page."""
 
 
 def splice_missing(
@@ -92,62 +96,119 @@ def splice_missing(
     pages: Mapping[int, str],
     surveys: list[PageSurvey],
     index: CandIndex,
-    missing: list[str],
+    missing: Iterable[str],
     log: Callable[[str], None],
-) -> tuple[list[str], list[int]]:
-    """Splice every candidate of ``missing`` some sampled page has, donor by donor in document
-    order. Returns the spliced ids and the donor page ids used."""
-    remaining = set(missing)
-    spliced: list[str] = []
-    used: list[int] = []
-    for donor_id, gain in choose_donors(surveys, base_id, missing):
-        todo = gain & remaining
-        if not todo:
+    *,
+    budget: int | None = None,
+    cost: UnitCost | None = None,
+) -> SpliceResult:
+    """Splice the candidates of ``missing`` some surveyed page has, most frequent first (ties:
+    candidate id), each from the page holding it and the most other still-missing candidates
+    (an already open donor first). A splice whose candidate then does not locate on the base
+    page, or that hides a candidate located there before (a value cell added to a key-value row
+    can turn the row into something else) at least as frequent as its own, is undone; rarer
+    hidden candidates are given up. Missing candidates a kept unit brings along count as
+    spliced. With ``budget`` and ``cost``, splicing stops once the units' estimated tokens
+    reach the budget; the rest are reported in ``over_budget``."""
+    order = sorted(set(missing), key=lambda cid: (-index.fields[cid].p, cid_key(cid)))
+    remaining = set(order)
+    holders = [s for s in surveys if s.page_id != base_id]
+    opened: dict[int, tuple[Tree, dict[str, list[Element]]]] = {}
+    out = SpliceResult([], [], [])
+    shown = set(locate(base, index))
+    for cid in order:
+        if cid not in remaining:
             continue
-        donor = Tree(clean_html(pages[donor_id]))
-        located = locate(donor, index, only=set(todo))
-        position = {el: n for n, el in enumerate(iter_elements(donor.root))}
-        order = sorted(
-            (position[els[0]], cid) for cid, els in located.items() if cid in todo and els
+        if budget is not None and cost is not None and out.spent >= budget:
+            out.over_budget = [c for c in order if c in remaining and _held(c, holders)]
+            log(
+                f"splice budget of {budget} tokens spent: {len(out.over_budget)} candidates not "
+                f"spliced (the most frequent of them on {index.fields[out.over_budget[0]].p:.1%} "
+                "of pages)"
+                if out.over_budget
+                else f"splice budget of {budget} tokens spent"
+            )
+            break
+        options = [s for s in holders if cid in s.present]
+        if not options:
+            continue
+        cached = [s for s in options if s.page_id in opened]
+        pick = max(
+            cached or options, key=lambda s: (len(s.present & remaining), -s.size, -s.page_id)
         )
-        contributed = False
-        for _, cid in order:
-            if cid not in remaining:
-                continue
-            splice_candidate(base, donor, index.fields[cid], located[cid][0], index)
-            spliced.append(cid)
-            contributed = True
-            now = set(locate(base, index, only=remaining))
-            if cid not in now:
-                log(f"spliced {cid} from page {donor_id}, but it does not locate on the union page")
-            remaining -= now
+        if pick.page_id not in opened:
+            if len(opened) >= DONOR_CACHE:
+                del opened[next(iter(opened))]
+            tree = Tree(clean_html(pages[pick.page_id]))
+            opened[pick.page_id] = (tree, locate(tree, index, only=set(pick.present & remaining)))
+        donor, located = opened[pick.page_id]
+        nodes = located.get(cid)
+        if not nodes:
+            continue
+        inserted = splice_candidate(base, donor, index.fields[cid], nodes[0], index, nodes)
+        now = set(locate(base, index))
+        hidden = sorted(shown - now, key=cid_key)
+        p = index.fields[cid].p
+        blocking = [h for h in hidden if index.fields[h].p >= p]
+        if cid not in now or blocking:
+            for el in inserted:
+                parent = el.getparent()
+                if parent is not None:
+                    parent.remove(el)
+            base.invalidate()
             remaining.discard(cid)
-        if contributed:
-            used.append(donor_id)
-    for cid in sorted(remaining, key=cid_key):
-        log(f"cannot splice {cid}: no sampled page has it")
-    return spliced, used
+            why = f"it hides {', '.join(blocking)}" if blocking else "it does not locate there"
+            log(f"splice of {cid} from page {pick.page_id} undone: {why}")
+            continue
+        if hidden:
+            log(f"splice of {cid} hides the rarer {', '.join(hidden)}")
+        carried = (now - shown) & remaining
+        shown = now
+        remaining -= carried
+        out.spliced.append(cid)
+        if pick.page_id not in out.donors:
+            out.donors.append(pick.page_id)
+        if cost is not None:
+            out.spent += cost(inserted, carried)
+    for cid in sorted(remaining.difference(out.over_budget), key=cid_key):
+        log(f"cannot splice {cid}: no surveyed page has it")
+    return out
+
+
+def _held(cid: str, surveys: Iterable[PageSurvey]) -> bool:
+    return any(cid in s.present for s in surveys)
 
 
 def splice_candidate(
-    base: Tree, donor: Tree, cand: Candidate, node: Element, index: CandIndex
-) -> Element:
-    """Copy the minimal unit carrying ``cand`` (``node`` on the donor page) into the base page;
-    returns the top inserted element (marked ``data-x-spliced``)."""
-    unit, label, fixed = _unit(donor, cand, node, index)
+    base: Tree,
+    donor: Tree,
+    cand: Candidate,
+    node: Element,
+    index: CandIndex,
+    group: Sequence[Element] = (),
+) -> tuple[Element, ...]:
+    """Copy the minimal unit carrying ``cand`` (``node`` on the donor page; ``group``: all its
+    nodes there) into the base page, marked ``data-x-spliced``; returns the top elements
+    inserted, in document order."""
+    unit, label, fixed = _unit(donor, cand, node, index, group)
     by_path = base.by_path()
+    ident = _Identity(index)
     chain: list[Element] = []
     anchor_parent = unit.getparent()
-    while anchor_parent is not None and donor.path(anchor_parent) not in by_path:
+    target: Element | None = None
+    while anchor_parent is not None:
+        options = by_path.get(donor.path(anchor_parent))
+        if options:
+            target = _corresponding(base, options, donor, anchor_parent, ident)
+            if target is not None:
+                break
         chain.append(anchor_parent)
         anchor_parent = anchor_parent.getparent()
-    if anchor_parent is None:
+    if target is None:
         # not even the root path matches: the donor root stands for the base root
         if chain:
             chain.pop()
         target = base.root
-    else:
-        target = _best_match(by_path[donor.path(anchor_parent)], anchor_parent)
     levels = [unit, *chain]  # bottom-up; each level's donor parent is the next level
     label_at = 0
     if label is None and not fixed:
@@ -159,7 +220,6 @@ def splice_candidate(
     copies = [_deep_copy(unit), *(_shallow_copy(el) for el in chain)]
     for i in range(1, len(copies)):
         copies[i].append(copies[i - 1])
-    ident = _Identity(index)
     first_donor = levels[-1]
     items = [copies[-1]]
     if label is not None:
@@ -171,11 +231,11 @@ def splice_candidate(
     _insert_aligned(base, target, donor, first_donor, items, ident)
     add_mark(items[0], X_SPLICED, [cand.id])
     base.invalidate()
-    return items[0]
+    return tuple(items)
 
 
 def _unit(
-    donor: Tree, cand: Candidate, node: Element, index: CandIndex
+    donor: Tree, cand: Candidate, node: Element, index: CandIndex, group: Sequence[Element] = ()
 ) -> tuple[Element, Element | None, bool]:
     """(unit, label sibling, fixed): ``fixed`` means the unit already includes its label."""
     table = index.tables.get(cand.table_id) if cand.table_id else None
@@ -183,12 +243,17 @@ def _unit(
         table = None  # "rows" tables: path-level candidates splice like any other node
     if table is not None and cand.table_role == "kv_value":
         key_path = index.key_paths.get(table.id)
+        if key_path is not None and key_path == split_candidate_path(table.row_path)[0]:
+            # the key is the row's own text: <li>Genre/Type: <span>Western</span></li>
+            row = ancestor_at(donor, node, key_path)
+            if row is not None and row is not node and row.getparent() is not None:
+                return row, None, True
         columns = [cand.column] if cand.column else []
         key = kv_key(donor, node, key_path, index.container_paths.get(table.id), columns)
         if key is not None:
             common = _common_ancestor(key, node)
             if common is not None and common.getparent() is not None:
-                if _is_container(donor, common, key, key_path):
+                if _is_container(donor, common, key, key_path, node):
                     unit = _child_toward(common, node)
                     label = _child_toward(common, key)
                     return unit, (None if label is unit else label), True
@@ -202,14 +267,31 @@ def _unit(
             container = next((n for n in up_from(node, 64) if str(n.tag) == "table"), None)
         if container is not None and container.getparent() is not None:
             return container, None, True
+    parent = node.getparent()
+    if (
+        len(group) >= 2
+        and cand.repeat_min == cand.repeat_max == len(group)
+        and parent is not None
+        and parent.getparent() is not None
+        and all(g.getparent() is parent for g in group)
+    ):
+        # a fixed group of same-path siblings (a label and its value sharing one path,
+        # <li><span>Prices</span><span>$$</span></li>): the unit is their parent
+        return parent, None, True
     return node, None, False
 
 
-def _is_container(donor: Tree, common: Element, key: Element, key_path: str | None) -> bool:
-    """Whether ``common`` holds several key-value rows (dl-like) rather than being one row."""
+def _is_container(
+    donor: Tree, common: Element, key: Element, key_path: str | None, value: Element
+) -> bool:
+    """Whether ``common`` holds several key-value rows (dl-like) rather than being one row (a
+    value sharing its key's path, ``<li><span>Budget:</span> <span>$5</span></li>``, is not a
+    second key)."""
     if key_path is None:
         return len(child_elements(common)) > 2
-    return any(n is not key and donor.path(n) == key_path for n in iter_elements(common))
+    return any(
+        n is not key and n is not value and donor.path(n) == key_path for n in iter_elements(common)
+    )
 
 
 def _common_ancestor(a: Element, b: Element) -> Element | None:
@@ -263,9 +345,29 @@ def _best_match(options: list[Element], donor_el: Element) -> Element:
     return best
 
 
+def _corresponding(
+    base: Tree, options: list[Element], donor: Tree, el: Element, ident: _Identity
+) -> Element | None:
+    """The base element standing for donor ancestor ``el`` among ``options`` (its path). A
+    labeled row (``el`` has same-path siblings and invariant label text, e.g. one of several
+    ``<section><h2>Label</h2>...</section>``) needs a base element with the same labels, so
+    a value is never spliced into another field's row; else the most similar option."""
+    parent = el.getparent()
+    if parent is not None:
+        step = label_of(el)
+        if any(s is not el and label_of(s) == step for s in child_elements(parent)):
+            want = ident(donor, el)
+            if want.startswith(_Identity.LABEL):
+                same = [o for o in options if ident(base, o) == want]
+                return _best_match(same, el) if same else None
+    return _best_match(options, el)
+
+
 class _Identity:
     """How a sibling is recognized across pages: its invariant (label or boilerplate) text
     when it has some, else its whole text."""
+
+    LABEL = "label:"
 
     def __init__(self, index: CandIndex) -> None:
         self.index = index
@@ -280,7 +382,7 @@ class _Identity:
                 if self.index.path_class.get(tree.path(n)) in INVARIANT_CLASSES
                 and (text := own_text(n))
             ]
-            hit = "label:" + " | ".join(parts)[:200] if parts else "text:" + short_text(el)
+            hit = self.LABEL + " | ".join(parts)[:200] if parts else "text:" + short_text(el)
             self.cache[el] = hit
         return hit
 

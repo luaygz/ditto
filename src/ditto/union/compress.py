@@ -303,6 +303,13 @@ def unmark_candidates(root: Element, ids: set[str]) -> None:
                         del el.attrib[X_T]
 
 
+def unmark_labels(root: Element) -> None:
+    """Forget every kept label (final budget step, once no candidate is left to forget)."""
+    for el in iter_elements(root):
+        if el.get(X_LABEL) is not None:
+            del el.attrib[X_LABEL]
+
+
 def shorten_candidate_text(root: Element, limit: int) -> None:
     """Cut candidate text to ``limit`` characters too (budget step before dropping candidates)."""
     for el in iter_elements(root):
