@@ -4,15 +4,15 @@ _Updated 2026-10-27._
 
 ## Current phase
 
-**v0.2 Analysis and union page** — in progress (v0.1 passed and tagged).
+**v0.4 Unprompted mode and CLI** — in progress (v0.1–v0.3 passed and tagged).
 
 ## Gates
 
 | Gate | Criterion | Status |
 | --- | --- | --- |
 | v0.1 | ARI ≥ 0.95 on synthetic default site at 10k pages; 100k (or scaled) run completes | **passed** — ARI 1.0 at 10k and 100k (`eval/results/synth_default`, `synth_scale`) |
-| v0.2 | every optional synthetic field in its union page; SWDE dev union pages < 30k tokens | **passed** — 48/48 optional fields; max 29,822 tokens over 23 SWDE dev templates (`eval/results/union_gate_*`); tag after the checkpoint work lands (HEAD must pass `make check`) |
-| v0.3 | SWDE dev F1 within 5 points of naive baseline at < 1% of its tokens/page | pending |
+| v0.2 | every optional synthetic field in its union page; SWDE dev union pages < 30k tokens | **passed** — 48/48 optional fields; max 29,822 tokens over 23 SWDE dev templates (`eval/results/union_gate_*`) |
+| v0.3 | SWDE dev F1 within 5 points of naive baseline at < 1% of its tokens/page | **passed** — ditto 0.876 vs naive 0.858 (norm F1, same 50-page samples); 40.6 vs 11,385 tokens/page (0.36%) (`eval/results/swde_dev_ditto/20261027T102344Z`) |
 | v0.4 | schema-precision ≥ 0.8 on 10 dev sites; clean install + README example works | pending |
 | v0.5 | every README number regenerates from `eval run`; spend under budget | pending |
 | v1.0 | release checklist | pending |
