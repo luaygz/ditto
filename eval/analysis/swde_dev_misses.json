@@ -1,0 +1,554 @@
+{
+  "about": "Misses under the norm column on the SWDE dev slice (ditto: every labeled page the LLM did not see; naive: its seeded 50-page sample per site). A stratified sample was classified by the build agent (not a human) as formatting false negative, real error or label problem; canon_* fields say which misses the canon column credits.",
+  "metric_version": 2,
+  "runs": {
+    "ditto": "20261027T102344Z",
+    "naive": "20261027T085024Z"
+  },
+  "sample": {
+    "per_stratum": 12,
+    "seed": 1,
+    "size": 158
+  },
+  "per_method": {
+    "ditto": {
+      "norm_misses": 11656,
+      "norm_misses_by_outcome": {
+        "extra": 1412,
+        "missing": 160,
+        "wrong": 10084
+      },
+      "canon_credits": 1974,
+      "canon_credits_by_site_field": {
+        "restaurant-fodors.address": 1839,
+        "restaurant-fodors.name": 135
+      },
+      "sample": {
+        "classified": 84,
+        "categories": {
+          "formatting": 6,
+          "real_error": 44,
+          "label_problem": 34
+        },
+        "kinds": {
+          "formatting": {
+            "trailing_separator": 3,
+            "diacritics": 3
+          },
+          "real_error": {
+            "missing": 26,
+            "different_node": 8,
+            "wrong_node": 5,
+            "extra_content": 4,
+            "partial": 1
+          },
+          "label_problem": {
+            "label_truncated": 13,
+            "label_extra_content": 12,
+            "label_missing": 5,
+            "label_is_whole_line": 4
+          }
+        },
+        "canon_credits_by_category": {
+          "formatting": 6,
+          "real_error": 0,
+          "label_problem": 0
+        }
+      },
+      "population_estimate": {
+        "formatting": 1975,
+        "real_error": 1271,
+        "label_problem": 8410
+      }
+    },
+    "naive": {
+      "norm_misses": 401,
+      "norm_misses_by_outcome": {
+        "extra": 45,
+        "wrong": 356
+      },
+      "canon_credits": 70,
+      "canon_credits_by_site_field": {
+        "movie-allmovie.genre": 12,
+        "restaurant-fodors.address": 44,
+        "restaurant-fodors.cuisine": 1,
+        "restaurant-fodors.phone": 13
+      },
+      "sample": {
+        "classified": 74,
+        "categories": {
+          "formatting": 16,
+          "real_error": 18,
+          "label_problem": 40
+        },
+        "kinds": {
+          "formatting": {
+            "trailing_separator": 11,
+            "multi_value_join": 5
+          },
+          "real_error": {
+            "different_node": 13,
+            "extra_content": 5
+          },
+          "label_problem": {
+            "label_missing": 12,
+            "label_extra_content": 12,
+            "label_is_whole_line": 11,
+            "label_truncated": 5
+          }
+        },
+        "canon_credits_by_category": {
+          "formatting": 16,
+          "real_error": 0,
+          "label_problem": 0
+        }
+      },
+      "population_estimate": {
+        "formatting": 70,
+        "real_error": 85,
+        "label_problem": 246
+      }
+    }
+  },
+  "examples": {
+    "formatting:diacritics": [
+      {
+        "method": "ditto",
+        "site": "restaurant-fodors",
+        "field": "name",
+        "predicted": "Varly's Swiftwater Seafood Cafe",
+        "label": "Varly's Swiftwater Seafood Café",
+        "canon_match": true
+      }
+    ],
+    "formatting:multi_value_join": [
+      {
+        "method": "naive",
+        "site": "movie-allmovie",
+        "field": "genre",
+        "predicted": "Children's/Family Fantasy",
+        "label": "[\"Children's/Family\", \"Fantasy\"]",
+        "canon_match": true
+      },
+      {
+        "method": "naive",
+        "site": "restaurant-fodors",
+        "field": "cuisine",
+        "predicted": "Seafood,American",
+        "label": "[\"Seafood\", \"American\"]",
+        "canon_match": true
+      }
+    ],
+    "formatting:trailing_separator": [
+      {
+        "method": "ditto",
+        "site": "restaurant-fodors",
+        "field": "address",
+        "predicted": "911 20th Ave. S, Nashville, TN",
+        "label": "911 20th Ave. S, Nashville, TN |",
+        "canon_match": true
+      },
+      {
+        "method": "naive",
+        "site": "restaurant-fodors",
+        "field": "phone",
+        "predicted": "312/226-8399",
+        "label": "312/226-8399 |",
+        "canon_match": true
+      }
+    ],
+    "label_problem:label_extra_content": [
+      {
+        "method": "ditto",
+        "site": "nbaplayer-espn",
+        "field": "name",
+        "predicted": "Jonas Jerebko",
+        "label": "Jonas Jerebko  #33  F",
+        "canon_match": false
+      }
+    ],
+    "label_problem:label_is_whole_line": [
+      {
+        "method": "ditto",
+        "site": "book-amazon",
+        "field": "publication_date",
+        "predicted": "March 1, 2000",
+        "label": "Zondervan; 1 edition (March 1, 2000)",
+        "canon_match": false
+      },
+      {
+        "method": "ditto",
+        "site": "book-amazon",
+        "field": "publisher",
+        "predicted": "Viking Adult",
+        "label": "Viking Adult; 1st edition (December 1, 2009)",
+        "canon_match": false
+      }
+    ],
+    "label_problem:label_missing": [
+      {
+        "method": "ditto",
+        "site": "auto-aol",
+        "field": "engine",
+        "predicted": "2.2-liter four-cylinder engine",
+        "label": null,
+        "canon_match": false
+      },
+      {
+        "method": "ditto",
+        "site": "book-abebooks",
+        "field": "publisher",
+        "predicted": "HarperCollins Publishers Ltd",
+        "label": null,
+        "canon_match": false
+      },
+      {
+        "method": "naive",
+        "site": "job-careerbuilder",
+        "field": "date_posted",
+        "predicted": "Oct 6, 2010",
+        "label": null,
+        "canon_match": false
+      }
+    ],
+    "label_problem:label_truncated": [
+      {
+        "method": "ditto",
+        "site": "movie-allmovie",
+        "field": "mpaa_rating",
+        "predicted": "PG",
+        "label": "P",
+        "canon_match": false
+      },
+      {
+        "method": "ditto",
+        "site": "movie-amctv",
+        "field": "director",
+        "predicted": "Charles Shyer",
+        "label": "Shyer",
+        "canon_match": false
+      },
+      {
+        "method": "ditto",
+        "site": "restaurant-frommers",
+        "field": "name",
+        "predicted": "BRIDGEwater Bistro",
+        "label": "BRIDGE",
+        "canon_match": false
+      }
+    ],
+    "real_error:different_node": [
+      {
+        "method": "ditto",
+        "site": "camera-amazon",
+        "field": "model",
+        "predicted": "DMC-ZR3K",
+        "label": "Panasonic Lumix DMC-ZR3 14.1 MP Digital Camera with 8x Optical Image Stabilized…",
+        "canon_match": false
+      },
+      {
+        "method": "ditto",
+        "site": "camera-beachaudio",
+        "field": "model",
+        "predicted": "FE-47",
+        "label": "[\"Olympus Fe-47 Point & Shoot Digital Camera - 14 Megapixel - 2.70\\\" Lcd -...\",…",
+        "canon_match": false
+      },
+      {
+        "method": "naive",
+        "site": "job-careerbuilder",
+        "field": "company",
+        "predicted": "The Allstate Corporation",
+        "label": "Allstate",
+        "canon_match": false
+      }
+    ],
+    "real_error:extra_content": [
+      {
+        "method": "ditto",
+        "site": "restaurant-fodors",
+        "field": "phone",
+        "predicted": "323/653-3300 | Reserve Online",
+        "label": "323/653-3300 |",
+        "canon_match": false
+      },
+      {
+        "method": "ditto",
+        "site": "restaurant-frommers",
+        "field": "cuisine",
+        "predicted": "Indian Web site wwwfineindiandining.com Prices Main courses $14-$23; lunch buff…",
+        "label": "Indian",
+        "canon_match": false
+      },
+      {
+        "method": "naive",
+        "site": "auto-aol",
+        "field": "engine",
+        "predicted": "A 2.3-liter four-cylinder engine generates 143 horsepower and a 4.0-liter V6 en…",
+        "label": null,
+        "canon_match": false
+      }
+    ],
+    "real_error:missing": [
+      {
+        "method": "ditto",
+        "site": "auto-aol",
+        "field": "price",
+        "predicted": null,
+        "label": "$283,350",
+        "canon_match": false
+      },
+      {
+        "method": "ditto",
+        "site": "book-amazon",
+        "field": "author",
+        "predicted": null,
+        "label": "Charlaine Harris",
+        "canon_match": false
+      },
+      {
+        "method": "ditto",
+        "site": "book-amazon",
+        "field": "isbn_13",
+        "predicted": null,
+        "label": "978-1428160859",
+        "canon_match": false
+      }
+    ],
+    "real_error:partial": [
+      {
+        "method": "ditto",
+        "site": "book-amazon",
+        "field": "title",
+        "predicted": "The 5000 Year Leap (Original Authorized Edition)",
+        "label": "The 5000 Year Leap (Original Authorized Edition) [plus MP3 Audio-CD and eBook]",
+        "canon_match": false
+      }
+    ],
+    "real_error:wrong_node": [
+      {
+        "method": "ditto",
+        "site": "auto-autobytel",
+        "field": "fuel_economy",
+        "predicted": "6.0L V-8 engine 6 speed automatic transmission 4WD",
+        "label": null,
+        "canon_match": false
+      },
+      {
+        "method": "ditto",
+        "site": "book-abebooks",
+        "field": "publisher",
+        "predicted": "2002. Book Condition: GOOD. . Giving great service since 2004: Buy from the Bes…",
+        "label": null,
+        "canon_match": false
+      }
+    ]
+  },
+  "earlier_dev_runs": {
+    "ditto/20261026T100631Z": {
+      "norm_misses": 55332,
+      "canon_credits": {
+        "book-amazon.isbn_13": {
+          "n": 1975,
+          "example": [
+            "9780307269997",
+            "978-0307269997"
+          ]
+        },
+        "restaurant-fodors.address": {
+          "n": 1839,
+          "example": [
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503",
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503 |"
+          ]
+        },
+        "restaurant-fodors.name": {
+          "n": 135,
+          "example": [
+            "Sacks Cafe",
+            "Sacks Café"
+          ]
+        },
+        "restaurant-fodors.cuisine": {
+          "n": 36,
+          "example": [
+            "New American, American",
+            "[\"New American\", \"American\"]"
+          ]
+        }
+      }
+    },
+    "ditto/20261026T102101Z": {
+      "norm_misses": 22325,
+      "canon_credits": {
+        "book-amazon.isbn_13": {
+          "n": 1958,
+          "example": [
+            "9780307269997",
+            "978-0307269997"
+          ]
+        },
+        "restaurant-fodors.address": {
+          "n": 1839,
+          "example": [
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503",
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503 |"
+          ]
+        },
+        "restaurant-fodors.name": {
+          "n": 135,
+          "example": [
+            "Sacks Cafe",
+            "Sacks Café"
+          ]
+        }
+      }
+    },
+    "ditto/20261026T104638Z": {
+      "norm_misses": 7651,
+      "canon_credits": {
+        "restaurant-fodors.address": {
+          "n": 1839,
+          "example": [
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503",
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503 |"
+          ]
+        },
+        "restaurant-fodors.name": {
+          "n": 135,
+          "example": [
+            "Sacks Cafe",
+            "Sacks Café"
+          ]
+        }
+      }
+    },
+    "ditto/20261027T085235Z": {
+      "norm_misses": 19252,
+      "canon_credits": {
+        "restaurant-fodors.address": {
+          "n": 1839,
+          "example": [
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503",
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503 |"
+          ]
+        },
+        "restaurant-fodors.name": {
+          "n": 135,
+          "example": [
+            "Sacks Cafe",
+            "Sacks Café"
+          ]
+        }
+      }
+    },
+    "ditto/20261027T092241Z": {
+      "norm_misses": 13569,
+      "canon_credits": {
+        "restaurant-fodors.address": {
+          "n": 1839,
+          "example": [
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503",
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503 |"
+          ]
+        },
+        "restaurant-fodors.name": {
+          "n": 135,
+          "example": [
+            "Sacks Cafe",
+            "Sacks Café"
+          ]
+        }
+      }
+    },
+    "ditto/20261027T094639Z": {
+      "norm_misses": 1352,
+      "canon_credits": {}
+    },
+    "ditto/20261027T100856Z": {
+      "norm_misses": 11656,
+      "canon_credits": {
+        "restaurant-fodors.address": {
+          "n": 1839,
+          "example": [
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503",
+            "2477 Arctic Blvd., Downtown, Anchorage, AK, 99503 |"
+          ]
+        },
+        "restaurant-fodors.name": {
+          "n": 135,
+          "example": [
+            "Sacks Cafe",
+            "Sacks Café"
+          ]
+        }
+      }
+    },
+    "naive/20261026T100810Z": {
+      "norm_misses": 211,
+      "canon_credits": {
+        "movie-allmovie.genre": {
+          "n": 12,
+          "example": [
+            "Comedy Western",
+            "[\"Comedy\", \"Western\"]"
+          ]
+        },
+        "restaurant-fodors.address": {
+          "n": 44,
+          "example": [
+            "6700 Jewel Lake Rd., South Anchorage, Anchorage, AK, 99502",
+            "6700 Jewel Lake Rd., South Anchorage, Anchorage, AK, 99502 |"
+          ]
+        },
+        "restaurant-fodors.phone": {
+          "n": 13,
+          "example": [
+            "907/243-0507",
+            "907/243-0507 |"
+          ]
+        },
+        "restaurant-fodors.cuisine": {
+          "n": 1,
+          "example": [
+            "Seafood,American",
+            "[\"Seafood\", \"American\"]"
+          ]
+        }
+      }
+    },
+    "naive/20261026T101546Z": {
+      "norm_misses": 311,
+      "canon_credits": {
+        "movie-allmovie.genre": {
+          "n": 12,
+          "example": [
+            "Comedy Western",
+            "[\"Comedy\", \"Western\"]"
+          ]
+        },
+        "restaurant-fodors.address": {
+          "n": 44,
+          "example": [
+            "6700 Jewel Lake Rd., South Anchorage, Anchorage, AK, 99502",
+            "6700 Jewel Lake Rd., South Anchorage, Anchorage, AK, 99502 |"
+          ]
+        },
+        "restaurant-fodors.phone": {
+          "n": 13,
+          "example": [
+            "907/243-0507",
+            "907/243-0507 |"
+          ]
+        },
+        "restaurant-fodors.cuisine": {
+          "n": 1,
+          "example": [
+            "Seafood,American",
+            "[\"Seafood\", \"American\"]"
+          ]
+        }
+      }
+    }
+  }
+}

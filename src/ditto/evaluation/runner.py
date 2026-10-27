@@ -10,6 +10,10 @@ committed), scores the output against the labels and writes::
     per_site.csv   one row per site
     meta.json      config, pinned and used model ids, prompt versions, git commit, dataset
                    manifest hashes, machine info, spend
+
+Unprompted evaluations also report recall after name alignment (overall and per vertical) and,
+when ``eval/judgments/<dataset>_<split>_schema_precision.json`` exists, the schema precision
+regenerated from its per-field verdicts, checked against the fields this run proposed.
 """
 
 from __future__ import annotations
@@ -48,6 +52,7 @@ from ditto.evaluation.clustering import clustering_metrics
 from ditto.evaluation.config import DATASET_MODULES, EvalConfig
 from ditto.evaluation.datasets.base import DatasetUnavailable, EvalSite, Selection
 from ditto.evaluation.metrics import (
+    METRIC_VERSION,
     MODES,
     ROW_META_KEYS,
     OptionalRecall,
@@ -57,6 +62,7 @@ from ditto.evaluation.metrics import (
     optional_field_recall,
     rename_fields,
     sample_keys,
+    schema_precision,
     score_site,
 )
 from ditto.llm.base import ROLES, BudgetExceeded
@@ -162,6 +168,8 @@ class SiteOutcome:
     cost: dict[str, Any] = field(default_factory=dict)
     speed: dict[str, Any] = field(default_factory=dict)
     alignment: dict[str, dict[str, str]] | None = None
+    proposed_schema: dict[str, dict[str, str]] | None = None
+    """Unprompted mode: ``{template: {field: type}}`` from ``schema_proposal.json``."""
     models: set[str] = field(default_factory=set)
     prompt_versions: set[str] = field(default_factory=set)
     notes: list[str] = field(default_factory=list)
@@ -197,6 +205,8 @@ class SiteOutcome:
             }
         if self.alignment is not None:
             out["alignment"] = self.alignment
+        if self.proposed_schema is not None:
+            out["proposed_schema"] = self.proposed_schema
         if self.union is not None:
             out["union"] = self.union
         return out
@@ -222,6 +232,18 @@ def read_output_rows(run: RunDir) -> list[dict[str, Any]]:
             if line.strip():
                 rows.append(orjson.loads(line))
     return rows
+
+
+def read_proposed_schema(run: RunDir) -> dict[str, dict[str, str]]:
+    """``{template: {field: type}}`` of an unprompted run's ``schema_proposal.json``."""
+    if not run.schema_proposal.exists():
+        return {}
+    data = read_json(run.schema_proposal)
+    templates = data.get("templates") if isinstance(data, dict) else None
+    return {
+        str(tid): {str(name): str(f.get("type")) for name, f in (t.get("fields") or {}).items()}
+        for tid, t in sorted((templates or {}).items())
+    }
 
 
 def cost_summary(
@@ -624,6 +646,7 @@ class _Runner:
         excluded = set().union(*seen.values()) if seen else set()
         if cfg.method.mode == "unprompted":
             predictions, out.alignment = self._align(site, predictions, page_template, excluded)
+            out.proposed_schema = read_proposed_schema(run)
         fields = site.fields()
         out.score = score_site(
             site.name,
@@ -1060,7 +1083,8 @@ def summarize(outcomes: Sequence[SiteOutcome]) -> dict[str, Any]:
     by_vertical: dict[str, list[SiteOutcome]] = defaultdict(list)
     for o in ok:
         by_vertical[o.site.vertical].append(o)
-    unprompted = [o for o in ok if o.alignment is not None]
+    unprompted = [o.score for o in ok if o.alignment is not None and o.score]
+    unprompted_agg = aggregate(unprompted) if unprompted else None
     return {
         "n_sites": len(outcomes),
         "n_ok": len(ok),
@@ -1081,13 +1105,16 @@ def summarize(outcomes: Sequence[SiteOutcome]) -> dict[str, Any]:
         "speed_pages_per_sec_per_core": _mean_speed(ok),
         "curves": _curves(outcomes),
         "unprompted_recall": (
+            {mode: unprompted_agg["overall"][mode]["recall"] for mode in MODES}
+            if unprompted_agg
+            else None
+        ),
+        "unprompted_recall_per_vertical": (
             {
-                mode: (
-                    aggregate([o.score for o in unprompted if o.score])["overall"][mode]["recall"]
-                )
-                for mode in MODES
+                vertical: {mode: agg[mode]["recall"] for mode in MODES}
+                for vertical, agg in unprompted_agg["per_vertical"].items()
             }
-            if unprompted
+            if unprompted_agg
             else None
         ),
         "union": _union_summary(outcomes),
@@ -1272,6 +1299,35 @@ def _unique_dir(parent: Path, stamp: str) -> Path:
     return path
 
 
+SCHEMA_PRECISION_GATE = 0.8  # brief, v0.4 gate: schema-precision judgment >= 0.8 on 10 dev sites
+
+
+def judgment_path(cfg: EvalConfig, judgments_dir: Path) -> Path:
+    """Where the schema-precision judgment of an unprompted evaluation lives:
+    ``<judgments_dir>/<dataset>_<split>_schema_precision.json``."""
+    return judgments_dir / f"{cfg.dataset}_{cfg.selection.split}_schema_precision.json"
+
+
+def judged_schema_precision(path: Path, outcomes: Sequence[SiteOutcome]) -> dict[str, Any]:
+    """Schema precision regenerated from a committed judgment file (per-field verdicts), checked
+    against the fields this run proposed on the judged sites."""
+    data = read_json(path)
+    proposed = {o.site.name: o.proposed_schema for o in outcomes if o.proposed_schema is not None}
+    result = schema_precision(data["fields"], proposed)
+    precision = result["precision"]
+    return {
+        "file": str(path),
+        "judge": data.get("judge"),
+        "source": data.get("source"),
+        "site_rule": data.get("site_rule"),
+        **result,
+        "gate": {
+            "threshold": SCHEMA_PRECISION_GATE,
+            "passed": precision is not None and precision >= SCHEMA_PRECISION_GATE,
+        },
+    }
+
+
 def run_eval(
     config_path: str | Path,
     *,
@@ -1280,6 +1336,7 @@ def run_eval(
     work_root: str | Path = "data/eval",
     datasets_dir: str | Path = "eval/datasets",
     baselines_dir: str | Path = DEFAULT_BASELINES_DIR,
+    judgments_dir: str | Path = "eval/judgments",
     hooks: Hooks | None = None,
 ) -> Path:
     """Run one evaluation config; return the results directory it wrote."""
@@ -1307,6 +1364,8 @@ def run_eval(
             "usd_per_1k_pages = tokens x standard-tier list prices (config/prices.yaml, no cache, "
             "batch or flex discounts) for every method; spend_usd = what was actually billed"
         ),
+        "metric_version": METRIC_VERSION,
+        "match_columns": list(MODES),
     }
     try:
         from ditto import __version__
@@ -1356,6 +1415,9 @@ def run_eval(
     runner = _Runner(cfg, hooks, work_dir, Path(baselines_dir))
     outcomes = runner.run(interleave_verticals(sites))
     summary = summarize(outcomes)
+    judgment = judgment_path(cfg, Path(judgments_dir))
+    if cfg.method.kind == "ditto" and cfg.method.mode == "unprompted" and judgment.exists():
+        summary["schema_precision"] = judged_schema_precision(judgment, outcomes)
     statuses = {o.status for o in outcomes}
     status = "ok" if "ok" in statuses else (statuses.pop() if len(statuses) == 1 else "failed")
     reason = None if status == "ok" else "; ".join(sorted({o.reason or "" for o in outcomes}))

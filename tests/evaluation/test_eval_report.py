@@ -44,6 +44,7 @@ def _accuracy(f1: float, *, verticals: tuple[str, ...] = ("auto",)) -> dict[str,
         return {
             "norm": {"precision": v, "recall": v, "f1": v},
             "raw": {"precision": v - 0.1, "recall": v - 0.1, "f1": v - 0.1},
+            "canon": {"precision": v, "recall": v, "f1": round(min(1.0, v + 0.02), 3)},
         }
 
     return {
@@ -281,6 +282,7 @@ def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
                     "type_3": {"f1": 0.62, "n_sites": 4},
                 },
                 "raw": {"type_1": {"f1": 0.71, "n_sites": 9}, "type_3": {"f1": 0.52, "n_sites": 4}},
+                "canon": {"type_1": {"f1": 0.83, "n_sites": 9}},
             },
             "cost": {"input_tokens_per_1k_pages": 900.0, "calls_per_template": 1.0},
         },
@@ -473,21 +475,22 @@ def test_swde_table_reads_numbers_from_the_latest_results(report: ModuleType, re
     swde = _render(report, repo, detail=False)["swde"]
     test_part, dev_part = swde.split("**SWDE development slice")
     ditto = _row(test_part, "ditto (prompted)")
-    assert ditto[1:9] == [
+    assert ditto[1:10] == [
         "all labeled pages the LLM did not see",
         "700",
         "0.910",
         "0.810",
+        "0.930",
         "4,321",
         "210",
         "1.25",
         "$0.0431",
     ]
-    assert ditto[9] == "812 pages/s/core (extract)"
+    assert ditto[10] == "812 pages/s/core (extract)"
     assert "the baselines' 20-page sample per site" in test_part
     naive = _row(test_part, "naive per-page LLM")
-    assert naive[3] == "0.940" and naive[8] == "$21.50 (extrapolated)"
-    assert naive[9] == "2.00 pages/s (wall)"
+    assert naive[3] == "0.940" and naive[9] == "$21.50 (extrapolated)"
+    assert naive[10] == "2.00 pages/s (wall)"
     crawl4ai = _row(test_part, "Crawl4AI generate_schema")
     assert crawl4ai[-1] == "not run yet"
     assert not re.search(r"\d", "".join(crawl4ai[1:])), "a config without results shows no number"
@@ -504,7 +507,15 @@ def test_detail_tables_add_verticals_stages_and_per_config_commands(
 ) -> None:
     swde = _render(report, repo, detail=True)["swde"]
     assert "Per vertical (mean of its sites):" in swde
-    assert _row(swde, "auto")[1:] == ["ditto (prompted)", "2", "0.910", "0.910", "0.910", "0.810"]
+    assert _row(swde, "auto")[1:] == [
+        "ditto (prompted)",
+        "2",
+        "0.910",
+        "0.910",
+        "0.910",
+        "0.810",
+        "0.930",
+    ]
     assert "| swde_test_ditto | – | – | 9,000 |" in swde
     assert "16 cores, 62.66 GB" in swde
     assert (
@@ -539,8 +550,14 @@ def test_livewebie_reports_complexity_types_or_skip_reason(report: ModuleType, r
     text = _render(report, repo, detail=False)["livewebie"]
     assert "Snapshot status: partial. 9 of 15 websites usable" in text
     assert "excluded `dp.la`: no page could be fetched" in text
-    assert _row(text, "type_1 (one single-valued attribute)")[1:] == ["0.810", "0.710", "9"]
-    assert _row(text, "all fields")[1:] == ["0.700", "0.600", "9"]
+    assert _row(text, "type_1 (one single-valued attribute)")[1:] == [
+        "0.810",
+        "0.710",
+        "0.830",
+        "9",
+    ]
+    assert _row(text, "type_3 (one list-valued attribute)")[2:4] == ["0.520", "–"]
+    assert _row(text, "all fields")[1:] == ["0.700", "0.600", "0.720", "9"]
 
     manifest = Path("eval/datasets/livewebie/manifest.json")
     manifest.write_text(json.dumps({"status": "skipped", "reason": "release unavailable"}))

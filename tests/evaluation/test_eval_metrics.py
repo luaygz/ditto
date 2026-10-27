@@ -3,11 +3,15 @@ from __future__ import annotations
 import pytest
 
 from ditto.evaluation.metrics import (
+    METRIC_VERSION,
+    MODES,
     Counts,
     OptionalRecall,
     aggregate,
     align_field_names,
     canonical,
+    canonical_text,
+    joins_alternatives,
     normalize_text,
     optional_field_recall,
     rename_fields,
@@ -82,6 +86,168 @@ def test_scalar_multi_value_labels_and_list_predictions() -> None:
     # a list prediction is scored by its first non-empty item (top-1)
     assert score_value("scalar", ["", "Drama", "Horror"], label, "raw") == Counts(tp=1)
     assert score_value("scalar", ["Horror", "Drama"], label, "raw") == Counts(fp=1, fn=1)
+
+
+# -- canon column (rules derived from SWDE dev misses, metric version 2) -------------------------
+
+
+def test_match_columns_and_version() -> None:
+    assert MODES == ("norm", "raw", "canon")
+    assert METRIC_VERSION == 2
+
+
+@pytest.mark.parametrize(
+    ("pred", "label"),
+    [
+        # trailing separator: SWDE restaurant labels end with " |"
+        ("2477 Arctic Blvd., Anchorage, AK, 99503", "2477 Arctic Blvd., Anchorage, AK, 99503 |"),
+        ("907/243-0507", "907/243-0507 |"),
+        ("12.5", "12.50 |"),  # the number form applies after the strip
+        # diacritics (combining marks U+0300-U+036F)
+        ("Sacks Cafe", "Sacks Café"),
+        ("Creme Brulee", "Crème brûlée"),
+        ("Cafe\u0301", "Café"),  # decomposed vs precomposed
+        ("Muller", "MÜLLER"),
+        # digit groups of a long identifier (ISBN-13/10, ten digits or more)
+        ("9780307269997", "978-0307269997"),
+        ("978 0 307 26999 7", "978-0-307-26999-7"),
+        ("0307269997", "0-307-26999-7"),  # leading zero: same number form on both sides
+        ("080442957X", "0-8044-2957-x"),  # ISBN-10 check character
+    ],
+)
+def test_canon_credits_formatting_differences(pred: str, label: str) -> None:
+    assert not values_match(pred, label, "norm")
+    assert values_match(pred, label, "canon")
+    assert score_value("scalar", pred, label, "canon") == Counts(tp=1)
+
+
+@pytest.mark.parametrize(
+    ("pred", "label"),
+    [
+        # extra or different facts are never credited
+        ("907/274-2739 | Reserve Online", "907/274-2739 |"),
+        ("Ray Allen", "Ray Allen\u00a0\u00a0#20\u00a0\u00a0SG"),
+        ("May 25, 2010", "Knopf; 1 edition (May 25, 2010)"),
+        ("Knopf", "Knopf; 1 edition (May 25, 2010)"),
+        ("George Roy Hill", "Roy Hill"),
+        ("PG13", "P"),
+        ("Price: $12.99", "$12.99"),  # no label-prefix rule
+        ("ISBN 978-0307269997", "9780307269997"),
+        ("a | b", "a b"),  # a pipe inside a value stays
+        ("Cafe", "Cafes"),
+        # digit groups with fewer than ten digits are left alone: dates, ranges, ZIP+4
+        ("1-12-2010", "11-2-2010"),
+        ("2010-05-25", "20100525"),
+        ("10-12", "1012"),
+        ("12345-6789", "123456789"),
+        ("978-0307269997", "978-0307269998"),
+        ("(907) 274-2739", "9072742739"),  # only hyphens and spaces separate digit groups
+    ],
+)
+def test_canon_does_not_credit_different_values(pred: str, label: str) -> None:
+    assert not values_match(pred, label, "canon")
+    assert score_value("scalar", pred, label, "canon") == Counts(fp=1, fn=1)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "  Hello \n  World ",
+        "$1,299.00",
+        "€ 12,50",
+        ": Canon",
+        "25\x9630 mpg",
+        "Straße",
+        "U.S.A.",
+        "(555) 123-4567",
+        "Route 66 —",
+    ],
+)
+def test_canon_extends_norm(text: str) -> None:
+    # canon is a function of the norm form: whatever norm equates, canon equates
+    assert canonical_text(text) == canonical_text(normalize_text(text))
+    assert normalize_text(text) == canonical_text(text)  # no canon rule applies to these
+
+
+def test_canonical_text_leaves_other_scripts_and_inner_separators() -> None:
+    assert canonical_text("שָׁלוֹם") == "שָׁלוֹם"  # Hebrew points are not U+0300-U+036F
+    assert canonical_text("किताब") == "किताब"
+    assert canonical_text("a | b |") == "a | b"
+    assert normalize_text("Sacks Café") == "sacks café"  # norm itself is unchanged
+    assert normalize_text("99503 |") == "99503 |"
+    assert canonical("—", "canon") is None
+    assert canonical("- |", "canon") is None
+    assert canonical(None, "canon") is None
+    assert canonical(9780307269997, "canon") == "9780307269997"
+
+
+@pytest.mark.parametrize(
+    ("pred", "label"),
+    [
+        ("Comedy Western", ["Comedy", "Western"]),
+        ("Seafood,American", ["Seafood", "American"]),
+        ("New American, American", ["New American", "American"]),
+        (
+            "Fantasy Musical Romance Children's/Family",
+            ["Fantasy", "Musical", "Romance", "Children's/Family"],
+        ),
+        ("Drama; Comedy", ["Comedy", "Drama", "Horror"]),  # a subset, in any order
+        ("Drama / Comedy |", ["Comedy", "Drama"]),
+    ],
+)
+def test_canon_credits_joined_label_values_on_scalars(pred: str, label: list[str]) -> None:
+    assert score_value("scalar", pred, label, "norm") == Counts(fp=1, fn=1)
+    assert score_value("scalar", pred, label, "canon") == Counts(tp=1)
+
+
+@pytest.mark.parametrize(
+    ("pred", "label"),
+    [
+        ("Comedy Western 1969", ["Comedy", "Western"]),  # an extra fact
+        ("Comedy Horror", ["Comedy", "Western"]),  # a value the label does not hold
+        ("Comedy Comedy", ["Comedy", "Western"]),  # repeats are not a join
+        ("ComedyWestern", ["Comedy", "Western"]),  # no separator
+        ("Comedy and Western", ["Comedy", "Western"]),
+        ("Comedy Comedy", "Comedy"),  # a single labeled value has nothing to join
+    ],
+)
+def test_canon_join_rule_rejects_other_content(pred: str, label: str | list[str]) -> None:
+    assert score_value("scalar", pred, label, "canon") == Counts(fp=1, fn=1)
+
+
+def test_join_rule_is_scalar_only() -> None:
+    assert joins_alternatives("drama comedy", ["comedy", "drama"])
+    assert not joins_alternatives("drama", ["comedy", "drama"])
+    assert not joins_alternatives("drama comedy", ["drama comedy"])
+    # list fields keep per-item matching: a joined string is one wrong item
+    c = score_value("list", ["Comedy Western"], ["Comedy", "Western"], "canon")
+    assert c == Counts(fp=1, fn=2)
+    # the first item of a list prediction is what a scalar scores
+    assert score_value("scalar", ["Comedy Western", "x"], ["Comedy", "Western"], "canon") == Counts(
+        tp=1
+    )
+
+
+def test_canon_applies_to_every_field_kind() -> None:
+    label_rows = [{"name": "Café Uno", "phone": "555 |"}]
+    pred_rows = [{"name": "Cafe Uno", "phone": "555"}]
+    assert score_value("record_list", pred_rows, label_rows, "norm") == Counts(fp=1, fn=1)
+    assert score_value("record_list", pred_rows, label_rows, "canon") == Counts(tp=1)
+    kv = score_value("key_value", {"Matière": "Coton"}, {"Matiere": "coton |"}, "canon")
+    assert kv == Counts(tp=1)
+    assert score_value("list", ["Cafe", "Bar"], ["Café", "Bar |"], "canon") == Counts(tp=2)
+
+
+def test_score_site_and_aggregate_report_canon() -> None:
+    labels = {"p0": {"name": "Café |"}, "p1": {"name": "Bar"}}
+    predictions = {"p0": {"name": "cafe"}, "p1": {"name": "Bar"}}
+    s = score_site("site", "v", predictions, labels)
+    assert s.fields["name"]["norm"] == Counts(tp=1, fp=1, fn=1)
+    assert s.fields["name"]["canon"] == Counts(tp=2)
+    assert s.to_dict()["canon"]["f1"] == pytest.approx(1.0)
+    agg = aggregate([s])
+    assert agg["overall"]["canon"]["f1"] == pytest.approx(1.0)
+    assert agg["per_vertical"]["v"]["fields_canon_f1"] == {"name": pytest.approx(1.0)}
 
 
 def test_list_counts_are_per_item() -> None:

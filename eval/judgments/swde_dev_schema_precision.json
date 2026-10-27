@@ -1,0 +1,4349 @@
+{
+ "version": 1,
+ "judge": "the build agent (Claude, the LLM that built ditto), not a human; judged on 2026-10-27 from the schema proposals and the extracted values",
+ "task": "v0.4 gate: schema precision of unprompted mode = entity fields / all proposed fields, on 10 SWDE development sites; gate >= 0.8",
+ "site_rule": "the alphabetically-first development site of each of the 8 verticals, plus the second development site of the two alphabetically-first verticals (auto, book)",
+ "sites": [
+  "auto-aol",
+  "auto-autobytel",
+  "book-abebooks",
+  "book-amazon",
+  "camera-amazon",
+  "job-careerbuilder",
+  "movie-allmovie",
+  "nbaplayer-espn",
+  "restaurant-fodors",
+  "university-collegeboard"
+ ],
+ "criterion": {
+  "entity": "a value someone scraping this page type would want as a database column: an attribute of the page's main entity (identity, description, specifications, prices, offers and availability, images of it, ratings and reviews of it, identifiers, links that identify a linked entity such as an author, seller or employer profile, or that lead to the entity's own resources such as its website or application form)",
+  "noise": "site chrome and navigation (tab links, links to search or listing pages), related or recommended items, counters, the page's own timestamps, share buttons, decorative logos, promotional widgets, a field that duplicates another field of the same template, or a field whose extracted values are mostly not what it claims",
+  "unit": "one proposed field of one template's schema_proposal.json (all fields judged)"
+ },
+ "source": {
+  "config": "eval/configs/swde_dev_unprompted.yaml",
+  "results": "/tmp/unp/1/swde_dev_unprompted/20261027T103546Z",
+  "work_dir": "data/eval/swde_dev_unprompted/20261027T103546Z",
+  "model": "openai/gpt-6.1-sol",
+  "prompt_version": "specgen.v2"
+ },
+ "summary": {
+  "fields": 206,
+  "entity": 187,
+  "precision": 0.9078,
+  "precision_site_mean": 0.9027,
+  "per_site": {
+   "auto-aol": {
+    "fields": 14,
+    "entity": 12,
+    "precision": 0.8571
+   },
+   "auto-autobytel": {
+    "fields": 10,
+    "entity": 9,
+    "precision": 0.9
+   },
+   "book-abebooks": {
+    "fields": 8,
+    "entity": 8,
+    "precision": 1.0
+   },
+   "book-amazon": {
+    "fields": 16,
+    "entity": 15,
+    "precision": 0.9375
+   },
+   "camera-amazon": {
+    "fields": 46,
+    "entity": 43,
+    "precision": 0.9348
+   },
+   "job-careerbuilder": {
+    "fields": 39,
+    "entity": 35,
+    "precision": 0.8974
+   },
+   "movie-allmovie": {
+    "fields": 27,
+    "entity": 26,
+    "precision": 0.963
+   },
+   "nbaplayer-espn": {
+    "fields": 14,
+    "entity": 9,
+    "precision": 0.6429
+   },
+   "restaurant-fodors": {
+    "fields": 13,
+    "entity": 13,
+    "precision": 1.0
+   },
+   "university-collegeboard": {
+    "fields": 19,
+    "entity": 17,
+    "precision": 0.8947
+   }
+  },
+  "gate": {
+   "threshold": 0.8,
+   "passed": true
+  },
+  "note": "ditto eval run eval/configs/swde_dev_unprompted.yaml recomputes this from 'fields'"
+ },
+ "fields": [
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "vehicle_name",
+   "type": "scalar",
+   "description": "Model year, manufacturer and model of the vehicle.",
+   "fill_rate": 1.0,
+   "examples": [
+    "2011 Ford F-150",
+    "2010 GMC Sierra 1500",
+    "2010 Ford F-150"
+   ],
+   "verdict": "entity",
+   "reason": "Model year, make and model of the vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "vehicle_trim",
+   "type": "scalar",
+   "description": "Manufacturer, model and trim configuration described by the page.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Acura MDX 3.7L Advance Package 4dr AWD",
+    "Acura MDX 3.7L Technology Package 4dr AWD",
+    "Acura MDX 3.7L 4dr AWD"
+   ],
+   "verdict": "entity",
+   "reason": "Trim configuration of the vehicle the page describes."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "image_urls",
+   "type": "list",
+   "description": "Vehicle image sources displayed in the masthead.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "http://o.aolcdn.com/commerce/images/CAC10CHT308B0806_Regular.jpg"
+    ],
+    [
+     "http://o.aolcdn.com/commerce/images/CAC10FOT11CB0801_Regular.jpg"
+    ],
+    [
+     "http://o.aolcdn.com/commerce/images/CAC00CHT304C0802_Regular.jpg"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Photos of the vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "msrp_prices",
+   "type": "list",
+   "description": "Manufacturer suggested retail prices shown in the vehicle masthead.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "$25,995"
+    ],
+    [
+     "$25,395"
+    ],
+    [
+     "$19,995"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Manufacturer's suggested retail price of the vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "fuel_economy",
+   "type": "scalar",
+   "description": "City and highway fuel economy as displayed.",
+   "fill_rate": 0.921,
+   "examples": [
+    "15 City / 21 Hwy",
+    "18 City / 25 Hwy",
+    "14 City / 20 Hwy"
+   ],
+   "verdict": "entity",
+   "reason": "City/highway fuel economy of the vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "market_price",
+   "type": "scalar",
+   "description": "Estimated vehicle market price.",
+   "fill_rate": 0.983,
+   "examples": [
+    "$30,006",
+    "$17,073",
+    "$45,715"
+   ],
+   "verdict": "entity",
+   "reason": "Estimated market price of the vehicle: a price fact."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "invoice_price",
+   "type": "scalar",
+   "description": "Vehicle dealer invoice price.",
+   "fill_rate": 0.974,
+   "examples": [
+    "$41,074",
+    "$14,750",
+    "$29,825"
+   ],
+   "verdict": "entity",
+   "reason": "Dealer invoice price of the vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "estimated_monthly_payment",
+   "type": "scalar",
+   "description": "Estimated monthly vehicle payment, excluding the footnote marker.",
+   "fill_rate": 1.0,
+   "examples": [
+    "$551",
+    "$552",
+    "$472"
+   ],
+   "verdict": "noise",
+   "reason": "Financing-calculator figure computed from the price with the site's assumed loan terms; a promotional widget, not a fact of the vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "basic_warranty",
+   "type": "scalar",
+   "description": "Basic warranty duration and mileage coverage.",
+   "fill_rate": 0.76,
+   "examples": [
+    "36 months/36,000 miles",
+    "48 months/50,000 miles",
+    "60 months/60,000 miles"
+   ],
+   "verdict": "entity",
+   "reason": "Warranty coverage of the vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "overview_paragraphs",
+   "type": "list",
+   "description": "Vehicle overview paragraphs covering features, powertrain and model-year changes.",
+   "fill_rate": 0.988,
+   "examples": [
+    [
+     "The Ford F-150 pickup truck offers some sweeping changes for 2011. Although the…",
+     "The F-150 still offers the XL, STX, XLT, FX4 and Lariat trims, but for 2011, th…",
+     "For 2011, the new trims and the new engines headline the changes but beyond tho…"
+    ],
+    [
+     "The GMC Sierra 1500 offers fuel economy, capability and performance in a broad …",
+     "There are four engine sizes to choose from: 4.3-liter V6, 4.8-liter V8, 5.3-lit…",
+     "The GMC Sierra 1500 is visually unchanged from 2009, but the 4.8L engine is now…"
+    ],
+    [
+     "The 2010 Ford F-150 pickup truck delivers outstanding performance with its dist…",
+     "The F-150 trims consist of the rugged and reliable XL, the sporty STX, the vers…",
+     "For 2010, the Flareside models and the 133-inch wheelbase Super Cabs have been …"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Editorial description of the vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "expert_review_excerpts",
+   "type": "list",
+   "description": "Expert review excerpt paragraphs without the full-review link label.",
+   "fill_rate": 0.467,
+   "examples": [
+    [
+     "The Ford F-150 lineup offers a plethora of models in dozens of permutations.All…"
+    ],
+    [
+     "The 2011 Chevrolet Silverado HD is a substantially revised pickup truck that re…"
+    ],
+    [
+     "The GMC Sierra is an excellent choice among full-size pickups, offering serious…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Expert review text about this vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "expert_review_url",
+   "type": "scalar",
+   "description": "Link to the full expert review for the vehicle.",
+   "fill_rate": 0.467,
+   "examples": [
+    "/cars-Acura-MDX-2010-3.7L_Advance_Package__4dr_All_wheel_Drive/expert-review/",
+    "/cars-Acura-MDX-2010-3.7L_Technology_Package__4dr_All_wheel_Drive/expert-review/",
+    "/cars-Acura-MDX-2010-3.7L__4dr_All_wheel_Drive/expert-review/"
+   ],
+   "verdict": "noise",
+   "reason": "Tab link to the same vehicle's review page, derivable from the page URL: site navigation."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "review_quote",
+   "type": "scalar",
+   "description": "Short published assessment of the vehicle.",
+   "fill_rate": 0.413,
+   "examples": [
+    "Ford is confident its latest truck will thrash the competition, mostly because …",
+    "The most obvious shortcoming is rear-seat space.",
+    "The cabin is impressively hushed overall."
+   ],
+   "verdict": "entity",
+   "reason": "Published press assessment of this vehicle."
+  },
+  {
+   "site": "auto-aol",
+   "template": "t_cb9c",
+   "field": "review_quote_source",
+   "type": "scalar",
+   "description": "Displayed attribution for the short vehicle assessment.",
+   "fill_rate": 0.413,
+   "examples": [
+    "- Car and Driver",
+    "- AutoWeek",
+    "- Automobile"
+   ],
+   "verdict": "entity",
+   "reason": "Publication the press quote comes from; borderline, kept because it belongs with review_quote."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "vehicle_name",
+   "type": "scalar",
+   "description": "Vehicle model name including its model year.",
+   "fill_rate": 1.0,
+   "examples": [
+    "2011 Volkswagen Jetta",
+    "2011 Dodge Ram 1500",
+    "2010 Ford F-150"
+   ],
+   "verdict": "entity",
+   "reason": "Model year, make and model."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "trim_name",
+   "type": "scalar",
+   "description": "Full name of the featured vehicle trim, including year and model.",
+   "fill_rate": 1.0,
+   "examples": [
+    "2011 Volkswagen SportWagen Base",
+    "2011 Audi R8 4.2",
+    "2010 Chrysler Town and Country Limited"
+   ],
+   "verdict": "entity",
+   "reason": "Trim the page describes."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "manufacturer_logo_url",
+   "type": "scalar",
+   "description": "Manufacturer logo image source.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://images.autobytel.com/web/carpics/60pixelswide/Chevrolet.jpg",
+    "http://images.autobytel.com/web/carpics/60pixelswide/Ford.jpg",
+    "http://images.autobytel.com/web/carpics/60pixelswide/Toyota.jpg"
+   ],
+   "verdict": "noise",
+   "reason": "Decorative make logo (42 distinct images); carries nothing beyond the make in vehicle_name."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "vehicle_image_url",
+   "type": "scalar",
+   "description": "Main vehicle image source.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://images.autobytel.com/web/carpics/320pixelswide/2010Saab9-3.jpg",
+    "http://images.autobytel.com/web/carpics/320pixelswide/2011KiaForte.jpg",
+    "http://images.autobytel.com/web/carpics/320pixelswide/2011VolkswagenCC.jpg"
+   ],
+   "verdict": "entity",
+   "reason": "Main photo of the vehicle."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "photos",
+   "type": "record_list",
+   "description": "Vehicle photo links and their thumbnail image sources.",
+   "fill_rate": 0.992,
+   "examples": [
+    [
+     {
+      "photo_url": "/content/research/vir/index.cfm/action/Photo/series_id_int/63149/photo/CAC00ACS…",
+      "thumbnail_url": "http://images.autobytel.com/web/carpicsviews/60pixelswide/CAC00ACS111C0101.jpg"
+     },
+     {
+      "photo_url": "/content/research/vir/index.cfm/action/Photo/series_id_int/63149/photo/CAC00ACS…",
+      "thumbnail_url": "http://images.autobytel.com/web/carpicsviews/60pixelswide/CAC00ACS111C0102.jpg"
+     },
+     {
+      "photo_url": "/content/research/vir/index.cfm/action/Photo/series_id_int/63149/photo/CAC00ACS…",
+      "thumbnail_url": "http://images.autobytel.com/web/carpicsviews/60pixelswide/CAC00ACS111C0104.jpg"
+     }
+    ],
+    [
+     {
+      "photo_url": "/content/research/vir/index.cfm/action/Photo/series_id_int/63150/photo/CAC00ACS…",
+      "thumbnail_url": "http://images.autobytel.com/web/carpicsviews/60pixelswide/CAC00ACS111C0101.jpg"
+     },
+     {
+      "photo_url": "/content/research/vir/index.cfm/action/Photo/series_id_int/63150/photo/CAC00ACS…",
+      "thumbnail_url": "http://images.autobytel.com/web/carpicsviews/60pixelswide/CAC00ACS111C0102.jpg"
+     },
+     {
+      "photo_url": "/content/research/vir/index.cfm/action/Photo/series_id_int/63150/photo/CAC00ACS…",
+      "thumbnail_url": "http://images.autobytel.com/web/carpicsviews/60pixelswide/CAC00ACS111C0104.jpg"
+     }
+    ],
+    [
+     {
+      "photo_url": "/content/research/vir/index.cfm/action/Photo/series_id_int/63152/photo/CAC00ACS…",
+      "thumbnail_url": "http://images.autobytel.com/web/carpicsviews/60pixelswide/CAC00ACS111C0101.jpg"
+     },
+     {
+      "photo_url": "/content/research/vir/index.cfm/action/Photo/series_id_int/63152/photo/CAC00ACS…",
+      "thumbnail_url": "http://images.autobytel.com/web/carpicsviews/60pixelswide/CAC00ACS111C0102.jpg"
+     },
+     {
+      "photo_url": "/content/research/vir/index.cfm/action/Photo/series_id_int/63152/photo/CAC00ACS…",
+      "thumbnail_url": "http://images.autobytel.com/web/carpicsviews/60pixelswide/CAC00ACS111C0104.jpg"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Photo gallery of the vehicle (photo and thumbnail)."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "powertrain_summary",
+   "type": "list",
+   "description": "Displayed engine, transmission, drivetrain and fuel-economy summary.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "6.0L V-8 engine 6 speed automatic transmission 2WD"
+    ],
+    [
+     "6.0L V-8 engine 6 speed automatic transmission 4WD"
+    ],
+    [
+     "5.3L V-8 engine 6 speed automatic transmission 2WD 15 MPG City / 21 MPG Hwy"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Engine, transmission, drivetrain and fuel economy of the trim (one combined text)."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "standard_features",
+   "type": "list",
+   "description": "Narrative description of the featured trim's standard equipment.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "There are 57 other F-250 trims available: » View all trims"
+    ],
+    [
+     "There are 89 other F-350 trims available: » View all trims"
+    ],
+    [
+     "The standard features of the Toyota Tundra Grade 5.7L V8 include i-FORCE 5.7L V…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Standard equipment of the trim; on 70 of 1,977 pages it picks the 'other trims available' sentence instead."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "starting_msrp",
+   "type": "scalar",
+   "description": "Displayed starting manufacturer's suggested retail price.",
+   "fill_rate": 0.997,
+   "examples": [
+    "$ 19,995",
+    "$ 22,995",
+    "$ 38,600"
+   ],
+   "verdict": "entity",
+   "reason": "Starting MSRP of the trim."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "starting_invoice_price",
+   "type": "scalar",
+   "description": "Displayed starting dealer invoice price.",
+   "fill_rate": 0.997,
+   "examples": [
+    "N/A",
+    "$ 39,279",
+    "$ 27,275"
+   ],
+   "verdict": "entity",
+   "reason": "Starting invoice price of the trim."
+  },
+  {
+   "site": "auto-autobytel",
+   "template": "t_d3f9",
+   "field": "consumer_ratings",
+   "type": "key_value",
+   "description": "Average consumer ratings overall and for comfort, performance, quality and appearance.",
+   "fill_rate": 0.353,
+   "examples": [
+    {
+     "Appearance": "5.0 out of 5",
+     "Comfort": "5.0 out of 5",
+     "Overall Rating": "5.0 out of 5",
+     "Performance": "5.0 out of 5"
+    },
+    {
+     "Appearance": "5.0 out of 5",
+     "Comfort": "4.0 out of 5",
+     "Overall Rating": "5.0 out of 5",
+     "Performance": "5.0 out of 5"
+    },
+    {
+     "Appearance": "5.0 out of 5",
+     "Comfort": "5.0 out of 5",
+     "Overall Rating": "5.0 out of 5",
+     "Performance": "4.0 out of 5"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Average owner ratings of the vehicle per aspect: a product attribute, not a page counter."
+  },
+  {
+   "site": "book-abebooks",
+   "template": "t_3b98",
+   "field": "title",
+   "type": "scalar",
+   "description": "Title of the book.",
+   "fill_rate": 1.0,
+   "examples": [
+    "The Book Thief",
+    "Snow Crash",
+    "The Killer Angels"
+   ],
+   "verdict": "entity",
+   "reason": "Book title."
+  },
+  {
+   "site": "book-abebooks",
+   "template": "t_3b98",
+   "field": "isbn_13",
+   "type": "scalar",
+   "description": "ISBN-13 identifying this book edition.",
+   "fill_rate": 1.0,
+   "examples": [
+    "9780002188425",
+    "9780002232616",
+    "9780002259590"
+   ],
+   "verdict": "entity",
+   "reason": "ISBN-13 of the edition."
+  },
+  {
+   "site": "book-abebooks",
+   "template": "t_3b98",
+   "field": "authors",
+   "type": "list",
+   "description": "Names of the book's authors.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "John Grisham"
+    ],
+    [
+     "O'Brian, Patrick"
+    ],
+    [
+     "James Lee Burke"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Author names."
+  },
+  {
+   "site": "book-abebooks",
+   "template": "t_3b98",
+   "field": "author_urls",
+   "type": "list",
+   "description": "Links to author profiles or author search results.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "/author/John+Grisham/2884774/"
+    ],
+    [
+     "/servlet/SearchResults?an=O%27Brian%2C+Patrick"
+    ],
+    [
+     "/author/James+Lee+Burke/2096374/"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Links identifying the authors (author pages, some author-search links); usable as author identifiers."
+  },
+  {
+   "site": "book-abebooks",
+   "template": "t_3b98",
+   "field": "cover_image_url",
+   "type": "scalar",
+   "description": "Source URL of the book's cover thumbnail.",
+   "fill_rate": 1.0,
+   "examples": [
+    "/images/servlets/shared/image-not-available.gif",
+    "http://isbn.abebooks.com/bwk/md/22/00/md0002188422.jpg",
+    "http://isbn.abebooks.com/bwk/md/91/00/md0002259591.jpg"
+   ],
+   "verdict": "entity",
+   "reason": "Cover image of the book (a placeholder image on ~25% of pages)."
+  },
+  {
+   "site": "book-abebooks",
+   "template": "t_3b98",
+   "field": "bibliographic_details",
+   "type": "key_value",
+   "description": "Labeled edition details, including ISBNs, publisher, publication date and binding when supplied.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Binding": "Softcover",
+     "ISBN 10": "0002188422 / 0-00-218842-2",
+     "ISBN 13": "9780002188425",
+     "Publication Date": "2002"
+    },
+    {
+     "ISBN 10": "0002232618 / 0-00-223261-8",
+     "ISBN 13": "9780002232616",
+     "Publication Date": "1988",
+     "Publisher": "Collins"
+    },
+    {
+     "Binding": "Hardcover",
+     "ISBN 10": "0002259591 / 0-00-225959-1",
+     "ISBN 13": "9780002259590",
+     "Publication Date": "1999"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "ISBNs, publisher, publication date and binding of the edition."
+  },
+  {
+   "site": "book-abebooks",
+   "template": "t_3b98",
+   "field": "editorial_paragraphs",
+   "type": "list",
+   "description": "Paragraphs of the book's synopsis and editorial reviews in page order.",
+   "fill_rate": 0.581,
+   "examples": [
+    [
+     "SET YOUR ALARM!"
+    ],
+    [
+     "\"THE BEGINNING OF SPRING is set in Moscow in 1911 (before war or revolution) an…",
+     "A. S. Byatt, Salon, 06/21/1999",
+     "\"More deceptively evocative prose from a master of lyrical understatement....Su…"
+    ],
+    [
+     "In this novel, Napoleon's 100 days of freedom have ended and Aubrey has finally…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Synopsis and editorial reviews of the book."
+  },
+  {
+   "site": "book-abebooks",
+   "template": "t_3b98",
+   "field": "offers",
+   "type": "record_list",
+   "description": "Individual bookseller offers, including edition identifiers, seller details, availability, descriptions, prices and shipping.",
+   "fill_rate": 0.994,
+   "examples": [
+    [
+     {
+      "authors": "Tufnell, Hayter",
+      "description": "HarperCollinsWillow, 1998. Paperback. Book Condition: Good. Daily dispatch from…",
+      "edition_note": null,
+      "isbn_10": "0002188422"
+     },
+     {
+      "authors": "Tufnell, Hayter",
+      "description": "HarperCollinsWillow, 1998. Hardcover. Book Condition: Good. all in good conditi…",
+      "edition_note": null,
+      "isbn_10": "0002188422"
+     },
+     {
+      "authors": "Tufnell, Hayter",
+      "description": "HarperCollinsWillow, 1998. Paperback. Book Condition: Good. USUAL SIGNS OF A WE…",
+      "edition_note": null,
+      "isbn_10": "0002188422"
+     }
+    ],
+    [
+     {
+      "authors": "Fitzgerald, Penelope",
+      "description": "HarperCollins Publishers Ltd. Book Condition: Used - Acceptable. Jacket has wea…",
+      "edition_note": null,
+      "isbn_10": "0002232618"
+     },
+     {
+      "authors": "Fitzgerald, Penelope",
+      "description": "HarperCollins Publishers Ltd, 1988. Hardcover. Book Condition: Very Good. Daily…",
+      "edition_note": null,
+      "isbn_10": "0002232618"
+     },
+     {
+      "authors": "Fitzgerald, Penelope",
+      "description": "Harpercollins, 1988. Hard Cover. Book Condition: Very Good. Dust Jacket Conditi…",
+      "edition_note": null,
+      "isbn_10": "0002232618"
+     }
+    ],
+    [
+     {
+      "authors": "O'Brian, Patrick",
+      "description": "HarperCollins Publishers Ltd, 1999. Book Condition: Used - Good. First Edition.…",
+      "edition_note": null,
+      "isbn_10": "0002259591"
+     },
+     {
+      "authors": "O'Brian, Patrick",
+      "description": "HarperCollins Publishers Canada, Limited, 1999. Book Condition: Very Good. Sail…",
+      "edition_note": null,
+      "isbn_10": "0002259591"
+     },
+     {
+      "authors": "O'Brian, Patrick",
+      "description": "HarperCollins Publishers Ltd, 1999. Book Condition: Used - Good. First Edition.…",
+      "edition_note": null,
+      "isbn_10": "0002259591"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Seller listings of this book with price, condition and shipping: the page's main content."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "title",
+   "type": "scalar",
+   "description": "Book title, excluding the separately displayed binding format.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Dear John",
+    "The Lion's Game",
+    "Two for the Dough (Stephanie Plum, No. 2)"
+   ],
+   "verdict": "entity",
+   "reason": "Book title."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "binding_formats",
+   "type": "list",
+   "description": "Binding or media formats displayed beside the book title.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "[Paperback]"
+    ],
+    [
+     "[Hardcover]"
+    ],
+    [
+     "[Mass Market Paperback]"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Binding of the edition ([Paperback], [Hardcover])."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "contributor_names",
+   "type": "list",
+   "description": "Names of authors and other contributors credited beneath the title.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Lee Child"
+    ],
+    [
+     "Vince Flynn"
+    ],
+    [
+     "Janet Evanovich"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Authors and other contributors."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "contributor_urls",
+   "type": "list",
+   "description": "Links associated with the credited authors and other contributors.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "/Lee-Child/e/B000APO0PQ/ref=ntt_athr_dp_pel_1"
+    ],
+    [
+     "/Nora-Roberts/e/B000APK6EU/ref=ntt_athr_dp_pel_1"
+    ],
+    [
+     "/Charlaine-Harris/e/B000AQ04CS/ref=ntt_athr_dp_pel_1"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Author pages of the contributors (author identifiers)."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "cover_image_url",
+   "type": "scalar",
+   "description": "Main book cover image source.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://g-ecx.images-amazon.com/images/G/01/nav2/dp/no-image-avail-img-map._V192…",
+    "http://g-ecx.images-amazon.com/images/G/01/nav2/dp/no-image-no-ciu._V192545765_…",
+    "http://ecx.images-amazon.com/images/I/41T9TGV2JBL._BO2,204,203,200_PIsitb-stick…"
+   ],
+   "verdict": "entity",
+   "reason": "Cover image."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "preview_url",
+   "type": "scalar",
+   "description": "Link from the main cover to the book reader preview.",
+   "fill_rate": 0.957,
+   "examples": [
+    "/gp/reader/0140280197/ref=sib_dp_pt#reader-link",
+    "/gp/reader/0060852550/ref=sib_dp_pt#reader-link",
+    "/gp/reader/0441016766/ref=sib_dp_pt#reader-link"
+   ],
+   "verdict": "noise",
+   "reason": "Link to the site's 'look inside' reader feature, not a fact of the book."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "price",
+   "type": "scalar",
+   "description": "Current selling price for the featured edition.",
+   "fill_rate": 0.842,
+   "examples": [
+    "$7.99",
+    "$10.19",
+    "$10.20"
+   ],
+   "verdict": "entity",
+   "reason": "Selling price."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "list_price",
+   "type": "scalar",
+   "description": "Publisher's list price for the featured edition.",
+   "fill_rate": 0.57,
+   "examples": [
+    "$14.99",
+    "$15.00",
+    "$14.95"
+   ],
+   "verdict": "entity",
+   "reason": "List price."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "savings",
+   "type": "scalar",
+   "description": "Displayed savings amount and percentage.",
+   "fill_rate": 0.57,
+   "examples": [
+    "$4.80 (32%)",
+    "$4.78 (32%)",
+    "$8.48 (34%)"
+   ],
+   "verdict": "entity",
+   "reason": "Discount of the current offer (amount and percent)."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "availability",
+   "type": "scalar",
+   "description": "Stock or release status of the featured edition.",
+   "fill_rate": 1.0,
+   "examples": [
+    "In Stock.",
+    "Available from these sellers.",
+    "Temporarily out of stock."
+   ],
+   "verdict": "entity",
+   "reason": "Stock status of the edition."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "marketplace_offers",
+   "type": "record_list",
+   "description": "Marketplace offer summaries by condition, with starting prices and offer-list links.",
+   "fill_rate": 0.954,
+   "examples": [
+    [
+     {
+      "offer_summary": "26 new",
+      "offers_url": "/gp/offer-listing/0814415385/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$13.80"
+     },
+     {
+      "offer_summary": "9 used",
+      "offers_url": "/gp/offer-listing/0814415385/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$13.42"
+     }
+    ],
+    [
+     {
+      "offer_summary": "25 new",
+      "offers_url": "/gp/offer-listing/006156284X/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$14.99"
+     },
+     {
+      "offer_summary": "5 used",
+      "offers_url": "/gp/offer-listing/006156284X/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$18.36"
+     }
+    ],
+    [
+     {
+      "offer_summary": "44 new",
+      "offers_url": "/gp/offer-listing/1573222453/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$9.00"
+     },
+     {
+      "offer_summary": "100 used",
+      "offers_url": "/gp/offer-listing/1573222453/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$1.88"
+     },
+     {
+      "offer_summary": "32 collectible",
+      "offers_url": "/gp/offer-listing/1573222453/ref=dp_olp_collectible?ie=UTF8&condition=collectib…",
+      "starting_price": "$22.95"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "New/used offer counts and starting prices for this book."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "editorial_sections",
+   "type": "record_list",
+   "description": "Editorial reviews, descriptions, and author biographies with their section headings.",
+   "fill_rate": 0.961,
+   "examples": [
+    [
+     {
+      "body": "Grade 5 Up-British actor Mike McShane provides a superb portrayal of Mark Twain…",
+      "heading": "From School Library Journal"
+     },
+     {
+      "body": "Huckleberry Finn may be the greater book, but Tom Sawyer has always been more w…",
+      "heading": "From Library Journal"
+     }
+    ],
+    [
+     {
+      "body": "Karin Slaughter on Broken For me, every novel begins with character rather than…",
+      "heading": "Amazon.com Review"
+     },
+     {
+      "body": "Starred Review. Slaughter brings her Grant County and Atlanta characters togeth…",
+      "heading": "From Publishers Weekly"
+     }
+    ],
+    [
+     {
+      "body": "An angry rebel, John dropped out of school and enlisted in the Army, not knowin…",
+      "heading": "Amazon.com Review"
+     },
+     {
+      "body": "Hot on the heels of True Believer and sequel At First Sight, Sparks returns wit…",
+      "heading": "From Publishers Weekly"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Editorial reviews and descriptions of the book."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "product_details",
+   "type": "key_value",
+   "description": "Bibliographic and physical details, including publisher, language, ISBNs, page counts, dimensions, and shipping weight.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "ISBN-10": "0140280197",
+     "ISBN-13": "978-0140280197",
+     "Language": "English",
+     "Paperback": "452 pages"
+    },
+    {
+     "Hardcover": "384 pages",
+     "ISBN-10": "0060852550",
+     "ISBN-13": "978-0060852559",
+     "Language": "English"
+    },
+    {
+     "Hardcover": "309 pages",
+     "ISBN-10": "0441016766",
+     "ISBN-13": "978-0441016761",
+     "Language": "English"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Pages, publisher and date, language, ISBNs, dimensions."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "category_rankings",
+   "type": "record_list",
+   "description": "Bestseller ranks within individual book categories.",
+   "fill_rate": 0.58,
+   "examples": [
+    [
+     {
+      "category": "Kellerman, Jonathan",
+      "category_path": "Books > Mystery & Thrillers > Authors, A-Z > ( K ) > Kellerman, Jonathan",
+      "category_url": "/gp/bestsellers/books/69500/ref=pd_zg_hrsr_b_1_5_last",
+      "rank": "#3"
+     }
+    ],
+    [
+     {
+      "category": "Management",
+      "category_path": "Books > Business & Investing > Management & Leadership > Management",
+      "category_url": "/gp/bestsellers/books/2683/ref=pd_zg_hrsr_b_1_4_last",
+      "rank": "#61"
+     },
+     {
+      "category": "Leadership",
+      "category_path": "Books > Business & Investing > Management & Leadership > Leadership",
+      "category_url": "/gp/bestsellers/books/2682/ref=pd_zg_hrsr_b_2_4_last",
+      "rank": "#45"
+     },
+     {
+      "category": "Customer Service",
+      "category_path": "Books > Business & Investing > Industries & Professions > Customer Service",
+      "category_url": "/gp/bestsellers/books/2635/ref=pd_zg_hrsr_b_3_4_last",
+      "rank": "#5"
+     }
+    ],
+    [
+     {
+      "category": "Turow, Scott",
+      "category_path": "Books > Mystery & Thrillers > Authors, A-Z > ( T ) > Turow, Scott",
+      "category_url": "/gp/bestsellers/books/284540/ref=pd_zg_hrsr_b_1_5_last",
+      "rank": "#2"
+     },
+     {
+      "category": "Legal",
+      "category_path": "Books > Mystery & Thrillers > Thrillers > Legal",
+      "category_url": "/gp/bestsellers/books/10487/ref=pd_zg_hrsr_b_2_4_last",
+      "rank": "#3"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Bestseller rank of this book per category: a product attribute commonly scraped."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "tags",
+   "type": "list",
+   "description": "Customer-assigned keywords associated with the book.",
+   "fill_rate": 0.941,
+   "examples": [
+    [
+     "charlotte mason",
+     "fairy tales",
+     "homeschooling"
+    ],
+    [
+     "paranormal romance",
+     "adventure",
+     "fu manchu"
+    ],
+    [
+     "historical fiction"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Customer tags describing the book's subject."
+  },
+  {
+   "site": "book-amazon",
+   "template": "t_0017",
+   "field": "subjects",
+   "type": "list",
+   "description": "Subject classifications offered for the book.",
+   "fill_rate": 0.976,
+   "examples": [
+    [
+     "Fiction / Classics"
+    ],
+    [
+     "Fiction - General",
+     "Fiction",
+     "Fiction / General"
+    ],
+    [
+     "History / United States"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Subject classifications of the book."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "product_name",
+   "type": "scalar",
+   "description": "Full camera product name.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Fujifilm Finepix S9000 9MP Digital Camera with 10.7x Wide Optical Zoom",
+    "Sony Cybershot DSC-G1 6MP Digital Camera with 3x Optical Image Stabilization Zo…",
+    "Panasonic Lumix DMC-LS70S 7MP Digital Camera with 3x Image Stabilized Zoom"
+   ],
+   "verdict": "entity",
+   "reason": "Product name."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "brand",
+   "type": "scalar",
+   "description": "Brand linked beneath the product title.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Nikon",
+    "Sony",
+    "Fuji"
+   ],
+   "verdict": "entity",
+   "reason": "Brand."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "image_url",
+   "type": "scalar",
+   "description": "Main product image source.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://ecx.images-amazon.com/images/I/51WM4W3WY9L._SL500_AA280_.jpg",
+    "http://ecx.images-amazon.com/images/I/41Hh5L2JQnL._SL500_AA280_.jpg",
+    "http://ecx.images-amazon.com/images/I/41xzP%2BjO-TL._SL500_AA280_.jpg"
+   ],
+   "verdict": "entity",
+   "reason": "Product image."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "price",
+   "type": "scalar",
+   "description": "Displayed primary purchase price.",
+   "fill_rate": 1.0,
+   "examples": [
+    "$999.00",
+    "$337.75",
+    "$119.22"
+   ],
+   "verdict": "entity",
+   "reason": "Selling price."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "list_price",
+   "type": "scalar",
+   "description": "Product's displayed list price.",
+   "fill_rate": 0.571,
+   "examples": [
+    "$299.95",
+    "$399.99",
+    "$349.95"
+   ],
+   "verdict": "entity",
+   "reason": "List price."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "savings",
+   "type": "scalar",
+   "description": "Displayed savings amount and percentage.",
+   "fill_rate": 0.571,
+   "examples": [
+    "$609.34 (64%)",
+    "$30.77 (21%)",
+    "$59.95 (20%)"
+   ],
+   "verdict": "entity",
+   "reason": "Discount of the current offer."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "availability",
+   "type": "scalar",
+   "description": "Primary product stock availability.",
+   "fill_rate": 1.0,
+   "examples": [
+    "In Stock.",
+    "In stock."
+   ],
+   "verdict": "entity",
+   "reason": "Stock status."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "seller_name",
+   "type": "scalar",
+   "description": "Seller fulfilling the primary offer.",
+   "fill_rate": 0.929,
+   "examples": [
+    "Electronics Club",
+    "Adorama Camera",
+    "Wall Street Photo"
+   ],
+   "verdict": "entity",
+   "reason": "Seller of the main offer."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "seller_url",
+   "type": "scalar",
+   "description": "Primary seller's profile link.",
+   "fill_rate": 0.929,
+   "examples": [
+    "/gp/help/seller/at-a-glance.html?ie=UTF8&seller=A3NZWXSNTH0Z2Q",
+    "/gp/help/seller/at-a-glance.html?ie=UTF8&seller=A17MC6HOH9AVE6",
+    "/gp/help/seller/at-a-glance.html?ie=UTF8&seller=A2P7U8ZHUJIO9T"
+   ],
+   "verdict": "entity",
+   "reason": "Seller profile link identifying the seller of the offer."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "shipping_cost",
+   "type": "scalar",
+   "description": "Shipping charge or free-shipping statement in the primary buy box.",
+   "fill_rate": 0.75,
+   "examples": [
+    "+ Free Shipping",
+    "+ $9.99 shipping",
+    "+ $6.57 shipping"
+   ],
+   "verdict": "entity",
+   "reason": "Shipping charge of the main offer."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "product_features",
+   "type": "list",
+   "description": "Product feature bullet points.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "12.1-megapixel resolution for stunning prints as large as 16 x 20 inches",
+     "Bright, 3.5-inch touch-panel OLED with Clear Color Display",
+     "5x wide-angle Zoom-NIKKOR glass lens; 5-way VR image stabilization system"
+    ],
+    [
+     "3.5-inch touch screen for easy focus selection and photo viewing",
+     "10.2-megapixel \"Exmor R\" CMOS sensor for stunning low-light performance",
+     "iSweep Panorama Mode captures stunning panoramic images"
+    ],
+    [
+     "14.2 megapixels for stunning prints as large as 20 x 30 inches",
+     "10x wide-angle optical Zoom-NIKKOR ED glass lens; 3.0-inch VGA (921k-dot) Clear…",
+     "720p HD movie recording at 30fps; HDMI output"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Feature bullets of the product."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "technical_details",
+   "type": "key_value",
+   "description": "Camera specifications and physical dimensions.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Brand Name": "Fuji",
+     "Display Size": "1.8 inches",
+     "Exposure Control Type": "Landscape, Portrait mode, Night mode, Sports mode",
+     "Height": "3.7 inches"
+    },
+    {
+     "Brand Name": "Sony",
+     "Depth": "1 inches",
+     "Display Size": "3.5 inches",
+     "Exposure Control Type": "Beach, Snow, High sensitivity, Landscape, Hi-speed shutter, Twilight portrait, …"
+    },
+    {
+     "Brand Name": "Panasonic",
+     "Depth": "1.2 inches",
+     "Display Size": "2 inches",
+     "Exposure Control Type": "Pet, Food, Fireworks, Starry sky, Scenery, Night portrait, Panning, Candle, Bea…"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Specification sheet."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "seller_offers",
+   "type": "record_list",
+   "description": "Additional seller offers with displayed prices and shipping terms.",
+   "fill_rate": 0.821,
+   "examples": [
+    [
+     {
+      "price": "$344.15",
+      "seller_name": "Video & Audio Center",
+      "shipping": "+ Free Shipping"
+     },
+     {
+      "price": "$352.50",
+      "seller_name": "fastfriendl...",
+      "shipping": "+ $5.49 shipping"
+     },
+     {
+      "price": "$499.00",
+      "seller_name": "Wall Street Photo",
+      "shipping": "+ Free Shipping"
+     }
+    ],
+    [
+     {
+      "price": "$139.99",
+      "seller_name": "H AND B DIGITAL",
+      "shipping": "+ $5.49 shipping"
+     }
+    ],
+    [
+     {
+      "price": "$249.95",
+      "seller_name": "Wall Street Photo",
+      "shipping": "+ Free Shipping"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Other sellers' offers (seller, price, shipping) for this product."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_0f45",
+   "field": "offers_by_condition",
+   "type": "record_list",
+   "description": "Offer availability and starting prices grouped by product condition.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     {
+      "offer_availability": "2 new",
+      "offer_listing_url": "/gp/offer-listing/B0007GIXS8/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$899.99"
+     },
+     {
+      "offer_availability": "7 used",
+      "offer_listing_url": "/gp/offer-listing/B0007GIXS8/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$299.00"
+     }
+    ],
+    [
+     {
+      "offer_availability": "7 new",
+      "offer_listing_url": "/gp/offer-listing/B000M4MLTW/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$299.99"
+     },
+     {
+      "offer_availability": "3 used",
+      "offer_listing_url": "/gp/offer-listing/B000M4MLTW/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$225.00"
+     }
+    ],
+    [
+     {
+      "offer_availability": "5 used",
+      "offer_listing_url": "/gp/offer-listing/B000MW8GVQ/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$65.00"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "New/used offer counts and starting prices."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "product_name",
+   "type": "scalar",
+   "description": "Full product name.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Samsung PL200 14.2MP Digital Camera with 7x Optical Zoom and 3-inch LCD in Blac…",
+    "SVP NEW 9MP Black Digital Camera+ Video Recorder+8X Zoom~ UltraSlim (4GB Includ…",
+    "Sony DSC-W350 14.1MP Digital Camera with 4x Wide Angle Zoom with Optical Steady…"
+   ],
+   "verdict": "entity",
+   "reason": "Product name."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "brand",
+   "type": "scalar",
+   "description": "Brand linked beneath the product name.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Sony",
+    "Canon",
+    "Nikon"
+   ],
+   "verdict": "entity",
+   "reason": "Brand."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "brand_url",
+   "type": "scalar",
+   "description": "Link to products from the brand.",
+   "fill_rate": 1.0,
+   "examples": [
+    "/s/ref=bl_sr_photo?_encoding=UTF8&node=172282&field-brandtextbin=Sony",
+    "/s/ref=bl_sr_photo?_encoding=UTF8&node=172282&field-brandtextbin=Canon",
+    "/s/ref=bl_sr_photo?_encoding=UTF8&node=172282&field-brandtextbin=Nikon"
+   ],
+   "verdict": "noise",
+   "reason": "Link to the site's search results for the brand: navigation, one URL per brand."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "product_image_url",
+   "type": "scalar",
+   "description": "Main product image source.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://g-ecx.images-amazon.com/images/G/01/nav2/dp/no-image-avail-img-map._V192…",
+    "http://ecx.images-amazon.com/images/I/51wP-s7AA5L._SL500_AA280_.jpg",
+    "http://ecx.images-amazon.com/images/I/51bnmZK2dXL._SL500_AA280_.jpg"
+   ],
+   "verdict": "entity",
+   "reason": "Product image."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "prices",
+   "type": "key_value",
+   "description": "Displayed list, regular, and sale prices keyed by their labels.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Price": "$169.95"
+    },
+    {
+     "Price": "$159.95"
+    },
+    {
+     "Price": "$259.95"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "List/regular/sale prices keyed by their labels."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "savings",
+   "type": "scalar",
+   "description": "Displayed savings amount and percentage.",
+   "fill_rate": 0.478,
+   "examples": [
+    "$20.00 (6%)",
+    "$100.04 (24%)",
+    "$100.04 (29%)"
+   ],
+   "verdict": "entity",
+   "reason": "Discount of the current offer."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "availability",
+   "type": "scalar",
+   "description": "Product stock and processing availability.",
+   "fill_rate": 0.997,
+   "examples": [
+    "In Stock.",
+    "In stock.",
+    "In stock but may require an extra 1-2 days to process."
+   ],
+   "verdict": "entity",
+   "reason": "Stock status."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "seller_name",
+   "type": "scalar",
+   "description": "Seller named in the main product availability block.",
+   "fill_rate": 0.898,
+   "examples": [
+    "Ace Photo Digital",
+    "Big VALUE Inc",
+    "Wall Street Photo"
+   ],
+   "verdict": "entity",
+   "reason": "Seller of the main offer."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "seller_url",
+   "type": "scalar",
+   "description": "Seller profile link.",
+   "fill_rate": 0.898,
+   "examples": [
+    "/gp/help/seller/at-a-glance.html?ie=UTF8&seller=A3SPLR0MSOYZ8O",
+    "/gp/help/seller/at-a-glance.html?ie=UTF8&seller=A3G19UOFL4CE7M",
+    "/gp/help/seller/at-a-glance.html?ie=UTF8&seller=A2P7U8ZHUJIO9T"
+   ],
+   "verdict": "entity",
+   "reason": "Seller profile link identifying the seller."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "shipping_cost",
+   "type": "scalar",
+   "description": "Shipping charge shown in the main buy box.",
+   "fill_rate": 0.82,
+   "examples": [
+    "+ Free Shipping",
+    "+ $9.95 shipping",
+    "+ $9.81 shipping"
+   ],
+   "verdict": "entity",
+   "reason": "Shipping charge of the main offer."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "seller_offers",
+   "type": "record_list",
+   "description": "Additional seller offers with displayed price and shipping information.",
+   "fill_rate": 0.363,
+   "examples": [
+    [
+     {
+      "price": null,
+      "seller_name": "J&R Music and Computer World",
+      "shipping": null
+     },
+     {
+      "price": null,
+      "seller_name": "Adorama Camera",
+      "shipping": null
+     },
+     {
+      "price": "$92.82",
+      "seller_name": "PC Universe",
+      "shipping": "+ $7.97 shipping"
+     }
+    ],
+    [
+     {
+      "price": "$699.99",
+      "seller_name": "Adorama Camera",
+      "shipping": "+ $14.95 shipping"
+     }
+    ],
+    [
+     {
+      "price": "$188.89",
+      "seller_name": "17th Street Photo",
+      "shipping": "+ Free Shipping"
+     },
+     {
+      "price": null,
+      "seller_name": "ANTOnline",
+      "shipping": null
+     },
+     {
+      "price": null,
+      "seller_name": "The Price Pros",
+      "shipping": null
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Other sellers' offers for this product."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "offers_by_condition",
+   "type": "record_list",
+   "description": "Offer availability and starting prices grouped by product condition.",
+   "fill_rate": 0.468,
+   "examples": [
+    [
+     {
+      "offer_summary": "2 used",
+      "offers_url": "/gp/offer-listing/B00004YV6J/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$99.99"
+     }
+    ],
+    [
+     {
+      "offer_summary": "4 new",
+      "offers_url": "/gp/offer-listing/B00006HMPV/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$14.89"
+     }
+    ],
+    [
+     {
+      "offer_summary": "4 new",
+      "offers_url": "/gp/offer-listing/B00008IOWR/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$80.00"
+     },
+     {
+      "offer_summary": "5 used",
+      "offers_url": "/gp/offer-listing/B00008IOWR/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$26.95"
+     },
+     {
+      "offer_summary": "1 refurbished",
+      "offers_url": "/gp/offer-listing/B00008IOWR/ref=dp_olp_refurbished?ie=UTF8&condition=refurbish…",
+      "starting_price": "$96.95"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "New/used offer counts and starting prices."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "product_features",
+   "type": "list",
+   "description": "Product feature bullets as displayed.",
+   "fill_rate": 0.972,
+   "examples": [
+    [
+     "A powerful 9.0 MegaPixels Output Digital Camera",
+     "High Resolution Full-Motion Digital Video Camcorder",
+     "HUGE 2.4 inches pure-color TFT Sharp LCD Monitor"
+    ],
+    [
+     "10x optical zoom, 25mm wide angle Sony G Lens",
+     "3.0\" LCD Screen, \"Exmor R\" CMOS sensor, Intelligent Sweep Panorama",
+     "10fps at full 10.2MP, Anti-Motion Blur / Hand-held Twilight"
+    ],
+    [
+     "Smallest in class: This is the world's smallest interchangeable lens digital st…",
+     "Interchangeable lenses: Compatible with Sony's E-mount series of smaller, light…",
+     "APS-C size HD image sensor: With 13 times the area of the typical image sensor,…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Feature bullets."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_142c",
+   "field": "technical_details",
+   "type": "key_value",
+   "description": "Technical specifications keyed by their displayed names.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Brand Name": "Olympus",
+     "Optical Sensor Resolution": "14 MP",
+     "Optical zoom": "5 x"
+    },
+    {
+     "Brand Name": "Nikon",
+     "Optical Sensor Resolution": "12 MP",
+     "Optical zoom": "4 x"
+    },
+    {
+     "Brand Name": "Canon",
+     "Optical Sensor Resolution": "12 MP",
+     "Optical zoom": "4 x"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Specification sheet."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "product_name",
+   "type": "scalar",
+   "description": "Full product name.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Panasonic Lumix DMC-FZ1S 2 MP Digital Camera w/12x Optical Zoom (Silver)",
+    "Canon Powershot SD10 4MP Digital Camera (Silver)",
+    "Sony Cybershot DSCP100 5.1MP Digital Camera with 3x Optical Zoom"
+   ],
+   "verdict": "entity",
+   "reason": "Product name."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "brand",
+   "type": "scalar",
+   "description": "Product brand linked beneath the title.",
+   "fill_rate": 1.0,
+   "examples": [
+    "General Electric",
+    "Panasonic",
+    "Canon"
+   ],
+   "verdict": "entity",
+   "reason": "Brand."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "brand_url",
+   "type": "scalar",
+   "description": "Link to the brand's product listings.",
+   "fill_rate": 1.0,
+   "examples": [
+    "/s/ref=bl_sr_photo?_encoding=UTF8&node=172282&field-brandtextbin=General%20Elec…",
+    "/s/ref=bl_sr_photo?_encoding=UTF8&node=172282&field-brandtextbin=Panasonic",
+    "/s/ref=bl_sr_photo?_encoding=UTF8&node=172282&field-brandtextbin=Canon"
+   ],
+   "verdict": "noise",
+   "reason": "Link to the site's search results for the brand: navigation."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "product_image_url",
+   "type": "scalar",
+   "description": "Main product image source.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://ecx.images-amazon.com/images/I/31BTYWW7K8L._AA280_.jpg",
+    "http://ecx.images-amazon.com/images/I/4117KZHMFYL._AA280_.jpg",
+    "http://ecx.images-amazon.com/images/I/41RE3H3HX7L._AA280_.jpg"
+   ],
+   "verdict": "entity",
+   "reason": "Product image."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "price",
+   "type": "scalar",
+   "description": "Displayed price in the Price row, excluding shipping text.",
+   "fill_rate": 1.0,
+   "examples": [
+    "$129.99",
+    "$189.99",
+    "$149.99"
+   ],
+   "verdict": "entity",
+   "reason": "Selling price."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "sale_price",
+   "type": "scalar",
+   "description": "Discounted price displayed in the Sale row.",
+   "fill_rate": 1.0,
+   "examples": [
+    "$129.99",
+    "$189.99",
+    "$149.99"
+   ],
+   "verdict": "noise",
+   "reason": "Duplicate of price: identical value on all 283 pages."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "list_price",
+   "type": "scalar",
+   "description": "Manufacturer's list price when displayed.",
+   "fill_rate": 0.647,
+   "examples": [
+    "$179.99",
+    "$199.95",
+    "$399.99"
+   ],
+   "verdict": "entity",
+   "reason": "List price."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "savings",
+   "type": "scalar",
+   "description": "Displayed savings amount and percentage.",
+   "fill_rate": 0.647,
+   "examples": [
+    "$50.99 (28%)",
+    "$85.95 (43%)",
+    "$59.01 (24%)"
+   ],
+   "verdict": "entity",
+   "reason": "Discount of the current offer."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "availability",
+   "type": "scalar",
+   "description": "Current stock availability message.",
+   "fill_rate": 0.982,
+   "examples": [
+    "In Stock.",
+    "In stock.",
+    "In stock but may require an extra 1-2 days to process."
+   ],
+   "verdict": "entity",
+   "reason": "Stock status."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "stock_warning",
+   "type": "scalar",
+   "description": "Low-stock warning shown for the product.",
+   "fill_rate": 0.488,
+   "examples": [
+    "Only 1 left in stock--order soon.",
+    "Only 2 left in stock--order soon.",
+    "Only 3 left in stock--order soon."
+   ],
+   "verdict": "entity",
+   "reason": "Remaining stock of the offer ('Only 2 left'); borderline, it is an urgency banner but carries the stock count."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "seller_name",
+   "type": "scalar",
+   "description": "Name of the seller offering the main purchase option.",
+   "fill_rate": 0.714,
+   "examples": [
+    "Wall Street Photo",
+    "Electronics Club",
+    "fastfriendlyservice"
+   ],
+   "verdict": "entity",
+   "reason": "Seller of the main offer."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "seller_url",
+   "type": "scalar",
+   "description": "Seller profile link for the main purchase option.",
+   "fill_rate": 0.714,
+   "examples": [
+    "/gp/help/seller/at-a-glance.html?ie=UTF8&seller=A2P7U8ZHUJIO9T",
+    "/gp/help/seller/at-a-glance.html?ie=UTF8&seller=AAGEE7CWN6YYM",
+    "/gp/help/seller/at-a-glance.html?ie=UTF8&seller=A3NZWXSNTH0Z2Q"
+   ],
+   "verdict": "entity",
+   "reason": "Seller profile link identifying the seller."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "selected_variant",
+   "type": "key_value",
+   "description": "Selected product variation, such as color or style.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Color": "Black"
+    },
+    {
+     "Color": "Silver"
+    },
+    {
+     "Color": "Red"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Selected color/style variant of the product."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "available_variants",
+   "type": "list",
+   "description": "Product variation choices displayed in the selector and swatches.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Black",
+     "Silver",
+     "Black"
+    ],
+    [
+     "Black",
+     "Red",
+     "Silver"
+    ],
+    [
+     "Black",
+     "Blue",
+     "Red"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Variant choices of the product (each listed twice: selector and swatches)."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "product_features",
+   "type": "list",
+   "description": "Product feature bullet points.",
+   "fill_rate": 0.979,
+   "examples": [
+    [
+     "28mm wide-angle lens; 4x optical zoom and Optical Image Stabilizer",
+     "Smart AUTO mode intelligently selects from 18 predefined settings",
+     "12.1-megapixel resolution allows you to print large size images with clarity an…"
+    ],
+    [
+     "10MP Digital Camera with 3x optical zoom and 5.7x digital zoom",
+     "2.4 Inch vibrant LCD with auto brightness",
+     "8MB internal memory with SD/SDHC card support up to 16GB"
+    ],
+    [
+     "7.2-megapixel CCD captures enough detail for photo-quality 15 x 20-inch prints",
+     "Carl Zeiss 3x optical zoom lens; 2.5-inch LCD display",
+     "High Sensitivity Mode (ISO 3200) allows for shooting even in low-light conditio…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Feature bullets."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "technical_specifications",
+   "type": "key_value",
+   "description": "Technical specification names and their displayed values.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Brand Name": "Canon",
+     "Display Size": "1.8 inches",
+     "Exposure Control Type": "Beach, Kids & pets, Night snapshot, Snow, Landscape, Portrait mode, Macro, Stit…",
+     "Height": "1.8 inches"
+    },
+    {
+     "Brand Name": "Kodak",
+     "Depth": "0.9 inches",
+     "Display Size": "2.7 inches",
+     "Exposure Control Type": "Candle, Beach, Snow, Panorama right, Panorama left, High sensitivity, Landscape…"
+    },
+    {
+     "Brand Name": "Panasonic",
+     "Depth": "3.3 inches",
+     "Display Size": "1.5 inches",
+     "Exposure Control Type": "Portrait mode, Macro, Night portrait, Panning"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Specification sheet."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "merchant_offers",
+   "type": "record_list",
+   "description": "Additional merchant purchase offers with displayed price and shipping terms.",
+   "fill_rate": 0.788,
+   "examples": [
+    [
+     {
+      "price": "$389.95",
+      "purchase_url": "/gp/item-dispatch/ref=dp_ebb_$merchantCount?ie=UTF8&storeID=photo&nodeID=502394…",
+      "seller_name": "CAMSDIGITAL",
+      "shipping": "+ $4.99 shipping"
+     },
+     {
+      "price": "$389.96",
+      "purchase_url": "/gp/item-dispatch/ref=dp_ebb_$merchantCount?ie=UTF8&storeID=photo&nodeID=502394…",
+      "seller_name": "fastfriendl...",
+      "shipping": "+ $4.99 shipping"
+     },
+     {
+      "price": "$498.00",
+      "purchase_url": "/gp/item-dispatch/ref=dp_ebb_$merchantCount?ie=UTF8&storeID=photo&nodeID=502394…",
+      "seller_name": "Wall Street Photo",
+      "shipping": "+ Free Shipping"
+     }
+    ],
+    [
+     {
+      "price": "$154.50",
+      "purchase_url": "/gp/item-dispatch/ref=dp_ebb_$merchantCount?ie=UTF8&storeID=photo&nodeID=502394…",
+      "seller_name": "ApexSuppliers",
+      "shipping": "+ Free Shipping"
+     }
+    ],
+    [
+     {
+      "price": "$185.50",
+      "purchase_url": "/gp/item-dispatch/ref=dp_ebb_$merchantCount?ie=UTF8&storeID=photo&nodeID=502394…",
+      "seller_name": "Ace Photo Digital",
+      "shipping": "+ $7.83 shipping"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Other merchants' offers for this product."
+  },
+  {
+   "site": "camera-amazon",
+   "template": "t_1fd4",
+   "field": "offers_by_condition",
+   "type": "record_list",
+   "description": "Offer counts and starting prices grouped by product condition.",
+   "fill_rate": 0.947,
+   "examples": [
+    [
+     {
+      "offer_summary": "3 new",
+      "offers_url": "/gp/offer-listing/B00009RKPM/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$274.99"
+     },
+     {
+      "offer_summary": "2 used",
+      "offers_url": "/gp/offer-listing/B00009RKPM/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$159.94"
+     }
+    ],
+    [
+     {
+      "offer_summary": "2 new",
+      "offers_url": "/gp/offer-listing/B0001G6UEI/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$347.99"
+     },
+     {
+      "offer_summary": "4 used",
+      "offers_url": "/gp/offer-listing/B0001G6UEI/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$50.00"
+     }
+    ],
+    [
+     {
+      "offer_summary": "6 new",
+      "offers_url": "/gp/offer-listing/B0002R284C/ref=dp_olp_new?ie=UTF8&condition=new",
+      "starting_price": "$298.99"
+     },
+     {
+      "offer_summary": "4 used",
+      "offers_url": "/gp/offer-listing/B0002R284C/ref=dp_olp_used?ie=UTF8&condition=used",
+      "starting_price": "$95.00"
+     },
+     {
+      "offer_summary": "1 refurbished",
+      "offers_url": "/gp/offer-listing/B0002R284C/ref=dp_olp_refurbished?ie=UTF8&condition=refurbish…",
+      "starting_price": "$185.95"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "New/used offer counts and starting prices."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_5fa8",
+   "field": "job_title",
+   "type": "scalar",
+   "description": "Title of the advertised position.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Education - Sales - Franchise",
+    "COMPUTER HARDWARE/SOFTWARE SALES",
+    "Software Developer"
+   ],
+   "verdict": "entity",
+   "reason": "Job title."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_5fa8",
+   "field": "job_description",
+   "type": "list",
+   "description": "Full job description sections, including duties and benefits.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Computer Explorers offers a diverse and comprehensive range of technology educa…"
+    ],
+    [
+     "GHA TECHNOLOGIES WHEN SERVICE AND DELIVERY COUNT!! Celebrating 20 Years of Serv…"
+    ],
+    [
+     "Software Developer / Software Engineer / Programmer / Computer Science Software…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Job description."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_5fa8",
+   "field": "job_requirements",
+   "type": "list",
+   "description": "Full requirements sections, including qualifications and application instructions.",
+   "fill_rate": 0.937,
+   "examples": [
+    [
+     "To be considered for this opportunity, you must have: Willingness to commit ful…"
+    ],
+    [
+     "."
+    ],
+    [
+     "Please refer to the Job Description for the qualifications."
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Job requirements."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_5fa8",
+   "field": "job_details",
+   "type": "key_value",
+   "description": "Labeled employer, compensation, employment, location, qualification, reference and contact facts.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Base Pay": "N/A",
+     "Company": "Hexagon Metrology",
+     "Contact": "Not Available",
+     "Email": "Send Email Now"
+    },
+    {
+     "Base Pay": "N/A",
+     "Company": "Buxton Consulting, Inc.",
+     "Contact": "Hari Reddy",
+     "Email": "Send Email Now"
+    },
+    {
+     "Company": "QVC, Inc",
+     "Employee Type": "Full-Time",
+     "Industry": "Broadcasting - Radio - TV Fashion - Apparel - Textile Internet - ECommerce",
+     "Job Type": "Design Information Technology"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Company, pay, employment type, location, education and other job facts."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_5fa8",
+   "field": "company_overview",
+   "type": "list",
+   "description": "Employer overview paragraphs supplied with the job advertisement.",
+   "fill_rate": 0.616,
+   "examples": [
+    [
+     "The character of a company -- the stamp it puts on its products, services and t…",
+     "IBM helped pioneer information technology over the years, and it stands today a…"
+    ],
+    [
+     "Collabera is one of the fastest growing end-to-end information technology servi…"
+    ],
+    [
+     "Ranked as one of the fastest growing Information Technology employment firms in…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Employer description that is part of the ad."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_5fa8",
+   "field": "company_links",
+   "type": "list",
+   "description": "Links to employer profiles, websites and other employer information.",
+   "fill_rate": 0.97,
+   "examples": [
+    [
+     "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=ICE…",
+     "http://www.computerexplorers.com/"
+    ],
+    [
+     "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=IBM2",
+     "http://www.ibm.com/us/en/?cm_re=masthead-_-home-_-home"
+    ],
+    [
+     "http://www.collabera.com/"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Employer profile and website links."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_5fa8",
+   "field": "application_urls",
+   "type": "list",
+   "description": "Destinations of the job's Apply Now buttons.",
+   "fill_rate": 0.914,
+   "examples": [
+    [
+     "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3F0…",
+     "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3F0…"
+    ],
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ],
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Where to apply for this job."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "job_title",
+   "type": "scalar",
+   "description": "Title of the advertised position.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Python/PHP Developer",
+    "Senior Software Developer",
+    "Junior Software Developer"
+   ],
+   "verdict": "entity",
+   "reason": "Job title."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "application_urls",
+   "type": "list",
+   "description": "Application links displayed with the job advertisement.",
+   "fill_rate": 0.75,
+   "examples": [
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ],
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ],
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Where to apply for this job."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "job_details",
+   "type": "key_value",
+   "description": "Labeled job facts, including employer, compensation, employment type, location, and experience requirements.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Base Pay": "N/A",
+     "Company": "CSI Companies",
+     "Contact": "Christine Huntley",
+     "Email": "Send Email Now"
+    },
+    {
+     "Base Pay": "$100,000 - $110,000 /Year",
+     "Company": "CSI Companies",
+     "Contact": "Amanda Thompson",
+     "Email": "Send Email Now"
+    },
+    {
+     "Base Pay": "$17.00 - $24.00 /Hour",
+     "Company": "CSI Companies",
+     "Contact": "Danny Negri",
+     "Email": "Send Email Now"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Company, type, location and other job facts."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "company_url",
+   "type": "scalar",
+   "description": "Link to the employer's company profile.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Neu…",
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=csi…"
+   ],
+   "verdict": "entity",
+   "reason": "Employer profile link (employer identifier)."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "job_description",
+   "type": "list",
+   "description": "Complete job description text blocks, including prose outside paragraph elements.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Downtown Salt Lake City has a culture all its own, and so do the offices that r…"
+    ],
+    [
+     "We are looking for a junior software developer to help design, develop, test, a…"
+    ],
+    [
+     "Permanent!! Systems Engineer (HP OpenView) / Production Control II (Event Monit…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Job description."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "job_requirements",
+   "type": "list",
+   "description": "Complete requirements text blocks, including listed skills and any accompanying benefits or application guidance.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "We are seeking candidates with experience in: PHP Python SQL Linux Django OO PH…"
+    ],
+    [
+     "We are looking for a junior software developer to help design, develop, test, a…"
+    ],
+    [
+     "Required Knowledge/Experience: · Bachelor's degree in Computer Science or relat…",
+     "Required Knowledge/Experience: · Bachelor's degree in Computer Science or relat…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Job requirements."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "contact_name",
+   "type": "scalar",
+   "description": "Recruiting contact name or the displayed availability status.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Not Available",
+    "Travis Porcelli",
+    "Christine Huntley"
+   ],
+   "verdict": "entity",
+   "reason": "Recruiter contact name (often 'Not Available')."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "contact_phone",
+   "type": "scalar",
+   "description": "Recruiting phone number or the displayed availability status.",
+   "fill_rate": 1.0,
+   "examples": [
+    "8013279090",
+    "Not Available",
+    "904-338-9515 ext 273"
+   ],
+   "verdict": "entity",
+   "reason": "Recruiter phone number."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "contact_email_url",
+   "type": "scalar",
+   "description": "Link used to contact the employer through the site's email application workflow.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J7X0…",
+    "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J8A4…",
+    "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J8A4…"
+   ],
+   "verdict": "noise",
+   "reason": "The site's generic ApplyStart.aspx?Job_DID=... workflow link, derivable from the job id; not contact data."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_83a6",
+   "field": "contact_fax",
+   "type": "scalar",
+   "description": "Recruiting fax number or the displayed availability status.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Not Available",
+    "801.327.9077"
+   ],
+   "verdict": "entity",
+   "reason": "Recruiter fax number (mostly 'Not Available')."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_952e",
+   "field": "job_title",
+   "type": "scalar",
+   "description": "Title of the advertised position.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Area Developer - Sales",
+    "Informatica Developer - NEEDED NOW!!",
+    "Test Architect - NEEDED NOW!!"
+   ],
+   "verdict": "entity",
+   "reason": "Job title."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_952e",
+   "field": "job_details",
+   "type": "key_value",
+   "description": "Labeled job facts, including employer, compensation, employment type, requirements, location and contact information.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Base Pay": "N/A",
+     "Company": "CDI IT Solutions",
+     "Contact": "Recruiter",
+     "Email": "Send Email Now"
+    },
+    {
+     "Base Pay": "N/A",
+     "Company": "CDI IT Solutions",
+     "Contact": "Recruiter",
+     "Email": "Send Email Now"
+    },
+    {
+     "Base Pay": "N/A",
+     "Company": "CDI IT Solutions",
+     "Contact": "Recruiter",
+     "Email": "Send Email Now"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Company, pay, type, requirements and other job facts."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_952e",
+   "field": "company_url",
+   "type": "scalar",
+   "description": "Link to the employer's CareerBuilder company profile.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Col…",
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=www…"
+   ],
+   "verdict": "entity",
+   "reason": "Employer profile link."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_952e",
+   "field": "application_urls",
+   "type": "list",
+   "description": "Application links displayed at the job's application entry points.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3G5…",
+     "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3G5…"
+    ],
+    [
+     "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3G6…",
+     "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3G6…"
+    ],
+    [
+     "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3G8…",
+     "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3G8…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Where to apply for this job."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_952e",
+   "field": "contact_url",
+   "type": "scalar",
+   "description": "Link offered under Email to contact the employer through CareerBuilder.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3G5…",
+    "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3G6…",
+    "http://www.careerbuilder.com/JobSeeker/ApplyOnline/ApplyStart.aspx?Job_DID=J3G8…"
+   ],
+   "verdict": "noise",
+   "reason": "Same ApplyStart link as application_urls with '&el=true' added: a duplicate."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "job_title",
+   "type": "scalar",
+   "description": "Title of the advertised position.",
+   "fill_rate": 0.983,
+   "examples": [
+    "Customer Service - Work From Home - W2 Employee",
+    "Networx Contract Configuration Analyst",
+    ".Net Application Developer"
+   ],
+   "verdict": "entity",
+   "reason": "Job title."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "job_details",
+   "type": "key_value",
+   "description": "Labeled job facts, including employer, compensation, employment type, industry, qualifications, location, reference ID and contact details.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Base Pay": "$9.00 /Hour",
+     "Company": "Work Fom Home For Teleperformance",
+     "Contact": "Not Available",
+     "Email": "Send Email Now"
+    },
+    {
+     "Base Pay": "$9.00 /Hour",
+     "Company": "Work Fom Home For Teleperformance",
+     "Contact": "Not Available",
+     "Email": "Send Email Now"
+    },
+    {
+     "Base Pay": "$9.00 /Hour",
+     "Company": "Work Fom Home For Teleperformance",
+     "Contact": "Not Available",
+     "Email": "Send Email Now"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Company, pay, type, industry and other job facts."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "company_profile_url",
+   "type": "scalar",
+   "description": "CareerBuilder profile of the employer linked from the Company fact.",
+   "fill_rate": 0.991,
+   "examples": [
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Tel…",
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Hud…",
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Sch…"
+   ],
+   "verdict": "entity",
+   "reason": "Employer profile link."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "company_jobs_url",
+   "type": "scalar",
+   "description": "Link to all job listings from this employer.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyJobResults.aspx?Comp_DI…",
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyJobResults.aspx?Comp_DI…",
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyJobResults.aspx?Comp_DI…"
+   ],
+   "verdict": "noise",
+   "reason": "Link to the site's listing of the employer's other jobs: navigation."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "company_links",
+   "type": "list",
+   "description": "Employer information links, including the company profile and external website.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Tel…",
+     "http://www.teleperformance.com/"
+    ],
+    [
+     "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Hud…",
+     "http://us.hudson.com/legal"
+    ],
+    [
+     "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Sch…",
+     "http://www.schneider-electric.com/"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Employer profile plus the employer's own website (the website is new information)."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "company_overview",
+   "type": "scalar",
+   "description": "Employer overview and organizational information.",
+   "fill_rate": 0.698,
+   "examples": [
+    "Teleperformance, the worldwide leading provider of outsourced CRM and contact c…",
+    "Since 1996 New Age Technologies has been recognized as one of the premier compa…",
+    "Reynolds and Reynolds is a leading provider of integrated solutions that help a…"
+   ],
+   "verdict": "entity",
+   "reason": "Employer description that is part of the ad."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "job_description",
+   "type": "list",
+   "description": "Full job description blocks, preserving responsibilities and embedded descriptive text.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Work At Home for Teleperformance - Full Time - Tech Support - Customer Service …"
+    ],
+    [
+     "Rocky Mountain Health Management Corporation is currently searching for a Netwo…"
+    ],
+    [
+     "Pitney Bowes (NYSE: PBI) is the $5.6 billion global technology leader whose pro…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Job description."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "job_requirements",
+   "type": "list",
+   "description": "Full requirements blocks, including qualifications, experience, benefits and application instructions.",
+   "fill_rate": 0.836,
+   "examples": [
+    [
+     "Professional skills required to Work From Home: A quiet and professional work e…"
+    ],
+    [
+     "Please see above."
+    ],
+    [
+     "Job Requirements: A minimum of 1 year experience with TriZetto’s Integrated Net…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Job requirements."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "application_urls",
+   "type": "list",
+   "description": "Application links displayed in the job's application button areas.",
+   "fill_rate": 0.974,
+   "examples": [
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ],
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ],
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Where to apply for this job."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_d589",
+   "field": "contact_application_url",
+   "type": "scalar",
+   "description": "Application or resume-submission link presented under the Email contact label.",
+   "fill_rate": 0.991,
+   "examples": [
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Hud…",
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Sch…",
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=New…"
+   ],
+   "verdict": "noise",
+   "reason": "Described as an application link but holds the employer profile URL (equal to company_profile_url on 45 of 116 pages): a mislabeled duplicate."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_e1a7",
+   "field": "job_title",
+   "type": "scalar",
+   "description": "Title of the advertised job.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Gadgets & Technology (PT writing, varied experience)"
+   ],
+   "verdict": "entity",
+   "reason": "Job title."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_e1a7",
+   "field": "job_details",
+   "type": "key_value",
+   "description": "Job overview facts, including employer, employment type, industry, management responsibility, job category, location and fax availability.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Company": "Examiner.com",
+     "Employee Type": "Part-Time",
+     "Fax": "Not Available",
+     "Industry": "Art - Photography - Journalism Entertainment Electronics"
+    },
+    {
+     "Company": "Examiner.com",
+     "Employee Type": "Part-Time",
+     "Fax": "Not Available",
+     "Industry": "Art - Photography - Journalism Entertainment Electronics"
+    },
+    {
+     "Company": "Examiner.com",
+     "Employee Type": "Part-Time",
+     "Fax": "Not Available",
+     "Industry": "Art - Photography - Journalism Entertainment Electronics"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Company, type, industry and other job facts."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_e1a7",
+   "field": "company_url",
+   "type": "scalar",
+   "description": "Link to the employer's CareerBuilder company profile.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://www.careerbuilder.com/JobSeeker/Companies/CompanyDetails.aspx?HHName=Exa…"
+   ],
+   "verdict": "entity",
+   "reason": "Employer profile link."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_e1a7",
+   "field": "job_description",
+   "type": "scalar",
+   "description": "Job description, including sample writing topics and advertised benefits.",
+   "fill_rate": 1.0,
+   "examples": [
+    "GADGETS & TECHNOLOGY Join us if you get a kick \"geeking out\" on the latest and …",
+    "GADGETS & TECHNOLOGY Join us if you get a kick \"geeking out\" on the latest and …"
+   ],
+   "verdict": "entity",
+   "reason": "Job description."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_e1a7",
+   "field": "job_requirements",
+   "type": "scalar",
+   "description": "Requirements, contractor terms and application instructions.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Qualifications: Credible, passionate and knowledgeable subject matter expert Ab…"
+   ],
+   "verdict": "entity",
+   "reason": "Job requirements."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_e1a7",
+   "field": "application_urls",
+   "type": "list",
+   "description": "Application links provided by the repeated Apply Now buttons.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ],
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ],
+    [
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…",
+     "http://www.careerbuilder.com/jobseeker/ApplyOnline/ExternalApply.aspx?useframes…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Where to apply (the site's Apply Now buttons)."
+  },
+  {
+   "site": "job-careerbuilder",
+   "template": "t_e1a7",
+   "field": "direct_application_url",
+   "type": "scalar",
+   "description": "Employer application link embedded in the job requirements.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://apply.examiner.com/?channelid=791&cid=careerbuilder_target-gadgetstech-aa",
+    "http://join.examiner.com/Become_an_Examiner.html?channelid=6&cid=careerbuilder_…"
+   ],
+   "verdict": "entity",
+   "reason": "The employer's own application link given in the ad text (application_urls wraps it in a site redirect)."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "title",
+   "type": "scalar",
+   "description": "Title of the movie.",
+   "fill_rate": 1.0,
+   "examples": [
+    "A Christmas Carol",
+    "Cyrano De Bergerac",
+    "Hercules"
+   ],
+   "verdict": "entity",
+   "reason": "Film title."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "poster_url",
+   "type": "scalar",
+   "description": "Movie poster or cover image.",
+   "fill_rate": 1.0,
+   "examples": [
+    "/img/noimage200.png",
+    "http://image.allmusic.com/00/adg/cov200/drt000/t000/t00001xiukq.jpg",
+    "http://image.allmusic.com/00/adg/cov200/drt000/t007/t00755lqqbm.jpg"
+   ],
+   "verdict": "entity",
+   "reason": "Poster image of the film."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "release_year",
+   "type": "scalar",
+   "description": "Year associated with the movie.",
+   "fill_rate": 1.0,
+   "examples": [
+    "1997",
+    "1999",
+    "1994"
+   ],
+   "verdict": "entity",
+   "reason": "Release year."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "runtime",
+   "type": "scalar",
+   "description": "Running time, including the displayed unit.",
+   "fill_rate": 1.0,
+   "examples": [
+    "105 min.",
+    "120 min.",
+    "90 min."
+   ],
+   "verdict": "entity",
+   "reason": "Running time."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "countries",
+   "type": "list",
+   "description": "Countries associated with the movie.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "USA"
+    ],
+    [
+     "UK"
+    ],
+    [
+     "France"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Production countries."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "mpaa_rating",
+   "type": "scalar",
+   "description": "Displayed MPAA classification.",
+   "fill_rate": 1.0,
+   "examples": [
+    "R",
+    "PG",
+    "PG13"
+   ],
+   "verdict": "entity",
+   "reason": "MPAA rating."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "category",
+   "type": "scalar",
+   "description": "Broad production category, such as feature or documentary.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Feature",
+    "Animated",
+    "Documentary"
+   ],
+   "verdict": "entity",
+   "reason": "Production category (feature, animated, documentary)."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "color_type",
+   "type": "scalar",
+   "description": "Color format and any additional format information shown with it.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Color",
+    "B&W",
+    "B&W, Available in Colorized Version"
+   ],
+   "verdict": "entity",
+   "reason": "Color or black-and-white format."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "work_rating_image_url",
+   "type": "scalar",
+   "description": "Image encoding the site's editorial work rating.",
+   "fill_rate": 1.0,
+   "examples": [
+    "/img/st_r7.gif",
+    "/img/st_r5.gif",
+    "/img/st_r6.gif"
+   ],
+   "verdict": "entity",
+   "reason": "The site's editorial star rating of the film; the value is encoded in the image name (st_r7.gif); borderline."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "attributes",
+   "type": "list",
+   "description": "Descriptive production or content attributes.",
+   "fill_rate": 0.478,
+   "examples": [
+    [
+     "High Artistic Quality"
+    ],
+    [
+     "High Production Values"
+    ],
+    [
+     "Sleeper"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Descriptors of the film (e.g. 'High Production Values')."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "alternative_titles",
+   "type": "list",
+   "description": "Alternative movie titles, including any displayed dates or qualifiers.",
+   "fill_rate": 0.261,
+   "examples": [
+    [
+     "Twelve Monkeys"
+    ],
+    [
+     "Thirteen Ghosts"
+    ],
+    [
+     "Nineteen Hundred",
+     "Novecento (Original Foreign title)"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Other titles of the film."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "genres",
+   "type": "list",
+   "description": "Movie genres.",
+   "fill_rate": 0.999,
+   "examples": [
+    [
+     "Drama"
+    ],
+    [
+     "Comedy"
+    ],
+    [
+     "Thriller"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Genres."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "subgenres",
+   "type": "list",
+   "description": "More specific movie types or subgenres.",
+   "fill_rate": 0.986,
+   "examples": [
+    [
+     "Psychological Thriller"
+    ],
+    [
+     "Romantic Comedy"
+    ],
+    [
+     "Psychological Drama"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Subgenres."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "content_flags",
+   "type": "list",
+   "description": "Content advisories and audience suitability flags.",
+   "fill_rate": 0.967,
+   "examples": [
+    [
+     "Suitable for Children"
+    ],
+    [
+     "Adult Situations"
+    ],
+    [
+     "Excellent For Children"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Content advisories."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "keywords",
+   "type": "list",
+   "description": "Keywords describing the movie.",
+   "fill_rate": 0.997,
+   "examples": [
+    [
+     "ghost",
+     "awakening",
+     "Christmas"
+    ],
+    [
+     "extramarital-affair",
+     "crush",
+     "mid-life-crisis"
+    ],
+    [
+     "biological-warfare",
+     "disaster",
+     "kidnap"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Plot keywords."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "themes",
+   "type": "list",
+   "description": "Narrative themes associated with the movie.",
+   "fill_rate": 0.971,
+   "examples": [
+    [
+     "Heroic Mission"
+    ],
+    [
+     "Filmmaking"
+    ],
+    [
+     "Military Life"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Themes."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "tones",
+   "type": "list",
+   "description": "Stylistic and emotional tones of the movie.",
+   "fill_rate": 0.979,
+   "examples": [
+    [
+     "Tense",
+     "Gritty"
+    ],
+    [
+     "Tense",
+     "Forceful"
+    ],
+    [
+     "Atmospheric"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Tones."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "moods",
+   "type": "list",
+   "description": "Viewing moods associated with the movie.",
+   "fill_rate": 0.688,
+   "examples": [
+    [
+     "Only Human"
+    ],
+    [
+     "Nail-biters"
+    ],
+    [
+     "In a Minor Key"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Moods."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "settings",
+   "type": "list",
+   "description": "Settings in which the movie takes place.",
+   "fill_rate": 0.496,
+   "examples": [
+    [
+     "New York City, NY"
+    ],
+    [
+     "war"
+    ],
+    [
+     "Los Angeles, CA"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Settings where the film takes place."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "box_office",
+   "type": "list",
+   "description": "Displayed box-office amounts.",
+   "fill_rate": 0.406,
+   "examples": [
+    [
+     "Domestic gross: $10,600,000"
+    ],
+    [
+     "Domestic gross: $15,900,000"
+    ],
+    [
+     "$15,000,000"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Box-office figures."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "production_companies",
+   "type": "list",
+   "description": "Companies credited with producing the movie.",
+   "fill_rate": 0.966,
+   "examples": [
+    [
+     "Paramount"
+    ],
+    [
+     "Warner Brothers"
+    ],
+    [
+     "Columbia Pictures"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Production companies."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "releases",
+   "type": "list",
+   "description": "Release dates with the countries or other qualifiers shown on the page.",
+   "fill_rate": 0.358,
+   "examples": [
+    [
+     "1998 11 20 (USA)"
+    ],
+    [
+     "1988 04 22 (USA)"
+    ],
+    [
+     "2000 02 18 (USA)"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Release dates per country."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "distributors",
+   "type": "list",
+   "description": "Companies credited with releasing the movie.",
+   "fill_rate": 0.378,
+   "examples": [
+    [
+     "Warner Brothers"
+    ],
+    [
+     "20th Century Fox"
+    ],
+    [
+     "Columbia Pictures"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Distributors."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "amg_work_id",
+   "type": "scalar",
+   "description": "All Media Guide work identifier.",
+   "fill_rate": 1.0,
+   "examples": [
+    "V 5",
+    "V 135562",
+    "V 67116"
+   ],
+   "verdict": "entity",
+   "reason": "The film's identifier in the site's database."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "plot_synopsis",
+   "type": "scalar",
+   "description": "Full plot synopsis, retaining inline linked names and titles.",
+   "fill_rate": 0.999,
+   "examples": [
+    "Blake Edwards' 10 stars Dudley Moore as George, a Mancini-type songwriter. Appr…",
+    "An intense film about time travel, this sci-fi entry was directed by Terry Gill…",
+    "Gimmick-loving producer William Castle strikes again with this fun haunted-hous…"
+   ],
+   "verdict": "entity",
+   "reason": "Plot synopsis."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "synopsis_author",
+   "type": "scalar",
+   "description": "Author credited for the plot synopsis.",
+   "fill_rate": 0.999,
+   "examples": [
+    "Hal Erickson",
+    "Mark Deming",
+    "Paul Brenner"
+   ],
+   "verdict": "entity",
+   "reason": "Author of the synopsis; borderline (page credit), kept because it belongs with plot_synopsis."
+  },
+  {
+   "site": "movie-allmovie",
+   "template": "t_8c5c",
+   "field": "dvd_releases_url",
+   "type": "scalar",
+   "description": "Link to the movie's DVD releases.",
+   "fill_rate": 0.936,
+   "examples": [
+    "http://www.allmovie.com/dvd/releases/10-5",
+    "http://www.allmovie.com/dvd/releases/12-monkeys-135562",
+    "http://www.allmovie.com/dvd/releases/13-ghosts-67116"
+   ],
+   "verdict": "noise",
+   "reason": "Tab link to the film's DVD-releases page, derivable from the page URL: navigation."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "player_name",
+   "type": "scalar",
+   "description": "Player's full name.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Malik Allen",
+    "Brendan Haywood",
+    "Richard Jefferson"
+   ],
+   "verdict": "entity",
+   "reason": "Player name."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "jersey_number",
+   "type": "scalar",
+   "description": "Player's displayed jersey number.",
+   "fill_rate": 1.0,
+   "examples": [
+    "5",
+    "11",
+    "1"
+   ],
+   "verdict": "entity",
+   "reason": "Jersey number."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "headshot_url",
+   "type": "scalar",
+   "description": "Player's headshot image source.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://a.espncdn.com/i/nba/profiles/players/0000.jpg",
+    "http://a.espncdn.com/i/headshots/nba/players/65/10.jpg",
+    "http://a.espncdn.com/i/headshots/nba/players/65/1000.jpg"
+   ],
+   "verdict": "entity",
+   "reason": "Photo of the player."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "team_name",
+   "type": "scalar",
+   "description": "Player's current team.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Dallas Mavericks",
+    "Atlanta Hawks",
+    "New Jersey Nets"
+   ],
+   "verdict": "entity",
+   "reason": "Current team."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "team_logo_url",
+   "type": "scalar",
+   "description": "Current team's logo image source.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://assets.espn.go.com/i/teamlogos/nba/sml/trans/dal.gif",
+    "http://assets.espn.go.com/i/teamlogos/nba/sml/trans/atl.gif",
+    "http://assets.espn.go.com/i/teamlogos/nba/sml/trans/njn.gif"
+   ],
+   "verdict": "noise",
+   "reason": "Decorative team logo; carries nothing beyond team_name."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "biographical_details",
+   "type": "key_value",
+   "description": "Labeled player facts including birth details, measurements, age, position, experience, college, draft, pronunciation and salary.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Age": "32",
+     "Birth Date": "June 27, 1978",
+     "Birth Place": "Willingboro, NJ",
+     "College": "Villanova"
+    },
+    {
+     "Age": "31",
+     "Birth Date": "November 27, 1979",
+     "Birth Place": "New York, NY",
+     "College": "North Carolina"
+    },
+    {
+     "Age": "30",
+     "Birth Date": "June 21, 1980",
+     "Birth Place": "Los Angeles, CA",
+     "College": "Arizona"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Birth date and place, height, weight, age, position, experience, college."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "statistics_season",
+   "type": "scalar",
+   "description": "Season heading for the player's headline statistics.",
+   "fill_rate": 0.977,
+   "examples": [
+    "2010-11 STATS",
+    "2009-10 STATS"
+   ],
+   "verdict": "noise",
+   "reason": "Section heading '2010-11 STATS' (2 distinct values on 434 pages): page chrome."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "next_game",
+   "type": "scalar",
+   "description": "Next scheduled matchup, time and broadcast information as displayed.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Pacers at BucksWednesday 12/8, 8:00 PM ET",
+    "Thunder at TimberwolvesWednesday 12/8, 8:00 PM ET",
+    "Raptors at KnicksWednesday 12/8, 7:30 PM ET"
+   ],
+   "verdict": "noise",
+   "reason": "Schedule widget with an upcoming game (24 distinct values, same for many players): not a player attribute."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "status_alert",
+   "type": "scalar",
+   "description": "Full player status alert.",
+   "fill_rate": 0.115,
+   "examples": [
+    "Johnson (elbow) will undergo arthroscopic elbow surgery with Dr. James Andrews …",
+    "Tests revealed a small fracture in one of Andersen's lower left vertebra that w…",
+    "Boozer (hand) will play in Wednesday's game against the Magic, K.C. Johnson of …"
+   ],
+   "verdict": "entity",
+   "reason": "Injury/status note about the player (12% of pages); borderline, time-bound."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "player_news",
+   "type": "scalar",
+   "description": "Player news report, excluding its accompanying analysis.",
+   "fill_rate": 0.993,
+   "examples": [
+    "Career",
+    "@",
+    "Haywood scored nine points and blocked three shots on Saturday as Dallas won th…"
+   ],
+   "verdict": "noise",
+   "reason": "Rotating news blurb; on 156 of 434 pages the value is the table heading 'Career' and on 164 pages it equals player_news_analysis."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "player_news_analysis",
+   "type": "scalar",
+   "description": "Analysis accompanying the player news report.",
+   "fill_rate": 0.993,
+   "examples": [
+    "Career",
+    "@",
+    "Haywood has been more active since serving a team-mandated one-game suspension.…"
+   ],
+   "verdict": "noise",
+   "reason": "Rotating news commentary; 'Career' on 156 of 434 pages and equal to player_news on 164."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "season_and_career_statistics",
+   "type": "record_list",
+   "description": "Season and career statistics, preserving the displayed shooting totals, percentages and per-game figures.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     {
+      "assists": "2.5",
+      "blocks": ".00",
+      "defensive_rebounds": "1.8",
+      "field_goal_percentage": "0-0"
+     },
+     {
+      "assists": "5.0",
+      "blocks": ".68",
+      "defensive_rebounds": "2.9",
+      "field_goal_percentage": "3-16"
+     }
+    ],
+    [
+     {
+      "assists": "4.1",
+      "blocks": ".74",
+      "defensive_rebounds": "5.2",
+      "field_goal_percentage": "0-0"
+     },
+     {
+      "assists": "7.6",
+      "blocks": "1.13",
+      "defensive_rebounds": "6.3",
+      "field_goal_percentage": "0-2"
+     }
+    ],
+    [
+     {
+      "assists": "14.8",
+      "blocks": ".90",
+      "defensive_rebounds": "4.2",
+      "field_goal_percentage": "36-83"
+     },
+     {
+      "assists": "17.0",
+      "blocks": "2.04",
+      "defensive_rebounds": "5.1",
+      "field_goal_percentage": "497-1409"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Season and career averages of the player (entity data, but the columns are shifted by one: 'scope' holds games, 'games' minutes, ...)."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "game_log",
+   "type": "record_list",
+   "description": "Displayed game-by-game results and player statistics, including postseason games when shown.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     {
+      "assists": "0",
+      "blocks": "0",
+      "box_score_url": "http://sports.espn.go.com/nba/boxscore?gameId=301128028",
+      "date": "11/28"
+     },
+     {
+      "assists": "0",
+      "blocks": "0",
+      "box_score_url": "http://sports.espn.go.com/nba/boxscore?gameId=301201028",
+      "date": "12/1"
+     },
+     {
+      "assists": "0",
+      "blocks": "0",
+      "box_score_url": "http://sports.espn.go.com/nba/boxscore?gameId=301203028",
+      "date": "12/3"
+     }
+    ],
+    [
+     {
+      "assists": "0",
+      "blocks": "0",
+      "box_score_url": "http://sports.espn.go.com/nba/boxscore?gameId=301129014",
+      "date": "11/29"
+     },
+     {
+      "assists": "0",
+      "blocks": "0",
+      "box_score_url": "http://sports.espn.go.com/nba/boxscore?gameId=301201014",
+      "date": "12/1"
+     },
+     {
+      "assists": "0",
+      "blocks": "0",
+      "box_score_url": "http://sports.espn.go.com/nba/boxscore?gameId=301202005",
+      "date": "12/2"
+     }
+    ],
+    [
+     {
+      "assists": "0",
+      "blocks": "0",
+      "box_score_url": "http://sports.espn.go.com/nba/boxscore?gameId=301128013",
+      "date": "11/28"
+     },
+     {
+      "assists": "0",
+      "blocks": "0",
+      "box_score_url": "http://sports.espn.go.com/nba/boxscore?gameId=301130023",
+      "date": "11/30"
+     },
+     {
+      "assists": "0",
+      "blocks": "0",
+      "box_score_url": "http://sports.espn.go.com/nba/boxscore?gameId=301201026",
+      "date": "12/1"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "The player's recent game-by-game statistics."
+  },
+  {
+   "site": "nbaplayer-espn",
+   "template": "t_dfea",
+   "field": "split_statistics",
+   "type": "record_list",
+   "description": "Player statistics for the displayed matchup and situational splits.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     {
+      "assists": "0.0",
+      "blocks": "0.00",
+      "defensive_rebounds": "1.0",
+      "field_goal_percentage": "1.000"
+     }
+    ],
+    [
+     {
+      "assists": "0.3",
+      "blocks": "1.42",
+      "defensive_rebounds": "3.8",
+      "field_goal_percentage": ".561"
+     }
+    ],
+    [
+     {
+      "assists": "2.0",
+      "blocks": "0.00",
+      "defensive_rebounds": "4.0",
+      "field_goal_percentage": ".444"
+     },
+     {
+      "assists": "1.4",
+      "blocks": "0.50",
+      "defensive_rebounds": "3.4",
+      "field_goal_percentage": ".500"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "The player's statistics split by opponent and rest days."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "restaurant_name",
+   "type": "scalar",
+   "description": "Name of the restaurant.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Capital Grille",
+    "Olives",
+    "Antonio's"
+   ],
+   "verdict": "entity",
+   "reason": "Restaurant name."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "addresses",
+   "type": "list",
+   "description": "Restaurant addresses, excluding map and reservation link text.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Bellagio Las Vegas, 3600 Las Vegas Blvd. S, Center Strip, Las Vegas, NV"
+    ],
+    [
+     "MGM Grand Hotel and Casino, 3799 Las Vegas Blvd. S, South Strip, Las Vegas, NV"
+    ],
+    [
+     "King's Shops at Waikoloa Village, 250 Waikoloa Beach Dr., Kohala Coast, HI"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Address."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "phone",
+   "type": "scalar",
+   "description": "Restaurant telephone number or numbers as displayed.",
+   "fill_rate": 1.0,
+   "examples": [
+    "407/939-3463",
+    "970/496-4386; 800/354-4386",
+    "702/248-3463"
+   ],
+   "verdict": "entity",
+   "reason": "Phone number."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "website_url",
+   "type": "scalar",
+   "description": "Restaurant website link.",
+   "fill_rate": 0.308,
+   "examples": [
+    "http://foxrestaurantconcepts.com",
+    "http://www.wolfgangpuck.com",
+    "http://www.trulucks.com"
+   ],
+   "verdict": "entity",
+   "reason": "The restaurant's website."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "reservation_url",
+   "type": "scalar",
+   "description": "Online reservation link supplied for the restaurant.",
+   "fill_rate": 0.173,
+   "examples": [
+    "http://www.opentable.com/single.aspx?rid=26638&ref=4549",
+    "http://www.opentable.com/single.aspx?rid=22594&ref=4549",
+    "http://www.opentable.com/single.aspx?rid=27172&ref=4549"
+   ],
+   "verdict": "entity",
+   "reason": "Online reservation page of this restaurant."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "price_range",
+   "type": "scalar",
+   "description": "Displayed price-range symbols.",
+   "fill_rate": 1.0,
+   "examples": [
+    "$$",
+    "$",
+    "$$$"
+   ],
+   "verdict": "entity",
+   "reason": "Price range."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "cuisines",
+   "type": "list",
+   "description": "Cuisine categories assigned to the restaurant.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "American"
+    ],
+    [
+     "Italian"
+    ],
+    [
+     "Seafood"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Cuisines."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "neighborhood",
+   "type": "scalar",
+   "description": "Restaurant neighborhood or local area.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Downtown",
+    "Atlanta",
+    "Santa Fe"
+   ],
+   "verdict": "entity",
+   "reason": "Neighborhood."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "editorial_review",
+   "type": "list",
+   "description": "Paragraphs of Fodor's editorial restaurant review.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Stop here for quick lunches and Kaladi Brothers espresso. The in-house bakery, …"
+    ],
+    [
+     "Every year when locals vote for Anchorage's best burger joint, Arctic Roadrunne…"
+    ],
+    [
+     "Anchorage's only Indian restaurant is housed in a collection of international s…"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Editorial review of the restaurant."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "average_member_rating",
+   "type": "scalar",
+   "description": "Average member rating including the displayed rating scale.",
+   "fill_rate": 0.269,
+   "examples": [
+    "5.0/5",
+    "4.8/5",
+    "4.6/5"
+   ],
+   "verdict": "entity",
+   "reason": "Average user rating of the restaurant."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "additional_details",
+   "type": "key_value",
+   "description": "Additional restaurant facts, including reservation advice, accepted cards, opening restrictions, other locations, and transit access.",
+   "fill_rate": 1.0,
+   "examples": [
+    {
+     "Credit Cards": "AE, D, DC, MC, V"
+    },
+    {
+     "Credit Cards": "AE, D, MC, V"
+    },
+    {
+     "Credit Cards": "AE, MC, V"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Credit cards, hours, reservations and other facts."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "contact_details",
+   "type": "key_value",
+   "description": "Supplementary contact information such as directions, mailing address, and fax number.",
+   "fill_rate": 0.011,
+   "examples": [
+    {
+     "Directions": "5C"
+    },
+    {
+     "Directions": "inside the Valdez airport terminal"
+    },
+    {
+     "Mailing": "Box 295, Chinle, AZ, USA, 86503"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Directions, mailing address, fax (1% of pages)."
+  },
+  {
+   "site": "restaurant-fodors",
+   "template": "t_6729",
+   "field": "member_reviews",
+   "type": "record_list",
+   "description": "Member reviews with reviewer information and overall and category ratings.",
+   "fill_rate": 0.271,
+   "examples": [
+    [
+     {
+      "atmosphere_rating": "3.0",
+      "food_rating": "2.0",
+      "overall_rating": "2.6",
+      "review_text": "Ok, for a quick bite, but nothing special. There are so many better choices in …"
+     }
+    ],
+    [
+     {
+      "atmosphere_rating": "3.0",
+      "food_rating": "1.0",
+      "overall_rating": "1.6",
+      "review_text": "Everything we ordered was in the range from ok to bad to how did they have the …"
+     },
+     {
+      "atmosphere_rating": "3.0",
+      "food_rating": "3.0",
+      "overall_rating": "2.4",
+      "review_text": "My experiences at Bombay Deluxe have not been positive, on the four or five tim…"
+     },
+     {
+      "atmosphere_rating": "4.0",
+      "food_rating": "4.0",
+      "overall_rating": "4.2",
+      "review_text": "Great place for lunch. The buffet is quick and tasty. Staff is always friendly.…"
+     }
+    ],
+    [
+     {
+      "atmosphere_rating": "1.0",
+      "food_rating": "1.0",
+      "overall_rating": "1.0",
+      "review_text": "Poor atmosphere and unimaginative food all at an exorborant price with service …"
+     }
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "User reviews of this restaurant with ratings."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "college_name",
+   "type": "scalar",
+   "description": "Name of the college or university.",
+   "fill_rate": 1.0,
+   "examples": [
+    "Herzing University",
+    "Columbia College",
+    "St. John's College"
+   ],
+   "verdict": "entity",
+   "reason": "College name."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "college_board_code",
+   "type": "scalar",
+   "description": "College Board identification code.",
+   "fill_rate": 0.914,
+   "examples": [
+    "2660",
+    "4686",
+    "5590"
+   ],
+   "verdict": "entity",
+   "reason": "The college's College Board code."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "main_contact_details",
+   "type": "scalar",
+   "description": "Main address and contact information, including the displayed website.",
+   "fill_rate": 1.0,
+   "examples": [
+    "2100 Moorpark Avenue San Jose, CA 95128 (408) 298-2181 www.sjcc.edu",
+    "12745 College Drive Glenns, VA 23149-2616 (804) 758-6700 www.rappahannock.edu",
+    "PO Box 1420 Lumberton, NC 28359 (910) 272-3700 www.robeson.edu"
+   ],
+   "verdict": "entity",
+   "reason": "Address, phone and website (one combined text)."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "college_website_url",
+   "type": "scalar",
+   "description": "Link to the college website as provided by College Board.",
+   "fill_rate": 1.0,
+   "examples": [
+    "http://apps.collegeboard.com/ut/AffiliateJumpPage.jsp?DestURL=http://www.itt-te…",
+    "http://apps.collegeboard.com/ut/AffiliateJumpPage.jsp?DestURL=http://www.ivytec…",
+    "http://apps.collegeboard.com/ut/AffiliateJumpPage.jsp?DestURL=http://www.ncbt.e…"
+   ],
+   "verdict": "entity",
+   "reason": "The college's website (behind a site redirect)."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "admissions_contact_details",
+   "type": "scalar",
+   "description": "Admissions office address, telephone, fax, email and contact person as displayed.",
+   "fill_rate": 1.0,
+   "examples": [
+    "College of St Benedict/St John's University PO Box 7155 Collegeville, MN 56321-…",
+    "2100 Moorpark Avenue San Jose, CA 95128-2798 (408) 288-3700 Fax: (408) 298-1935…",
+    "12745 College Drive Glenns, VA 23149-2616 (804) 758-6700 Fax: (804) 758-3852 Co…"
+   ],
+   "verdict": "entity",
+   "reason": "Admissions office address, phone, fax, email and contact person."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "admissions_email",
+   "type": "scalar",
+   "description": "Admissions office email address.",
+   "fill_rate": 0.824,
+   "examples": [
+    "market@educorp.edu",
+    "admissions@ohio.edu",
+    "info@heald.edu"
+   ],
+   "verdict": "entity",
+   "reason": "Admissions email."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "application_url",
+   "type": "scalar",
+   "description": "Link for applying to the college.",
+   "fill_rate": 0.567,
+   "examples": [
+    "http://collegesearch.collegeboard.com/search/apply_inquire_pop.jsp?destUrl=http…",
+    "http://collegesearch.collegeboard.com/search/apply_inquire_pop.jsp?destUrl=http…",
+    "http://collegesearch.collegeboard.com/search/apply_inquire_pop.jsp?destUrl=http…"
+   ],
+   "verdict": "entity",
+   "reason": "Where to apply to the college."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "information_request_url",
+   "type": "scalar",
+   "description": "Link for requesting information from the college.",
+   "fill_rate": 0.366,
+   "examples": [
+    "http://collegesearch.collegeboard.com/search/apply_inquire_pop.jsp?destUrl=http…",
+    "http://collegesearch.collegeboard.com/search/apply_inquire_pop.jsp?destUrl=http…",
+    "http://collegesearch.collegeboard.com/search/apply_inquire_pop.jsp?destUrl=http…"
+   ],
+   "verdict": "noise",
+   "reason": "Marketing call-to-action link ('request information' form)."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "school_characteristics",
+   "type": "list",
+   "description": "School type, ownership, academic level, affiliations and other listed institutional characteristics.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Public",
+     "Community College",
+     "Two-year"
+    ],
+    [
+     "Public",
+     "Community College",
+     "Two-year"
+    ],
+    [
+     "Proprietary",
+     "Technical College",
+     "Two-year"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Control (public/private), type, level, accreditation and affiliations."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "academic_calendar",
+   "type": "scalar",
+   "description": "Academic calendar system.",
+   "fill_rate": 0.994,
+   "examples": [
+    "Semester",
+    "Quarter",
+    "Continuous"
+   ],
+   "verdict": "entity",
+   "reason": "Academic calendar."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "degrees_offered",
+   "type": "list",
+   "description": "Degrees and certificates offered by the institution.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Certificate",
+     "Associate"
+    ],
+    [
+     "Certificate",
+     "Diploma",
+     "Associate"
+    ],
+    [
+     "Bachelor's",
+     "Master's"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Degrees offered."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "other_characteristics",
+   "type": "scalar",
+   "description": "Additional institutional characteristics supplied by the college.",
+   "fill_rate": 0.312,
+   "examples": [
+    "Certain bachelor degree programs must be completed at another Penn State campus.",
+    "SUNY institution.",
+    "Part of multicampus system specializing in career education."
+   ],
+   "verdict": "entity",
+   "reason": "Other characteristics of the college."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "campus_setting",
+   "type": "list",
+   "description": "Campus setting, surrounding community size and residential or commuter character.",
+   "fill_rate": 1.0,
+   "examples": [
+    [
+     "Urban setting",
+     "Very large city (over 500,000)",
+     "Commuter campus"
+    ],
+    [
+     "Suburban setting",
+     "Small city (50,000 - 249,999)",
+     "Commuter campus"
+    ],
+    [
+     "Suburban setting",
+     "Large town (10,000 - 49,999)",
+     "Commuter campus"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Campus setting and city size."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "enrollment_statistics",
+   "type": "key_value",
+   "description": "Reported enrollment counts and student-to-faculty ratio.",
+   "fill_rate": 0.996,
+   "examples": [
+    {
+     "Degree-seeking undergrads": "250"
+    },
+    {
+     "Degree-seeking undergrads": "300"
+    },
+    {
+     "Degree-seeking undergrads": "120"
+    }
+   ],
+   "verdict": "entity",
+   "reason": "Enrollment counts."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "first_year_residency_and_attendance",
+   "type": "list",
+   "description": "First-year student residency and attendance percentages.",
+   "fill_rate": 0.701,
+   "examples": [
+    [
+     "99% In-state students",
+     "1% Out-of-state students"
+    ],
+    [
+     "98% In-state students",
+     "2% Out-of-state students"
+    ],
+    [
+     "95% In-state students",
+     "5% Out-of-state students"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "In-state/out-of-state shares of first-year students."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "first_year_student_profile",
+   "type": "list",
+   "description": "Reported first-year student demographics and high-school academic profile percentages.",
+   "fill_rate": 0.684,
+   "examples": [
+    [
+     "50% Women",
+     "50% Men"
+    ],
+    [
+     "48% Women",
+     "52% Men"
+    ],
+    [
+     "52% Women",
+     "48% Men"
+    ]
+   ],
+   "verdict": "entity",
+   "reason": "Demographics and academic profile of first-year students."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "college_description",
+   "type": "scalar",
+   "description": "The college's own narrative description.",
+   "fill_rate": 0.033,
+   "examples": [
+    "The Gettysburg Experience is rooted in a rigorous liberal arts and science curr…",
+    "Widener University is a private, metropolitan university that emphasizes academ…",
+    "Hampshire was founded in 1965 by four of the country's most celebrated colleges…"
+   ],
+   "verdict": "entity",
+   "reason": "The college's own description."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "college_logo_url",
+   "type": "scalar",
+   "description": "College logo image source.",
+   "fill_rate": 0.033,
+   "examples": [
+    "/premium/images/1150/1150-logo.jpg",
+    "/premium/images/1219/1219-logo.gif",
+    "/premium/images/1258/1258-logo.jpg"
+   ],
+   "verdict": "noise",
+   "reason": "Decorative college logo image."
+  },
+  {
+   "site": "university-collegeboard",
+   "template": "t_e876",
+   "field": "campus_photo_url",
+   "type": "scalar",
+   "description": "Campus photograph used to introduce the photo tour.",
+   "fill_rate": 0.033,
+   "examples": [
+    "/premium/images/1150/1150-glance.jpg",
+    "/premium/images/1219/1219-glance.jpg",
+    "/premium/images/1258/1258-glance.jpg"
+   ],
+   "verdict": "entity",
+   "reason": "Photo of the campus."
+  }
+ ]
+}

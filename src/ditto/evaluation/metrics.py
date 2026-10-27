@@ -1,9 +1,11 @@
 """Evaluation metrics: value normalization, page-level per-field P/R/F1 and their aggregation.
 
-Every score is computed twice: ``norm`` (normalized match: whitespace, case, currency symbols,
-thousands separators, trailing punctuation, plus leading separators such as ``": "``, C1 control
-characters read as cp1252, and the canonical form of plain numbers) and ``raw`` (exact string
-equality). Units per field kind:
+Every score is computed in three match columns: ``norm`` (normalized match: whitespace, case,
+currency symbols, thousands separators, trailing punctuation, plus leading separators such as
+``": "``, C1 control characters read as cp1252, and the canonical form of plain numbers), ``raw``
+(exact string equality) and ``canon`` (the ``norm`` form plus the formatting rules derived from
+the SWDE development-slice misses, see :func:`canonical_text`; on a scalar field a prediction
+that joins several labeled values with list separators also counts). Units per field kind:
 
 - ``scalar``: one unit per page. A list label holds acceptable alternatives; a list prediction
   is scored by its first non-empty item (top-1).
@@ -37,8 +39,15 @@ from typing import Any, Literal
 from ditto.evaluation.datasets.base import LabelKind, is_empty
 from ditto.textutil import normalize_ws
 
-MatchMode = Literal["norm", "raw"]
-MODES: tuple[MatchMode, ...] = ("norm", "raw")
+MatchMode = Literal["norm", "raw", "canon"]
+MODES: tuple[MatchMode, ...] = ("norm", "raw", "canon")
+
+METRIC_VERSION = 2
+"""Version of the match-column definitions, recorded in every evaluation's ``meta.json``.
+
+1: ``norm`` and ``raw``. 2: adds ``canon``, whose rules were derived from SWDE development-slice
+misses only (``eval/analysis/swde_dev_misses.md``) and frozen before any test set was rescored;
+``norm`` and ``raw`` are unchanged."""
 
 # Keys of an extracted output row that are bookkeeping, not fields.
 ROW_META_KEYS = frozenset({"url", "page_id", "template_id", "_meta"})
@@ -56,6 +65,15 @@ _LEADING_SEPARATORS = ":;,|\u00b7\u2022\u2013\u2014 "
 _C1 = {cp: bytes([cp]).decode("cp1252", errors="ignore") or None for cp in range(0x80, 0xA0)}
 _PLAIN_NUMBER = re.compile(r"[+-]?(?:\d+\.?\d*|\.\d+)")
 _COLKEY = re.compile(r"[^0-9a-z]+")
+# canon: separators also stripped at the end (SWDE labels such as "99503 |"), combining
+# diacritical marks (U+0300-U+036F after canonical decomposition), digit groups of a long
+# identifier ("978-0307269997") and the separators between joined label values.
+_CANON_TRAILING = _TRAILING_PUNCT + "|"
+_DIACRITICS = re.compile("[\u0300-\u036f]")
+_DIGIT_GROUPS = re.compile(r"\d+(?:[- ]\d+)+(?:[- ]?x)?|\d+[- ]x")
+_DIGIT_GROUP_SEPARATORS = re.compile(r"[- ]")
+_MIN_GROUPED_LENGTH = 10
+_JOIN_SEPARATOR = re.compile(r"\s*[,;/|]\s*|\s+")
 
 
 # -- normalization -------------------------------------------------------------------------------
@@ -84,6 +102,11 @@ def normalize_text(text: str) -> str:
     text = _THOUSANDS.sub("", text)
     text = normalize_ws(text).casefold()
     text = text.rstrip(_TRAILING_PUNCT).lstrip(_LEADING_SEPARATORS).strip()
+    return _number_form(text)
+
+
+def _number_form(text: str) -> str:
+    """Canonical decimal form of a plain number (``"12.50"`` -> ``"12.5"``); other text as is."""
     if _PLAIN_NUMBER.fullmatch(text):
         try:
             number = Decimal(text)
@@ -95,16 +118,39 @@ def normalize_text(text: str) -> str:
     return text
 
 
+def canonical_text(text: str) -> str:
+    """Canonical form used by the ``canon`` match column: a function of the ``norm`` form.
+
+    On top of :func:`normalize_text`: combining diacritical marks are dropped (``"café"`` ->
+    ``"cafe"``); a trailing ``|`` is stripped like trailing punctuation (``"99503 |"``); a value
+    made only of digit groups separated by single hyphens or spaces (an ISBN-10 may end in the
+    check character ``x``) and at least ten characters long without them loses the separators
+    (``"978-0307269997"`` -> ``"9780307269997"``), so dates and ranges such as ``"10-12"`` are
+    untouched. Equal ``norm`` forms always give equal ``canon`` forms.
+    """
+    text = normalize_text(text)
+    text = _DIACRITICS.sub("", unicodedata.normalize("NFD", text))
+    text = unicodedata.normalize("NFC", text).rstrip(_CANON_TRAILING)
+    if _DIGIT_GROUPS.fullmatch(text):
+        joined = _DIGIT_GROUP_SEPARATORS.sub("", text)
+        if len(joined) >= _MIN_GROUPED_LENGTH:
+            text = joined
+    return normalize_text(text)
+
+
 def canonical(value: Any, mode: MatchMode) -> str | None:
     """Comparable form of a value under ``mode`` (``None`` when the value is empty).
 
-    Under ``norm`` a value that normalizes to nothing (e.g. a lone dash) counts as empty.
+    Under ``norm`` and ``canon`` a value that normalizes to nothing (e.g. a lone dash) counts as
+    empty.
     """
     text = to_text(value)
     if text is None or not text.strip():
         return None
     if mode == "raw":
         return text
+    if mode == "canon":
+        return canonical_text(text) or None
     return normalize_text(text) or None
 
 
@@ -197,6 +243,34 @@ def _pairs(value: Any) -> dict[str, Any]:
     return out
 
 
+def joins_alternatives(text: str, alternatives: Iterable[str]) -> bool:
+    """``text`` is two or more distinct ``alternatives`` joined by list separators.
+
+    Separators: ``,`` ``;`` ``/`` ``|`` (with optional spaces) or whitespace. Every piece must be
+    a whole alternative, so a value with any other content never qualifies (``"comedy western"``
+    joins ``comedy`` and ``western``; ``"comedy western 1969"`` does not).
+    """
+    options = sorted(set(alternatives), key=len, reverse=True)
+    if len(options) < 2:
+        return False
+
+    def joined(rest: str, used: frozenset[str]) -> bool:
+        for option in options:
+            if option in used or not rest.startswith(option):
+                continue
+            tail = rest[len(option) :]
+            if not tail:
+                if used:
+                    return True
+                continue
+            sep = _JOIN_SEPARATOR.match(tail)
+            if sep and sep.end() < len(tail) and joined(tail[sep.end() :], used | {option}):
+                return True
+        return False
+
+    return joined(text, frozenset())
+
+
 def _score_scalar(pred: Any, label: Any, mode: MatchMode) -> Counts:
     alternatives = [a for a in (canonical(v, mode) for v in _items(label)) if a is not None]
     guess = canonical(_first_item(pred), mode)
@@ -204,7 +278,9 @@ def _score_scalar(pred: Any, label: Any, mode: MatchMode) -> Counts:
         return Counts(fn=1) if alternatives else Counts(tn=1)
     if not alternatives:
         return Counts(fp=1)
-    return Counts(tp=1) if guess in alternatives else Counts(fp=1, fn=1)
+    if guess in alternatives or (mode == "canon" and joins_alternatives(guess, alternatives)):
+        return Counts(tp=1)
+    return Counts(fp=1, fn=1)
 
 
 def _score_list(pred: Any, label: Any, mode: MatchMode) -> Counts:
@@ -509,6 +585,53 @@ def _flat_values(value: Any) -> set[str]:
     return out
 
 
+def _structured(value: Any) -> bool:
+    """A key-value mapping or a list of records (rows)."""
+    if isinstance(value, Mapping):
+        return True
+    return isinstance(value, (list, tuple)) and any(isinstance(v, Mapping) for v in value)
+
+
+def field_parts(name: str, value: Any) -> dict[str, Any]:
+    """A predicted field and, for a structured value, its addressable parts.
+
+    An unprompted spec may group what the labels keep apart: a specification sheet becomes one
+    ``key_value`` field, a listing table one ``record_list``. Each key of a mapping is a part
+    ``name[Key]`` (its value); each column of a record list is a part ``name.column`` (the
+    column's values in row order). Plain values have no parts.
+    """
+    parts: dict[str, Any] = {name: value}
+    if isinstance(value, Mapping):
+        for key, v in _pairs(value).items():
+            parts[f"{name}[{normalize_ws(key)}]"] = v
+    elif isinstance(value, (list, tuple)):
+        columns: dict[str, list[Any]] = {}
+        for row in value:
+            if isinstance(row, Mapping):
+                for col, v in row.items():
+                    if not is_empty(v):
+                        columns.setdefault(str(col), []).append(v)
+        for col, values in columns.items():
+            parts[f"{name}.{col}"] = values
+    return parts
+
+
+def _part_base(part: str) -> str:
+    """The predicted field a part belongs to (the part itself for a whole field)."""
+    cut = min((i for i in (part.find("["), part.find(".")) if i > 0), default=len(part))
+    return part[:cut]
+
+
+def part_value(row: Mapping[str, Any], part: str) -> Any:
+    """Value of a whole predicted field or of one of its parts (see :func:`field_parts`)."""
+    if part in row:
+        return row[part]
+    base = _part_base(part)
+    if base == part or base not in row:
+        return None
+    return field_parts(base, row[base]).get(part)
+
+
 def align_field_names(
     predictions: Mapping[str, Mapping[str, Any]],
     labels: Mapping[str, Mapping[str, Any]],
@@ -518,46 +641,73 @@ def align_field_names(
 ) -> dict[str, str]:
     """Map label field names to predicted (LLM-named) fields by value overlap on ``keys``.
 
-    For every (label field, predicted field) pair, count the pages where their normalized values
-    share at least one value. Pairs are assigned one-to-one greedily by descending overlap; a pair
-    needs an overlap on at least ``min_fraction`` of the pages that carry the label (and at least
-    one page). Returns ``{label_field: predicted_field}``.
+    Candidates are the predicted fields and their parts (a key of a key-value field, a column
+    of a record list; :func:`field_parts`). A plain label (scalar or list) can only align to a
+    plain field or a part, a structured label (key-value or records) only to a whole structured
+    field: anything else could never score. For every compatible (label field, candidate) pair,
+    count the pages where their normalized values share at least one value. Pairs are assigned
+    one-to-one greedily by descending overlap; a whole field and its parts exclude each other,
+    sibling parts do not. A pair needs an overlap on at least ``min_fraction`` of the pages that
+    carry the label (and at least one page). Returns ``{label_field: predicted field or part}``;
+    :func:`rename_fields` resolves parts.
     """
     overlap: Counter[tuple[str, str]] = Counter()
     labeled: Counter[str] = Counter()
+    structured_labels: set[str] = set()
+    structured_fields: set[str] = set()  # whole fields with a mapping or record value
     for key in keys:
         label_row = labels.get(key)
         pred_row = predictions.get(key)
         if not label_row:
             continue
-        pred_values = {
-            name: _flat_values(value)
-            for name, value in (pred_row or {}).items()
-            if name not in ROW_META_KEYS
-        }
+        pred_values: dict[str, set[str]] = {}
+        for name, whole in (pred_row or {}).items():
+            if name in ROW_META_KEYS:
+                continue
+            if _structured(whole):
+                structured_fields.add(name)
+            for part, value in field_parts(name, whole).items():
+                pred_values[part] = _flat_values(value)
         for lf, label in label_row.items():
             want = _flat_values(label)
             if not want:
                 continue
             labeled[lf] += 1
+            if _structured(label):
+                structured_labels.add(lf)
             for pf, got in pred_values.items():
                 if got & want:
                     overlap[(lf, pf)] += 1
+
+    def compatible(lf: str, pf: str) -> bool:
+        return (pf in structured_fields) == (lf in structured_labels)
+
     alignment: dict[str, str] = {}
     used: set[str] = set()
+    whole_used: set[str] = set()  # fields aligned whole: none of their parts is available
+    part_used: set[str] = set()  # fields with an aligned part: the whole is not available
     for (lf, pf), n in sorted(overlap.items(), key=lambda kv: (-kv[1], kv[0])):
-        if lf in alignment or pf in used:
+        base = _part_base(pf)
+        if lf in alignment or pf in used or base in whole_used or not compatible(lf, pf):
+            continue
+        if base == pf and base in part_used:
             continue
         if n < max(1.0, min_fraction * labeled[lf]):
             continue
         alignment[lf] = pf
         used.add(pf)
+        (whole_used if base == pf else part_used).add(base)
     return alignment
 
 
 def rename_fields(row: Mapping[str, Any], alignment: Mapping[str, str]) -> dict[str, Any]:
-    """Predicted row with LLM field names replaced by the aligned label names."""
-    return {lf: row[pf] for lf, pf in alignment.items() if pf in row}
+    """Predicted row with LLM field names (or field parts) replaced by the aligned label names."""
+    out: dict[str, Any] = {}
+    for lf, pf in alignment.items():
+        value = part_value(row, pf)
+        if value is not None:
+            out[lf] = value
+    return out
 
 
 def sample_keys(keys: Iterable[str], n: int, seed: int) -> list[str]:
@@ -566,3 +716,65 @@ def sample_keys(keys: Iterable[str], n: int, seed: int) -> list[str]:
     if len(ordered) <= n:
         return ordered
     return sorted(random.Random(seed).sample(ordered, n))
+
+
+# -- unprompted schema precision (judged) -------------------------------------------------------
+
+VERDICTS = ("entity", "noise")
+
+
+def schema_precision(
+    judgments: Sequence[Mapping[str, Any]],
+    proposed: Mapping[str, Mapping[str, Iterable[str]]] | None = None,
+) -> dict[str, Any]:
+    """Schema precision from per-field verdicts: entity fields / all judged fields.
+
+    ``judgments`` are ``{site, template, field, verdict, ...}`` rows (verdict ``entity`` or
+    ``noise``). Precision is reported per site and overall (micro: over all judged fields), plus
+    the mean of the per-site values. With ``proposed`` (``{site: {template: field names}}`` of a
+    run), the result also says whether the judgments cover exactly that run's proposed fields on
+    the judged sites: ``unjudged`` lists proposed fields without a verdict, ``stale`` verdicts for
+    fields the run did not propose, ``sites_missing`` judged sites the run lacks.
+    """
+    per_site: dict[str, dict[str, Any]] = {}
+    judged: dict[str, set[tuple[str, str]]] = defaultdict(set)
+    for row in judgments:
+        verdict = row.get("verdict")
+        if verdict not in VERDICTS:
+            raise ValueError(f"verdict must be one of {VERDICTS}, got {verdict!r} in {row}")
+        site, key = str(row["site"]), (str(row["template"]), str(row["field"]))
+        if key in judged[site]:
+            raise ValueError(f"duplicate verdict for {site} {key[0]}.{key[1]}")
+        judged[site].add(key)
+        entry = per_site.setdefault(site, {"fields": 0, "entity": 0})
+        entry["fields"] += 1
+        entry["entity"] += verdict == "entity"
+    for entry in per_site.values():
+        entry["precision"] = entry["entity"] / entry["fields"]
+    n_fields = sum(e["fields"] for e in per_site.values())
+    n_entity = sum(e["entity"] for e in per_site.values())
+    out: dict[str, Any] = {
+        "n_sites": len(per_site),
+        "fields": n_fields,
+        "entity": n_entity,
+        "precision": n_entity / n_fields if n_fields else None,
+        "precision_site_mean": _mean(e["precision"] for e in per_site.values()),
+        "per_site": dict(sorted(per_site.items())),
+    }
+    if proposed is not None:
+        unjudged: list[str] = []
+        stale: list[str] = []
+        for site in sorted(judged):
+            if site not in proposed:
+                continue
+            run_fields = {(t, f) for t, names in proposed[site].items() for f in names}
+            unjudged.extend(f"{site} {t}.{f}" for t, f in sorted(run_fields - judged[site]))
+            stale.extend(f"{site} {t}.{f}" for t, f in sorted(judged[site] - run_fields))
+        missing = sorted(set(judged) - set(proposed))
+        out["run_check"] = {
+            "matches_run": not (unjudged or stale or missing),
+            "unjudged": unjudged,
+            "stale": stale,
+            "sites_missing": missing,
+        }
+    return out

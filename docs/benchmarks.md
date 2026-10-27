@@ -174,13 +174,41 @@ fixture site under `tests/fixtures/site/` comes from the same generator (`eval/s
 
 As implemented in `src/ditto/evaluation/metrics.py` and `src/ditto/evaluation/clustering.py`.
 
-**Two match modes**, every score computed in both:
+**Three match columns**, every score computed in all three:
 
 - `raw`: exact string equality.
 - `norm` (normalized): C1 control characters read as cp1252, currency symbols removed, thousands
   separators removed between digits, whitespace collapsed, case folded, trailing punctuation and
   leading separators (such as `": "`) stripped, and plain numbers put in canonical form (`1.50`
   equals `1.5`). A value that normalizes to nothing counts as empty.
+- `canon` (canonical, added in metric version 2): the `norm` form, then
+  1. combining diacritical marks dropped (U+0300–U+036F after canonical decomposition): `Café`
+     equals `Cafe`;
+  2. a trailing `|` stripped like trailing punctuation: `Anchorage, AK, 99503 |` equals
+     `Anchorage, AK, 99503`;
+  3. a value made only of digit groups joined by single hyphens or spaces (an ISBN-10 may end in
+     its check character `X`) and at least ten characters long without them is compared without
+     the separators: `978-0307269997` equals `9780307269997`; shorter values such as dates
+     (`1-12-2010`), ranges (`10-12`) or ZIP+4 codes are left as they are;
+  4. on a `scalar` field only, a prediction made of two or more distinct label alternatives
+     joined by `,` `;` `/` `|` or whitespace is correct (`Comedy Western` for the label
+     `[Comedy, Western]`); every piece must be a whole labeled value.
+
+  The `canon` form is a function of the `norm` form, so values with equal `norm` forms have equal
+  `canon` forms (only a value made of separators alone, such as `- |`, becomes empty).
+  There is no substring, containment or similarity matching: a value with different or extra
+  content stays a miss (`Price: $12.99` against `$12.99`, `907/274-2739 | Reserve Online`
+  against `907/274-2739 |`, `Ray Allen` against SWDE's `Ray Allen #20 SG`).
+
+The `canon` rules were derived from the misses of the SWDE development slice only (the saved
+predictions of ditto and the naive baseline; see `eval/analysis/swde_dev_misses.md`, regenerated
+by `uv run python eval/analysis/swde_dev_misses.py`) and frozen as metric version 2 before any
+test set was rescored. Every `meta.json` records `metric_version` and `match_columns`; results
+written before version 2 have no `canon` column. Formatting differences the dev misses did not
+show (dates written differently, a leading field label, units) have no rule. On the dev slice,
+`canon` moves overall F1 from 0.877 to 0.892 for ditto (0.876 to 0.890 on the baselines' 50-page
+samples) and from 0.858 to 0.880 for the naive baseline; most remaining dev misses are SWDE label
+problems (truncated or over-long labels), which no rule credits.
 
 **Units per field kind**, page by page:
 

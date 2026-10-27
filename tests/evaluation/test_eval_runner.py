@@ -11,6 +11,7 @@ from _eval_tiny_site import BASELINE, FakePipeline, make_tiny_site, truth_predic
 
 from ditto.evaluation.datasets.base import EvalSite, Selection
 from ditto.evaluation.datasets.synthetic import read_site
+from ditto.evaluation.metrics import METRIC_VERSION
 from ditto.evaluation.runner import Hooks, cost_summary, manifest_hashes, run_eval
 
 
@@ -173,14 +174,20 @@ def test_prompted_run_writes_results_and_meta(
     assert meta["spend_by_site"] == {"tiny": pytest.approx(0.004)}
     assert meta["config"]["name"] == "tiny_eval"
     assert meta["status"] == "ok"
+    assert meta["metric_version"] == METRIC_VERSION
+    assert meta["match_columns"] == ["norm", "raw", "canon"]
 
     per_site = _read_csv(out / "per_site.csv")
     assert [r["site"] for r in per_site] == ["tiny"]
     assert float(per_site[0]["f1_norm"]) == pytest.approx(site["accuracy"]["norm"]["f1"])
+    assert float(per_site[0]["f1_canon"]) == pytest.approx(site["accuracy"]["canon"]["f1"])
     assert float(per_site[0]["ari"]) == pytest.approx(1.0)
     assert per_site[0]["pps_core_extract"] == "400.0"
     rows = _read_csv(out / "results.csv")
     assert [r["scope"] for r in rows] == ["synthetic", "overall"]
+    assert float(rows[-1]["f1_canon"]) == pytest.approx(
+        summary["accuracy"]["overall"]["canon"]["f1"]
+    )
     assert float(rows[-1]["usd_per_1k_pages"]) == pytest.approx(5.25)
     assert float(rows[-1]["cluster_ari"]) == pytest.approx(1.0)
 

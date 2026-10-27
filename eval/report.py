@@ -553,7 +553,7 @@ def _scope(e: Entry, sample: bool) -> str:
 def _accuracy_row(e: Entry, *, sample: bool = False) -> list[str]:
     head = [e.config.label, _scope(e, sample)]
     if not e.ok:
-        return [*head, *([DASH] * 8), e.status_text()]
+        return [*head, *([DASH] * 9), e.status_text()]
     assert e.result is not None
     key = "accuracy_sample" if sample else "accuracy"
     cost = e.result.summary.get("cost") or {}
@@ -562,6 +562,7 @@ def _accuracy_row(e: Entry, *, sample: bool = False) -> list[str]:
         _fmt(_pages_scored(e.result, key), 0),
         _fmt(_overall_f1(e.result, "norm", key)),
         _fmt(_overall_f1(e.result, "raw", key)),
+        _fmt(_overall_f1(e.result, "canon", key)),
         _fmt(cost.get("input_tokens_per_1k_pages"), 0),
         _fmt(cost.get("output_tokens_per_1k_pages"), 0),
         _fmt(cost.get("calls_per_template"), 2),
@@ -577,6 +578,7 @@ ACCURACY_HEADER = (
     "pages scored",
     "F1 norm",
     "F1 raw",
+    "F1 canon",
     "input tokens / 1k pages",
     "output tokens / 1k pages",
     "LLM calls / template",
@@ -638,12 +640,13 @@ def per_vertical_table(entries: Sequence[Entry]) -> list[str]:
                     _fmt(_get(agg, "norm", "recall")),
                     _fmt(_get(agg, "norm", "f1")),
                     _fmt(_get(agg, "raw", "f1")),
+                    _fmt(_get(agg, "canon", "f1")),
                 ]
             )
     if not rows:
         return []
     rows.sort(key=lambda r: r[0])
-    header = ("vertical", "method", "sites", "P norm", "R norm", "F1 norm", "F1 raw")
+    header = ("vertical", "method", "sites", "P norm", "R norm", "F1 norm", "F1 raw", "F1 canon")
     return ["Per vertical (mean of its sites):", "", *_table(header, rows), ""]
 
 
@@ -846,6 +849,7 @@ def section_livewebie(ctx: Context, target: Target) -> list[str]:
                 f"{t} ({COMPLEXITY_TYPES.get(t, t)})",
                 _fmt(_get(groups, "norm", t, "f1")),
                 _fmt(_get(groups, "raw", t, "f1")),
+                _fmt(_get(groups, "canon", t, "f1")),
                 _fmt(_get(groups, "norm", t, "n_sites"), 0),
             ]
             for t in sorted(set(groups.get("norm") or {}) | set(groups.get("raw") or {}))
@@ -855,6 +859,7 @@ def section_livewebie(ctx: Context, target: Target) -> list[str]:
                 "all fields",
                 _fmt(_overall_f1(e.result)),
                 _fmt(_overall_f1(e.result, "raw")),
+                _fmt(_overall_f1(e.result, "canon")),
                 _fmt(e.result.summary.get("n_ok"), 0),
             ]
         )
@@ -862,7 +867,7 @@ def section_livewebie(ctx: Context, target: Target) -> list[str]:
         lines += [
             f"**{e.config.label}** on the snapshot, mean field F1 per query complexity type:",
             "",
-            *_table(("complexity type", "F1 norm", "F1 raw", "sites"), rows),
+            *_table(("complexity type", "F1 norm", "F1 raw", "F1 canon", "sites"), rows),
             "",
             f"Input tokens per 1k pages {_fmt(cost.get('input_tokens_per_1k_pages'), 0)}, "
             f"LLM calls per template {_fmt(cost.get('calls_per_template'), 2)}, "
