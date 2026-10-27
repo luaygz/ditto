@@ -479,6 +479,22 @@ class CachedLLM:
             log.warning("could not write LLM cache entry %s: %s", key, exc)
         return completion
 
+    def is_cached(
+        self,
+        messages: list[Message],
+        *,
+        json_schema: dict[str, Any] | None = None,
+        max_tokens: int = 4096,
+        prompt_version: str = "",
+    ) -> bool:
+        """True when ``complete`` with these arguments would be served from the response cache
+        (always False with ``no_cache``). Used to leave cached calls out of cost projections."""
+        if self.no_cache:
+            return False
+        msgs = render_schema(messages, json_schema)
+        body = request_body(msgs, max_tokens=max_tokens, json_schema=json_schema)
+        return self.cache.path(cache_key(prompt_version, self.model, body)).exists()
+
     def projected_cost(self, messages: Sequence[Message], max_tokens: int) -> float:
         """Worst-case cost of one call: input from characters, output at ``max_tokens``."""
         chars = sum(len(m["content"]) for m in messages)

@@ -577,6 +577,26 @@ def test_budget_refusal_records_and_raises(run: RunDir, monkeypatch: pytest.Monk
     assert not run.draft_spec("t_prof").exists()
 
 
+def test_cached_templates_are_not_refused_for_budget(
+    run: RunDir, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A rerun whose generation requests are all cached costs nothing, so it must not be
+    refused even when the remaining budget is below the uncached projection."""
+    monkeypatch.setenv("LLM_BUDGET_USD", "0.000001")
+    llm = FakeLLM([GOOD])
+    seen: list[str] = []
+
+    def is_cached(messages: list[Message], **kwargs: object) -> bool:
+        seen.append(str(kwargs.get("prompt_version")))
+        return True
+
+    llm.is_cached = is_cached  # type: ignore[attr-defined]
+    result = generate_run(run, mode="prompted", schema=SCHEMA, llm=llm, min_cluster_size=3)
+    assert seen and all(v.startswith("specgen.") for v in seen)
+    assert result.projected_cost_usd == 0.0 and result.aborted is None
+    assert llm.calls
+
+
 def test_budget_abort_mid_run_lists_unprocessed(run: RunDir) -> None:
     candidates().model_copy(update={"template_id": "t_list"}).save(run.candidates("t_list"))
     write_union(run, "t_list", UNION_HTML)

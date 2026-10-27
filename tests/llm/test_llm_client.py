@@ -414,6 +414,18 @@ def test_flex_tier_bills_half_but_lists_standard(tmp_path: Path) -> None:
     assert _lines(llm.settings.ledger_path)[0]["cost_usd"] == pytest.approx(standard / 2)
 
 
+def test_is_cached_matches_complete(tmp_path: Path) -> None:
+    llm = _llm(tmp_path, FakeAdapter())
+    assert not llm.is_cached(MSGS, max_tokens=100, prompt_version="p.v1")
+    llm.complete(MSGS, max_tokens=100, prompt_version="p.v1")
+    assert llm.is_cached(MSGS, max_tokens=100, prompt_version="p.v1")
+    assert not llm.is_cached(MSGS, max_tokens=200, prompt_version="p.v1")
+    assert not llm.is_cached(MSGS, max_tokens=100, prompt_version="p.v2")
+    assert not _llm(tmp_path, FakeAdapter(), no_cache=True).is_cached(
+        MSGS, max_tokens=100, prompt_version="p.v1"
+    )
+
+
 def test_summarize_usage(tmp_path: Path) -> None:
     run = RunDir(tmp_path / "run")
     run.ensure().write_meta(site="example.org")

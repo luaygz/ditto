@@ -54,6 +54,7 @@ from ditto.llm import (
     parse_json,
     run_concurrently,
 )
+from ditto.llm.structured import with_json_instruction
 from ditto.run import RunDir, read_json, write_json
 from ditto.schema import (
     ABSENT,
@@ -1010,11 +1011,28 @@ def generate_run(
     prompt_tokens = {
         tid: sum(count_tokens(m["content"]) for m in msgs) for tid, msgs in messages.items()
     }
-    out_tokens = sum(expected_output_tokens(inp) for inp in inputs)
-    projected, estimated = estimate_cost(llm.model, sum(prompt_tokens.values()), out_tokens)
+    # Templates whose first request is already in the response cache cost nothing, so a cached
+    # rerun is never refused for lack of budget.
+    is_cached = getattr(llm, "is_cached", None)
+    billable = [
+        inp
+        for inp in inputs
+        if not (
+            callable(is_cached)
+            and is_cached(
+                with_json_instruction(messages[inp.template_id]),
+                max_tokens=DEFAULT_MAX_TOKENS,
+                prompt_version=prompt.id,
+            )
+        )
+    ]
+    out_tokens = sum(expected_output_tokens(inp) for inp in billable)
+    projected, estimated = estimate_cost(
+        llm.model, sum(prompt_tokens[inp.template_id] for inp in billable), out_tokens
+    )
     result.projected_cost_usd, result.projected_estimated = projected, estimated
     try:
-        if inputs:
+        if billable:
             check_budget(projected, run=run)
     except BudgetExceeded as exc:
         result.aborted = f"refused: {exc}"
