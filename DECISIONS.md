@@ -120,3 +120,4 @@ One line per decision, with the reason. Newest at the bottom of each section.
 ## Process (continued)
 
 - 2026-10-26 — Work moved from the laptop (12 cores, 30 GB) to the desktop (16 cores, 62 GB); the copied `.venv` pointed at a missing interpreter and was rebuilt from `uv.lock`. Speed numbers in results come from the desktop.
+- 2026-10-27 — SWDE dev naive baseline complete in `eval/results/swde_dev_naive/20261027T085024Z` (16/16 sites). The two earlier partial runs (7/16 before the budget cap; 10/16 after an integrator edit to a baseline file broke 5 sites mid-run and an XML control character broke movie-amctv) are kept for the audit trail; reports read the latest run.
